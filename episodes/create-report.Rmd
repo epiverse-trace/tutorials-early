@@ -1,0 +1,28 @@
+---
+title: 'create-report'
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to write a reproducible report with `{episoap}`?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Create a reproducible situation report.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+This is a lesson created via The Carpentries Workbench. 
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `{episoap}` to
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
