@@ -9,6 +9,7 @@ exercises: 2
 - How do you visualize incidence cases?
 - what is the growth rate of the epidemic?
 - what is the person, place, time distribution of cases?
+<!-- - what are the epidemiological characteristics of the infection? -->
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
