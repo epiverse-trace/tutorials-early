@@ -54,9 +54,7 @@ if(!require("pak")) install.packages("pak")
 new_packages <- c(
   "EpiNow2",
   "epiverse-trace/epiparameter",
-  "socialmixr",
-  "epiverse-trace/epidemics",
-  "tidyverse"
+  "tidyverse
 )
 
 pak::pak(new_packages)
@@ -69,8 +67,6 @@ When the installation has finished, you can try to load the packages by pasting 
 ```r
 library(EpiNow2)
 library(epiparameter)
-library(socialmixr)
-library(epidemics)
 library(tidyverse)
 ```
 
