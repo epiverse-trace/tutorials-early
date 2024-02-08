@@ -222,8 +222,8 @@ community listed at <https://github.com/epiverse-trace/> including via social
 media, slack, newsletters, and email lists. You can also [reach us by
 email][contact].
 
-[repo]: https://github.com/epiverse-trace/tutorials
-[repo-issues]: https://github.com/epiverse-trace/tutorials/issues
+[repo]: https://github.com/epiverse-trace/tutorials-early
+[repo-issues]: https://github.com/epiverse-trace/tutorials-early/issues
 [contact]: mailto:andree.valle-campos@lshtm.ac.uk
 [cp-site]: https://epiverse-trace.github.io/
 [dc-issues]: https://github.com/issues?q=user%3Adatacarpentry

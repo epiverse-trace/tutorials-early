@@ -39,34 +39,6 @@
       ],
       "Hash": "9b4993e98e0e19da84c168460c032fef"
     },
-    "DiagrammeR": {
-      "Package": "DiagrammeR",
-      "Version": "1.0.11",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "RColorBrewer",
-        "cli",
-        "dplyr",
-        "glue",
-        "htmltools",
-        "htmlwidgets",
-        "igraph",
-        "magrittr",
-        "purrr",
-        "readr",
-        "rlang",
-        "rstudioapi",
-        "scales",
-        "stringr",
-        "tibble",
-        "tidyr",
-        "viridisLite",
-        "visNetwork"
-      ],
-      "Hash": "584c1e1cbb6f9b6c3b0f4ef0ad960966"
-    },
     "EpiNow2": {
       "Package": "EpiNow2",
       "Version": "1.4.0",
@@ -546,20 +518,6 @@
       ],
       "Hash": "59351f28a81f0742720b85363c4fdd61"
     },
-    "deSolve": {
-      "Package": "deSolve",
-      "Version": "1.40",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "methods",
-        "stats"
-      ],
-      "Hash": "0a861334beb4eb8ca0d24a27b28b6679"
-    },
     "desc": {
       "Package": "desc",
       "Version": "1.4.3",
@@ -673,30 +631,6 @@
         "rlang"
       ],
       "Hash": "bb0eec2fe32e88d9e2836c2f73ea2077"
-    },
-    "epidemics": {
-      "Package": "epidemics",
-      "Version": "0.0.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "epiverse-trace",
-      "RemoteRepo": "epidemics",
-      "RemoteRef": "main",
-      "RemoteSha": "f7e33b594768fb1fdac3fb97f9c075c7f9e9ce76",
-      "RemoteHost": "api.github.com",
-      "Requirements": [
-        "BH",
-        "Rcpp",
-        "RcppEigen",
-        "checkmate",
-        "cli",
-        "data.table",
-        "deSolve",
-        "glue",
-        "stats",
-        "utils"
-      ],
-      "Hash": "3799aa7424ed199ea2f83a439655f1b1"
     },
     "epiparameter": {
       "Package": "epiparameter",
@@ -1003,13 +937,6 @@
       ],
       "Hash": "d6db1667059d027da730decdc214b959"
     },
-    "grates": {
-      "Package": "grates",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c937fa4cc110a4aabae986a6393dfb15"
-    },
     "gridExtra": {
       "Package": "gridExtra",
       "Version": "2.3",
@@ -1102,21 +1029,6 @@
       ],
       "Hash": "2d7b3857980e0e0d0a1fd6f11928ab0f"
     },
-    "htmlwidgets": {
-      "Package": "htmlwidgets",
-      "Version": "1.6.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "grDevices",
-        "htmltools",
-        "jsonlite",
-        "knitr",
-        "rmarkdown",
-        "yaml"
-      ],
-      "Hash": "04291cc45198225444a397606810ac37"
-    },
     "httr": {
       "Package": "httr",
       "Version": "1.4.7",
@@ -1142,43 +1054,6 @@
         "uuid"
       ],
       "Hash": "99df65cfef20e525ed38c3d2577f7190"
-    },
-    "igraph": {
-      "Package": "igraph",
-      "Version": "2.0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "Matrix",
-        "R",
-        "cli",
-        "cpp11",
-        "grDevices",
-        "graphics",
-        "lifecycle",
-        "magrittr",
-        "methods",
-        "pkgconfig",
-        "rlang",
-        "stats",
-        "utils"
-      ],
-      "Hash": "fb2999614d40fe7fd61cf569b66a2dbc"
-    },
-    "incidence2": {
-      "Package": "incidence2",
-      "Version": "2.2.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "data.table",
-        "grDevices",
-        "grates",
-        "pillar",
-        "utils"
-      ],
-      "Hash": "0e1c66f6d72eacacbd8fe6ba1ed85cc9"
     },
     "inline": {
       "Package": "inline",
@@ -1633,7 +1508,7 @@
       "Package": "ragg",
       "Version": "1.2.7",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://carpentries.r-universe.dev",
       "Requirements": [
         "systemfonts",
         "textshaping"
@@ -1925,7 +1800,7 @@
       "Package": "stringi",
       "Version": "1.8.3",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "https://carpentries.r-universe.dev",
       "Requirements": [
         "R",
         "stats",
@@ -2165,24 +2040,6 @@
       ],
       "Hash": "c826c7c4241b6fc89ff55aaea3fa7491"
     },
-    "visNetwork": {
-      "Package": "visNetwork",
-      "Version": "2.1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "htmltools",
-        "htmlwidgets",
-        "jsonlite",
-        "magrittr",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "3e48b097e8d9a91ecced2ed4817a678d"
-    },
     "vroom": {
       "Package": "vroom",
       "Version": "1.6.5",
@@ -2208,19 +2065,6 @@
         "withr"
       ],
       "Hash": "390f9315bc0025be03012054103d227c"
-    },
-    "webshot": {
-      "Package": "webshot",
-      "Version": "0.5.5",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "callr",
-        "jsonlite",
-        "magrittr"
-      ],
-      "Hash": "16858ee1aba97f902d24049d4a44ef16"
     },
     "withr": {
       "Package": "withr",
