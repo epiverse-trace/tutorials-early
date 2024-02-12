@@ -54,7 +54,7 @@ if(!require("pak")) install.packages("pak")
 new_packages <- c(
   "EpiNow2",
   "epiverse-trace/epiparameter",
-  "tidyverse
+  "tidyverse"
 )
 
 pak::pak(new_packages)

@@ -7,6 +7,6 @@
 "episodes/read-delays.Rmd" "2c7422e552f8e16c28449877182c0704" "site/built/read-delays.md" "2024-02-08"
 "instructors/instructor-notes.md" "ca3834a1b0f9e70c4702aa7a367a6bb5" "site/built/instructor-notes.md" "2024-02-08"
 "learners/reference.md" "3c3b0a87a98f91231d47f5a2e24ad27d" "site/built/reference.md" "2024-02-08"
-"learners/setup.md" "195503a05a1f3745bb830d5e43a2c128" "site/built/setup.md" "2024-02-08"
+"learners/setup.md" "c0c29d7741be934679560ed21ca84aa9" "site/built/setup.md" "2024-02-12"
 "profiles/learner-profiles.md" "31b503c4b5bd1f0960ada730eca4a25e" "site/built/learner-profiles.md" "2024-02-08"
 "renv/profiles/lesson-requirements/renv.lock" "437f9ffcf1771fd0e3203f048789e46b" "site/built/renv.lock" "2024-02-08"
