@@ -59,6 +59,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 
 # Order of episodes in your lesson
 episodes:
+- read-cases.Rmd
 - read-delays.Rmd
 
 # Information for Learners
@@ -75,6 +76,6 @@ profiles:
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
 
+
 varnish: epiverse-trace/varnish@epiversetheme
-# this is carpentries/sandpaper#533 in our fork so we can keep it up to date with main
 sandpaper: epiverse-trace/sandpaper@patch-renv-github-bug
