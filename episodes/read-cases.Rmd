@@ -26,7 +26,7 @@ This episode requires you to be familiar with:
 
 # Introduction
 
-The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, within relational database management systems (RDBMS), and health information system APIs (HIS). The latter two options are particularly well-suited for storing institutional data. This episode will elucidate the process of reading cases from these sources.
+The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats,  relational database management systems (RDBMS) servers, and health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/). The latter two options are particularly well-suited for storing institutional data. This episode will elucidate the process of reading cases from these sources.
 
 ## Reading from files
 
