@@ -230,7 +230,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2024-02-15 |
+        <p>Last updated on 2024-02-16 |
         
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -252,7 +252,7 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul><li>how many different data formats can I read?</li>
-<li>is it possible to import data from database or APIs?</li>
+<li>is it possible to import data from database and health APIs?</li>
 </ul></div>
 </div>
 </div>
@@ -264,6 +264,19 @@
 <code>R</code> environment for analysis.</li>
 </ul></div>
 </div>
+</div>
+</div>
+</div>
+<div id="prerequisites" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div id="prerequisites" class="callout-inner">
+<h3 class="callout-title">Prerequisites<a class="anchor" aria-label="anchor" href="#prerequisites"></a>
+</h3>
+<div class="callout-content">
+<p>This episode requires you to be familiar with:</p>
+<p><strong>Data science</strong> : Basic programming with R.</p>
 </div>
 </div>
 </div>
@@ -290,8 +303,10 @@ in a wide range of formats.</p>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
-<span><span class="va">case_data</span> <span class="op">=</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="st">"ebola_cases.csv"</span><span class="op">)</span></span></code></pre>
+<span><span class="va">case_data</span> <span class="op">=</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="st">"./data/ebola_cases.csv"</span>, format <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></span></code></pre>
 </div>
+<p>Similarly, you can import files of other formats such as “tsv”,
+“xlsx”, …etc.</p>
 <div id="reading-compressed-data" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -310,7 +325,7 @@ in a wide range of formats.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1">Give me a hint</h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can check the supported file formats in the <a href="https://github.com/gesistsa/rio" class="external-link">rio</a>
 package as follows:</p>
@@ -330,7 +345,7 @@ package as follows:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -430,9 +445,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
-  "dateCreated": "2024-02-15",
-  "dateModified": "2024-02-15",
-  "datePublished": "2024-02-15"
+  "dateCreated": "2024-02-16",
+  "dateModified": "2024-02-16",
+  "datePublished": "2024-02-16"
 }
 
   </script><script>
