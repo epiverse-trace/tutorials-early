@@ -73,9 +73,44 @@ rio::import("/path_name/file_name.zip")
 
 ## Reading from databases
 
+The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
+
+
+The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` dataframe as a table within it, and subsequently read from it:
+
+
+```r
+library(DBI)
+library(RSQLite)
+# Create a temporary SQLite database in memory
+db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+# Store the 'case_data' dataframe as a table named 'cases' in the SQLite database
+DBI::dbWriteTable(db_con, "cases", case_data)
+# Read data from the 'cases' table
+result <- DBI::dbReadTable(db_con, "cases")
+# Close the database connection
+DBI::dbDisconnect(db_con)
+# View the result
+base::print(utils::head(result))
+```
+
+```{.output}
+   date confirm
+1 16208       1
+2 16210       2
+3 16211       4
+4 16212       6
+5 16213       1
+6 16214       2
+```
+
+This code first establishes a connection to an SQLite database created in memory using `dbConnect` function. Then, it writes the `case_data` dataframe into a table named 'cases' within the database using `dbWriteTable` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable` function. Finally, it closes the database connection with `dbDisconnect` function.
+
+More examples about SQL databases and R can be found [here](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
 
 ## Reading from HIS APIs
 
+Coming soon with {readepi}
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.
