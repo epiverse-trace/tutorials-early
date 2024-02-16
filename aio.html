@@ -359,7 +359,7 @@ in a wide range of formats.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1">Give me a hint</h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>You can check the supported file formats in the <a href="https://github.com/gesistsa/rio" class="external-link">rio</a>
 package as follows:</p>
@@ -379,7 +379,7 @@ package as follows:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1">Show me the solution</h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -396,10 +396,54 @@ package as follows:</p>
 <div class="section level2">
 <h2 id="reading-from-databases">Reading from databases<a class="anchor" aria-label="anchor" href="#reading-from-databases"></a>
 </h2>
+<p>The <a href="https://dbi.r-dbi.org/" class="external-link">DBI</a> package serves as a
+versatile interface for interacting with database management systems
+(DBMS) across different back-ends or servers. It offers a uniform method
+for accessing and retrieving data from various database systems.</p>
+<p>The following code chunk demonstrates how to create a temporary
+SQLite database in memory, store the <code>case_data</code> dataframe as
+a table within it, and subsequently read from it:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">DBI</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">RSQLite</span><span class="op">)</span></span>
+<span><span class="co"># Create a temporary SQLite database in memory</span></span>
+<span><span class="va">db_con</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
+<span><span class="co"># Store the 'case_data' dataframe as a table named 'cases' in the SQLite database</span></span>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbWriteTable</span><span class="op">(</span><span class="va">db_con</span>, <span class="st">"cases"</span>, <span class="va">case_data</span><span class="op">)</span></span>
+<span><span class="co"># Read data from the 'cases' table</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbReadTable</span><span class="op">(</span><span class="va">db_con</span>, <span class="st">"cases"</span><span class="op">)</span></span>
+<span><span class="co"># Close the database connection</span></span>
+<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">db_con</span><span class="op">)</span></span>
+<span><span class="co"># View the result</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">print</span><span class="op">(</span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>   date confirm
+1 16208       1
+2 16210       2
+3 16211       4
+4 16212       6
+5 16213       1
+6 16214       2</code></pre>
+</div>
+<p>This code first establishes a connection to an SQLite database
+created in memory using <code>dbConnect</code> function. Then, it writes
+the <code>case_data</code> dataframe into a table named ‘cases’ within
+the database using <code>dbWriteTable</code> function. Subsequently, it
+reads the data from the ‘cases’ table using <code>dbReadTable</code>
+function. Finally, it closes the database connection with
+<code>dbDisconnect</code> function.</p>
+<p>More examples about SQL databases and R can be found <a href="https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="reading-from-his-apis">Reading from HIS APIs<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a>
 </h2>
+<p>Coming soon with {readepi}</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1638,8 +1682,8 @@ want!</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code> [1] 5.823541 2.416440 4.658485 1.351855 6.272351 7.385981 4.963495 3.724556
- [9] 3.870448 1.897756</code></pre>
+<pre class="output" tabindex="0"><code> [1] 4.402210 3.447361 1.673618 2.600193 2.113737 2.623346 2.395041 4.383288
+ [9] 8.084235 7.266946</code></pre>
 </div>
 
 <div id="window-for-contact-tracing-and-the-serial-interval" class="callout challenge">
