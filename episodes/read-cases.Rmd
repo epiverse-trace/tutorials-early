@@ -7,7 +7,7 @@ exercises: 2
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - how many different data formats can I read? 
-- is it possible to import data from database or APIs? 
+- is it possible to import data from database and health APIs? 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -15,6 +15,14 @@ exercises: 2
 - Explain how read/import outbreak data from different sources into `R` 
 environment for analysis.
 ::::::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::: prereq
+
+## Prerequisites
+
+This episode requires you to be familiar with:
+
+**Data science** : Basic programming with R.
+:::::::::::::::::::::::::::::::::
 
 # Introduction
 
@@ -25,15 +33,15 @@ The initial step in outbreak analysis involves importing the target dataset into
 Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), and [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
 The below example shows how to import a `csv` file into `R` environment using `rio` package.
-
-```{r, eval=FALSE}
+```{r,warning=FALSE,message=FALSE}
 library("rio")
-case_data = rio::import("ebola_cases.csv")
+case_data = rio::import("./data/ebola_cases.csv", format = "csv")
 ```
+Similarly, you can import files of other formats such as "tsv", "xlsx", ...etc.
+
 ::::::::::::::::::::::::::::::::: challenge
 
 ###  Reading compressed data 
-
 Take 1 minute:
 
 - Is it possible to read compressed data in `R`?
@@ -54,6 +62,7 @@ rio::install_formats()
 library("rio")
 rio::import("/path_name/file_name.zip")
 ```
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
