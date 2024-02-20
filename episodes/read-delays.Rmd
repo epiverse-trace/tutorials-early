@@ -253,7 +253,7 @@ The `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` list al
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # 16 delays distributions
 epiparameter::epidist_db(
   disease = "ebola"
@@ -380,7 +380,7 @@ epiparameter::epidist_db(
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # the distribution with the highest sample size has a gamma distribution
 epiparameter::epidist_db(
   disease = "ebola",
@@ -435,7 +435,7 @@ Use the `str()` to display the structure of the `<epidist>` R object.
 
 :::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # get the sd
 covid_serialint$summary_stats$sd
 
@@ -478,7 +478,7 @@ An informative delay measures the time from symptom onset to recovery or death.
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # one way to get the list of all the available parameters
 epidist_db(disease = "all") %>%
   list_distributions() %>%
@@ -659,7 +659,7 @@ In Figure 5 from the [R probability functions for the normal distribution](https
 plot(covid_serialint)
 ```
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 cdf(covid_serialint, q = 2)
 cdf(covid_serialint, q = 6)
 ```
@@ -771,7 +771,7 @@ covid_serialint_discrete$prob_dist$r(10)
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 covid_incubation <-
   epiparameter::epidist_db(
     disease = "covid",
@@ -796,7 +796,7 @@ Now, _Is this result expected in epidemiological terms?_
 
 From a maximum value with `$prob_dist$q()`, we can create a sequence of quantile values as a numeric vector and map density values for each:
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # create a discrete distribution visualization
 # from a maximum value from the distribution
 covid_serialint_discrete$prob_dist$q(0.999) %>%
@@ -998,7 +998,7 @@ epinow_estimates <- epinow(
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 covid_incubation <- epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "incubation",
@@ -1170,7 +1170,7 @@ How to get the mean and standard deviation from a generation time with median an
 
 <!-- evaluate to keep or diversity assessments using PMF -->
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # What parameters are available for Influenza?
 epidist_db(disease = "influenza") %>%
   list_distributions() %>%
@@ -1319,7 +1319,7 @@ Key functions:
 
 In this solution we use `purrr::pluck()` to extract elements within the `summary_stats` object which is of class `list`.
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # pre-symptomatic transmission
 epidist_db(
   disease = "influenza",
@@ -1355,7 +1355,7 @@ epidist_db(
   pluck("mean")
 ```
 
-```{r,eval=FALSE}
+```{r,eval=TRUE}
 # pre-symptomatic transmission
 epidist_db(
   disease = "covid",
