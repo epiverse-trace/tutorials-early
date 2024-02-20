@@ -94,7 +94,7 @@ This code first establishes a connection to an SQLite database created in memory
 
 ## Reading from HIS APIs
 
-Coming soon with {readepi}
+Health related data are also increasingly stored in specialized HIS APIS like Fingertips, GoData, REDCap, and DHIS2. In such case one can resort to [readepi](https://epiverse-trace.github.io/readepi/) package, which allow to import data from HIS APIs.  
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.

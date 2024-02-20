@@ -9,4 +9,5 @@ any links that you are not going to use.
 [carpentries-workbench]: https://carpentries.github.io/sandpaper-docs/
 [DHIS2]: https://dhis2.org/
 [REDCap]: https://www.project-redcap.org/
+[readepi]: https://epiverse-trace.github.io/readepi/
 
