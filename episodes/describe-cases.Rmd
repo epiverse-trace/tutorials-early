@@ -1,6 +1,6 @@
 ---
-title: 'describe-cases'
-teaching: 10
+title: 'Describe cases'
+teaching: 1
 exercises: 2
 ---
 

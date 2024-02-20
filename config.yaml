@@ -60,7 +60,9 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 # Order of episodes in your lesson
 episodes:
 - read-cases.Rmd
+- describe-cases.Rmd
 - read-delays.Rmd
+
 
 # Information for Learners
 learners:
