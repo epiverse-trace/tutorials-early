@@ -5,7 +5,7 @@ exercises: 2
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
-
+- How to convert case data to incidence? 
 - How do you visualize incidence cases?
 - what is the growth rate of the epidemic?
 - what is the person, place, time distribution of cases?
@@ -14,7 +14,7 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-
+- Convert case data to incidence data
 - Create incidence curves
 - Estimate the growth rate from incidence curves
 - Create quick descriptive and comparison tables
@@ -23,8 +23,26 @@ exercises: 2
 
 ## Introduction
 
-This is a lesson created via The Carpentries Workbench. 
+A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, our emphasis is on effectively describing and visualizing epidemic data, with a particular focus on a **simulated Ebola case data**. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd).
 
+```{r, warning=FALSE, message=FALSE}
+library(readr)
+ebola_case_data <- readr::read_csv("data/ebola_2014_first_200_days.csv")
+utils::head(ebola_case_data,5)
+```
+## Incidence cases
+
+Downstream analysis involves working with aggregated data rather than individual cases. The  [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functions for consolidating case data, usually centered around dated occurrences. These packages also facilitate the management and visualization of the aggregated data. The code chunks provided below demonstrate the creation of an `incidence2` object from the `ebola_case_data`, utilizing the  date of symptom onset
+
+```{r, message=FALSE, warning=FALSE}
+library("incidence2")
+library("ggplot2")
+ebola_incidence_data <- incidence2::incidence(ebola_case_data, 
+                                              date_index = "date_onset", interval = 1,#
+                                              groups = "gender")
+base::plot(ebola_incidence_data,fill = "gender") + labs(x = "Date of symptoms onset", 
+                              y = " Cases")
+```
 ## time
 
 ## Exponential growth

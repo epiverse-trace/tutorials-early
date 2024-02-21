@@ -969,6 +969,13 @@
       ],
       "Hash": "d6db1667059d027da730decdc214b959"
     },
+    "grates": {
+      "Package": "grates",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "c937fa4cc110a4aabae986a6393dfb15"
+    },
     "gridExtra": {
       "Package": "gridExtra",
       "Version": "2.3",
@@ -1086,6 +1093,21 @@
         "uuid"
       ],
       "Hash": "99df65cfef20e525ed38c3d2577f7190"
+    },
+    "incidence2": {
+      "Package": "incidence2",
+      "Version": "2.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "data.table",
+        "grDevices",
+        "grates",
+        "pillar",
+        "utils"
+      ],
+      "Hash": "0e1c66f6d72eacacbd8fe6ba1ed85cc9"
     },
     "inline": {
       "Package": "inline",
