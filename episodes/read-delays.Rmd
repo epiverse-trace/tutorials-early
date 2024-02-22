@@ -837,8 +837,8 @@ Now we can plug everything into the `EpiNow2::dist_spec()` function!
 ```{r}
 serial_interval_covid <-
   dist_spec(
-    mean = covid_serialint_parameters["meanlog"],
-    sd = covid_serialint_parameters["sdlog"],
+    mean = covid_serialint$summary_stats$mean,
+    sd = covid_serialint$summary_stats$sd,
     max = covid_serialint_discrete_max,
     distribution = "lognormal"
   )
@@ -929,11 +929,12 @@ ebola_serial_discrete <- discretise(ebola_serial)
 
 ebola_serial_discrete_max <- ebola_serial_discrete$prob_dist$q(p = 0.999)
 
-ebola_serial_quantiles <- seq(1L, to = ebola_serial_discrete_max, by = 1L)
-
 serial_interval_ebola <-
   dist_spec(
-    pmf = ebola_serial_quantiles
+    mean = ebola_serial$summary_stats$mean,
+    sd = ebola_serial$summary_stats$sd,
+    max = ebola_serial_discrete_max,
+    distribution = "gamma" # don't forget! it's a must!
   )
 
 # run epinow
@@ -1011,16 +1012,14 @@ covid_incubation <- epiparameter::epidist_db(
 )
 
 # adapt epiparameter to epinow2
-covid_incubation_parameters <- get_parameters(covid_incubation)
-
 covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
 
 incubation_time_covid <- 
   dist_spec(
-    mean = covid_incubation_parameters["meanlog"],
-    sd = covid_incubation_parameters["sdlog"],
+    mean = covid_incubation$summary_stats$mean,
+    sd = covid_incubation$summary_stats$sd,
     max = covid_incubation_discrete$prob_dist$q(p = 0.999),
-    distribution = "lognormal"
+    distribution = "lognormal" # do not forget this!
   )
 
 # run epinow
@@ -1103,13 +1102,12 @@ ebola_serial <- epidist_db(
 # adapt epiparameter to epinow2
 ebola_serial_discrete <- discretise(ebola_serial)
 
-ebola_serial_discrete_max <- ebola_serial_discrete$prob_dist$q(p = 0.999)
-
-ebola_serial_quantiles <- seq(1L, to = ebola_serial_discrete_max, by = 1L)
-
 serial_interval_ebola <-
   dist_spec(
-    pmf = ebola_serial_quantiles
+    mean = ebola_serial$summary_stats$mean,
+    sd = ebola_serial$summary_stats$sd,
+    max = ebola_serial_discrete$prob_dist$q(p = 0.999),
+    distribution = "gamma"
   )
 
 # subset one distribution for delay of the incubation period
@@ -1122,13 +1120,12 @@ ebola_incubation <- epidist_db(
 # adapt epiparameter to epinow2
 ebola_incubation_discrete <- discretise(ebola_incubation)
 
-ebola_incubation_discrete_max <- ebola_incubation_discrete$prob_dist$q(p = 0.999)
-
-ebola_incubation_quantiles <- seq(1L, to = ebola_incubation_discrete_max, by = 1L)
-
 incubation_period_ebola <-
   dist_spec(
-    pmf = ebola_incubation_quantiles
+    mean = ebola_incubation$summary_stats$mean,
+    sd = ebola_incubation$summary_stats$sd,
+    max = ebola_serial_discrete$prob_dist$q(p = 0.999),
+    distribution = "gamma"
   )
 
 # run epinow
