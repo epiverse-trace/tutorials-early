@@ -327,6 +327,8 @@ covid_serialint <-
 covid_serialint
 ```
 
+<!-- to activate for EpiNow2@dist-interfase
+
 But still, we need to extract them as usable numbers. We use `epiparameter::get_parameters()` for this:
 
 ```{r}
@@ -346,6 +348,8 @@ to use the [code completion feature](https://support.posit.co/hc/en-us/articles/
 This only seems to work in code chunks and R console!
 
 ::::::::::::::::::
+
+-->
 
 ::::::::::::::::::::::::::::::::: challenge
 
