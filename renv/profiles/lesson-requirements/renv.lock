@@ -177,25 +177,6 @@
       ],
       "Hash": "45f0398006e83a5b10b72a90663d8d8c"
     },
-    "RSQLite": {
-      "Package": "RSQLite",
-      "Version": "2.3.5",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "DBI",
-        "R",
-        "bit64",
-        "blob",
-        "cpp11",
-        "memoise",
-        "methods",
-        "pkgconfig",
-        "plogr",
-        "rlang"
-      ],
-      "Hash": "f5a75d57e0a3014a6ef537ac04a80fc6"
-    },
     "Rcpp": {
       "Package": "Rcpp",
       "Version": "1.0.12",
@@ -749,19 +730,6 @@
         "tibble"
       ],
       "Hash": "1a0a9a3d5083d0d573c4214576f1e690"
-    },
-    "foreign": {
-      "Package": "foreign",
-      "Version": "0.8-86",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "550170303dbb19d07b2bcc288068e7dc"
     },
     "formatR": {
       "Package": "formatR",
@@ -1378,6 +1346,16 @@
       ],
       "Hash": "2a0dc8c6adfb6f032e4d4af82d258ab5"
     },
+    "outbreaks": {
+      "Package": "outbreaks",
+      "Version": "1.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "a62a28f56f51694490827b57ee78f970"
+    },
     "parallelly": {
       "Package": "parallelly",
       "Version": "1.36.0",
@@ -1449,13 +1427,6 @@
         "utils"
       ],
       "Hash": "01f28d4278f15c76cddbea05899c5d6f"
-    },
-    "plogr": {
-      "Package": "plogr",
-      "Version": "0.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "09eb987710984fc2905c7129c7d85e65"
     },
     "plyr": {
       "Package": "plyr",
@@ -1640,29 +1611,6 @@
         "withr"
       ],
       "Hash": "1425f91b4d5d9a8f25352c44a3d914ed"
-    },
-    "rio": {
-      "Package": "rio",
-      "Version": "1.0.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "R.utils",
-        "curl",
-        "data.table",
-        "foreign",
-        "haven",
-        "lifecycle",
-        "readxl",
-        "stats",
-        "stringi",
-        "tibble",
-        "tools",
-        "utils",
-        "writexl"
-      ],
-      "Hash": "8e63a1ebe85848713226eb395cba420b"
     },
     "rlang": {
       "Package": "rlang",
@@ -2150,13 +2098,6 @@
         "data.table"
       ],
       "Hash": "ee42417b66554b8fb1ab000b6a7a6588"
-    },
-    "writexl": {
-      "Package": "writexl",
-      "Version": "1.5.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "856a075aec895ea1bea3055fa54e356c"
     },
     "xfun": {
       "Package": "xfun",
