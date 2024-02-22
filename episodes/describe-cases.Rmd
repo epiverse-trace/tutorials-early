@@ -23,37 +23,49 @@ exercises: 2
 
 ## Introduction
 
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, our emphasis is on effectively describing and visualizing epidemic data, with a particular focus on a **simulated Ebola case data**. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd).
+A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, focuses describing and visualizing epidemic data, with a particular focus on a **Covid-19 case data from England**, which comes with the [outbreaks](http://www.reconverse.org/outbreaks/) package. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd)).
 
 ```{r, warning=FALSE, message=FALSE}
-library(readr)
-ebola_case_data <- readr::read_csv("data/ebola_2014_first_200_days.csv")
-utils::head(ebola_case_data,5)
+library("outbreaks")
+covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
+utils::head(covid19_eng_case_data,5)
 ```
 ## Incidence cases
 
-Downstream analysis involves working with aggregated data rather than individual cases. The  [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functions for consolidating case data, usually centered around dated occurrences. These packages also facilitate the management and visualization of the aggregated data. The code chunks provided below demonstrate the creation of an `incidence2` object from the `ebola_case_data`, utilizing the  date of symptom onset
+Downstream analysis involves working with aggregated data rather than individual cases. The  [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functions for grouping case data, usually centered around dated occurrences and/or other factors.  The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the  date of sample.
 
 ```{r, message=FALSE, warning=FALSE}
 library("incidence2")
 library("ggplot2")
-ebola_incidence_data <- incidence2::incidence(ebola_case_data, 
-                                              date_index = "date_onset", interval = 1,#
-                                              groups = "gender")
-base::plot(ebola_incidence_data,fill = "gender") + labs(x = "Date of symptoms onset", 
-                              y = " Cases")
+covid19_eng_incidence_data <- incidence2::incidence(covid19_eng_case_data, 
+                                              date_index = "date")
+utils::head(covid19_eng_incidence_data)
 ```
-## time
+
+The `incidence2` object can be visualized using the plot function of base R package. 
+```{r, message=FALSE, warning=FALSE}
+base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+`Incidence2` can also aggregate case data based on a dated event and other factors. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
+
+```{r, message=FALSE, warning=FALSE}
+weekly_covid19_eng_incidence <- incidence2::incidence(covid19_eng_case_data, date_index = "date", interval = "week", groups = "sex")
+base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+- Using the above `covid91_eng_case_data`  dataset, produce monthly epi-curves for Covid-19 cases in England based on  regional places in England?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+<!-- https://gitlab.renkulab.io/the-graph-courses/further-data-analysis-with-r-staging/-/tree/master/ch06_basic_geospatial_viz/lessons -->
 
 ## Exponential growth
 
 Within the renewal equation, the generation interval mechanistically links the reproductive number R to observables such as the epidemic growth rate r or the number of new infections per day [(Wallinga et al. 2006)](https://royalsocietypublishing.org/doi/10.1098/rspb.2006.3754)
-
-## person
-
-## place
-
-<!-- https://gitlab.renkulab.io/the-graph-courses/further-data-analysis-with-r-staging/-/tree/master/ch06_basic_geospatial_viz/lessons -->
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
