@@ -1400,6 +1400,16 @@
       ],
       "Hash": "2a0dc8c6adfb6f032e4d4af82d258ab5"
     },
+    "outbreaks": {
+      "Package": "outbreaks",
+      "Version": "1.9.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "a62a28f56f51694490827b57ee78f970"
+    },
     "parallelly": {
       "Package": "parallelly",
       "Version": "1.36.0",
