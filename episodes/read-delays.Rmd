@@ -1193,27 +1193,45 @@ influenza_generation_discrete <-
 # problem
 # the summary statistics do not have mean and sd
 influenza_generation$summary_stats
-influenza_generation$summary_stats$median
-influenza_generation$summary_stats$quantiles
+
+# get parameters (new function!)
+influenza_generation_parameters <- 
+  get_parameters(influenza_generation)
 
 # solution
-# extract parameters from percentiles
-influenza_extracted <- extract_param(
-  type = "percentiles",
-  values = c(influenza_generation$summary_stats$quantiles[1],
-             influenza_generation$summary_stats$quantiles[2]),
-  distribution = "lnorm",
-  percentiles = c(0.05, 0.95)
-)
+# convert distribution parameters to summary statistics
+influenza_converted <- 
+  convert_params_to_summary_stats(
+    distribution = "weibull", 
+    shape = influenza_generation_parameters["shape"],
+    scale = influenza_generation_parameters["scale"]
+  )
 
-influenza_extracted
+influenza_converted
+
+# however, dist_spec() only accepts lognormal or gamma distributions
+# then, we can rely on getting the pmf
+# this follows the same code as for the ggplot2 above!
+
+influenza_generation_pmf <- 
+  influenza_generation_discrete$prob_dist$q(p = 0.999) %>%
+  # generate quantile values
+  # as a sequence for each natural number
+  seq(1L, to = ., by = 1L) %>%
+  # coerce numeric vector to data frame
+  as_tibble_col(column_name = "quantile_values") %>%
+  mutate(
+    # map density values
+    # for each quantile in the density function
+    density_values =
+      covid_serialint_discrete$prob_dist$d(quantile_values)
+  )
+
+influenza_generation_pmf
 
 generation_time_influenza <-
   dist_spec(
-    mean = influenza_extracted[1],
-    sd = influenza_extracted[2],
-    max = influenza_generation_discrete$prob_dist$q(p = 0.999),
-    distribution = "lognormal"
+    pmf = influenza_generation_pmf$density_values
   )
 
 influenza_cleaned <-
