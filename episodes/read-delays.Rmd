@@ -1159,7 +1159,7 @@ Use the `influenza_england_1978_school` from the `{outbreaks}` package to calcul
 
 ::::::::::::::::: hint
 
-How to get the mean and standard deviation from a generation time with median and quantiles as summary statistics?
+How to get the mean and standard deviation from a generation time with only distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::dist_spec()`?
 
 - Look at how to extract parameters from `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html)
 
