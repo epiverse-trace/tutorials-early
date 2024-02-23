@@ -841,6 +841,8 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
   geom_col()
 ```
 
+**Note:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura, 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ as an approximation of the _generation time_ we need to make this distribution with positive values only!
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
