@@ -525,8 +525,11 @@ distribution %>%
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
 ```{r,eval=FALSE}
-distribution[[1]]$summary_stats
-distribution[[1]]$prob_dist
+distribution %>% 
+  # pluck the first entry in the object class <list>
+  pluck(1) %>% 
+  # check if <epidist> object have distribution parameters
+  is_parameterised()
 ```
 
 ::::::::::::::::: spoiler
@@ -735,7 +738,7 @@ To finally get a `max` value, let's access the quantile value of the 99.9th perc
 
 ```{r}
 covid_serialint_discrete_max <-
-  covid_serialint_discrete$prob_dist$q(p = 0.999)
+  quantile(covid_serialint_discrete, p = 0.999)
 ```
 
 ::::::::::::::::::::::::::::::::: challenge
@@ -752,23 +755,23 @@ Calculate:
 
 What delay distribution measures the time between infection and the onset of symptoms?
 
-The probability function for `<epidist>` **discrete** distributions differ from the *continuous* ones!
+The probability function for `<epidist>` **discrete** distributions are the same that we used for the *continuous* ones!
 
 ```{r,eval=FALSE}
 # plot to have a visual reference
 plot(covid_serialint_discrete, day_range = 0:20)
 
 # density value at quantile value 10 (day)
-covid_serialint_discrete$prob_dist$d(10)
+density(covid_serialint_discrete, at = 10)
 
 # cumulative probability at quantile value 10 (day)
-covid_serialint_discrete$prob_dist$cdf(10)
+cdf(covid_serialint_discrete, q = 10)
 
 # In what quantile value (days) do we have the 60% cumulative probability?
-covid_serialint_discrete$prob_dist$q(0.6)
+quantile(covid_serialint_discrete, p = 0.6)
 
 # generate random values
-covid_serialint_discrete$prob_dist$r(10)
+generate(covid_serialint_discrete, times = 10)
 ```
 
 ::::::::::::::::::::::
@@ -785,7 +788,7 @@ covid_incubation <-
 
 covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
 
-covid_incubation_discrete$prob_dist$q(0.99)
+quantile(covid_incubation_discrete,p = 0.99)
 ```
 
 99% of those who develop COVID-19 symptoms will do so within 16 days of infection.
@@ -798,12 +801,12 @@ Now, _Is this result expected in epidemiological terms?_
 
 ### how to create a distribution plot?
 
-From a maximum value with `$prob_dist$q()`, we can create a sequence of quantile values as a numeric vector and map density values for each:
+From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and map density values for each:
 
 ```{r,eval=TRUE}
 # create a discrete distribution visualization
 # from a maximum value from the distribution
-covid_serialint_discrete$prob_dist$q(0.999) %>%
+quantile(covid_serialint_discrete, p = 0.999) %>%
   # generate quantile values
   # as a sequence for each natural number
   seq(1L, to = ., by = 1L) %>%
@@ -812,8 +815,11 @@ covid_serialint_discrete$prob_dist$q(0.999) %>%
   mutate(
     # map density values
     # for each quantile in the density function
-    density_values =
-      covid_serialint_discrete$prob_dist$d(quantile_values)
+    density_values = 
+      density(
+        x = covid_serialint_discrete, 
+        at = quantile_values
+      )
   ) %>%
   # create plot
   ggplot(
@@ -927,7 +933,7 @@ ebola_serial <- epidist_db(
 # adapt epiparameter to epinow2
 ebola_serial_discrete <- discretise(ebola_serial)
 
-ebola_serial_discrete_max <- ebola_serial_discrete$prob_dist$q(p = 0.999)
+ebola_serial_discrete_max <- quantile(ebola_serial_discrete, p = 0.999)
 
 serial_interval_ebola <-
   dist_spec(
@@ -1018,7 +1024,7 @@ incubation_time_covid <-
   dist_spec(
     mean = covid_incubation$summary_stats$mean,
     sd = covid_incubation$summary_stats$sd,
-    max = covid_incubation_discrete$prob_dist$q(p = 0.999),
+    max = quantile(covid_incubation_discrete, p = 0.999),
     distribution = "lognormal" # do not forget this!
   )
 
@@ -1106,7 +1112,7 @@ serial_interval_ebola <-
   dist_spec(
     mean = ebola_serial$summary_stats$mean,
     sd = ebola_serial$summary_stats$sd,
-    max = ebola_serial_discrete$prob_dist$q(p = 0.999),
+    max = quantile(ebola_serial_discrete, p = 0.999),
     distribution = "gamma"
   )
 
@@ -1124,7 +1130,7 @@ incubation_period_ebola <-
   dist_spec(
     mean = ebola_incubation$summary_stats$mean,
     sd = ebola_incubation$summary_stats$sd,
-    max = ebola_serial_discrete$prob_dist$q(p = 0.999),
+    max = quantile(ebola_serial_discrete, p = 0.999),
     distribution = "gamma"
   )
 
@@ -1214,7 +1220,7 @@ influenza_converted
 # this follows the same code as for the ggplot2 above!
 
 influenza_generation_pmf <- 
-  influenza_generation_discrete$prob_dist$q(p = 0.999) %>%
+  quantile(influenza_generation_discrete, p = 0.999) %>%
   # generate quantile values
   # as a sequence for each natural number
   seq(1L, to = ., by = 1L) %>%
@@ -1224,14 +1230,14 @@ influenza_generation_pmf <-
     # map density values
     # for each quantile in the density function
     density_values =
-      covid_serialint_discrete$prob_dist$d(quantile_values)
+      density(covid_serialint_discrete, at = quantile_values)
   )
 
 influenza_generation_pmf
 
 generation_time_influenza <-
   dist_spec(
-    pmf = influenza_generation_pmf$density_values
+    pmf = influenza_generation_pmf %>% pull(density_values)
   )
 
 influenza_cleaned <-
