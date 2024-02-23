@@ -427,7 +427,7 @@ Share about:
 
 ::::::::: hint
 
-Use the `$` operator plus the <kbd>tab</kbd> keyboard button to explore them as an expandable list:
+Use the `$` operator plus the <kbd>tab</kbd> or <kbd>↹</kbd>  keyboard button to explore them as an expandable list:
 
 ```r
 covid_serialint$
