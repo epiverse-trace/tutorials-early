@@ -1189,8 +1189,6 @@ How to get the mean and standard deviation from a generation time with only dist
 
 <!-- https://github.com/epiverse-trace/epiparameter/issues/114 -->
 
-<!-- evaluate to keep or diversity assessments using PMF -->
-
 ```{r,eval=TRUE}
 # What parameters are available for Influenza?
 epidist_db(disease = "influenza") %>%
@@ -1207,18 +1205,19 @@ influenza_generation <-
 influenza_generation_discrete <-
   discretise(influenza_generation)
 
-# we can get the PMF 
-# but also the extract_param
-
-# problem
+# we have a problem
 # the summary statistics do not have mean and sd
 influenza_generation$summary_stats
 
-# get parameters (new function!)
+# one solution is to 
+# get parameters and convert to summary statistics
+
+# first,
+# get parameters
 influenza_generation_parameters <- 
   get_parameters(influenza_generation)
 
-# solution
+# then,
 # convert distribution parameters to summary statistics
 influenza_converted <- 
   convert_params_to_summary_stats(
@@ -1234,6 +1233,7 @@ influenza_converted
 # this follows the same code as for the ggplot2 above!
 
 influenza_generation_pmf <- 
+  # from a maximum value from the distribution
   quantile(influenza_generation_discrete, p = 0.999) %>%
   # generate quantile values
   # as a sequence for each natural number
