@@ -525,9 +525,9 @@ distribution %>%
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
 ```{r,eval=FALSE}
-distribution %>% 
+distribution %>%
   # pluck the first entry in the object class <list>
-  pluck(1) %>% 
+  pluck(1) %>%
   # check if <epidist> object have distribution parameters
   is_parameterised()
 ```
@@ -560,11 +560,11 @@ In `{epiparameter}`, you will mostly find **continuous** distributions like thes
 
 ```{r}
 # get a single <epidist> object
-distribution_single <- 
+distribution_single <-
   epiparameter::epidist_db(
     disease = "covid",
     epi_dist = "serial",
-    single_epidist = T
+    single_epidist = TRUE
   )
 
 # plot <epidist> object
@@ -798,7 +798,7 @@ covid_incubation <-
 
 covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
 
-quantile(covid_incubation_discrete,p = 0.99)
+quantile(covid_incubation_discrete, p = 0.99)
 ```
 
 99% of those who develop COVID-19 symptoms will do so within 16 days of infection.
@@ -825,9 +825,9 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
   mutate(
     # map density values
     # for each quantile in the density function
-    density_values = 
+    density_values =
       density(
-        x = covid_serialint_discrete, 
+        x = covid_serialint_discrete,
         at = quantile_values
       )
   ) %>%
@@ -1034,7 +1034,7 @@ covid_incubation <- epiparameter::epidist_db(
 # adapt epiparameter to epinow2
 covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
 
-incubation_time_covid <- 
+incubation_time_covid <-
   dist_spec(
     mean = covid_incubation$summary_stats$mean,
     sd = covid_incubation$summary_stats$sd,
@@ -1209,21 +1209,21 @@ influenza_generation_discrete <-
 # the summary statistics do not have mean and sd
 influenza_generation$summary_stats
 
-# one solution is to 
+# one solution is to
 # get parameters and convert to summary statistics
 
 # first,
 # get parameters
-influenza_generation_parameters <- 
+influenza_generation_params <-
   get_parameters(influenza_generation)
 
 # then,
 # convert distribution parameters to summary statistics
-influenza_converted <- 
+influenza_converted <-
   convert_params_to_summary_stats(
-    distribution = "weibull", 
-    shape = influenza_generation_parameters["shape"],
-    scale = influenza_generation_parameters["scale"]
+    distribution = "weibull",
+    shape = influenza_generation_params["shape"],
+    scale = influenza_generation_params["scale"]
   )
 
 influenza_converted
@@ -1232,7 +1232,7 @@ influenza_converted
 # then, we can rely on getting the pmf
 # this follows the same code as for the ggplot2 above!
 
-influenza_generation_pmf <- 
+influenza_generation_pmf <-
   # from a maximum value from the distribution
   quantile(influenza_generation_discrete, p = 0.999) %>%
   # generate quantile values
@@ -1244,7 +1244,10 @@ influenza_generation_pmf <-
     # map density values
     # for each quantile in the density function
     density_values =
-      density(covid_serialint_discrete, at = quantile_values)
+      density(
+        x = covid_serialint_discrete,
+        at = quantile_values
+      )
   )
 
 influenza_generation_pmf
