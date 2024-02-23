@@ -559,13 +559,23 @@ In `{epiparameter}`, you will mostly find **continuous** distributions like thes
 - the *Cumulative Distribution Function (CDF)*.
 
 ```{r}
-plot(distribution[[2]])
+# get a single <epidist> object
+distribution_single <- 
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial",
+    single_epidist = T
+  )
+
+# plot <epidist> object
+plot(distribution_single)
 ```
 
 With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what it look like:
 
 ```{r,eval=FALSE}
-plot(distribution[[2]], day_range = 0:20)
+# plot <epidist> object
+plot(distribution_single, day_range = 0:20)
 ```
 
 ::::::::::::::::: discussion
