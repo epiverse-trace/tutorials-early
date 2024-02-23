@@ -70,7 +70,7 @@ epinow_estimates <- epinow(
 )
 ```
 
-To do this replacement, instead of plug-in numeric values to `EpiNow2::dist_spec()` to manually specify the delay distribution parameters, we are going to collect them from the library of epidemiological parameters provided by `{epiparameter}`:
+To do this replacement, instead of plug-in numeric values to `EpiNow2::dist_spec()` to manually specify the **summary statistics** of the delay distribution, we are going to collect them from the library of epidemiological parameters provided by `{epiparameter}`:
 
 ```r
 generation_time <- dist_spec(
@@ -311,7 +311,7 @@ What does a parametrised `<epidist>` is? Look at `?is_parameterised`.
 
 :::::::::::::::::::::::::
 
-Now, we have an epidemiological parameter we can reuse! We can replace the numbers we plug into `EpiNow2::dist_spec()`.
+Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into `EpiNow2::dist_spec()`.
 
 Let's assign this `<epidist>` class object to the `covid_serialint` object.
 
@@ -849,6 +849,10 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
 ## Plug-in `{epiparameter}` to `{EpiNow2}`
 
 Now we can plug everything into the `EpiNow2::dist_spec()` function!
+
+- the summary statistics `mean` and `sd` of the distribution,
+- a maximum value `max`,
+- the `distribution` name.
 
 ```{r}
 serial_interval_covid <-
