@@ -811,7 +811,7 @@ Now, _Is this result expected in epidemiological terms?_
 
 ### how to create a distribution plot?
 
-From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and map density values for each:
+From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and calculate density values for each:
 
 ```{r,eval=TRUE}
 # create a discrete distribution visualization
@@ -823,7 +823,7 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
   # coerce numeric vector to data frame
   as_tibble_col(column_name = "quantile_values") %>%
   mutate(
-    # map density values
+    # calculate density values
     # for each quantile in the density function
     density_values =
       density(
@@ -1240,14 +1240,13 @@ influenza_generation_pmf <-
   seq(1L, to = ., by = 1L) %>%
   # coerce numeric vector to data frame
   as_tibble_col(column_name = "quantile_values") %>%
+  # calculate density values
+  # for each quantile in the density function
   mutate(
-    # map density values
-    # for each quantile in the density function
-    density_values =
-      density(
-        x = covid_serialint_discrete,
-        at = quantile_values
-      )
+    density_values = density(
+      x = covid_serialint_discrete,
+      at = quantile_values
+    )
   )
 
 influenza_generation_pmf
