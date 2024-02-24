@@ -46,7 +46,7 @@ Look at the [glossary](../learners/reference.md) for the definitions of all the 
 
 :::::::::::::::::::::::::
 
-However, early in an epidemic, modelling efforts can be delayed by the lack of a centralized resource that summarises input parameters for the disease of interest ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Projects like `{epiparameter}` and `{epireview}` are building online catalogues following systematic review protocols that can help build models faster for coming outbreaks and epidemics from known pathogens and unknown ones related to known families of viruses.
+However, early in an epidemic, modelling efforts can be delayed by the lack of a centralised resource that summarises input parameters for the disease of interest ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Projects like `{epiparameter}` and `{epireview}` are building online catalogues following systematic review protocols that can help build models faster for coming outbreaks and epidemics from known pathogens and unknown ones related to known families of viruses.
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
@@ -108,13 +108,13 @@ When we calculate the *serial interval*, we see that not all case pairs have the
 
 ![Serial intervals of possible case pairs in (a) COVID-19 and (b) MERS-CoV. Pairs represent a presumed infector and their presumed infectee plotted by date of symptom onset ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig6)).](fig/serial-interval-pairs.jpg)
 
-To summarize these data from individual and pair time periods, we can find the **statistical distributions** that best fit the data ([McFarland et al., 2023](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2023.28.27.2200806)).
+To summarise these data from individual and pair time periods, we can find the **statistical distributions** that best fit the data ([McFarland et al., 2023](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2023.28.27.2200806)).
 
 <!-- add a reference about good practices to estimate distributions -->
 
 ![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Lognormal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
 
-Statistical distributions are summarized in terms of their **summary statistics** like the *location* (mean and percentiles) and *spread* (variance or standard deviation) of the distribution, or with their **distribution parameters** that inform about the *form* (shape and rate/scale) of the distribution. These estimated values can be reported with their **uncertainty** (95% confidence intervals).
+Statistical distributions are summarised in terms of their **summary statistics** like the *location* (mean and percentiles) and *spread* (variance or standard deviation) of the distribution, or with their **distribution parameters** that inform about the *form* (shape and rate/scale) of the distribution. These estimated values can be reported with their **uncertainty** (95% confidence intervals).
 
 | Gamma | mean | shape | rate/scale |
 |:--------------|:--------------|:--------------|:--------------|
@@ -196,7 +196,7 @@ epiparameter::epidist_db(
 )
 ```
 
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the aforementioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
+Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the abovementioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
 
 ```{r,eval=FALSE}
 epiparameter::epidist_db(
@@ -205,7 +205,7 @@ epiparameter::epidist_db(
 )
 ```
 
-With this query combination, we get more than one delay distributions. This output is an object class `<multi_epidist>`.
+With this query combination, we get more than one delay distribution. This output is an object class `<multi_epidist>`.
 
 ::::::::::::::::: callout
 
@@ -215,7 +215,7 @@ With this query combination, we get more than one delay distributions. This outp
 
 :::::::::::::::::::::::::
 
-To summarize a `<multi_epidist>` view and get the column names from the underlying parameter dataset, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+To summarise a `<multi_epidist>` view and get the column names from the underlying parameter dataset, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
@@ -241,12 +241,12 @@ First, search for Ebola disease delay distributions. Find:
 
 `epidist_db()` and `list_distributions()` give us different and complementary summary outputs.
 
-The `epidist_db()` function alone count for us the number of entries like:
+The `epidist_db()` function alone counts for us the number of entries like:
 
 - studies, and
 - delay distributions.
 
-On the other hand, the `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` list all the entries in a data frame with columns like:
+On the other hand, the `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` lists all the entries in a data frame with columns like:
 
 - the type of the probability distribution per delay, and
 - author and year of the study.
@@ -274,15 +274,15 @@ epiparameter::epidist_db(
   list_distributions()
 ```
 
-For this query we find two types of probability distributions: _lognormal_ and _gamma_.
+We find two types of probability distributions for this query: _lognormal_ and _gamma_.
 
 Now, search for delay distributions of your disease of interest! Ask:
 
-- Do you recognize the papers?
+- Do you recognise the papers?
 
-- Do you think we should consider any other paper?
+- Should it consider any other paper?
 
-How does `{epiparameter}` did the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
+How does `{epiparameter}` do the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
 ::::::::::::::::::::::::::
 
@@ -320,7 +320,7 @@ epiparameter::epidist_db(
 Looking at the help documentation for `?epiparameter::epidist_db()`:
 
 - If multiple entries match the arguments supplied and `single_epidist = TRUE`,
-- Then, the parameterised `⁠<epidist>`⁠ with the largest sample size will be returned.
+- Then, the parameterised`⁠<epidist>`⁠ with the largest sample size will be returned.
 - If multiple entries are equal after this sorting, the first entry will be returned.
 
 What does a parametrised `<epidist>` is? Look at `?is_parameterised`.
@@ -452,11 +452,11 @@ We will explore these concepts at the end!
 
 ### Ebola's severity parameter
 
-A severity parameter like the duration of hospitalization could add to the information needed about the bed capacity in response to an outbreak ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
+A severity parameter like the duration of hospitalisation could add to the information needed about the bed capacity in response to an outbreak ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
 For Ebola: 
 
-- What is the reported point estimate and uncertainty of the mean duration of health-care and case isolation?
+- What is the reported point estimate and uncertainty of the mean duration of health care and case isolation?
 
 ::::::::::::::::: hint
 
@@ -498,9 +498,8 @@ update it from last epiparameter test
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{epiparameter}` to access the systematic review catalog of epidemiological delay distributions.
+- Use `{epiparameter}` to access the systematic review catalogue of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
 - Use `list_distributions()` for an overview of multiple delay distributions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
