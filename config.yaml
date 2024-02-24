@@ -59,9 +59,9 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 
 # Order of episodes in your lesson
 episodes:
-- delays-01-reuse.Rmd
-- delays-02-functions.Rmd
-- delays-03-challenges.Rmd
+- delays-reuse.Rmd
+- delays-functions.Rmd
+- delays-challenges.Rmd
 
 # Information for Learners
 learners:
