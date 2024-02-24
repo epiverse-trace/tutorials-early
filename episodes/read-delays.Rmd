@@ -200,14 +200,16 @@ epiparameter::epidist_db(
 )
 ```
 
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the abovementioned considerations, we can look at the `serial` intervals for `COVID`-19.
+Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the aforementioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
 
-```{r}
+```{r,eval=FALSE}
 epiparameter::epidist_db(
   disease = "COVID",
   epi_dist = "serial"
 )
 ```
+
+With this query combination, we get more than one delay distributions. This output is an object class `<multi_epidist>`.
 
 ::::::::::::::::: callout
 
@@ -217,7 +219,7 @@ epiparameter::epidist_db(
 
 :::::::::::::::::::::::::
 
-We get more than one epidemiological delay. To summarize this view and get the column names from the underlying parameter dataset, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+To summarize a `<multi_epidist>` view and get the column names from the underlying parameter dataset, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
@@ -231,42 +233,60 @@ epiparameter::epidist_db(
 
 ### Ebola's incubation periods
 
-Take 5 minutes:
+Take 5 minutes to explore the `{epiparameter}` library. 
+
+First, search for Ebola disease delay distributions. Find:
 
 - How many delay distributions are for the Ebola disease?
 
-- How many delay distributions are for the incubation period of Ebola?
-
-- Explore the library and find the disease with the delay distribution of your interest! Do you recognize the paper?
+- How many types of delay distributions are for the incubation period of Ebola?
 
 ::::::::::::::::: hint
 
-The `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` list all the entries by:
+`epidist_db()` and `list_distributions()` give us different and complementary summary outputs.
 
-- disease,
-- epidemiological distribution,
-- the type of the probability distribution,
-- author of the study, and 
-- year of study.
+The `epidist_db()` function alone count for us the number of entries like:
+
+- studies, and
+- delay distributions.
+
+On the other hand, the `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` list all the entries in a data frame with columns like:
+
+- the type of the probability distribution per delay, and
+- author and year of the study.
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
-```{r,eval=TRUE}
-# 16 delays distributions
+```{r}
+# we expect 16 delays distributions for ebola
 epiparameter::epidist_db(
   disease = "ebola"
-)
-
-# 5 delay distributions are for the incubation period
-epiparameter::epidist_db(
-  disease = "ebola",
-  epi_dist = "incubation"
 )
 ```
 
 Now, from the output of `epiparameter::epidist_db()`, What is an [offspring distribution](../learners/reference.md#offspringdist)?
+
+```{r,eval=TRUE}
+# we expect 2 different types of delay distributions 
+# for ebola incubation period
+epiparameter::epidist_db(
+  disease = "ebola",
+  epi_dist = "incubation"
+) %>% 
+  list_distributions()
+```
+
+For this query we find two types of probability distributions: _lognormal_ and _gamma_.
+
+Now, search for delay distributions of your disease of interest! Ask:
+
+- Do you recognize the papers?
+
+- Do you think we should consider any other paper?
+
+How does `{epiparameter}` did the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
 ::::::::::::::::::::::::::
 
@@ -351,54 +371,6 @@ This only seems to work in code chunks and R console!
 
 -->
 
-::::::::::::::::::::::::::::::::: challenge
-
-### Ebola's incubation period
-
-Take 2 minutes:
-
-- What type of distribution has the incubation period of Ebola with the highest sample size?
-- How would you access to the sample size of the other studies in the `<multi_epidist>` class object?
-
-::::::::::::::::: hint
-
-The `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` list all the entries by:
-
-- disease,
-- epidemiological distribution,
-- the type of the probability distribution,
-- author of the study, and
-- year of study.
-
-This is a `<multi_epidist>` class object:
-
-```{r,eval=FALSE}
-epiparameter::epidist_db(
-  disease = "ebola",
-  epi_dist = "incubation"
-)
-```
-
-
-::::::::::::::::::::::
-
-::::::::::::::::: solution
-
-```{r,eval=TRUE}
-# the distribution with the highest sample size has a gamma distribution
-epiparameter::epidist_db(
-  disease = "ebola",
-  epi_dist = "incubation",
-  single_epidist = TRUE
-)
-```
-
-To access the `sample_size`, review an [issue reported in the GitHub repository](https://github.com/epiverse-trace/epiparameter/issues/227) of the `{epiparameter}` package. 
-
-::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::::::
-
 ## Extract the summary statistics
 
 We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving into the `summary_stats` object:
@@ -410,20 +382,17 @@ covid_serialint$summary_stats$mean
 
 :::::::::::::::::::::::::::::: challenge
 
-### How to get the `sd` and other nested elements?
+### Ebola's serial interval
 
 Take 1 minute to:
 
-1. Get the `sd` of the epidemiological distribution.
+Get access to the Ebola serial interval with the highest sample size.
 
-2. Find the `sample_size` used in the study.
+Answer:
 
-3. Explore all the other nested elements within the `<epidist>` object.
+- What is the `sd` of the epidemiological distribution?
 
-Share about: 
-
-- What elements do you find useful for your analysis?
-- What other elements would you like to see in this object? How?
+- What is the `sample_size` used in that study?
 
 ::::::::: hint
 
@@ -440,18 +409,37 @@ Use the `str()` to display the structure of the `<epidist>` R object.
 :::::::::: solution
 
 ```{r,eval=TRUE}
+# ebola serial interval
+ebola_serial <- 
+  epiparameter::epidist_db(
+  disease = "ebola",
+  epi_dist = "serial",
+  single_epidist = TRUE
+)
+
+ebola_serial
+```
+
+```{r,eval=TRUE}
 # get the sd
-covid_serialint$summary_stats$sd
+ebola_serial$summary_stats$sd
 
 # get the sample_size
-covid_serialint$metadata$sample_size
+ebola_serial$metadata$sample_size
 ```
+
+Now, explore all the other nested elements within the `<epidist>` object.
+
+Share about: 
+
+- What elements do you find useful for your analysis?
+- What other elements would you like to see in this object? How?
 
 ::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::: intructor
+:::::::::::::::::::::::::::::: instructor
 
 An interesting element is the `method_assess` nested entry, which refers to the methods used by the study authors to assess for bias while estimating the serial interval distribution.
 
@@ -472,11 +460,11 @@ A severity parameter like the duration of hospitalization could add to the infor
 
 For Ebola: 
 
-- what is a reported point estimate and uncertainty of the mean duration of health-care and case isolation?
+- What is the reported point estimate and uncertainty of the mean duration of health-care and case isolation?
 
 ::::::::::::::::: hint
 
-An informative delay measures the time from symptom onset to recovery or death.
+An informative delay should measure the time from symptom onset to recovery or death.
 
 ::::::::::::::::::::::
 
@@ -571,7 +559,7 @@ distribution_single <-
 plot(distribution_single)
 ```
 
-With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what it look like:
+With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore how this looks like:
 
 ```{r,eval=FALSE}
 # plot <epidist> object
@@ -584,7 +572,7 @@ plot(distribution_single, day_range = 0:20)
 
 Explore this shinyapp called **The Distribution Zoo**!
 
-Follow these steps to reproduce the form of the `covid_serialint` distribution:
+Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
 
 1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shinyapp website,
 2. Go to the left panel,
@@ -592,7 +580,7 @@ Follow these steps to reproduce the form of the `covid_serialint` distribution:
 4. Select a new *Type of distribution*: `Log-Normal`,
 5. Move the **sliders**, i.e. the graphical control element that allows you to adjust a value by moving a handle along a horizontal track or bar to the `covid_serialint` parameters. 
 
-Replicate these with the `distribution` object and all its list elements: `2`, `3`, and `4`. Explore how the shape of a distribution changes when its parameters change.
+Replicate these with the `distribution` object and all its list elements: `[[2]]`, `[[3]]`, and `[[4]]`. Explore how the shape of a distribution changes when its parameters change.
 
 Share about:
 
@@ -600,7 +588,13 @@ Share about:
 
 :::::::::::::::::::::::::
 
-<!-- A slider, in the context of user interfaces and graphical user interfaces (GUIs), is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis. -->
+::::::::::::::::::::::::: instructor
+
+For shinyapps like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/):
+
+A slider, in the context of user interfaces and graphical user interfaces (GUIs), is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
+
+:::::::::::::::::::::::::
 
 ## Distribution functions
 
@@ -811,7 +805,7 @@ Now, _Is this result expected in epidemiological terms?_
 
 ### how to create a distribution plot?
 
-From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and calculate density values for each:
+From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and calculate `density()` values for each:
 
 ```{r,eval=TRUE}
 # create a discrete distribution visualization
@@ -841,7 +835,7 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
   geom_col()
 ```
 
-**Note:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura, 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ as an approximation of the _generation time_ we need to make this distribution with positive values only!
+**Remember:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ as an approximation of the _generation time_ we need to make this distribution with positive values only!
 
 ::::::::::::::::::::::::::
 
@@ -852,7 +846,7 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
 
 Now we can plug everything into the `EpiNow2::dist_spec()` function!
 
-- the summary statistics `mean` and `sd` of the distribution,
+- the **summary statistics** `mean` and `sd` of the distribution,
 - a maximum value `max`,
 - the `distribution` name.
 
@@ -872,7 +866,7 @@ serial_interval_covid
 
 ### Warning
 
-Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission.
+Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission. ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
 
 ::::::::::::::::::
 
@@ -1343,8 +1337,8 @@ Meta-analysis on the proportion of pre-symptomatic and asymptomatic transmission
 
 Compare the serial interval and incubation period of Influenza and MERS:
 
-- What type of transmission has Influenza?
-- What type of transmission has MERS?
+- What type of transmission may Influenza has?
+- What type of transmission may MERS has?
 - Do these results correlate with the available evidence?
 
 ::::::::::::::::: hint
