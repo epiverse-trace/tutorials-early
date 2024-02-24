@@ -9,17 +9,13 @@ editor_options:
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How to get delay distributions from a systematic review?
-- How to connect reused delays with my existing analysis pipeline?
-- When should delays be reused from a systematic review?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Get delays from a systematic review with `{epiparameter}`.
-- Get statistical summaries and distribution parameters of delay distributions.
-- Use distribution functions from delay distributions.
-- Convert a continuous to a discrete delay distribution.
+- Get distribution parameters and summary statistics of delay distributions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -502,11 +498,9 @@ update it from last epiparameter test
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{epiparameter}` to access the systematic review catalogue of epidemiological delay distributions.
+- Use `{epiparameter}` to access the systematic review catalog of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
 - Use `list_distributions()` for an overview of multiple delay distributions.
-- Use `discretise()` to convert continuous to discrete delay distributions.
-- Use `{epiparameter}` probability functions for any delay distributions. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
