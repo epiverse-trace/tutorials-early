@@ -81,7 +81,6 @@ Let's explore how we can access this and other time delays using `{epiparameter}
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
-library(EpiNow2)
 library(tidyverse)
 ```
 
@@ -265,12 +264,12 @@ epiparameter::epidist_db(
 Now, from the output of `epiparameter::epidist_db()`, What is an [offspring distribution](../learners/reference.md#offspringdist)?
 
 ```{r,eval=TRUE}
-# we expect 2 different types of delay distributions 
+# we expect 2 different types of delay distributions
 # for ebola incubation period
 epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation"
-) %>% 
+) %>%
   list_distributions()
 ```
 
@@ -406,12 +405,12 @@ Use the `str()` to display the structure of the `<epidist>` R object.
 
 ```{r,eval=TRUE}
 # ebola serial interval
-ebola_serial <- 
+ebola_serial <-
   epiparameter::epidist_db(
-  disease = "ebola",
-  epi_dist = "serial",
-  single_epidist = TRUE
-)
+    disease = "ebola",
+    epi_dist = "serial",
+    single_epidist = TRUE
+  )
 
 ebola_serial
 ```
