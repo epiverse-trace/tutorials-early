@@ -36,6 +36,12 @@ We have practice how to get epidemiological parameters from the literature and u
 
 Here you will find complementary challenges and resources to continue your learning path!
 
+```{r,warning=FALSE,message=FALSE}
+library(epiparameter)
+library(EpiNow2)
+library(tidyverse)
+```
+
 ## Adjusting for reporting delays
 
 Estimating $R_t$ requires data on the daily number of new infections. Due to lags in the development of detectable viral loads, symptom onset, seeking care, and reporting, these numbers are not readily available. All observations reflect transmission events from some time in the past. In other words, if $d$ is the delay from infection to observation, then observations at time $t$ inform $R_{t−d}$, not $R_t$. [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)
@@ -66,8 +72,8 @@ epinow_estimates <- epinow(
   # cases
   reported_cases = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(serial_interval_covid),
-  delays = delay_opts(incubation_time_covid),
+  generation_time = generation_time_opts(covid_serial_interval),
+  delays = delay_opts(covid_incubation_time),
   # computation
   stan = stan_opts(
     cores = 4, samples = 1000, chains = 3,
@@ -81,6 +87,30 @@ epinow_estimates <- epinow(
 ::::::::::::::::: solution
 
 ```{r,eval=TRUE}
+# get covid serial interval
+covid_serialint <- 
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial",
+    author = "Nishiura",
+    single_epidist = TRUE
+  )
+
+# adapt epidist to epinow2
+covid_serialint_discrete_max <-
+  covid_serialint %>% 
+  discretise() %>% 
+  quantile(p = 0.999)
+
+covid_serial_interval <-
+  dist_spec(
+    mean = covid_serialint$summary_stats$mean,
+    sd = covid_serialint$summary_stats$sd,
+    max = covid_serialint_discrete_max,
+    distribution = "lognormal"
+  )
+
+# get covid incubation period
 covid_incubation <- epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "incubation",
@@ -89,13 +119,16 @@ covid_incubation <- epiparameter::epidist_db(
 )
 
 # adapt epiparameter to epinow2
-covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
+covid_incubation_discrete_max <-
+  covid_incubation %>% 
+  discretise() %>% 
+  quantile(p = 0.999)
 
-incubation_time_covid <-
+covid_incubation_time <-
   dist_spec(
     mean = covid_incubation$summary_stats$mean,
     sd = covid_incubation$summary_stats$sd,
-    max = quantile(covid_incubation_discrete, p = 0.999),
+    max = covid_incubation_discrete_max,
     distribution = "lognormal" # do not forget this!
   )
 
@@ -104,8 +137,8 @@ epinow_estimates <- epinow(
   # cases
   reported_cases = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(serial_interval_covid),
-  delays = delay_opts(incubation_time_covid),
+  generation_time = generation_time_opts(covid_serial_interval),
+  delays = delay_opts(covid_incubation_time),
   # computation
   stan = stan_opts(
     cores = 4, samples = 1000, chains = 3,
@@ -154,7 +187,7 @@ We can use two complementary delay distributions to estimate the $R_t$ at time $
 
 ::::::::::::::::: solution
 
-```{r,eval=TRUE,echo=FALSE}
+```{r,eval=TRUE,echo=FALSE,message=FALSE,warning=FALSE}
 # read data from the tutorial repository R project
 ebola_confirmed <-
   read_csv(file.path("data", "ebola_cases.csv"))
@@ -304,7 +337,7 @@ influenza_generation_pmf <-
   # for each quantile in the density function
   mutate(
     density_values = density(
-      x = covid_serialint_discrete,
+      x = influenza_generation_discrete,
       at = quantile_values
     )
   )
@@ -374,6 +407,8 @@ Refer to this excellent tutorial on estimating the serial interval and incubatio
 
 - Tutorial in English: <https://rpubs.com/tracelac/diseaseX> <!-- to request -->
 - Tutorial en Español: <https://epiverse-trace.github.io/epimodelac/EnfermedadX.html>
+
+**Then,** after you get your estimated values you can create manually your own` <epidist>` class objects with `epiparameter::epidist()`. Take a look to its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
 
 :::::::::::::::::::::::::::::
 
