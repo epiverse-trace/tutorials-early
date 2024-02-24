@@ -14,10 +14,10 @@ carpentry: 'incubator'
 title: 'Reading and cleaning data for outbreak analytics with R'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created:
+created: 
 
 # Comma-separated list of keywords for the lesson
-keywords:
+keywords: 
 
 # Life cycle stage of the lesson
 # possible values: pre-alpha, alpha, beta, stable
@@ -58,17 +58,19 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 # - another-learner.md
 
 # Order of episodes in your lesson
-episodes:
+episodes: 
 - read-delays.Rmd
+- delays-functions.Rmd
+- delays-challenges.Rmd
 
 # Information for Learners
-learners:
+learners: 
 
 # Information for Instructors
-instructors:
+instructors: 
 
 # Learner Profiles
-profiles:
+profiles: 
 
 # Customisation ---------------------------------------------
 #

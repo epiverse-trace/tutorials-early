@@ -1,0 +1,576 @@
+---
+title: 'Input delay data'
+teaching: 10
+exercises: 2
+editor_options: 
+  chunk_output_type: inline
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to get delay distributions from a systematic review?
+- How to connect reused delays with my existing analysis pipeline?
+- When should delays be reused from a systematic review?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Get delays from a systematic review with `{epiparameter}`.
+- Get statistical summaries and distribution parameters of delay distributions.
+- Use distribution functions from delay distributions.
+- Convert a continuous to a discrete delay distribution.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: prereq
+
+## Prerequisites
+
+This episode requires you to be familiar with:
+
+**Data science** : Basic programming with R.
+
+**Epidemic theory** : Epidemiological parameters. Time periods.
+
+:::::::::::::::::::::::::::::::::
+
+## Introduction
+
+Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into `EpiNow2::dist_spec()`.
+
+Let's assign this `<epidist>` class object to the `covid_serialint` object.
+
+```{r}
+covid_serialint <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial",
+    author = "Nishiura",
+    single_epidist = TRUE
+  )
+
+covid_serialint
+```
+
+<!-- to activate for EpiNow2@dist-interfase
+
+But still, we need to extract them as usable numbers. We use `epiparameter::get_parameters()` for this:
+
+```{r}
+covid_serialint_parameters <- epiparameter::get_parameters(covid_serialint)
+
+covid_serialint_parameters
+```
+
+This gets a vector of class `<numeric>` useful as input for any other package! 
+
+:::::::::::::::::: callout
+
+If we write the `[]` next to the last object create like in `covid_serialint_parameters[]`, within `[]` we can use the 
+Tab key <kbd>↹</kbd> 
+to use the [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) and have a quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. We invite you to try this out!
+
+This only seems to work in code chunks and R console!
+
+::::::::::::::::::
+
+-->
+
+But, how can we plug them into `{EpiNow2}`? In this lesson we are going to review the distributions functions that `{epiparameter}` provides to get the value we need for this and any other package downstream in the pipeline!
+
+## Continuous distributions
+
+The following output has four entries with different content in the **probability distribution** (`prob_distribution`) column:
+
+```{r}
+distribution <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial"
+  )
+
+distribution %>%
+  list_distributions()
+```
+
+Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
+
+```{r,eval=FALSE}
+distribution %>%
+  # pluck the first entry in the object class <list>
+  pluck(1) %>%
+  # check if <epidist> object have distribution parameters
+  is_parameterised()
+```
+
+::::::::::::::::: spoiler
+
+### Parameterised entries have an Inference method
+
+As detailed in `?is_parameterised`, a parameterised distribution is the entry that has a probability distribution associated with it provided by an `inference_method` as shown in `metadata`:
+
+```{r,eval=FALSE}
+distribution[[1]]$metadata$inference_method
+distribution[[2]]$metadata$inference_method
+distribution[[4]]$metadata$inference_method
+```
+
+:::::::::::::::::::::::::
+
+In the `epiparameter::list_distributions()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
+
+```{r}
+distribution %>%
+  list_distributions()
+```
+
+In `{epiparameter}`, you will mostly find **continuous** distributions like these. You can visualize any of them with the `plot()` function and access to: 
+
+- the *Probability Density Function (PDF)* and 
+- the *Cumulative Distribution Function (CDF)*.
+
+```{r}
+# get a single <epidist> object
+distribution_single <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial",
+    single_epidist = TRUE
+  )
+
+# plot <epidist> object
+plot(distribution_single)
+```
+
+With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore how this looks like:
+
+```{r,eval=FALSE}
+# plot <epidist> object
+plot(distribution_single, day_range = 0:20)
+```
+
+::::::::::::::::: discussion
+
+### The distribution Zoo
+
+Explore this shinyapp called **The Distribution Zoo**!
+
+Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
+
+1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shinyapp website,
+2. Go to the left panel,
+3. Keep the *Category of distribution*: `Continuous Univariate`,
+4. Select a new *Type of distribution*: `Log-Normal`,
+5. Move the **sliders**, i.e. the graphical control element that allows you to adjust a value by moving a handle along a horizontal track or bar to the `covid_serialint` parameters. 
+
+Replicate these with the `distribution` object and all its list elements: `[[2]]`, `[[3]]`, and `[[4]]`. Explore how the shape of a distribution changes when its parameters change.
+
+Share about:
+
+- What other features of the website do you find helpful?
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: instructor
+
+For shinyapps like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/):
+
+A slider, in the context of user interfaces and graphical user interfaces (GUIs), is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
+
+:::::::::::::::::::::::::
+
+## Distribution functions
+
+In R, all the statistical distributions have functions to access the:
+
+- Probability **Density** function (PDF),
+- Cumulative Distribution function (**CDF**),
+- **Quantile** function, and
+- **Random** values from the given distribution.
+
+:::::::::::: spoiler
+
+### Functions for the Normal distribution
+
+If you need it, read in detail about the [R probability functions for the normal distribution](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc), each of its definitions and identify in which part of a distribution they are located!
+
+![The four probability functions for the normal distribution ([Jack Weiss, 2012](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc))](fig/fig5a-normaldistribution.png)
+
+::::::::::::::::::::
+
+If you look at `?stats::Distributions`, each type of distribution has a unique set of functions. However, `{epiparameter}` gives you the same four functions to access each of the values above for any `<epidist>` object you want! 
+
+```{r,eval=FALSE}
+# plot this to have a visual reference
+plot(covid_serialint, day_range = 0:20)
+```
+
+```{r}
+# the density value at quantile value of 10 (days)
+density(covid_serialint, at = 10)
+
+# the cumulative probability at quantile value of 10 (days)
+cdf(covid_serialint, q = 10)
+
+# the quantile value (day) at a cumulative probability of 60%
+quantile(covid_serialint, p = 0.6)
+
+# generate 10 random values (days) given
+# the distribution family and its parameters
+generate(covid_serialint, times = 10)
+```
+
+::::::::: instructor
+
+Access to the reference documentation (Help files) for these functions is accessible with the three double-colon notation: `epiparameter:::`
+
+- `?epiparameter:::density.epidist()`
+- `?epiparameter:::cdf.epidist()`
+- `?epiparameter:::quantile.epidist()`
+- `?epiparameter:::generate.epidist()`
+
+::::::::::::::::::
+
+::::::::::::::::::::::::::::::::: challenge
+
+### Window for contact tracing and the Serial interval
+
+The **serial interval** is important in the optimization of contact tracing since it provides a time window for the containment of a disease spread ([Fine, 2003](https://academic.oup.com/aje/article/158/11/1039/162725)). Depending on the serial interval, we can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
+
+With the COVID-19 serial interval (`covid_serialint`) calculate:
+
+- How much more of the backward cases could be captured if the contact tracing method considered contacts up to 6 days pre-onset compared to 2 days pre-onset?
+
+::::::::::::::::: hint
+
+In Figure 5 from the [R probability functions for the normal distribution](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc), the shadowed section represents a cumulative probability of `0.997` for the quantile value at `x = 2`.
+
+::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+```{r,eval=FALSE}
+plot(covid_serialint)
+```
+
+```{r,eval=TRUE}
+cdf(covid_serialint, q = 2)
+cdf(covid_serialint, q = 6)
+```
+
+Given the COVID-19 serial interval:
+
+- A contact tracing method considering contacts up to 2 days pre-onset will capture around 11.1% of backward cases.
+
+- If this period is extended to 6 days pre-onset, this could include 76.2% of backward contacts.
+
+::::::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+### What if
+
+If we exchange the question between days and cumulative probability to: 
+
+- When considering secondary cases, how many days following the symptom onset of primary cases can we expect 55% of symptom onset to occur?
+
+```{r,eval=FALSE}
+quantile(covid_serialint, p = 0.55)
+```
+
+An interpretation could be:
+
+- The 55% percent of the symptom onset of secondary cases will happen after 4.2 days after the symptom onset of primary cases.
+
+::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+## Discretize a continuous distribution
+
+We are getting closer to the end! `EpiNow2::dist_spec()` still needs a maximum value (`max`). 
+
+One way to do this is to get the quantile value for the distribution's 99.9th percentile or `0.999` cumulative probability. For this, we need access to the set of distribution functions for our `<epidist>` object.
+
+We can use the set of distribution functions for a _continuous_ distribution (as above). However, these values will be _continuous_ numbers. We can **discretize** the continuous distribution stored in our `<epidist>` object to get discrete values from a continuous distribution.
+
+When we `epiparameter::discretise()` the continuous distribution we get a **discrete**(-ized) distribution:
+
+```{r}
+covid_serialint_discrete <-
+  epiparameter::discretise(covid_serialint)
+
+covid_serialint_discrete
+```
+
+We identify this change in the `Distribution:` output line of the `<epidist>` object. Take a double check to this line:
+
+```
+Distribution: discrete lnorm
+```
+
+While for a **continuous** distribution, we plot the *Probability Density Function (PDF)*, for a **discrete** distribution, we plot the *Probability Mass Function (PMF)*:
+
+```{r,eval=FALSE}
+# continuous
+plot(covid_serialint)
+
+# discrete
+plot(covid_serialint_discrete)
+```
+
+To finally get a `max` value, let's access the quantile value of the 99.9th percentile or `0.999` probability of the distribution with the `prob_dist$q` notation, similarly to how we access the `summary_stats` values.
+
+```{r}
+covid_serialint_discrete_max <-
+  quantile(covid_serialint_discrete, p = 0.999)
+```
+
+::::::::::::::::::::::::::::::::: challenge
+
+### Lenght of quarantine and Incubation period
+
+The **incubation period** distribution is a useful delay to assess the length of active monitoring or quarantine ([Lauer et al., 2020](https://www.acpjournals.org/doi/10.7326/M20-0504)). Similarly, delays from symptom onset to recovery (or death) will determine the required duration of health-care and case isolation ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
+
+Calculate:
+
+- Within what exact time frame do 99% of individuals who develop COVID-19 symptoms exhibit them after infection?
+
+::::::::::::::::: hint
+
+What delay distribution measures the time between infection and the onset of symptoms?
+
+The probability function for `<epidist>` **discrete** distributions are the same that we used for the *continuous* ones!
+
+```{r,eval=FALSE}
+# plot to have a visual reference
+plot(covid_serialint_discrete, day_range = 0:20)
+
+# density value at quantile value 10 (day)
+density(covid_serialint_discrete, at = 10)
+
+# cumulative probability at quantile value 10 (day)
+cdf(covid_serialint_discrete, q = 10)
+
+# In what quantile value (days) do we have the 60% cumulative probability?
+quantile(covid_serialint_discrete, p = 0.6)
+
+# generate random values
+generate(covid_serialint_discrete, times = 10)
+```
+
+::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+```{r,eval=TRUE}
+covid_incubation <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "incubation",
+    single_epidist = TRUE
+  )
+
+covid_incubation_discrete <- epiparameter::discretise(covid_incubation)
+
+quantile(covid_incubation_discrete, p = 0.99)
+```
+
+99% of those who develop COVID-19 symptoms will do so within 16 days of infection.
+
+Now, _Is this result expected in epidemiological terms?_
+
+::::::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+### how to create a distribution plot?
+
+From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and calculate `density()` values for each:
+
+```{r,eval=TRUE}
+# create a discrete distribution visualization
+# from a maximum value from the distribution
+quantile(covid_serialint_discrete, p = 0.999) %>%
+  # generate quantile values
+  # as a sequence for each natural number
+  seq(1L, to = ., by = 1L) %>%
+  # coerce numeric vector to data frame
+  as_tibble_col(column_name = "quantile_values") %>%
+  mutate(
+    # calculate density values
+    # for each quantile in the density function
+    density_values =
+      density(
+        x = covid_serialint_discrete,
+        at = quantile_values
+      )
+  ) %>%
+  # create plot
+  ggplot(
+    aes(
+      x = quantile_values,
+      y = density_values
+    )
+  ) +
+  geom_col()
+```
+
+**Remember:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ as an approximation of the _generation time_ we need to make this distribution with positive values only!
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+## Plug-in `{epiparameter}` to `{EpiNow2}`
+
+Now we can plug everything into the `EpiNow2::dist_spec()` function!
+
+- the **summary statistics** `mean` and `sd` of the distribution,
+- a maximum value `max`,
+- the `distribution` name.
+
+```{r}
+serial_interval_covid <-
+  dist_spec(
+    mean = covid_serialint$summary_stats$mean,
+    sd = covid_serialint$summary_stats$sd,
+    max = covid_serialint_discrete_max,
+    distribution = "lognormal"
+  )
+
+serial_interval_covid
+```
+
+:::::::::: callout
+
+### Warning
+
+Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission. ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
+
+::::::::::::::::::
+
+Let's replace the `generation_time` input we used for `EpiNow2::epinow()`.
+
+```{r,eval=FALSE}
+epinow_estimates <- epinow(
+  # cases
+  reported_cases = example_confirmed[1:60],
+  # delays
+  generation_time = generation_time_opts(serial_interval_covid),
+  # computation
+  stan = stan_opts(
+    cores = 4, samples = 1000, chains = 3,
+    control = list(adapt_delta = 0.99)
+  )
+)
+
+base::plot(epinow_estimates)
+```
+
+::::::::::::::::::::::::::::::::: challenge
+
+### Ebola's effective reproduction number
+
+Download and read the [Ebola dataset](data/ebola_cases.csv):
+
+- Reuse one epidemiological parameter to estimate the effective reproduction number for the Ebola dataset.
+- Why did you choose that parameter?
+
+::::::::::::::::: hint
+
+To calculate the $R_t$, we need:
+
+- data set with confirmed cases per day and
+- one key delay distribution
+
+Key functions we applied in this episode are:
+
+- `epidist_db()`
+- `list_distributions()`
+- `discretise()`
+- probability functions for continuous and discrete distributions 
+
+::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+```{r,eval=TRUE,echo=FALSE}
+# read data from the tutorial repository R project
+ebola_confirmed <-
+  read_csv(file.path("data", "ebola_cases.csv"))
+```
+
+```{r,eval=FALSE,echo=TRUE}
+# read data
+# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
+ebola_confirmed <-
+  read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
+
+# list distributions
+epidist_db(disease = "ebola") %>%
+  list_distributions()
+```
+
+```{r,message=FALSE,warning=FALSE,eval=TRUE}
+# subset one distribution
+ebola_serial <- epidist_db(
+  disease = "ebola",
+  epi_dist = "serial",
+  single_epidist = TRUE
+)
+
+# adapt epiparameter to epinow2
+ebola_serial_discrete <- discretise(ebola_serial)
+
+ebola_serial_discrete_max <- quantile(ebola_serial_discrete, p = 0.999)
+
+serial_interval_ebola <-
+  dist_spec(
+    mean = ebola_serial$summary_stats$mean,
+    sd = ebola_serial$summary_stats$sd,
+    max = ebola_serial_discrete_max,
+    distribution = "gamma" # don't forget! it's a must!
+  )
+
+# run epinow
+epinow_estimates <- epinow(
+  # cases
+  reported_cases = ebola_confirmed,
+  # delays
+  generation_time = generation_time_opts(serial_interval_ebola),
+  # computation
+  stan = stan_opts(
+    cores = 4, samples = 1000, chains = 3,
+    control = list(adapt_delta = 0.99)
+  )
+)
+
+plot(epinow_estimates)
+
+```
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::  
+
+<!--
+## Concept map
+
+update it from last epiparameter test 
+-->
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `{epiparameter}` to access the systematic review catalogue of epidemiological delay distributions.
+- Use `epidist_db()` to select single delay distributions.
+- Use `list_distributions()` for an overview of multiple delay distributions.
+- Use `discretise()` to convert continuous to discrete delay distributions.
+- Use `{epiparameter}` probability functions for any delay distributions. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
