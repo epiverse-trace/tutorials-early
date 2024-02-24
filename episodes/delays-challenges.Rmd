@@ -152,6 +152,9 @@ Using the same [Ebola dataset](data/ebola_cases.csv):
 
 We can use two complementary delay distributions to estimate the $R_t$ at time $t$.
 
+- generation time.
+- incubation period and reporting delays.
+
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
