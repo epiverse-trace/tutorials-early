@@ -34,9 +34,9 @@ This episode requires you to be familiar with:
 
 ## Introduction
 
-We have practice how to get epidemiological parameters from the literature and used them as input for other packages.
+We have practised how to get epidemiological parameters from the literature and used them as input for other packages.
 
-Here you will find complementary challenges and resources to continue your learning path!
+You will find complementary challenges and resources to continue your learning path here!
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
@@ -54,7 +54,7 @@ The **delay distribution** could be inferred jointly with the underlying times o
 
 For `{EpiNow2}`, we can specify these two complementary delay distributions in the `delays` argument.
 
-![Rt is a measure of transmission at time t. Observations after time t must be adjusted. ICU, intensive care unit. From  [Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)](fig/rt-adjusting-delays.png)
+![$R_{t}$ is a measure of transmission at time $t$. Observations after time $t$ must be adjusted. ICU, intensive care unit. From  [Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)](fig/rt-adjusting-delays.png)
 
 ::::::::::::::::::::::::::::::::: challenge
 
@@ -375,7 +375,7 @@ plot(epinow_estimates)
 
 ## When to reuse? When to estimate?
 
-In the early stage of an outbreak, we can rely on reusing parameters for known pathogens to unknown ones, like for the [Disease X](https://en.wikipedia.org/wiki/Disease_X), a pathogen currently unknown to cause human disease and potentially cause a  serious international epidemic ([WHO, 2018](https://www.who.int/activities/prioritizing-diseases-for-research-and-development-in-emergency-contexts)). 
+In the early stage of an outbreak, we can rely on reusing parameters for known pathogens to unknown ones, like for the [Disease X](https://en.wikipedia.org/wiki/Disease_X), a pathogen currently unknown to cause human disease and potentially cause a serious international epidemic ([WHO, 2018](https://www.who.int/activities/prioritizing-diseases-for-research-and-development-in-emergency-contexts)). 
 
 But when data from **lines list paired with contact tracing** is available, we can estimate the key delay distributions that best fit our data. These will help us to inform, compare and update any previous estimate about questions like:
 
@@ -400,7 +400,7 @@ Refer to this excellent tutorial on estimating the serial interval and incubatio
 - Tutorial in English: <https://rpubs.com/tracelac/diseaseX> <!-- to request -->
 - Tutorial en Español: <https://epiverse-trace.github.io/epimodelac/EnfermedadX.html>
 
-**Then,** after you get your estimated values you can create manually your own` <epidist>` class objects with `epiparameter::epidist()`. Take a look to its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
+**Then,** after you get your estimated values, you can manually create your own` <epidist>` class objects with `epiparameter::epidist()`! Take a look at its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
 
 :::::::::::::::::::::::::::::
 
@@ -428,8 +428,8 @@ Meta-analysis on the proportion of pre-symptomatic and asymptomatic transmission
 
 Compare the serial interval and incubation period of Influenza and MERS:
 
-- What type of transmission may Influenza has?
-- What type of transmission may MERS has?
+- What type of transmission may Influenza have?
+- What type of transmission may MERS have?
 - Do these results correlate with the available evidence?
 
 ::::::::::::::::: hint
