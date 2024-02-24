@@ -8,6 +8,7 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
+- How to get summary statistics from `<epidist>` objects with only distribution parameters?
 - When should delays be reused from a systematic review?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -15,6 +16,7 @@ editor_options:
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Reuse reporting delays from `{epiparameter}` as `{EpiNow2}` inputs.
+- Convert distribution parameters to summary statistics with `{epiparameter}`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -263,10 +265,9 @@ plot(epinow_estimates)
 
 :::::::::::::::::::::::::::::::::::::::::::
 
+## Convert parameters to summary statistics 
 
 ::::::::::::::::::::::::::::::::: challenge
-
-### Extract parameters
 
 Use the `influenza_england_1978_school` from the `{outbreaks}` package to calculate the effective reproduction number.
 
@@ -367,15 +368,6 @@ epinow_estimates <- epinow(
 
 plot(epinow_estimates)
 ```
-
-
-
-
-
-
-
-
-
 
 ::::::::::::::::::::::::::
 
