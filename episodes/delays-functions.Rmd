@@ -66,15 +66,13 @@ This gets a vector of class `<numeric>` useful as input for any other package!
 
 If we write the `[]` next to the last object create like in `covid_serialint_parameters[]`, within `[]` we can use the 
 Tab key <kbd>↹</kbd> 
-to use the [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) and have a quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. We invite you to try this out!
-
-This only seems to work in code chunks and R console!
+to use the [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) and have a quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. We invite you to try this out in code chunks and the R console!
 
 ::::::::::::::::::
 
 -->
 
-But, how can we plug them into `{EpiNow2}`? In this lesson we are going to review the distributions functions that `{epiparameter}` provides to get the value we need for this and any other package downstream in the pipeline!
+But how can we plug them into `{EpiNow2}`? In this episode, we will review the distribution functions that `{epiparameter}` provides to get the value we need for this and any other package downstream in the pipeline!
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
@@ -128,7 +126,7 @@ distribution %>%
   list_distributions()
 ```
 
-In `{epiparameter}`, you will mostly find **continuous** distributions like these. You can visualize any of them with the `plot()` function and access to: 
+In `{epiparameter}`, you will mostly find **continuous** distributions like these. You can visualise any of them with the `plot()` function and access to: 
 
 - the *Probability Density Function (PDF)* and 
 - the *Cumulative Distribution Function (CDF)*.
@@ -146,7 +144,7 @@ distribution_single <-
 plot(distribution_single)
 ```
 
-With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore how this looks like:
+With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what this looks like:
 
 ```{r,eval=FALSE}
 # plot <epidist> object
@@ -161,7 +159,7 @@ Explore this shinyapp called **The Distribution Zoo**!
 
 Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
 
-1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shinyapp website,
+1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
 2. Go to the left panel,
 3. Keep the *Category of distribution*: `Continuous Univariate`,
 4. Select a new *Type of distribution*: `Log-Normal`,
@@ -177,20 +175,18 @@ Share about:
 
 ::::::::::::::::::::::::: instructor
 
-For shinyapps like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/):
-
-A slider, in the context of user interfaces and graphical user interfaces (GUIs), is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
+In the context of user interfaces and graphical user interfaces (GUIs), like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/) shiny app, a **slider** is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
 
 :::::::::::::::::::::::::
 
 ## Distribution functions
 
-In R, all the statistical distributions have functions to access the:
+In R, all the statistical distributions have functions to access the following:
 
-- Probability **Density** function (PDF),
-- Cumulative Distribution function (**CDF**),
-- **Quantile** function, and
-- **Random** values from the given distribution.
+- `density()`: Probability **Density** function (PDF),
+- `cdf()`: Cumulative Distribution function (**CDF**),
+- `quantile()`: **Quantile** function, and
+- `generate()`: **Random** values from the given distribution.
 
 :::::::::::: spoiler
 
@@ -239,7 +235,7 @@ Access to the reference documentation (Help files) for these functions is access
 
 ### Window for contact tracing and the Serial interval
 
-The **serial interval** is important in the optimization of contact tracing since it provides a time window for the containment of a disease spread ([Fine, 2003](https://academic.oup.com/aje/article/158/11/1039/162725)). Depending on the serial interval, we can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
+The **serial interval** is important in the optimisation of contact tracing since it provides a time window for the containment of a disease spread ([Fine, 2003](https://academic.oup.com/aje/article/158/11/1039/162725)). Depending on the serial interval, we can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
 
 With the COVID-19 serial interval (`covid_serialint`) calculate:
 
@@ -292,13 +288,13 @@ An interpretation could be:
 :::::::::::::::::::::::::::::::::::::::::::
 
 
-## Discretize a continuous distribution
+## Discretise a continuous distribution
 
 We are getting closer to the end! `EpiNow2::dist_spec()` still needs a maximum value (`max`). 
 
 One way to do this is to get the quantile value for the distribution's 99.9th percentile or `0.999` cumulative probability. For this, we need access to the set of distribution functions for our `<epidist>` object.
 
-We can use the set of distribution functions for a _continuous_ distribution (as above). However, these values will be _continuous_ numbers. We can **discretize** the continuous distribution stored in our `<epidist>` object to get discrete values from a continuous distribution.
+We can use the set of distribution functions for a _continuous_ distribution (as above). However, these values will be _continuous_ numbers. We can **discretise** the continuous distribution stored in our `<epidist>` object to get discrete values from a continuous distribution.
 
 When we `epiparameter::discretise()` the continuous distribution we get a **discrete**(-ized) distribution:
 
@@ -336,17 +332,17 @@ covid_serialint_discrete_max <-
 
 ### Length of quarantine and Incubation period
 
-The **incubation period** distribution is a useful delay to assess the length of active monitoring or quarantine ([Lauer et al., 2020](https://www.acpjournals.org/doi/10.7326/M20-0504)). Similarly, delays from symptom onset to recovery (or death) will determine the required duration of health-care and case isolation ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
+The **incubation period** distribution is a useful delay to assess the length of active monitoring or quarantine ([Lauer et al., 2020](https://www.acpjournals.org/doi/10.7326/M20-0504)). Similarly, delays from symptom onset to recovery (or death) will determine the required duration of health care and case isolation ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
 Calculate:
 
-- Within what exact time frame do 99% of individuals who develop COVID-19 symptoms exhibit them after infection?
+- Within what exact time frame do 99% of individuals exhibiting COVID-19 symptoms exhibit them after infection?
 
 ::::::::::::::::: hint
 
 What delay distribution measures the time between infection and the onset of symptoms?
 
-The probability function for `<epidist>` **discrete** distributions are the same that we used for the *continuous* ones!
+The probability functions for `<epidist>` **discrete** distributions are the same that we used for the *continuous* ones!
 
 ```{r,eval=FALSE}
 # plot to have a visual reference
@@ -390,12 +386,12 @@ Now, _Is this result expected in epidemiological terms?_
 
 ::::::::::::::::: solution
 
-### how to create a distribution plot?
+### How to create a distribution plot?
 
 From a maximum value with `quantile()`, we can create a sequence of quantile values as a numeric vector and calculate `density()` values for each:
 
 ```{r,eval=TRUE}
-# create a discrete distribution visualization
+# create a discrete distribution visualisation
 # from a maximum value from the distribution
 quantile(covid_serialint_discrete, p = 0.999) %>%
   # generate quantile values
@@ -422,7 +418,7 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
   geom_col()
 ```
 
-**Remember:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ as an approximation of the _generation time_ we need to make this distribution with positive values only!
+**Remember:** In infections with pre-symptomatic transmission, serial intervals can have negative values ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)). When we use the _serial interval_ to approximate the _generation time_ we need to make this distribution with positive values only!
 
 ::::::::::::::::::::::::::
 
@@ -570,7 +566,7 @@ update it from last epiparameter test
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use distribution functions with `<epidist>` objects to get summary statistics and informative parameters for public health interventions like the Window for contact tracing and Length of quarantine.
-- Use `discretise()` to convert continuous to discrete delay distributions.
+- Use `discretise ()` to convert continuous to discrete delay distributions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
