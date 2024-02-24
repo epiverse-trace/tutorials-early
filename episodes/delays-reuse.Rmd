@@ -77,7 +77,7 @@ generation_time <- dist_spec(
 )
 ```
 
-Let's explore how we can access this and other time delays using `{epiparameter}`. We'll use the pipe `%>%` to connect some of their functions, so let's also call to the `{tidyverse}` package:
+Let's explore how we can access to time delays and get their **summary statistics** using `{epiparameter}`. We'll use the pipe `%>%` to connect some of their functions, so let's also call to the `{tidyverse}` package:
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
