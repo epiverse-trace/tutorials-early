@@ -550,7 +550,6 @@ epinow_estimates <- epinow(
 )
 
 plot(epinow_estimates)
-
 ```
 
 ::::::::::::::::::::::::::

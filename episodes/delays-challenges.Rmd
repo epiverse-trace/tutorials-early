@@ -90,7 +90,7 @@ epinow_estimates <- epinow(
 
 ```{r,eval=TRUE}
 # get covid serial interval
-covid_serialint <- 
+covid_serialint <-
   epiparameter::epidist_db(
     disease = "covid",
     epi_dist = "serial",
@@ -100,8 +100,8 @@ covid_serialint <-
 
 # adapt epidist to epinow2
 covid_serialint_discrete_max <-
-  covid_serialint %>% 
-  discretise() %>% 
+  covid_serialint %>%
+  discretise() %>%
   quantile(p = 0.999)
 
 covid_serial_interval <-
@@ -122,8 +122,8 @@ covid_incubation <- epiparameter::epidist_db(
 
 # adapt epiparameter to epinow2
 covid_incubation_discrete_max <-
-  covid_incubation %>% 
-  discretise() %>% 
+  covid_incubation %>%
+  discretise() %>%
   quantile(p = 0.999)
 
 covid_incubation_time <-
