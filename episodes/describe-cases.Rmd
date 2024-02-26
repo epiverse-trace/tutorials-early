@@ -6,15 +6,15 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 - How to convert case data to incidence? 
-- How do you visualize incidence cases?
-- what is the growth rate of the epidemic?
-- what is the person, place, time distribution of cases?
+- How to visualize incidence cases?
+- What is the person, place, time distribution of cases?
+- What is the growth rate of the epidemic?
 <!-- - what are the epidemiological characteristics of the infection? -->
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
-- Convert case data to incidence data
+- Convert case data to incidence 
 - Create incidence curves
 - Estimate the growth rate from incidence curves
 - Create quick descriptive and comparison tables
@@ -47,7 +47,7 @@ The `incidence2` object can be visualized using the plot function of base R pack
 base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 
-`Incidence2` can also aggregate case data based on a dated event and other factors. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
+Moreover, `Incidence2` can also aggregate case data based on a dated event and other factors such as  what is the person and place. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
 
 ```{r, message=FALSE, warning=FALSE}
 weekly_covid19_eng_incidence <- incidence2::incidence(covid19_eng_case_data, date_index = "date", interval = "week", groups = "sex")
@@ -62,6 +62,31 @@ base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(ax
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 <!-- https://gitlab.renkulab.io/the-graph-courses/further-data-analysis-with-r-staging/-/tree/master/ch06_basic_geospatial_viz/lessons -->
+#### Analyzing the trend in case data
+
+Aggregated case data over a specific time unit, or incidence data, typically represent the number of cases occurring within that time frame. These data can often be assumed to follow either a Poisson distribution or a negative binomial distribution, depending on the specific characteristics of the data and the underlying processes generating them.
+
+When analyzing such data, one common approach is to examine the trend over time by computing the rate of change, which can indicate whether there is exponential growth or decay in the number of cases. Exponential growth implies that the number of cases is increasing at an accelerating rate over time, while exponential decay suggests that the number of cases is decreasing at a decelerating rate.
+
+Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health.
+
+The `i2extras` package provides methods for modelling the trend in case. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
+
+```{r, warning=FALSE, message=FALSE}
+library("i2extras")
+# This line loads the i2extras package, which  provides methods for modeling trends in case data.
+df <- base::subset(covid19_eng_case_data, 
+                   covid19_eng_case_data$date <= min(covid19_eng_case_data$date)+90)
+# This code subset the covid19_eng_case_data to include only the first 3 months of data.
+df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
+#This line uses the incidence function from the incidence2 package to compute the
+#incidence data. It groups the data by sex.
+out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
+# Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.
+# The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
+base::plot(out, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
+#This code plots the results using the plot function.
+```
 
 ## Exponential growth
 
@@ -69,8 +94,8 @@ Within the renewal equation, the generation interval mechanistically links the r
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{incidence2}` 
-- Use `{i2extras}`
+- Use `{incidence2}` to aggregate case data based on a date event.  
+- Use `{i2extras}` to calculate exponential growth or decline of cases.
 - Use `{compareGroups}`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
