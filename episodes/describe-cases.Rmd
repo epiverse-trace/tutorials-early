@@ -39,19 +39,19 @@ library("incidence2")
 library("ggplot2")
 covid19_eng_incidence_data <- incidence2::incidence(covid19_eng_case_data, 
                                               date_index = "date")
-utils::head(covid19_eng_incidence_data)
+utils::head(covid19_eng_incidence_data,5)
 ```
 
 The `incidence2` object can be visualized using the plot function of base R package. 
 ```{r, message=FALSE, warning=FALSE}
-base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
 ```
 
 Moreover, `Incidence2` can also aggregate case data based on a dated event and other factors such as  what is the person and place. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
 
 ```{r, message=FALSE, warning=FALSE}
 weekly_covid19_eng_incidence <- incidence2::incidence(covid19_eng_case_data, date_index = "date", interval = "week", groups = "sex")
-base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
 ```
 
 
@@ -70,7 +70,9 @@ When analyzing such data, one common approach is to examine the trend over time 
 
 Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health.
 
+
 The `i2extras` package provides methods for modelling the trend in case data, calculating moving averages, and exponential growth or decay rate. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
+
 
 ```{r, warning=FALSE, message=FALSE}
 library("i2extras")
@@ -86,6 +88,9 @@ fitted_curve <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
 base::plot(fitted_curve, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
 ```
+
+### Exponential growth or decay rate
+
 The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -95,13 +100,14 @@ rates <- base::as.data.frame(rates)
 rates %>%select(sex, r, r_lower, r_upper )
 ```
 
-::::::::::::::::::::::::::::::::::::: challenge 
+### Peak time
+Peak time--the date which the highest number of cases observed-- can be estimeated using the `estimate_peak` function
+```{r, message=FALSE, warning=FALSE}
+peaks <- i2extras::estimate_peak((df_incid), progress = FALSE)
+peaks%>% select(-c(count_variable, bootstrap_peaks))
+```
 
-- What is the trend of cases in the above example, is it increasing or decreasing?
-- Using  `covid91_eng_case_data`  dataset, model and visualize the trend of  Covid-19 in England in the first six months cases via Poisson distribution?
-- Determine the exponential growth or decay rate?
-
-::::::::::::::::::::::::::::::::::::::::::::::::
+### Moving average
 
 A moving average, which shows the trend of cases in specified time period, also can be calculate using the `add_rolling_average` function in `i2extras` package, as illustrated in the below code chunk.
 
@@ -114,9 +120,17 @@ base::plot(moving_Avg, border_colour = "white", angle = 45) +
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-- Calculate and visualize monthly moving average of Covid-19 cases in England?
+- What is the trend of cases in the above example, is it increasing or decreasing?
+- Using  `covid91_eng_case_data` dataset for the first six months cases perform the following:
+  - model and visualize the epi cure via Poisson distribution?
+  - Determine the exponential growth or decay rate?
+  - Estimate peak time?
+  - Calculate and visualize monthly moving average?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
 
 ## Exponential growth
 
@@ -125,7 +139,7 @@ Within the renewal equation, the generation interval mechanistically links the r
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{incidence2}` to aggregate case data based on a date event.  
-- Use `{i2extras}` to fit epi curve,  calculate exponential growth or decline of cases, estimate pick size and peak time, and computing moving average of cases in specified time window.
+- Use `{i2extras}` to fit epi curve,  calculate exponential growth or decline of cases, find peak time, and computing moving average of cases in specified time window.
 - Use `{compareGroups}`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
