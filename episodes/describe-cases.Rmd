@@ -70,7 +70,7 @@ When analyzing such data, one common approach is to examine the trend over time 
 
 Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health.
 
-The `i2extras` package provides methods for modelling the trend in case. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
+The `i2extras` package provides methods for modelling the trend in case data, calculating moving averages, and exponential growth or decay rate. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
 
 ```{r, warning=FALSE, message=FALSE}
 library("i2extras")
@@ -81,12 +81,42 @@ df <- base::subset(covid19_eng_case_data,
 df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
 #This line uses the incidence function from the incidence2 package to compute the
 #incidence data. It groups the data by sex.
-out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
+fitted_curve <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.
 # The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
-base::plot(out, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
-#This code plots the results using the plot function.
+base::plot(fitted_curve, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
 ```
+The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
+
+```{r, message=FALSE, warning=FALSE}
+library("tidyverse")
+rates <- i2extras::growth_rate(fitted_curve)
+rates <- base::as.data.frame(rates)
+rates %>%select(sex, r, r_lower, r_upper )
+```
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+- What is the trend of cases in the above example, is it increasing or decreasing?
+- Using  `covid91_eng_case_data`  dataset, model and visualize the trend of  Covid-19 in England in the first six months cases via Poisson distribution?
+- Determine the exponential growth or decay rate?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A moving average, which shows the trend of cases in specified time period, also can be calculate using the `add_rolling_average` function in `i2extras` package, as illustrated in the below code chunk.
+
+```{r, warning=FALSE, message=FALSE}
+moving_Avg <- i2extras::add_rolling_average(df_incid, n = 7L)
+base::plot(moving_Avg, border_colour = "white", angle = 45) +
+    ggplot2::geom_line(aes(x = date_index, y = rolling_average, color="red"))+
+    ggplot2::labs(x = "Date", y= "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+- Calculate and visualize monthly moving average of Covid-19 cases in England?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Exponential growth
 
@@ -95,7 +125,7 @@ Within the renewal equation, the generation interval mechanistically links the r
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{incidence2}` to aggregate case data based on a date event.  
-- Use `{i2extras}` to calculate exponential growth or decline of cases.
+- Use `{i2extras}` to fit epi curve,  calculate exponential growth or decline of cases, estimate pick size and peak time, and computing moving average of cases in specified time window.
 - Use `{compareGroups}`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
