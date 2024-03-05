@@ -303,12 +303,13 @@ the timing of transmission and interventions.</p>
 <figure><img src="fig/time-periods.jpg" alt="Definition of key time periods. From Xiang et al, 2021" class="figure mx-auto d-block"><div class="figcaption">Definition of key time periods. From <a href="https://www.sciencedirect.com/science/article/pii/S2468042721000038" class="external-link">Xiang
 et al, 2021</a>
 </div>
-</figure><div id="callout1" class="callout">
+</figure><div id="definitions" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="definitions">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a></h3>
+<div id="definitions" class="callout-inner">
+<h3 class="callout-title">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
+</h3>
 <div class="callout-content">
 <p>Look at the <a href="reference.html">glossary</a> for the definitions
 of all the time periods of the figure above!</p>
@@ -405,13 +406,14 @@ estimation. <span class="math inline">\(R_{t}\)</span> estimates are
 sensitive not only to the mean generation time but also to the variance
 and form of the generation interval distribution <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409" class="external-link">(Gostic
 et al., 2020)</a>.</p>
-<div id="callout2" class="callout">
+<div id="from-time-periods-to-probability-distributions." class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="from-time-periods-to-probability-distributions-">From time periods to probability
-distributions.<a class="anchor" aria-label="anchor" href="#from-time-periods-to-probability-distributions-"></a></h3>
+<div id="from-time-periods-to-probability-distributions." class="callout-inner">
+<h3 class="callout-title">From time periods to probability
+distributions.<a class="anchor" aria-label="anchor" href="#from-time-periods-to-probability-distributions."></a>
+</h3>
 <div class="callout-content">
 <p>When we calculate the <em>serial interval</em>, we see that not all
 case pairs have the same time length. We will observe this variability
@@ -680,12 +682,13 @@ Parameters:
 attr(,"class")
 [1] "multi_epidist"</code></pre>
 </div>
-<div id="callout3" class="callout">
+<div id="case-insensitive" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="case-insensitive">CASE-INSENSITIVE<a class="anchor" aria-label="anchor" href="#case-insensitive"></a></h3>
+<div id="case-insensitive" class="callout-inner">
+<h3 class="callout-title">CASE-INSENSITIVE<a class="anchor" aria-label="anchor" href="#case-insensitive"></a>
+</h3>
 <div class="callout-content">
 <p><code>epidist_db</code> is <a href="https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity" class="external-link">case-insensitive</a>.
 This means that you can use strings with letters in upper or lower case
@@ -855,13 +858,13 @@ Parameters:
   meanlog: 1.386
   sdlog: 0.568</code></pre>
 </div>
-<div id="callout4" class="callout">
+<div id="how-does-single_epidist-works" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="how-does-single_epidist-works">How does <code>single_epidist</code>
-works?<a class="anchor" aria-label="anchor" href="#how-does-single_epidist-works"></a></h3>
+<div id="how-does-single_epidist-works" class="callout-inner">
+<h3 class="callout-title">How does<code>single_epidist</code>works?<a class="anchor" aria-label="anchor" href="#how-does-single_epidist-works"></a>
+</h3>
 <div class="callout-content">
 <p>Looking at the help documentation for
 <code>?epiparameter::epidist_db()</code>:</p>
@@ -1706,12 +1709,13 @@ function!</p>
 <pre class="output" tabindex="0"><code>
   Fixed distribution with PMF [0.18 0.11 0.08 0.066 0.057 0.05 0.045 0.041 0.037 0.034 0.032 0.03 0.028 0.027 0.025 0.024 0.023 0.022 0.021 0.02 0.019 0.019 0.018]</code></pre>
 </div>
-<div id="callout5" class="callout">
+<div id="warning" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="section level3 callout-title callout-inner">
-<h3 class="callout-title" id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a></h3>
+<div id="warning" class="callout-inner">
+<h3 class="callout-title">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
+</h3>
 <div class="callout-content">
 <p>Using the serial interval instead of the generation time is an
 alternative that can propagate bias in your estimates, even more so in
@@ -2471,7 +2475,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/1bc5753e917d515c3d888ce6cc013c0a680eacfc" class="external-link">pegboard (0.7.3)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.1.9000)</a></p>
+        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/6a0023c1dbaf9f6936e161364a80c6971777ee46" class="external-link">pegboard (0.7.4.9000)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.1.9000)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
