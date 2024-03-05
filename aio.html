@@ -313,13 +313,15 @@ periods.</p>
 infectious disease shows that its development has a regularity from
 stage to stage. The time periods from an infectious disease inform about
 the timing of transmission and interventions.</p>
-<figure><img src="fig/time-periods.jpg" alt="" class="figure mx-auto d-block"><figcaption>Definition of key time periods. From <a href="https://www.sciencedirect.com/science/article/pii/S2468042721000038" class="external-link">Xiang
-et al, 2021</a></figcaption></figure><div id="definitions" class="callout callout">
+<figure><img src="fig/time-periods.jpg" alt="Definition of key time periods. From Xiang et al, 2021" class="figure mx-auto d-block"><div class="figcaption">Definition of key time periods. From <a href="https://www.sciencedirect.com/science/article/pii/S2468042721000038" class="external-link">Xiang
+et al, 2021</a>
+</div>
+</figure><div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="definitions" class="callout-inner">
-<h3 class="callout-title">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="definitions">Definitions<a class="anchor" aria-label="anchor" href="#definitions"></a>
 </h3>
 <div class="callout-content">
 <p>Look at the <a href="reference.html">glossary</a> for the definitions
@@ -390,18 +392,21 @@ connect some of their functions, so let’s also call to the
 <p>The generation time, jointly with the <span class="math inline">\(R\)</span>, can inform about the speed of spread
 and its feasibility of control. Given a <span class="math inline">\(R&gt;1\)</span>, with a shorter generation time,
 cases can appear more quickly.</p>
-<figure><img src="fig/reproduction-generation-time.png" alt="" class="figure mx-auto d-block"><figcaption>Video from the MRC Centre for Global Infectious
+<figure><img src="fig/reproduction-generation-time.png" alt="Video from the MRC Centre for Global Infectious Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group with Dr Anne Cori (27-07-2023) at https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL" class="figure mx-auto d-block"><div class="figcaption">Video from the MRC Centre for Global Infectious
 Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group
-with Dr Anne Cori (27-07-2023) at <a href="https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL" class="external-link uri">https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL</a></figcaption></figure><p>In calculating the effective reproduction number (<span class="math inline">\(R_{t}\)</span>), the <em>generation time</em>
+with Dr Anne Cori (27-07-2023) at <a href="https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL" class="external-link uri">https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL</a>
+</div>
+</figure><p>In calculating the effective reproduction number (<span class="math inline">\(R_{t}\)</span>), the <em>generation time</em>
 distribution is often approximated by the <a href="reference.html#serialinterval">serial interval</a> distribution.
 This frequent approximation is because it is easier to observe and
 measure the onset of symptoms than the onset of infectiousness.</p>
-<figure><img src="fig/serial-interval-observed.jpeg" alt="" class="figure mx-auto d-block"><figcaption>A schematic of the relationship of different time
-periods of transmission between an infector and an infectee in a
+<figure><img src="fig/serial-interval-observed.jpeg" alt="A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time (Chung Lau et al. 2021)." class="figure mx-auto d-block"><div class="figcaption">A schematic of the relationship of different
+time periods of transmission between an infector and an infectee in a
 transmission pair. Exposure window is defined as the time interval
 having viral exposure, and transmission window is defined as the time
 interval for onward transmission with respect to the infection time (<a href="https://academic.oup.com/jid/article/224/10/1664/6356465" class="external-link">Chung
-Lau et al. 2021</a>).</figcaption></figure><p>However, using the <em>serial interval</em> as an approximation of
+Lau et al. 2021</a>).</div>
+</figure><p>However, using the <em>serial interval</em> as an approximation of
 the <em>generation time</em> is primarily valid for diseases in which
 infectiousness starts after symptom onset (<a href="https://academic.oup.com/jid/article/224/10/1664/6356465" class="external-link">Chung
 Lau et al. 2021</a>). In cases where infectiousness starts before
@@ -415,31 +420,33 @@ estimation. <span class="math inline">\(R_{t}\)</span> estimates are
 sensitive not only to the mean generation time but also to the variance
 and form of the generation interval distribution <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409" class="external-link">(Gostic
 et al., 2020)</a>.</p>
-<div id="from-time-periods-to-probability-distributions." class="callout callout">
+<div id="callout2" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="from-time-periods-to-probability-distributions." class="callout-inner">
-<h3 class="callout-title">From time periods to probability
-distributions.<a class="anchor" aria-label="anchor" href="#from-time-periods-to-probability-distributions."></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="from-time-periods-to-probability-distributions-">From time periods to probability
+distributions.<a class="anchor" aria-label="anchor" href="#from-time-periods-to-probability-distributions-"></a>
 </h3>
 <div class="callout-content">
 <p>When we calculate the <em>serial interval</em>, we see that not all
 case pairs have the same time length. We will observe this variability
 for any case pair and individual time period, including the <a href="reference.html#incubation">incubation period</a> and <a href="reference.html#infectiousness">infectious period</a>.</p>
-<figure><img src="fig/serial-interval-pairs.jpg" alt="" class="figure mx-auto d-block"><figcaption>Serial intervals of possible case pairs in (a)
+<figure><img src="fig/serial-interval-pairs.jpg" alt="Serial intervals of possible case pairs in (a) COVID-19 and (b) MERS-CoV. Pairs represent a presumed infector and their presumed infectee plotted by date of symptom onset (Althobaity et al., 2022)." class="figure mx-auto d-block"><div class="figcaption">Serial intervals of possible case pairs in (a)
 COVID-19 and (b) MERS-CoV. Pairs represent a presumed infector and their
 presumed infectee plotted by date of symptom onset (<a href="https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig6" class="external-link">Althobaity
-et al., 2022</a>).</figcaption></figure><p>To summarize these data from individual and pair time periods, we can
+et al., 2022</a>).</div>
+</figure><p>To summarize these data from individual and pair time periods, we can
 find the <strong>statistical distributions</strong> that best fit the
 data (<a href="https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2023.28.27.2200806" class="external-link">McFarland
 et al., 2023</a>).</p>
 <!-- add a reference about good practices to estimate distributions -->
-<figure><img src="fig/seria-interval-fitted-distributions.jpg" alt="" class="figure mx-auto d-block"><figcaption>Fitted serial interval distribution for (a) COVID-19
-and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia.
-We fitted three commonly used distributions, Lognormal, Gamma, and
-Weibull distributions, respectively (<a href="https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5" class="external-link">Althobaity
-et al., 2022</a>).</figcaption></figure><p>Statistical distributions are summarized in terms of their
+<figure><img src="fig/seria-interval-fitted-distributions.jpg" alt="Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Lognormal, Gamma, and Weibull distributions, respectively (Althobaity et al., 2022)." class="figure mx-auto d-block"><div class="figcaption">Fitted serial interval distribution for (a)
+COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi
+Arabia. We fitted three commonly used distributions, Lognormal, Gamma,
+and Weibull distributions, respectively (<a href="https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5" class="external-link">Althobaity
+et al., 2022</a>).</div>
+</figure><p>Statistical distributions are summarized in terms of their
 <strong>summary statistics</strong> like the <em>location</em> (mean and
 percentiles) and <em>spread</em> (variance or standard deviation) of the
 distribution, or with their <strong>distribution parameters</strong>
@@ -534,9 +541,10 @@ and that the serial interval approximates the generation time.</p>
 <li>Which one would be harder to control?</li>
 <li>Why do you conclude that?</li>
 </ul>
-<figure><img src="fig/serial-interval-covid-sars.jpg" alt="" class="figure mx-auto d-block"><figcaption>Serial interval of novel coronavirus (COVID-19)
+<figure><img src="fig/serial-interval-covid-sars.jpg" alt="Serial interval of novel coronavirus (COVID-19) infections overlaid with a published distribution of SARS. (Nishiura et al, 2020)" class="figure mx-auto d-block"><div class="figcaption">Serial interval of novel coronavirus (COVID-19)
 infections overlaid with a published distribution of SARS. (<a href="https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext" class="external-link">Nishiura
-et al, 2020</a>)</figcaption></figure>
+et al, 2020</a>)</div>
+</figure>
 </div>
 </div>
 </div>
@@ -726,12 +734,12 @@ Parameters:
 attr(,"class")
 [1] "multi_epidist"</code></pre>
 </div>
-<div id="case-insensitive" class="callout callout">
+<div id="callout3" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="case-insensitive" class="callout-inner">
-<h3 class="callout-title">CASE-INSENSITIVE<a class="anchor" aria-label="anchor" href="#case-insensitive"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="case-insensitive">CASE-INSENSITIVE<a class="anchor" aria-label="anchor" href="#case-insensitive"></a>
 </h3>
 <div class="callout-content">
 <p><code>epidist_db</code> is <a href="https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity" class="external-link">case-insensitive</a>.
@@ -907,12 +915,13 @@ Parameters:
   meanlog: 1.386
   sdlog: 0.568</code></pre>
 </div>
-<div id="how-does-single_epidist-works" class="callout callout">
+<div id="callout4" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="how-does-single_epidist-works" class="callout-inner">
-<h3 class="callout-title">How does<code>single_epidist</code>works?<a class="anchor" aria-label="anchor" href="#how-does-single_epidist-works"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="how-does-single_epidist-works">How does <code>single_epidist</code>
+works?<a class="anchor" aria-label="anchor" href="#how-does-single_epidist-works"></a>
 </h3>
 <div class="callout-content">
 <p>Looking at the help documentation for
@@ -1104,7 +1113,7 @@ button to explore them as an expandable list:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>covid_serialint<span class="sc">$</span></span></code></pre>
+<pre class="sourceCode r" tabindex="0"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>covid_serialint<span class="sc">$</span></span></code></pre>
 </div>
 <p>Use the <code>str()</code> to display the structure of the
 <code>&lt;epidist&gt;</code> R object.</p>
@@ -1400,9 +1409,10 @@ the:</p>
 probability functions for the normal distribution</a>, each of its
 definitions and identify in which part of a distribution they are
 located!</p>
-<figure><img src="fig/fig5a-normaldistribution.png" alt="" class="figure mx-auto d-block"><figcaption>The four probability functions for the normal
+<figure><img src="fig/fig5a-normaldistribution.png" alt="The four probability functions for the normal distribution (Jack Weiss, 2012)" class="figure mx-auto d-block"><div class="figcaption">The four probability functions for the normal
 distribution (<a href="https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc" class="external-link">Jack
-Weiss, 2012</a>)</figcaption></figure>
+Weiss, 2012</a>)</div>
+</figure>
 </div>
 </div>
 </div>
@@ -1793,12 +1803,12 @@ function!</p>
 <pre class="output" tabindex="0"><code>
   Fixed distribution with PMF [0.18 0.11 0.08 0.066 0.057 0.05 0.045 0.041 0.037 0.034 0.032 0.03 0.028 0.027 0.025 0.024 0.023 0.022 0.021 0.02 0.019 0.019 0.018]</code></pre>
 </div>
-<div id="warning" class="callout callout">
+<div id="callout5" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="warning" class="callout-inner">
-<h3 class="callout-title">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
+<div class="section level3 callout-title callout-inner">
+<h3 class="callout-title" id="warning">Warning<a class="anchor" aria-label="anchor" href="#warning"></a>
 </h3>
 <div class="callout-content">
 <p>Using the serial interval instead of the generation time is an
@@ -1938,19 +1948,23 @@ these numbers are not readily available. All observations reflect
 transmission events from some time in the past. In other words, if <span class="math inline">\(d\)</span> is the delay from infection to
 observation, then observations at time <span class="math inline">\(t\)</span> inform <span class="math inline">\(R_{t−d}\)</span>, not <span class="math inline">\(R_t\)</span>. <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007" class="external-link">(Gostic
 et al., 2020)</a></p>
-<figure><img src="fig/disease-reporting.jpg" alt="" class="figure mx-auto d-block"><figcaption>Timeline for chain of disease reporting, the
+<figure><img src="fig/disease-reporting.jpg" alt="Timeline for chain of disease reporting, the Netherlands. Lab, laboratory; PHA, public health authority. From Marinović et al., 2015" class="figure mx-auto d-block"><div class="figcaption">Timeline for chain of disease reporting, the
 Netherlands. Lab, laboratory; PHA, public health authority. From <a href="https://wwwnc.cdc.gov/eid/article/21/2/13-0504_article" class="external-link">Marinović
-et al., 2015</a></figcaption></figure><p>The <strong>delay distribution</strong> could be inferred jointly
+et al., 2015</a>
+</div>
+</figure><p>The <strong>delay distribution</strong> could be inferred jointly
 with the underlying times of infection or estimated as the sum of the
 <strong><a href="reference.html#incubation">incubation
 period</a></strong> distribution and the distribution of delays from
 symptom onset to observation from line list data <strong>(<a href="reference.html#reportingdelay">reporting delay</a>)</strong>.</p>
 <p>For <a href="https://epiforecasts.io/EpiNow2/" class="external-link">EpiNow2</a>, we can specify these two complementary
 delay distributions in the <code>delays</code> argument.</p>
-<figure><img src="fig/rt-adjusting-delays.png" alt="" class="figure mx-auto d-block"><figcaption>Rt is a measure of transmission at time t.
+<figure><img src="fig/rt-adjusting-delays.png" alt="Rt is a measure of transmission at time t. Observations after time t must be adjusted. ICU, intensive care unit. From Gostic et al., 2020" class="figure mx-auto d-block"><div class="figcaption">Rt is a measure of transmission at time t.
 Observations after time t must be adjusted. ICU, intensive care unit.
 From <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007" class="external-link">Gostic
-et al., 2020</a></figcaption></figure><div id="reuse-an-incubation-period-for-covid-19" class="callout challenge">
+et al., 2020</a>
+</div>
+</figure><div id="reuse-an-incubation-period-for-covid-19" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -2356,21 +2370,25 @@ using Bayesian inference with packages like <a href="https://mc-stan.org/rstan/"
 <div class="accordion-body">
 <p>The lengths of the Serial interval and Incubation period determine
 the type of disease transmission.</p>
-<figure><img src="fig/incubation-period-serial-interval.jpg" alt="" class="figure mx-auto d-block"><figcaption>The relationship between the incubation period and
-serial interval. From <a href="https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext" class="external-link">Nishiura
-2020</a></figcaption></figure><p>Estimating the proportion of pre-symptomatic infections, or the
+<figure><img src="fig/incubation-period-serial-interval.jpg" alt="The relationship between the incubation period and serial interval. From Nishiura 2020" class="figure mx-auto d-block"><div class="figcaption">The relationship between the incubation period
+and serial interval. From <a href="https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext" class="external-link">Nishiura
+2020</a>
+</div>
+</figure><p>Estimating the proportion of pre-symptomatic infections, or the
 extent to which infectiousness precedes symptom onset will determine the
 effectiveness of contact tracing and the feasibility of controlling an
 outbreak (<a href="https://www.pnas.org/doi/full/10.1073/pnas.0307506101" class="external-link">Fraser et
 al., 2004</a> and <a href="https://www.thelancet.com/article/S2214-109X(20)30074-7/fulltext" class="external-link">Hellewell
 et al., 2020</a>).</p>
 <!-- The proportion of pre-symptomatic transmission contributes to the effective reproduction number and expected new cases. -->
-<figure><img src="fig/reproduction-number-pre-symptomatic.png" alt="" class="figure mx-auto d-block"><figcaption>Parameter estimates. Plausible ranges for the key
-parameters R0 and θ (read the main text for sources) for four viral
+<figure><img src="fig/reproduction-number-pre-symptomatic.png" alt="Parameter estimates. Plausible ranges for the key parameters R0 and θ (read the main text for sources) for four viral infections of public concern are shown as shaded regions. The size of the shaded area reflects the uncertainties in the parameter estimates. Fraser et al., 2004" class="figure mx-auto d-block"><div class="figcaption">Parameter estimates. Plausible ranges for the
+key parameters R0 and θ (read the main text for sources) for four viral
 infections of public concern are shown as shaded regions. The size of
 the shaded area reflects the uncertainties in the parameter estimates.
 <a href="https://www.pnas.org/doi/10.1073/pnas.0307506101" class="external-link">Fraser et
-al., 2004</a></figcaption></figure><p>Meta-analysis on the proportion of pre-symptomatic and asymptomatic
+al., 2004</a>
+</div>
+</figure><p>Meta-analysis on the proportion of pre-symptomatic and asymptomatic
 transmission in SARS-CoV-2 found limitations of the evidence given high
 heterogeneity and high risk of selection and information bias between
 studies (<a href="https://journals.plos.org/plosmedicine/article/figure?id=10.1371/journal.pmed.1003987.g003" class="external-link">Buitrago-Garcia
@@ -2589,8 +2607,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "dateCreated": "2024-02-17",
-  "dateModified": "2024-02-27",
-  "datePublished": "2024-02-27"
+  "dateModified": "2024-03-05",
+  "datePublished": "2024-03-05"
 }
 
   </script><script>
