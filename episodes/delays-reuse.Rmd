@@ -14,6 +14,7 @@ editor_options:
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
+- Get delays from a literature search database with `{epiparameter}`.
 - Get distribution parameters and summary statistics of delay distributions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
