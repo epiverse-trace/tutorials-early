@@ -8,13 +8,12 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to get delay distributions from a systematic review?
+- How to get easy access to delay distributions from a literature search database?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Get delays from a systematic review with `{epiparameter}`.
 - Get distribution parameters and summary statistics of delay distributions.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -46,7 +45,7 @@ Look at the [glossary](../learners/reference.md) for the definitions of all the 
 
 :::::::::::::::::::::::::
 
-However, early in an epidemic, modelling efforts can be delayed by the lack of a centralised resource that summarises input parameters for the disease of interest ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Projects like `{epiparameter}` and `{epireview}` are building online catalogues following systematic review protocols that can help build models faster for coming outbreaks and epidemics from known pathogens and unknown ones related to known families of viruses.
+However, early in an epidemic, modelling efforts can be delayed by the lack of a centralised resource that summarises input parameters for the disease of interest ([Nash et al., 2023](https://mrc-ide.github.io/epireview/)). Projects like `{epiparameter}` and `{epireview}` are building online catalogues following literature synthesis protocols that can help build models faster for coming outbreaks and epidemics from known pathogens and unknown ones related to known families of viruses.
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
@@ -497,7 +496,7 @@ update it from last epiparameter test
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{epiparameter}` to access the systematic review catalogue of epidemiological delay distributions.
+- Use `{epiparameter}` to access the literature catalogue of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
 - Use `list_distributions()` for an overview of multiple delay distributions.
 
