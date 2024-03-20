@@ -89,16 +89,16 @@ This can be different to the [incubation period](#incubation) as shown in Figure
 
 
 ## N
+
+[Natural history of disease]{#naturalhistory} 
+: Refers to the development of disease from beginning to end without any treatment or intervention. In fact, given the harmfulness of an epidemic, treatment or intervention measures are inevitable. Therefore, it is difficult for the natural history of a disease to be unaffected by the various coupling factors. ([Xiang et al, 2021](https://www.sciencedirect.com/science/article/pii/S2468042721000038))
+
 [Non-pharmaceutical interventions]{#NPIs}
 : Non-pharmaceutical interventions (NPIs) are measures put in place to reduce transmission that do not include the administration of drugs or vaccinations. [More information on NPIs](https://www.gov.uk/government/publications/technical-report-on-the-covid-19-pandemic-in-the-uk/chapter-8-non-pharmaceutical-interventions).
 
 ## O
 [Ordinary differential equations]{#ordinary}
 : Ordinary differential equations (ODEs) can be used to represent the rate of change of one variable (e.g. number of infected individuals) with respect to another (e.g. time). Check out this introduction to [ODEs](https://mathinsight.org/ordinary_differential_equation_introduction). ODEs are widely used in infectious disease modelling to model the flow of individuals between different disease states. 
-[Natural history of disease]{#naturalhistory} 
-: Refers to the development of disease from beginning to end without any treatment or intervention. In fact, given the harmfulness of an epidemic, treatment or intervention measures are inevitable. Therefore, it is difficult for the natural history of a disease to be unaffected by the various coupling factors. ([Xiang et al, 2021](https://www.sciencedirect.com/science/article/pii/S2468042721000038))
-
-## O
 
 [Offspring distribution]{#offspringdist}
 : Distribution of the number of secondary cases caused by a particular infected individual. ([Lloyd-Smith et al., 2005](https://www.nature.com/articles/nature04153), [Endo et al., 2020](https://wellcomeopenresearch.org/articles/5-67/v3))
