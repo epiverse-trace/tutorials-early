@@ -24,11 +24,15 @@ editor_options:
 
 ## Prerequisites
 
+- Complete tutorial [Quantifying transmission](https://epiverse-trace.github.io/tutorials-middle/quantify-transmissibility.html)
+
 This episode requires you to be familiar with:
 
 **Data science** : Basic programming with R.
 
-**Epidemic theory** : Epidemiological parameters. Time periods.
+**Statistics** : Probability distributions.
+
+**Epidemic theory** : Epidemiological parameters, time periods, Effective reproductive number.
 
 :::::::::::::::::::::::::::::::::
 
