@@ -376,9 +376,9 @@ epiparameter::epidist_db(
 
 Looking at the help documentation for `?epiparameter::epidist_db()`:
 
-- If multiple entries match the arguments supplied and `single_epidist = TRUE`,
-- Then, the parameterised `⁠<epidist>`⁠ with the largest sample size will be returned.
-- If multiple entries are equal after this sorting, the first entry will be returned.
+- If multiple entries match the arguments supplied and `single_epidist = TRUE`, then the parameterised
+`<epidist>` with the *largest sample size* will be returned.
+- If multiple entries are equal after this sorting, the *first entry* will be returned.
 
 What does a parametrised `<epidist>` is? Look at `?is_parameterised`.
 
