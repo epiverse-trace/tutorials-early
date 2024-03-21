@@ -604,6 +604,19 @@ ebola_severity$summary_stats$mean_ci_limits
 
 :::::::::::::::::::::::::::::::::::::::::::
 
+Notice that with these pieces of information we can replace two out of three inputs of the `EpiNow2::dist_spec()` function:
+
+```r
+generation_time <- dist_spec(
+  mean = covid_serialint$summary_stats$mean,
+  sd = covid_serialint$summary_stats$sd,
+  max = 20,
+  distribution = "gamma"
+)
+```
+
+In the next episode we'll access to the `max` by using **distribution functions**!
+
 <!--
 ## Concept map
 
