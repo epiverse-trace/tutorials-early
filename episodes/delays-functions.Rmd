@@ -94,54 +94,6 @@ plot(covid_serialint, day_range = 0:20)
 
 But, how can we use `{epiparameter}` to access to specific distribution values for data analysis tasks?
 
-::::::::::::::::: spoiler
-
-### Parameterised entries
-
-The following output has four entries with different content in the **probability distribution** (`prob_distribution`) column:
-
-```{r}
-distribution <-
-  epiparameter::epidist_db(
-    disease = "covid",
-    epi_dist = "serial"
-  )
-
-distribution %>%
-  list_distributions()
-```
-
-Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
-
-```{r,eval=FALSE}
-distribution %>%
-  # pluck the first entry in the object class <list>
-  pluck(1) %>%
-  # check if <epidist> object have distribution parameters
-  is_parameterised()
-```
-
-In the `epiparameter::list_distributions()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
-
-```{r}
-distribution %>%
-  list_distributions()
-```
-
-`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Lognormal** is called `lnorm`.
-
-### Parameterised entries have an Inference method
-
-As detailed in `?is_parameterised`, a parameterised distribution is the entry that has a probability distribution associated with it provided by an `inference_method` as shown in `metadata`:
-
-```{r,eval=FALSE}
-distribution[[1]]$metadata$inference_method
-distribution[[2]]$metadata$inference_method
-distribution[[4]]$metadata$inference_method
-```
-
-:::::::::::::::::::::::::
-
 ## Distribution functions
 
 In R, all the statistical distributions have functions to access the following:
