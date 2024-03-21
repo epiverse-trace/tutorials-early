@@ -380,7 +380,7 @@ Looking at the help documentation for `?epiparameter::epidist_db()`:
 `<epidist>` with the *largest sample size* will be returned.
 - If multiple entries are equal after this sorting, the *first entry* will be returned.
 
-What does a parametrised `<epidist>` is? Look at `?is_parameterised`.
+What is a *parametrised* `<epidist>`? Look at `?is_parameterised`.
 
 :::::::::::::::::::::::::
 
