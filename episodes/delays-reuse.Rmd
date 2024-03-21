@@ -453,15 +453,19 @@ We will explore these concepts at the end!
 
 A severity parameter like the duration of hospitalisation could add to the information needed about the bed capacity in response to an outbreak ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
+Also, `{EpiNow2}` can also include the uncertainty around each summary statistic, like the standard deviation of the standard deviation.
+
 For Ebola: 
 
-- What is the reported point estimate and uncertainty of the mean duration of health care and case isolation?
+- What is the reported *point estimate* and *uncertainty* of the mean duration of health care and case isolation?
 
 ::::::::::::::::: hint
 
 An informative delay should measure the time from symptom onset to recovery or death.
 
 Find a way to access the whole `{epiparameter}` database and find how that delay may be stored.
+
+Explore within `<epidist>$summary_stats$...`.
 
 ::::::::::::::::::::::
 
@@ -486,6 +490,8 @@ ebola_severity$summary_stats$mean_ci
 # limits of the confidence intervals
 ebola_severity$summary_stats$mean_ci_limits
 ```
+
+We invite you to read this discussion on: [How to adapt `{epiparamter}` uncertainty entries to `{EpiNow2}`](https://github.com/epiverse-trace/epiparameter/discussions/218)? 
 
 ::::::::::::::::::::::::::
 
