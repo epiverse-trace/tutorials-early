@@ -58,12 +58,6 @@ to use the [code completion feature](https://support.posit.co/hc/en-us/articles/
 
 `{epiparameter}` help us to *choose* one specific set of epidemiological parameters from the literature, instead of copy/pasting them *by hand*:
 
-```{r,warning=FALSE,message=FALSE}
-library(epiparameter)
-library(EpiNow2)
-library(tidyverse)
-```
-
 ```{r}
 covid_serialint <-
   epiparameter::epidist_db(
@@ -88,6 +82,14 @@ generation_time <- dist_spec(
 ```
 
 In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a `max` value for this and any other package downstream in the pipeline!
+
+Let's load the `{epiparameter}` and `{EpiNow2}` package. We'll use the pipe `%>%`, some `{dplyr}` verbs and `{ggplot2}`, so let's also call to the `{tidyverse}` package:
+
+```{r,warning=FALSE,message=FALSE}
+library(epiparameter)
+library(EpiNow2)
+library(tidyverse)
+```
 
 ## Distribution functions
 
