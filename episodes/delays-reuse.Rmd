@@ -142,9 +142,9 @@ The generation time, jointly with the $R$, can inform about the speed of spread 
 In calculating the effective reproduction number ($R_{t}$), the *generation time* distribution is often approximated by the [serial interval](../learners/reference.md#serialinterval) distribution.
 This frequent approximation is because it is easier to observe and measure the onset of symptoms than the onset of infectiousness.
 
-![A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time ([Chung Lau et al. 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)).](fig/serial-interval-observed.jpeg)
+![A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)).](fig/serial-interval-observed.jpeg)
 
-However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al. 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case of a pre-symptomatic transmission ([Nishiura et al. (2020)](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
+However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case of a pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
 
 Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation. $R_{t}$ estimates are sensitive not only to the mean generation time but also to the variance and form of the generation interval distribution [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409).
 
@@ -159,7 +159,7 @@ Given the Serial interval of both infections in the figure below:
 - Which one would be harder to control? 
 - Why do you conclude that?
 
-![Serial interval of novel coronavirus (COVID-19) infections overlaid with a published distribution of SARS. ([Nishiura et al, 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext))](fig/serial-interval-covid-sars.jpg)
+![Serial interval of novel coronavirus (COVID-19) infections overlaid with a published distribution of SARS. ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext))](fig/serial-interval-covid-sars.jpg)
 
 ::::::::::::::::: hint
 
