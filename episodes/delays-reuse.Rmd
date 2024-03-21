@@ -214,7 +214,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 :::::::::::::::::::::::::
 
-To summarise a `<multi_epidist>` view and get the column names from the underlying parameter dataset, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+To summarise a `<multi_epidist>` view and get the column names from the underlying parameter database, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
@@ -460,6 +460,8 @@ For Ebola:
 ::::::::::::::::: hint
 
 An informative delay should measure the time from symptom onset to recovery or death.
+
+Find a way to access the whole `{epiparameter}` database and find how that delay may be stored.
 
 ::::::::::::::::::::::
 
