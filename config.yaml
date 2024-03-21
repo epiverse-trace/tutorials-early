@@ -61,7 +61,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 episodes:
 - delays-reuse.Rmd
 - delays-functions.Rmd
-- delays-challenges.Rmd
+#- delays-challenges.Rmd
 
 # Information for Learners
 learners:
