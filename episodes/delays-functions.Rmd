@@ -128,6 +128,8 @@ distribution %>%
   list_distributions()
 ```
 
+`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Lognormal** is called `lnorm`.
+
 ### Parameterised entries have an Inference method
 
 As detailed in `?is_parameterised`, a parameterised distribution is the entry that has a probability distribution associated with it provided by an `inference_method` as shown in `metadata`:
