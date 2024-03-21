@@ -34,22 +34,6 @@ This episode requires you to be familiar with:
 
 ## Introduction
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into `EpiNow2::dist_spec()`.
-
-Let's assign this `<epidist>` class object to the `covid_serialint` object.
-
-```{r}
-covid_serialint <-
-  epiparameter::epidist_db(
-    disease = "covid",
-    epi_dist = "serial",
-    author = "Nishiura",
-    single_epidist = TRUE
-  )
-
-covid_serialint
-```
-
 <!-- to activate for EpiNow2@dist-interfase
 
 But still, we need to extract them as usable numbers. We use `epiparameter::get_parameters()` for this:
@@ -72,7 +56,7 @@ to use the [code completion feature](https://support.posit.co/hc/en-us/articles/
 
 -->
 
-But how can we plug them into `{EpiNow2}`? In this episode, we will review the distribution functions that `{epiparameter}` provides to get the value we need for this and any other package downstream in the pipeline!
+`{epiparameter}` help us to *choose* one specific set of epidemiological parameters from the literature, instead of copy/pasting them *by hand*:
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
@@ -80,19 +64,30 @@ library(EpiNow2)
 library(tidyverse)
 ```
 
-## Continuous distributions
-
-In `{epiparameter}`, you will mostly find **continuous** distributions like these. You can use `plot()` to `<epidist>` objects to visualise: 
-
-- the *Probability Density Function (PDF)* and 
-- the *Cumulative Distribution Function (CDF)*.
-
 ```{r}
-# plot <epidist> object
-plot(covid_serialint, day_range = 0:20)
+covid_serialint <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial",
+    author = "Nishiura",
+    single_epidist = TRUE
+  )
+
+covid_serialint
 ```
 
-But, how can we use `{epiparameter}` to access to specific distribution values for data analysis tasks?
+Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** two out of three numbers into `EpiNow2::dist_spec()`
+
+```r
+generation_time <- dist_spec(
+  mean = covid_serialint$summary_stats$mean,
+  sd = covid_serialint$summary_stats$sd,
+  max = 20,
+  distribution = "gamma"
+)
+```
+
+In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a `max` value for this and any other package downstream in the pipeline!
 
 ## Distribution functions
 
