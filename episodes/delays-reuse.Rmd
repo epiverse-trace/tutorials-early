@@ -628,6 +628,7 @@ update it from last epiparameter test
 - Use `{epiparameter}` to access the literature catalogue of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
 - Use `list_distributions()` for an overview of multiple delay distributions.
+- Reuse known estimates for unknown disease in the early stage of an outbreak when no contact tracing data is available.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

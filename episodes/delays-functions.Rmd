@@ -689,6 +689,26 @@ plot(epinow_estimates)
 
 :::::::::::::::::::::::::::::::::::::::::::
 
+## Next steps
+
+::::::::::::::::: testimonial
+
+### How to get distribution parameters from statistical distributions?
+
+How to get the mean and standard deviation from a generation time with *only* distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::dist_spec()`?
+
+Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html)
+
+### How to estimate delay distributions for Disease X?
+
+Refer to this excellent tutorial on estimating the serial interval and incubation period of Disease X accounting for *censoring* using Bayesian inference with packages like `{rstan}` and `{coarseDataTools}`.
+
+- Tutorial in English: <https://rpubs.com/tracelac/diseaseX> <!-- to request -->
+- Tutorial en Español: <https://epiverse-trace.github.io/epimodelac/EnfermedadX.html>
+
+**Then,** after you get your estimated values, you can manually create your own` <epidist>` class objects with `epiparameter::epidist()`! Take a look at its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
+
+:::::::::::::::::::::::::::::
 
 <!--
 ## Concept map
@@ -699,7 +719,8 @@ update it from last epiparameter test
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use distribution functions with `<epidist>` objects to get summary statistics and informative parameters for public health interventions like the Window for contact tracing and Length of quarantine.
-- Use `discretise ()` to convert continuous to discrete delay distributions.
+- Use `discretise()` to convert continuous to discrete delay distributions.
+- Use `{epiparameter}` to get reporting delays required in transmissibility estimates. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 

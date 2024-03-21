@@ -170,19 +170,6 @@ We can identify what entries in the `{epiparameter}` library assessed for these 
 covid_serialint$method_assess
 ```
 
-::::::::::::::::: testimonial
-
-### How to estimate delay distributions for Disease X?
-
-Refer to this excellent tutorial on estimating the serial interval and incubation period of Disease X accounting for *censoring* using Bayesian inference with packages like `{rstan}` and `{coarseDataTools}`.
-
-- Tutorial in English: <https://rpubs.com/tracelac/diseaseX> <!-- to request -->
-- Tutorial en Español: <https://epiverse-trace.github.io/epimodelac/EnfermedadX.html>
-
-**Then,** after you get your estimated values, you can manually create your own` <epidist>` class objects with `epiparameter::epidist()`! Take a look at its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
-
-:::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::: spoiler
 
 ### How to assess for pre-symptomatic infection?
@@ -313,7 +300,6 @@ update it from last epiparameter test
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{epiparameter}` to get reporting delays required in transmissibility estimates. 
 - Reuse known estimates for unknown disease in the early stage of an outbreak when no contact tracing data is available.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
