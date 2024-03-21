@@ -63,7 +63,7 @@ episodes:
 #- describe-cases.Rmd
 - read-delays.Rmd
 - delays-functions.Rmd
-- delays-challenges.Rmd
+#- delays-challenges.Rmd
 
 
 # Information for Learners
