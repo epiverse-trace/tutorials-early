@@ -87,12 +87,14 @@ generation_time <- dist_spec(
 
 In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a `max` value for this and any other package downstream in the pipeline!
 
-Let's load the `{epiparameter}` and `{EpiNow2}` package. We'll use the pipe `%>%`, some `{dplyr}` verbs and `{ggplot2}`, so let's also call to the `{tidyverse}` package:
+Let's load the `{epiparameter}` and `{EpiNow2}` package. For `{EpiNow2}`, we'll set 4 cores to be used in parallel computations. We'll use the pipe `%>%`, some `{dplyr}` verbs and `{ggplot2}`, so let's also call to the `{tidyverse}` package:
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
 library(EpiNow2)
 library(tidyverse)
+
+withr::local_options(list(mc.cores = 4))
 ```
 
 ## Distribution functions
@@ -376,12 +378,7 @@ epinow_estimates <- epinow(
   # cases
   reported_cases = example_confirmed[1:60],
   # delays
-  generation_time = generation_time_opts(serial_interval_covid),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+  generation_time = generation_time_opts(serial_interval_covid)
 )
 
 base::plot(epinow_estimates)
@@ -457,12 +454,7 @@ epinow_estimates <- epinow(
   # cases
   reported_cases = ebola_confirmed,
   # delays
-  generation_time = generation_time_opts(serial_interval_ebola),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+  generation_time = generation_time_opts(serial_interval_ebola)
 )
 
 plot(epinow_estimates)
@@ -505,12 +497,7 @@ epinow_estimates <- epinow(
   reported_cases = example_confirmed[1:60],
   # delays
   generation_time = generation_time_opts(covid_serial_interval),
-  delays = delay_opts(covid_incubation_time),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+  delays = delay_opts(covid_incubation_time)
 )
 ```
 
@@ -570,12 +557,7 @@ epinow_estimates <- epinow(
   reported_cases = example_confirmed[1:60],
   # delays
   generation_time = generation_time_opts(covid_serial_interval),
-  delays = delay_opts(covid_incubation_time),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+  delays = delay_opts(covid_incubation_time)
 )
 
 base::plot(epinow_estimates)
@@ -679,12 +661,7 @@ epinow_estimates <- epinow(
   reported_cases = ebola_confirmed,
   # delays
   generation_time = generation_time_opts(serial_interval_ebola),
-  delays = delay_opts(incubation_period_ebola),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+  delays = delay_opts(incubation_period_ebola)
 )
 
 plot(epinow_estimates)
