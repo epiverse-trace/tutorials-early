@@ -74,7 +74,7 @@ covid_serialint <-
 covid_serialint
 ```
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** two out of three numbers into `EpiNow2::dist_spec()`
+Now, we have an epidemiological parameter we can reuse! We can replace the two out of three **summary statistics** into `EpiNow2::dist_spec()`
 
 ```r
 generation_time <- dist_spec(
