@@ -218,7 +218,7 @@ epiparameter::epidist_db(
 )
 ```
 
-With this query combination, we get more than one delay distribution. This output is an object class `<multi_epidist>`.
+With this query combination, we get more than one delay distribution. This output is an `<epidist>` class object.
 
 ::::::::::::::::: callout
 
@@ -228,7 +228,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 :::::::::::::::::::::::::
 
-To summarise a `<multi_epidist>` view and get the column names from the underlying parameter database, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+To summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
@@ -249,7 +249,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
 ```{r,eval=FALSE}
-# assign <multi_epidist> to object
+# get an <epidist> object
 distribution <-
   epiparameter::epidist_db(
     disease = "covid",
@@ -377,7 +377,7 @@ epiparameter::epidist_db(
 Looking at the help documentation for `?epiparameter::epidist_db()`:
 
 - If multiple entries match the arguments supplied and `single_epidist = TRUE`,
-- Then, the parameterised`⁠<epidist>`⁠ with the largest sample size will be returned.
+- Then, the parameterised `⁠<epidist>`⁠ with the largest sample size will be returned.
 - If multiple entries are equal after this sorting, the first entry will be returned.
 
 What does a parametrised `<epidist>` is? Look at `?is_parameterised`.
