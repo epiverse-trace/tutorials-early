@@ -50,8 +50,39 @@ However, early in an epidemic, modelling efforts can be delayed by the lack of a
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
-To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in this episode will be to replace the `generation_time` input that we can use for `EpiNow2::epinow()`.
+To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in this episode will be to *choose* one specific set of epidemiological parameters from the literature, instead of copy/pasting them *by hand*, to plug them in to an `{EpiNow2}` analysis workflow.
 
+<!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
+
+Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to connect some of their functions, so let's also call to the `{tidyverse}` package:
+
+```{r,warning=FALSE,message=FALSE}
+library(epiparameter)
+library(tidyverse)
+```
+
+## The problem
+
+In `{EpiNow2}` we can specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+
+```r
+generation_time <- dist_spec(
+  mean = 4,
+  sd = 2,
+  max = 20,
+  distribution = "gamma"
+)
+```
+
+Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get them from the **distribution parameters** reported. One source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
+
+<!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
+
+Today, we'll *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
+
+<!-- Instead of *manually* plug-in numeric values to `EpiNow2::dist_spec()` to specify the **summary statistics** of the delay distribution, we are going to *choose* them from the library of epidemiological parameters provided by `{epiparameter}`. -->
+
+<!--
 ```r
 epinow_estimates <- epinow(
   # cases
@@ -65,24 +96,7 @@ epinow_estimates <- epinow(
   )
 )
 ```
-
-To do this replacement, instead of plug-in numeric values to `EpiNow2::dist_spec()` to manually specify the **summary statistics** of the delay distribution, we are going to collect them from the library of epidemiological parameters provided by `{epiparameter}`:
-
-```r
-generation_time <- dist_spec(
-  mean = 3.6,
-  sd = 3.1,
-  max = 20,
-  distribution = "lognormal"
-)
-```
-
-Let's explore how we can access to time delays and get their **summary statistics** using `{epiparameter}`. We'll use the pipe `%>%` to connect some of their functions, so let's also call to the `{tidyverse}` package:
-
-```{r,warning=FALSE,message=FALSE}
-library(epiparameter)
-library(tidyverse)
-```
+-->
 
 ## Find a Generation time
 
