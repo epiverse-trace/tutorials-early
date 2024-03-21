@@ -467,6 +467,8 @@ epinow_estimates <- epinow(
 plot(epinow_estimates)
 ```
 
+`{EpiNow2}` can also include the uncertainty around each summary statistic. We invite you to read this discussion on: [How to adapt `{epiparameter}` uncertainty entries to `{EpiNow2}`](https://github.com/epiverse-trace/epiparameter/discussions/218)? 
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::  
