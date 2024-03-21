@@ -224,6 +224,50 @@ epiparameter::epidist_db(
   epiparameter::list_distributions()
 ```
 
+In the `epiparameter::list_distributions()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
+
+`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Lognormal** is called `lnorm`.
+
+::::::::::::::::: spoiler
+
+### Why do we have a <NA> entry?
+
+Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
+
+```{r,eval=FALSE}
+# assign <multi_epidist> to object
+distribution <-
+  epiparameter::epidist_db(
+    disease = "covid",
+    epi_dist = "serial"
+  )
+
+distribution %>%
+  # pluck the first entry in the object class <list>
+  pluck(1) %>%
+  # check if <epidist> object have distribution parameters
+  is_parameterised()
+
+# check if the second <epidist> object 
+# have distribution parameters
+distribution %>%
+  pluck(2) %>%
+  is_parameterised()
+```
+
+### Parameterised entries have an Inference method
+
+As detailed in `?is_parameterised`, a parameterised distribution is the entry that has a probability distribution associated with it provided by an `inference_method` as shown in `metadata`:
+
+```{r,eval=FALSE}
+distribution[[1]]$metadata$inference_method
+distribution[[2]]$metadata$inference_method
+distribution[[4]]$metadata$inference_method
+```
+
+:::::::::::::::::::::::::
+
+
 ::::::::::::::::::::::::::::::::: challenge
 
 ### Ebola's incubation periods
