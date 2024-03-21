@@ -191,7 +191,7 @@ The objective of the assessment above is to assess the interpretation of a large
 
 First, let's assume that the data set `example_confirmed` has COVID-19 observed cases. So, we need to find a reported generation time for COVID-19 or any other useful parameter for this aim. 
 
-Let's start by looking at how many parameters we have in the epidemiological distributions database (`epidist_db`) for the `disease` named `covid`-19:
+Let's start by looking at how many parameters we have in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
 
 ```{r}
 epiparameter::epidist_db(
