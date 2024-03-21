@@ -244,7 +244,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 
 ::::::::::::::::: spoiler
 
-### Why do we have a <NA> entry?
+### Why do we have a `<NA>` entry?
 
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
