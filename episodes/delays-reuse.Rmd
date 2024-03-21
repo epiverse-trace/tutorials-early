@@ -366,6 +366,52 @@ This only seems to work in code chunks and R console!
 
 -->
 
+You can use `plot()` to `<epidist>` objects to visualise:
+
+- the *Probability Density Function (PDF)* and 
+- the *Cumulative Distribution Function (CDF)*.
+
+```{r}
+# plot <epidist> object
+plot(covid_serialint)
+```
+
+With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what this looks like:
+
+```{r,eval=FALSE}
+# plot <epidist> object
+plot(covid_serialint, day_range = 0:20)
+```
+
+::::::::::::::::: discussion
+
+### The distribution Zoo
+
+Explore this shinyapp called **The Distribution Zoo**!
+
+Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
+
+1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
+2. Go to the left panel,
+3. Keep the *Category of distribution*: `Continuous Univariate`,
+4. Select a new *Type of distribution*: `Log-Normal`,
+5. Move the **sliders**, i.e. the graphical control element that allows you to adjust a value by moving a handle along a horizontal track or bar to the `covid_serialint` parameters. 
+
+Replicate these with the `distribution` object and all its list elements: `[[2]]`, `[[3]]`, and `[[4]]`. Explore how the shape of a distribution changes when its parameters change.
+
+Share about:
+
+- What other features of the website do you find helpful?
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: instructor
+
+In the context of user interfaces and graphical user interfaces (GUIs), like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/) shiny app, a **slider** is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
+
+:::::::::::::::::::::::::
+
+
 ## Extract the summary statistics
 
 We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving into the `summary_stats` object:
@@ -423,7 +469,9 @@ ebola_serial$summary_stats$sd
 ebola_serial$metadata$sample_size
 ```
 
-Now, explore all the other nested elements within the `<epidist>` object.
+Try to visualise this distribution using `plot()`.
+
+Also, explore all the other nested elements within the `<epidist>` object.
 
 Share about: 
 
