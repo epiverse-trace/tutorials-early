@@ -699,7 +699,11 @@ plot(epinow_estimates)
 
 How to get the mean and standard deviation from a generation time with *only* distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::dist_spec()`?
 
-Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html)
+Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html)!
+
+:::::::::::::::::::::::::::::
+
+::::::::::::::::: testimonial
 
 ### How to estimate delay distributions for Disease X?
 
