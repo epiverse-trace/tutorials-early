@@ -101,4 +101,3 @@ Health related data are also increasingly stored in specialized HIS APIS like Fi
 - Use `{DBI}` to read data from databases.
 - Use `{readepi}` to read data form HIS APIs.
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
