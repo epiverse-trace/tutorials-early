@@ -4,6 +4,14 @@ teaching: 1
 exercises: 2
 ---
 
+```{r, include = FALSE} 
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+library("outbreaks")
+library("incidence2")
+library("ggplot2")
+library("i2extras")
+```
+
 :::::::::::::::::::::::::::::::::::::: questions 
 - How to convert case data to incidence? 
 - How to visualize incidence cases?
@@ -26,156 +34,117 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, focuses describing and visualizing epidemic data, with a particular focus on a **Covid-19 case data from England**, which comes with the [outbreaks](http://www.reconverse.org/outbreaks/) package. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd)).
+
+A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that is part of the [{outbreaks}](http://www.reconverse.org/outbreaks/) package. The initial step consists in reading this dataset, and we recommend utilizing the [{readr}](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd)).
 
 ```{r, warning=FALSE, message=FALSE}
-library("outbreaks")
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
-utils::head(covid19_eng_case_data,5)
+head(covid19_eng_case_data)
 ```
+
 ## Incidence cases
 
-Downstream analysis involves working with aggregated data rather than individual cases. The  [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functions for grouping case data, usually centered around dated occurrences and/or other factors.  The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the  date of sample.
+Downstream analysis involves working with aggregated data rather than individual cases. The  [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functionalities for grouping case data, usually centered around dated occurrences and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the date of sample.
 
 ```{r, message=FALSE, warning=FALSE}
-library("incidence2")
-library("ggplot2")
-covid19_eng_incidence_data <- incidence2::incidence(covid19_eng_case_data, 
-                                              date_index = "date")
-utils::head(covid19_eng_incidence_data,5)
+covid19_eng_incidence_data <- incidence2::incidence(
+  covid19_eng_case_data, 
+  date_index = "date"
+)
+head(covid19_eng_incidence_data)
 ```
 
-The `incidence2` object can be visualized using the plot function of base R package. 
+The `incidence2` object can be visualized using the `plot()` function from base R package. 
+
 ```{r, message=FALSE, warning=FALSE}
-base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=1))
+plot(covid19_eng_incidence_data)
 ```
 
-Moreover, `Incidence2` can also aggregate case data based on a dated event and other factors such as  what is the person and place. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
+Moreover, {incidence2} has functionalities that allow for aggregating case data based on a dated event and other factors such as the individual gender, the sampling location, etc. In the example below, we calculate weekly counts of Covid-19 cases in England grouping them by `sex` type.
 
 ```{r, message=FALSE, warning=FALSE}
-weekly_covid19_eng_incidence <- incidence2::incidence(covid19_eng_case_data, date_index = "date", interval = "week", groups = "sex")
-base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+weekly_covid19_eng_incidence <- incidence2::incidence(
+  covid19_eng_case_data,
+  date_index = "date",
+  interval = "week",
+  groups = "sex"
+)
+plot(weekly_covid19_eng_incidence, angle = 45)
 ```
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-- Using the above `covid91_eng_case_data`  dataset, produce monthly epi-curves for Covid-19 cases in England based on  regional places in England?
+- Using the above `covid91_eng_case_data`  dataset, produce monthly epi-curves for Covid-19 cases in England based on regional places in England?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 <!-- https://gitlab.renkulab.io/the-graph-courses/further-data-analysis-with-r-staging/-/tree/master/ch06_basic_geospatial_viz/lessons -->
+
 #### Analyzing the trend in case data
 
-Aggregated case data over a specific time unit, or incidence data, typically represent the number of cases occurring within that time frame. These data can often be assumed to follow either a Poisson distribution or a negative binomial distribution, depending on the specific characteristics of the data and the underlying processes generating them.
+Aggregated case data over a specific time unit, or incidence data, typically represent the number of cases occurring within that time frame. These data can often be assumed to follow either a **Poisson** or a **negative binomial** distribution, depending on the specific characteristics of the data and the underlying processes generating them.
 
-When analyzing such data, one common approach is to examine the trend over time by computing the rate of change, which can indicate whether there is exponential growth or decay in the number of cases. Exponential growth implies that the number of cases is increasing at an accelerating rate over time, while exponential decay suggests that the number of cases is decreasing at a decelerating rate.
+When analyzing such data, one common approach is to examine the trend over time by computing the **rate of change**, which can indicate whether there is exponential growth or decay in the number of cases. Exponential growth implies that the number of cases is increasing at an accelerating rate over time, while exponential decay suggests that the number of cases is decreasing at a decelerating rate.
 
 Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health.
 
-
-The `i2extras` package provides methods for modelling the trend in case data, calculating moving averages, and exponential growth or decay rate. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
+The {i2extras} package provides methods for modelling the trend in case data, calculating moving averages, and exponential growth or decay rate. The code chunk below computes the Covid-19 trend in UK within first 3 months using a negative binomial distribution. 
 
 
 ```{r, warning=FALSE, message=FALSE}
-library("i2extras")
-# This line loads the i2extras package, which  provides methods for modeling trends in case data.
-df <- base::subset(covid19_eng_case_data, 
-                   covid19_eng_case_data$date <= min(covid19_eng_case_data$date)+90)
-# This code subset the covid19_eng_case_data to include only the first 3 months of data.
+# subset the covid19_eng_case_data to include only the first 3 months of data.
+df <- subset(covid19_eng_case_data, 
+             covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90)
+
+# compute the incidence data, grouping it by sex.
 df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
-#This line uses the incidence function from the incidence2 package to compute the
-#incidence data. It groups the data by sex.
+
+# use the fit_curve function from i2extras to fit a curve to the incidence data
 fitted_curve <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
-# Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.
-# The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
-base::plot(fitted_curve, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
+
+# plot the fitted curve
+plot(fitted_curve, angle = 45)
 ```
 
 ### Exponential growth or decay rate
 
-The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
+The rate of exponential growth or decay can be extracted from the fitted curve via the `growth_rate()` function.
 
 ```{r, message=FALSE, warning=FALSE}
-library("tidyverse")
 rates <- i2extras::growth_rate(fitted_curve)
-rates <- base::as.data.frame(rates)
-rates %>%select(sex, r, r_lower, r_upper )
+rates <- base::as.data.frame(rates) |>
+  subset(select = c(sex, r, r_lower, r_upper))
 ```
 
 ### Peak time
-Peak time--the date which the highest number of cases observed-- can be estimeated using the `estimate_peak` function
+
+The **Peak time ** is the date which the highest number of cases is observed. It can be estimated using the `i2extras::estimate_peak()` function as shown below:
+
 ```{r, message=FALSE, warning=FALSE}
-peaks <- i2extras::estimate_peak((df_incid), progress = FALSE)
-peaks%>% select(-c(count_variable, bootstrap_peaks))
+peaks <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
+  subset(select = -c(count_variable, bootstrap_peaks))
 ```
 
 ### Moving average
 
-A moving average, which shows the trend of cases in specified time period, also can be calculate using the `add_rolling_average` function in `i2extras` package, as illustrated in the below code chunk.
+A moving average, which shows the trend of cases in a specified time period, can be calculated using the `add_rolling_average()` function in {i2extras} package, as illustrated below:
 
 ```{r, warning=FALSE, message=FALSE}
 moving_Avg <- i2extras::add_rolling_average(df_incid, n = 7L)
-base::plot(moving_Avg, border_colour = "white", angle = 45) +
-    ggplot2::geom_line(aes(x = date_index, y = rolling_average, color="red"))+
-    ggplot2::labs(x = "Date", y= "Cases")
+base::plot(moving_Avg, border_colour = "white", angle = 45)
 ```
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 - What is the trend of cases in the above example, is it increasing or decreasing?
-- Using  `covid91_eng_case_data` dataset for the first six months cases perform the following:
-  - model and visualize the epi cure via Poisson distribution?
-  - Determine the exponential growth or decay rate?
-  - Estimate peak time?
-  - Calculate and visualize monthly moving average?
+- Use the `covid91_eng_case_data` dataset for the first six months and perform the following:
+  - model and visualize the epi cure via Poisson distribution
+  - Determine the exponential growth or decay rate
+  - Estimate peak time
+  - Calculate and visualize monthly moving average
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, our emphasis is on effectively describing and visualizing epidemic data, with a particular focus on a **simulated Ebola case data**. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd).
-
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. In this episode, focuses describing and visualizing epidemic data, with a particular focus on a **Covid-19 case data from England**, which comes with the [outbreaks](http://www.reconverse.org/outbreaks/) package. The initial step involves reading this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd)).
-
-```{r, warning=FALSE, message=FALSE}
-library("outbreaks")
-covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
-utils::head(covid19_eng_case_data,5)
-```
-## Incidence cases
-
-Downstream analysis involves working with aggregated data rather than individual cases. The  [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functions for grouping case data, usually centered around dated occurrences and/or other factors.  The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the  date of sample.
-
-```{r, message=FALSE, warning=FALSE}
-library("incidence2")
-library("ggplot2")
-covid19_eng_incidence_data <- incidence2::incidence(covid19_eng_case_data, 
-                                              date_index = "date")
-utils::head(covid19_eng_incidence_data)
-```
-
-## time
-
-
-The `incidence2` object can be visualized using the plot function of base R package. 
-```{r, message=FALSE, warning=FALSE}
-base::plot(covid19_eng_incidence_data) + labs(x = "Date", y = " Cases")+theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-
-`Incidence2` can also aggregate case data based on a dated event and other factors. For example the code chunk groups weekly counts of Covid-19 cases in England based on  `sex` type.
-
-```{r, message=FALSE, warning=FALSE}
-weekly_covid19_eng_incidence <- incidence2::incidence(covid19_eng_case_data, date_index = "date", interval = "week", groups = "sex")
-base::plot(weekly_covid19_eng_incidence, )+labs(x= "Date", y ="Cases")+ theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-- Using the above `covid91_eng_case_data`  dataset, produce monthly epi-curves for Covid-19 cases in England based on  regional places in England?
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-<!-- https://gitlab.renkulab.io/the-graph-courses/further-data-analysis-with-r-staging/-/tree/master/ch06_basic_geospatial_viz/lessons -->
 
 
 ## Exponential growth
@@ -189,4 +158,3 @@ Within the renewal equation, the generation interval mechanistically links the r
 - Use `{compareGroups}`
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
-
