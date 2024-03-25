@@ -262,7 +262,7 @@ distribution %>%
   # check if <epidist> object have distribution parameters
   is_parameterised()
 
-# check if the second <epidist> object 
+# check if the second <epidist> object
 # have distribution parameters
 distribution %>%
   pluck(2) %>%
