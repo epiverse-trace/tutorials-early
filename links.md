@@ -7,4 +7,7 @@ any links that you are not going to use.
 [r-markdown]: https://rmarkdown.rstudio.com/
 [rstudio]: https://www.rstudio.com/
 [carpentries-workbench]: https://carpentries.github.io/sandpaper-docs/
+[DHIS2]: https://dhis2.org/
+[REDCap]: https://www.project-redcap.org/
+[readepi]: https://epiverse-trace.github.io/readepi/
 
