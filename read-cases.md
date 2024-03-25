@@ -28,7 +28,7 @@ This episode requires you to be familiar with:
 
 The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats,  relational database management systems (RDBMS) servers, and health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/). The latter two options are particularly well-suited for storing institutional data. This episode will elucidate the process of reading cases from these sources.
 
-## Reading from files
+## Reading from files 
 
 Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), and [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
