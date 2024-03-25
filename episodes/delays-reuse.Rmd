@@ -54,7 +54,7 @@ To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in 
 
 <!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
 
-Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to connect some of their functions, so let's also call to the `{magrittr}` package:
+Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to connect some of their functions, some `{tibble}` and `{dplyr}` functions, so let's also call to the `{tidyverse}` package:
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
