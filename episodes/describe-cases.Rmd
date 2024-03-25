@@ -45,8 +45,8 @@ head(covid19_eng_case_data)
 Downstream analysis involves working with aggregated data rather than individual cases. The  [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers essential functionalities for grouping case data, usually centered around dated occurrences and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the date of sample.
 
 ```{r, message=FALSE, warning=FALSE}
-covid19_eng_incidence_data <- incidence2::incidence(
-  covid19_eng_case_data, 
+covid19_eng_incidence_data <- incidence(
+  covid19_eng_case_data,
   date_index = "date"
 )
 head(covid19_eng_incidence_data)
@@ -98,7 +98,7 @@ The {i2extras} package provides methods for modelling the trend in case data, ca
 
 ```{r, warning=FALSE, message=FALSE}
 # subset the covid19_eng_case_data to include only the first 3 months of data.
-df <- subset(covid19_eng_case_data, 
+df <- subset(covid19_eng_case_data,
              covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90)
 
 # compute the incidence data, grouping it by sex.
@@ -138,12 +138,17 @@ out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # significance level (alpha) of 0.05.
 base::plot(out, angle = 45) + ggplot2::labs(x = "Date", y = "Cases")
 # This code plots the results using the plot function.
-#This line uses the incidence function from the incidence2 package to compute the
+#This line uses the incidence function from the
+# incidence2 package to compute the
 #incidence data. It groups the data by sex.
-fitted_curve <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
-# Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.
-# The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
-base::plot(fitted_curve, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
+fitted_curve <-
+  i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
+# Here, the fit_curve function from i2extras
+# is used to fit a curve to the incidence data.
+# The model chosen is the negative binomial distribution
+# with a significance level (alpha) of 0.05.
+base::plot(fitted_curve, angle = 45) +
+  ggplot2::labs(x = "Date", y = "Cases")
 ```
 The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
 
@@ -151,7 +156,7 @@ The rate of exponential growth or decay can be extracted from the fitted curve v
 library("tidyverse")
 rates <- i2extras::growth_rate(fitted_curve)
 rates <- base::as.data.frame(rates)
-rates %>%select(sex, r, r_lower, r_upper )
+rates %>% select(sex, r, r_lower, r_upper)
 ```
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -167,8 +172,14 @@ A moving average, which shows the trend of cases in specified time period, also 
 ```{r, warning=FALSE, message=FALSE}
 moving_Avg <- i2extras::add_rolling_average(df_incid, n = 7L)
 base::plot(moving_Avg, border_colour = "white", angle = 45) +
-    ggplot2::geom_line(aes(x = date_index, y = rolling_average, color="red"))+
-    ggplot2::labs(x = "Date", y= "Cases")
+  ggplot2::geom_line(
+    aes(
+      x = date_index,
+      y = rolling_average,
+      color = "red"
+    )
+  ) +
+  ggplot2::labs(x = "Date", y = "Cases")
 ```
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -212,7 +223,7 @@ The rate of exponential growth or decay can be extracted from the fitted curve v
 
 ```{r, message=FALSE, warning=FALSE}
 rates <- i2extras::growth_rate(fitted_curve)
-rates <- base::as.data.frame(rates) |>
+rates <- base::as.data.frame(rates) %>%
   subset(select = c(sex, r, r_lower, r_upper))
 ```
 
@@ -221,7 +232,7 @@ rates <- base::as.data.frame(rates) |>
 The **Peak time ** is the date which the highest number of cases is observed. It can be estimated using the `i2extras::estimate_peak()` function as shown below:
 
 ```{r, message=FALSE, warning=FALSE}
-peaks <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
+peaks <- i2extras::estimate_peak(df_incid, progress = FALSE) %>%
   subset(select = -c(count_variable, bootstrap_peaks))
 ```
 The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
