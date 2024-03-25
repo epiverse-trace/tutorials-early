@@ -90,7 +90,6 @@ df <- base::subset(covid19_eng_case_data,
 # This code subset the covid19_eng_case_data to include only the first 3 months
 # of data.
 df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
-<<<<<<< HEAD
 # This line uses the incidence function from the incidence2 package to
 # compute the incidence data. It groups the data by sex.
 out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
@@ -99,14 +98,12 @@ out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # significance level (alpha) of 0.05.
 base::plot(out, angle = 45) + ggplot2::labs(x = "Date", y = "Cases")
 # This code plots the results using the plot function.
-=======
 #This line uses the incidence function from the incidence2 package to compute the
 #incidence data. It groups the data by sex.
 fitted_curve <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.
 # The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
 base::plot(fitted_curve, angle = 45)+ ggplot2::labs(x = "Date", y ="Cases")
->>>>>>> 286f15b (add code for calculating growth or decay rate)
 ```
 The rate of exponential growth or decay can be extracted from the fitted curve via `growth_rate` function.
 
