@@ -34,8 +34,9 @@ Several packages are available for importing outbreak data stored in individual 
 
 The below example shows how to import a `csv` file into `R` environment using `rio` package.
 ```{r,warning=FALSE,message=FALSE}
-library("rio")
-case_data = rio::import("./data/ebola_cases.csv", format = "csv")
+requireNamespace("rio")
+case_data <- rio::import(file.path("data", "ebola_cases.csv", fsep = "/"))
+# "./data/ebola_cases.csv", format = "csv")
 ```
 Similarly, you can import files of other formats such as "tsv", "xlsx", ...etc.
 
@@ -50,7 +51,7 @@ Take 1 minute:
 
 You can check the supported file formats in the `{rio}` package as follows:
 ```{r, eval=FALSE}
-library("rio")
+requireNamespace("rio")
 rio::install_formats()
 ```
 
@@ -59,8 +60,8 @@ rio::install_formats()
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
-library("rio")
-rio::import("/path_name/file_name.zip")
+requireNamespace("rio")
+rio::import(file.path("path_name", "file_name.zip", fsep = "/"))
 ```
 
 ::::::::::::::::::::::::::
@@ -76,11 +77,12 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` dataframe as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
-library(DBI)
-library(RSQLite)
+requireNamespace(DBI)
+requireNamespace(RSQLite)
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
-# Store the 'case_data' dataframe as a table named 'cases' in the SQLite database
+# Store the 'case_data' dataframe as a table named 'cases'
+# in the SQLite database
 DBI::dbWriteTable(db_con, "cases", case_data)
 # Read data from the 'cases' table
 result <- DBI::dbReadTable(db_con, "cases")
