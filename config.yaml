@@ -61,7 +61,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 episodes:
 #- read-cases.Rmd
 #- describe-cases.Rmd
-- read-delays.Rmd
+- delays-reuse.Rmd
 - delays-functions.Rmd
 #- delays-challenges.Rmd
 
