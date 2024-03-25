@@ -199,7 +199,19 @@
 <div class="accordion accordion-flush" id="accordionFlush3">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading3">
-        <a href="read-delays.html">2. Read delays</a>
+        <a href="describe-cases.html">2. Describe cases</a>
+    </div>
+<!--/div.accordion-header-->
+        
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush4">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading4">
+        <a href="read-delays.html">3. Read delays</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -491,8 +503,473 @@ which allow to import data from HIS APIs.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD [DHIS2]: <a href="https://dhis2.org/" class="external-link uri">https://dhis2.org/</a> [REDCap]:
+<a href="https://www.project-redcap.org/" class="external-link uri">https://www.project-redcap.org/</a> [readepi]: <a href="https://epiverse-trace.github.io/readepi/" class="external-link uri">https://epiverse-trace.github.io/readepi/</a></p>
+<p>======= [readr]: <a href="https://readr.tidyverse.org/" class="external-link uri">https://readr.tidyverse.org/</a>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; dbdaefa (added some links)</p>
 </div>
-</div></section><section id="aio-read-delays"><p>Content from <a href="read-delays.html">Read delays</a></p>
+</div></section><section id="aio-describe-cases"><p>Content from <a href="describe-cases.html">Describe cases</a></p>
+<hr>
+<p>Last updated on 2024-03-25 |
+        
+        <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How to convert case data to incidence?</li>
+<li>How to visualize incidence cases?</li>
+<li>What is the person, place, time distribution of cases?</li>
+<li>What is the growth rate of the epidemic?
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</li>
+<li>How do you visualize incidence cases?</li>
+<li>what is the growth rate of the epidemic?</li>
+<li>what is the person, place, time distribution of cases?</li>
+<li>what are the epidemiological characteristics of the infection?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Convert case data to incidence</li>
+<li>Convert case data to incidence data</li>
+<li>Create incidence curves</li>
+<li>Estimate the growth rate from incidence curves</li>
+<li>Create quick descriptive and comparison tables</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
+<hr class="half-width">
+<p>A comprehensive description of data is pivotal for conducting
+insightful explanatory and exploratory analyses. This episode focuses
+describing and visualizing epidemic data, with a particular focus on a
+<strong>Covid-19 case data from England</strong>, which comes with the
+<a href="http://www.reconverse.org/outbreaks/" class="external-link">outbreaks</a> package.
+The initial step involves reading this dataset, and we recommend
+utilizing the <a href="links.html#readr">readr</a> package for this
+purpose (or employing alternative methods as outlined in the <a href="read-cases.html">Read case data</a>).</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"outbreaks"</span><span class="op">)</span></span>
+<span><span class="va">covid19_eng_case_data</span> <span class="op">&lt;-</span> <span class="fu">outbreaks</span><span class="fu">::</span><span class="va">covid19_england_nhscalls_2020</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">covid19_eng_case_data</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>  site_type       date    sex     age  ccg_code
+1       111 2020-03-18 female missing e38000062
+2       111 2020-03-18 female missing e38000163
+3       111 2020-03-18 female    0-18 e38000001
+4       111 2020-03-18 female    0-18 e38000002
+5       111 2020-03-18 female    0-18 e38000004
+                                ccg_name count postcode
+1                nhs_gloucestershire_ccg     1   gl34fe
+2                 nhs_south_tyneside_ccg     1  ne325nn
+3 nhs_airedale_wharfedale_and_craven_ccg     8   bd57jr
+4                        nhs_ashford_ccg     7  tn254ab
+5           nhs_barking_and_dagenham_ccg    35   rm13ae
+                nhs_region day      weekday
+1               South West   0 rest_of_week
+2 North East and Yorkshire   0 rest_of_week
+3 North East and Yorkshire   0 rest_of_week
+4               South East   0 rest_of_week
+5                   London   0 rest_of_week</code></pre>
+</div>
+</section><section id="incidence-cases"><h2 class="section-heading">Incidence cases<a class="anchor" aria-label="anchor" href="#incidence-cases"></a>
+</h2>
+<hr class="half-width">
+<p>Downstream analysis involves working with aggregated data rather than
+individual cases. The <a href="(https://www.reconverse.org/incidence2/articles/incidence2.html)%7B.external%20target=%22_blank%22%7D" class="external-link">incidence2</a>
+package offers essential functions for grouping case data, usually
+centered around dated occurrences and/or other factors. The code chunk
+provided below demonstrates the creation of an <code>incidence2</code>
+object from the <code>covid19_eng_case_data</code> based on the date of
+sample.</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"incidence2"</span><span class="op">)</span></span>
+<span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"ggplot2"</span><span class="op">)</span></span>
+<span><span class="va">covid19_eng_incidence_data</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">incidence</span><span class="op">(</span><span class="va">covid19_eng_case_data</span>,</span>
+<span>                                                    date_index <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span></span>
+<span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">covid19_eng_incidence_data</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># incidence:  5 x 3
+# count vars: date
+  date_index count_variable count
+* &lt;date&gt;     &lt;chr&gt;          &lt;int&gt;
+1 2020-03-18 date            2579
+2 2020-03-19 date            2602
+3 2020-03-20 date            2615
+4 2020-03-21 date            2588
+5 2020-03-22 date            2603</code></pre>
+</div>
+<p>The <code>incidence2</code> object can be visualized using the plot
+function of base R package.</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">covid19_eng_incidence_data</span><span class="op">)</span> <span class="op">+</span> <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">" Cases"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">0.5</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in labs(x = "Date", y = " Cases"): could not find function "labs"</code></pre>
+</div>
+<p>Moreover, <code>Incidence2</code> can also aggregate case data based
+on a dated event and other factors such as what is the person and place.
+For example the code chunk groups weekly counts of Covid-19 cases in
+England based on <code>sex</code> type.</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">weekly_covid19_eng_incidence</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">incidence</span><span class="op">(</span><span class="va">covid19_eng_case_data</span>,</span>
+<span>                                                      date_index <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span>                                                      interval <span class="op">=</span> <span class="st">"week"</span>,</span>
+<span>                                                      groups <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">weekly_covid19_eng_incidence</span><span class="op">)</span> <span class="op">+</span> <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Cases"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in labs(x = "Date", y = "Cases"): could not find function "labs"</code></pre>
+</div>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>Using the above <code>covid91_eng_case_data</code> dataset, produce
+monthly epi-curves for Covid-19 cases in England based on regional
+places in England?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section level4">
+<h4 id="analyzing-the-trend-in-case-data">Analyzing the trend in case data<a class="anchor" aria-label="anchor" href="#analyzing-the-trend-in-case-data"></a>
+</h4>
+<p>Aggregated case data over a specific time unit, or incidence data,
+typically represent the number of cases occurring within that time
+frame. These data can often be assumed to follow either a Poisson
+distribution or a negative binomial distribution, depending on the
+specific characteristics of the data and the underlying processes
+generating them.</p>
+<p>When analyzing such data, one common approach is to examine the trend
+over time by computing the rate of change, which can indicate whether
+there is exponential growth or decay in the number of cases. Exponential
+growth implies that the number of cases is increasing at an accelerating
+rate over time, while exponential decay suggests that the number of
+cases is decreasing at a decelerating rate.</p>
+<p>Understanding the trend in case data is crucial for various purposes,
+such as forecasting future case counts, implementing public health
+interventions, and assessing the effectiveness of control measures. By
+analyzing the trend, policymakers and public health experts can make
+informed decisions to mitigate the spread of diseases and protect public
+health.</p>
+<p>The <code>i2extras</code> package provides methods for modelling the
+trend in case data, calculating moving averages, and exponential growth
+or decay rate. The code chunk below computes the Covid-19 trend in UK
+within first 3 months using negative binomial distribution.</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"i2extras"</span><span class="op">)</span></span>
+<span><span class="co"># This line loads the i2extras package, which  provides methods for modeling</span></span>
+<span><span class="co"># trends in case data.</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">subset</span><span class="op">(</span><span class="va">covid19_eng_case_data</span>,</span>
+<span>                   <span class="va">covid19_eng_case_data</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;=</span> <span class="fu">min</span><span class="op">(</span><span class="va">covid19_eng_case_data</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
+<span>                   <span class="op">+</span> <span class="fl">90</span><span class="op">)</span></span>
+<span><span class="co"># This code subset the covid19_eng_case_data to include only the first 3 months</span></span>
+<span><span class="co"># of data.</span></span>
+<span><span class="va">df_incid</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">incidence</span><span class="op">(</span><span class="va">df</span>, date_index <span class="op">=</span> <span class="st">"date"</span>, groups <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
+<span><span class="co"># This line uses the incidence function from the incidence2 package to</span></span>
+<span><span class="co"># compute the incidence data. It groups the data by sex.</span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">fit_curve</span><span class="op">(</span><span class="va">df_incid</span>, model  <span class="op">=</span> <span class="st">"negbin"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="co"># Here, the fit_curve function from i2extras is used to fit a curve to the</span></span>
+<span><span class="co"># incidence data. The model chosen is the negative binomial distribution with a</span></span>
+<span><span class="co"># significance level (alpha) of 0.05.</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">out</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Cases"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-5-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># This code plots the results using the plot function.</span></span>
+<span><span class="co">#This line uses the incidence function from the incidence2 package to compute the</span></span>
+<span><span class="co">#incidence data. It groups the data by sex.</span></span>
+<span><span class="va">fitted_curve</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">fit_curve</span><span class="op">(</span><span class="va">df_incid</span>, model  <span class="op">=</span> <span class="st">"negbin"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="co"># Here, the fit_curve function from i2extras is used to fit a curve to the incidence data.</span></span>
+<span><span class="co"># The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">fitted_curve</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span><span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span><span class="st">"Cases"</span><span class="op">)</span></span></code></pre>
+</div>
+<p><img src="fig/describe-cases-rendered-unnamed-chunk-5-2.png" style="display: block; margin: auto;" class="figure">
+The rate of exponential growth or decay can be extracted from the fitted
+curve via <code>growth_rate</code> function.</p>
+<div class="codewrapper sourceCode" id="cb11">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">growth_rate</span><span class="op">(</span><span class="va">fitted_curve</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">rates</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">%&gt;%</span><span class="fu">select</span><span class="op">(</span><span class="va">sex</span>, <span class="va">r</span>, <span class="va">r_lower</span>, <span class="va">r_upper</span> <span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>      sex            r      r_lower      r_upper
+1  female -0.008241228 -0.009182635 -0.007300403
+2    male -0.008346783 -0.009316775 -0.007377392
+3 unknown -0.023703987 -0.028179436 -0.019299926</code></pre>
+</div>
+<div id="discussion2" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion2"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>What is the trend of cases in the above example, is it increasing or
+decreasing?</li>
+<li>Using <code>covid91_eng_case_data</code> dataset, model and
+visualize the trend of Covid-19 in England in the first six months cases
+via Poisson distribution?</li>
+<li>Determine the exponential growth or decay rate?</li>
+</ul>
+</div>
+</div>
+</div>
+<p>A moving average, which shows the trend of cases in specified time
+period, also can be calculate using the <code>add_rolling_average</code>
+function in <code>i2extras</code> package, as illustrated in the below
+code chunk.</p>
+<div class="codewrapper sourceCode" id="cb13">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">moving_Avg</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">add_rolling_average</span><span class="op">(</span><span class="va">df_incid</span>, n <span class="op">=</span> <span class="fl">7L</span><span class="op">)</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">moving_Avg</span>, border_colour <span class="op">=</span> <span class="st">"white"</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span> <span class="op">+</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date_index</span>, y <span class="op">=</span> <span class="va">rolling_average</span>, color<span class="op">=</span><span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>    <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y<span class="op">=</span> <span class="st">"Cases"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="discussion3" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion3"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>Calculate and visualize monthly moving average of Covid-19 cases in
+England?</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Aggregated case data over a specific time unit, or incidence data,
+typically represent the number of cases occurring within that time
+frame. These data can often be assumed to follow either a Poisson
+distribution or a negative binomial distribution, depending on the
+specific characteristics of the data and the underlying processes
+generating them.</p>
+<p>When analyzing such data, one common approach is to examine the trend
+over time by computing the rate of change, which can indicate whether
+there is exponential growth or decay in the number of cases. Exponential
+growth implies that the number of cases is increasing at an accelerating
+rate over time, while exponential decay suggests that the number of
+cases is decreasing at a decelerating rate.</p>
+<p>Understanding the trend in case data is crucial for various purposes,
+such as forecasting future case counts, implementing public health
+interventions, and assessing the effectiveness of control measures. By
+analyzing the trend, policymakers and public health experts can make
+informed decisions to mitigate the spread of diseases and protect public
+health.</p>
+<p>The <code>i2extras</code> package provides methods for modelling the
+trend in case data, calculating moving averages, and exponential growth
+or decay rate. The code chunk below computes the Covid-19 trend in UK
+within first 3 months using negative binomial distribution.</p>
+<div class="codewrapper sourceCode" id="cb14">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"i2extras"</span><span class="op">)</span></span>
+<span><span class="co"># This line loads the i2extras package, which provides methods for modeling</span></span>
+<span><span class="co"># trends in case data.</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">subset</span><span class="op">(</span><span class="va">covid19_eng_case_data</span>,</span>
+<span>                   <span class="va">covid19_eng_case_data</span><span class="op">$</span><span class="va">date</span> <span class="op">&lt;=</span> <span class="fu">min</span><span class="op">(</span><span class="va">covid19_eng_case_data</span><span class="op">$</span><span class="va">date</span><span class="op">)</span></span>
+<span>                   <span class="op">+</span> <span class="fl">90</span><span class="op">)</span></span>
+<span><span class="co"># This code subset the covid19_eng_case_data to include only the first</span></span>
+<span><span class="co"># 3 months of data.</span></span>
+<span><span class="va">df_incid</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">incidence</span><span class="op">(</span><span class="va">df</span>, date_index <span class="op">=</span> <span class="st">"date"</span>, groups <span class="op">=</span> <span class="st">"sex"</span><span class="op">)</span></span>
+<span><span class="co"># This line uses the incidence function from the incidence2 package</span></span>
+<span><span class="co"># to compute the incidence data. It groups the data by sex.</span></span>
+<span><span class="va">fitted_curve</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">fit_curve</span><span class="op">(</span><span class="va">df_incid</span>, model  <span class="op">=</span> <span class="st">"negbin"</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="co"># Here, the fit_curve function from i2extras is used to fit a curve to the</span></span>
+<span><span class="co"># incidence data. The model chosen is the negative binomial distribution with</span></span>
+<span><span class="co"># a significance level (alpha) of 0.05.</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">fitted_curve</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Cases"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure>
+</div>
+<div class="section level3">
+<h3 id="exponential-growth-or-decay-rate">Exponential growth or decay rate<a class="anchor" aria-label="anchor" href="#exponential-growth-or-decay-rate"></a>
+</h3>
+<p>The rate of exponential growth or decay can be extracted from the
+fitted curve via <code>growth_rate</code> function.</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"tidyverse"</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">growth_rate</span><span class="op">(</span><span class="va">fitted_curve</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">as.data.frame</span><span class="op">(</span><span class="va">rates</span><span class="op">)</span></span>
+<span><span class="va">rates</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="va">sex</span>, <span class="va">r</span>, <span class="va">r_lower</span>, <span class="va">r_upper</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>      sex            r      r_lower      r_upper
+1  female -0.008241228 -0.009182635 -0.007300403
+2    male -0.008346783 -0.009316775 -0.007377392
+3 unknown -0.023703987 -0.028179436 -0.019299926</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="peak-time">Peak time<a class="anchor" aria-label="anchor" href="#peak-time"></a>
+</h3>
+<p>Peak time–the date which the highest number of cases observed– can be
+estimeated using the <code>estimate_peak</code> function</p>
+<div class="codewrapper sourceCode" id="cb17">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">peaks</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">estimate_peak</span><span class="op">(</span><span class="op">(</span><span class="va">df_incid</span><span class="op">)</span>, progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">peaks</span> <span class="op">%&gt;%</span> <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="fu">c</span><span class="op">(</span><span class="va">count_variable</span>, <span class="va">bootstrap_peaks</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A data frame: 3 × 6
+  sex     observed_peak observed_count lower_ci   median     upper_ci  
+  &lt;chr&gt;   &lt;date&gt;                 &lt;int&gt; &lt;date&gt;     &lt;date&gt;     &lt;date&gt;    
+1 female  2020-03-26              1314 2020-03-18 2020-03-22 2020-03-30
+2 male    2020-03-27              1299 2020-03-18 2020-03-25 2020-03-30
+3 unknown 2020-04-10                32 2020-03-24 2020-04-10 2020-04-20</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="moving-average">Moving average<a class="anchor" aria-label="anchor" href="#moving-average"></a>
+</h3>
+<p>A moving average, which shows the trend of cases in specified time
+period, also can be calculate using the <code>add_rolling_average</code>
+function in <code>i2extras</code> package, as illustrated in the below
+code chunk.</p>
+<div class="codewrapper sourceCode" id="cb19">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">moving_Avg</span> <span class="op">&lt;-</span> <span class="fu">i2extras</span><span class="fu">::</span><span class="fu">add_rolling_average</span><span class="op">(</span><span class="va">df_incid</span>, n <span class="op">=</span> <span class="fl">7L</span><span class="op">)</span></span>
+<span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">moving_Avg</span>, border_colour <span class="op">=</span> <span class="st">"white"</span>, angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">geom_line</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">date_index</span>, y <span class="op">=</span> <span class="va">rolling_average</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Date"</span>, y <span class="op">=</span> <span class="st">"Cases"</span><span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="discussion4" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion4"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>What is the trend of cases in the above example, is it increasing or
+decreasing?</li>
+<li>Using <code>covid91_eng_case_data</code> dataset for the first six
+months cases perform the following:
+<ul>
+<li>model and visualize the epi cure via Poisson distribution?</li>
+<li>Determine the exponential growth or decay rate?</li>
+<li>Estimate peak time?</li>
+<li>Calculate and visualize monthly moving average?</li>
+</ul>
+</li>
+<li>Use <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> to aggregate case data based on a date
+event.<br>
+</li>
+<li>Use <a href="https://www.reconverse.org/i2extras/" class="external-link">i2extras</a> to fit epi curve, calculate exponential
+growth or decline of cases, estimate pick size and peak time, and
+computing moving average of cases in specified time window.</li>
+<li>Use <a href="https://isubirana.github.io/compareGroups/" class="external-link">compareGroups</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
+</h3>
+<div class="callout-content">
+<ul>
+<li>Use <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> to aggregate case data based on a date
+event.<br>
+</li>
+<li>Use <a href="https://www.reconverse.org/i2extras/" class="external-link">i2extras</a> to fit epi curve, calculate exponential
+growth or decline of cases, find peak time, and computing moving average
+of cases in specified time window.</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- 
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use. 
+ -->
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD [DHIS2]: <a href="https://dhis2.org/" class="external-link uri">https://dhis2.org/</a> [REDCap]:
+<a href="https://www.project-redcap.org/" class="external-link uri">https://www.project-redcap.org/</a> [readepi]: <a href="https://epiverse-trace.github.io/readepi/" class="external-link uri">https://epiverse-trace.github.io/readepi/</a></p>
+<p>======= [readr]: <a href="https://readr.tidyverse.org/" class="external-link uri">https://readr.tidyverse.org/</a>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; dbdaefa (added some links)</p>
+</div>
+</section></section><section id="aio-read-delays"><p>Content from <a href="read-delays.html">Read delays</a></p>
 <hr>
 <p>Last updated on 2024-03-25 |
         
@@ -1717,8 +2194,8 @@ want!</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code> [1]  3.466091  2.920408  5.042029  8.351304  6.064613  7.952773 12.679416
- [8]  8.895517  1.877537 11.002923</code></pre>
+<pre class="output" tabindex="0"><code> [1] 10.523003  2.097116  2.150636  7.432737  6.578472  1.700090  3.443649
+ [8]  6.207808  1.404100  2.595907</code></pre>
 </div>
 
 <div id="window-for-contact-tracing-and-the-serial-interval" class="callout challenge">
@@ -2800,6 +3277,10 @@ distributions.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD [DHIS2]: <a href="https://dhis2.org/" class="external-link uri">https://dhis2.org/</a> [REDCap]:
+<a href="https://www.project-redcap.org/" class="external-link uri">https://www.project-redcap.org/</a> [readepi]: <a href="https://epiverse-trace.github.io/readepi/" class="external-link uri">https://epiverse-trace.github.io/readepi/</a></p>
+<p>======= [readr]: <a href="https://readr.tidyverse.org/" class="external-link uri">https://readr.tidyverse.org/</a>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; dbdaefa (added some links)</p>
 </section></section>
 </div>
     </main>
