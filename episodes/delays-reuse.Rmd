@@ -58,7 +58,7 @@ Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to co
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
-library(magrittr)
+library(tidyverse)
 ```
 
 ## The problem
