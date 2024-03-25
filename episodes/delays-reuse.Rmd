@@ -50,7 +50,7 @@ However, early in an epidemic, modelling efforts can be delayed by the lack of a
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
-To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in this episode will be to *choose* one specific set of epidemiological parameters from the literature, instead of copy/pasting them *by hand*, to plug them in to an `{EpiNow2}` analysis workflow.
+To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in this episode will be to *choose* one specific set of epidemiological parameters from the literature, instead of *copying-and-pasting* them by hand, to plug them into an `{EpiNow2}` analysis workflow.
 
 <!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
 
