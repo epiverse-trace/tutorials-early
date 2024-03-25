@@ -187,7 +187,19 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="read-delays.html">1. Read delays</a>
+        <a href="delays-reuse.html">1. Reuse delay data</a>
+    </div>
+<!--/div.accordion-header-->
+        
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="delays-functions.html">2. Input delay data</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -250,19 +262,28 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="read-delays"><h2 class="section-heading"><a href="read-delays.html">Read delays</a></h2>
+<section id="delays-reuse"><h2 class="section-heading"><a href="delays-reuse.html">Reuse delay data</a></h2>
 <hr class="half-width">
 <ul>
-<li>Use <code>{epiparameter}</code> to access the systematic review
-catalogue of epidemiological delay distributions.</li>
+<li>Use <code>{epiparameter}</code> to access the literature catalogue
+of epidemiological delay distributions.</li>
 <li>Use <code>epidist_db()</code> to select single delay
 distributions.</li>
 <li>Use <code>list_distributions()</code> for an overview of multiple
 delay distributions.</li>
+<li>Reuse known estimates for unknown disease in the early stage of an
+outbreak when no contact tracing data is available.</li>
+</ul></section><section id="delays-functions"><h2 class="section-heading"><a href="delays-functions.html">Input delay data</a></h2>
+<hr class="half-width">
+<ul>
+<li>Use distribution functions with <code>&lt;epidist&gt;</code> objects
+to get summary statistics and informative parameters for public health
+interventions like the Window for contact tracing and Length of
+quarantine.</li>
 <li>Use <code>discretise()</code> to convert continuous to discrete
 delay distributions.</li>
-<li>Use <code>{epiparameter}</code> probability functions for any delay
-distributions.</li>
+<li>Use <code>{epiparameter}</code> to get reporting delays required in
+transmissibility estimates.</li>
 </ul></section>
 </div>
     </main>

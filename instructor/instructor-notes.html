@@ -188,7 +188,19 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="read-delays.html">1. Read delays</a>
+        <a href="delays-reuse.html">1. Reuse delay data</a>
+    </div>
+<!--/div.accordion-header-->
+        
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="delays-functions.html">2. Input delay data</a>
     </div>
 <!--/div.accordion-header-->
         
@@ -260,16 +272,55 @@ any links that you are not going to use.
  -->
 
 
-      <section id="aggregate-instructor-notes"><section id="read-delays"><h2 class="section-heading"><a href="read-delays.html">Read delays</a></h2>
+      <section id="aggregate-instructor-notes"><section id="delays-reuse"><h2 class="section-heading"><a href="delays-reuse.html">Reuse delay data</a></h2>
 <hr class="half-width">
-<h3 id="read-delays-headingInstructor1">
-<a href="read-delays.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#read-delays-headingInstructor1"></a>
+<h3 id="delays-reuse-headingInstructor1">
+<a href="delays-reuse.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#delays-reuse-headingInstructor1"></a>
 </h3>
 <p>The objective of the assessment above is to assess the interpretation
 of a larger or shorter generation time.</p>
 <hr>
-<br><h3 id="read-delays-headingInstructor2">
-<a href="read-delays.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#read-delays-headingInstructor2"></a>
+<br><h3 id="delays-reuse-headingInstructor2">
+<a href="delays-reuse.html#headingInstructor2">Instructor Note</a><a class="anchor" aria-label="anchor" href="#delays-reuse-headingInstructor2"></a>
+</h3>
+<p>In the context of user interfaces and graphical user interfaces
+(GUIs), like the <a href="https://ben18785.shinyapps.io/distribution-zoo/" class="external-link">Distribution
+Zoo</a> shiny app, a <strong>slider</strong> is a graphical control
+element that allows users to adjust a value by moving a handle along a
+track or bar. Conceptually, it provides a way to select a numeric value
+within a specified range by visually sliding or dragging a pointer (the
+handle) along a continuous axis.</p>
+<hr>
+<br><h3 id="delays-reuse-headingInstructor3">
+<a href="delays-reuse.html#headingInstructor3">Instructor Note</a><a class="anchor" aria-label="anchor" href="#delays-reuse-headingInstructor3"></a>
+</h3>
+<p>An interesting element is the <code>method_assess</code> nested
+entry, which refers to the methods used by the study authors to assess
+for bias while estimating the serial interval distribution.</p>
+<div class="codewrapper sourceCode" id="cb44">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">covid_serialint</span><span class="op">$</span><span class="va">method_assess</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>$censored
+[1] TRUE
+
+$right_truncated
+[1] TRUE
+
+$phase_bias_adjusted
+[1] FALSE</code></pre>
+</div>
+<p>We will explore these concepts following episodes!</p>
+<hr>
+<br></section><section id="delays-functions"><h2 class="section-heading"><a href="delays-functions.html">Input delay data</a></h2>
+<hr class="half-width">
+<h3 id="delays-functions-headingInstructor1">
+<a href="delays-functions.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#delays-functions-headingInstructor1"></a>
 </h3>
 <p>Access to the reference documentation (Help files) for these
 functions is accessible with the three double-colon notation:
