@@ -230,7 +230,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2024-02-16 |
+        <p>Last updated on 2024-03-25 |
         
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -282,11 +282,12 @@
 <h1 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h1>
 <p>The initial step in outbreak analysis involves importing the target
 dataset into the <code>R</code> environment from various sources.
-Outbreak data is typically stored in files of diverse formats, within
-relational database management systems (RDBMS), and health information
-system APIs (HIS). The latter two options are particularly well-suited
-for storing institutional data. This episode will elucidate the process
-of reading cases from these sources.</p>
+Outbreak data is typically stored in files of diverse formats,
+relational database management systems (RDBMS) servers, and health
+information system (HIS) application program interfaces (APIs) such as
+<a href="https://www.project-redcap.org/" class="external-link">REDCap</a> and <a href="https://dhis2.org/" class="external-link">DHIS2</a>. The latter two options are
+particularly well-suited for storing institutional data. This episode
+will elucidate the process of reading cases from these sources.</p>
 <div class="section level2">
 <h2 id="reading-from-files">Reading from files<a class="anchor" aria-label="anchor" href="#reading-from-files"></a></h2>
 <p>Several packages are available for importing outbreak data stored in
@@ -300,8 +301,9 @@ in a wide range of formats.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
-<span><span class="va">case_data</span> <span class="op">=</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="st">"./data/ebola_cases.csv"</span>, format <span class="op">=</span> <span class="st">"csv"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
+<span><span class="va">case_data</span> <span class="op">&lt;-</span> <span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="fu">file.path</span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"ebola_cases.csv"</span>, fsep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># "./data/ebola_cases.csv", format = "csv")</span></span></code></pre>
 </div>
 <p>Similarly, you can import files of other formats such as “tsv”,
 “xlsx”, …etc.</p>
@@ -331,7 +333,7 @@ package as follows:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
 <span><span class="fu">rio</span><span class="fu">::</span><span class="fu">install_formats</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
@@ -349,8 +351,8 @@ package as follows:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
-<span><span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="st">"/path_name/file_name.zip"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
+<span><span class="fu">rio</span><span class="fu">::</span><span class="fu">import</span><span class="op">(</span><span class="fu">file.path</span><span class="op">(</span><span class="st">"path_name"</span>, <span class="st">"file_name.zip"</span>, fsep <span class="op">=</span> <span class="st">"/"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -370,11 +372,32 @@ a table within it, and subsequently read from it:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">DBI</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">RSQLite</span><span class="op">)</span></span>
-<span><span class="co"># Create a temporary SQLite database in memory</span></span>
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="va">DBI</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'DBI' not found</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">requireNamespace</span><span class="op">(</span><span class="va">RSQLite</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'RSQLite' not found</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a temporary SQLite database in memory</span></span>
 <span><span class="va">db_con</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, <span class="st">":memory:"</span><span class="op">)</span></span>
-<span><span class="co"># Store the 'case_data' dataframe as a table named 'cases' in the SQLite database</span></span>
+<span><span class="co"># Store the 'case_data' dataframe as a table named 'cases'</span></span>
+<span><span class="co"># in the SQLite database</span></span>
 <span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbWriteTable</span><span class="op">(</span><span class="va">db_con</span>, <span class="st">"cases"</span>, <span class="va">case_data</span><span class="op">)</span></span>
 <span><span class="co"># Read data from the 'cases' table</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbReadTable</span><span class="op">(</span><span class="va">db_con</span>, <span class="st">"cases"</span><span class="op">)</span></span>
@@ -400,12 +423,15 @@ the <code>case_data</code> dataframe into a table named ‘cases’ within
 the database using <code>dbWriteTable</code> function. Subsequently, it
 reads the data from the ‘cases’ table using <code>dbReadTable</code>
 function. Finally, it closes the database connection with
-<code>dbDisconnect</code> function.</p>
-<p>More examples about SQL databases and R can be found <a href="https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html" class="external-link">here</a>.</p>
+<code>dbDisconnect</code> function. More examples about SQL databases
+and R can be found <a href="https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="reading-from-his-apis">Reading from HIS APIs<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a></h2>
-<p>Coming soon with {readepi}</p>
+<p>Health related data are also increasingly stored in specialized HIS
+APIS like Fingertips, GoData, REDCap, and DHIS2. In such case one can
+resort to <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> package,
+which allow to import data from HIS APIs.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -459,14 +485,14 @@ any links that you are not going to use.
 	
         | <a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/epiverse-trace/tutorials-early/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:andree.valle-campos@lshtm.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+				<p><a href="https://github.com/epiverse-trace/tutorials-early/blob/main/" class="external-link">Cite</a> | <a href="mailto:andree.valle-campos@lshtm.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
         
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
         
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/1bc5753e917d515c3d888ce6cc013c0a680eacfc" class="external-link">pegboard (0.7.3)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.1.9000)</a></p>
+        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.3)</a>, <a href="https://github.com/carpentries/pegboard/tree/e9ca729c7db3ca97f016480679f9f58d115d2721" class="external-link">pegboard (0.7.4)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.2.9000)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -487,9 +513,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/read-cases.html",
-  "dateCreated": "2024-02-16",
-  "dateModified": "2024-02-16",
-  "datePublished": "2024-02-16"
+  "dateCreated": "2024-03-25",
+  "dateModified": "2024-03-25",
+  "datePublished": "2024-03-25"
 }
 
   </script><script>
