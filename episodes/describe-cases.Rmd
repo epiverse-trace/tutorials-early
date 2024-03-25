@@ -132,7 +132,7 @@ df <- base::subset(covid19_eng_case_data,
 df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
 # This line uses the incidence function from the incidence2 package to
 # compute the incidence data. It groups the data by sex.
-out <- i2extras::fit_curve(df_incid, model  = "negbin", alpha = 0.05)
+out <- fit_curve(df_incid, model  = "negbin", alpha = 0.05)
 # Here, the fit_curve function from i2extras is used to fit a curve to the
 # incidence data. The model chosen is the negative binomial distribution with a
 # significance level (alpha) of 0.05.
