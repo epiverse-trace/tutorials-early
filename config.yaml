@@ -59,7 +59,7 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 
 # Order of episodes in your lesson
 episodes:
-#- read-cases.Rmd
+- read-cases.Rmd
 #- describe-cases.Rmd
 - delays-reuse.Rmd
 - delays-functions.Rmd
