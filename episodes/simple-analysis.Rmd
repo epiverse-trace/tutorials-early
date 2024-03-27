@@ -1,0 +1,104 @@
+---
+title: 'Early analysis'
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- What is the growth rate of the epidemic?
+- What are the epidemiological characteristics of the infection?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Perform an early analysis of outbreak data
+- Identify trends, exponential, doubling, and peak time
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health. This episode focuses on how to perform a simple early analysis on incidence data. It uses the same dataset of **Covid-19 case data from England** that utilized it in [Aggregate and describe](../episodes/describe-cases.Rmd). 
+
+
+## Simple model
+
+Aggregated case data over a specific time unit, or incidence data, typically represent the number of cases occurring within that time frame. These data can often be assumed to follow either `Poisson distribution` or a `negative binomial (NB) distribution`, depending on the specific characteristics of the data and the underlying processes generating them. When analyzing such data, one common approach is to examine the trend over time by computing the rate of change, which can indicate whether there is exponential growth or decay in the number of cases. Exponential growth implies that the number of cases is increasing at an accelerating rate over time, while exponential decay suggests that the number of cases is decreasing at a decelerating rate.
+
+The `i2extras` package provides methods for modelling the trend in case data, calculating moving averages, and exponential growth or decay rate. The code chunk below computes the Covid-19 trend in UK within first 3 months using negative binomial distribution. 
+
+
+```{r, warning=FALSE, message=FALSE}
+requireNamespace("i2extras")
+requireNamespace("incidence2")
+# This line loads the i2extras package, which provides methods for modeling
+# trends in case data.
+covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
+df <- base::subset(
+  covid19_eng_case_data,
+  covid19_eng_case_data$date <= min(covid19_eng_case_data$date)
+  + 90
+)
+# This code subset the covid19_eng_case_data to include only the first
+# 3 months of data.
+df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
+# This line uses the incidence function from the incidence2 package
+# to compute the incidence data. It groups the data by sex.
+fitted_curve_nb <- i2extras::fit_curve(df_incid, model = "negbin", alpha = 0.05)
+# Here, the fit_curve function from i2extras is used to fit a curve to the
+# incidence data. The model chosen is the negative binomial distribution with
+# a significance level (alpha) of 0.05.
+base::plot(fitted_curve_nb, angle = 45) + ggplot2::labs(x = "Date", y = "Cases")
+```
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 1: Can you do it?
+
+Repeat the above analysis using Poisson distribution?
+
+:::::::::::::::::::::::: solution 
+
+```{r, warning=FALSE, message=FALSE}
+fitted_curve_poisson <- i2extras::fit_curve(df_incid, model = "poisson",
+                                            alpha = 0.05)
+base::plot(fitted_curve_poisson, angle = 45) + ggplot2::labs(x = "Date",
+                                                             y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Exponential growth or decay rate
+
+The rate of exponential growth or decay can be extracted from the fitted curve via the `growth_rate()` function.
+
+```{r, message=FALSE, warning=FALSE}
+library(magrittr) # to get the pipe operator %>%
+rates <- i2extras::growth_rate(fitted_curve_nb)
+rates <- base::as.data.frame(rates) %>%
+  subset(select = c(sex, r, r_lower, r_upper))
+print(rates)
+```
+
+## Math
+
+One of our episodes contains $\LaTeX$ equations when describing how to create
+dynamic reports with {knitr}, so we now use mathjax to describe this:
+
+`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
+
+Cool, right?
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `{i2extras}` to:
+  - fit epi curve,  
+  - calculate exponential growth or decline of cases, 
+  - find peak time, and 
+  - computing moving average of cases in specified time window.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
