@@ -105,12 +105,43 @@ base::print(peaks_nb)
 ```
 
 
+## Moving average
+
+A moving or rolling average calculates the average number of cases within a specified time period. This can be achieved by utilizing the `add_rolling_average()` function from the `{i2extras}` package on an `incidence2 object`. The following code chunk demonstrates the computation of the weekly average number of cases from the `incidence2` object `df_incid`, followed by visualization.
+
+```{r, warning=FALSE, message=FALSE}
+requireNamespace("ggplot2")
+moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
+base::plot(moving_Avg_week, border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average,
+                                  color = "red")) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 3: Monthly moving average
+
+Compute and visualize the monthly moving average of cases on `df_incid`? 
+
+:::::::::::::::::::::::: solution 
+
+```{r, warning=FALSE, message=FALSE}
+moving_Avg_mont <- i2extras::add_rolling_average(df_incid, n = 30L)
+base::plot(moving_Avg_mont, border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average,
+                                  color = "red")) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{i2extras}` to:
-  - fit epi curve,  
+  - fit epi curve using either **Poisson** or **NB** distributions,  
   - calculate exponential growth or decline of cases, 
   - find peak time, and 
   - computing moving average of cases in specified time window.
