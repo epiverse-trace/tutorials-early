@@ -49,6 +49,7 @@ Read the [License](LICENSE.md) of this tutorial.
 - [@amanda-minter](https://github.com/amanda-minter/)
 - [@avallecam](https://github.com/avallecam/)
 
+
 ```{r,eval=FALSE,echo=FALSE}
-readCitationFile(file = "inst/CITATION")
+readCitationFile(file = file.path("inst", "CITATION", fsep = "/"))
 ```
