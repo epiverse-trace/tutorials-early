@@ -1,4 +1,4 @@
-case_id,age,gender,status,date_onset,date_sample,district,cheifdom,age_cat
+case id,age,gender,status,date onset,date sample,district,cheifdom,age_cat
 14905,90,1,confirmed,03/15/2015,06/04/2015,M,D,65+
 13043,twenty-five,2,,Sep /11/Y,03/01/2014,W,X,twenty-five
 14364,54,f,NA,09/02/2014,03/03/2015,N,M,25-64

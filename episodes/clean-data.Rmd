@@ -19,5 +19,23 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, and standardized to facilitate accurate and reproducible analysis. To achieve this, we will utilize the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
-After reading a dataset of case data, the next logical step is to clean, curate, and standardize it for accurate reproducible analysis, and convert the resulting clean dataset into `linelist` object for robust downstream analysis.  This episode focuses on cleaning outbreak data using [cleanepi]() package. We are going to utilize a simulated data of Ebola cases to demonstrate the data cleansing operation. 
+The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
+
+```{r}
+requireNamespace("rio")
+sim_ebola_data <- rio::import(file.path("data", "simulated_ebola.csv",
+                                        fsep = "/"))
+utils::head(sim_ebola_data, 5)
+```
+
+##  Quick inspection
+Quick exploration and inspection of the dataset are crucial before diving into any  analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
+
+```{r}
+requireNamespace("cleanepi")
+cleanepi::scan_data(sim_ebola_data)
+```
+
+The results provides a summary of each column, including column names, data types, number of missing values, and summary statistics for numerical columns.

@@ -23,7 +23,7 @@ exercises: 2
 
 ## Introduction
 
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that contained in the [outbreaks](http://www.reconverse.org/outbreaks/) package. The first setp is to  read this dataset, and we recommend utilizing the [eadr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd)).
+A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that contained in the [outbreaks](http://www.reconverse.org/outbreaks/) package. The first setp is to  read this dataset, and we recommend utilizing the [eadr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
 
 ```{r, warning=FALSE, message=FALSE}
 requireNamespace("outbreaks")
