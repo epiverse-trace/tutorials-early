@@ -38,4 +38,5 @@ requireNamespace("cleanepi")
 cleanepi::scan_data(sim_ebola_data)
 ```
 
+
 The results provides a summary of each column, including column names, data types, number of missing values, and summary statistics for numerical columns.
