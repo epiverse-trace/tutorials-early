@@ -1,0 +1,23 @@
+---
+title: 'Clean, standardize, and valid outbreaks data'
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to clean and standardize case data?
+- How to convert raw dataset into a `linelist` object?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain how clean, curate, and standardize case data using `{cleanepi}` package
+- Demonstrate how to covert case data to a `linelist` object 
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+After reading a dataset of case data, the next logical step is to clean, curate, and standardize it for accurate reproducible analysis, and convert the resulting clean dataset into `linelist` object for robust downstream analysis. 
