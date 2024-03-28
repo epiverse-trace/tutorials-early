@@ -40,7 +40,6 @@ You will find complementary challenges and resources to continue your learning p
 
 ```{r,warning=FALSE,message=FALSE}
 library(epiparameter)
-library(EpiNow2)
 library(tidyverse)
 ```
 

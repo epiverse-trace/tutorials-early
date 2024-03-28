@@ -668,13 +668,13 @@ influenza_generation
 # EpiNow2 currently accepts Gamma or LogNormal
 # other can pass the PMF function
 
-influenza_generation_discrete <- 
+influenza_generation_discrete <-
   epiparameter::discretise(influenza_generation)
 
-influenza_generation_max <- 
+influenza_generation_max <-
   quantile(influenza_generation_discrete, p = 0.999)
 
-influenza_generation_pmf <- 
+influenza_generation_pmf <-
   density(
     influenza_generation_discrete,
     at = 1:influenza_generation_max
@@ -695,17 +695,17 @@ influenza_incubation <-
   epidist_db(
     disease = "influenza",
     epi_dist = "incubation",
-    single_epidist = TRUE 
+    single_epidist = TRUE
   )
 
 # Discretize incubation period
-influenza_incubation_discrete <- 
+influenza_incubation_discrete <-
   epiparameter::discretise(influenza_incubation)
 
-influenza_incubation_max <- 
+influenza_incubation_max <-
   quantile(influenza_incubation_discrete, p = 0.999)
 
-influenza_incubation_pmf <- 
+influenza_incubation_pmf <-
   density(
     influenza_incubation_discrete,
     at = 1:influenza_incubation_max
