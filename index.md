@@ -2,6 +2,11 @@
 site: sandpaper::sandpaper_site
 ---
 
+This is an [Epiverse-TRACE][epiversetrace] tutorial built with [The Carpentries Workbench][workbench]. 
+
+[epiversetrace]: https://epiverse-trace.github.io/
+[workbench]: https://carpentries.github.io/workbench/
+
 ## Epiverse-TRACE tutorials
 
 The Epiverse-TRACE tutorials are training materials for Outbreak Analysis tasks aimed at [learners](../profiles.md) who are willing to achieve basic competence in modelling and analytics.
