@@ -144,20 +144,12 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Schedule
         </span>
-      </button>
+      
     </div><!--/div.accordion-header-->
-        
-    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
-      <div class="accordion-body">
-        <ul><li><a href="#epiverse-trace-tutorials">Epiverse-TRACE tutorials</a></li>
-<li><a href="#related-projects">Related projects</a></li>
-        </ul></div><!--/div.accordion-body-->
-    </div><!--/div.accordion-collapse-->
         
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -231,60 +223,16 @@
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
 
-<section id="epiverse-trace-tutorials"><h2 class="section-heading">Epiverse-TRACE tutorials<a class="anchor" aria-label="anchor" href="#epiverse-trace-tutorials"></a>
-</h2>
-<hr class="half-width"><p>The Epiverse-TRACE tutorials are training materials for Outbreak
-Analysis tasks aimed at <a href="profiles.html">learners</a> who are
-willing to achieve basic competence in modelling and analytics.</p>
-<p>The tutorials are built around the workflow of outbreak analysis
-split into three stages : early tasks, middle tasks and late tasks.</p>
-<figure><img src="https://epiverse-trace.github.io/task_pipeline-minimal.svg" alt="An overview of the tutorial topics" class="figure mx-auto d-block"><div class="figcaption">An overview of the tutorial topics</div>
-</figure><p>Task topics consist of one or more episodes. You can navigate to
-different episodes using the menu on the left hand side. Alternatively,
-you may find the topic you are interested in the <a href="key-points.html">key points</a> of each episode.</p>
-<p>Each episode contains:</p>
-<ul><li>
-<strong>Overview</strong> : describes what questions will be
-answered and what are the objectives of the episode.</li>
-<li>
-<strong>Prerequisites</strong>: describes what episodes/packages
-need to be covered before the current episode.</li>
-<li>
-<strong>Example R code</strong> : work through the episodes on your
-own computer using the example R code.</li>
-<li>
-<strong>Challenges</strong> : complete challenges to test your
-understanding.</li>
-<li>
-<strong>Explainers</strong> : add to your understanding of
-mathematical and modelling concepts with the explainer boxes.</li>
-</ul><p>Also check out the <a href="reference.html">glossary</a> for any
-terms you may be unfamiliar with.</p>
-</section><section id="related-projects"><h2 class="section-heading">Related projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
-</h2>
-<hr class="half-width"><ul><li>R package vignettes : for R package <code>{package}</code> find the
-vignette located at
-<code>https://epiverse-trace.github.io/{package}/</code>. <a href="https://epiverse-trace.github.io/" class="external-link">Look at all Epiverse-TRACE
-packages in our developer space</a>.</li>
-<li>
-<a href="https://epiverse-trace.github.io/howto/" class="external-link">How-to guides</a>
-: reproducible recipes with concrete steps to solve specific Outbreak
-Analysis questions.</li>
-<li>
-<a href="https://www.epirhandbook.com/en/index.html" class="external-link">The
-Epidemiologist R Handbook</a> : Quick R code reference manual with
-task-centered examples that address common epidemiological
-problems.</li>
-<li>
-<em>COMING SOON</em> case studies : reproducible case-studies of
-outbreak data analysis tasks using R packages.</li>
-</ul><p>This tutorial was built with <a href="https://carpentries.github.io/sandpaper-docs" class="external-link">The Carpentries
-Workbench</a>.</p>
+<p>This is an <a href="https://epiverse-trace.github.io/" class="external-link">Epiverse-TRACE</a> tutorial
+built with <a href="https://carpentries.github.io/workbench/" class="external-link">The
+Carpentries Workbench</a>.</p>
 <!-- 
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use. 
  -->
-</section><section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
+
+
+      <section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
@@ -319,64 +267,143 @@ any links that you are not going to use.
  --></tbody></table><p>
       The actual schedule may vary slightly depending on the topics and exercises chosen by the instructor.
       </p>
-      </section><section id="setup"><section id="software-setup"><h2 class="section-heading">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
+      </section><section id="setup"><section id="motivation"><h2 class="section-heading">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<hr class="half-width"><div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">
-<div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Instructor Note</h3>
-</button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
-<div class="accordion-body">
-<p>Setup instructions live in this document. Please specify the tools
-and the data sets the learner needs to have installed. If you want to
-hide different setup instructions, you can use a <code>solution</code>
-tag.</p>
-</div>
-</div>
-</div>
+<hr class="half-width"><p><strong>Outbreaks</strong> appear with different diseases and in
+different contexts, but what all of them have in common are the key
+public health <strong>questions</strong> (<a href="https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605" class="external-link">Cori
+et al. 2017</a>). Common questions also require common data analysis
+<strong>tasks</strong>.</p>
+<p>Epiverse-TRACE’s aim is to provide an software ecosystem for <a href="reference.html#outbreakanalytics"><strong>outbreak
+analytics</strong></a> with integrated, generalisable and scalable
+community-driven software. We support the development of R packages,
+make the existing ones interoperable for the user experience, and
+stimulate a community of practice.</p>
+<div class="section level3">
+<h3 id="epiverse-trace-tutorials">Epiverse-TRACE tutorials<a class="anchor" aria-label="anchor" href="#epiverse-trace-tutorials"></a></h3>
+<p>The tutorials are built around the workflow of outbreak analysis
+split into three stages: <strong>Early tasks</strong>, <strong>Middle
+tasks</strong> and <strong>Late tasks</strong>.</p>
+<figure><img src="https://epiverse-trace.github.io/task_pipeline-minimal.svg" alt="An overview of the tutorial topics" class="figure mx-auto d-block"><div class="figcaption">An overview of the tutorial topics</div>
+</figure><p>Each task has its own tutorial website. Task topics consist of one or
+more episodes.</p>
+<table class="table"><colgroup><col width="33%"><col width="33%"><col width="33%"></colgroup><thead><tr class="header"><th><a href="https://epiverse-trace.github.io/tutorials-early/" class="external-link">Early
+task tutorials ➠</a></th>
+<th><a href="https://epiverse-trace.github.io/tutorials-middle" class="external-link">Middle
+task tutorials ➠</a></th>
+<th><a href="https://epiverse-trace.github.io/tutorials-late/" class="external-link">Late task
+tutorials ➠</a></th>
+</tr></thead><tbody><tr class="odd"><td>Reading and cleaning case data</td>
+<td>Real-time analysis and forecasting</td>
+<td>Scenario modelling</td>
+</tr><tr class="even"><td>Read and clean linelist data, Access delay distributions, and
+Estimate transmission metrics.</td>
+<td>Forecast cases, Estimate severity, and Estimate superspreading.</td>
+<td>Simulate disease spread and Investigate interventions.</td>
+</tr></tbody></table><p>Each episode contains:</p>
+<ul><li>
+<strong>Overview</strong> : describes what questions will be
+answered and what are the objectives of the episode.</li>
+<li>
+<strong>Prerequisites</strong>: describes what episodes/packages
+need to be covered before the current episode.</li>
+<li>
+<strong>Example R code</strong> : work through the episodes on your
+own computer using the example R code.</li>
+<li>
+<strong>Challenges</strong> : complete challenges to test your
+understanding.</li>
+<li>
+<strong>Explainers</strong> : add to your understanding of
+mathematical and modelling concepts with the explainer boxes.</li>
+</ul><p>Also check out the <a href="reference.html">glossary</a> for any
+terms you may be unfamiliar with.</p>
 </div>
 <div class="section level3">
-<h3 id="install-r-and-rstudio">Install R and RStudio<a class="anchor" aria-label="anchor" href="#install-r-and-rstudio"></a></h3>
+<h3 id="epiverse-trace-r-packages">Epiverse-TRACE R packages<a class="anchor" aria-label="anchor" href="#epiverse-trace-r-packages"></a></h3>
+<p>Our strategy is to gradually incorporate specialised <strong>R
+packages</strong> into our traditional analysis pipeline. These packages
+should fill the gaps in these epidemiology-specific tasks in response to
+outbreaks.</p>
+<figure><img src="../fig/pkgs-hexlogos.png" alt="In R, the fundamental unit of shareable code is the package. A package bundles together code, data, documentation, and tests and is easy to share with others (Wickham and Bryan, 2023)" class="figure mx-auto d-block"><div class="figcaption">In <strong>R</strong>, the fundamental unit of
+shareable code is the <strong>package</strong>. A package bundles
+together code, data, documentation, and tests and is easy to share with
+others (<a href="https://r-pkgs.org/introduction.html" class="external-link">Wickham and
+Bryan, 2023</a>)</div>
+</figure><div id="prereq1" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Prerequisite<a class="anchor" aria-label="anchor" href="#prereq1"></a>
+</h3>
+<div class="callout-content">
+<p>This course assumes intermediate R knowledge. This workshop is for
+you if:</p>
+<ul><li>You can use the magrittr pipe <code>%&gt;%</code> and/or native pipe
+<code>|&gt;</code>
+</li>
+<li>You are familiar with functions from <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>,
+<a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a>, and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>
+</li>
+<li>You can read data into R, transform and reshape data, and make a
+wide variety of graphs</li>
+</ul><p>We expect participants to have some exposure to basic Statistical,
+Mathematical and Epidemic theory concepts, but NOT intermediate or
+expert familiarity with modeling.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section id="software-setup"><h2 class="section-heading">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a>
+</h2>
+<hr class="half-width"><p>Follow these two steps:</p>
+<div class="section level3">
+<h3 id="install-or-upgrade-r-and-rstudio">1. Install or upgrade R and RStudio<a class="anchor" aria-label="anchor" href="#install-or-upgrade-r-and-rstudio"></a></h3>
 <p>R and RStudio are two separate pieces of software:</p>
 <ul><li>
 <strong>R</strong> is a programming language and software used to
 run code written in R.</li>
 <li>
 <strong>RStudio</strong> is an integrated development environment
-(IDE) that makes using R easier. In this tutorial, we use RStudio to
-interact with R.</li>
-</ul><p>If you don’t already have <code>R</code> and <code>RStudio</code>
-installed, follow the instructions for your operating system at <a href="https://posit.co/download/rstudio-desktop/" class="external-link uri">https://posit.co/download/rstudio-desktop/</a>.</p>
-</div>
-<div class="section level3">
-<h3 id="update-r-and-rstudio">Update R and RStudio<a class="anchor" aria-label="anchor" href="#update-r-and-rstudio"></a></h3>
-<p>This tutorial requires R version 4.0.0 or later.</p>
-<p>If you already have R and RStudio installed, first check if your R
-version is up to date:</p>
-<ul><li><p>When you open RStudio your R version will be printed in the
-console on the <a href="https://docs.posit.co/ide/user/ide/guide/code/console.html" class="external-link">console
-window</a>. Alternatively, you can type <code>sessionInfo()</code> into
-the console.</p></li>
-<li><p>If your version of R is older than the one required, download and
-install the latest version of R from the <a href="https://cran.rstudio.com/" class="external-link">R project website</a> for your
-operating system.</p></li>
-<li><p>After installing a new version of R, you will have to reinstall
-all your packages with the new version. For Windows, there is a package
-called <code>installr</code> that can help you with upgrading your R
-version and migrating your package library.</p></li>
-<li><p>To update RStudio to the latest version, open RStudio and click
-on <code>Help &gt; Check for Updates</code>. If a new version is
-available follow the instructions on the screen. By default, RStudio
-will also automatically notify you of new versions every once in a
-while.</p></li>
-</ul><div id="callout1" class="callout">
+(IDE) that makes using R easier. We recommend to use RStudio to interact
+with R.</li>
+</ul><p>To install R and RStudio, follow these instructions <a href="https://posit.co/download/rstudio-desktop/" class="external-link uri">https://posit.co/download/rstudio-desktop/</a>.</p>
+<div id="already-installed" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout<a class="anchor" aria-label="anchor" href="#callout1"></a>
+<div id="already-installed" class="callout-inner">
+<h3 class="callout-title">Already installed?<a class="anchor" aria-label="anchor" href="#already-installed"></a>
+</h3>
+<div class="callout-content">
+<p>Hold on: This is a great time to make sure your R installation is
+current.</p>
+<p>This tutorial requires <strong>R version 4.0.0 or later</strong>.</p>
+</div>
+</div>
+</div>
+<p>To check if your R version is up to date:</p>
+<ul><li><p>In RStudio your R version will be printed in <a href="https://docs.posit.co/ide/user/ide/guide/code/console.html" class="external-link">the
+console window</a>. Or run <code>sessionInfo()</code> there.</p></li>
+<li>
+<p><strong>To update R</strong>, download and install the latest
+version from the <a href="https://cran.rstudio.com/" class="external-link">R project
+website</a> for your operating system.</p>
+<ul><li><p>After installing a new version, you will have to reinstall all
+your packages with the new version.</p></li>
+<li><p>For Windows, the <a href="https://talgalili.github.io/installr/" class="external-link">installr</a> package can upgrade your
+R version and migrate your package library.</p></li>
+</ul></li>
+<li><p><strong>To update RStudio</strong>, open RStudio and click on
+<code>Help &gt; Check for Updates</code>. If a new version is available
+follow the instructions on the screen.</p></li>
+</ul><div id="check-for-updates-regularly" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="check-for-updates-regularly" class="callout-inner">
+<h3 class="callout-title">Check for Updates regularly<a class="anchor" aria-label="anchor" href="#check-for-updates-regularly"></a>
 </h3>
 <div class="callout-content">
 <p>While this may sound scary, it is <strong>far more common</strong> to
@@ -388,14 +415,14 @@ regularly use is a good practice.</p>
 </div>
 </div>
 <div class="section level3">
-<h3 id="install-required-r-packages">Install required R packages<a class="anchor" aria-label="anchor" href="#install-required-r-packages"></a></h3>
-<p>During the tutorial, we will need a number of R packages. Packages
-contain useful R code written by other people. We will use packages from
-the <a href="https://epiverse-trace.github.io/" class="external-link">Epiverse-TRACE</a>.</p>
-<p>To try to install these packages, open RStudio and copy and paste the
-following code chunk into the <a href="https://docs.posit.co/ide/user/ide/guide/code/console.html" class="external-link">console
+<h3 id="install-the-required-r-packages">2. Install the required R packages<a class="anchor" aria-label="anchor" href="#install-the-required-r-packages"></a></h3>
+<!--
+During the tutorial, we will need a number of R packages. Packages contain useful R code written by other people. We will use packages from the [Epiverse-TRACE](https://epiverse-trace.github.io/). 
+-->
+<p>Open RStudio and <strong>copy and paste</strong> the following code
+chunk into the <a href="https://docs.posit.co/ide/user/ide/guide/code/console.html" class="external-link">console
 window</a>, then press the <kbd>Enter</kbd> (Windows and Linux) or
-<kbd>Return</kbd> (MacOS) to execute the command.</p>
+<kbd>Return</kbd> (MacOS) to execute the command:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -410,6 +437,9 @@ window</a>, then press the <kbd>Enter</kbd> (Windows and Linux) or
 <span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="va">new_packages</span><span class="op">)</span></span></code></pre>
 </div>
+<p>These installation steps could ask you
+<code>? Do you want to continue (Y/n)</code> write <code>Y</code> and
+press <kbd>Enter</kbd>.</p>
 <p>You should update <strong>all of the packages</strong> required for
 the tutorial, even if you installed them relatively recently. New
 versions bring improvements and important bug fixes.</p>
