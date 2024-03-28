@@ -1,5 +1,5 @@
 ---
-title: 'Input delay data'
+title: 'Use delay distributions in analysis'
 teaching: 10
 exercises: 2
 editor_options: 
