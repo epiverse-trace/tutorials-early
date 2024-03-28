@@ -245,7 +245,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 
 ::::::::::::::::: spoiler
 
-### Why do we have a `<NA>` entry?
+### Why do we have a <NA> entry?
 
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
@@ -450,7 +450,7 @@ Explore this shinyapp called **The Distribution Zoo**!
 
 Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
 
-1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
+1. Access the <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
 2. Go to the left panel,
 3. Keep the *Category of distribution*: `Continuous Univariate`,
 4. Select a new *Type of distribution*: `Log-Normal`,
