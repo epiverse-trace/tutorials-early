@@ -44,11 +44,17 @@ library(EpiNow2)
 library(tidyverse)
 ```
 
-## Convert parameters to summary statistics
+## Challenge ideas
 
-::::::::::::::::::::::::::::::::: challenge
+- ...
 
-Use the `influenza_england_1978_school` from the `{outbreaks}` package to calculate the effective reproduction number.
+## Challenge 2
+
+::::::::::::::::::::::::::::::::::::::::::: challenge
+
+use any of the case studies in <https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html#use-cases>
+
+<!-- https://github.com/epiverse-trace/epiparameter/issues/114 -->
 
 ::::::::::::::::: hint
 
@@ -58,23 +64,9 @@ How to get the mean and standard deviation from a generation time with only dist
 
 ::::::::::::::::::::::
 
-::::::::::::::::: solution
+:::::::::::::::::::::: solution
 
-<!-- https://github.com/epiverse-trace/epiparameter/issues/114 -->
-
-```{r,eval=TRUE}
-# What parameters are available for Influenza?
-epidist_db(disease = "influenza") %>%
-  list_distributions() %>%
-  as_tibble() %>%
-  count(epi_distribution)
-
-influenza_generation <-
-  epidist_db(
-    disease = "influenza",
-    epi_dist = "generation"
-  )
-
+```{r}
 influenza_generation_discrete <-
   discretise(influenza_generation)
 
@@ -100,58 +92,13 @@ influenza_converted <-
   )
 
 influenza_converted
-
-# however, dist_spec() only accepts lognormal or gamma distributions
-# then, we can rely on getting the pmf
-# this follows the same code as for the ggplot2 above!
-
-influenza_generation_pmf <-
-  # from a maximum value from the distribution
-  quantile(influenza_generation_discrete, p = 0.999) %>%
-  # generate quantile values
-  # as a sequence for each natural number
-  seq(1L, to = ., by = 1L) %>%
-  # coerce numeric vector to data frame
-  as_tibble_col(column_name = "quantile_values") %>%
-  # calculate density values
-  # for each quantile in the density function
-  mutate(
-    density_values = density(
-      x = influenza_generation_discrete,
-      at = quantile_values
-    )
-  )
-
-influenza_generation_pmf
-
-generation_time_influenza <-
-  dist_spec(
-    pmf = influenza_generation_pmf %>% pull(density_values)
-  )
-
-influenza_cleaned <-
-  outbreaks::influenza_england_1978_school %>%
-  select(date, confirm = in_bed)
-
-epinow_estimates <- epinow(
-  # cases
-  reported_cases = influenza_cleaned,
-  # delays
-  generation_time = generation_time_opts(generation_time_influenza),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
-)
-
-plot(epinow_estimates)
 ```
 
-::::::::::::::::::::::::::
+::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
 
+<!--
 ## When to reuse? When to estimate?
 
 In the early stage of an outbreak, we can rely on reusing parameters for known pathogens to unknown ones, like for the [Disease X](https://en.wikipedia.org/wiki/Disease_X), a pathogen currently unknown to cause human disease and potentially cause a serious international epidemic ([WHO, 2018](https://www.who.int/activities/prioritizing-diseases-for-research-and-development-in-emergency-contexts)). 
@@ -179,8 +126,6 @@ The lengths of the Serial interval and Incubation period determine the type of d
 ![The relationship between the incubation period and serial interval. From [Nishiura 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext)](fig/incubation-period-serial-interval.jpg)
 
 Estimating the proportion of pre-symptomatic infections, or the extent to which infectiousness precedes symptom onset will determine the effectiveness of contact tracing and the feasibility of controlling an outbreak ([Fraser et al., 2004](https://www.pnas.org/doi/full/10.1073/pnas.0307506101) and [Hellewell et al., 2020](https://www.thelancet.com/article/S2214-109X(20)30074-7/fulltext)).
-
-<!-- The proportion of pre-symptomatic transmission contributes to the effective reproduction number and expected new cases. -->
 
 ![Parameter estimates. Plausible ranges for the key parameters R0 and θ (read the main text for sources) for four viral infections of public concern are shown as shaded regions. The size of the shaded area reflects the uncertainties in the parameter estimates. [Fraser et al., 2004](https://www.pnas.org/doi/10.1073/pnas.0307506101)](fig/reproduction-number-pre-symptomatic.png)
 
@@ -290,7 +235,9 @@ epidist_db(
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
+-->
 
+<!-- The proportion of pre-symptomatic transmission contributes to the effective reproduction number and expected new cases. -->
 
 <!--
 ## Concept map
