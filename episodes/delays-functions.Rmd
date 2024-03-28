@@ -366,17 +366,9 @@ We invite you to try this out in code chunks and the R console!
 
 ::::::::::::::::::::::::::::::
 
-:::::::::: callout
-
-### Warning
-
-Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission. ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
-
-::::::::::::::::::
-
 Let's replace the `generation_time` input we used for `EpiNow2::epinow()`.
 
-```{r,eval=FALSE}
+```{r}
 epinow_estimates <- epinow(
   # cases
   reported_cases = example_confirmed[1:60],
@@ -386,6 +378,14 @@ epinow_estimates <- epinow(
 
 base::plot(epinow_estimates)
 ```
+
+:::::::::: callout
+
+### Warning
+
+Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission. ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
+
+::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::: challenge
 
