@@ -213,7 +213,7 @@ covid_serialint_discrete <-
 covid_serialint_discrete
 ```
 
-We identify this change in the `Distribution:` output line of the `<epidist>` object. Take a double check to this line:
+We identify this change in the `Distribution:` output line of the `<epidist>` object. Double check this line:
 
 ```
 Distribution: discrete lnorm
