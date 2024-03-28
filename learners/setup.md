@@ -4,6 +4,38 @@ title: Setup
 
 ## Motivation
 
+**Outbreaks** appear with different diseases and in different contexts, but what all of them have in common are the key public health **questions** ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). Common questions also require common data analysis **tasks**.
+
+Epiverse-TRACE's aim is to provide an software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of R packages, make the existing ones interoperable for the user experience, and stimulate a community of practice.
+
+### Epiverse-TRACE tutorials
+
+The tutorials are built around the workflow of outbreak analysis split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
+
+![An overview of the tutorial topics](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
+
+Each task has its own tutorial website. Task topics consist of one or more episodes.
+
+| [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
+|---|---|---|
+| Reading and cleaning case data | Real-time analysis and forecasting | Scenario modelling |
+| Read and clean linelist data, Access delay distributions, and Estimate transmission metrics. | Forecast cases, Estimate severity, and Estimate superspreading. | Simulate disease spread and Investigate interventions. |
+
+Each episode contains:
+
++ **Overview** : describes what questions will be answered and what are the objectives of the episode.
++ **Prerequisites**: describes what episodes/packages need to be covered before the current episode.
++ **Example R code** : work through the episodes on your own computer using the example R code.
++ **Challenges** : complete challenges to test your understanding.
++ **Explainers** : add to your understanding of mathematical and modelling concepts with the explainer boxes.
+
+Also check out the [glossary](../reference.md) for any terms you may be unfamiliar with.
+
+### Epiverse-TRACE R packages
+
+Our strategy is to gradually incorporate specialised **R packages** into our traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
+
+![In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos.png)
 
 :::::::::::::::::::::::::::: prereq
 
