@@ -285,33 +285,47 @@ distribution[[4]]$metadata$inference_method
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Ebola's incubation periods
+### Find your delay distributions!
 
-Take 5 minutes to explore the `{epiparameter}` library. 
+Take 2 minutes to explore the `{epiparameter}` library. 
 
-First, search for Ebola disease delay distributions. Find:
+Search for delay distributions of your disease of interest (e.g., Influenza) and a specific delay distribution (e.g., the incubation period).
 
-- How many delay distributions are for the Ebola disease?
+Find:
 
-- How many types of delay distributions are for the incubation period of Ebola?
+- How many delay distributions are for that disease?
+
+- How many types of probability distribution (e.g., gamma, lognormal) are for a given delay in that disease?
+
+Ask:
+
+- Do you recognise the papers?
+
+- Should `{epiparameter}` literature review consider any other paper?
 
 ::::::::::::::::: hint
 
-`epidist_db()` and `list_distributions()` give us different and complementary summary outputs.
-
-The `epidist_db()` function alone counts for us the number of entries like:
+The `epidist_db()` function with `disease` alone counts the number of entries like:
 
 - studies, and
 - delay distributions.
 
-On the other hand, the `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` lists all the entries in a data frame with columns like:
+The `epidist_db()` function with `disease` and `epi_dist` gets a list of all entries with:
 
-- the type of the probability distribution per delay, and
+- the complete citation, 
+- the **type** of a probability distribution, and 
+- distribution parameter values.
+
+The combo of `epidist_db()` plus `list_distributions()` gets a data frame of all entries with columns like:
+
+- the **type** of the probability distribution per delay, and
 - author and year of the study.
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
+
+We choose to explore Ebola's delay distributions:
 
 ```{r}
 # we expect 16 delays distributions for ebola
@@ -321,6 +335,17 @@ epiparameter::epidist_db(
 ```
 
 Now, from the output of `epiparameter::epidist_db()`, What is an [offspring distribution](../learners/reference.md#offspringdist)?
+
+We choose to find Ebola's incubation periods. This output list all the papers and parameters found. Run this locally if needed:
+
+```{r, eval=FALSE}
+epiparameter::epidist_db(
+  disease = "ebola",
+  epi_dist = "incubation"
+)
+```
+
+We use `list_distributions()` to get a summary display of all:
 
 ```{r,eval=TRUE}
 # we expect 2 different types of delay distributions
@@ -333,12 +358,6 @@ epiparameter::epidist_db(
 ```
 
 We find two types of probability distributions for this query: _lognormal_ and _gamma_.
-
-Now, search for delay distributions of your disease of interest! Ask:
-
-- Do you recognise the papers?
-
-- Should it consider any other paper?
 
 How does `{epiparameter}` do the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
