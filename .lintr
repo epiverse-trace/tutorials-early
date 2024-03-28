@@ -1,0 +1,16 @@
+linters: all_linters(
+    packages = "lintr",
+    object_name_linter = NULL,
+    implicit_integer_linter = NULL,
+    brace_linter = NULL,
+    extraction_operator_linter = NULL,
+    missing_package_linter = NULL,
+    library_call_linter = NULL,
+    namespace_linter = NULL,
+    undesirable_function_linter(
+      modify_defaults(
+        default_undesirable_functions,
+        library = NULL # this is fine in Rmd files
+      )
+    )
+  )
