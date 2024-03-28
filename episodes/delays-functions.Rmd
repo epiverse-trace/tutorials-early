@@ -340,6 +340,15 @@ Now we can plug everything into the `EpiNow2::dist_spec()` function!
 - a maximum value `max`,
 - the `distribution` name.
 
+But, before, in `EpiNow2::dist_spec()` for a **Lognormal** distribution we need the *distribution parameters* instead of the summary statistics:
+
+```{r}
+covid_serialint_parameters <-
+  epiparameter::get_parameters(covid_serialint)
+```
+
+Then, we have:
+
 ```{r}
 serial_interval_covid <-
   dist_spec(
@@ -354,7 +363,7 @@ serial_interval_covid
 
 :::::::::::::::::::::::::::::: callout
 
-### BONUS TIP: Lognormal distributions
+### A code completion tip
 
 If we write the `[]` next to the object `covid_serialint_parameters[]`, within `[]` we can use the 
 Tab key <kbd>↹</kbd> 
