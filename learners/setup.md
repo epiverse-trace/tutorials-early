@@ -2,6 +2,21 @@
 title: Setup
 ---
 
+## Motivation
+
+
+:::::::::::::::::::::::::::: prereq
+
+This course assumes intermediate R knowledge. This workshop is for you if:
+
+- You can use the magrittr pipe `%>%` and/or native pipe `|>`
+- You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
+- You can read data into R, transform and reshape data, and make a wide variety of graphs
+
+We expect participants to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
+
+::::::::::::::::::::::::::::
+
 ## Software Setup
 
 Follow these two steps:
