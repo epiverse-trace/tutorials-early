@@ -416,8 +416,6 @@ covid_serialint <-
     author = "Nishiura",
     single_epidist = TRUE
   )
-
-covid_serialint
 ```
 
 <!-- to activate for EpiNow2@dist-interfase
