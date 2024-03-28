@@ -63,15 +63,16 @@ library(tidyverse)
 
 ## The problem
 
-If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we need to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
 
 ```r
-generation_time <- dist_spec(
-  mean = 4,
-  sd = 2,
-  max = 20,
-  distribution = "gamma"
-)
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = 4,
+    sd = 2,
+    max = 20,
+    distribution = "gamma"
+  )
 ```
 
 Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get them from the **distribution parameters** reported. One source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
@@ -607,12 +608,13 @@ ebola_severity$summary_stats$mean_ci_limits
 Notice that with these pieces of information we can replace two out of three inputs of the `EpiNow2::dist_spec()` function:
 
 ```r
-generation_time <- dist_spec(
-  mean = covid_serialint$summary_stats$mean,
-  sd = covid_serialint$summary_stats$sd,
-  max = 20,
-  distribution = "gamma"
-)
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = covid_serialint$summary_stats$mean,
+    sd = covid_serialint$summary_stats$sd,
+    max = 20,
+    distribution = "gamma"
+  )
 ```
 
 In the next episode we'll access to the `max` by using **distribution functions**!
