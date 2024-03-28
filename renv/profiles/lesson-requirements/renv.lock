@@ -242,6 +242,24 @@
       ],
       "Hash": "b8d6850ef3e330bc108e712679e79443"
     },
+    "UpSetR": {
+      "Package": "UpSetR",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "grDevices",
+        "gridExtra",
+        "methods",
+        "plyr",
+        "scales",
+        "stats",
+        "utils"
+      ],
+      "Hash": "f6ef89503aaff474873f8bc1823894e1"
+    },
     "abind": {
       "Package": "abind",
       "Version": "1.4-5",
@@ -274,6 +292,19 @@
         "utils"
       ],
       "Hash": "ecd1fd4d4ea49df1b62fb706c37785ac"
+    },
+    "arsenal": {
+      "Package": "arsenal",
+      "Version": "3.6.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "knitr",
+        "stats",
+        "utils"
+      ],
+      "Hash": "e16d280d498f4d8f2316a01dc3eed9b6"
     },
     "askpass": {
       "Package": "askpass",
@@ -471,6 +502,39 @@
         "utils"
       ],
       "Hash": "b4acc5f619ee2f36d6611a0a3ad5c40e"
+    },
+    "cleanepi": {
+      "Package": "cleanepi",
+      "Version": "0.0.2",
+      "Source": "GitHub",
+      "Remotes": "epiverse-trace/numberize",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "cleanepi",
+      "RemoteUsername": "epiverse-trace",
+      "RemotePkgRef": "epiverse-trace/cleanepi",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "891aa9f90558f9effc73cd12606175a4336f3d39",
+      "Requirements": [
+        "R",
+        "R.utils",
+        "arsenal",
+        "checkmate",
+        "dplyr",
+        "glue",
+        "janitor",
+        "linelist",
+        "lubridate",
+        "magrittr",
+        "matchmaker",
+        "naniar",
+        "numberize",
+        "readr",
+        "snakecase",
+        "stringr",
+        "utils"
+      ],
+      "Hash": "6f6364aa60fd03e9d4ee14149b0d0036"
     },
     "cli": {
       "Package": "cli",
@@ -1252,6 +1316,28 @@
       ],
       "Hash": "0080607b4a1a7b28979aecef976d8bc2"
     },
+    "janitor": {
+      "Package": "janitor",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "hms",
+        "lifecycle",
+        "lubridate",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "snakecase",
+        "stringi",
+        "stringr",
+        "tidyr",
+        "tidyselect"
+      ],
+      "Hash": "5baae149f1082f466df9d1442ba7aa65"
+    },
     "jquerylib": {
       "Package": "jquerylib",
       "Version": "0.1.4",
@@ -1338,6 +1424,21 @@
       ],
       "Hash": "b8552d117e1b808b09a832f589b79035"
     },
+    "linelist": {
+      "Package": "linelist",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "checkmate",
+        "dplyr",
+        "lifecycle",
+        "rlang",
+        "tidyselect"
+      ],
+      "Hash": "ffef5e34d44121c9808b03fca5db6bb2"
+    },
     "listenv": {
       "Package": "listenv",
       "Version": "0.9.1",
@@ -1422,6 +1523,18 @@
         "utils"
       ],
       "Hash": "5f7886e53a3b39d4a110c7bd7fce9164"
+    },
+    "matchmaker": {
+      "Package": "matchmaker",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "cli",
+        "forcats",
+        "rlang"
+      ],
+      "Hash": "faae0c4f0c37c5e91cdfffd238212422"
     },
     "matrixStats": {
       "Package": "matrixStats",
@@ -1510,6 +1623,33 @@
       ],
       "Hash": "6dfe8bf774944bd5595785e3229d8771"
     },
+    "naniar": {
+      "Package": "naniar",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "UpSetR",
+        "cli",
+        "dplyr",
+        "forcats",
+        "ggplot2",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "norm",
+        "purrr",
+        "rlang",
+        "stats",
+        "tibble",
+        "tidyr",
+        "vctrs",
+        "viridis",
+        "visdat"
+      ],
+      "Hash": "74d1b68ee4d1e076dee034a9ef3acd41"
+    },
     "nlme": {
       "Package": "nlme",
       "Version": "3.1-164",
@@ -1534,6 +1674,16 @@
       ],
       "Hash": "277c67a08f358f42b6a77826e4492f79"
     },
+    "norm": {
+      "Package": "norm",
+      "Version": "1.0-11.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "stats"
+      ],
+      "Hash": "82d9d75b78bc83553c034cd5c7ed2b3c"
+    },
     "numDeriv": {
       "Package": "numDeriv",
       "Version": "2016.8-1.1",
@@ -1543,6 +1693,19 @@
         "R"
       ],
       "Hash": "df58958f293b166e4ab885ebcad90e02"
+    },
+    "numberize": {
+      "Package": "numberize",
+      "Version": "0.0.1",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "numberize",
+      "RemoteUsername": "epiverse-trace",
+      "RemotePkgRef": "epiverse-trace/numberize",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "f25903b8e42a2e9ad1ae04ea706cfdf2179196dc",
+      "Hash": "a801ada77eef7b3e9e506885c7a91428"
     },
     "oai": {
       "Package": "oai",
@@ -2061,6 +2224,18 @@
       ],
       "Hash": "3838071b66e0c566d55cc26bd6e27bf4"
     },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "stringi",
+        "stringr"
+      ],
+      "Hash": "58767e44739b76965332e8a4fe3f91f1"
+    },
     "socialmixr": {
       "Package": "socialmixr",
       "Version": "0.3.1",
@@ -2375,6 +2550,19 @@
       ],
       "Hash": "c03fa420630029418f7e6da3667aac4a"
     },
+    "viridis": {
+      "Package": "viridis",
+      "Version": "0.6.5",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "gridExtra",
+        "viridisLite"
+      ],
+      "Hash": "acd96d9fa70adeea4a5a1150609b9745"
+    },
     "viridisLite": {
       "Package": "viridisLite",
       "Version": "0.4.2",
@@ -2384,6 +2572,28 @@
         "R"
       ],
       "Hash": "c826c7c4241b6fc89ff55aaea3fa7491"
+    },
+    "visdat": {
+      "Package": "visdat",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "dplyr",
+        "forcats",
+        "ggplot2",
+        "glue",
+        "magrittr",
+        "purrr",
+        "readr",
+        "scales",
+        "stats",
+        "tibble",
+        "tidyr"
+      ],
+      "Hash": "aa0c558f21cab0196eea9b51433f2c0e"
     },
     "vroom": {
       "Package": "vroom",
