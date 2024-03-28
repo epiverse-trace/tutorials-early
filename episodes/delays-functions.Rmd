@@ -332,26 +332,6 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
 
 :::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::: callout
-
-### Log normal distributions
-
-If you need the log normal **distribution parameters** instead of the summary statistics, we can use `epiparameter::get_parameters()`:
-
-```{r}
-covid_serialint_parameters <-
-  epiparameter::get_parameters(covid_serialint)
-
-covid_serialint_parameters
-```
-
-This gets a vector of class `<numeric>` ready to use as input for any other package!
-
-**BONUS TIP:** If we write the `[]` next to the last object create like in `covid_serialint_parameters[]`, within `[]` we can use the 
-Tab key <kbd>↹</kbd> 
-to use the [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) and have a quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. We invite you to try this out in code chunks and the R console!
-
-::::::::::::::::::::::::::::::
 
 ## Plug-in `{epiparameter}` to `{EpiNow2}`
 
@@ -372,6 +352,20 @@ serial_interval_covid <-
 
 serial_interval_covid
 ```
+
+:::::::::::::::::::::::::::::: callout
+
+### BONUS TIP: Lognormal distributions
+
+If we write the `[]` next to the object `covid_serialint_parameters[]`, within `[]` we can use the 
+Tab key <kbd>↹</kbd> 
+for [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) 
+
+This gives quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. 
+
+We invite you to try this out in code chunks and the R console!
+
+::::::::::::::::::::::::::::::
 
 :::::::::: callout
 
