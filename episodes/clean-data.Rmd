@@ -1,5 +1,5 @@
 ---
-title: 'Clean, standardize, and valid outbreaks data'
+title: 'Clean outbreaks data'
 teaching: 10
 exercises: 2
 ---
@@ -20,4 +20,4 @@ exercises: 2
 
 ## Introduction
 
-After reading a dataset of case data, the next logical step is to clean, curate, and standardize it for accurate reproducible analysis, and convert the resulting clean dataset into `linelist` object for robust downstream analysis. 
+After reading a dataset of case data, the next logical step is to clean, curate, and standardize it for accurate reproducible analysis, and convert the resulting clean dataset into `linelist` object for robust downstream analysis.  This episode focuses on cleaning outbreak data using [cleanepi]() package. We are going to utilize a simulated data of Ebola cases to demonstrate the data cleansing operation. 
