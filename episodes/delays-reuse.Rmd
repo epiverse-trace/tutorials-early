@@ -469,19 +469,19 @@ We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving
 covid_serialint$summary_stats$mean
 ```
 
-Notice that with these pieces of information we can replace one out of three inputs of the `EpiNow2::dist_spec()` function:
+Notice that with this output we can replace one of the inputs for the `EpiNow2::dist_spec()` function:
 
 ```r
 generation_time <- 
   EpiNow2::dist_spec(
-    mean = covid_serialint$summary_stats$mean,
+    mean = covid_serialint$summary_stats$mean, # we changed this line :)
     sd = 2,
     max = 20,
     distribution = "gamma"
   )
 ```
 
-In coming episodes we'll learn how to use `{EpiNow2}` to estimate transmissibility and how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::dist_spec()`.
+In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::dist_spec()` and use `{epiparameter}` in your analysis.
 
 :::::::::::::::::::::::::::::: callout
 
