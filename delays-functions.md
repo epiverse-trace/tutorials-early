@@ -175,8 +175,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1] 6.737175 4.530745 3.870120 2.816580 3.509542 4.710597 6.118135 4.456846
- [9] 6.001574 1.981515
+ [1] 4.946173 1.848653 4.558656 4.051608 8.892126 3.296900 4.339645 5.280796
+ [9] 6.350389 5.440831
 ```
 
 ::::::::: instructor
@@ -583,10 +583,10 @@ epinow_estimates <- epinow(
 ```
 
 ```{.output}
-WARN [2024-03-25 19:13:34] epinow: There were 1 divergent transitions after warmup. See
+WARN [2024-03-28 20:46:51] epinow: There were 8 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-25 19:13:34] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-03-28 20:46:51] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -731,7 +731,7 @@ Logging threshold set at INFO for the EpiNow2 logger
 ```
 
 ```{.output}
-Writing EpiNow2 logs to the console and: /tmp/RtmpZZGwcw/regional-epinow/2020-04-21.log
+Writing EpiNow2 logs to the console and: /tmp/Rtmp0E3eaa/regional-epinow/2020-04-21.log
 ```
 
 ```{.output}
@@ -739,14 +739,14 @@ Logging threshold set at INFO for the EpiNow2.epinow logger
 ```
 
 ```{.output}
-Writing EpiNow2.epinow logs to the console and: /tmp/RtmpZZGwcw/epinow/2020-04-21.log
+Writing EpiNow2.epinow logs to the console and: /tmp/Rtmp0E3eaa/epinow/2020-04-21.log
 ```
 
 ```{.output}
-WARN [2024-03-25 19:15:25] epinow: There were 3 divergent transitions after warmup. See
+WARN [2024-03-28 20:48:37] epinow: There were 8 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-25 19:15:25] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-03-28 20:48:37] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -857,10 +857,10 @@ epinow_estimates <- epinow(
 ```
 
 ```{.output}
-WARN [2024-03-25 19:19:18] epinow: There were 19 divergent transitions after warmup. See
+WARN [2024-03-28 20:52:04] epinow: There were 10 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-25 19:19:18] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-03-28 20:52:04] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
