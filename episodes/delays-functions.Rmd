@@ -60,22 +60,21 @@ covid_serialint <-
     author = "Nishiura",
     single_epidist = TRUE
   )
-
-covid_serialint
 ```
 
-Now, we have an epidemiological parameter we can reuse! We can replace the two out of three **summary statistics** into `EpiNow2::dist_spec()`
+Now, we have an epidemiological parameter we can use in our analysis! In the chunk below we replaced one of the **summary statistics** inputs into `EpiNow2::dist_spec()`
 
 ```r
-generation_time <- dist_spec(
-  mean = covid_serialint$summary_stats$mean,
-  sd = covid_serialint$summary_stats$sd,
-  max = 20,
-  distribution = "gamma"
-)
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = covid_serialint$summary_stats$mean, # we changed this line :)
+    sd = 2,
+    max = 20,
+    distribution = "gamma"
+  )
 ```
 
-In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a `max` value for this and any other package downstream in the pipeline!
+In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a maximum value (`max`) for this and any other package downstream in your analysis pipeline!
 
 Let's load the `{epiparameter}` and `{EpiNow2}` package. For `{EpiNow2}`, we'll set 4 cores to be used in parallel computations. We'll use the pipe `%>%`, some `{dplyr}` verbs and `{ggplot2}`, so let's also call to the `{tidyverse}` package:
 
