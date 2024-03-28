@@ -4,49 +4,56 @@ title: Setup
 
 ## Software Setup
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+Follow these two steps:
 
-Setup instructions live in this document. Please specify the tools and the data sets the learner needs to have installed. If you want to hide different setup instructions, you can use a `solution` tag.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-### Install R and RStudio
+### 1. Install or upgrade R and RStudio
 
 R and RStudio are two separate pieces of software: 
 
 * **R** is a programming language and software used to run code written in R.
-* **RStudio** is an integrated development environment (IDE) that makes using R easier. In this tutorial, we use RStudio to interact with R. 
+* **RStudio** is an integrated development environment (IDE) that makes using R easier. We recommend to use RStudio to interact with R. 
 
-If you don't already have `R` and `RStudio` installed, follow the instructions for your operating system at <https://posit.co/download/rstudio-desktop/>.
-
-### Update R and RStudio
-
-This tutorial requires R version 4.0.0 or later. 
-
-If you already have R and RStudio installed, first check if your R version is up to date:
-
-* When you open RStudio your R version will be printed in the console on the [console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Alternatively, you can type `sessionInfo()` into the console. 
-
-* If your version of R is older than the one required, download and install the latest version of R from the [R project website](https://cran.rstudio.com/) for your operating system. 
-
-* After installing a new version of R, you will have to reinstall all your packages with the new version. For Windows, there is a package called `installr` that can help you with upgrading your R version and migrating your package library. 
-
-* To update RStudio to the latest version, open RStudio and click on 
-`Help > Check for Updates`. If a new version is available follow the 
-instructions on the screen. By default, RStudio will also automatically notify you 
-of new versions every once in a while.
+To install R and RStudio, follow these instructions <https://posit.co/download/rstudio-desktop/>.
 
 ::::::::::::::::::::::::::::: callout
+
+### Already installed? 
+
+Hold on: This is a great time to make sure your R installation is current.
+
+This tutorial requires **R version 4.0.0 or later**. 
+
+:::::::::::::::::::::::::::::
+
+To check if your R version is up to date:
+
+- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()` there.
+
+- **To update R**, download and install the latest version from the [R project website](https://cran.rstudio.com/) for your operating system.
+
+  - After installing a new version, you will have to reinstall all your packages with the new version. 
+
+  - For Windows, the `{installr}` package can upgrade your R version and migrate your package library.
+
+- **To update RStudio**, open RStudio and click on 
+`Help > Check for Updates`. If a new version is available follow the 
+instructions on the screen.
+
+::::::::::::::::::::::::::::: callout
+
+### Check for Updates regularly
 
 While this may sound scary, it is **far more common** to run into issues due to using out-of-date versions of R or R packages. Keeping up with the latest versions of R, RStudio, and any packages you regularly use is a good practice.
 
 :::::::::::::::::::::::::::::
 
-### Install required R packages
+### 2. Install the required R packages
 
+<!--
 During the tutorial, we will need a number of R packages. Packages contain useful R code written by other people. We will use packages from the [Epiverse-TRACE](https://epiverse-trace.github.io/). 
+-->
 
-To try to install these packages, open RStudio and copy and paste the following code chunk into the [console window](https://docs.posit.co/ide/user/ide/guide/code/console.html), then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) to execute the command.
+Open RStudio and **copy and paste** the following code chunk into the [console window](https://docs.posit.co/ide/user/ide/guide/code/console.html), then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) to execute the command:
 
 ```r
 if(!require("pak")) install.packages("pak")
@@ -59,6 +66,8 @@ new_packages <- c(
 
 pak::pak(new_packages)
 ```
+
+These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
 
 You should update **all of the packages** required for the tutorial, even if you installed them relatively recently. New versions bring improvements and important bug fixes.
 
