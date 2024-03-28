@@ -103,6 +103,9 @@ This can be different to the [incubation period](#incubation) as shown in Figure
 [Offspring distribution]{#offspringdist}
 : Distribution of the number of secondary cases caused by a particular infected individual. ([Lloyd-Smith et al., 2005](https://www.nature.com/articles/nature04153), [Endo et al., 2020](https://wellcomeopenresearch.org/articles/5-67/v3))
 
+[Outbreak analytics]{#outbreakanalytics}
+: A specialized field within data science that focuses on the technological and methodological aspects of the outbreak data pipeline. This includes the systematic collection, analysis, modeling, and reporting of data to inform outbreak response ([Polonsky et al., 2019](https://royalsocietypublishing.org/doi/full/10.1098/rstb.2018.0276)).
+
 ## P
 
 [(Dynamical or Epidemic) Phase bias]{#phasebias}
