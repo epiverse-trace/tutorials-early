@@ -1,5 +1,5 @@
 ---
-title: 'Reuse delay data'
+title: 'Access epidemiological delay distributions'
 teaching: 10
 exercises: 2
 editor_options: 
@@ -75,7 +75,7 @@ generation_time <-
   )
 ```
 
-Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get them from the **distribution parameters** reported. One source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
+Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get the **distribution parameters** from those reports. An additional source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to parameters to implement them into your analysis pipeline. `{epiparameter}` provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
 
 <!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
 
@@ -373,7 +373,7 @@ epiparameter::epidist_db(
 
 ::::::::::::::::: callout
 
-### How does `single_epidist` works?
+### How does 'single_epidist' works?
 
 Looking at the help documentation for `?epiparameter::epidist_db()`:
 
