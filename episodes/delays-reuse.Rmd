@@ -289,7 +289,7 @@ distribution[[4]]$metadata$inference_method
 
 Take 2 minutes to explore the `{epiparameter}` library. 
 
-Search for delay distributions of your disease of interest (e.g., Influenza) and a specific delay distribution (e.g., the incubation period).
+**Choose** a disease of interest (e.g., Influenza, Measles, etc.) and a delay distribution (e.g., the incubation period, onset to death, etc.).
 
 Find:
 
@@ -408,7 +408,7 @@ Now, we have an epidemiological parameter we can reuse! We can replace the **sum
 
 Let's assign this `<epidist>` class object to the `covid_serialint` object.
 
-```{r}
+```{r,message=FALSE}
 covid_serialint <-
   epiparameter::epidist_db(
     disease = "covid",
@@ -592,7 +592,7 @@ For Ebola:
 
 An informative delay should measure the time from symptom onset to recovery or death.
 
-Find a way to access the whole `{epiparameter}` database and find how that delay may be stored.
+Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `list_distributions()` output is a dataframe.
 
 ::::::::::::::::::::::
 
