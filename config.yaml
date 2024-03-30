@@ -64,6 +64,7 @@ episodes:
 #- describe-cases.Rmd
 #- simple-analysis.Rmd
 - delays-reuse.Rmd
+- quantify-transmissibility.Rmd
 - delays-functions.Rmd
 
 # Information for Learners
