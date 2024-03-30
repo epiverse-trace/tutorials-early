@@ -4,17 +4,17 @@ title: Setup
 
 ## Motivation
 
-**Outbreaks** appear with different diseases and in different contexts, but what all of them have in common are the key public health **questions** ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). We can relate these common key questions to common data analysis **tasks**.
+**Outbreaks** appear with different diseases and in different contexts, but what all of them have in common is the key public health **questions** ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). We can relate these key public health questions to outbreak data analysis **tasks**.
 
-Epiverse-TRACE's aim is to provide an software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of R packages, make the existing ones interoperable for the user experience, and stimulate a community of practice.
+Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of R packages, make the existing ones interoperable for the user experience, and stimulate a community of practice.
 
 ### Epiverse-TRACE tutorials
 
-The tutorials are built around the workflow of outbreak analysis split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
+The tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
 
 ![An overview of the tutorial topics](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
 
-Each task has its own tutorial website. Task topics consist of one or more episodes.
+Each task has its tutorial website. Each tutorial website consists of a set of episodes.
 
 | [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
 |---|---|---|
