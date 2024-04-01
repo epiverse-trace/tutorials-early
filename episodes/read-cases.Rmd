@@ -1,6 +1,6 @@
 ---
 title: 'Read case data'
-teaching: 10
+teaching: 20
 exercises: 2
 editor_options: 
   chunk_output_type: inline
@@ -29,7 +29,7 @@ This episode requires you to be familiar with:
 
 ## Introduction
 
-The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats,  relational database management systems (RDBMS) servers, and health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/). The latter two options are particularly well-suited for storing institutional data. This episode will elucidate the process of reading cases from these sources.
+The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats,  relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/). The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
 
 ## Reading from files 
 
@@ -37,7 +37,7 @@ Several packages are available for importing outbreak data stored in individual 
 
 The below example shows how to import a `csv` file into `R` environment using `rio` package.
 ```{r,warning=FALSE,message=FALSE}
-requireNamespace("rio")
+requireNamespace("rio", quietly = TRUE)
 case_data <- rio::import(file.path("data", "ebola_cases.csv", fsep = "/"))
 head(case_data, 5)
 ```
@@ -54,7 +54,7 @@ Take 1 minute:
 
 You can check the supported file formats in the `{rio}` package as follows:
 ```{r, eval=FALSE}
-requireNamespace("rio")
+requireNamespace("rio", quietly = TRUE)
 rio::install_formats()
 ```
 
@@ -63,7 +63,7 @@ rio::install_formats()
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
-requireNamespace("rio")
+requireNamespace("rio", quietly = TRUE)
 rio::import(file.path("path_name", "file_name.zip", fsep = "/"))
 ```
 
@@ -80,8 +80,8 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` dataframe as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
-requireNamespace("DBI")
-requireNamespace("RSQLite")
+requireNamespace("DBI", quietly = TRUE)
+requireNamespace("RSQLite", quietly = TRUE)
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 # Store the 'case_data' dataframe as a table named 'cases'
@@ -99,7 +99,8 @@ This code first establishes a connection to an SQLite database created in memory
 
 ## Reading from HIS APIs
 
-Health related data are also increasingly stored in specialized HIS APIS like Fingertips, GoData, REDCap, and DHIS2. In such case one can resort to [readepi](https://epiverse-trace.github.io/readepi/) package, which allow to import data from HIS APIs.  
+Health related data are also increasingly stored in specialized HIS APIs like **Fingertips**, **GoData**, **REDCap**, and **DHIS2**. In such case one can resort to [readepi](https://epiverse-trace.github.io/readepi/) package, which enables reading  data from HIS-APIs.  
+-[TBC]
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.

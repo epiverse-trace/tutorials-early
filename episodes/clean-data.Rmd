@@ -19,12 +19,12 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, and standardized to facilitate accurate and reproducible analysis. To achieve this, we will utilize the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated,  standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks  data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r}
-requireNamespace("rio")
+requireNamespace("rio", quietly = TRUE)
 sim_ebola_data <- rio::import(file.path("data", "simulated_ebola.csv",
                                         fsep = "/"))
 utils::head(sim_ebola_data, 5)
@@ -34,7 +34,7 @@ utils::head(sim_ebola_data, 5)
 Quick exploration and inspection of the dataset are crucial before diving into any  analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-requireNamespace("cleanepi")
+requireNamespace("cleanepi", quietly = TRUE)
 cleanepi::scan_data(sim_ebola_data)
 ```
 
