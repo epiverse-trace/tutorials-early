@@ -327,13 +327,13 @@ generation_time_fixed <- dist_spec(
 
 ::::::::::::::::::::::::::::::::: spoiler
 
-### Reduce computation time
+### On reducing computation time
 
 Using an appropriate number of samples and chains is crucial for ensuring convergence and obtaining reliable estimates in Bayesian computations using Stan. Inadequate sampling or insufficient chains may lead to issues such as divergent transitions, impacting the accuracy and stability of the inference process.
 
 For the purpose of this tutorial, we can add more configuration details to get an useful output in less time. You can specify a fixed number of `samples` and `chains` to the `stan` argument using the `stan_opts()` function:
 
-The code in the previous chunk can take around 10 minutes. We expect this chunk below to take approximately 3 minutes:
+The code in the proposed code chunk can take around 10 minutes. We expect this alternative code chunk below using `stan_opts()` to take approximately 3 minutes:
 
 ```{r,eval=FALSE}
 estimates <- epinow(
