@@ -325,21 +325,6 @@ generation_time_fixed <- dist_spec(
 
 *Note : in the code below fixed distributions are used instead of variable. This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.*
 
-```{r, message = FALSE, eval = TRUE}
-reported_cases <- cases[1:90, ]
-
-estimates <- epinow(
-  reported_cases = reported_cases,
-  generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(
-    incubation_period_fixed + reporting_delay_fixed
-  ),
-  rt = rt_opts(
-    prior = list(mean = rt_log_mean, sd = rt_log_sd)
-  )
-)
-```
-
 ::::::::::::::::::::::::::::::::: spoiler
 
 ### Reduce computation time
@@ -367,6 +352,21 @@ estimates <- epinow(
 ```
 
 :::::::::::::::::::::::::::::::::
+
+```{r, message = FALSE, eval = TRUE}
+reported_cases <- cases[1:90, ]
+
+estimates <- epinow(
+  reported_cases = reported_cases,
+  generation_time = generation_time_opts(generation_time_fixed),
+  delays = delay_opts(
+    incubation_period_fixed + reporting_delay_fixed
+  ),
+  rt = rt_opts(
+    prior = list(mean = rt_log_mean, sd = rt_log_sd)
+  )
+)
+```
 
 ### Results
 
