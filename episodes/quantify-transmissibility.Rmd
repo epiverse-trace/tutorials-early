@@ -30,9 +30,9 @@ withr::local_options(list(mc.cores = 4))
 
 Learners should familiarise themselves with following concepts before working through this tutorial: 
 
-**Statistics** : probability distributions, principle of Bayesian analysis. 
+**Statistics**: probability distributions, principle of Bayesian analysis. 
 
-**Epidemic theory** : Effective reproduction number.
+**Epidemic theory**: Effective reproduction number.
 
 :::::::::::::::::::::::::::::::::
 
@@ -76,7 +76,7 @@ In the ["`Expected change in daily cases`" callout](#expected-change-in-daily-ca
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-The first step is to load the `{EpiNow2}` package :
+The first step is to load the `{EpiNow2}` package:
 
 ```{r, eval = FALSE}
 library(EpiNow2)
@@ -100,8 +100,8 @@ dplyr::as_tibble(incidence2::covidregionaldataUK)
 
 To use the data, we must format the data to have two columns:
 
-+ `date` : the date (as a date object see `?is.Date()`),
-+ `confirm` : number of confirmed cases on that date.
++ `date`: the date (as a date object see `?is.Date()`),
++ `confirm`: number of confirmed cases on that date.
 
 Let's use `{tidyr}` and `incidence2::incidence()` for this:
 
@@ -139,7 +139,7 @@ ggplot(cases[1:90, ], aes(x = date, y = confirm)) +
 
 
 ### Delay distributions 
-We assume there are delays from the time of infection until the time a case is reported. We specify these delays as distributions to account for the uncertainty in individual level differences. The delay can consist of multiple types of delays/processes. A typical delay from time of infection to case reporting may consist of :
+We assume there are delays from the time of infection until the time a case is reported. We specify these delays as distributions to account for the uncertainty in individual level differences. The delay can consist of multiple types of delays/processes. A typical delay from time of infection to case reporting may consist of:
 
 <p class="text-center" style="background-color: aliceblue">**time from infection to symptom onset** (the [incubation period](../learners/reference.md#incubation)) + **time from symptom onset to case notification** (the reporting time)
 .</p>
@@ -325,7 +325,7 @@ generation_time_fixed <- dist_spec(
 )
 ```
 
-*Note : in the code below fixed distributions are used instead of variable. This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.*
+*Note: in the code below fixed distributions are used instead of variable. This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.*
 
 ::::::::::::::::::::::::::::::::: spoiler
 
@@ -425,9 +425,9 @@ A factor describing expected change in daily cases based on the posterior probab
 
 The outbreak data of the start of the COVID-19 pandemic from the United Kingdom from the R package `{incidence2}` includes the region in which the cases were recorded. To find regional estimates of the effective reproduction number and cases, we must format the data to have three columns:
 
-+ `date` : the date,
-+ `region` : the region, 
-+ `confirm` : number of confirmed cases for a region on a given date.
++ `date`: the date,
++ `region`: the region, 
++ `confirm`: number of confirmed cases for a region on a given date.
 
 ```{r}
 regional_cases <-
