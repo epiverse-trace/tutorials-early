@@ -108,6 +108,7 @@ Let's use `{tidyr}` and `incidence2::incidence()` for this:
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyr)
+library(dplyr)
 
 cases <- incidence2::covidregionaldataUK %>% 
   # preprocess missing values
@@ -117,10 +118,12 @@ cases <- incidence2::covidregionaldataUK %>%
     date_index = "date",
     counts = "cases_new",
     interval = "day",
-    # rename column outputs to fit {EpiNow2}
+    # rename column outputs to fit {EpiNow2} input
     date_names_to = "date",
     count_values_to = "confirm"
-  )
+  ) %>% 
+  # optional, but does not affect {EpiNow2} input
+  select(-count_variable)
 ```
 
 
