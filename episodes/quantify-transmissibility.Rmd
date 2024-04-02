@@ -103,28 +103,43 @@ To use the data, we must format the data to have two columns:
 + `date`: the date (as a date object see `?is.Date()`),
 + `confirm`: number of confirmed cases on that date.
 
-Let's use `{tidyr}` and `incidence2::incidence()` for this:
+Let's use `{dplyr}` for this:
 
 ```{r, warning = FALSE, message = FALSE}
+library(dplyr)
+
+cases <- incidence2::covidregionaldataUK %>%
+  select(date, cases_new) %>%
+  group_by(date) %>%
+  summarise(confirm = sum(cases_new, na.rm = TRUE)) %>%
+  ungroup()
+```
+
+::::::::::::::::::::::::: spoiler
+
+### When to use incidence2?
+
+We can also use the `{incidence2}` package to aggregate cases. However, if you ever need to aggregate you data in a different time **interval** (i.e., days, weeks or months) or per **group** categories, we recommend you to explore the `incidence2::incidence()` function:
+
+```{r, warning = FALSE, message = FALSE, eval=FALSE}
 library(tidyr)
 library(dplyr)
 
-cases <- incidence2::covidregionaldataUK %>% 
+incidence2::covidregionaldataUK %>%
   # preprocess missing values
-  tidyr::replace_na(list(cases_new = 0)) %>% 
+  tidyr::replace_na(list(cases_new = 0)) %>%
   # compute the daily incidence
   incidence2::incidence(
     date_index = "date",
     counts = "cases_new",
-    interval = "day",
-    # rename column outputs to fit {EpiNow2} input
-    date_names_to = "date",
-    count_values_to = "confirm"
-  ) %>% 
-  # optional, but does not affect {EpiNow2} input
-  select(-count_variable)
+    groups = "region",
+    interval = "week"
+  )
 ```
 
+You can also estimate transmission metrics from {incidence2} objects using the `{i2extras}` package. Read further in the [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette!
+
+:::::::::::::::::::::::::
 
 There are case data available for `r dim(cases)[1]` days, but in an outbreak situation it is likely we would only have access to the beginning of this data set. Therefore we assume we only have the first 90 days of this data. 
 
