@@ -13,7 +13,7 @@ withr::local_options(list(mc.cores = 4))
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How can I estimate the time-varying reproduction number ($Rt$) and growth rate from a time series of case data?
-- How can I quantify geographical heterogeneity in these transmission metrics? 
+- How can I quantify geographical heterogeneity from these transmission metrics? 
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -28,7 +28,7 @@ withr::local_options(list(mc.cores = 4))
 
 ## Prerequisites
 
-Learners should familiarise themselves with following concept dependencies before working through this tutorial: 
+Learners should familiarise themselves with following concepts before working through this tutorial: 
 
 **Statistics** : probability distributions, principle of Bayesian analysis. 
 
@@ -52,7 +52,7 @@ But in an ongoing outbreak, the population does not remain entirely susceptible 
 
 Quantifying transmission metrics at the start of an outbreak can give important information on the strength of transmission (reproduction number) and the speed of transmission ([growth rate](../learners/reference.md#growth), doubling/halving time). To estimate these key metrics using case data we must account for delays between the date of infections and date of reported cases. In an outbreak situation, data are usually available on reported dates only, therefore we must use estimation methods to account for these delays when trying to understand changes in transmission over time. 
 
-In the next tutorials we will focus on how to implement the functions in `{EpiNow2}` to estimate transmission metrics of case data. We will not cover the theoretical background of the models or inference framework, for details on these concepts see the [vignette](https://epiforecasts.io/EpiNow2/dev/articles/estimate_infections.html).
+In the next tutorials we will focus on how to use the functions in `{EpiNow2}` to estimate transmission metrics of case data. We will not cover the theoretical background of the models or inference framework, for details on these concepts see the [vignette](https://epiforecasts.io/EpiNow2/dev/articles/estimate_infections.html).
 For more details on the distinction between speed and strength of transmission and implications for control, see [Dushoff & Park, 2021](https://royalsocietypublishing.org/doi/full/10.1098/rspb.2020.1556).
 
 
@@ -70,9 +70,9 @@ In Bayesian inference, we use prior knowledge (prior distributions) with data (i
 
 :::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
-We refer to the Prior probability distribution and the [Posterior probability](https://en.wikipedia.org/wiki/Posterior_probability) distribution.
+Refer to the prior probability distribution and the [posterior probability](https://en.wikipedia.org/wiki/Posterior_probability) distribution.
 
-Lines below, in the "`Expected change in daily cases`" callout, by "the posterior probability that $R_t < 1$", we refer specifically to the [area under the posterior probability distribution curve](https://www.nature.com/articles/nmeth.3368/figures/1). 
+In the ["`Expected change in daily cases`" callout](#expected-change-in-daily-cases), by "the posterior probability that $R_t < 1$", we refer specifically to the [area under the posterior probability distribution curve](https://www.nature.com/articles/nmeth.3368/figures/1). 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -149,7 +149,7 @@ The delay distribution for each of these processes can either estimated from dat
 
 ::::::::::::::::::::::::::::::::::::: callout
 ### Delays and data
-The number of delays and type of delay is a flexible input that depends on the data. The examples below highlight how the delays can be specified for different data sources:
+The number of delays and type of delay are a flexible input that depend on the data. The examples below highlight how the delays can be specified for different data sources:
 
 <center>
 
@@ -168,7 +168,7 @@ The number of delays and type of delay is a flexible input that depends on the d
 
 #### Incubation period distribution 
 
-The distribution of incubation period can usually be obtained from the literature. The package `{epiparameter}` contains a library of epidemiological parameters for different diseases obtained from the literature. 
+The distribution of incubation period for many diseases can usually be obtained from the literature. The package `{epiparameter}` contains a library of epidemiological parameters for different diseases obtained from the literature. 
 
 We specify a (fixed) gamma distribution with mean $\mu = 4$ and standard deviation $\sigma= 2$ (shape = $4$, scale = $1$) using the function `dist_spec()` as follows:
 
@@ -464,7 +464,7 @@ estimates_regional$summary$plots$R
 
 ## Summary
 
-`EpiNow2` can be used to estimate transmission metrics from case data at the start of an outbreak. The reliability of these estimates depends on the quality of the data and appropriate choice of delay distributions. In the next tutorial we will learn how to make forecasts and investigate some of the additional inference options available in `EpiNow2`. 
+`EpiNow2` can be used to estimate transmission metrics from case data at any time in the course of an outbreak. The reliability of these estimates depends on the quality of the data and appropriate choice of delay distributions. In the next tutorial we will learn how to make forecasts and investigate some of the additional inference options available in `EpiNow2`. 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
