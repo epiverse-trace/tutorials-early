@@ -1,5 +1,5 @@
 ---
-title: 'Reuse delay data'
+title: 'Access epidemiological delay distributions'
 teaching: 10
 exercises: 2
 editor_options: 
@@ -64,18 +64,19 @@ library(tidyverse)
 
 ## The problem
 
-In `{EpiNow2}` we can specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
 
 ```r
-generation_time <- dist_spec(
-  mean = 4,
-  sd = 2,
-  max = 20,
-  distribution = "gamma"
-)
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = 4,
+    sd = 2,
+    max = 20,
+    distribution = "gamma"
+  )
 ```
 
-Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get them from the **distribution parameters** reported. One source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
+Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get the **distribution parameters** from those reports. An additional source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to parameters to implement them into your analysis pipeline. `{epiparameter}` provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
 
 <!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
 
@@ -98,6 +99,21 @@ epinow_estimates <- epinow(
 )
 ```
 -->
+
+## Find a Generation time
+
+The generation time, jointly with the $R$, can inform about the speed of spread and its feasibility of control. Given a $R>1$, with a shorter generation time, cases can appear more quickly.
+
+![Video from the MRC Centre for Global Infectious Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group with Dr Anne Cori (27-07-2023) at <https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL>](fig/reproduction-generation-time.png)
+
+In calculating the effective reproduction number ($R_{t}$), the *generation time* distribution is often approximated by the [serial interval](../learners/reference.md#serialinterval) distribution.
+This frequent approximation is because it is easier to observe and measure the onset of symptoms than the onset of infectiousness.
+
+![A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)).](fig/serial-interval-observed.jpeg)
+
+However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case of a pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
+
+Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation. $R_{t}$ estimates are sensitive not only to the mean generation time but also to the variance and form of the generation interval distribution [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409).
 
 ::::::::::::::::: callout
 
@@ -133,21 +149,6 @@ Statistical distributions are summarised in terms of their **summary statistics*
 Table: Serial interval estimates using Gamma, Weibull, and Log normal distributions. 95% confidence intervals for the shape and scale (logmean and sd for Log normal) parameters are shown in brackets ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#tbl3)).
 
 :::::::::::::::::::::::::
-
-## Find a Generation time
-
-The generation time, jointly with the $R$, can inform about the speed of spread and its feasibility of control. Given a $R>1$, with a shorter generation time, cases can appear more quickly.
-
-![Video from the MRC Centre for Global Infectious Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group with Dr Anne Cori (27-07-2023) at <https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL>](fig/reproduction-generation-time.png)
-
-In calculating the effective reproduction number ($R_{t}$), the *generation time* distribution is often approximated by the [serial interval](../learners/reference.md#serialinterval) distribution.
-This frequent approximation is because it is easier to observe and measure the onset of symptoms than the onset of infectiousness.
-
-![A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)).](fig/serial-interval-observed.jpeg)
-
-However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case of a pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
-
-Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation. $R_{t}$ estimates are sensitive not only to the mean generation time but also to the variance and form of the generation interval distribution [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409).
 
 ::::::::::::::::::::::::::::::::: challenge
 
@@ -299,7 +300,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 
 ::::::::::::::::: spoiler
 
-### Why do we have a `<NA>` entry?
+### Why do we have a 'NA' entry?
 
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
@@ -341,33 +342,47 @@ distribution[[4]]$metadata$inference_method
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Ebola's incubation periods
+### Find your delay distributions!
 
-Take 5 minutes to explore the `{epiparameter}` library. 
+Take 2 minutes to explore the `{epiparameter}` library. 
 
-First, search for Ebola disease delay distributions. Find:
+**Choose** a disease of interest (e.g., Influenza, Measles, etc.) and a delay distribution (e.g., the incubation period, onset to death, etc.).
 
-- How many delay distributions are for the Ebola disease?
+Find:
 
-- How many types of delay distributions are for the incubation period of Ebola?
+- How many delay distributions are for that disease?
+
+- How many types of probability distribution (e.g., gamma, lognormal) are for a given delay in that disease?
+
+Ask:
+
+- Do you recognise the papers?
+
+- Should `{epiparameter}` literature review consider any other paper?
 
 ::::::::::::::::: hint
 
-`epidist_db()` and `list_distributions()` give us different and complementary summary outputs.
-
-The `epidist_db()` function alone counts for us the number of entries like:
+The `epidist_db()` function with `disease` alone counts the number of entries like:
 
 - studies, and
 - delay distributions.
 
-On the other hand, the `{epiparameter}` combo of `epidist_db()` plus `list_distributions()` lists all the entries in a data frame with columns like:
+The `epidist_db()` function with `disease` and `epi_dist` gets a list of all entries with:
 
-- the type of the probability distribution per delay, and
+- the complete citation, 
+- the **type** of a probability distribution, and 
+- distribution parameter values.
+
+The combo of `epidist_db()` plus `list_distributions()` gets a data frame of all entries with columns like:
+
+- the **type** of the probability distribution per delay, and
 - author and year of the study.
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
+
+We choose to explore Ebola's delay distributions:
 
 
 ```r
@@ -393,6 +408,18 @@ List of <epidist> objects
 ```
 
 Now, from the output of `epiparameter::epidist_db()`, What is an [offspring distribution](../learners/reference.md#offspringdist)?
+
+We choose to find Ebola's incubation periods. This output list all the papers and parameters found. Run this locally if needed:
+
+
+```r
+epiparameter::epidist_db(
+  disease = "ebola",
+  epi_dist = "incubation"
+)
+```
+
+We use `list_distributions()` to get a summary display of all:
 
 
 ```r
@@ -421,12 +448,6 @@ To retrieve the short citation for each use the 'get_citation' function
 ```
 
 We find two types of probability distributions for this query: _lognormal_ and _gamma_.
-
-Now, search for delay distributions of your disease of interest! Ask:
-
-- Do you recognise the papers?
-
-- Should it consider any other paper?
 
 How does `{epiparameter}` do the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
@@ -497,7 +518,7 @@ Parameters:
 
 ::::::::::::::::: callout
 
-### How does `single_epidist` works?
+### How does 'single_epidist' works?
 
 Looking at the help documentation for `?epiparameter::epidist_db()`:
 
@@ -522,32 +543,6 @@ covid_serialint <-
     author = "Nishiura",
     single_epidist = TRUE
   )
-```
-
-```{.output}
-Using Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
-coronavirus (COVID-19) infections." _International Journal of
-Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
-<https://doi.org/10.1016/j.ijid.2020.02.060>.. 
-To retrieve the short citation use the 'get_citation' function
-```
-
-```r
-covid_serialint
-```
-
-```{.output}
-Disease: COVID-19
-Pathogen: SARS-CoV-2
-Epi Distribution: serial interval
-Study: Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
-coronavirus (COVID-19) infections." _International Journal of
-Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
-<https://doi.org/10.1016/j.ijid.2020.02.060>.
-Distribution: lnorm
-Parameters:
-  meanlog: 1.386
-  sdlog: 0.568
 ```
 
 <!-- to activate for EpiNow2@dist-interfase
@@ -591,7 +586,7 @@ You can use `plot()` to `<epidist>` objects to visualise:
 plot(covid_serialint)
 ```
 
-<img src="fig/delays-reuse-rendered-unnamed-chunk-14-1.png" style="display: block; margin: auto;" />
+<img src="fig/delays-reuse-rendered-unnamed-chunk-15-1.png" style="display: block; margin: auto;" />
 
 With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what this looks like:
 
@@ -600,34 +595,6 @@ With the `day_range` argument, you can change the length or number of days in th
 # plot <epidist> object
 plot(covid_serialint, day_range = 0:20)
 ```
-
-::::::::::::::::: discussion
-
-### The distribution Zoo
-
-Explore this shinyapp called **The Distribution Zoo**!
-
-Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
-
-1. Access to <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
-2. Go to the left panel,
-3. Keep the *Category of distribution*: `Continuous Univariate`,
-4. Select a new *Type of distribution*: `Log-Normal`,
-5. Move the **sliders**, i.e. the graphical control element that allows you to adjust a value by moving a handle along a horizontal track or bar to the `covid_serialint` parameters. 
-
-Replicate these with the `distribution` object and all its list elements: `[[2]]`, `[[3]]`, and `[[4]]`. Explore how the shape of a distribution changes when its parameters change.
-
-Share about:
-
-- What other features of the website do you find helpful?
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::: instructor
-
-In the context of user interfaces and graphical user interfaces (GUIs), like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/) shiny app, a **slider** is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
-
-:::::::::::::::::::::::::
 
 
 ## Extract the summary statistics
@@ -643,6 +610,45 @@ covid_serialint$summary_stats$mean
 ```{.output}
 [1] 4.7
 ```
+
+Notice that with this output we can replace one of the inputs for the `EpiNow2::dist_spec()` function:
+
+```r
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = covid_serialint$summary_stats$mean, # we changed this line :)
+    sd = 2,
+    max = 20,
+    distribution = "gamma"
+  )
+```
+
+In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::dist_spec()` and use `{epiparameter}` in your analysis.
+
+:::::::::::::::::::::::::::::: callout
+
+### Log normal distributions
+
+If you need the log normal **distribution parameters** instead of the summary statistics, we can use `epiparameter::get_parameters()`:
+
+
+```r
+covid_serialint_parameters <-
+  epiparameter::get_parameters(covid_serialint)
+
+covid_serialint_parameters
+```
+
+```{.output}
+  meanlog     sdlog 
+1.3862617 0.5679803 
+```
+
+This gets a vector of class `<numeric>` ready to use as input for any other package!
+
+::::::::::::::::::::::::::::::
+
+## Challenges
 
 :::::::::::::::::::::::::::::: challenge
 
@@ -794,7 +800,7 @@ For Ebola:
 
 An informative delay should measure the time from symptom onset to recovery or death.
 
-Find a way to access the whole `{epiparameter}` database and find how that delay may be stored.
+Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `list_distributions()` output is a dataframe.
 
 ::::::::::::::::::::::
 
@@ -880,18 +886,33 @@ ebola_severity$summary_stats$mean_ci_limits
 
 :::::::::::::::::::::::::::::::::::::::::::
 
-Notice that with these pieces of information we can replace two out of three inputs of the `EpiNow2::dist_spec()` function:
+::::::::::::::::: discussion
 
-```r
-generation_time <- dist_spec(
-  mean = covid_serialint$summary_stats$mean,
-  sd = covid_serialint$summary_stats$sd,
-  max = 20,
-  distribution = "gamma"
-)
-```
+### The distribution Zoo
 
-In the next episode we'll access to the `max` by using **distribution functions**!
+Explore this shinyapp called **The Distribution Zoo**!
+
+Follow these steps to reproduce the form of the COVID serial interval distribution from `{epiparameter}` (`covid_serialint` object):
+
+1. Access the <https://ben18785.shinyapps.io/distribution-zoo/> shiny app website,
+2. Go to the left panel,
+3. Keep the *Category of distribution*: `Continuous Univariate`,
+4. Select a new *Type of distribution*: `Log-Normal`,
+5. Move the **sliders**, i.e. the graphical control element that allows you to adjust a value by moving a handle along a horizontal track or bar to the `covid_serialint` parameters. 
+
+Replicate these with the `distribution` object and all its list elements: `[[2]]`, `[[3]]`, and `[[4]]`. Explore how the shape of a distribution changes when its parameters change.
+
+Share about:
+
+- What other features of the website do you find helpful?
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: instructor
+
+In the context of user interfaces and graphical user interfaces (GUIs), like the [Distribution Zoo](https://ben18785.shinyapps.io/distribution-zoo/) shiny app, a **slider** is a graphical control element that allows users to adjust a value by moving a handle along a track or bar. Conceptually, it provides a way to select a numeric value within a specified range by visually sliding or dragging a pointer (the handle) along a continuous axis.
+
+:::::::::::::::::::::::::
 
 <!--
 ## Concept map

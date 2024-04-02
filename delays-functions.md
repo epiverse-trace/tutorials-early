@@ -1,5 +1,5 @@
 ---
-title: 'Input delay data'
+title: 'Use delay distributions in analysis'
 teaching: 10
 exercises: 2
 editor_options: 
@@ -63,44 +63,19 @@ covid_serialint <-
   )
 ```
 
-```{.output}
-Using Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
-coronavirus (COVID-19) infections." _International Journal of
-Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
-<https://doi.org/10.1016/j.ijid.2020.02.060>.. 
-To retrieve the short citation use the 'get_citation' function
-```
+Now, we have an epidemiological parameter we can use in our analysis! In the chunk below we replaced one of the **summary statistics** inputs into `EpiNow2::dist_spec()`
 
 ```r
-covid_serialint
+generation_time <- 
+  EpiNow2::dist_spec(
+    mean = covid_serialint$summary_stats$mean, # we changed this line :)
+    sd = 2,
+    max = 20,
+    distribution = "gamma"
+  )
 ```
 
-```{.output}
-Disease: COVID-19
-Pathogen: SARS-CoV-2
-Epi Distribution: serial interval
-Study: Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
-coronavirus (COVID-19) infections." _International Journal of
-Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
-<https://doi.org/10.1016/j.ijid.2020.02.060>.
-Distribution: lnorm
-Parameters:
-  meanlog: 1.386
-  sdlog: 0.568
-```
-
-Now, we have an epidemiological parameter we can reuse! We can replace the two out of three **summary statistics** into `EpiNow2::dist_spec()`
-
-```r
-generation_time <- dist_spec(
-  mean = covid_serialint$summary_stats$mean,
-  sd = covid_serialint$summary_stats$sd,
-  max = 20,
-  distribution = "gamma"
-)
-```
-
-In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a `max` value for this and any other package downstream in the pipeline!
+In this episode, we will use the **distribution functions** that `{epiparameter}` provides to get a maximum value (`max`) for this and any other package downstream in your analysis pipeline!
 
 Let's load the `{epiparameter}` and `{EpiNow2}` package. For `{EpiNow2}`, we'll set 4 cores to be used in parallel computations. We'll use the pipe `%>%`, some `{dplyr}` verbs and `{ggplot2}`, so let's also call to the `{tidyverse}` package:
 
@@ -175,8 +150,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1] 4.946173 1.848653 4.558656 4.051608 8.892126 3.296900 4.339645 5.280796
- [9] 6.350389 5.440831
+ [1]  4.436411  4.079876  7.023633 16.692691  4.443053  2.929674  5.768319
+ [8]  4.648662  6.260220  6.995987
 ```
 
 ::::::::: instructor
@@ -293,7 +268,7 @@ Parameters:
   sdlog: 0.568
 ```
 
-We identify this change in the `Distribution:` output line of the `<epidist>` object. Take a double check to this line:
+We identify this change in the `Distribution:` output line of the `<epidist>` object. Double check this line:
 
 ```
 Distribution: discrete lnorm
@@ -435,32 +410,6 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
 
 :::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::::::: callout
-
-### Log normal distributions
-
-If you need the log normal **distribution parameters** instead of the summary statistics, we can use `epiparameter::get_parameters()`:
-
-
-```r
-covid_serialint_parameters <-
-  epiparameter::get_parameters(covid_serialint)
-
-covid_serialint_parameters
-```
-
-```{.output}
-  meanlog     sdlog 
-1.3862617 0.5679803 
-```
-
-This gets a vector of class `<numeric>` ready to use as input for any other package!
-
-**BONUS TIP:** If we write the `[]` next to the last object create like in `covid_serialint_parameters[]`, within `[]` we can use the 
-Tab key <kbd>↹</kbd> 
-to use the [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) and have a quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. We invite you to try this out in code chunks and the R console!
-
-::::::::::::::::::::::::::::::
 
 ## Plug-in `{epiparameter}` to `{EpiNow2}`
 
@@ -469,6 +418,16 @@ Now we can plug everything into the `EpiNow2::dist_spec()` function!
 - the **summary statistics** `mean` and `sd` of the distribution,
 - a maximum value `max`,
 - the `distribution` name.
+
+But, before, in `EpiNow2::dist_spec()` for a **Lognormal** distribution we need the *distribution parameters* instead of the summary statistics:
+
+
+```r
+covid_serialint_parameters <-
+  epiparameter::get_parameters(covid_serialint)
+```
+
+Then, we have:
 
 
 ```r
@@ -488,6 +447,46 @@ serial_interval_covid
   Fixed distribution with PMF [0.0073 0.1 0.2 0.19 0.15 0.11 0.075 0.051 0.035 0.023 0.016 0.011 0.0076 0.0053 0.0037 0.0027 0.0019 0.0014 0.001 0.00074 0.00055 0.00041 0.00031]
 ```
 
+:::::::::::::::::::::::::::::: callout
+
+### A code completion tip
+
+If we write the `[]` next to the object `covid_serialint_parameters[]`, within `[]` we can use the 
+Tab key <kbd>↹</kbd> 
+for [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) 
+
+This gives quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. 
+
+We invite you to try this out in code chunks and the R console!
+
+::::::::::::::::::::::::::::::
+
+Let's replace the `generation_time` input we used for `EpiNow2::epinow()`.
+
+
+```r
+epinow_estimates_cg <- epinow(
+  # cases
+  reported_cases = example_confirmed[1:60],
+  # delays
+  generation_time = generation_time_opts(serial_interval_covid)
+)
+```
+
+```{.output}
+WARN [2024-04-02 21:04:37] epinow: There were 3 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. - 
+WARN [2024-04-02 21:04:37] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+```
+
+```r
+base::plot(epinow_estimates_cg)
+```
+
+<img src="fig/delays-functions-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" />
+
 :::::::::: callout
 
 ### Warning
@@ -495,112 +494,6 @@ serial_interval_covid
 Using the serial interval instead of the generation time is an alternative that can propagate bias in your estimates, even more so in diseases with reported pre-symptomatic transmission. ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465))
 
 ::::::::::::::::::
-
-Let's replace the `generation_time` input we used for `EpiNow2::epinow()`.
-
-
-```r
-epinow_estimates <- epinow(
-  # cases
-  reported_cases = example_confirmed[1:60],
-  # delays
-  generation_time = generation_time_opts(serial_interval_covid)
-)
-
-base::plot(epinow_estimates)
-```
-
-::::::::::::::::::::::::::::::::: challenge
-
-### Ebola's effective reproduction number
-
-Download and read the [Ebola dataset](data/ebola_cases.csv):
-
-- Reuse one epidemiological parameter to estimate the effective reproduction number for the Ebola dataset.
-- Why did you choose that parameter?
-
-::::::::::::::::: hint
-
-To calculate the $R_t$, we need:
-
-- data set with confirmed cases per day and
-- one key delay distribution
-
-Key functions we applied in this episode are:
-
-- `epidist_db()`
-- `list_distributions()`
-- `discretise()`
-- probability functions for continuous and discrete distributions 
-
-::::::::::::::::::::::
-
-::::::::::::::::: solution
-
-
-
-
-```r
-# read data
-# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
-ebola_confirmed <-
-  read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
-
-# list distributions
-epidist_db(disease = "ebola") %>%
-  list_distributions()
-```
-
-
-```r
-# subset one distribution
-ebola_serial <- epidist_db(
-  disease = "ebola",
-  epi_dist = "serial",
-  single_epidist = TRUE
-)
-
-# adapt epiparameter to epinow2
-ebola_serial_discrete <- discretise(ebola_serial)
-
-ebola_serial_discrete_max <- quantile(ebola_serial_discrete, p = 0.999)
-
-serial_interval_ebola <-
-  dist_spec(
-    mean = ebola_serial$summary_stats$mean,
-    sd = ebola_serial$summary_stats$sd,
-    max = ebola_serial_discrete_max,
-    distribution = "gamma" # don't forget! it's a must!
-  )
-
-# run epinow
-epinow_estimates <- epinow(
-  # cases
-  reported_cases = ebola_confirmed,
-  # delays
-  generation_time = generation_time_opts(serial_interval_ebola)
-)
-```
-
-```{.output}
-WARN [2024-03-28 20:46:51] epinow: There were 8 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-28 20:46:51] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
-```r
-plot(epinow_estimates)
-```
-
-<img src="fig/delays-functions-rendered-unnamed-chunk-19-1.png" style="display: block; margin: auto;" />
-
-`{EpiNow2}` can also include the uncertainty around each summary statistic. We invite you to read this discussion on: [How to adapt `{epiparameter}` uncertainty entries to `{EpiNow2}`](https://github.com/epiverse-trace/epiparameter/discussions/218)? 
-
-::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::::::::::::::::  
 
 ## Adjusting for reporting delays
 
@@ -643,6 +536,8 @@ epinow_estimates <- epinow(
 
 
 ```r
+# generation time ---------------------------------------------------------
+
 # get covid serial interval
 covid_serialint <-
   epiparameter::epidist_db(
@@ -651,17 +546,7 @@ covid_serialint <-
     author = "Nishiura",
     single_epidist = TRUE
   )
-```
 
-```{.output}
-Using Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
-coronavirus (COVID-19) infections." _International Journal of
-Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
-<https://doi.org/10.1016/j.ijid.2020.02.060>.. 
-To retrieve the short citation use the 'get_citation' function
-```
-
-```r
 # adapt epidist to epinow2
 covid_serialint_discrete_max <-
   covid_serialint %>%
@@ -679,6 +564,8 @@ covid_serial_interval <-
     distribution = "lognormal"
   )
 
+# incubation time ---------------------------------------------------------
+
 # get covid incubation period
 covid_incubation <- epiparameter::epidist_db(
   disease = "covid",
@@ -686,19 +573,7 @@ covid_incubation <- epiparameter::epidist_db(
   author = "Natalie",
   single_epidist = TRUE
 )
-```
 
-```{.output}
-Using Linton N, Kobayashi T, Yang Y, Hayashi K, Akhmetzhanov A, Jung S, Yuan
-B, Kinoshita R, Nishiura H (2020). "Incubation Period and Other
-Epidemiological Characteristics of 2019 Novel Coronavirus Infections
-with Right Truncation: A Statistical Analysis of Publicly Available
-Case Data." _Journal of Clinical Medicine_. doi:10.3390/jcm9020538
-<https://doi.org/10.3390/jcm9020538>.. 
-To retrieve the short citation use the 'get_citation' function
-```
-
-```r
 # adapt epiparameter to epinow2
 covid_incubation_discrete_max <-
   covid_incubation %>%
@@ -716,8 +591,10 @@ covid_incubation_time <-
     distribution = "lognormal" # do not forget this!
   )
 
+# epinow ------------------------------------------------------------------
+
 # run epinow
-epinow_estimates <- epinow(
+epinow_estimates_cgi <- epinow(
   # cases
   reported_cases = example_confirmed[1:60],
   # delays
@@ -727,68 +604,66 @@ epinow_estimates <- epinow(
 ```
 
 ```{.output}
-Logging threshold set at INFO for the EpiNow2 logger
-```
-
-```{.output}
-Writing EpiNow2 logs to the console and: /tmp/Rtmp0E3eaa/regional-epinow/2020-04-21.log
-```
-
-```{.output}
-Logging threshold set at INFO for the EpiNow2.epinow logger
-```
-
-```{.output}
-Writing EpiNow2.epinow logs to the console and: /tmp/Rtmp0E3eaa/epinow/2020-04-21.log
-```
-
-```{.output}
-WARN [2024-03-28 20:48:37] epinow: There were 8 divergent transitions after warmup. See
+WARN [2024-04-02 21:06:28] epinow: There were 9 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-28 20:48:37] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-02 21:06:28] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
+WARN [2024-04-02 21:06:29] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ```r
-base::plot(epinow_estimates)
+base::plot(epinow_estimates_cgi)
 ```
 
-<img src="fig/delays-functions-rendered-unnamed-chunk-20-1.png" style="display: block; margin: auto;" />
+<img src="fig/delays-functions-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::
 
-:::::::::::::: solution
+:::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::: discussion
 
 ### How much has it changed?
 
 After adding the incubation period, discuss:
 
-- Does the retrospective trend of forecast change?
+- Does the trend of the model fit in the "Estimate" section change?
 - Has the uncertainty changed?
 - How would you explain or interpret any of these changes?
 
-::::::::::::::::::::::::::::
+Compare the `{EpiNow2}` figures generated previously.
 
-:::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Challenges
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Ebola's effective reproduction number was adjusted by reporting delays 
+### Ebola's effective reproduction number adjusted by reporting delays 
 
-Using the same [Ebola dataset](data/ebola_cases.csv):
+Download and read the [Ebola dataset](data/ebola_cases.csv):
 
-- Reuse one additional epidemiological parameter for the `delays` argument in `EpiNow2::epinow()`.
-- Estimate the effective reproduction number using `EpiNow2::epinow()`.
+- Estimate the effective reproduction number using `{EpiNow2}` 
+- Adjust the estimate by the available reporting delays in `{epiparameter}`
 - Why did you choose that parameter?
 
 ::::::::::::::::: hint
 
-We can use two complementary delay distributions to estimate the $R_t$ at time $t$.
+To calculate the $R_t$ using `{EpiNow2}`, we need:
 
-- generation time.
-- incubation period and reporting delays.
+- Aggregated incidence `data`, with confirmed cases per day, and
+- The `generation` time distribution.
+- Optionally, reporting `delays` distributions when available (e.g., incubation period).
+
+To get delay distribution using `{epiparameter}` we can use functions like:
+
+- `epidist_db()`
+- `list_distributions()`
+- `discretise()`
+- `quantile()` 
 
 ::::::::::::::::::::::
 
@@ -810,6 +685,8 @@ epidist_db(disease = "ebola") %>%
 
 
 ```r
+# generation time ---------------------------------------------------------
+
 # subset one distribution for the generation time
 ebola_serial <- epidist_db(
   disease = "ebola",
@@ -827,6 +704,8 @@ serial_interval_ebola <-
     max = quantile(ebola_serial_discrete, p = 0.999),
     distribution = "gamma"
   )
+
+# incubation time ---------------------------------------------------------
 
 # subset one distribution for delay of the incubation period
 ebola_incubation <- epidist_db(
@@ -846,8 +725,10 @@ incubation_period_ebola <-
     distribution = "gamma"
   )
 
+# epinow ------------------------------------------------------------------
+
 # run epinow
-epinow_estimates <- epinow(
+epinow_estimates_egi <- epinow(
   # cases
   reported_cases = ebola_confirmed,
   # delays
@@ -857,18 +738,173 @@ epinow_estimates <- epinow(
 ```
 
 ```{.output}
-WARN [2024-03-28 20:52:04] epinow: There were 10 divergent transitions after warmup. See
+WARN [2024-04-02 21:09:53] epinow: There were 2 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-03-28 20:52:04] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-02 21:09:53] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
 ```r
-plot(epinow_estimates)
+plot(epinow_estimates_egi)
 ```
 
-<img src="fig/delays-functions-rendered-unnamed-chunk-23-1.png" style="display: block; margin: auto;" />
+<img src="fig/delays-functions-rendered-unnamed-chunk-20-1.png" style="display: block; margin: auto;" />
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::: challenge
+
+### What to do with Weibull distributions?
+
+Use the `influenza_england_1978_school` dataset from the `{outbreaks}` package to calculate the effective reproduction number using `{EpiNow2}` adjusting by the available reporting delays in `{epiparameter}`.
+
+::::::::::::::::: hint
+
+`EpiNow2::dist_spec()` also accepts Probability Mass Functions (PMF) from any distribution family. Read the reference guide on [Specify a distribution](https://epiforecasts.io/EpiNow2/reference/dist_spec.html).
+
+::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+
+```r
+# What parameters are available for Influenza?
+epidist_db(disease = "influenza") %>%
+  list_distributions() %>%
+  as_tibble() %>%
+  count(epi_distribution)
+```
+
+```{.output}
+# A tibble: 3 × 2
+  epi_distribution      n
+  <chr>             <int>
+1 generation time       1
+2 incubation period    15
+3 serial interval       1
+```
+
+```r
+# generation time ---------------------------------------------------------
+
+# Read the generation time
+influenza_generation <-
+  epidist_db(
+    disease = "influenza",
+    epi_dist = "generation"
+  )
+
+influenza_generation
+```
+
+```{.output}
+Disease: Influenza
+Pathogen: Influenza-A-H1N1
+Epi Distribution: generation time
+Study: Lessler J, Reich N, Cummings D, New York City Department of Health and
+Mental Hygiene Swine Influenza Investigation Team (2009). "Outbreak of
+2009 Pandemic Influenza A (H1N1) at a New York City School." _The New
+England Journal of Medicine_. doi:10.1056/NEJMoa0906089
+<https://doi.org/10.1056/NEJMoa0906089>.
+Distribution: weibull
+Parameters:
+  shape: 2.360
+  scale: 3.180
+```
+
+```r
+# EpiNow2 currently accepts Gamma or LogNormal
+# other can pass the PMF function
+
+influenza_generation_discrete <-
+  epiparameter::discretise(influenza_generation)
+
+influenza_generation_max <-
+  quantile(influenza_generation_discrete, p = 0.999)
+
+influenza_generation_pmf <-
+  density(
+    influenza_generation_discrete,
+    at = 1:influenza_generation_max
+  )
+
+influenza_generation_pmf
+```
+
+```{.output}
+[1] 0.063123364 0.221349877 0.297212205 0.238968280 0.124851641 0.043094538
+[7] 0.009799363
+```
+
+```r
+# EpiNow2::dist_spec() can also accept the PMF values
+generation_time_influenza <-
+  dist_spec(
+    pmf = influenza_generation_pmf
+  )
+
+# incubation period -------------------------------------------------------
+
+# Read the incubation period
+influenza_incubation <-
+  epidist_db(
+    disease = "influenza",
+    epi_dist = "incubation",
+    single_epidist = TRUE
+  )
+
+# Discretize incubation period
+influenza_incubation_discrete <-
+  epiparameter::discretise(influenza_incubation)
+
+influenza_incubation_max <-
+  quantile(influenza_incubation_discrete, p = 0.999)
+
+influenza_incubation_pmf <-
+  density(
+    influenza_incubation_discrete,
+    at = 1:influenza_incubation_max
+  )
+
+influenza_incubation_pmf
+```
+
+```{.output}
+[1] 0.057491512 0.166877052 0.224430917 0.215076318 0.161045462 0.097466092
+[7] 0.048419279 0.019900259 0.006795222
+```
+
+```r
+# EpiNow2::dist_spec() can also accept the PMF values
+incubation_time_influenza <-
+  dist_spec(
+    pmf = influenza_incubation_pmf
+  )
+
+# epinow ------------------------------------------------------------------
+
+# Read data
+influenza_cleaned <-
+  outbreaks::influenza_england_1978_school %>%
+  select(date, confirm = in_bed)
+
+# Run epinow()
+epinow_estimates_igi <- epinow(
+  # cases
+  reported_cases = influenza_cleaned,
+  # delays
+  generation_time = generation_time_opts(generation_time_influenza),
+  delays = delay_opts(incubation_time_influenza)
+)
+
+plot(epinow_estimates_igi)
+```
+
+<img src="fig/delays-functions-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::
 
@@ -882,7 +918,7 @@ plot(epinow_estimates)
 
 How to get the mean and standard deviation from a generation time with *only* distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::dist_spec()`?
 
-Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html)!
+Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html) and its [use cases](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html#use-cases)!
 
 :::::::::::::::::::::::::::::
 
@@ -898,6 +934,7 @@ Refer to this excellent tutorial on estimating the serial interval and incubatio
 **Then,** after you get your estimated values, you can manually create your own` <epidist>` class objects with `epiparameter::epidist()`! Take a look at its [reference guide on "Create an `<epidist>` object"](https://epiverse-trace.github.io/epiparameter/reference/epidist.html#ref-examples)!
 
 :::::::::::::::::::::::::::::
+
 
 <!--
 ## Concept map
