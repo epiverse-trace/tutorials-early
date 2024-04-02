@@ -104,16 +104,23 @@ To use the data, we must format the data to have two columns:
 + `date` : the date (as a date object see `?is.Date()`),
 + `confirm` : number of confirmed cases on that date.
 
-Let's use `{dplyr}` for this:
+Let's use `{tidyr}` and `incidence2::incidence()` for this:
 
 ```{r, warning = FALSE, message = FALSE}
-library(dplyr)
+library(tidyr)
 
-cases <- incidence2::covidregionaldataUK %>%
-  select(date, cases_new) %>%
-  group_by(date) %>%
-  summarise(confirm = sum(cases_new, na.rm = TRUE)) %>%
-  ungroup()
+cases <- incidence2::covidregionaldataUK %>% 
+  # preprocess missing values
+  tidyr::replace_na(list(cases_new = 0)) %>% 
+  # compute the daily incidence
+  incidence2::incidence(
+    date_index = "date",
+    counts = "cases_new",
+    interval = "day",
+    # rename column outputs to fit {EpiNow2}
+    date_names_to = "date",
+    count_values_to = "confirm"
+  )
 ```
 
 
