@@ -40,4 +40,20 @@ cleanepi::scan_data(sim_ebola_data)
 ```
 
 
-The results provides a summary of each column, including column names, data types, number of missing values, and summary statistics for numerical columns.
+The results provides a summary of each column, including column names, data types, and number of missing values.  You can see that the column names in the dataset are descriptive but lack consistency, as they are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are missing values present.
+
+## Standardizing column names
+
+Standardizing column names typically involves removing spaces and connecting different words with a special character such as an underscore (_) or a dot (.). This practice helps maintain consistency and readability in the dataset.
+
+To that extend, the `{cleanepi}` package provides the `standardize_column_names`  for standardizing and reformatting column names. 
+```{r, }
+sim_ebola_data <- cleanepi::standardize_column_names(sim_ebola_data)
+names(sim_ebola_data)
+```
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+- What differences you can observe in the column names?
+
+::::::::::::::::::::::::::::::::::::::::::::::::

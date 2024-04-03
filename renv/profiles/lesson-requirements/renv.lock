@@ -516,7 +516,6 @@
       "RemoteRef": "HEAD",
       "RemoteSha": "891aa9f90558f9effc73cd12606175a4336f3d39",
       "Requirements": [
-        "R",
         "R.utils",
         "arsenal",
         "checkmate",
