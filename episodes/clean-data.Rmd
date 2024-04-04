@@ -113,6 +113,17 @@ In the raw dataset, some column can come with mixture of character and numerical
 The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illustrated in the below code chunk
 
 ```{r}
-sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data, target_columns = "age")
+sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data, 
+                                               target_columns = "age")
 utils::head(sim_ebola_data)
 ```
+
+## Epidemiology related operations
+In addition to common data cleansing tasks, such as those discussed in the previous section, the {cleanepi} package offers additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section covers some of these specialized tasks.
+### Dictionary-based substitution
+
+### Calculating age at different time scales
+
+### Calulating age categories
+
+## Multiple operations at once
