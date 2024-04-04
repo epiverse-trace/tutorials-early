@@ -26,7 +26,7 @@ The first step is to import the dataset following the guidelines outlined in the
 
 ```{r}
 requireNamespace("rio", quietly = TRUE)
-raw_ebola_data <- rio::import(file.path("data", "simulated_ebola.csv",
+raw_ebola_data <- rio::import(file.path("data", "simulated_ebola_2.csv",
                                         fsep = "/"))
 utils::head(raw_ebola_data, 5)
 ```
@@ -74,7 +74,9 @@ sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
 Note that, our simulated Ebola does not contain duplicated nor constant rows or columns. 
-### Replicing missing values
+
+### Replacing missing values
+
 In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by a unique string, usually denoted by `NA`, in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
 
 ```{r}
@@ -90,12 +92,27 @@ sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data,
                                               target_columns = "case_id")
 ```
 
+Note that our simulated  dataset does contain duplicated subject IDS.
+
 ### Standardizing dates
 
 Certainly an epidemic dataset contains date columns for different events, such the date of infection, date of symptoms onset, ..etc, and these dates can come with different date from, and it good practice to unify them. The `{cleanepi}` package provides functionality for unifying date columns in epidemic datasets, ensuring consistency across different date formats. Here's how you can use it on our simulated dataset:
 
 ```{r}
-sim_ebola_data <- cleanepi::standardize_dates(sim_ebola_data)
+sim_ebola_data <- cleanepi::standardize_dates(sim_ebola_data, 
+                                          target_columns = c("date_onset", "date_sample"))
+
+utils::head(sim_ebola_data)
 ```
 
-This function will automatically figure out the date columns with the given dataset and convert them to **YMD** date format.
+This function covert the list of given columns, or will automatically figure out the date columns,  within the  dataset   to a **YMD**  format or any other specified date format.
+
+### Converting to numeric values
+
+In the raw dataset, some column can come with mixture of character and numerical values, and you want to covert them explicitly to be numeric. For example, in our simulated data set, in the age column some entries are written in words. 
+The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illustrated in the below code chunk
+
+```{r}
+sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data, target_columns = "age")
+utils::head(sim_ebola_data)
+```
