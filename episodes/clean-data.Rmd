@@ -14,7 +14,7 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain how clean, curate, and standardize case data using `{cleanepi}` package
-- Demonstrate how to covert case data to a `linelist` object 
+- Demonstrate how to covert case data to `linelist` data 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -26,9 +26,9 @@ The first step is to import the dataset following the guidelines outlined in the
 
 ```{r}
 requireNamespace("rio", quietly = TRUE)
-sim_ebola_data <- rio::import(file.path("data", "simulated_ebola.csv",
+raw_ebola_data <- rio::import(file.path("data", "simulated_ebola.csv",
                                         fsep = "/"))
-utils::head(sim_ebola_data, 5)
+utils::head(raw_ebola_data, 5)
 ```
 
 ##  Quick inspection
@@ -36,19 +36,23 @@ Quick exploration and inspection of the dataset are crucial before diving into a
 
 ```{r}
 requireNamespace("cleanepi", quietly = TRUE)
-cleanepi::scan_data(sim_ebola_data)
+cleanepi::scan_data(raw_ebola_data)
 ```
 
 
 The results provides a summary of each column, including column names, data types, and number of missing values.  You can see that the column names in the dataset are descriptive but lack consistency, as they are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are missing values present.
 
-## Standardizing column names
+## Common data cleaning operations
+
+This section  demonstrate how to perform  some common data cleaning operations using the `{cleanepi}`.
+
+### Standardizing column names
 
 Standardizing column names typically involves removing spaces and connecting different words with a special character such as an underscore (_) or a dot (.). This practice helps maintain consistency and readability in the dataset.
 
-To that extend, the `{cleanepi}` package provides the `standardize_column_names`  for standardizing and reformatting column names. 
+To that extend, the `{cleanepi}` package provides the `standardize_column_names()`  for standardizing and reformatting column names. 
 ```{r, }
-sim_ebola_data <- cleanepi::standardize_column_names(sim_ebola_data)
+sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
 names(sim_ebola_data)
 ```
 
@@ -57,3 +61,41 @@ names(sim_ebola_data)
 - What differences you can observe in the column names?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter in the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
+
+### Removing irregularities
+
+Raw data may contain irregularities such as duplicated and empty rows and columns, as well as constant columns. `remove_duplicates` and `remove_constants` functions from `{cleanepi}`  remove such irregularities as demonstrated in the below code chunk. 
+
+```{r}
+sim_ebola_data <- cleanepi::remove_constant(sim_ebola_data)
+sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
+```
+
+Note that, our simulated Ebola does not contain duplicated nor constant rows or columns. 
+### Replicing missing values
+In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by a unique string, usually denoted by `NA`, in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
+
+```{r}
+sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
+```
+
+### Validating subject IDs
+
+Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range or containing certain prefixes and suffixes. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and  meet the required criteria.
+
+```{r}
+sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data, 
+                                              target_columns = "case_id")
+```
+
+### Standardizing dates
+
+Certainly an epidemic dataset contains date columns for different events, such the date of infection, date of symptoms onset, ..etc, and these dates can come with different date from, and it good practice to unify them. The `{cleanepi}` package provides functionality for unifying date columns in epidemic datasets, ensuring consistency across different date formats. Here's how you can use it on our simulated dataset:
+
+```{r}
+sim_ebola_data <- cleanepi::standardize_dates(sim_ebola_data)
+```
+
+This function will automatically figure out the date columns with the given dataset and convert them to **YMD** date format.
