@@ -23,7 +23,7 @@ exercises: 2
 
 ## Introduction
 
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that contained in the [outbreaks](http://www.reconverse.org/outbreaks/) package. The first setp is to  read this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
+A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that contained in the [outbreaks](http://www.reconverse.org/outbreaks/) package. The first step is to  read this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
 
 ```{r, warning=FALSE, message=FALSE}
 requireNamespace("outbreaks", quietly = TRUE)
@@ -33,7 +33,7 @@ utils::head(covid19_eng_case_data, 5)
 
 ## Incidence data
 
-Downstream analysis involves working with aggregated data rather than individual cases. This requires aggregating case data and creating incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the date of samples.
+Downstream analysis involves working with aggregated data rather than individual cases. This requires aggregating case data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the sampling date.
 
 ```{r, message=FALSE, warning=FALSE}
 requireNamespace("incidence2", quietly = TRUE)
@@ -73,7 +73,7 @@ base::plot(weekly_covid19_eng_incidence, angle = 45)
 :::::::::::::::::::::::: solution 
 
  
-```r
+```{r}
 monthly_covid19_eng_incidence <- incidence2::incidence(
   covid19_eng_case_data,
   date_index = "date",
