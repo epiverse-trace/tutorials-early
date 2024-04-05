@@ -29,16 +29,17 @@ This episode requires you to be familiar with:
 
 ## Introduction
 
-The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats,  relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/). The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
+The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/), [DHIS2](https://dhis2.org/), etc. The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
 
 ## Reading from files 
 
-Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), and [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
-The below example shows how to import a `csv` file into `R` environment using `rio` package.
+The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
+
 ```{r,warning=FALSE,message=FALSE}
 requireNamespace("rio", quietly = TRUE)
-case_data <- rio::import(file.path("data", "ebola_cases.csv", fsep = "/"))
+case_data <- rio::import(file.path("episodes", "data", "ebola_cases.csv"))
 head(case_data, 5)
 ```
 
@@ -47,6 +48,7 @@ Similarly, you can import files of other formats such as `tsv`, `xlsx`, etc.
 ::::::::::::::::::::::::::::::::: challenge
 
 ###  Reading compressed data 
+
 Take 1 minute:
 - Is it possible to read compressed data in `R`?
 
@@ -64,7 +66,7 @@ rio::install_formats()
 
 ```{r,eval=FALSE}
 requireNamespace("rio", quietly = TRUE)
-rio::import(file.path("path_name", "file_name.zip", fsep = "/"))
+rio::import("path/to/file/file_name.zip")
 ```
 
 ::::::::::::::::::::::::::
@@ -77,7 +79,7 @@ rio::import(file.path("path_name", "file_name.zip", fsep = "/"))
 The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
 
-The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` dataframe as a table within it, and subsequently read from it:
+The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
 requireNamespace("DBI", quietly = TRUE)
@@ -95,7 +97,7 @@ DBI::dbDisconnect(db_con)
 base::print(utils::head(result))
 ```
 
-This code first establishes a connection to an SQLite database created in memory using `dbConnect` function. Then, it writes the `case_data` dataframe into a table named 'cases' within the database using `dbWriteTable` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable` function. Finally, it closes the database connection with `dbDisconnect` function. More examples about SQL databases and R can be found [here](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
+This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `case_data` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`. More examples about SQL databases and R can be found [here](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
 
 ## Reading from HIS APIs
 
@@ -104,6 +106,5 @@ Health related data are also increasingly stored in specialized HIS APIs like **
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 - Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.
-- Use `{DBI}` to read data from databases.
-- Use `{readepi}` to read data form HIS APIs.
+- Use `{readepi}` to read data form HIS APIs and RDBMS.
 ::::::::::::::::::::::::::::::::::::::::::::::::
