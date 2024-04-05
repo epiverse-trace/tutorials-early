@@ -66,7 +66,7 @@ rio::install_formats()
 
 ```{r,eval=FALSE}
 requireNamespace("rio", quietly = TRUE)
-rio::import(file.path("path", "to", "file", "file_name.zip"))
+rio::import(file.path("path", "file_name.zip", fsep = "/"))
 ```
 
 ::::::::::::::::::::::::::
