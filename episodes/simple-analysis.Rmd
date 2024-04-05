@@ -31,8 +31,9 @@ The `i2extras` package provides methods for modelling the trend in case data, ca
 
 
 ```{r, warning=FALSE, message=FALSE}
+# loads the i2extras package, which provides methods for modeling
 requireNamespace("i2extras", quietly = TRUE)
-requireNamespace("incidence2", quietly = TRUE) # This line loads the i2extras package, which provides methods for modeling
+requireNamespace("incidence2", quietly = TRUE)
 
 # subset the covid19_eng_case_data to include only the first 3 months of data
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
@@ -41,10 +42,12 @@ df <- base::subset(
   covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90
 )
 
-# uses the incidence function from the incidence2 package to compute the incidence data
+# uses the incidence function from the incidence2 package to compute the
+# incidence data
 df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
 
-# fit a curve to the incidence data. The model chosen is the negative binomial distribution with a significance level (alpha) of 0.05.
+# fit a curve to the incidence data. The model chosen is the negative binomial
+# distribution with a significance level (alpha) of 0.05.
 fitted_curve_nb <- i2extras::fit_curve(df_incid, model = "negbin", alpha = 0.05)
 base::plot(fitted_curve_nb, angle = 45) + ggplot2::labs(x = "Date", y = "Cases")
 ```

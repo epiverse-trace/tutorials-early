@@ -30,7 +30,6 @@ requireNamespace("rio", quietly = TRUE)
 raw_ebola_data <- rio::import(
   file.path("episodes", "data", "simulated_ebola_2.csv")
 )
-                                        
 utils::head(raw_ebola_data, 5)
 ```
 
@@ -95,12 +94,13 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
 Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
 
 ```{r}
-# remove this chunk code once {cleanepi} is updated. The coercion made here will be accounted for within {cleanepi}
+# remove this chunk code once {cleanepi} is updated. The coercion made here will
+# be accounted for within {cleanepi}
 sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
 ```
 
 ```{r}
-sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data, 
+sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data,
                                               target_columns = "case_id",
                                               range = c(0, 15000))
 ```
@@ -113,7 +113,7 @@ Certainly an epidemic dataset contains date columns for different events, such a
 
 ```{r}
 sim_ebola_data <- cleanepi::standardize_dates(
-  sim_ebola_data, 
+  sim_ebola_data,
   target_columns = c("date_onset", "date_sample")
 )
 
@@ -129,7 +129,7 @@ The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illu
 Note that this function makes call of functions from the `{numberize}` package.
 
 ```{r}
-sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data, 
+sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
                                                target_columns = "age")
 utils::head(sim_ebola_data)
 ```
