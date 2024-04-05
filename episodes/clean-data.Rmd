@@ -19,20 +19,24 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated,  standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks  data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r}
 requireNamespace("rio", quietly = TRUE)
-raw_ebola_data <- rio::import(file.path("data", "simulated_ebola_2.csv",
-                                        fsep = "/"))
+raw_ebola_data <- rio::import(
+  file.path("episodes", "data", "simulated_ebola_2.csv")
+)
+                                        
 utils::head(raw_ebola_data, 5)
 ```
 
 ##  Quick inspection
-Quick exploration and inspection of the dataset are crucial before diving into any  analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
+
+Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
 requireNamespace("cleanepi", quietly = TRUE)
@@ -40,18 +44,19 @@ cleanepi::scan_data(raw_ebola_data)
 ```
 
 
-The results provides a summary of each column, including column names, data types, and number of missing values.  You can see that the column names in the dataset are descriptive but lack consistency, as they are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are missing values present.
+The results provides an overview of the content of every column, including column names, and the percent of some data types per column.
+You can see that the column names in the dataset are descriptive but lack consistency, as some they are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are missing values in others.
 
 ## Common data cleaning operations
 
-This section  demonstrate how to perform  some common data cleaning operations using the `{cleanepi}`.
+This section  demonstrate how to perform some common data cleaning operations using the `{cleanepi}` package.
 
 ### Standardizing column names
 
-Standardizing column names typically involves removing spaces and connecting different words with a special character such as an underscore (_) or a dot (.). This practice helps maintain consistency and readability in the dataset.
+For this example dataset, standardizing column names typically involves removing spaces and connecting different words with “_”. This practice helps maintain consistency and readability in the dataset.
+However, the function used for standardizing column names offers more options. Type `?cleanepi::standardize_column_names` for more details.
 
-To that extend, the `{cleanepi}` package provides the `standardize_column_names()`  for standardizing and reformatting column names. 
-```{r, }
+```{r}
 sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
 names(sim_ebola_data)
 ```
@@ -62,7 +67,9 @@ names(sim_ebola_data)
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter in the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
+If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter of the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
+
+**Exercise:** Standardize the column names of the input dataset, but keep the “V1” column as is.
 
 ### Removing irregularities
 
@@ -77,7 +84,7 @@ Note that, our simulated Ebola does not contain duplicated nor constant rows or 
 
 ### Replacing missing values
 
-In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by a unique string, usually denoted by `NA`, in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
+In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
 
 ```{r}
 sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
@@ -85,32 +92,41 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
 
 ### Validating subject IDs
 
-Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range or containing certain prefixes and suffixes. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and  meet the required criteria.
+Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
+
+```{r}
+# remove this chunk code once {cleanepi} is updated. The coercion made here will be accounted for within {cleanepi}
+sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
+```
 
 ```{r}
 sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data, 
-                                              target_columns = "case_id")
+                                              target_columns = "case_id",
+                                              range = c(0, 15000))
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
 
 ### Standardizing dates
 
-Certainly an epidemic dataset contains date columns for different events, such the date of infection, date of symptoms onset, ..etc, and these dates can come with different date from, and it good practice to unify them. The `{cleanepi}` package provides functionality for unifying date columns in epidemic datasets, ensuring consistency across different date formats. Here's how you can use it on our simulated dataset:
+Certainly an epidemic dataset contains date columns for different events, such as the date of infection, date of symptoms onset, ..etc, and these dates can come in different date forms, and it good practice to unify them. The `{cleanepi}` package provides functionality for converting date columns in epidemic datasets into ISO format, ensuring consistency across the different date columns. Here's how you can use it on our simulated dataset:
 
 ```{r}
-sim_ebola_data <- cleanepi::standardize_dates(sim_ebola_data, 
-                                          target_columns = c("date_onset", "date_sample"))
+sim_ebola_data <- cleanepi::standardize_dates(
+  sim_ebola_data, 
+  target_columns = c("date_onset", "date_sample")
+)
 
 utils::head(sim_ebola_data)
 ```
 
-This function covert the list of given columns, or will automatically figure out the date columns,  within the  dataset   to a **YMD**  format or any other specified date format.
+This function coverts the values in the target columns, or will automatically figure out the date columns within the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
 
 ### Converting to numeric values
 
-In the raw dataset, some column can come with mixture of character and numerical values, and you want to covert them explicitly to be numeric. For example, in our simulated data set, in the age column some entries are written in words. 
-The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illustrated in the below code chunk
+In the raw dataset, some column can come with mixture of character and numerical values, and you want to covert the character values explicitly into numeric. For example, in our simulated data set, in the age column some entries are written in words. 
+The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illustrated in the below code chunk.
+Note that this function makes call of functions from the `{numberize}` package.
 
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data, 
@@ -119,7 +135,9 @@ utils::head(sim_ebola_data)
 ```
 
 ## Epidemiology related operations
-In addition to common data cleansing tasks, such as those discussed in the previous section, the {cleanepi} package offers additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section covers some of these specialized tasks.
+
+In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section covers some of these specialized tasks.
+
 ### Dictionary-based substitution
 
 ### Calculating age at different time scales
