@@ -39,7 +39,7 @@ The below example shows how to import a `csv` file into `R` environment using `{
 
 ```{r,warning=FALSE,message=FALSE}
 requireNamespace("rio", quietly = TRUE)
-case_data <- rio::import(file.path("episodes", "data", "ebola_cases.csv"))
+case_data <- rio::import(file.path("data", "ebola_cases.csv", fsep = "/"))
 head(case_data, 5)
 ```
 

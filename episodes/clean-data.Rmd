@@ -28,7 +28,7 @@ The first step is to import the dataset following the guidelines outlined in the
 ```{r}
 requireNamespace("rio", quietly = TRUE)
 raw_ebola_data <- rio::import(
-  file.path("episodes", "data", "simulated_ebola_2.csv")
+  file.path("data", "simulated_ebola_2.csv", fsep = "/")
 )
 utils::head(raw_ebola_data, 5)
 ```
@@ -101,8 +101,9 @@ sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
 
 ```{r}
 sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data,
-                                              target_columns = "case_id",
-                                              range = c(0, 15000))
+  target_columns = "case_id",
+  range = c(0, 15000)
+)
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -130,18 +131,46 @@ Note that this function makes call of functions from the `{numberize}` package.
 
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
-                                               target_columns = "age")
+  target_columns = "age"
+)
 utils::head(sim_ebola_data)
 ```
 
 ## Epidemiology related operations
 
-In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section covers some of these specialized tasks.
+In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers 
+additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section 
+covers some of these specialized tasks.
 
 ### Dictionary-based substitution
+In the realm of data preprocessing, it's common to encounter scenarios where certain columns in a dataset, such as the "gender" column in our simulated Ebola dataset,
+are expected to have specific values or factors. However, it's also common for unexpected or erroneous values to appear in these
+columns, which need to be replaced with appropriate values. The `{cleanepi}` package offers support for dictionary-based 
+substitution, a method that allows you to replace values in specific columns based on mappings defined in a dictionary. 
+This approach ensures consistency and accuracy in data cleaning.
 
+Moreover, {cleanepi} provides a built-in dictionary specifically tailored for epidemiological data.
+ This dictionary includes mappings for the "gender" column. 
+```{r}
+test_dict <- base::readRDS(system.file("extdata",
+  "test_dict.RDS",
+  package = "cleanepi"
+))
+base::print(test_dict)
+```
+
+Now, we can use this dictionary to standardize values of the the `gender` column according to predefined categories. Below is an example code chunk demonstrating how to utilize this functionality:
+```{r}
+sim_ebola_data <- cleanepi::clean_using_dictionary(sim_ebola_data,
+  dictionary = test_dict
+)
+base::print(sim_ebola_data)
+```
+This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
 ### Calculating age at different time scales
 
 ### Calulating age categories
+[TBC]
 
 ## Multiple operations at once
+## validate case data
