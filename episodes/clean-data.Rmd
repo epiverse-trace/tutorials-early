@@ -1,5 +1,5 @@
 ---
-title: 'Clean outbreaks data'
+title: 'Clean and validate case data'
 teaching: 10
 exercises: 2
 ---
@@ -19,7 +19,6 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
-
 In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 
@@ -94,8 +93,8 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
 Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
 
 ```{r}
-# remove this chunk code once {cleanepi} is updated. The coercion made here will
-# be accounted for within {cleanepi}
+# remove this chunk code once `{cleanepi}` is updated. The coercion made here
+#cwill be accounted for within `{cleanepi}`
 sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
 ```
 
@@ -115,7 +114,10 @@ Certainly an epidemic dataset contains date columns for different events, such a
 ```{r}
 sim_ebola_data <- cleanepi::standardize_dates(
   sim_ebola_data,
-  target_columns = c("date_onset", "date_sample")
+  target_columns = c(
+    "date_onset",
+    "date_sample"
+  )
 )
 
 utils::head(sim_ebola_data)
@@ -149,7 +151,7 @@ columns, which need to be replaced with appropriate values. The `{cleanepi}` pac
 substitution, a method that allows you to replace values in specific columns based on mappings defined in a dictionary. 
 This approach ensures consistency and accuracy in data cleaning.
 
-Moreover, {cleanepi} provides a built-in dictionary specifically tailored for epidemiological data.
+Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for epidemiological data.
  This dictionary includes mappings for the "gender" column. 
 ```{r}
 test_dict <- base::readRDS(system.file("extdata",
@@ -164,13 +166,36 @@ Now, we can use this dictionary to standardize values of the the `gender` column
 sim_ebola_data <- cleanepi::clean_using_dictionary(sim_ebola_data,
   dictionary = test_dict
 )
-base::print(sim_ebola_data)
+utils::head(sim_ebola_data)
 ```
 This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
+
+### Calculating time span between different date events
+
+In epidemiological data analysis it is also useful to  track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
+The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different 
+time scales. For example,  the below code snippet  utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
+ until the  date this document is generated  (`r Sys.Date()`).
+```{r}
+sim_ebola_data <- cleanepi::span(sim_ebola_data,
+  target_column = "date_sample",
+  end_date = Sys.Date(),
+  span_unit = "years",
+  span_column_name = "time_since_sampling_date",
+  span_remainder_unit = "months"
+)
+utils::head(sim_ebola_data)
+```
+After executing the `span()` function, two new column named `time_since_sampling_date` and `remainder_months` are added to the sim_ebola_data dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time less that is year, measured in months.
+
 ### Calculating age at different time scales
 
+[TBC]
+
 ### Calulating age categories
+
 [TBC]
 
 ## Multiple operations at once
-## validate case data
+
+## Validating case data
