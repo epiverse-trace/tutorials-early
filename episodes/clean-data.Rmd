@@ -138,13 +138,30 @@ sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
 utils::head(sim_ebola_data)
 ```
 
-## Epidemiology related operations
+## Epidemiology related data cleaning operations
 
 In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers 
 additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section 
 covers some of these specialized tasks.
 
+### Checking sequence of dated-events
+
+Ensuring the correct order and sequence of dated events is crucial in epidemiological data analysis, especially 
+when analyzing infectious diseases where the timing of events like symptom onset and sample collection is essential. 
+The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
+Here's an example code chunk demonstrating the usage of `check_date_sequence()` in our simulated Ebola dataset
+ ```{r}
+ sim_ebola_data <- cleanepi::check_date_sequence(
+   data = sim_ebola_data,
+   target_columns = c("date_onset", "date_sample"),
+   remove = TRUE
+ )
+ ```
+
+This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
+any inconsistencies or errors in the chronological order of events, allowing yor to address them appropriately.
 ### Dictionary-based substitution
+
 In the realm of data preprocessing, it's common to encounter scenarios where certain columns in a dataset, such as the "gender" column in our simulated Ebola dataset,
 are expected to have specific values or factors. However, it's also common for unexpected or erroneous values to appear in these
 columns, which need to be replaced with appropriate values. The `{cleanepi}` package offers support for dictionary-based 
