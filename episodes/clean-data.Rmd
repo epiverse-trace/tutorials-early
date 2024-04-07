@@ -94,7 +94,7 @@ Each entry in the dataset represents a subject and should be distinguishable by 
 
 ```{r}
 # remove this chunk code once `{cleanepi}` is updated. The coercion made here
-#cwill be accounted for within `{cleanepi}`
+# cwill be accounted for within `{cleanepi}`
 sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
 ```
 
@@ -129,8 +129,6 @@ This function coverts the values in the target columns, or will automatically fi
 
 In the raw dataset, some column can come with mixture of character and numerical values, and you want to covert the character values explicitly into numeric. For example, in our simulated data set, in the age column some entries are written in words. 
 The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illustrated in the below code chunk.
-Note that this function makes call of functions from the `{numberize}` package.
-
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
   target_columns = "age"
@@ -149,17 +147,18 @@ covers some of these specialized tasks.
 Ensuring the correct order and sequence of dated events is crucial in epidemiological data analysis, especially 
 when analyzing infectious diseases where the timing of events like symptom onset and sample collection is essential. 
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
-Here's an example code chunk demonstrating the usage of `check_date_sequence()` in our simulated Ebola dataset
+Here's an example code chunk demonstrating the usage of `check_date_sequence()` function in our simulated Ebola dataset
  ```{r}
- sim_ebola_data <- cleanepi::check_date_sequence(
-   data = sim_ebola_data,
-   target_columns = c("date_onset", "date_sample"),
-   remove = TRUE
- )
+sim_ebola_data <- cleanepi::check_date_sequence(
+  data = sim_ebola_data,
+  target_columns = c("date_onset", "date_sample"),
+  remove = TRUE
+)
  ```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
 any inconsistencies or errors in the chronological order of events, allowing yor to address them appropriately.
+
 ### Dictionary-based substitution
 
 In the realm of data preprocessing, it's common to encounter scenarios where certain columns in a dataset, such as the "gender" column in our simulated Ebola dataset,
@@ -185,14 +184,15 @@ sim_ebola_data <- cleanepi::clean_using_dictionary(sim_ebola_data,
 )
 utils::head(sim_ebola_data)
 ```
-This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
+This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is 
+accurately categorized and ready for further analysis.
 
 ### Calculating time span between different date events
 
 In epidemiological data analysis it is also useful to  track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different 
 time scales. For example,  the below code snippet  utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the  date this document is generated  (`r Sys.Date()`).
+ until the  date this document was generated  (`r Sys.Date()`).
 ```{r}
 sim_ebola_data <- cleanepi::span(sim_ebola_data,
   target_column = "date_sample",
@@ -203,16 +203,56 @@ sim_ebola_data <- cleanepi::span(sim_ebola_data,
 )
 utils::head(sim_ebola_data)
 ```
-After executing the `span()` function, two new column named `time_since_sampling_date` and `remainder_months` are added to the sim_ebola_data dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time less that is year, measured in months.
-
-### Calculating age at different time scales
-
-[TBC]
-
-### Calulating age categories
-
-[TBC]
+After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are 
+added to the sim_ebola_data dataset, containing the calculated time elapsed since the date of sampling for each case, 
+measured in years, and the remaining time less that is year, measured in months.
 
 ## Multiple operations at once
+
+Performing data cleaning operations individually can be time-consuming and error-prone. The `{cleanepi}` package 
+simplifies this process by offering a convenient wrapper function called clean_data, which allows you to perform 
+multiple  operations at once.
+
+The clean_data function applies a series of predefined data cleaning operations to the input dataset. Here's an example 
+code chunk illustrating how to use clean_data on a raw simulated Ebola dataset:
+
+```{r}
+ops <- list(
+  standardize_column_names = list(keep = NULL, rename = NULL),
+  replace_missing_values = list(
+    target_columns = NULL,
+    na_strings = cleanepi::common_na_strings
+  ),
+  remove_duplicates = list(
+    target_columns = NULL,
+    rm_empty_rows = TRUE,
+    rm_empty_cols = TRUE,
+    rm_constant_cols = TRUE
+  ),
+  standardize_dates = list(
+    target_columns = c("date_onset", "date_sample"),
+    error_tolerance = 0.5,
+    format = NULL,
+    timeframe = NULL,
+    orders = list(
+      world_named_months = c("Ybd", "dby"),
+      world_digit_months = c("dmy", "Ymd"),
+      US_formats = c("Omdy", "YOmd")
+    )
+  ),
+  standardize_subject_ids = list(
+    target_columns = "case_id"
+  ),
+  dictionary = test_dict,
+  to_numeric = "age"
+)
+clean_data <- cleanepi::clean_data(
+  data = raw_ebola_data,
+  params = ops
+)
+```
+
+### Printing the clean report
+[TBC]
 
 ## Validating case data
