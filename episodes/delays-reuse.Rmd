@@ -27,7 +27,7 @@ This episode requires you to be familiar with:
 
 **Data science** : Basic programming with R.
 
-**Epidemic theory** : Epidemiological parameters, time periods.
+**Epidemic theory** : Epidemiological parameters, Disease time periods, such as Incubation period, Generation time, Serial interval.
 
 :::::::::::::::::::::::::::::::::
 
