@@ -374,6 +374,8 @@ epinow_estimates_cg <- epinow(
 base::plot(epinow_estimates_cg)
 ```
 
+The `plot()` output includes the estimated cases by date of infection, which are reconstructed from the reported cases and delays.
+
 :::::::::: callout
 
 ### Warning
