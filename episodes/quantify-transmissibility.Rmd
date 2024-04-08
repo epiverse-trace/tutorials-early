@@ -139,8 +139,8 @@ incidence2::covidregionaldataUK %>%
     date_index = "date",
     counts = "cases_new",
     count_values_to = "confirm",
-    date_names_to = "date",
-  ) %>% 
+    date_names_to = "date"
+  ) %>%
   # complete range of dates
   incidence2::complete_dates()
 ```
