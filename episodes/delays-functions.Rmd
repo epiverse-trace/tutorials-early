@@ -491,6 +491,8 @@ epinow_estimates_cgi <- epinow(
 base::plot(epinow_estimates_cgi)
 ```
 
+Try to complement the `delays` argument with a reporting delay like the `reporting_delay_fixed` object of the previous episode.
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
