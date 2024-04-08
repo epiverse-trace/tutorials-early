@@ -46,7 +46,9 @@ But in an ongoing outbreak, the population does not remain entirely susceptible 
 
 ## Introduction
 
-The transmission intensity of an outbreak is quantified using two key metrics: the reproduction number, which informs on the strength of the transmission by indicating how many new cases are expected from each existing case; and the [growth rate](../learners/reference.md#growth), which informs on the speed of the transmission by indicating how rapidly the outbreak is spreading or declining (doubling/halving time) within a population. To estimate these key metrics using case data we must account for delays between the date of infections and date of reported cases. In an outbreak situation, data are usually available on reported dates only, therefore we must use estimation methods to account for these delays when trying to understand changes in transmission over time. For more details on the distinction between speed and strength of transmission and implications for control, see [Dushoff & Park, 2021](https://royalsocietypublishing.org/doi/full/10.1098/rspb.2020.1556).
+The transmission intensity of an outbreak is quantified using two key metrics: the reproduction number, which informs on the strength of the transmission by indicating how many new cases are expected from each existing case; and the [growth rate](../learners/reference.md#growth), which informs on the speed of the transmission by indicating how rapidly the outbreak is spreading or declining (doubling/halving time) within a population. For more details on the distinction between speed and strength of transmission and implications for control, review [Dushoff & Park, 2021](https://royalsocietypublishing.org/doi/full/10.1098/rspb.2020.1556).
+
+To estimate these key metrics using case data we must account for delays between the date of infections and date of reported cases. In an outbreak situation, data are usually available on reported dates only, therefore we must use estimation methods to account for these delays when trying to understand changes in transmission over time.
 
 In the next tutorials we will focus on how to use the functions in `{EpiNow2}` to estimate transmission metrics of case data. We will not cover the theoretical background of the models or inference framework, for details on these concepts see the [vignette](https://epiforecasts.io/EpiNow2/dev/articles/estimate_infections.html).
 
@@ -137,7 +139,11 @@ cases <- incidence2::covidregionaldataUK %>%
 
 ### When to use incidence2?
 
-We can also use the `{incidence2}` package to aggregate cases. However, if you ever need to aggregate you data in a different time **interval** (i.e., days, weeks or months) or per **group** categories, we recommend you to explore the `incidence2::incidence()` function:
+We can also use the `{incidence2}` package to:
+
+- Aggregate cases (similar to the code above) but in different time *intervals* (i.e., days, weeks or months) or per *group* categories. Explore later the [`incidence2::incidence()` reference manual](https://www.reconverse.org/incidence2/reference/incidence.html).
+
+- Complete dates for all the range of dates per group category using `incidence2::complete_dates()`. Read further in its [function reference manual](https://www.reconverse.org/incidence2/reference/complete_dates.html).
 
 
 ```r
@@ -151,12 +157,12 @@ incidence2::covidregionaldataUK %>%
   incidence2::incidence(
     date_index = "date",
     counts = "cases_new",
-    groups = "region",
-    interval = "week"
-  )
+    count_values_to = "confirm",
+    date_names_to = "date"
+  ) %>%
+  # complete range of dates
+  incidence2::complete_dates()
 ```
-
-You can also estimate transmission metrics from {incidence2} objects using the `{i2extras}` package. Read further in the [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette!
 
 :::::::::::::::::::::::::
 
@@ -400,14 +406,6 @@ estimates <- epinow(
 )
 ```
 
-```{.output}
-WARN [2024-04-02 21:48:34] epinow: There were 3 divergent transitions after warmup. See
-https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
-to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-02 21:48:34] epinow: Examine the pairs() plot to diagnose sampling problems
- - 
-```
-
 ### Results
 
 We can extract and visualise estimates of the effective reproduction number through time:
@@ -437,24 +435,24 @@ summary(estimates)
 ```
 
 ```{.output}
-                                 measure                estimate
-                                  <char>                  <char>
-1: New confirmed cases by infection date    7242 (4119 -- 12675)
-2:        Expected change in daily cases       Likely decreasing
-3:            Effective reproduction no.      0.89 (0.58 -- 1.3)
-4:                        Rate of growth -0.015 (-0.063 -- 0.04)
-5:          Doubling/halving time (days)         -48 (17 -- -11)
+                                 measure                 estimate
+                                  <char>                   <char>
+1: New confirmed cases by infection date     7207 (3925 -- 12712)
+2:        Expected change in daily cases        Likely decreasing
+3:            Effective reproduction no.       0.89 (0.56 -- 1.3)
+4:                        Rate of growth -0.014 (-0.065 -- 0.039)
+5:          Doubling/halving time (days)          -49 (18 -- -11)
 ```
 
 As these estimates are based on partial data, they have a wide uncertainty interval.
 
-+ From the summary of our analysis we see that the expected change in daily cases is Likely decreasing with the estimated new confirmed cases 7242 (4119 -- 12675).
++ From the summary of our analysis we see that the expected change in daily cases is Likely decreasing with the estimated new confirmed cases 7207 (3925 -- 12712).
 
-+ The effective reproduction number $R_t$ estimate (on the last date of the data) is 0.89 (0.58 -- 1.3). 
++ The effective reproduction number $R_t$ estimate (on the last date of the data) is 0.89 (0.56 -- 1.3). 
 
-+ The exponential growth rate of case numbers is -0.015 (-0.063 -- 0.04).
++ The exponential growth rate of case numbers is -0.014 (-0.065 -- 0.039).
 
-+ The doubling time (the time taken for case numbers to double) is -48 (17 -- -11).
++ The doubling time (the time taken for case numbers to double) is -49 (18 -- -11).
 
 ::::::::::::::::::::::::::::::::::::: callout
 ### `Expected change in daily cases` 
@@ -524,17 +522,17 @@ estimates_regional <- regional_epinow(
 ```
 
 ```{.output}
-INFO [2024-04-02 21:48:39] Producing following optional outputs: regions, summary, samples, plots, latest
-INFO [2024-04-02 21:48:39] Reporting estimates using data up to: 2020-04-28
-INFO [2024-04-02 21:48:39] No target directory specified so returning output
-INFO [2024-04-02 21:48:39] Producing estimates for: East Midlands, East of England, England, London, North East, North West, Northern Ireland, Scotland, South East, South West, Wales, West Midlands, Yorkshire and The Humber
-INFO [2024-04-02 21:48:39] Regions excluded: none
-INFO [2024-04-02 22:33:54] Completed regional estimates
-INFO [2024-04-02 22:33:54] Regions with estimates: 13
-INFO [2024-04-02 22:33:54] Regions with runtime errors: 0
-INFO [2024-04-02 22:33:54] Producing summary
-INFO [2024-04-02 22:33:54] No summary directory specified so returning summary output
-INFO [2024-04-02 22:33:54] No target directory specified so returning timings
+INFO [2024-04-08 18:34:58] Producing following optional outputs: regions, summary, samples, plots, latest
+INFO [2024-04-08 18:34:58] Reporting estimates using data up to: 2020-04-28
+INFO [2024-04-08 18:34:58] No target directory specified so returning output
+INFO [2024-04-08 18:34:58] Producing estimates for: East Midlands, East of England, England, London, North East, North West, Northern Ireland, Scotland, South East, South West, Wales, West Midlands, Yorkshire and The Humber
+INFO [2024-04-08 18:34:58] Regions excluded: none
+INFO [2024-04-08 19:19:30] Completed regional estimates
+INFO [2024-04-08 19:19:30] Regions with estimates: 13
+INFO [2024-04-08 19:19:30] Regions with runtime errors: 0
+INFO [2024-04-08 19:19:30] Producing summary
+INFO [2024-04-08 19:19:30] No summary directory specified so returning summary output
+INFO [2024-04-08 19:19:30] No target directory specified so returning timings
 ```
 
 ```r
@@ -544,49 +542,49 @@ estimates_regional$summary$summarised_results$table
 ```{.output}
                       Region New confirmed cases by infection date
                       <char>                                <char>
- 1:            East Midlands                      342 (207 -- 545)
- 2:          East of England                      548 (332 -- 865)
- 3:                  England                   3540 (2244 -- 5532)
- 4:                   London                      295 (187 -- 464)
- 5:               North East                      253 (149 -- 431)
- 6:               North West                      558 (328 -- 894)
- 7:         Northern Ireland                         43 (22 -- 79)
- 8:                 Scotland                      287 (167 -- 527)
- 9:               South East                      593 (350 -- 996)
-10:               South West                      421 (298 -- 597)
-11:                    Wales                        95 (64 -- 136)
-12:            West Midlands                      271 (144 -- 489)
-13: Yorkshire and The Humber                      480 (290 -- 789)
+ 1:            East Midlands                      341 (207 -- 547)
+ 2:          East of England                      537 (328 -- 840)
+ 3:                  England                   3542 (2220 -- 5532)
+ 4:                   London                      297 (191 -- 457)
+ 5:               North East                      252 (145 -- 427)
+ 6:               North West                      557 (313 -- 879)
+ 7:         Northern Ireland                         43 (24 -- 85)
+ 8:                 Scotland                      283 (157 -- 541)
+ 9:               South East                      585 (365 -- 997)
+10:               South West                      420 (291 -- 607)
+11:                    Wales                        95 (65 -- 138)
+12:            West Midlands                      268 (145 -- 468)
+13: Yorkshire and The Humber                      480 (276 -- 780)
     Expected change in daily cases Effective reproduction no.
                             <fctr>                     <char>
- 1:              Likely increasing          1.2 (0.83 -- 1.6)
+ 1:              Likely increasing          1.2 (0.84 -- 1.6)
  2:              Likely increasing          1.2 (0.83 -- 1.6)
- 3:              Likely decreasing         0.92 (0.64 -- 1.2)
- 4:              Likely decreasing         0.79 (0.55 -- 1.1)
- 5:              Likely decreasing         0.91 (0.62 -- 1.3)
- 6:              Likely decreasing         0.87 (0.57 -- 1.2)
- 7:              Likely decreasing           0.63 (0.38 -- 1)
- 8:              Likely decreasing         0.91 (0.61 -- 1.4)
- 9:                         Stable         0.99 (0.66 -- 1.4)
+ 3:              Likely decreasing         0.91 (0.64 -- 1.2)
+ 4:              Likely decreasing         0.79 (0.56 -- 1.1)
+ 5:              Likely decreasing          0.91 (0.6 -- 1.3)
+ 6:              Likely decreasing         0.86 (0.55 -- 1.2)
+ 7:              Likely decreasing          0.64 (0.4 -- 1.1)
+ 8:              Likely decreasing          0.9 (0.58 -- 1.4)
+ 9:                         Stable         0.98 (0.69 -- 1.4)
 10:                     Increasing           1.4 (1.1 -- 1.8)
-11:                     Decreasing        0.57 (0.42 -- 0.75)
-12:              Likely decreasing         0.71 (0.42 -- 1.1)
-13:                         Stable             1 (0.7 -- 1.4)
+11:                     Decreasing        0.57 (0.42 -- 0.76)
+12:              Likely decreasing          0.7 (0.43 -- 1.1)
+13:                         Stable            1 (0.69 -- 1.4)
                Rate of growth Doubling/halving time (days)
                        <char>                       <char>
- 1:   0.023 (-0.023 -- 0.067)               30 (10 -- -30)
- 2:   0.024 (-0.023 -- 0.067)               28 (10 -- -31)
- 3:   -0.011 (-0.052 -- 0.03)              -62 (23 -- -13)
- 4:  -0.029 (-0.068 -- 0.012)              -24 (58 -- -10)
- 5:  -0.012 (-0.056 -- 0.037)              -60 (19 -- -12)
- 6:  -0.018 (-0.063 -- 0.024)              -38 (29 -- -11)
- 7:   -0.053 (-0.1 -- 0.0028)            -13 (240 -- -6.9)
- 8:  -0.012 (-0.057 -- 0.044)              -58 (16 -- -12)
- 9: -0.0012 (-0.049 -- 0.049)             -580 (14 -- -14)
-10:    0.047 (0.014 -- 0.084)               15 (8.2 -- 48)
-11: -0.065 (-0.093 -- -0.035)            -11 (-20 -- -7.4)
-12:  -0.041 (-0.092 -- 0.012)             -17 (59 -- -7.6)
-13:  0.0037 (-0.043 -- 0.051)              190 (14 -- -16)
+ 1:   0.022 (-0.022 -- 0.067)               31 (10 -- -31)
+ 2:   0.021 (-0.023 -- 0.065)               32 (11 -- -30)
+ 3:   -0.012 (-0.052 -- 0.03)              -57 (23 -- -13)
+ 4:  -0.029 (-0.066 -- 0.011)              -24 (64 -- -11)
+ 5:  -0.012 (-0.059 -- 0.037)              -57 (19 -- -12)
+ 6:  -0.018 (-0.067 -- 0.023)              -38 (30 -- -10)
+ 7: -0.052 (-0.098 -- 0.0096)             -13 (72 -- -7.1)
+ 8:  -0.014 (-0.063 -- 0.048)              -51 (14 -- -11)
+ 9: -0.0022 (-0.044 -- 0.049)             -320 (14 -- -16)
+10:    0.047 (0.012 -- 0.085)               15 (8.1 -- 59)
+11: -0.065 (-0.093 -- -0.033)            -11 (-21 -- -7.5)
+12: -0.042 (-0.091 -- 0.0089)             -17 (78 -- -7.6)
+13:  0.0033 (-0.045 -- 0.051)              210 (14 -- -15)
 ```
 
 ```r
@@ -595,6 +593,13 @@ estimates_regional$summary$plots$R
 
 <img src="fig/quantify-transmissibility-rendered-unnamed-chunk-21-1.png" style="display: block; margin: auto;" />
 
+:::::::::::::::::::::::::: testimonial
+
+### the i2extras package
+
+`{i2extras}` package also estimate transmission metrics like growth rate and doubling/halving time at different time intervals (i.e., days, weeks, or months). `{i2extras}` require `{incidence2}` objects as inputs. Read further in its [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette.
+
+::::::::::::::::::::::::::
 
 ## Summary
 

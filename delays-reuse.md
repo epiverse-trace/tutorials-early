@@ -8,7 +8,7 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to get easy access to delay distributions from a literature search database?
+- How to get access to disease delay distributions from a pre-established database for use in analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -27,13 +27,13 @@ This episode requires you to be familiar with:
 
 **Data science** : Basic programming with R.
 
-**Epidemic theory** : Epidemiological parameters, time periods.
+**Epidemic theory** : epidemiological parameters, disease time periods, such as the incubation period, generation time, and serial interval.
 
 :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-The [natural history](../learners/reference.md#naturalhistory) of an infectious disease shows that its development has a regularity from stage to stage. The time periods from an infectious disease inform about the timing of transmission and interventions.
+Infectious diseases follow an infection cycle, which usually includes the following phases: presymptomatic period, symptomatic period and recovery period, as described by their [natural history](../learners/reference.md#naturalhistory). These time periods can be used to understand transmission dynamics and inform disease prevention and control interventions.
 
 ![Definition of key time periods. From [Xiang et al, 2021](https://www.sciencedirect.com/science/article/pii/S2468042721000038)](fig/time-periods.jpg)
 
@@ -50,7 +50,7 @@ However, early in an epidemic, modelling efforts can be delayed by the lack of a
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
-To exemplify how to use `{epiparameter}` in your analysis pipeline, our goal in this episode will be to *choose* one specific set of epidemiological parameters from the literature, instead of *copying-and-pasting* them by hand, to plug them into an `{EpiNow2}` analysis workflow.
+To exemplify how to use the `{epiparameter}` R package in your analysis pipeline, our goal in this episode will be to choose one specific set of epidemiological parameters from the literature, instead of copying-and-pasting them by hand, to plug them into an `{EpiNow2}` analysis workflow.
 
 <!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
 
@@ -76,13 +76,9 @@ generation_time <-
   )
 ```
 
-Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get the **distribution parameters** from those reports. An additional source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to parameters to implement them into your analysis pipeline. `{epiparameter}` provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
+It is a common practice for analysts to manually search the available literature and copy and paste the **summary statistics** or the **distribution parameters** from scientific publications. A challenge that is often faced is that the reporting of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to reliable estimates of distribution parameters for a range of infectious diseases, so that they can easily be implemented in outbreak analytic pipelines.
 
-<!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
-
-Today, we'll *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
-
-<!-- Instead of *manually* plug-in numeric values to `EpiNow2::dist_spec()` to specify the **summary statistics** of the delay distribution, we are going to *choose* them from the library of epidemiological parameters provided by `{epiparameter}`. -->
+In this episode, we will *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
 
 <!--
 ```r
@@ -100,9 +96,9 @@ epinow_estimates <- epinow(
 ```
 -->
 
-## Find a Generation time
+## Generation time vs serial interval
 
-The generation time, jointly with the $R$, can inform about the speed of spread and its feasibility of control. Given a $R>1$, with a shorter generation time, cases can appear more quickly.
+The generation time, jointly with the reproduction number ($R$), provide valuable insights on the strength of transmission and inform the implementation of control measures. Given a $R>1$, the shorter the generation time, the earlier the incidence of disease cases will grow.
 
 ![Video from the MRC Centre for Global Infectious Disease Analysis, Ep 76. Science In Context - Epi Parameter Review Group with Dr Anne Cori (27-07-2023) at <https://youtu.be/VvpYHhFDIjI?si=XiUyjmSV1gKNdrrL>](fig/reproduction-generation-time.png)
 
@@ -111,9 +107,9 @@ This frequent approximation is because it is easier to observe and measure the o
 
 ![A schematic of the relationship of different time periods of transmission between an infector and an infectee in a transmission pair. Exposure window is defined as the time interval having viral exposure, and transmission window is defined as the time interval for onward transmission with respect to the infection time ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)).](fig/serial-interval-observed.jpeg)
 
-However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case of a pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
+However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case for diseases with pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
 
-Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation. $R_{t}$ estimates are sensitive not only to the mean generation time but also to the variance and form of the generation interval distribution [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409).
+<!-- Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation ([Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409)). -->
 
 ::::::::::::::::: callout
 
@@ -171,13 +167,13 @@ The peak of each curve can inform you about the location of the mean of each dis
 
 ::::::::::::::::: solution
 
-Which one would be harder to control?
+**Which one would be harder to control?**
 
-- COVID-19
+COVID-19
 
-Why do you conclude that?
+**Why do you conclude that?**
 
-- COVID-19 has the lowest mean serial interval. The approximate mean value for the serial interval of COVID-19 is around four days, and SARS is about seven days. Thus, COVID-19 will likely have newer generations in less time than SARS, assuming similar reproduction numbers.
+COVID-19 has the lowest mean serial interval. The approximate mean value for the serial interval of COVID-19 is around four days, and SARS is about seven days. Thus, COVID-19 will likely have newer generations in less time than SARS, assuming similar reproduction numbers.
 
 ::::::::::::::::::::::::::
 
@@ -189,11 +185,11 @@ The objective of the assessment above is to assess the interpretation of a large
 
 ::::::::::::::::::::::
 
-## Extract epidemiological parameters
+## Choosing epidemiological parameters
 
-First, let's assume that the data set `example_confirmed` has COVID-19 observed cases. So, we need to find a reported generation time for COVID-19 or any other useful parameter for this aim. 
+In this section, we will use `{epiparameter}` to obtain the generation time and the serial interval for COVID-19, so these metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent sections of this episode.
 
-Let's start by looking at how many parameters we have in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
+Let's start by looking at how many entries are available in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
 
 
 ```r
@@ -249,7 +245,7 @@ Parameters:
   scale: 3.180
 ```
 
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the abovementioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
+Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the above-mentioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
 
 
 ```r
@@ -265,7 +261,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 ### CASE-INSENSITIVE
 
-`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly.
+`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly. Strings like `"serial"`, `"serial interval"` or `"serial_interval"` are also valid.
 
 :::::::::::::::::::::::::
 
@@ -530,8 +526,6 @@ What is a *parametrised* `<epidist>`? Look at `?is_parameterised`.
 
 :::::::::::::::::::::::::
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into `EpiNow2::dist_spec()`.
-
 Let's assign this `<epidist>` class object to the `covid_serialint` object.
 
 
@@ -611,13 +605,13 @@ covid_serialint$summary_stats$mean
 [1] 4.7
 ```
 
-Notice that with this output we can replace one of the inputs for the `EpiNow2::dist_spec()` function:
+Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into the `EpiNow2::dist_spec()` function:
 
 ```r
 generation_time <- 
   EpiNow2::dist_spec(
-    mean = covid_serialint$summary_stats$mean, # we changed this line :)
-    sd = 2,
+    mean = covid_serialint$summary_stats$mean, # replaced!
+    sd = covid_serialint$summary_stats$sd, # replaced!
     max = 20,
     distribution = "gamma"
   )
