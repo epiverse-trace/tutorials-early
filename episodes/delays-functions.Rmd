@@ -340,7 +340,7 @@ Now we can plug everything into the `EpiNow2::dist_spec()` function!
 - a maximum value `max`,
 - the `distribution` name.
 
-But, before, in `EpiNow2::dist_spec()` for a **Lognormal** distribution we need the *distribution parameters* instead of the summary statistics:
+However, when using `EpiNow2::dist_spec()`, to define a **Lognormal** distribution, like the one in the `covid_serialint` object, we need to convert its summary statistics to distribution parameters named logmean and logsd. With `{epiparameter}` we can directly get the *distribution parameters* using `epiparameter::get_parameters()`:
 
 ```{r}
 covid_serialint_parameters <-
