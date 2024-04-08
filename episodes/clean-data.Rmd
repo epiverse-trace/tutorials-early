@@ -161,40 +161,42 @@ any inconsistencies or errors in the chronological order of events, allowing yor
 
 ### Dictionary-based substitution
 
-In the realm of data preprocessing, it's common to encounter scenarios where certain columns in a dataset, such as the "gender" column in our simulated Ebola dataset,
-are expected to have specific values or factors. However, it's also common for unexpected or erroneous values to appear in these
-columns, which need to be replaced with appropriate values. The `{cleanepi}` package offers support for dictionary-based 
-substitution, a method that allows you to replace values in specific columns based on mappings defined in a dictionary. 
+In the realm of data pre-processing, it's common to encounter scenarios where certain columns in a dataset, such as the “gender” column in our simulated Ebola dataset,
+are expected to have specific values or factors. However, it's also common for unexpected or erroneous values to appear in these columns, which need to be replaced with appropriate values. The `{cleanepi}` package offers support for dictionary-based substitution, a method that allows you to replace values in specific columns based on mappings defined in a dictionary. 
 This approach ensures consistency and accuracy in data cleaning.
 
-Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for epidemiological data.
- This dictionary includes mappings for the "gender" column. 
+Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for epidemiological data. The example dictionary below includes mappings for the “gender” column.
+
 ```{r}
-test_dict <- base::readRDS(system.file("extdata",
-  "test_dict.RDS",
-  package = "cleanepi"
-))
+test_dict <- base::readRDS(
+  system.file("extdata", "test_dict.RDS", package = "cleanepi")
+)
 base::print(test_dict)
 ```
 
-Now, we can use this dictionary to standardize values of the the `gender` column according to predefined categories. Below is an example code chunk demonstrating how to utilize this functionality:
+Now, we can use this dictionary to standardize values of the the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to utilize this functionality:
+
 ```{r}
-sim_ebola_data <- cleanepi::clean_using_dictionary(sim_ebola_data,
+sim_ebola_data <- cleanepi::clean_using_dictionary(
+  sim_ebola_data,
   dictionary = test_dict
 )
 utils::head(sim_ebola_data)
 ```
-This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is 
-accurately categorized and ready for further analysis.
+
+This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
+
+> Note that, when the column in the dataset contains values that are not in the dictionary, the clean_using_dictionary() will raise an error. Users can use the cleanepi::add_to_dictionary() function to include the missing value into the dictionary. See the corresponding section in the package [vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html) for more details.
 
 ### Calculating time span between different date events
 
-In epidemiological data analysis it is also useful to  track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
-The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different 
-time scales. For example,  the below code snippet  utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the  date this document was generated  (`r Sys.Date()`).
+In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
+The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
+ until the date this document was generated (`r Sys.Date()`).
+ 
 ```{r}
-sim_ebola_data <- cleanepi::span(sim_ebola_data,
+sim_ebola_data <- cleanepi::span(
+  sim_ebola_data,
   target_column = "date_sample",
   end_date = Sys.Date(),
   span_unit = "years",
@@ -203,35 +205,32 @@ sim_ebola_data <- cleanepi::span(sim_ebola_data,
 )
 utils::head(sim_ebola_data)
 ```
-After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are 
-added to the sim_ebola_data dataset, containing the calculated time elapsed since the date of sampling for each case, 
-measured in years, and the remaining time less that is year, measured in months.
+
+After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
 
 ## Multiple operations at once
 
-Performing data cleaning operations individually can be time-consuming and error-prone. The `{cleanepi}` package 
-simplifies this process by offering a convenient wrapper function called clean_data, which allows you to perform 
-multiple  operations at once.
+Performing data cleaning operations individually can be time-consuming and error-prone. The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
 
-The clean_data function applies a series of predefined data cleaning operations to the input dataset. Here's an example 
-code chunk illustrating how to use clean_data on a raw simulated Ebola dataset:
+The `clean_data()` function applies a series of predefined data cleaning operations to the input dataset. Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
 
 ```{r}
+# remove the line below once Karim has updated cleanepi
+raw_ebola_data$`case id` <- as.character(raw_ebola_data$`case id`)
+
+# PERFORM THE OPERATIONS USING THE base R SYNTAX
 ops <- list(
-  standardize_column_names = list(keep = NULL, rename = NULL),
+  standardize_column_names = list(keep = "V1", rename = NULL),
   replace_missing_values = list(
     target_columns = NULL,
     na_strings = cleanepi::common_na_strings
   ),
   remove_duplicates = list(
-    target_columns = NULL,
-    rm_empty_rows = TRUE,
-    rm_empty_cols = TRUE,
-    rm_constant_cols = TRUE
+    target_columns = NULL
   ),
   standardize_dates = list(
     target_columns = c("date_onset", "date_sample"),
-    error_tolerance = 0.5,
+    error_tolerance = 0.4,
     format = NULL,
     timeframe = NULL,
     orders = list(
@@ -241,15 +240,31 @@ ops <- list(
     )
   ),
   standardize_subject_ids = list(
-    target_columns = "case_id"
+    target_columns = "case_id",
+    range = c(1, 15000)
   ),
   dictionary = test_dict,
-  to_numeric = "age"
+  target_columns = "age"
 )
 clean_data <- cleanepi::clean_data(
   data = raw_ebola_data,
   params = ops
 )
+
+# PERFORM THE OPERATIONS USING THE pipe SYNTAX
+cleaned_data <- raw_ebola_data |>
+    cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
+    cleanepi::replace_missing_values(target_columns = NULL) |>
+    cleanepi::remove_constant(cutoff = 1.0) |>
+    cleanepi::remove_duplicates(target_columns = NULL) |>
+    cleanepi::standardize_dates(target_columns = c("date_onset", "date_sample"),
+                                error_tolerance = 0.4,
+                                format          = NULL,
+                                timeframe       = NULL) |>
+    cleanepi::check_subject_ids(target_columns = "case_id",
+                                range          = c(1, 15000)) |>
+    cleanepi::convert_to_numeric(target_columns = "age") |>
+    cleanepi::clean_using_dictionary(dictionary = test_dict)
 ```
 
 ### Printing the clean report
