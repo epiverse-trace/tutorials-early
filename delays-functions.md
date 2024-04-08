@@ -68,8 +68,8 @@ Now, we have an epidemiological parameter we can use in our analysis! In the chu
 ```r
 generation_time <- 
   EpiNow2::dist_spec(
-    mean = covid_serialint$summary_stats$mean, # we changed this line :)
-    sd = 2,
+    mean = covid_serialint$summary_stats$mean, # replaced!
+    sd = covid_serialint$summary_stats$sd, # replaced!
     max = 20,
     distribution = "gamma"
   )
@@ -97,7 +97,7 @@ In R, all the statistical distributions have functions to access the following:
 - `quantile()`: **Quantile** function, and
 - `generate()`: **Random** values from the given distribution.
 
-:::::::::::: spoiler
+:::::::::::: checklist
 
 ### Functions for the Normal distribution
 
@@ -150,8 +150,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1]  4.436411  4.079876  7.023633 16.692691  4.443053  2.929674  5.768319
- [8]  4.648662  6.260220  6.995987
+ [1]  3.466710  3.231539  2.654693  4.223915  1.219574 10.411659  2.370048
+ [8]  3.720143  5.196095  4.732607
 ```
 
 ::::::::: instructor
@@ -419,7 +419,7 @@ Now we can plug everything into the `EpiNow2::dist_spec()` function!
 - a maximum value `max`,
 - the `distribution` name.
 
-But, before, in `EpiNow2::dist_spec()` for a **Lognormal** distribution we need the *distribution parameters* instead of the summary statistics:
+However, when using `EpiNow2::dist_spec()`, to define a **Lognormal** distribution, like the one in the `covid_serialint` object, we need to convert its summary statistics to distribution parameters named logmean and logsd. With `{epiparameter}` we can directly get the *distribution parameters* using `epiparameter::get_parameters()`:
 
 
 ```r
@@ -447,21 +447,7 @@ serial_interval_covid
   Fixed distribution with PMF [0.0073 0.1 0.2 0.19 0.15 0.11 0.075 0.051 0.035 0.023 0.016 0.011 0.0076 0.0053 0.0037 0.0027 0.0019 0.0014 0.001 0.00074 0.00055 0.00041 0.00031]
 ```
 
-:::::::::::::::::::::::::::::: callout
-
-### A code completion tip
-
-If we write the `[]` next to the object `covid_serialint_parameters[]`, within `[]` we can use the 
-Tab key <kbd>↹</kbd> 
-for [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) 
-
-This gives quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. 
-
-We invite you to try this out in code chunks and the R console!
-
-::::::::::::::::::::::::::::::
-
-Let's replace the `generation_time` input we used for `EpiNow2::epinow()`.
+Assuming a COVID-19 scenario, let's use the first 60 days of the `example_confirmed` data set from the `{EpiNow2}` package as `reported_cases` and the recently created `serial_interval_covid` object as inputs to estimate the time-varying reproduction number using `EpiNow2::epinow()`.
 
 
 ```r
@@ -474,10 +460,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-02 21:04:37] epinow: There were 3 divergent transitions after warmup. See
+WARN [2024-04-08 21:25:24] epinow: There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-02 21:04:37] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-08 21:25:24] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -486,6 +472,8 @@ base::plot(epinow_estimates_cg)
 ```
 
 <img src="fig/delays-functions-rendered-unnamed-chunk-16-1.png" style="display: block; margin: auto;" />
+
+The `plot()` output includes the estimated cases by date of infection, which are reconstructed from the reported cases and delays.
 
 :::::::::: callout
 
@@ -499,24 +487,21 @@ Using the serial interval instead of the generation time is an alternative that 
 
 Estimating $R_t$ requires data on the daily number of new infections. Due to lags in the development of detectable viral loads, symptom onset, seeking care, and reporting, these numbers are not readily available. All observations reflect transmission events from some time in the past. In other words, if $d$ is the delay from infection to observation, then observations at time $t$ inform $R_{t−d}$, not $R_t$. [(Gostic et al., 2020)](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)
 
-![Timeline for chain of disease reporting, the Netherlands. Lab, laboratory; PHA, public health authority. From [Marinović et al., 2015](https://wwwnc.cdc.gov/eid/article/21/2/13-0504_article)](fig/disease-reporting.jpg)
+![**Timeline for chain of disease reporting, the Netherlands.** Lab, laboratory; PHA, public health authority. From [Marinović et al., 2015](https://wwwnc.cdc.gov/eid/article/21/2/13-0504_article)](fig/disease-reporting.jpg)
 
-The **delay distribution** could be inferred jointly with the underlying times of infection or estimated as the sum of the **[incubation period](../learners/reference.md#incubation)** distribution and the distribution of delays from symptom onset to observation from line list data **([reporting delay](../learners/reference.md#reportingdelay))**.
+The **delay distribution** could be inferred jointly with the underlying times of infection or estimated as the sum of the [incubation period](../learners/reference.md#incubation) distribution and the distribution of delays from symptom onset to observation from line list data ([reporting delay](../learners/reference.md#reportingdelay)). For `{EpiNow2}`, we can specify these two complementary delay distributions in the `delays` argument.
 
-For `{EpiNow2}`, we can specify these two complementary delay distributions in the `delays` argument.
-
-![$R_{t}$ is a measure of transmission at time $t$. Observations after time $t$ must be adjusted. ICU, intensive care unit. From  [Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)](fig/rt-adjusting-delays.png)
+![**$R_{t}$ is a measure of transmission at time $t$.** Observations after time $t$ must be adjusted. ICU, intensive care unit. From  [Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409#sec007)](fig/rt-adjusting-delays.png)
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Reuse an Incubation period for COVID-19
+### Use an Incubation period for COVID-19 to estimate Rt
 
-Use `{epiparameter}` to:
-
-- Find an incubation period for COVID-19.
-- Add our last `epinow()` code chunk using the `delays` argument and the `delay_opts()` helper function.
+Estimate the time-varying reproduction number for the first 60 days of the `example_confirmed` data set from `{EpiNow2}`. Access to an incubation period for COVID-19 from `{epiparameter}` to use it as a reporting delay.
 
 ::::::::::::::::: hint
+
+Use the last `epinow()` calculation using the `delays` argument and the `delay_opts()` helper function.
 
 The `delays` argument and the `delay_opts()` helper function are analogous to the `generation_time` argument and the `generation_time_opts()` helper function.
 
@@ -604,14 +589,11 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-02 21:06:28] epinow: There were 9 divergent transitions after warmup. See
+WARN [2024-04-08 21:27:09] epinow: There were 10 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-02 21:06:28] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-08 21:27:09] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
-WARN [2024-04-02 21:06:29] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ```r
@@ -619,6 +601,8 @@ base::plot(epinow_estimates_cgi)
 ```
 
 <img src="fig/delays-functions-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
+
+Try to complement the `delays` argument with a reporting delay like the `reporting_delay_fixed` object of the previous episode.
 
 ::::::::::::::::::::::::::
 
@@ -634,11 +618,25 @@ After adding the incubation period, discuss:
 - Has the uncertainty changed?
 - How would you explain or interpret any of these changes?
 
-Compare the `{EpiNow2}` figures generated previously.
+Compare all the `{EpiNow2}` figures generated previously.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Challenges
+
+:::::::::::::::::::::::::::::: callout
+
+### A code completion tip
+
+If we write the `[]` next to the object `covid_serialint_parameters[]`, within `[]` we can use the 
+Tab key <kbd>↹</kbd> 
+for [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) 
+
+This gives quick access to `covid_serialint_parameters["meanlog"]` and `covid_serialint_parameters["sdlog"]`. 
+
+We invite you to try this out in code chunks and the R console!
+
+::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::: challenge
 
@@ -738,10 +736,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-02 21:09:53] epinow: There were 2 divergent transitions after warmup. See
+WARN [2024-04-08 21:30:34] epinow: There were 2 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-02 21:09:53] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-08 21:30:34] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
