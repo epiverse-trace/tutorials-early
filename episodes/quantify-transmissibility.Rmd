@@ -121,7 +121,11 @@ cases <- incidence2::covidregionaldataUK %>%
 
 ### When to use incidence2?
 
-We can also use the `{incidence2}` package to aggregate cases. However, if you ever need to aggregate you data in a different time **interval** (i.e., days, weeks or months) or per **group** categories, we recommend you to explore the `incidence2::incidence()` function:
+We can also use the `{incidence2}` package to:
+
+- Aggregate cases (similar to the code above) but in different time *intervals* (i.e., days, weeks or months) or per *group* categories. Explore later the [`incidence2::incidence()` reference manual](https://www.reconverse.org/incidence2/reference/incidence.html).
+
+- Complete dates for all the range of dates per group category using `incidence2::complete_dates()`. Read further in its [function reference manual](https://www.reconverse.org/incidence2/reference/complete_dates.html).
 
 ```{r, warning = FALSE, message = FALSE, eval=FALSE}
 library(tidyr)
@@ -134,12 +138,12 @@ incidence2::covidregionaldataUK %>%
   incidence2::incidence(
     date_index = "date",
     counts = "cases_new",
-    groups = "region",
-    interval = "week"
-  )
+    count_values_to = "confirm",
+    date_names_to = "date",
+  ) %>% 
+  # complete range of dates
+  incidence2::complete_dates()
 ```
-
-You can also estimate transmission metrics from {incidence2} objects using the `{i2extras}` package. Read further in the [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette!
 
 :::::::::::::::::::::::::
 
@@ -477,6 +481,13 @@ estimates_regional$summary$summarised_results$table
 estimates_regional$summary$plots$R
 ```
 
+:::::::::::::::::::::::::: testimonial
+
+### the i2extras package
+
+`{i2extras}` package also estimate transmission metrics like growth rate and doubling/halving time at different time intervals (i.e., days, weeks, or months). `{i2extras}` require `{incidence2}` objects as inputs. Read further in its [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette.
+
+::::::::::::::::::::::::::
 
 ## Summary
 
