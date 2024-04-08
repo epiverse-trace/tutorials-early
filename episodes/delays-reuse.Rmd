@@ -33,7 +33,7 @@ This episode requires you to be familiar with:
 
 ## Introduction
 
-The [natural history](../learners/reference.md#naturalhistory) of an infectious disease shows that its development has a regularity from stage to stage. The time periods from an infectious disease inform about the timing of transmission and interventions.
+The [natural history](../learners/reference.md#naturalhistory) of an infectious disease shows that its development has a regularity from stage to another, which roughly goes through: presymptomatic period, symptomatic period and recovery period. The time periods from an infectious disease inform about the timing of transmission and interventions.
 
 ![Definition of key time periods. From [Xiang et al, 2021](https://www.sciencedirect.com/science/article/pii/S2468042721000038)](fig/time-periods.jpg)
 
