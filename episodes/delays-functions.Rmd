@@ -67,8 +67,8 @@ Now, we have an epidemiological parameter we can use in our analysis! In the chu
 ```r
 generation_time <- 
   EpiNow2::dist_spec(
-    mean = covid_serialint$summary_stats$mean, # we changed this line :)
-    sd = 2,
+    mean = covid_serialint$summary_stats$mean, # replaced!
+    sd = covid_serialint$summary_stats$sd, # replaced!
     max = 20,
     distribution = "gamma"
   )
