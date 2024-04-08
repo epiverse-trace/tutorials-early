@@ -27,7 +27,7 @@ This episode requires you to be familiar with:
 
 **Data science** : Basic programming with R.
 
-**Epidemic theory** : Epidemiological parameters, Disease time periods, such as Incubation period, Generation time, Serial interval.
+**Epidemic theory** : epidemiological parameters, disease time periods, such as the incubation period, generation time, and serial interval.
 
 :::::::::::::::::::::::::::::::::
 
@@ -221,7 +221,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 ### CASE-INSENSITIVE
 
-`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly. Strings like `"serial"`, `"serial interval"` or `"serial_interval"` are valid.
+`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly. Strings like `"serial"`, `"serial interval"` or `"serial_interval"` are also valid.
 
 :::::::::::::::::::::::::
 
@@ -469,7 +469,7 @@ Now, we have an epidemiological parameter we can reuse! We can replace the **sum
 generation_time <- 
   EpiNow2::dist_spec(
     mean = covid_serialint$summary_stats$mean, # replaced!
-    sd = covid_serialint$summary_stats$, # replaced!
+    sd = covid_serialint$summary_stats$sd, # replaced!
     max = 20,
     distribution = "gamma"
   )
