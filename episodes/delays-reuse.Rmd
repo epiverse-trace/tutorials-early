@@ -77,11 +77,7 @@ generation_time <-
 
 It is a common practice for analysts to manually search the available literature and copy and paste the **summary statistics** or the **distribution parameters** from scientific publications. A challenge that is often faced is that the reporting of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to reliable estimates of distribution parameters for a range of infectious diseases, so that they can easily be implemented in outbreak analytic pipelines.
 
-<!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
-
-Today, we'll *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
-
-<!-- Instead of *manually* plug-in numeric values to `EpiNow2::dist_spec()` to specify the **summary statistics** of the delay distribution, we are going to *choose* them from the library of epidemiological parameters provided by `{epiparameter}`. -->
+In this episode, we will *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
 
 <!--
 ```r
