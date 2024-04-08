@@ -253,18 +253,18 @@ clean_data <- cleanepi::clean_data(
 
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
 cleaned_data <- raw_ebola_data |>
-    cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
-    cleanepi::replace_missing_values(target_columns = NULL) |>
-    cleanepi::remove_constant(cutoff = 1.0) |>
-    cleanepi::remove_duplicates(target_columns = NULL) |>
-    cleanepi::standardize_dates(target_columns = c("date_onset", "date_sample"),
-                                error_tolerance = 0.4,
-                                format          = NULL,
-                                timeframe       = NULL) |>
-    cleanepi::check_subject_ids(target_columns = "case_id",
-                                range          = c(1, 15000)) |>
-    cleanepi::convert_to_numeric(target_columns = "age") |>
-    cleanepi::clean_using_dictionary(dictionary = test_dict)
+  cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
+  cleanepi::replace_missing_values(target_columns = NULL) |>
+  cleanepi::remove_constant(cutoff = 1.0) |>
+  cleanepi::remove_duplicates(target_columns = NULL) |>
+  cleanepi::standardize_dates(target_columns = c("date_onset", "date_sample"),
+                              error_tolerance = 0.4,
+                              format          = NULL,
+                              timeframe       = NULL) |>
+  cleanepi::check_subject_ids(target_columns = "case_id",
+                              range          = c(1, 15000)) |>
+  cleanepi::convert_to_numeric(target_columns = "age") |>
+  cleanepi::clean_using_dictionary(dictionary = test_dict)
 ```
 
 ### Printing the clean report
