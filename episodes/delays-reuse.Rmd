@@ -474,8 +474,8 @@ Notice that with this output we can replace one of the inputs for the `EpiNow2::
 ```r
 generation_time <- 
   EpiNow2::dist_spec(
-    mean = covid_serialint$summary_stats$mean, # we changed this line :)
-    sd = 2,
+    mean = covid_serialint$summary_stats$mean, # replaced!
+    sd = covid_serialint$summary_stats$, # replaced!
     max = 20,
     distribution = "gamma"
   )
