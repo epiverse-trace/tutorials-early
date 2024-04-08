@@ -75,7 +75,7 @@ generation_time <-
   )
 ```
 
-Usually, we would *copy/paste* the **summary statistics** we found in a paper. Or, try to get the **distribution parameters** from those reports. An additional source of issue is that the report of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to parameters to implement them into your analysis pipeline. `{epiparameter}` provide information for a collection of distributions for a range of infectious diseases that is as accurate, unbiased and as comprehensive as possible.
+It is a common practice for analysts to manually search the available literature and copy and paste the **summary statistics** or the **distribution parameters** from scientific publications. A challenge that is often faced is that the reporting of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to reliable estimates of distribution parameters for a range of infectious diseases, so that they can easily be implemented in outbreak analytic pipelines.
 
 <!-- https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html -->
 
