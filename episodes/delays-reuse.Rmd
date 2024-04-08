@@ -8,7 +8,7 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to get easy access to delay distributions from a literature search database?
+- How to get access to disease delay distributions from a pre-established database for use in analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
