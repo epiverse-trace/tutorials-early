@@ -95,7 +95,7 @@ epinow_estimates <- epinow(
 ```
 -->
 
-## Find a Generation time
+## Generation time vs serial interval
 
 The generation time, jointly with the reproduction number ($R$), provide valuable insights on the strength of transmission and inform the implementation of control measures. Given a $R>1$, the shorter the generation time, the earlier the incidence of disease cases will grow.
 
@@ -108,7 +108,7 @@ This frequent approximation is because it is easier to observe and measure the o
 
 However, using the *serial interval* as an approximation of the *generation time* is primarily valid for diseases in which infectiousness starts after symptom onset ([Chung Lau et al., 2021](https://academic.oup.com/jid/article/224/10/1664/6356465)). In cases where infectiousness starts before symptom onset, the serial intervals can have negative values, which is the case for diseases with pre-symptomatic transmission ([Nishiura et al., 2020](https://www.ijidonline.com/article/S1201-9712(20)30119-3/fulltext#gr2)).
 
-Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation ([Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409)).
+<!-- Additionally, even if the *generation time* and *serial interval* have the same mean, their variance usually differs, propagating bias to the $R_{t}$ estimation ([Gostic et al., 2020](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008409)). -->
 
 ::::::::::::::::: callout
 
@@ -188,7 +188,7 @@ The objective of the assessment above is to assess the interpretation of a large
 
 In this section, we will use `{epiparameter}` to obtain the generation time and the serial interval for COVID-19, so these metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent sections of this episode.
 
-Let's start by looking at how many parameters we have in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
+Let's start by looking at how many entries are available in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
 
 ```{r}
 epiparameter::epidist_db(
@@ -206,7 +206,7 @@ epiparameter::epidist_db(
 )
 ```
 
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the abovementioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
+Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the above-mentioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
 
 ```{r,eval=FALSE}
 epiparameter::epidist_db(
@@ -221,7 +221,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 ### CASE-INSENSITIVE
 
-`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly.
+`epidist_db` is [case-insensitive](https://dillionmegida.com/p/case-sensitivity-vs-case-insensitivity/#case-insensitivity). This means that you can use strings with letters in upper or lower case indistinctly. Strings like `"serial"`, `"serial interval"` or `"serial_interval"` are valid.
 
 :::::::::::::::::::::::::
 
@@ -400,8 +400,6 @@ What is a *parametrised* `<epidist>`? Look at `?is_parameterised`.
 
 :::::::::::::::::::::::::
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into `EpiNow2::dist_spec()`.
-
 Let's assign this `<epidist>` class object to the `covid_serialint` object.
 
 ```{r,message=FALSE}
@@ -465,7 +463,7 @@ We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving
 covid_serialint$summary_stats$mean
 ```
 
-Notice that with this output we can replace one of the inputs for the `EpiNow2::dist_spec()` function:
+Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into the `EpiNow2::dist_spec()` function:
 
 ```r
 generation_time <- 
