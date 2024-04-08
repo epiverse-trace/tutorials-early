@@ -95,7 +95,7 @@ In R, all the statistical distributions have functions to access the following:
 - `quantile()`: **Quantile** function, and
 - `generate()`: **Random** values from the given distribution.
 
-:::::::::::: spoiler
+:::::::::::: checklist
 
 ### Functions for the Normal distribution
 
