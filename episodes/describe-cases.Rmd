@@ -22,9 +22,14 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
+In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps 
+determine relationships between variables and summarize their main characteristics often by means of data visualization. 
 
-A comprehensive description of data is pivotal for conducting insightful explanatory and exploratory analyses. This episode focuses on describing and visualizing epidemic data. The examples are built around the **Covid-19 case data from England** dataset that contained in the [outbreaks](http://www.reconverse.org/outbreaks/) package. The first step is to  read this dataset, and we recommend utilizing the [readr](../links.md#readr) package for this purpose (or employing alternative methods as outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
-
+This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved that using a couples of handy `R` packages. A key 
+observation in DA in epidemic analysis is discerning the relationship between time and the number of reported cases, 
+spanning various categories such as confirmed, hospitalized, deaths, and recoveries. 
+ 
+## 
 ```{r, warning=FALSE, message=FALSE}
 requireNamespace("outbreaks", quietly = TRUE)
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
