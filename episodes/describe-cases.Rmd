@@ -30,7 +30,7 @@ packages. A key observation in EDA of epidemic analysis is capturing the relatio
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
  
-## Synthetic outbreak 
+## Synthetic outbreak data
 To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
 for a hypothetical Ebola outbreak utilizing the `{simulist}` package. This line list dataset offers individual-level 
 information about the outbreak. For our simulation, we will assume that the dynamics of this outbreak are influenced by 
@@ -99,73 +99,30 @@ linelist <- simulist::sim_linelist(
 )
 utils::head(linelist)
 ```
-
-## Old code
-```{r, warning=FALSE, message=FALSE}
-requireNamespace("outbreaks", quietly = TRUE)
-covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
-utils::head(covid19_eng_case_data, 5)
-```
-
-## Incidence data
-
-Downstream analysis involves working with aggregated data rather than individual cases. This requires aggregating case data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the `covid19_eng_case_data` based on the sampling date.
+## Aggregating
+Downstream analysis involves working with aggregated data rather than individual cases. This requires grouping linelist 
+data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
+package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events 
+and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the 
+`covid19_eng_case_data` based on the sampling date.
 
 ```{r, message=FALSE, warning=FALSE}
 requireNamespace("incidence2", quietly = TRUE)
-covid19_eng_incidence_data <- incidence2::incidence(
-  covid19_eng_case_data,
-  date_index = "date"
+incidence_data <- incidence2::incidence(
+  linelist,
+  date_index = "date_onset",
+  interval = 1
 )
-utils::head(covid19_eng_incidence_data, 5)
+utils::head(incidence_data, 5)
 ```
-
+## visualization
 The `incidence2` object can be visualized using the `plot()` function from base R package. 
 
 ```{r, message=FALSE, warning=FALSE}
-base::plot(covid19_eng_incidence_data)
-```
-
-Moreover, `{incidence2}` has other functions that allow for aggregating case data based on a dated event and other factors such as the individual gender, the sampling location, etc. In the example below, we calculate weekly counts of Covid-19 cases in England grouping them by `sex` type.
-
-```{r, message=FALSE, warning=FALSE}
-weekly_covid19_eng_incidence <- incidence2::incidence(
-  covid19_eng_case_data,
-  date_index = "date",
-  interval = "week",
-  groups = "sex"
-)
-base::plot(weekly_covid19_eng_incidence, angle = 45)
-```
-
-
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
- - Using the above `covid91_eng_case_data`  dataset, produce monthly epi-curves for Covid-19 cases in England based on regional places in England?
-
-:::::::::::::::::::::::: solution 
-
- 
-```{r}
-monthly_covid19_eng_incidence <- incidence2::incidence(
-  covid19_eng_case_data,
-  date_index = "date",
-  interval = "month",
-  groups = "sex"
-)
-base::plot(monthly_covid19_eng_incidence, angle = 45)
-```
-
-:::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-::::::::::::::::::::::::::::::::::::: keypoints 
-
-- Use `{incidence2}` to aggregate case data based on a date event.  
-::::::::::::::::::::::::::::::::::::::::::::::::
-
+requireNamespace("ggplot2", quietly = TRUE)
+requireNamespace("tracetheme", quietly = TRUE)
+base::plot(incidence_data) + ggplot2::labs(
+  x = "Time (in days)",
+  y = "Dialy cases"
+) + tracetheme::theme_trace()
+``` 

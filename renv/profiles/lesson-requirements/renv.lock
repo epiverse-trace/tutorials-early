@@ -2358,6 +2358,13 @@
       "Repository": "CRAN",
       "Hash": "3a1be13d68d47a8cd0bfd74739ca1555"
     },
+    "sysfonts": {
+      "Package": "sysfonts",
+      "Version": "0.8.9",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7dfca1e9c5c278300b5ca6a1772072f7"
+    },
     "systemfonts": {
       "Package": "systemfonts",
       "Version": "1.0.5",
@@ -2540,6 +2547,26 @@
         "testthat"
       ],
       "Hash": "875a5ad839758abb126f89cdb4d64434"
+    },
+    "tracetheme": {
+      "Package": "tracetheme",
+      "Version": "0.1.0.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "tracetheme",
+      "RemoteUsername": "epiverse-trace",
+      "RemotePkgRef": "epiverse-trace/tracetheme",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "26a8d219e2a5d1a47328e7905a2d3e2c0436f74c",
+      "Requirements": [
+        "R",
+        "curl",
+        "ggplot2",
+        "jsonlite",
+        "sysfonts"
+      ],
+      "Hash": "735ab1bcf7d41136798d449130d7a9cc"
     },
     "truncnorm": {
       "Package": "truncnorm",
