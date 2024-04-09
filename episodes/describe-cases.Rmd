@@ -26,15 +26,20 @@ In an analytic pipeline, exploratory data analysis (EDA) is an important step be
 determine relationships between variables and summarize their main characteristics often by means of data visualization. 
 
 This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved that using a couples of handy `R` 
-packages. A key observation in DA in epidemic analysis is discerning the relationship between time and the number of 
+packages. A key observation in EDA of epidemic analysis is capturing the relationship between time and the number of 
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
  
 ## Synthetic outbreak 
-To demonstrate how to perform EDA on an outbreak data, we are going to generate line list of a hypthoical Ebola outbreak
-using the `{simulist}` package. The line list dataset provide an individual-level information about the outbreak. 
+To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
+for a hypothetical Ebola outbreak utilizing the `{simulist}` package. This line list dataset offers individual-level 
+information about the outbreak. For our simulation, we will assume that the dynamics of this outbreak are influenced by 
+several factors: the contact distribution (average number of contacts for an infected case), distribution of contact 
+intervals (time period between contacts), and the delay distributions of onset to hospitalization and onset to death. 
+These latter distributions can be sourced from literature and are conveniently available in the `{epiparameter}` 
+package, see the below code chunk.
 
-```{r}
+```{r, warning=FALSE, message=FALSE}
 requireNamespace("simulist", quietly = TRUE)
 requireNamespace("epiparameter", quietly = TRUE)
 contact_dist <- epiparameter::epidist(
@@ -44,23 +49,55 @@ contact_dist <- epiparameter::epidist(
   prob_distribution_params = c(mean = 4)
 )
 cont_interval <- epiparameter::epidist(
-  disease = "COVID-19",
+  disease = "Ebola",
   epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
+# Define onset to hospitalized
+onset_to_hosp <- contact_dist <- epiparameter::epidist(
+  disease = "Ebola",
+  epi_dist = "onset to hospitalisatio",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 14)
+)
+
 # get onset to death from {epiparameter} database
 onset_to_death <- epiparameter::epidist_db(
   disease = "Ebola",
   epi_dist = "onset to death",
   single_epidist = TRUE
 )
-linelist <- simulist::sim_linelist(
-  contact_distribution = contact_dist,
-  contact_interval = cont_interval,
-  prob_infect = 0.8,
-  onset_to_death = onset_to_death
+infect_period <- epiparameter::epidist(
+  disease = "Ebola",
+  epi_dist = "Infectious period",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
 )
+```
+Additionally, we assume that the outbreak started at the beginning of 2023, is highly contagious with a probability of 
+infection of 80%, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
+the mentioned distributions, the code chunk below generates a simulated line list:
+```{r, warning=FALSE, message=FALSE}
+base::set.seed(1)
+linelist <- simulist::sim_linelist(
+  contact_dist,
+  infect_period,
+  prob_infect = 0.8,
+  onset_to_hosp,
+  onset_to_death,
+  hosp_risk = 0.2,
+  hosp_death_risk = 0.5,
+  non_hosp_death_risk = 0.05,
+  outbreak_start_date = as.Date("2023-01-01"),
+  add_names = TRUE,
+  add_ct = TRUE,
+  outbreak_size = c(1000, 10000),
+  population_age = c(1, 90),
+  case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
+  config = simulist::create_config()
+)
+utils::head(linelist)
 ```
 
 ## Old code
