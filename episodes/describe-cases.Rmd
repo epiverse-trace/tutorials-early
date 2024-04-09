@@ -25,11 +25,45 @@ exercises: 2
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps 
 determine relationships between variables and summarize their main characteristics often by means of data visualization. 
 
-This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved that using a couples of handy `R` packages. A key 
-observation in DA in epidemic analysis is discerning the relationship between time and the number of reported cases, 
-spanning various categories such as confirmed, hospitalized, deaths, and recoveries. 
+This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved that using a couples of handy `R` 
+packages. A key observation in DA in epidemic analysis is discerning the relationship between time and the number of 
+reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
+demographic factors such as gender, age, etc.  
  
-## 
+## Synthetic outbreak 
+To demonstrate how to perform EDA on an outbreak data, we are going to generate line list of a hypthoical Ebola outbreak
+using the `{simulist}` package. The line list dataset provide an individual-level information about the outbreak. 
+
+```{r}
+requireNamespace("simulist", quietly = TRUE)
+requireNamespace("epiparameter", quietly = TRUE)
+contact_dist <- epiparameter::epidist(
+  disease = "Ebola",
+  epi_dist = "contact distribution",
+  prob_distribution = "pois",
+  prob_distribution_params = c(mean = 4)
+)
+cont_interval <- epiparameter::epidist(
+  disease = "COVID-19",
+  epi_dist = "contact interval",
+  prob_distribution = "gamma",
+  prob_distribution_params = c(shape = 1, scale = 1)
+)
+# get onset to death from {epiparameter} database
+onset_to_death <- epiparameter::epidist_db(
+  disease = "Ebola",
+  epi_dist = "onset to death",
+  single_epidist = TRUE
+)
+linelist <- simulist::sim_linelist(
+  contact_distribution = contact_dist,
+  contact_interval = cont_interval,
+  prob_infect = 0.8,
+  onset_to_death = onset_to_death
+)
+```
+
+## Old code
 ```{r, warning=FALSE, message=FALSE}
 requireNamespace("outbreaks", quietly = TRUE)
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
