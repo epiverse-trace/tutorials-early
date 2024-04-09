@@ -1,7 +1,7 @@
 ---
 title: 'Aggregate and visulaize'
 teaching: 10
-exercises: 2
+exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -44,7 +44,7 @@ contact_dist <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "contact distribution",
   prob_distribution = "pois",
-  prob_distribution_params = c(mean = 4)
+  prob_distribution_params = c(mean = 2)
 )
 cont_interval <- epiparameter::epidist(
   disease = "Ebola",
@@ -57,7 +57,7 @@ onset_to_hosp <- contact_dist <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "onset to hospitalisatio",
   prob_distribution = "pois",
-  prob_distribution_params = c(mean = 14)
+  prob_distribution_params = c(mean = 7)
 )
 
 # get onset to death from {epiparameter} database
@@ -81,7 +81,7 @@ base::set.seed(1)
 linelist <- simulist::sim_linelist(
   contact_dist,
   infect_period,
-  prob_infect = 0.8,
+  prob_infect = 0.6,
   onset_to_hosp,
   onset_to_death,
   hosp_risk = 0.2,
@@ -126,6 +126,27 @@ weekly_incidence_data <- incidence2::incidence(
 utils::head(weekly_incidence_data, 5)
 ```
 
+::::::::::::::::::::::::::::::::::::: callout
+## Notes 
+When cases are grouped by different factors, it's possible that these groups may have different date ranges in the 
+resulting `incidence2` object. The `incidence2` package provides a function called `complete_dates()` to ensure that an
+ incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
+
+```{r, message=FALSE, warning=FALSE}
+requireNamespace("incidence2", quietly = TRUE)
+dialy_incidence_data_2 <- incidence2::incidence(
+  linelist,
+  date_index = "date_onset",
+  groups = "sex",
+  interval = 1
+)
+incidence2::complete_dates(dialy_incidence_data_2,
+  expand = TRUE,
+  fill = 0L, by = 1L,
+  allow_POSIXct = FALSE
+)
+```
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## visualization
 
