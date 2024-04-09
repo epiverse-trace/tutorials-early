@@ -14,11 +14,9 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Convert case data to incidence 
+- Simulate synthetic outbreak data
+- Convert linelist data to incidence 
 - Create epidemic curves from incidence data
-- Estimate the growth rate from incidence curves
-- Create quick descriptive and comparison tables
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
@@ -104,7 +102,7 @@ Downstream analysis involves working with aggregated data rather than individual
 data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
 package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events 
 and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the 
-`covid19_eng_case_data` based on the sampling date.
+simulated `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
 requireNamespace("incidence2", quietly = TRUE)
@@ -127,6 +125,18 @@ base::plot(incidence_data) + ggplot2::labs(
 ) + tracetheme::theme_trace()
 ``` 
 
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 1: Can you do it?
+
+ - Using suitable distributions for contacts, contact interval, infectious period, onset to hospitalized, and onset to 
+ death to generate simulated linelist data for a Marburg outbreak that has probability of $0.5$ infection?
+ - Aggregate the generated linelist and produce some a few epidemic curves?
+
+
+:::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
