@@ -45,7 +45,7 @@ cleanepi::scan_data(raw_ebola_data)
 The results provides an overview of the content of every column, including column names, and the percent of some data types per column.
 You can see that the column names in the dataset are descriptive but lack consistency, as some they are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are missing values in others.
 
-## Common data cleaning operations
+## Common operations
 
 This section  demonstrate how to perform some common data cleaning operations using the `{cleanepi}` package.
 
@@ -136,7 +136,7 @@ sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
 utils::head(sim_ebola_data)
 ```
 
-## Epidemiology related data cleaning operations
+## Epidemiology related operations
 
 In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers 
 additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data. This section 
