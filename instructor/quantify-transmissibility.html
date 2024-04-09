@@ -82,11 +82,17 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown"><hr><li><a class="dropdown-item" href="reference.html">Glossary of Terms: Epiverse-TRACE</a></li>
           </ul></li>
       </ul></div>
+    <!--
     <form class="d-flex col-md-2 search-form">
-      <fieldset disabled><input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search"><button class="btn btn-outline-success tablet-search-button" type="submit">
+      <fieldset disabled>
+      <input class="form-control me-2 searchbox" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success tablet-search-button"  type="submit">
           <i class="search-icon" data-feather="search" role="img" aria-label="search button"></i>
         </button>
-      </fieldset></form>
+      </fieldset>
+    </form>
+    -->
+    <a class="btn btn-primary" href="../aio.html" role="button">search button</a>
   </div><!--/div.container-fluid -->
 </nav><div class="col-md-12 mobile-title">
   Accessing and using delays to Quantify transmission
@@ -375,7 +381,7 @@ likelihood <span class="math inline">\(\times\)</span> prior probability
   <h3 class="accordion-header" id="headingInstructor1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Instructor Note</h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Refer to the prior probability distribution and the <a href="https://en.wikipedia.org/wiki/Posterior_probability" class="external-link">posterior
 probability</a> distribution.</p>
@@ -400,7 +406,7 @@ under the posterior probability distribution curve</a>.</p>
   <h3 class="accordion-header" id="headingInstructor2">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div>Instructor Note</h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>This tutorial illustrates the usage of <code>epinow()</code> to
 estimate the time-varying reproduction number and infection times.
@@ -469,7 +475,7 @@ Kingdom. The data are available in the R package
   <h3 class="accordion-header" id="headingSpoiler1">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>When to use incidence2?</h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>We can also use the <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> package to:</p>
 <ul><li><p>Aggregate cases (similar to the code above) but in different time
@@ -769,7 +775,7 @@ uncertainty.</em></p>
   <h3 class="accordion-header" id="headingSpoiler2">
 <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>On reducing computation time</h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Using an appropriate number of samples and chains is crucial for
 ensuring convergence and obtaining reliable estimates in Bayesian
