@@ -102,26 +102,53 @@ Downstream analysis involves working with aggregated data rather than individual
 data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
 package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events 
 and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the 
-simulated `linelist` data based on the  date of onset.
+simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
 requireNamespace("incidence2", quietly = TRUE)
-incidence_data <- incidence2::incidence(
+dialy_incidence_data <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
   interval = 1
 )
-utils::head(incidence_data, 5)
+utils::head(dialy_incidence_data, 5)
 ```
+Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
+more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
+
+```{r}
+weekly_incidence_data <- incidence2::incidence(
+  linelist,
+  date_index = "date_onset",
+  interval = 7,
+  groups = c("sex", "case_type")
+)
+utils::head(weekly_incidence_data, 5)
+```
+
+
 ## visualization
-The `incidence2` object can be visualized using the `plot()` function from base R package. 
+
+"The `incidence2` object can be visualized using the `plot()` function from the base R package. 
+The resulting graph is referred to as an epidemic curve, or epi-curve for short. The following code 
+snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
 
 ```{r, message=FALSE, warning=FALSE}
 requireNamespace("ggplot2", quietly = TRUE)
 requireNamespace("tracetheme", quietly = TRUE)
-base::plot(incidence_data) + ggplot2::labs(
+base::plot(dialy_incidence_data) + ggplot2::labs(
   x = "Time (in days)",
   y = "Dialy cases"
+) + tracetheme::theme_trace()
+``` 
+
+
+```{r, message=FALSE, warning=FALSE}
+requireNamespace("ggplot2", quietly = TRUE)
+requireNamespace("tracetheme", quietly = TRUE)
+base::plot(weekly_incidence_data) + ggplot2::labs(
+  x = "Time (in days)",
+  y = "weekly cases"
 ) + tracetheme::theme_trace()
 ``` 
 
@@ -130,16 +157,14 @@ base::plot(incidence_data) + ggplot2::labs(
 ## Challenge 1: Can you do it?
 
  - Using suitable distributions for contacts, contact interval, infectious period, onset to hospitalized, and onset to 
- death to generate simulated linelist data for a Marburg outbreak that has probability of $0.5$ infection?
- - Aggregate the generated linelist and produce some a few epidemic curves?
-
-
-:::::::::::::::::::::::::::::::::
+ death, generate a simulated linelist data for  Marburg outbreak that has the probability of $0.5$ infection?
+ - Aggregate the generated linelist and produce some epidemic curves?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{simulist}` to generate synthetic outbreak data
-- Use `{incidence2}` to aggregate and visualize case data based on a date event.  
+- Use `{simulist}` package to generate synthetic outbreak data
+- Use `{incidence2}` package to aggregate case data based on a date event. 
+- Use `{incidence2}` package to produce epidemic curves.
 ::::::::::::::::::::::::::::::::::::::::::::::::
