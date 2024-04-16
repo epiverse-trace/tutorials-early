@@ -80,6 +80,9 @@ rio:::rio_formats %>%
   select(-import_function) %>% 
   knitr::kable()
 `` ` (FIX THIS chunk closure)
+
+Access to all the available formats run:
+
 ```{r, eval=FALSE}
 rio::install_formats()
 ```
