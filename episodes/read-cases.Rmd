@@ -39,7 +39,9 @@ The below example shows how to import a `csv` file into `R` environment using `{
 
 ```{r,warning=FALSE,message=FALSE}
 requireNamespace("rio", quietly = TRUE)
-case_data <- rio::import(file.path("data", "ebola_cases.csv", fsep = "/"))
+# read data
+# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
+case_data <- rio::import(here::here("data", "ebola_cases.csv"))
 head(case_data, 5)
 ```
 
