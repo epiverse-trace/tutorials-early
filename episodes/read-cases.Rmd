@@ -92,6 +92,7 @@ loadNamespace(RSQLite)
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+
 # Store the 'case_data' dataframe as a table named 'cases'
 # in the SQLite database
 DBI::dbWriteTable(db_con, "cases", case_data)
