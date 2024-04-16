@@ -38,11 +38,10 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 ```{r,warning=FALSE,message=FALSE}
-loadNamespace(rio)
-loadNamespace(here)
+library("rio")
+library("here")
 # read data
-# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
-case_data <- rio::import(here::here("data", "ebola_cases.csv"))
+case_data <- rio::import(here::here("built","data", "ebola_cases.csv"))
 head(case_data, 5)
 ```
 
@@ -71,7 +70,7 @@ rio::install_formats()
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
-rio::import(file.path("path", "file_name.zip", fsep = "/"))
+rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))
 ```
 
 ::::::::::::::::::::::::::
@@ -87,8 +86,8 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
-loadNamespace(DBI)
-loadNamespace(RSQLite)
+library("DBI")
+library("RSQLite")
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")

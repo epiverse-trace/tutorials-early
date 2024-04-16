@@ -13,7 +13,7 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how clean, curate, and standardize case data using `{cleanepi}` package
+- Explain how to clean, curate, and standardize case data using `{cleanepi}` package
 - Demonstrate how to covert case data to `linelist` data 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -25,9 +25,10 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r}
-requireNamespace("rio", quietly = TRUE)
+loadNamespace("rio")
+loadNamespace("here")
 raw_ebola_data <- rio::import(
-  file.path("data", "simulated_ebola_2.csv", fsep = "/")
+  here::here("episodes", "data", "simulated_ebola_2.csv")
 )
 utils::head(raw_ebola_data, 5)
 ```
@@ -37,7 +38,7 @@ utils::head(raw_ebola_data, 5)
 Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-requireNamespace("cleanepi", quietly = TRUE)
+loadNamespace("cleanepi")
 cleanepi::scan_data(raw_ebola_data)
 ```
 
