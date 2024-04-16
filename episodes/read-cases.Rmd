@@ -42,7 +42,7 @@ The below example shows how to import a `csv` file into `R` environment using `{
 library("rio")
 library("here")
 # read data
-case_data <- rio::import(here::here("built","data", "ebola_cases.csv"))
+case_data <- rio::import(here::here("built", "data", "ebola_cases.csv"))
 head(case_data, 5)
 ```
 
