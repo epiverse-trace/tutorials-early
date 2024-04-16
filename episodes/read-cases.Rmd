@@ -109,8 +109,9 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
-requireNamespace("DBI", quietly = TRUE)
-requireNamespace("RSQLite", quietly = TRUE)
+library(DBI)
+library(RSQLite)
+
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
 # Store the 'case_data' dataframe as a table named 'cases'
