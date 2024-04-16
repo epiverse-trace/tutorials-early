@@ -57,7 +57,29 @@ Take 1 minute:
 
 ::::::::::::::::: hint
 
-You can check the supported file formats in the `{rio}` package as follows:
+You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) in the `{rio}` package on the package website. Here is a selection of some key ones:
+
+```{r, message = FALSE, warning=FALSE, echo = FALSE}
+library(tidyverse)
+rio:::rio_formats %>% 
+  as_tibble() %>% 
+  filter(
+    magrittr::is_in(
+      input,
+      c("epiinfo","excel","zip","parquet","json","googlesheets")
+      )
+    ) %>% 
+  select(
+    "Name" = format_name, 
+    "Format" = input, 
+    import_function) %>% 
+  mutate(
+    import_function = str_replace(import_function,"(.+)::(.+)","\\1"),
+    "Import package" = str_replace(import_function, "(.+)","\\{\\1\\}")
+  ) %>% 
+  select(-import_function) %>% 
+  knitr::kable()
+`` ` (FIX THIS chunk closure)
 ```{r, eval=FALSE}
 rio::install_formats()
 ```
