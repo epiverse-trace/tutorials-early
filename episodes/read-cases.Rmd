@@ -38,8 +38,8 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 ```{r,warning=FALSE,message=FALSE}
-library(rio)
-library(here)
+loadNamespace(rio)
+loadNamespace(here)
 # read data
 # e.g.: if path to file is data/raw-data/ebola_cases.csv then:
 case_data <- rio::import(here::here("data", "ebola_cases.csv"))
@@ -59,27 +59,6 @@ Take 1 minute:
 
 You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) in the `{rio}` package on the package website. Here is a selection of some key ones:
 
-```{r, message = FALSE, warning=FALSE, echo = FALSE}
-library(tidyverse)
-rio:::rio_formats %>% 
-  as_tibble() %>% 
-  filter(
-    magrittr::is_in(
-      input,
-      c("epiinfo","excel","zip","parquet","json","googlesheets")
-      )
-    ) %>% 
-  select(
-    "Name" = format_name, 
-    "Format" = input, 
-    import_function) %>% 
-  mutate(
-    import_function = str_replace(import_function,"(.+)::(.+)","\\1"),
-    "Import package" = str_replace(import_function, "(.+)","\\{\\1\\}")
-  ) %>% 
-  select(-import_function) %>% 
-  knitr::kable()
-`` ` (FIX THIS chunk closure)
 
 Access to all the available formats run:
 
@@ -92,7 +71,6 @@ rio::install_formats()
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
-requireNamespace("rio", quietly = TRUE)
 rio::import(file.path("path", "file_name.zip", fsep = "/"))
 ```
 
@@ -109,8 +87,8 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
 
 ```{r,warning=FALSE,message=FALSE}
-library(DBI)
-library(RSQLite)
+loadNamespace(DBI)
+loadNamespace(RSQLite)
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
