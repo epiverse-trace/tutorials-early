@@ -59,7 +59,6 @@ Take 1 minute:
 
 You can check the supported file formats in the `{rio}` package as follows:
 ```{r, eval=FALSE}
-requireNamespace("rio", quietly = TRUE)
 rio::install_formats()
 ```
 
