@@ -38,7 +38,8 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 ```{r,warning=FALSE,message=FALSE}
-requireNamespace("rio", quietly = TRUE)
+library(rio)
+library(here)
 # read data
 # e.g.: if path to file is data/raw-data/ebola_cases.csv then:
 case_data <- rio::import(here::here("data", "ebola_cases.csv"))
