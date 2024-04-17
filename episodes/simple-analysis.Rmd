@@ -1,5 +1,5 @@
 ---
-title: 'Early analysis'
+title: 'Simple analysis'
 teaching: 10
 exercises: 2
 ---
@@ -32,9 +32,9 @@ The `i2extras` package provides methods for modelling the trend in case data, ca
 
 ```{r, warning=FALSE, message=FALSE}
 # loads the i2extras package, which provides methods for modeling
-requireNamespace("i2extras", quietly = TRUE)
+library("i2extras")
 # This line loads the i2extras package, which provides methods for modeling
-requireNamespace("incidence2", quietly = TRUE)
+library("incidence2")
 # subset the covid19_eng_case_data to include only the first 3 months of data
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
 df <- base::subset(
@@ -108,7 +108,7 @@ base::print(peaks_nb)
 A moving or rolling average calculates the average number of cases within a specified time period. This can be achieved by utilizing the `add_rolling_average()` function from the `{i2extras}` package on an `incidence2 object`. The following code chunk demonstrates the computation of the weekly average number of cases from the `incidence2` object `df_incid`, followed by visualization.
 
 ```{r, warning=FALSE, message=FALSE}
-requireNamespace("ggplot2", quietly = TRUE)
+library("ggplot2")
 moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
 base::plot(moving_Avg_week, border_colour = "white", angle = 45) +
   ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average,
