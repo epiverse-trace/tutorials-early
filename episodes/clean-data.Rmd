@@ -25,8 +25,8 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r}
-loadNamespace("rio")
-loadNamespace("here")
+library("rio")
+library("here")
 raw_ebola_data <- rio::import(
   here::here("episodes", "data", "simulated_ebola_2.csv")
 )
@@ -38,7 +38,7 @@ utils::head(raw_ebola_data, 5)
 Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-loadNamespace("cleanepi")
+library("cleanepi")
 cleanepi::scan_data(raw_ebola_data)
 ```
 
