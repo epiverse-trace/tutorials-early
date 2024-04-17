@@ -264,7 +264,7 @@ it's essential to establish an additional foundational layer to ensure the integ
   below code chunk.
 
 ```{r}
-requireNamespace("linelist", quietly = TRUE)
+library("linelist")
 data <- linelist::make_linelist(cleaned_data,
   id = "case_id",
   age = "age",
@@ -274,3 +274,11 @@ data <- linelist::make_linelist(cleaned_data,
 )
 utils::head(data, 7)
 ```
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `{cleanepi}` package to clean and standardize epidemic and outbreak data
+- Use `{linelist}` to tagg, validate, and prepare case data for downstream analysis.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+

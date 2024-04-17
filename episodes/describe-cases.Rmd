@@ -38,8 +38,8 @@ These latter distributions can be sourced from literature and are conveniently a
 package, see the below code chunk.
 
 ```{r, warning=FALSE, message=FALSE}
-requireNamespace("simulist", quietly = TRUE)
-requireNamespace("epiparameter", quietly = TRUE)
+library("simulist")
+library("epiparameter")
 contact_dist <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "contact distribution",
@@ -105,7 +105,7 @@ and/or other factors. The code chunk provided below demonstrates the creation of
 simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
-requireNamespace("incidence2", quietly = TRUE)
+library("incidence2")
 dialy_incidence_data <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
@@ -133,7 +133,6 @@ resulting `incidence2` object. The `incidence2` package provides a function call
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
 ```{r, message=FALSE, warning=FALSE}
-requireNamespace("incidence2", quietly = TRUE)
 dialy_incidence_data_2 <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
@@ -155,8 +154,8 @@ The resulting graph is referred to as an epidemic curve, or epi-curve for short.
 snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
 
 ```{r, message=FALSE, warning=FALSE}
-requireNamespace("ggplot2", quietly = TRUE)
-requireNamespace("tracetheme", quietly = TRUE)
+library("ggplot2")
+library("tracetheme")
 base::plot(dialy_incidence_data) + ggplot2::labs(
   x = "Time (in days)",
   y = "Dialy cases"
@@ -165,8 +164,6 @@ base::plot(dialy_incidence_data) + ggplot2::labs(
 
 
 ```{r, message=FALSE, warning=FALSE}
-requireNamespace("ggplot2", quietly = TRUE)
-requireNamespace("tracetheme", quietly = TRUE)
 base::plot(weekly_incidence_data) + ggplot2::labs(
   x = "Time (in days)",
   y = "weekly cases"
@@ -186,6 +183,6 @@ base::plot(weekly_incidence_data) + ggplot2::labs(
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{simulist}` package to generate synthetic outbreak data
-- Use `{incidence2}` package to aggregate case data based on a date event. 
-- Use `{incidence2}` package to produce epidemic curves.
+- Use `{incidence2}` package to aggregate case data based on a date event, and produce epidemic curves. 
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
