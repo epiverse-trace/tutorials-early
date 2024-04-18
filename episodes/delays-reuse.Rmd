@@ -1,7 +1,7 @@
 ---
 title: 'Access epidemiological delay distributions'
-teaching: 10
-exercises: 2
+teaching: 20
+exercises: 10
 editor_options: 
   chunk_output_type: inline
 ---
