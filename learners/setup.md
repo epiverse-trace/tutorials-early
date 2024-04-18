@@ -43,7 +43,7 @@ This course assumes intermediate R knowledge. This workshop is for you if:
 
 - You can read data into R, transform and reshape data, and make a wide variety of graphs
 - You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
-- You can use the magrittr pipe `%>%` and/or native pipe `|>`
+- You can use the magrittr pipe `%>%` and/or native pipe `|>`.
 
 
 We expect participants to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
@@ -75,7 +75,7 @@ This tutorial requires **R version 4.0.0 or later**.
 
 To check if your R version is up to date:
 
-- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()` there.
+- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()`.
 
 - **To update R**, download and install the latest version from the [R project website](https://cran.rstudio.com/) for your operating system.
 
