@@ -12,7 +12,9 @@ Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**]
 
 The tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
 
+<p style="text-align: center;">
 ![An overview of the tutorial topics](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
+</p>
 
 Each task has its tutorial website. Each tutorial website consists of a set of episodes.
 
