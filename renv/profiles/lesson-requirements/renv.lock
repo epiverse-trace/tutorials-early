@@ -507,8 +507,8 @@
       "Package": "cleanepi",
       "Version": "0.0.2",
       "Source": "GitHub",
-      "Remotes": "epiverse-trace/numberize",
       "RemoteType": "github",
+      "Remotes": "epiverse-trace/numberize",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "cleanepi",
       "RemoteUsername": "epiverse-trace",
@@ -516,7 +516,6 @@
       "RemoteRef": "HEAD",
       "RemoteSha": "891aa9f90558f9effc73cd12606175a4336f3d39",
       "Requirements": [
-        "R",
         "R.utils",
         "arsenal",
         "checkmate",
@@ -534,7 +533,7 @@
         "stringr",
         "utils"
       ],
-      "Hash": "6f6364aa60fd03e9d4ee14149b0d0036"
+      "Hash": "14303262935716a84136af3ba86f3c1f"
     },
     "cli": {
       "Package": "cli",
