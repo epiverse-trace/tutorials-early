@@ -1,6 +1,6 @@
 ---
 title: 'Aggregate and visulaize'
-teaching: 10
+teaching: 20
 exercises: 10
 ---
 

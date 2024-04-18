@@ -1,7 +1,7 @@
 ---
 title: 'Read case data'
 teaching: 20
-exercises: 2
+exercises: 10
 editor_options: 
   chunk_output_type: inline
 ---
