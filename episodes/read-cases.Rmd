@@ -104,7 +104,7 @@ DBI::dbDisconnect(db_con)
 base::print(utils::head(result))
 ```
 
-This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `case_data` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`. More examples about SQL databases and R can be found [here](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html).
+This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `case_data` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`. Read this [tutorial episode on SQL databases and R](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html) for more examples.
 
 :::::::::::::::::::::: callout
 
