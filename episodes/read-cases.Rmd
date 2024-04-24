@@ -110,7 +110,7 @@ This code first establishes a connection to an SQLite database created in memory
 
 ### Run SQL queries in R using dbplyr
 
-Using a database interface package is invaluable for optimizing memory usage because it can strategically limit the amount of data pulled from the database through queries. By leveraging such a package, one can ensure that most aggregation tasks are performed directly within the database before extracting the necessary information. This approach minimizes the need to load large datasets into local memory for processing, thereby conserving resources and enhancing performance. Conversely, relying solely on external data manipulation processes can lead to suboptimal memory usage. Conducting all data operations outside the database could tax system resources and hinder efficiency.
+A database interface package optimize memory usage by processing the database before extraction, reducing memory load. Conversely, conducting all data manipulation outside the database (e.g., in our local Rstudio session) can lead to inefficient memory usage and strained system resources.
 
 Read the [Introduction to dbplyr](https://dbplyr.tidyverse.org/articles/dbplyr.html) vignette to learn how to generate your own queries!
 
