@@ -25,11 +25,16 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r, message=FALSE}
+# Load packages
 library("rio")
 library("here")
+
+# Read data
 raw_ebola_data <- rio::import(
   here::here("built", "data", "simulated_ebola_2.csv")
 )
+
+# Return first five rows
 utils::head(raw_ebola_data, 5)
 ```
 
