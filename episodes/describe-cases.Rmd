@@ -147,7 +147,7 @@ incidence2::complete_dates(dialy_incidence_data_2,
 ```
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## visualization
+## Visualization
 
 "The `incidence2` object can be visualized using the `plot()` function from the base R package. 
 The resulting graph is referred to as an epidemic curve, or epi-curve for short. The following code 
