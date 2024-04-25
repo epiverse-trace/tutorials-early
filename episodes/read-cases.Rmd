@@ -72,16 +72,9 @@ Take 1 minute:
 
 ::::::::::::::::: hint
 
-You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) in the `{rio}` package on the package website. Here is a selection of some key ones:
-
-
-Access to all the available formats run:
-
-```{r, eval=FALSE}
-rio::install_formats()
-```
-
-::::::::::::::::::::::
+You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) in the 
+`{rio}` package on the package website. Here is a selection of some key ones. You can also download a zip file for 
+[Marburg outbreak](https://github.com/epiverse-trace/tutorials-early/blob/md-outputs-PR-39/data/Marburg.zip)
 
 ::::::::::::::::: solution
 
