@@ -20,6 +20,7 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
+
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps 
 determine relationships between variables and summarize their main characteristics often by means of data visualization. 
 
@@ -29,6 +30,7 @@ reported cases, spanning various categories (confirmed, hospitalized, deaths, an
 demographic factors such as gender, age, etc.  
  
 ## Synthetic outbreak data
+
 To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
 for a hypothetical Ebola outbreak utilizing the `{simulist}` package. This line list dataset offers individual-level 
 information about the outbreak. For our simulation, we will assume that the dynamics of this outbreak are influenced by 
@@ -38,21 +40,27 @@ These latter distributions can be sourced from literature and are conveniently a
 package, see the below code chunk.
 
 ```{r, warning=FALSE, message=FALSE}
+# Load simulist and epiparameter packages
 library("simulist")
 library("epiparameter")
+
+# Define contact distribution
 contact_dist <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "contact distribution",
   prob_distribution = "pois",
   prob_distribution_params = c(mean = 2)
 )
+
+# Define  distribution for interval between contact
 cont_interval <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "contact interval",
   prob_distribution = "gamma",
   prob_distribution_params = c(shape = 1, scale = 1)
 )
-# Define onset to hospitalized
+
+# Define onset to hospitalized distribution
 onset_to_hosp <- contact_dist <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "onset to hospitalisatio",
@@ -66,6 +74,8 @@ onset_to_death <- epiparameter::epidist_db(
   epi_dist = "onset to death",
   single_epidist = TRUE
 )
+
+# Define distribution for infectious period
 infect_period <- epiparameter::epidist(
   disease = "Ebola",
   epi_dist = "Infectious period",
@@ -77,7 +87,10 @@ Additionally, we assume that the outbreak started at the beginning of 2023, is h
 infection of 80%, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
 the mentioned distributions, the code chunk below generates a simulated line list:
 ```{r, warning=FALSE, message=FALSE}
+# Set seed to 1 to  have the same results
 base::set.seed(1)
+
+# Generate simulation data using the defined distribution.
 linelist <- simulist::sim_linelist(
   contact_dist,
   infect_period,
@@ -95,9 +108,12 @@ linelist <- simulist::sim_linelist(
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
   config = simulist::create_config()
 )
+
+# View first few rows of the generated data
 utils::head(linelist)
 ```
 ## Aggregating
+
 Downstream analysis involves working with aggregated data rather than individual cases. This requires grouping linelist 
 data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
 package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events 
@@ -105,24 +121,32 @@ and/or other factors. The code chunk provided below demonstrates the creation of
 simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
+# load incidence2 package
 library("incidence2")
+
+# create incidence object by aggregating case data  based on the date of onset
 dialy_incidence_data <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
   interval = 1
 )
+
+# View the first incidence data for the first 5 days
 utils::head(dialy_incidence_data, 5)
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
 
 ```{r}
+# Grouping data by week
 weekly_incidence_data <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
   interval = 7,
   groups = c("sex", "case_type")
 )
+
+# View incidence data for the first 5 weeks
 utils::head(weekly_incidence_data, 5)
 ```
 
@@ -133,12 +157,15 @@ resulting `incidence2` object. The `incidence2` package provides a function call
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
 ```{r, message=FALSE, warning=FALSE}
+# Create incidence object
 dialy_incidence_data_2 <- incidence2::incidence(
   linelist,
   date_index = "date_onset",
   groups = "sex",
   interval = 1
 )
+
+# Complete missing dates in the incidence object
 incidence2::complete_dates(dialy_incidence_data_2,
   expand = TRUE,
   fill = 0L, by = 1L,
@@ -154,8 +181,11 @@ The resulting graph is referred to as an epidemic curve, or epi-curve for short.
 snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
 
 ```{r, message=FALSE, warning=FALSE}
+# Load ggplot2 and tracetheme packages
 library("ggplot2")
 library("tracetheme")
+
+# Plot daily incidence data
 base::plot(dialy_incidence_data) + ggplot2::labs(
   x = "Time (in days)",
   y = "Dialy cases"
@@ -164,6 +194,9 @@ base::plot(dialy_incidence_data) + ggplot2::labs(
 
 
 ```{r, message=FALSE, warning=FALSE}
+
+# Plot weekly incidence data
+
 base::plot(weekly_incidence_data) + ggplot2::labs(
   x = "Time (in days)",
   y = "weekly cases"

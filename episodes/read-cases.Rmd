@@ -94,7 +94,8 @@ Click [here](https://github.com/epiverse-trace/tutorials-early/tree/md-outputs-P
 
 ## Reading from databases
 
-The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
+The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management 
+systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
 
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
