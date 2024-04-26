@@ -84,7 +84,7 @@ infect_period <- epiparameter::epidist(
 )
 ```
 Additionally, we assume that the outbreak started at the beginning of 2023, is highly contagious with a probability of 
-infection of 80%, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
+infection of $80\%$, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
 the mentioned distributions, the code chunk below generates a simulated line list:
 ```{r, warning=FALSE, message=FALSE}
 # Set seed to 1 to  have the same results

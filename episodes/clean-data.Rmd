@@ -99,7 +99,7 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
 Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
 
 ```{r}
-# remove this chunk code once {cleanepi} is updated. 
+# remove this chunk code once {cleanepi} is updated.
 # The coercion made here will be accounted for within {cleanepi}
 sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
 ```
