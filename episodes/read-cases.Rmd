@@ -55,7 +55,6 @@ head(ebola_confirmed, 5)
 library("rio")
 library("here")
 # read data
-print(getwd())
 case_data <- rio::import(here::here("built", "data", "ebola_cases.csv"))
 # preview data
 head(case_data, 5)
@@ -72,16 +71,22 @@ Take 1 minute:
 
 ::::::::::::::::: hint
 
-You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) in the 
-`{rio}` package on the package website. Here is a selection of some key ones. You can also download a zip file for 
-[Marburg outbreak](https://github.com/epiverse-trace/tutorials-early/blob/md-outputs-PR-39/data/Marburg.zip)
+You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) 
+in the `{rio}` package on the package website. Here is a selection of some key ones:
+
+
+```{r, eval=FALSE}
+rio::install_formats()
+```
+
+::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
 rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))
 ```
-
+Click [here](https://github.com/epiverse-trace/tutorials-early/tree/md-outputs-PR-39/data/Marburg.zip) to download a zip file containing data for Marburg outbreak  and then import it to your working environment.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
