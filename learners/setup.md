@@ -112,10 +112,65 @@ new_packages <- c(
   "tidyverse"
 )
 
-pak::pak(new_packages)
+pak::pkg_install(new_packages)
 ```
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
+
+::::::::::::::::::::::::::::: spoiler
+
+### do you get an error with epiverse-trace packages?
+
+If you get an error message when installing {epiparameter}, try this alternative code:
+
+```r
+# for epiparameter
+install.packages("epiparameter", repos = c("https://epiverse-trace.r-universe.dev"))
+```
+
+:::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::: spoiler
+
+### What to do if an Error persist?
+
+If the error message keyword include an string like `Personal access token (PAT)`, you may need to [set up your GitHub token](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token).
+
+First, install these R packages:
+
+```r
+if(!require("pak")) install.packages("pak")
+
+new <- c("gh",
+         "gitcreds",
+         "usethis")
+
+pak::pak(new)
+```
+
+Then, follow these three steps to [set up your GitHub token (read this step-by-step guide)](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token):
+
+```r
+# Generate a token
+usethis::create_github_token()
+
+# Configure your token 
+gitcreds::gitcreds_set()
+
+# Get a situational report
+usethis::git_sitrep()
+```
+
+Try again installing {epiparameter}:
+
+```r
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("epiverse-trace/epiparameter")
+```
+
+If the error persist, [contact us](#your-questions)!
+
+:::::::::::::::::::::::::::
 
 You should update **all of the packages** required for the tutorial, even if you installed them relatively recently. New versions bring improvements and important bug fixes.
 
