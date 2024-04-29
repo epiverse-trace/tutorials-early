@@ -4,12 +4,6 @@ teaching: 30
 exercises: 0
 ---
 
-```{r setup, echo = FALSE, warning = FALSE, message = FALSE}
-library(EpiNow2)
-library(ggplot2)
-withr::local_options(list(mc.cores = 4))
-```
-
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How can I estimate the time-varying reproduction number ($Rt$) and growth rate from a time series of case data?
@@ -77,12 +71,13 @@ In the ["`Expected change in daily cases`" callout](#expected-change-in-daily-ca
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+In this tutorial we are going to learn how to use the `{EpiNow2}` package to estimate the time-varying reproduction number. We’ll use the `{dplyr}` package to arrange some of its inputs, `{ggplot2}` to visualize case distribution, and the pipe `%>%` to connect some of their functions, so let’s also call to the `{tidyverse}` package:
 
-The first step is to load the `{EpiNow2}` package:
-
-```{r, eval = FALSE}
+```{r,message=FALSE,warning=FALSE}
 library(EpiNow2)
+library(tidyverse)
 ```
+
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
 
