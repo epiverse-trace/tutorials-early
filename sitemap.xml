@@ -13,6 +13,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/aio.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/clean-data.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/delays-functions.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/aio.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/delays-functions.html</loc>
@@ -76,6 +82,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/reference.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/simple-analysis.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor-notes.html</loc>
   </url>
   <url>
@@ -95,5 +104,8 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/simple-analysis.html</loc>
   </url>
 </urlset>
