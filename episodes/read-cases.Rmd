@@ -52,10 +52,8 @@ head(ebola_confirmed, 5)
 
 
 ```{r,eval=TRUE, echo=FALSE, message=FALSE}
-library("rio")
-library("here")
 # read data
-case_data <- rio::import(here::here("built", "data", "ebola_cases.csv"))
+case_data <- rio::import(file.path("data", "ebola_cases.csv"))
 # preview data
 head(case_data, 5)
 ```

@@ -24,16 +24,26 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
 
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
-```{r, message=FALSE}
+```{r,eval=FALSE,echo=TRUE,message=FALSE}
 # Load packages
 library("rio")
 library("here")
 
 # Read data
+# e.g.: if path to file is data/raw-data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
-  here::here("built", "data", "simulated_ebola_2.csv")
+  here::here("data", "raw-data", "simulated_ebola_2.csv")
 )
+```
 
+```{r,eval=TRUE,echo=FALSE,message=FALSE}
+# Read data
+raw_ebola_data <- rio::import(
+  file.path("data", "simulated_ebola_2.csv")
+)
+```
+
+```{r, message=FALSE}
 # Return first five rows
 utils::head(raw_ebola_data, 5)
 ```
@@ -268,7 +278,7 @@ it's essential to establish an additional foundational layer to ensure the integ
   This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
   below code chunk.
 
-```{r}
+```{r,warning=FALSE}
 library("linelist")
 data <- linelist::make_linelist(cleaned_data,
   id = "case_id",
