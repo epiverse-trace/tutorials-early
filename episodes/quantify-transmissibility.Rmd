@@ -324,6 +324,10 @@ To find the maximum number of available cores on your machine, use `parallel::de
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::: checklist
+
+**Note:** In the code below `_fixed` distributions are used instead of `_variable` (delay distributions with uncertainty). This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.
+
 ```{r, echo = FALSE}
 rt_log_mean <- convert_to_logmean(2, 1)
 rt_log_sd <- convert_to_logsd(2, 1)
@@ -346,50 +350,35 @@ generation_time_fixed <- dist_spec(
 )
 ```
 
-*Note: in the code below fixed distributions are used instead of variable. This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.*
+:::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::: spoiler
-
-### On reducing computation time
-
-Using an appropriate number of samples and chains is crucial for ensuring convergence and obtaining reliable estimates in Bayesian computations using Stan. Inadequate sampling or insufficient chains may lead to issues such as divergent transitions, impacting the accuracy and stability of the inference process.
-
-For the purpose of this tutorial, we can add more configuration details to get an useful output in less time. You can specify a fixed number of `samples` and `chains` to the `stan` argument using the `stan_opts()` function:
-
-The code in the proposed code chunk can take around 10 minutes. We expect this alternative code chunk below using `stan_opts()` to take approximately 3 minutes:
-
-```{r,eval=FALSE}
-estimates <- epinow(
-  # same code as previous chunk
-  reported_cases = reported_cases,
-  generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(
-    incubation_period_fixed + reporting_delay_fixed
-  ),
-  rt = rt_opts(
-    prior = list(mean = rt_log_mean, sd = rt_log_sd)
-  ),
-  # [new] set a fixed number of samples and chains
-  stan = stan_opts(samples = 1000, chains = 3)
-)
-```
-
-:::::::::::::::::::::::::::::::::
+Now you are ready to run `EpiNow2::epinow()` to estimate the time-varying reproduction number:
 
 ```{r, message = FALSE, eval = TRUE}
 reported_cases <- cases[1:90, ]
 
 estimates <- epinow(
+  # cases
   reported_cases = reported_cases,
+  # delays
   generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(
-    incubation_period_fixed + reporting_delay_fixed
-  ),
-  rt = rt_opts(
-    prior = list(mean = rt_log_mean, sd = rt_log_sd)
-  )
+  delays = delay_opts(incubation_period_fixed + reporting_delay_fixed),
+  # prior
+  rt = rt_opts(prior = list(mean = rt_log_mean, sd = rt_log_sd)),
+  # computation (optional)
+  stan = stan_opts(samples = 1000, chains = 3)
 )
 ```
+
+::::::::::::::::::::::::::::::::: callout
+
+### Do not wait for this to continue
+
+Using `stan = stan_opts()` is optional. For the purpose of this tutorial on reducing computation time, we specified a fixed number of `samples = 1000` and `chains = 3` to the `stan` argument using the `stan_opts()` function. We expect this to take approximately 3 minutes.
+
+**Remember:** Using an appropriate number of *samples* and *chains* is crucial for ensuring convergence and obtaining reliable estimates in Bayesian computations using Stan. Inadequate sampling or insufficient chains may lead to issues such as divergent transitions, impacting the accuracy and stability of the inference process.
+
+:::::::::::::::::::::::::::::::::
 
 ### Results
 
@@ -466,14 +455,13 @@ To find regional estimates, we use the same inputs as `epinow()` to the function
 
 ```{r, message = FALSE, eval = TRUE}
 estimates_regional <- regional_epinow(
+  # cases
   reported_cases = regional_cases,
+  # delays
   generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(
-    incubation_period_fixed + reporting_delay_fixed
-  ),
-  rt = rt_opts(
-    prior = list(mean = rt_log_mean, sd = rt_log_sd)
-  )
+  delays = delay_opts(incubation_period_fixed + reporting_delay_fixed),
+  # prior
+  rt = rt_opts(prior = list(mean = rt_log_mean, sd = rt_log_sd))
 )
 
 estimates_regional$summary$summarised_results$table
