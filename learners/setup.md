@@ -119,6 +119,22 @@ These installation steps could ask you `? Do you want to continue (Y/n)` write `
 
 ::::::::::::::::::::::::::::: spoiler
 
+### do you get an error with EpiNow2?
+
+Windows users will need a working installation of `Rtools` in order to build the package from source. `Rtools` is not an R package, but a software you need to download and install. We suggest you to follow [these steps](http://jtleek.com/modules/01_DataScientistToolbox/02_10_rtools/#1):
+
+1. Download the `Rtools` installer from <https://cran.r-project.org/bin/windows/Rtools/>
+2. Install `Rtools` with default selections
+
+To verify your installation follow these two steps:
+
+3. Install `{devtools}` -->  `install.packages("devtools")`
+4. Verify Rtools installation with --> `devtools::find_rtools()`
+
+:::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::: spoiler
+
 ### do you get an error with epiverse-trace packages?
 
 If you get an error message when installing {epiparameter}, try this alternative code:
