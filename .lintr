@@ -12,5 +12,9 @@ linters: all_linters(
         default_undesirable_functions,
         library = NULL # this is fine in Rmd files
       )
+    ),
+   unused_import_linter(
+      allow_ns_usage = TRUE,
+      except_packages = c("bit64", "data.table", "tidyverse")
     )
   )
