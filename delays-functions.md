@@ -150,8 +150,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1]  3.466710  3.231539  2.654693  4.223915  1.219574 10.411659  2.370048
- [8]  3.720143  5.196095  4.732607
+ [1] 2.889660 9.307841 2.218292 3.749691 5.273008 1.416355 2.502361 2.234118
+ [9] 2.217577 3.045567
 ```
 
 ::::::::: instructor
@@ -460,10 +460,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-08 21:25:24] epinow: There were 3 divergent transitions after warmup. See
+WARN [2024-04-29 22:16:50] epinow: There were 5 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-08 21:25:24] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-29 22:16:50] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -589,10 +589,10 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-08 21:27:09] epinow: There were 10 divergent transitions after warmup. See
+WARN [2024-04-29 22:18:38] epinow: There were 7 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-08 21:27:09] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-29 22:18:38] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -736,10 +736,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-08 21:30:34] epinow: There were 2 divergent transitions after warmup. See
+WARN [2024-04-29 22:21:52] epinow: There were 3 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-08 21:30:34] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-04-29 22:21:52] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 

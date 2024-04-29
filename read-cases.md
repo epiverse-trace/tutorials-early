@@ -1,0 +1,157 @@
+---
+title: 'Read case data'
+teaching: 20
+exercises: 10
+editor_options: 
+  chunk_output_type: inline
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- Where do you usually store your outbreak data?
+- How many different data formats can I read? 
+- Is it possible to import data from database and health APIs? 
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Explain how to import outbreak data from different sources into `R` 
+environment for analysis.
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: prereq
+
+## Prerequisites
+
+This episode requires you to be familiar with:
+
+**Data science** : Basic programming with R.
+:::::::::::::::::::::::::::::::::
+
+## Introduction
+
+The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/), [DHIS2](https://dhis2.org/), etc. The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
+
+## Reading from files 
+
+Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+
+The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
+
+
+```r
+library("rio")
+library("here")
+
+# read data
+# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
+ebola_confirmed <- read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
+
+# preview data
+head(ebola_confirmed, 5)
+```
+
+
+
+```{.output}
+        date confirm
+1 2014-05-18       1
+2 2014-05-20       2
+3 2014-05-21       4
+4 2014-05-22       6
+5 2014-05-23       1
+```
+
+Similarly, you can import files of other formats such as `tsv`, `xlsx`, etc.
+
+::::::::::::::::::::::::::::::::: challenge
+
+###  Reading compressed data 
+
+Take 1 minute:
+- Is it possible to read compressed data in `R`?
+
+::::::::::::::::: hint
+
+You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) 
+in the `{rio}` package on the package website. Here is a selection of some key ones:
+
+
+
+```r
+rio::install_formats()
+```
+
+::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+
+```r
+rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))
+```
+Click [here](https://github.com/epiverse-trace/tutorials-early/tree/md-outputs-PR-39/data/Marburg.zip) to download a zip file containing data for Marburg outbreak  and then import it to your working environment.
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+## Reading from databases
+
+The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management 
+systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
+
+
+The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
+
+
+```r
+library("DBI")
+library("RSQLite")
+
+# Create a temporary SQLite database in memory
+db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+
+# Store the 'case_data' dataframe as a table named 'cases'
+# in the SQLite database
+DBI::dbWriteTable(db_con, "cases", case_data)
+# Read data from the 'cases' table
+result <- DBI::dbReadTable(db_con, "cases")
+# Close the database connection
+DBI::dbDisconnect(db_con)
+# View the result
+base::print(utils::head(result))
+```
+
+```{.output}
+   date confirm
+1 16208       1
+2 16210       2
+3 16211       4
+4 16212       6
+5 16213       1
+6 16214       2
+```
+
+This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `case_data` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`. Read this [tutorial episode on SQL databases and R](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html) for more examples.
+
+:::::::::::::::::::::: callout
+
+### Run SQL queries in R using dbplyr
+
+A database interface package optimize memory usage by processing the database before extraction, reducing memory load. Conversely, conducting all data manipulation outside the database (e.g., in our local Rstudio session) can lead to inefficient memory usage and strained system resources.
+
+Read the [Introduction to dbplyr](https://dbplyr.tidyverse.org/articles/dbplyr.html) vignette to learn how to generate your own queries!
+
+::::::::::::::::::::::
+
+
+## Reading from HIS APIs
+
+Health related data are also increasingly stored in specialized HIS APIs like **Fingertips**, **GoData**, **REDCap**, and **DHIS2**. In such case one can resort to [readepi](https://epiverse-trace.github.io/readepi/) package, which enables reading  data from HIS-APIs.  
+-[TBC]
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+- Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.
+- Use `{readepi}` to read data form HIS APIs and RDBMS.
+::::::::::::::::::::::::::::::::::::::::::::::::
