@@ -86,6 +86,16 @@ library(tidyverse)
 withr::local_options(list(mc.cores = 4))
 ```
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
+
+`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
+
+:::::::::::::::::::
+
 ## Distribution functions
 
 In R, all the statistical distributions have functions to access the following:
