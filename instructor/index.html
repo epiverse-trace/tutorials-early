@@ -542,17 +542,131 @@ window</a>, then press the <kbd>Enter</kbd> (Windows and Linux) or
 <span>  <span class="st">"tidyverse"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="va">new_packages</span><span class="op">)</span></span></code></pre>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pkg_install</span><span class="op">(</span><span class="va">new_packages</span><span class="op">)</span></span></code></pre>
 </div>
 <p>These installation steps could ask you
 <code>? Do you want to continue (Y/n)</code> write <code>Y</code> and
 press <kbd>Enter</kbd>.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+<div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>do you get an error with EpiNow2?</h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Windows users will need a working installation of <code>Rtools</code>
+in order to build the package from source. <code>Rtools</code> is not an
+R package, but a software you need to download and install. We suggest
+you to follow:</p>
+<!-- reference [these steps](http://jtleek.com/modules/01_DataScientistToolbox/02_10_rtools/#1) -->
+<ol style="list-style-type: decimal"><li>
+<strong>Verify <code>Rtools</code> installation</strong>. You can do
+so by using Windows search across your system. Optionally, you can use
+<a href="https://devtools.r-lib.org/" class="external-link">devtools</a> running:</li>
+</ol><div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw">require</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">find_rtools</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<p>If the result is <code>FALSE</code>, then you should do step 2.</p>
+<ol start="2" style="list-style-type: decimal"><li><p><strong>Install <code>Rtools</code></strong>. Download the
+<code>Rtools</code> installer from <a href="https://cran.r-project.org/bin/windows/Rtools/" class="external-link uri">https://cran.r-project.org/bin/windows/Rtools/</a>. Install
+with default selections.</p></li>
+<li><p><strong>Verify <code>Rtools</code> installation</strong>. Again,
+we can use <a href="https://devtools.r-lib.org/" class="external-link">devtools</a>:</p></li>
+</ol><div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw">require</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">find_rtools</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">
+<div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>do you get an error with epiverse-trace packages?</h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div class="accordion-body">
+<p>If you get an error message when installing {epiparameter}, try this
+alternative code:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># for epiparameter</span></span>
+<span><span class="fu">install.packages</span><span class="op">(</span><span class="st">"epiparameter"</span>, repos <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"https://epiverse-trace.r-universe.dev"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">
+<div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>What to do if an Error persist?</h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div class="accordion-body">
+<p>If the error message keyword include an string like
+<code>Personal access token (PAT)</code>, you may need to <a href="https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token" class="external-link">set
+up your GitHub token</a>.</p>
+<p>First, install these R packages:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw">require</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">new</span> <span class="op">&lt;-</span> <span class="fu">c</span><span class="op">(</span><span class="st">"gh"</span>,</span>
+<span>         <span class="st">"gitcreds"</span>,</span>
+<span>         <span class="st">"usethis"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="va">new</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Then, follow these three steps to <a href="https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token" class="external-link">set
+up your GitHub token (read this step-by-step guide)</a>:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Generate a token</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">create_github_token</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Configure your token </span></span>
+<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu">gitcreds_set</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get a situational report</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu">git_sitrep</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<p>Try again installing {epiparameter}:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="kw">require</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"epiverse-trace/epiparameter"</span><span class="op">)</span></span></code></pre>
+</div>
+<p>If the error persist, <a href="#your-questions">contact us</a>!</p>
+</div>
+</div>
+</div>
+</div>
 <p>You should update <strong>all of the packages</strong> required for
 the tutorial, even if you installed them relatively recently. New
 versions bring improvements and important bug fixes.</p>
 <p>When the installation has finished, you can try to load the packages
 by pasting the following code into the console:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -631,9 +745,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/index.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/index.html",
-  "dateCreated": "2024-04-29",
-  "dateModified": "2024-04-30",
-  "datePublished": "2024-04-30"
+  "dateCreated": "2024-05-04",
+  "dateModified": "2024-05-04",
+  "datePublished": "2024-05-04"
 }
 
   </script><script>
