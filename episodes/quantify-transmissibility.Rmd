@@ -50,6 +50,29 @@ To estimate these key metrics using case data we must account for delays between
 
 In the next tutorials we will focus on how to use the functions in `{EpiNow2}` to estimate transmission metrics of case data. We will not cover the theoretical background of the models or inference framework, for details on these concepts see the [vignette](https://epiforecasts.io/EpiNow2/dev/articles/estimate_infections.html).
 
+In this tutorial we are going to learn how to use the `{EpiNow2}` package to estimate the time-varying reproduction number. We’ll use the `{dplyr}` package to arrange some of its inputs, `{ggplot2}` to visualize case distribution, and the pipe `%>%` to connect some of their functions, so let’s also call to the `{tidyverse}` package:
+
+```{r,message=FALSE,warning=FALSE}
+library(EpiNow2)
+library(tidyverse)
+```
+
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
+
+`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
+
+:::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+
+This tutorial illustrates the usage of `epinow()` to estimate the time-varying reproduction number and infection times. Learners should understand the necessary inputs to the model and the limitations of the model output. 
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: callout
 ### Bayesian inference
