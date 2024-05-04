@@ -112,10 +112,94 @@ new_packages <- c(
   "tidyverse"
 )
 
-pak::pak(new_packages)
+pak::pkg_install(new_packages)
 ```
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
+
+::::::::::::::::::::::::::::: spoiler
+
+### do you get an error with EpiNow2?
+
+Windows users will need a working installation of `Rtools` in order to build the package from source. `Rtools` is not an R package, but a software you need to download and install. We suggest you to follow:
+
+<!-- reference [these steps](http://jtleek.com/modules/01_DataScientistToolbox/02_10_rtools/#1) -->
+
+1. **Verify `Rtools` installation**. You can do so by using Windows search across your system. Optionally, you can use `{devtools}` running: 
+
+```r
+if(!require("devtools")) install.packages("devtools")
+devtools::find_rtools()
+```
+
+If the result is `FALSE`, then you should do step 2.
+
+2. **Install `Rtools`**. Download the `Rtools` installer from <https://cran.r-project.org/bin/windows/Rtools/>. Install with default selections.
+
+3. **Verify `Rtools` installation**. Again, we can use `{devtools}`:
+
+```r
+if(!require("devtools")) install.packages("devtools")
+devtools::find_rtools()
+```
+
+:::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::: spoiler
+
+### do you get an error with epiverse-trace packages?
+
+If you get an error message when installing {epiparameter}, try this alternative code:
+
+```r
+# for epiparameter
+install.packages("epiparameter", repos = c("https://epiverse-trace.r-universe.dev"))
+```
+
+:::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::: spoiler
+
+### What to do if an Error persist?
+
+If the error message keyword include an string like `Personal access token (PAT)`, you may need to [set up your GitHub token](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token).
+
+First, install these R packages:
+
+```r
+if(!require("pak")) install.packages("pak")
+
+new <- c("gh",
+         "gitcreds",
+         "usethis")
+
+pak::pak(new)
+```
+
+Then, follow these three steps to [set up your GitHub token (read this step-by-step guide)](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token):
+
+```r
+# Generate a token
+usethis::create_github_token()
+
+# Configure your token 
+gitcreds::gitcreds_set()
+
+# Get a situational report
+usethis::git_sitrep()
+```
+
+Try again installing {epiparameter}:
+
+```r
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("epiverse-trace/epiparameter")
+```
+
+If the error persist, [contact us](#your-questions)!
+
+:::::::::::::::::::::::::::
 
 You should update **all of the packages** required for the tutorial, even if you installed them relatively recently. New versions bring improvements and important bug fixes.
 

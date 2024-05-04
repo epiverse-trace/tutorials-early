@@ -88,6 +88,16 @@ library(tidyverse)
 withr::local_options(list(mc.cores = 4))
 ```
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
+
+`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
+
+:::::::::::::::::::
+
 ## Distribution functions
 
 In R, all the statistical distributions have functions to access the following:
@@ -150,8 +160,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1] 2.889660 9.307841 2.218292 3.749691 5.273008 1.416355 2.502361 2.234118
- [9] 2.217577 3.045567
+ [1]  3.698099 14.965865  2.538199  3.947991  6.919752  8.699023  2.928458
+ [8] 19.117628  4.032281  7.400597
 ```
 
 ::::::::: instructor
@@ -460,10 +470,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-29 22:16:50] epinow: There were 5 divergent transitions after warmup. See
+WARN [2024-05-04 09:44:07] epinow: There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-29 22:16:50] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-04 09:44:07] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -589,10 +599,10 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-29 22:18:38] epinow: There were 7 divergent transitions after warmup. See
+WARN [2024-05-04 09:46:00] epinow: There were 7 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-29 22:18:38] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-04 09:46:00] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -736,10 +746,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-04-29 22:21:52] epinow: There were 3 divergent transitions after warmup. See
+WARN [2024-05-04 09:49:21] epinow: There were 9 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-04-29 22:21:52] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-04 09:49:21] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
