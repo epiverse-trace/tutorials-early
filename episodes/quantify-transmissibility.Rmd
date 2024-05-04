@@ -94,20 +94,6 @@ In the ["`Expected change in daily cases`" callout](#expected-change-in-daily-ca
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-In this tutorial we are going to learn how to use the `{EpiNow2}` package to estimate the time-varying reproduction number. We’ll use the `{dplyr}` package to arrange some of its inputs, `{ggplot2}` to visualize case distribution, and the pipe `%>%` to connect some of their functions, so let’s also call to the `{tidyverse}` package:
-
-```{r,message=FALSE,warning=FALSE}
-library(EpiNow2)
-library(tidyverse)
-```
-
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
-
-This tutorial illustrates the usage of `epinow()` to estimate the time-varying reproduction number and infection times. Learners should understand the necessary inputs to the model and the limitations of the model output. 
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 ## Delay distributions and case data 
 ### Case data
