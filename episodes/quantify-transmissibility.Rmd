@@ -332,25 +332,16 @@ To find the maximum number of available cores on your machine, use `parallel::de
 
 **Note:** In the code below `_fixed` distributions are used instead of `_variable` (delay distributions with uncertainty). This is to speed up computation time. It is generally recommended to use variable distributions that account for additional uncertainty.
 
-```{r, echo = FALSE}
-rt_log_mean <- convert_to_logmean(2, 1)
-rt_log_sd <- convert_to_logsd(2, 1)
-
-incubation_period_fixed <- dist_spec(
-  mean = 4, sd = 2,
-  max = 20, distribution = "gamma"
-)
-
-log_mean <- convert_to_logmean(2, 1)
-log_sd <- convert_to_logsd(2, 1)
-reporting_delay_fixed <- dist_spec(
-  mean = log_mean, sd = log_sd,
-  max = 10, distribution = "lognormal"
-)
-
+```{r, echo = TRUE}
+# fixed alternatives
 generation_time_fixed <- dist_spec(
   mean = 3.6, sd = 3.1,
   max = 20, distribution = "lognormal"
+)
+
+reporting_delay_fixed <- dist_spec(
+  mean = log_mean, sd = log_sd,
+  max = 10, distribution = "lognormal"
 )
 ```
 
