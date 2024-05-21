@@ -160,8 +160,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1]  3.698099 14.965865  2.538199  3.947991  6.919752  8.699023  2.928458
- [8] 19.117628  4.032281  7.400597
+ [1]  3.836004 21.185760  6.768786  5.694561  4.351052  1.975986  6.473852
+ [8]  5.317287  2.802400  2.036221
 ```
 
 ::::::::: instructor
@@ -470,10 +470,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-04 09:44:07] epinow: There were 1 divergent transitions after warmup. See
+WARN [2024-05-21 02:06:25] epinow: There were 4 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-04 09:44:07] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-21 02:06:25] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -599,10 +599,10 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-04 09:46:00] epinow: There were 7 divergent transitions after warmup. See
+WARN [2024-05-21 02:08:11] epinow: There were 20 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-04 09:46:00] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-21 02:08:11] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -746,10 +746,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-04 09:49:21] epinow: There were 9 divergent transitions after warmup. See
+WARN [2024-05-21 02:11:12] epinow: There were 13 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-04 09:49:21] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-05-21 02:11:12] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 

@@ -122,7 +122,7 @@ base::print(peaks_nb)
   sex     observed_peak observed_count lower_ci   median     upper_ci  
 * <chr>   <date>                 <int> <date>     <date>     <date>    
 1 female  2020-03-26              1314 2020-03-18 2020-03-23 2020-03-29
-2 male    2020-03-27              1299 2020-03-18 2020-03-23 2020-03-30
+2 male    2020-03-27              1299 2020-03-18 2020-03-25 2020-03-30
 3 unknown 2020-04-10                32 2020-03-24 2020-04-10 2020-04-16
 ```
 
