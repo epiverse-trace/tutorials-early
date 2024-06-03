@@ -1,5 +1,5 @@
 ---
-title: 'Aggregate and visulaize'
+title: 'Aggregate and visualize'
 teaching: 20
 exercises: 10
 ---
