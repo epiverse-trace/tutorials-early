@@ -1,7 +1,7 @@
 ---
 title: 'Use delay distributions in analysis'
-teaching: 10
-exercises: 2
+teaching: 20
+exercises: 10
 editor_options: 
   chunk_output_type: inline
 ---
@@ -160,8 +160,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1]  3.836004 21.185760  6.768786  5.694561  4.351052  1.975986  6.473852
- [8]  5.317287  2.802400  2.036221
+ [1] 5.016854 2.638262 2.623872 5.541008 4.366855 1.278456 5.674894 1.252402
+ [9] 5.943339 5.343587
 ```
 
 ::::::::: instructor
@@ -470,10 +470,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-21 02:06:25] epinow: There were 4 divergent transitions after warmup. See
+WARN [2024-06-03 11:32:27] epinow: There were 12 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-21 02:06:25] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-03 11:32:27] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -599,10 +599,10 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-21 02:08:11] epinow: There were 20 divergent transitions after warmup. See
+WARN [2024-06-03 11:34:24] epinow: There were 6 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-21 02:08:11] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-03 11:34:24] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -746,10 +746,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-05-21 02:11:12] epinow: There were 13 divergent transitions after warmup. See
+WARN [2024-06-03 11:38:02] epinow: There were 2 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-05-21 02:11:12] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-03 11:38:02] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
