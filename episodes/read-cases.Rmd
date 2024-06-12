@@ -16,7 +16,7 @@ editor_options:
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain how to import outbreak data from different sources into `R` 
-environment for analysis.
+environment.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: prereq
