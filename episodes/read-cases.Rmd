@@ -34,7 +34,7 @@ The initial step in outbreak analysis involves importing the target dataset into
 
 ## Reading from files 
 
-Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
