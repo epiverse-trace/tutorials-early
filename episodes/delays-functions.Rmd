@@ -150,7 +150,7 @@ Access to the reference documentation (Help files) for these functions is access
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Window for contact tracing and the Serial interval
+### Window for contact tracing and the serial interval
 
 The **serial interval** is important in the optimisation of contact tracing since it provides a time window for the containment of a disease spread ([Fine, 2003](https://academic.oup.com/aje/article/158/11/1039/162725)). Depending on the serial interval, we can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
 
@@ -247,7 +247,7 @@ covid_serialint_discrete_max <-
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Length of quarantine and Incubation period
+### Length of quarantine and incubation period
 
 The **incubation period** distribution is a useful delay to assess the length of active monitoring or quarantine ([Lauer et al., 2020](https://www.acpjournals.org/doi/10.7326/M20-0504)). Similarly, delays from symptom onset to recovery (or death) will determine the required duration of health care and case isolation ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
@@ -406,7 +406,7 @@ The **delay distribution** could be inferred jointly with the underlying times o
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Use an Incubation period for COVID-19 to estimate Rt
+### Use an incubation period for COVID-19 to estimate Rt
 
 Estimate the time-varying reproduction number for the first 60 days of the `example_confirmed` data set from `{EpiNow2}`. Access to an incubation period for COVID-19 from `{epiparameter}` to use it as a reporting delay.
 
