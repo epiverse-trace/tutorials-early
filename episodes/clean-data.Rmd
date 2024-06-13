@@ -19,7 +19,7 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and valid to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
@@ -83,7 +83,7 @@ names(sim_ebola_data)
 
 If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter of the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
 
-**Exercise:** Standardize the column names of the input dataset, but keep the “V1” column as is.
+**Exercise:** Standardize the column names of the input dataset, but keep the “V1” column as it is.
 
 ### Removing irregularities
 
