@@ -222,7 +222,8 @@ We will download the data directly from R during the tutorial. However, if you a
 
 The data files for the tutorial can be downloaded manually here: 
 
-- <https://epiverse-trace.github.io/tutorials/data/ebola_cases.csv>
+- <https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv>
+- <https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip>
 
 ## Your Questions
 
