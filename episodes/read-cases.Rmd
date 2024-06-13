@@ -43,7 +43,7 @@ library("rio")
 library("here")
 
 # read data
-# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
+# e.g., the path to our file is data/raw-data/ebola_cases.csv then:
 ebola_confirmed <- read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
 
 # preview data
