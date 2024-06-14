@@ -111,7 +111,7 @@ If you want to maintain certain column names without subjecting them to the stan
 Raw data may contain irregularities such as duplicated and empty rows and columns, as well as constant columns. `remove_duplicates` and `remove_constants` functions from `{cleanepi}`  remove such irregularities as demonstrated in the below code chunk. 
 
 ```{r}
-sim_ebola_data <- cleanepi::remove_constant(sim_ebola_data)
+sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
@@ -122,7 +122,7 @@ Note that, our simulated Ebola does not contain duplicated nor constant rows or 
 In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
 
 ```{r}
-sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
+sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data, na_strings = "")
 ```
 
 ### Validating subject IDs
