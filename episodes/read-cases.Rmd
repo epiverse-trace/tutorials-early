@@ -96,7 +96,7 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
 
-The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
+The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table on it, and subsequently read it:
 
 ```{r,warning=FALSE,message=FALSE}
 library("DBI")
