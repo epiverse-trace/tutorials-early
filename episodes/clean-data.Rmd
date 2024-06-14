@@ -18,6 +18,15 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::: prereq
+
+This episode requires you to:
+
+- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Save it in the `data/` folder.
+
+:::::::::::::::::::::
+
 ## Introduction
 In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and valid to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
