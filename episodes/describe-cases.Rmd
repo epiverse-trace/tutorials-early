@@ -101,8 +101,6 @@ linelist <- simulist::sim_linelist(
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
-  add_names = TRUE,
-  add_ct = TRUE,
   outbreak_size = c(1000, 10000),
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
