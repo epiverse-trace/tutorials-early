@@ -15,6 +15,7 @@ exercises: 10
 
 - Explain how to clean, curate, and standardize case data using `{cleanepi}` package
 - Demonstrate how to covert case data to `linelist` data 
+- Perform essential data-cleaning operations to be performed in a raw case dataset.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -51,9 +52,9 @@ library("rio")
 library("here")
 
 # Read data
-# e.g.: if path to file is data/raw-data/simulated_ebola_2.csv then:
+# e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
-  here::here("data", "raw-data", "simulated_ebola_2.csv")
+  here::here("data", "simulated_ebola_2.csv")
 )
 ```
 
@@ -104,7 +105,11 @@ names(sim_ebola_data)
 
 If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter of the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
 
-**Exercise:** Standardize the column names of the input dataset, but keep the “V1” column as it is.
+::::::::::::::::::::::::::::::::::::: challenge
+
+Standardize the column names of the input dataset, but keep the “V1” column as it is.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Removing irregularities
 
@@ -129,17 +134,14 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data, na_strings = 
 
 Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
 
-```{r}
-# remove this chunk code once {cleanepi} is updated.
-# The coercion made here will be accounted for within {cleanepi}
-sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
-```
 
 ```{r}
-sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data,
-  target_columns = "case_id",
-  range = c(0, 15000)
-)
+sim_ebola_data <- 
+  cleanepi::check_subject_ids(
+    data = sim_ebola_data,
+    target_columns = "case_id",
+    range = c(0, 15000)
+  )
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -189,8 +191,7 @@ Here's an example code chunk demonstrating the usage of `check_date_sequence()` 
  ```{r, warning=FALSE}
 sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
-  target_columns = c("date_onset", "date_sample"),
-  remove = TRUE
+  target_columns = c("date_onset", "date_sample")
 )
  ```
 
@@ -233,7 +234,7 @@ The `{cleanepi}` package  offers a convenient function for calculating the time 
  until the date this document was generated (`r Sys.Date()`).
  
 ```{r}
-sim_ebola_data <- cleanepi::span(
+sim_ebola_data <- cleanepi::timespan(
   sim_ebola_data,
   target_column = "date_sample",
   end_date = Sys.Date(),
@@ -255,13 +256,11 @@ The `clean_data()` function applies a series of predefined data cleaning operati
 
 Further more, you can combine multiple data cleaning tasks via the pipe operator in "|>", as shown in the below code snippet. 
 ```{r}
-# remove the line below once Karim has updated cleanepi
-raw_ebola_data$`case id` <- as.character(raw_ebola_data$`case id`)
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
 cleaned_data <- raw_ebola_data |>
   cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
-  cleanepi::replace_missing_values(target_columns = NULL) |>
-  cleanepi::remove_constant(cutoff = 1.0) |>
+  cleanepi::replace_missing_values(na_strings = "") |>
+  cleanepi::remove_constants(cutoff = 1.0) |>
   cleanepi::remove_duplicates(target_columns = NULL) |>
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample"),
@@ -301,7 +300,8 @@ it's essential to establish an additional foundational layer to ensure the integ
 
 ```{r,warning=FALSE}
 library("linelist")
-data <- linelist::make_linelist(cleaned_data,
+data <- linelist::make_linelist(
+  x = cleaned_data,
   id = "case_id",
   age = "age",
   date_onset = "date_onset",
