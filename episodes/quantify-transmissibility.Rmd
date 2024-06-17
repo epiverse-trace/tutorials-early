@@ -61,9 +61,11 @@ library(tidyverse)
 
 ### The double-colon
 
-The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
 
-`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
 
 :::::::::::::::::::
 
