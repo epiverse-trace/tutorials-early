@@ -13,6 +13,6 @@
 "episodes/delays-functions.Rmd" "3b40b34577112812aa7b872f728500f4" "site/built/delays-functions.md" "2024-06-17"
 "instructors/instructor-notes.md" "ca3834a1b0f9e70c4702aa7a367a6bb5" "site/built/instructor-notes.md" "2024-05-21"
 "learners/reference.md" "106717912e909a7c8d9e3e8fea48e17d" "site/built/reference.md" "2024-05-21"
-"learners/setup.md" "4c235f3d33132e2ec79d813610a29bf3" "site/built/setup.md" "2024-06-17"
+"learners/setup.md" "8a764bf35fa565c007782dba28732b0e" "site/built/setup.md" "2024-06-17"
 "profiles/learner-profiles.md" "31b503c4b5bd1f0960ada730eca4a25e" "site/built/learner-profiles.md" "2024-05-21"
 "renv/profiles/lesson-requirements/renv.lock" "201f9680fa680a90ab80d294ff8143d0" "site/built/renv.lock" "2024-05-21"

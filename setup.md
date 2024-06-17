@@ -33,17 +33,18 @@ Also check out the [glossary](../reference.md) for any terms you may be unfamili
 
 ### Epiverse-TRACE R packages
 
-Our strategy is to gradually incorporate specialised **R packages** into our traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
+Our strategy is to gradually incorporate specialised **R packages** into a traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
 
-![In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png)
+![In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png).
 
 :::::::::::::::::::::::::::: prereq
 
 This course assumes intermediate R knowledge. This workshop is for you if:
 
-- You can use the magrittr pipe `%>%` and/or native pipe `|>`
-- You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
 - You can read data into R, transform and reshape data, and make a wide variety of graphs
+- You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
+- You can use the magrittr pipe `%>%` and/or native pipe `|>`.
+
 
 We expect participants to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
 
@@ -74,7 +75,7 @@ This tutorial requires **R version 4.0.0 or later**.
 
 To check if your R version is up to date:
 
-- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()` there.
+- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()`.
 
 - **To update R**, download and install the latest version from the [R project website](https://cran.rstudio.com/) for your operating system.
 
