@@ -130,7 +130,7 @@ library("RSQLite")
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(
-  drv = RSQLite::SQLite(), 
+  drv = RSQLite::SQLite(),
   dbname = ":memory:"
 )
 
