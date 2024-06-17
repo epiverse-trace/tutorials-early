@@ -19,7 +19,7 @@ Each task has its tutorial website. Each tutorial website consists of a set of e
 | [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
 |---|---|---|
 | Read and clean case data, and make linelist | Real-time analysis and forecasting | Scenario modelling |
-| Convert linelist data to incidence, access delay distributions, and estimate transmission metrics. | Forecast cases, estimate severity and  superspreading. | Simulate disease spread and investigate interventions. |
+| Read, clean and validate case data, convert linelist data to incidence for visualization. | Access delay distributions and estimate transmission metrics, forecast cases, estimate severity and superspreading. | Simulate disease spread and investigate interventions. |
 
 Each episode contains:
 
