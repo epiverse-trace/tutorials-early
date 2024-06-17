@@ -104,7 +104,24 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 
 ```r
 if(!require("pak")) install.packages("pak")
+# for episodes on read, clean, validate and visualize linelist
+new_packages <- c(
+  "epiverse-trace/cleanepi",
+  "rio",
+  "here",
+  "DBI",
+  "RSQLite",
+  "dbplyr",
+  "linelist",
+  "epiverse-trace/simulist",
+  "incidence2",
+  "epiverse-trace/tracetheme",
+  "tidyverse"
+)
 
+pak::pkg_install(new_packages)
+
+# for episodes on access delays and quantify transmission
 new_packages <- c(
   "EpiNow2",
   "epiverse-trace/epiparameter",
@@ -224,6 +241,7 @@ The data files for the tutorial can be downloaded manually here:
 
 - <https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv>
 - <https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip>
+- <https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv>
 
 ## Your Questions
 
