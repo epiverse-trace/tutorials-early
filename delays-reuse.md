@@ -62,6 +62,19 @@ library(epiparameter)
 library(tidyverse)
 ```
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
 ## The problem
 
 If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
@@ -142,7 +155,7 @@ Statistical distributions are summarised in terms of their **summary statistics*
 | MERS-CoV | 14.08(13.1–15.2) | 2.58(2.50–2.68) | 0.44(0.39–0.5) |
 | COVID-19 | 5.2(4.2–6.5) | 1.45(1.31–1.61) | 0.63(0.54–0.74) |
 
-Table: Serial interval estimates using Gamma, Weibull, and Log normal distributions. 95% confidence intervals for the shape and scale (logmean and sd for Log normal) parameters are shown in brackets ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#tbl3)).
+Table: Serial interval estimates using Gamma, Weibull, and Log Normal distributions. 95% confidence intervals for the shape and scale (logmean and sd for Log Normal) parameters are shown in brackets ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#tbl3)).
 
 :::::::::::::::::::::::::
 
@@ -152,7 +165,7 @@ Table: Serial interval estimates using Gamma, Weibull, and Log normal distributi
 
 Assume that COVID-19 and SARS have similar reproduction number values and that the serial interval approximates the generation time. 
 
-Given the Serial interval of both infections in the figure below: 
+Given the serial interval of both infections in the figure below: 
 
 - Which one would be harder to control? 
 - Why do you conclude that?
@@ -306,7 +319,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 
 ::::::::::::::::: spoiler
 
-### Why do we have a 'NA' entry?
+### Why do we have an 'NA' entry?
 
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
@@ -892,7 +905,7 @@ ebola_severity$summary_stats$mean_ci_limits
 
 ::::::::::::::::: discussion
 
-### The distribution Zoo
+### The distribution zoo
 
 Explore this shinyapp called **The Distribution Zoo**!
 

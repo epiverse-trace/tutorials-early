@@ -92,9 +92,11 @@ withr::local_options(list(mc.cores = 4))
 
 ### The double-colon
 
-The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
 
-`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
 
 :::::::::::::::::::
 
@@ -160,8 +162,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ```{.output}
- [1] 5.016854 2.638262 2.623872 5.541008 4.366855 1.278456 5.674894 1.252402
- [9] 5.943339 5.343587
+ [1]  5.534646  9.250007  4.254961  3.436661 13.323202  3.695330  5.519206
+ [8]  4.682234  2.675111  2.804316
 ```
 
 ::::::::: instructor
@@ -177,7 +179,7 @@ Access to the reference documentation (Help files) for these functions is access
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Window for contact tracing and the Serial interval
+### Window for contact tracing and the serial interval
 
 The **serial interval** is important in the optimisation of contact tracing since it provides a time window for the containment of a disease spread ([Fine, 2003](https://academic.oup.com/aje/article/158/11/1039/162725)). Depending on the serial interval, we can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
 
@@ -305,7 +307,7 @@ covid_serialint_discrete_max <-
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Length of quarantine and Incubation period
+### Length of quarantine and incubation period
 
 The **incubation period** distribution is a useful delay to assess the length of active monitoring or quarantine ([Lauer et al., 2020](https://www.acpjournals.org/doi/10.7326/M20-0504)). Similarly, delays from symptom onset to recovery (or death) will determine the required duration of health care and case isolation ([Cori et al., 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
@@ -470,10 +472,10 @@ epinow_estimates_cg <- epinow(
 ```
 
 ```{.output}
-WARN [2024-06-03 11:32:27] epinow: There were 12 divergent transitions after warmup. See
+WARN [2024-06-17 21:44:52] epinow: There were 5 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-03 11:32:27] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-17 21:44:52] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -505,7 +507,7 @@ The **delay distribution** could be inferred jointly with the underlying times o
 
 ::::::::::::::::::::::::::::::::: challenge
 
-### Use an Incubation period for COVID-19 to estimate Rt
+### Use an incubation period for COVID-19 to estimate Rt
 
 Estimate the time-varying reproduction number for the first 60 days of the `example_confirmed` data set from `{EpiNow2}`. Access to an incubation period for COVID-19 from `{epiparameter}` to use it as a reporting delay.
 
@@ -599,10 +601,10 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-06-03 11:34:24] epinow: There were 6 divergent transitions after warmup. See
+WARN [2024-06-17 21:46:37] epinow: There were 10 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-03 11:34:24] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-17 21:46:37] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -746,10 +748,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ```{.output}
-WARN [2024-06-03 11:38:02] epinow: There were 2 divergent transitions after warmup. See
+WARN [2024-06-17 21:50:29] epinow: There were 2 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-03 11:38:02] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-17 21:50:29] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 

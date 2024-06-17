@@ -10,13 +10,13 @@ editor_options:
 
 - Where do you usually store your outbreak data?
 - How many different data formats can I read? 
-- Is it possible to import data from database and health APIs? 
+- Is it possible to import data from databases and health APIs? 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain how to import outbreak data from different sources into `R` 
-environment for analysis.
+environment.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: prereq
@@ -32,9 +32,32 @@ This episode requires you to be familiar with:
 
 The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/), [DHIS2](https://dhis2.org/), etc. The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
+:::::::::: prereq
+
+### Setup a project and folder
+
+- Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
+- Inside the RStudio project, create the `data/` folder.
+- Inside the `data/` folder, save the [ebola_cases.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
+
+::::::::::
+
 ## Reading from files 
 
-Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
@@ -44,8 +67,8 @@ library("rio")
 library("here")
 
 # read data
-# e.g.: if path to file is data/raw-data/ebola_cases.csv then:
-ebola_confirmed <- read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
+# e.g., the path to our file is data/raw-data/ebola_cases.csv then:
+ebola_confirmed <- rio::import(here::here("data", "ebola_cases.csv"))
 
 # preview data
 head(ebola_confirmed, 5)
@@ -62,19 +85,19 @@ head(ebola_confirmed, 5)
 5 2014-05-23       1
 ```
 
-Similarly, you can import files of other formats such as `tsv`, `xlsx`, etc.
+Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
 
 ::::::::::::::::::::::::::::::::: challenge
 
 ###  Reading compressed data 
 
 Take 1 minute:
-- Is it possible to read compressed data in `R`?
+Can you read data from a compressed file in `R`? Download this [zip file](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) containing data for Marburg outbreak and then import it to your working environment.
 
 ::::::::::::::::: hint
 
 You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) 
-in the `{rio}` package on the package website. Here is a selection of some key ones:
+in the `{rio}` package on the package website. To expand {rio} to the full range of support for import and export formats run:
 
 
 
@@ -82,15 +105,18 @@ in the `{rio}` package on the package website. Here is a selection of some key o
 rio::install_formats()
 ```
 
+You can use this template to read the file: 
+
+`rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))`
+
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
 
 ```r
-rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))
+rio::import(here::here("data", "Marburg.zip"))
 ```
-Click [here](https://github.com/epiverse-trace/tutorials-early/tree/md-outputs-PR-39/data/Marburg.zip) to download a zip file containing data for Marburg outbreak  and then import it to your working environment.
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
@@ -102,7 +128,7 @@ The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for in
 systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
 
-The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `case_data` as a table within it, and subsequently read from it:
+The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
 
 
 ```r
@@ -110,38 +136,57 @@ library("DBI")
 library("RSQLite")
 
 # Create a temporary SQLite database in memory
-db_con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
+db_con <- DBI::dbConnect(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
 
-# Store the 'case_data' dataframe as a table named 'cases'
+# Store the 'ebola_confirmed' dataframe as a table named 'cases'
 # in the SQLite database
-DBI::dbWriteTable(db_con, "cases", case_data)
+DBI::dbWriteTable(
+  conn = db_con,
+  name = "cases",
+  value = ebola_confirmed
+)
+```
+
+```{.error}
+Error in h(simpleError(msg, call)): error in evaluating the argument 'value' in selecting a method for function 'dbWriteTable': object 'ebola_confirmed' not found
+```
+
+```r
 # Read data from the 'cases' table
-result <- DBI::dbReadTable(db_con, "cases")
+result <- DBI::dbReadTable(
+  conn = db_con,
+  name = "cases"
+)
+```
+
+```{.error}
+Error: no such table: cases
+```
+
+```r
 # Close the database connection
-DBI::dbDisconnect(db_con)
+DBI::dbDisconnect(conn = db_con)
+
 # View the result
 base::print(utils::head(result))
 ```
 
-```{.output}
-   date confirm
-1 16208       1
-2 16210       2
-3 16211       4
-4 16212       6
-5 16213       1
-6 16214       2
+```{.error}
+Error in eval(expr, envir, enclos): object 'result' not found
 ```
 
-This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `case_data` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`. Read this [tutorial episode on SQL databases and R](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html) for more examples.
+This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `ebola_confirmed` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`.
 
 :::::::::::::::::::::: callout
 
 ### Run SQL queries in R using dbplyr
 
-A database interface package optimize memory usage by processing the database before extraction, reducing memory load. Conversely, conducting all data manipulation outside the database (e.g., in our local Rstudio session) can lead to inefficient memory usage and strained system resources.
+We can use database interface packages to optimize memory usage. If we process the database with "queries" (e.g., select, filter, summarise) before extraction, we can reduce the memory load in our RStudio session. Conversely, conducting all data manipulation outside the database management system can lead to occupying more disk space than desired running out of memory.
 
-Read the [Introduction to dbplyr](https://dbplyr.tidyverse.org/articles/dbplyr.html) vignette to learn how to generate your own queries!
+Read this [tutorial episode on SQL databases and R](https://datacarpentry.org/R-ecology-lesson/05-r-and-databases.html#complex-database-queries) to practice how to make relational database SQL queries using multiple {dplyr} verbs like `left_join()` among tables before pulling down data to your local session with `collect()`!
 
 ::::::::::::::::::::::
 

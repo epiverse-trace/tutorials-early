@@ -23,6 +23,19 @@ exercises: 10
 
 Understanding the trend in case data is crucial for various purposes, such as forecasting future case counts, implementing public health interventions, and assessing the effectiveness of control measures. By analyzing the trend, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health. This episode focuses on how to perform a simple early analysis on incidence data. It uses the same dataset of **Covid-19 case data from England** that utilized it in [Aggregate and visualize](../episodes/describe-cases.Rmd) episode. 
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
 ## Simple model
 
 Aggregated case data over a specific time unit, or incidence data, typically represent the number of cases occurring within that time frame. These data can often be assumed to follow either `Poisson distribution` or a `negative binomial (NB) distribution`, depending on the specific characteristics of the data and the underlying processes generating them. When analyzing such data, one common approach is to examine the trend over time by computing the rate of change, which can indicate whether there is exponential growth or decay in the number of cases. Exponential growth implies that the number of cases is increasing at an accelerating rate over time, while exponential decay suggests that the number of cases is decreasing at a decelerating rate.
@@ -32,24 +45,39 @@ The `i2extras` package provides methods for modelling the trend in case data, ca
 
 
 ```r
-# loads the i2extras package, which provides methods for modeling
+# load packages which provides methods for modeling
 library("i2extras")
-# This line loads the i2extras package, which provides methods for modeling
 library("incidence2")
-# subset the covid19_eng_case_data to include only the first 3 months of data
+
+# read data from {outbreaks} package
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
+
+# subset the covid19_eng_case_data to include only the first 3 months of data
 df <- base::subset(
   covid19_eng_case_data,
   covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90
 )
+
 # uses the incidence function from the incidence2 package to compute the
 # incidence data
-df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex")
+df_incid <- incidence2::incidence(
+  df,
+  date_index = "date",
+  groups = "sex"
+)
 
 # fit a curve to the incidence data. The model chosen is the negative binomial
 # distribution with a significance level (alpha) of 0.05.
-fitted_curve_nb <- i2extras::fit_curve(df_incid, model = "negbin", alpha = 0.05)
-base::plot(fitted_curve_nb, angle = 45) + ggplot2::labs(x = "Date", y = "Cases")
+fitted_curve_nb <-
+  i2extras::fit_curve(
+    df_incid,
+    model = "negbin",
+    alpha = 0.05
+  )
+
+# plot fitted curve
+base::plot(fitted_curve_nb, angle = 45) +
+  ggplot2::labs(x = "Date", y = "Cases")
 ```
 
 <img src="fig/simple-analysis-rendered-unnamed-chunk-1-1.png" style="display: block; margin: auto;" />
@@ -65,8 +93,13 @@ Repeat the above analysis using Poisson distribution?
 
 
 ```r
-fitted_curve_poisson <- i2extras::fit_curve(df_incid, model = "poisson",
-                                            alpha = 0.05)
+fitted_curve_poisson <-
+  i2extras::fit_curve(
+    x = df_incid,
+    model = "poisson",
+    alpha = 0.05
+  )
+
 base::plot(fitted_curve_poisson, angle = 45) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
@@ -100,7 +133,7 @@ base::print(rates_nb)
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 2:  Growth rates from **Poisson**-fitted curve
+## Challenge 2:  Growth rates from a **Poisson**-fitted curve
 
 Extract growth rates from the **Poisson**-fitted curve of **Challenge 1**?
 
@@ -114,6 +147,7 @@ The **Peak time ** is the time at which the highest number of cases is observed 
 ```r
 peaks_nb <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
   subset(select = -c(count_variable, bootstrap_peaks))
+
 base::print(peaks_nb)
 ```
 
@@ -121,9 +155,9 @@ base::print(peaks_nb)
 # A data frame: 3 × 6
   sex     observed_peak observed_count lower_ci   median     upper_ci  
 * <chr>   <date>                 <int> <date>     <date>     <date>    
-1 female  2020-03-26              1314 2020-03-18 2020-03-23 2020-03-29
-2 male    2020-03-27              1299 2020-03-18 2020-03-25 2020-03-30
-3 unknown 2020-04-10                32 2020-03-24 2020-04-10 2020-04-16
+1 female  2020-03-26              1314 2020-03-18 2020-03-23 2020-03-31
+2 male    2020-03-27              1299 2020-03-19 2020-03-26 2020-03-30
+3 unknown 2020-04-10                32 2020-03-24 2020-04-07 2020-04-20
 ```
 
 
@@ -134,10 +168,17 @@ A moving or rolling average calculates the average number of cases within a spec
 
 ```r
 library("ggplot2")
+
 moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
+
 base::plot(moving_Avg_week, border_colour = "white", angle = 45) +
-  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average,
-                                  color = "red")) +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      x = date_index,
+      y = rolling_average,
+      color = "red"
+    )
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -154,9 +195,19 @@ Compute and visualize the monthly moving average of cases on `df_incid`?
 
 ```r
 moving_Avg_mont <- i2extras::add_rolling_average(df_incid, n = 30L)
-base::plot(moving_Avg_mont, border_colour = "white", angle = 45) +
-  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average,
-                                  color = "red")) +
+
+base::plot(
+  moving_Avg_mont,
+  border_colour = "white",
+  angle = 45
+) +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      x = date_index,
+      y = rolling_average,
+      color = "red"
+    )
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 

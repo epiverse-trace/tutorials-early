@@ -1,5 +1,5 @@
 ---
-title: 'Aggregate and visulaize'
+title: 'Aggregate and visualize'
 teaching: 20
 exercises: 10
 ---
@@ -28,6 +28,19 @@ This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved
 packages. A key observation in EDA of epidemic analysis is capturing the relationship between time and the number of 
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
+ 
+ ::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
  
 ## Synthetic outbreak data
 
@@ -103,8 +116,6 @@ linelist <- simulist::sim_linelist(
   hosp_death_risk = 0.5,
   non_hosp_death_risk = 0.05,
   outbreak_start_date = as.Date("2023-01-01"),
-  add_names = TRUE,
-  add_ct = TRUE,
   outbreak_size = c(1000, 10000),
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
@@ -213,7 +224,8 @@ dialy_incidence_data_2 <- incidence2::incidence(
 )
 
 # Complete missing dates in the incidence object
-incidence2::complete_dates(dialy_incidence_data_2,
+incidence2::complete_dates(
+  x = dialy_incidence_data_2,
   expand = TRUE,
   fill = 0L, by = 1L,
   allow_POSIXct = FALSE
@@ -253,10 +265,12 @@ library("ggplot2")
 library("tracetheme")
 
 # Plot daily incidence data
-base::plot(dialy_incidence_data) + ggplot2::labs(
-  x = "Time (in days)",
-  y = "Dialy cases"
-) + tracetheme::theme_trace()
+base::plot(dialy_incidence_data) +
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "Dialy cases"
+  ) +
+  tracetheme::theme_trace()
 ```
 
 <img src="fig/describe-cases-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
@@ -266,10 +280,12 @@ base::plot(dialy_incidence_data) + ggplot2::labs(
 ```r
 # Plot weekly incidence data
 
-base::plot(weekly_incidence_data) + ggplot2::labs(
-  x = "Time (in days)",
-  y = "weekly cases"
-) + tracetheme::theme_trace()
+base::plot(weekly_incidence_data) +
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "weekly cases"
+  ) +
+  tracetheme::theme_trace()
 ```
 
 <img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />

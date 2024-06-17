@@ -15,11 +15,33 @@ exercises: 10
 
 - Explain how to clean, curate, and standardize case data using `{cleanepi}` package
 - Demonstrate how to covert case data to `linelist` data 
+- Perform essential data-cleaning operations to be performed in a raw case dataset.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::: prereq
+
+This episode requires you to:
+
+- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Save it in the `data/` folder.
+
+:::::::::::::::::::::
+
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validate to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and valid to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
 
 
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
@@ -31,9 +53,9 @@ library("rio")
 library("here")
 
 # Read data
-# e.g.: if path to file is data/raw-data/simulated_ebola_2.csv then:
+# e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
-  here::here("data", "raw-data", "simulated_ebola_2.csv")
+  here::here("data", "simulated_ebola_2.csv")
 )
 ```
 
@@ -107,7 +129,11 @@ names(sim_ebola_data)
 
 If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` parameter of the `standardize_column_names()` function. This parameter accepts a vector of column names that are intended to be kept unchanged.
 
-**Exercise:** Standardize the column names of the input dataset, but keep the “V1” column as is.
+::::::::::::::::::::::::::::::::::::: challenge
+
+Standardize the column names of the input dataset, but keep the “V1” column as it is.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ### Removing irregularities
 
@@ -115,7 +141,14 @@ Raw data may contain irregularities such as duplicated and empty rows and column
 
 
 ```r
-sim_ebola_data <- cleanepi::remove_constant(sim_ebola_data)
+sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
+```
+
+```{.error}
+Error: 'remove_constants' is not an exported object from 'namespace:cleanepi'
+```
+
+```r
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
@@ -127,7 +160,10 @@ In addition to the regularities, raw data can contain missing values that may be
 
 
 ```r
-sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
+sim_ebola_data <- cleanepi::replace_missing_values(
+  data = sim_ebola_data,
+  na_strings = ""
+)
 ```
 
 ### Validating subject IDs
@@ -135,22 +171,22 @@ sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data)
 Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a specific number of characters. The `{cleanepi}` package offers the `check_subject_ids` function designed precisely for this task as shown in the below code chunk. This function validates whether they are unique and meet the required criteria.
 
 
-```r
-# remove this chunk code once {cleanepi} is updated.
-# The coercion made here will be accounted for within {cleanepi}
-sim_ebola_data$case_id <- as.character(sim_ebola_data$case_id)
-```
-
 
 ```r
-sim_ebola_data <- cleanepi::check_subject_ids(sim_ebola_data,
-  target_columns = "case_id",
-  range = c(0, 15000)
-)
+sim_ebola_data <-
+  cleanepi::check_subject_ids(
+    data = sim_ebola_data,
+    target_columns = "case_id",
+    range = c(0, 15000)
+  )
 ```
 
 ```{.output}
 Found 1957 duplicated rows. Please consult the report for more details.
+```
+
+```{.error}
+Error in parse_vector(x, col_number(), na = na, locale = locale, trim_ws = trim_ws): is.character(x) is not TRUE
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -223,8 +259,7 @@ Here's an example code chunk demonstrating the usage of `check_date_sequence()` 
  ```r
  sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
-  target_columns = c("date_onset", "date_sample"),
-  remove = TRUE
+  target_columns = c("date_onset", "date_sample")
  )
  ```
 
@@ -286,11 +321,11 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-05-21).
+ until the date this document was generated (2024-06-17).
  
 
 ```r
-sim_ebola_data <- cleanepi::span(
+sim_ebola_data <- cleanepi::timespan(
   sim_ebola_data,
   target_column = "date_sample",
   end_date = Sys.Date(),
@@ -298,6 +333,13 @@ sim_ebola_data <- cleanepi::span(
   span_column_name = "time_since_sampling_date",
   span_remainder_unit = "months"
 )
+```
+
+```{.error}
+Error: 'timespan' is not an exported object from 'namespace:cleanepi'
+```
+
+```r
 utils::head(sim_ebola_data)
 ```
 
@@ -309,13 +351,6 @@ utils::head(sim_ebola_data)
 4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
 5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
 6   6   14274  76 female      <NA>       <NA>  2016-01-23
-  time_since_sampling_date remainder_months
-1                        9             1.52
-2                       10             4.62
-3                        9             2.66
-4                        9             4.72
-5                        7             7.44
-6                        8             3.97
 ```
 
 After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
@@ -330,13 +365,11 @@ The `clean_data()` function applies a series of predefined data cleaning operati
 Further more, you can combine multiple data cleaning tasks via the pipe operator in "|>", as shown in the below code snippet. 
 
 ```r
-# remove the line below once Karim has updated cleanepi
-raw_ebola_data$`case id` <- as.character(raw_ebola_data$`case id`)
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
 cleaned_data <- raw_ebola_data |>
   cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
-  cleanepi::replace_missing_values(target_columns = NULL) |>
-  cleanepi::remove_constant(cutoff = 1.0) |>
+  cleanepi::replace_missing_values(na_strings = "") |>
+  cleanepi::remove_constants(cutoff = 1.0) |>
   cleanepi::remove_duplicates(target_columns = NULL) |>
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample"),
@@ -352,8 +385,8 @@ cleaned_data <- raw_ebola_data |>
   cleanepi::clean_using_dictionary(dictionary = test_dict)
 ```
 
-```{.output}
-Found 1957 duplicated rows. Please consult the report for more details.
+```{.error}
+Error: 'remove_constants' is not an exported object from 'namespace:cleanepi'
 ```
 
 ## Printing the clean report
@@ -381,29 +414,33 @@ it's essential to establish an additional foundational layer to ensure the integ
 
 ```r
 library("linelist")
-data <- linelist::make_linelist(cleaned_data,
+data <- linelist::make_linelist(
+  x = cleaned_data,
   id = "case_id",
   age = "age",
   date_onset = "date_onset",
   date_reporting = "date_sample",
   gender = "gender"
 )
+```
+
+```{.error}
+Error in eval(expr, envir, enclos): object 'cleaned_data' not found
+```
+
+```r
 utils::head(data, 7)
 ```
 
 ```{.output}
-
-// linelist object
-  V1 case_id age gender    status date_onset date_sample
-1  1   14905  90   male confirmed 2015-03-15  2015-04-06
-2  2   13043  25 female      <NA>       <NA>  2014-01-03
-3  3   14364  54 female      <NA> 2014-02-09  2015-03-03
-4  4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5  5   12648  74 female      <NA> 2014-06-08  2016-10-10
-6  6   14274  76 female      <NA>       <NA>  2016-01-23
-7  7   14132  16   male confirmed       <NA>  2015-10-05
-
-// tags: id:case_id, date_onset:date_onset, date_reporting:date_sample, gender:gender, age:age 
+                                                                            
+1 function (..., list = character(), package = NULL, lib.loc = NULL,        
+2     verbose = getOption("verbose"), envir = .GlobalEnv, overwrite = TRUE) 
+3 {                                                                         
+4     fileExt <- function(x) {                                              
+5         db <- grepl("\\\\.[^.]+\\\\.(gz|bz2|xz)$", x)                     
+6         ans <- sub(".*\\\\.", "", x)                                      
+7         ans[db] <- sub(".*\\\\.([^.]+\\\\.)(gz|bz2|xz)$", "\\\\1\\\\2",   
 ```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 

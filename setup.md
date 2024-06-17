@@ -18,16 +18,16 @@ Each task has its tutorial website. Each tutorial website consists of a set of e
 
 | [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
 |---|---|---|
-| Reading and cleaning case data | Real-time analysis and forecasting | Scenario modelling |
-| Read and clean linelist data, Access delay distributions, and Estimate transmission metrics. | Forecast cases, Estimate severity, and Estimate superspreading. | Simulate disease spread and Investigate interventions. |
+| Read and clean case data, and make linelist | Real-time analysis and forecasting | Scenario modelling |
+| Read, clean and validate case data, convert linelist data to incidence for visualization. | Access delay distributions and estimate transmission metrics, forecast cases, estimate severity and superspreading. | Simulate disease spread and investigate interventions. |
 
 Each episode contains:
 
-+ **Overview** : describes what questions will be answered and what are the objectives of the episode.
++ **Overview**: describes what questions will be answered and what are the objectives of the episode.
 + **Prerequisites**: describes what episodes/packages need to be covered before the current episode.
-+ **Example R code** : work through the episodes on your own computer using the example R code.
-+ **Challenges** : complete challenges to test your understanding.
-+ **Explainers** : add to your understanding of mathematical and modelling concepts with the explainer boxes.
++ **Example R code**: work through the episodes on your own computer using the example R code.
++ **Challenges**: complete challenges to test your understanding.
++ **Explainers**: add to your understanding of mathematical and modelling concepts with the explainer boxes.
 
 Also check out the [glossary](../reference.md) for any terms you may be unfamiliar with.
 
@@ -104,7 +104,24 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 
 ```r
 if(!require("pak")) install.packages("pak")
+# for episodes on read, clean, validate and visualize linelist
+new_packages <- c(
+  "epiverse-trace/cleanepi",
+  "rio",
+  "here",
+  "DBI",
+  "RSQLite",
+  "dbplyr",
+  "linelist",
+  "epiverse-trace/simulist",
+  "incidence2",
+  "epiverse-trace/tracetheme",
+  "tidyverse"
+)
 
+pak::pkg_install(new_packages)
+
+# for episodes on access delays and quantify transmission
 new_packages <- c(
   "EpiNow2",
   "epiverse-trace/epiparameter",
@@ -222,7 +239,9 @@ We will download the data directly from R during the tutorial. However, if you a
 
 The data files for the tutorial can be downloaded manually here: 
 
-- <https://epiverse-trace.github.io/tutorials/data/ebola_cases.csv>
+- <https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv>
+- <https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip>
+- <https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv>
 
 ## Your Questions
 
