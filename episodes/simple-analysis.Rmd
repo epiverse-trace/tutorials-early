@@ -86,7 +86,7 @@ base::print(rates_nb)
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 2:  Growth rates from **Poisson**-fitted curve
+## Challenge 2:  Growth rates from a **Poisson**-fitted curve
 
 Extract growth rates from the **Poisson**-fitted curve of **Challenge 1**?
 
