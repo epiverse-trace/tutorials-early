@@ -61,6 +61,19 @@ library(epiparameter)
 library(tidyverse)
 ```
 
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
 ## The problem
 
 If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
