@@ -29,6 +29,19 @@ packages. A key observation in EDA of epidemic analysis is capturing the relatio
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
  
+ ::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+ 
 ## Synthetic outbreak data
 
 To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
@@ -164,7 +177,8 @@ dialy_incidence_data_2 <- incidence2::incidence(
 )
 
 # Complete missing dates in the incidence object
-incidence2::complete_dates(dialy_incidence_data_2,
+incidence2::complete_dates(
+  x = dialy_incidence_data_2,
   expand = TRUE,
   fill = 0L, by = 1L,
   allow_POSIXct = FALSE
@@ -184,10 +198,12 @@ library("ggplot2")
 library("tracetheme")
 
 # Plot daily incidence data
-base::plot(dialy_incidence_data) + ggplot2::labs(
-  x = "Time (in days)",
-  y = "Dialy cases"
-) + tracetheme::theme_trace()
+base::plot(dialy_incidence_data) + 
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "Dialy cases"
+  ) + 
+  tracetheme::theme_trace()
 ``` 
 
 
@@ -195,10 +211,12 @@ base::plot(dialy_incidence_data) + ggplot2::labs(
 
 # Plot weekly incidence data
 
-base::plot(weekly_incidence_data) + ggplot2::labs(
-  x = "Time (in days)",
-  y = "weekly cases"
-) + tracetheme::theme_trace()
+base::plot(weekly_incidence_data) + 
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "weekly cases"
+  ) + 
+  tracetheme::theme_trace()
 ``` 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
