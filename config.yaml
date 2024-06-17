@@ -11,7 +11,7 @@
 carpentry: 'incubator'
 
 # Overall title for pages.
-title: 'Using delays to quantify transmission'
+title: 'Read and clean case data, and make linelist for outbreak analytics with R'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created:
