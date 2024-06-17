@@ -23,11 +23,11 @@ Each task has its tutorial website. Each tutorial website consists of a set of e
 
 Each episode contains:
 
-+ **Overview** : describes what questions will be answered and what are the objectives of the episode.
++ **Overview**: describes what questions will be answered and what are the objectives of the episode.
 + **Prerequisites**: describes what episodes/packages need to be covered before the current episode.
-+ **Example R code** : work through the episodes on your own computer using the example R code.
-+ **Challenges** : complete challenges to test your understanding.
-+ **Explainers** : add to your understanding of mathematical and modelling concepts with the explainer boxes.
++ **Example R code**: work through the episodes on your own computer using the example R code.
++ **Challenges**: complete challenges to test your understanding.
++ **Explainers**: add to your understanding of mathematical and modelling concepts with the explainer boxes.
 
 Also check out the [glossary](../reference.md) for any terms you may be unfamiliar with.
 
