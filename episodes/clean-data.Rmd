@@ -127,7 +127,10 @@ Note that, our simulated Ebola does not contain duplicated nor constant rows or 
 In addition to the regularities, raw data can contain missing values that may be encoded by different strings, including the empty. To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
 
 ```{r}
-sim_ebola_data <- cleanepi::replace_missing_values(sim_ebola_data, na_strings = "")
+sim_ebola_data <- cleanepi::replace_missing_values(
+  data = sim_ebola_data,
+  na_strings = ""
+)
 ```
 
 ### Validating subject IDs
@@ -136,7 +139,7 @@ Each entry in the dataset represents a subject and should be distinguishable by 
 
 
 ```{r}
-sim_ebola_data <- 
+sim_ebola_data <-
   cleanepi::check_subject_ids(
     data = sim_ebola_data,
     target_columns = "case_id",

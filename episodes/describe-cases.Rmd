@@ -198,11 +198,11 @@ library("ggplot2")
 library("tracetheme")
 
 # Plot daily incidence data
-base::plot(dialy_incidence_data) + 
+base::plot(dialy_incidence_data) +
   ggplot2::labs(
     x = "Time (in days)",
     y = "Dialy cases"
-  ) + 
+  ) +
   tracetheme::theme_trace()
 ``` 
 
@@ -211,11 +211,11 @@ base::plot(dialy_incidence_data) +
 
 # Plot weekly incidence data
 
-base::plot(weekly_incidence_data) + 
+base::plot(weekly_incidence_data) +
   ggplot2::labs(
     x = "Time (in days)",
     y = "weekly cases"
-  ) + 
+  ) +
   tracetheme::theme_trace()
 ``` 
 
