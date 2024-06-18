@@ -161,8 +161,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1] 2.807837 5.057186 3.423053 5.976781 4.601006 3.966900 3.283370 4.529076
- [9] 1.574009 6.001376
+ [1]  2.152383  3.309027  6.665583  4.732071  8.479846 13.433640  2.432767
+ [8]  2.970002  2.631198  4.473118
 ```
 
 ::::::::: instructor
@@ -473,11 +473,14 @@ epinow_estimates_cg <- epinow(
 ```
 
 ``` output
-WARN [2024-06-18 13:34:38] epinow: There were 6 divergent transitions after warmup. See
+WARN [2024-06-18 17:14:48] epinow: There were 1 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-18 13:34:38] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-18 17:14:48] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
+WARN [2024-06-18 17:14:49] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ``` r
@@ -546,17 +549,10 @@ covid_serialint <-
   )
 
 # adapt epidist to epinow2
-covid_serialint_discrete_max <-
-  covid_serialint %>%
-  discretise() %>%
+covid_serialint_discrete_max <- covid_serialint %>%
+  epiparameter::discretise() %>%
   quantile(p = 0.99)
-```
 
-``` error
-Error in discretise(.): Can only discretise a <dist_spec>.
-```
-
-``` r
 covid_serialint_parameters <-
   epiparameter::get_parameters(covid_serialint)
 
@@ -578,17 +574,10 @@ covid_incubation <- epiparameter::epidist_db(
 )
 
 # adapt epiparameter to epinow2
-covid_incubation_discrete_max <-
-  covid_incubation %>%
-  discretise() %>%
+covid_incubation_discrete_max <- covid_incubation %>%
+  epiparameter::discretise() %>%
   quantile(p = 0.99)
-```
 
-``` error
-Error in discretise(.): Can only discretise a <dist_spec>.
-```
-
-``` r
 covid_incubation_parameters <-
   epiparameter::get_parameters(covid_incubation)
 
@@ -598,13 +587,7 @@ covid_incubation_time <-
     sdlog = covid_incubation_parameters["sdlog"],
     max = covid_incubation_discrete_max
   )
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'covid_incubation_discrete_max' not found
-```
-
-``` r
 # epinow ------------------------------------------------------------------
 
 # run epinow
@@ -617,17 +600,22 @@ epinow_estimates_cgi <- epinow(
 )
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'covid_incubation_time' not found
+``` output
+WARN [2024-06-18 17:16:40] epinow: There were 1 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. - 
+WARN [2024-06-18 17:16:40] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
+WARN [2024-06-18 17:16:41] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
+Running the chains for more iterations may help. See
+https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ``` r
 base::plot(epinow_estimates_cgi)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'epinow_estimates_cgi' not found
-```
+<img src="fig/delays-functions-rendered-unnamed-chunk-17-1.png" style="display: block; margin: auto;" />
 
 Try to complement the `delays` argument with a reporting delay like the `reporting_delay_fixed` object of the previous episode.
 
@@ -704,7 +692,7 @@ ebola_confirmed <-
   read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
 
 # list distributions
-epidist_db(disease = "ebola") %>%
+epiparameter::epidist_db(disease = "ebola") %>%
   epiparameter::parameter_tbl()
 ```
 
@@ -713,65 +701,41 @@ epidist_db(disease = "ebola") %>%
 # generation time ---------------------------------------------------------
 
 # subset one distribution for the generation time
-ebola_serial <- epidist_db(
+ebola_serial <- epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "serial",
   single_epidist = TRUE
 )
 
 # adapt epiparameter to epinow2
-ebola_serial_discrete <- discretise(ebola_serial)
-```
+ebola_serial_discrete <- epiparameter::discretise(ebola_serial)
 
-``` error
-Error in discretise(ebola_serial): Can only discretise a <dist_spec>.
-```
-
-``` r
 serial_interval_ebola <-
   EpiNow2::Gamma(
     mean = ebola_serial$summary_stats$mean,
     sd = ebola_serial$summary_stats$sd,
     max = quantile(ebola_serial_discrete, p = 0.99)
   )
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'ebola_serial_discrete' not found
-```
-
-``` r
 # incubation time ---------------------------------------------------------
 
 # subset one distribution for delay of the incubation period
-ebola_incubation <- epidist_db(
+ebola_incubation <- epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation",
   single_epidist = TRUE
 )
 
 # adapt epiparameter to epinow2
-ebola_incubation_discrete <- discretise(ebola_incubation)
-```
+ebola_incubation_discrete <- epiparameter::discretise(ebola_incubation)
 
-``` error
-Error in discretise(ebola_incubation): Can only discretise a <dist_spec>.
-```
-
-``` r
 incubation_period_ebola <-
   EpiNow2::Gamma(
     mean = ebola_incubation$summary_stats$mean,
     sd = ebola_incubation$summary_stats$sd,
     max = quantile(ebola_serial_discrete, p = 0.99)
   )
-```
 
-``` error
-Error in eval(expr, envir, enclos): object 'ebola_serial_discrete' not found
-```
-
-``` r
 # epinow ------------------------------------------------------------------
 
 # run epinow
@@ -784,17 +748,19 @@ epinow_estimates_egi <- epinow(
 )
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'serial_interval_ebola' not found
+``` output
+WARN [2024-06-18 17:19:33] epinow: There were 3 divergent transitions after warmup. See
+https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
+to find out why this is a problem and how to eliminate them. - 
+WARN [2024-06-18 17:19:33] epinow: Examine the pairs() plot to diagnose sampling problems
+ - 
 ```
 
 ``` r
 plot(epinow_estimates_egi)
 ```
 
-``` error
-Error in eval(expr, envir, enclos): object 'epinow_estimates_egi' not found
-```
+<img src="fig/delays-functions-rendered-unnamed-chunk-20-1.png" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::
 
@@ -818,7 +784,7 @@ Use the `influenza_england_1978_school` dataset from the `{outbreaks}` package t
 
 ``` r
 # What parameters are available for Influenza?
-epidist_db(disease = "influenza") %>%
+epiparameter::epidist_db(disease = "influenza") %>%
   epiparameter::parameter_tbl() %>%
   count(epi_distribution)
 ```
@@ -838,7 +804,7 @@ epidist_db(disease = "influenza") %>%
 
 # Read the generation time
 influenza_generation <-
-  epidist_db(
+  epiparameter::epidist_db(
     disease = "influenza",
     epi_dist = "generation"
   )
@@ -895,7 +861,7 @@ generation_time_influenza <-
 
 # Read the incubation period
 influenza_incubation <-
-  epidist_db(
+  epiparameter::epidist_db(
     disease = "influenza",
     epi_dist = "incubation",
     single_epidist = TRUE
