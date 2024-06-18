@@ -161,8 +161,8 @@ generate(covid_serialint, times = 10)
 ```
 
 ``` output
- [1]  2.152383  3.309027  6.665583  4.732071  8.479846 13.433640  2.432767
- [8]  2.970002  2.631198  4.473118
+ [1] 1.817744 2.013148 2.871411 1.560954 4.544691 7.315718 2.563274 6.472184
+ [9] 8.090210 6.302332
 ```
 
 ::::::::: instructor
@@ -473,14 +473,11 @@ epinow_estimates_cg <- epinow(
 ```
 
 ``` output
-WARN [2024-06-18 17:14:48] epinow: There were 1 divergent transitions after warmup. See
+WARN [2024-06-18 17:33:18] epinow: There were 19 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-18 17:14:48] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-18 17:33:18] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
-WARN [2024-06-18 17:14:49] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ``` r
@@ -601,14 +598,11 @@ epinow_estimates_cgi <- epinow(
 ```
 
 ``` output
-WARN [2024-06-18 17:16:40] epinow: There were 1 divergent transitions after warmup. See
+WARN [2024-06-18 17:35:46] epinow: There were 6 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-18 17:16:40] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-18 17:35:46] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
-WARN [2024-06-18 17:16:41] epinow: Bulk Effective Samples Size (ESS) is too low, indicating posterior means and medians may be unreliable.
-Running the chains for more iterations may help. See
-https://mc-stan.org/misc/warnings.html#bulk-ess - 
 ```
 
 ``` r
@@ -749,10 +743,10 @@ epinow_estimates_egi <- epinow(
 ```
 
 ``` output
-WARN [2024-06-18 17:19:33] epinow: There were 3 divergent transitions after warmup. See
+WARN [2024-06-18 17:38:01] epinow: There were 7 divergent transitions after warmup. See
 https://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup
 to find out why this is a problem and how to eliminate them. - 
-WARN [2024-06-18 17:19:33] epinow: Examine the pairs() plot to diagnose sampling problems
+WARN [2024-06-18 17:38:01] epinow: Examine the pairs() plot to diagnose sampling problems
  - 
 ```
 
@@ -904,23 +898,12 @@ influenza_cleaned <-
 # Run epinow()
 epinow_estimates_igi <- epinow(
   # cases
-  reported_cases = influenza_cleaned,
+  data = influenza_cleaned,
   # delays
   generation_time = generation_time_opts(generation_time_influenza),
   delays = delay_opts(incubation_time_influenza)
 )
-```
 
-``` warning
-Warning: The `reported_cases` argument of `epinow()` is deprecated as of EpiNow2 1.5.0.
-ℹ Please use the `data` argument instead.
-ℹ The argument will be removed completely in the next version.
-This warning is displayed once every 8 hours.
-Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-generated.
-```
-
-``` r
 plot(epinow_estimates_igi)
 ```
 
