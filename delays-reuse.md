@@ -50,14 +50,14 @@ However, early in an epidemic, modelling efforts can be delayed by the lack of a
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
-To exemplify how to use the `{epiparameter}` R package in your analysis pipeline, our goal in this episode will be to choose one specific set of epidemiological parameters from the literature, instead of copying-and-pasting them by hand, to plug them into an `{EpiNow2}` analysis workflow.
+To exemplify how to use the `{epiparameter}` R package in your analysis pipeline, our goal in this episode will be to access one specific set of epidemiological parameters from the literature, instead of copying-and-pasting them by hand, to plug them into an `{EpiNow2}` analysis workflow.
 
-<!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
+<!-- In this episode, we'll learn how to access one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
 
 Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to connect some of their functions, some `{tibble}` and `{dplyr}` functions, so let's also call to the `{tidyverse}` package:
 
 
-```r
+``` r
 library(epiparameter)
 library(tidyverse)
 ```
@@ -77,37 +77,54 @@ This help us remember package functions and avoid namespace conflicts.
 
 ## The problem
 
-If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::Gamma()` to specify a [generation time](../learners/reference.md#generationtime) as a probability distribution adding its `mean`, standard deviation (`sd`), and maximum value (`max`). 
+
+To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
 
 ```r
 generation_time <- 
-  EpiNow2::dist_spec(
+  EpiNow2::Gamma(
     mean = 4,
     sd = 2,
-    max = 20,
-    distribution = "gamma"
+    max = 20
   )
 ```
 
 It is a common practice for analysts to manually search the available literature and copy and paste the **summary statistics** or the **distribution parameters** from scientific publications. A challenge that is often faced is that the reporting of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to reliable estimates of distribution parameters for a range of infectious diseases, so that they can easily be implemented in outbreak analytic pipelines.
 
-In this episode, we will *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
+In this episode, we will *access* the summary statistics of generation time for COVID-19 from the library of epidemiological parameters provided by `{epiparameter}`. These metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent episodes.
 
-<!--
-```r
-epinow_estimates <- epinow(
-  # cases
-  reported_cases = example_confirmed[1:60],
-  # delays
-  generation_time = generation_time_opts(generation_time),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+Let's start by looking at how many entries are available in the **epidemiological distributions database** in `{epiparameter}` using `epidist_db()` for the epidemiological distribution `epi_dist` called generation time with the string `"generation"`:
+
+
+``` r
+epiparameter::epidist_db(
+  epi_dist = "generation"
 )
 ```
--->
+
+``` output
+Returning 1 results that match the criteria (1 are parameterised). 
+Use subset to filter by entry variables or single_epidist to return a single entry. 
+To retrieve the citation for each use the 'get_citation' function
+```
+
+``` output
+Disease: Influenza
+Pathogen: Influenza-A-H1N1
+Epi Distribution: generation time
+Study: Lessler J, Reich N, Cummings D, New York City Department of Health and
+Mental Hygiene Swine Influenza Investigation Team (2009). "Outbreak of
+2009 Pandemic Influenza A (H1N1) at a New York City School." _The New
+England Journal of Medicine_. doi:10.1056/NEJMoa0906089
+<https://doi.org/10.1056/NEJMoa0906089>.
+Distribution: weibull
+Parameters:
+  shape: 2.360
+  scale: 3.180
+```
+
+Currently, in the library of epidemiological parameters, we have one `"generation"` time entry for Influenza. Instead, we can look at the `serial` intervals for `COVID`-19. Let find what we need to consider for this!
 
 ## Generation time vs serial interval
 
@@ -136,7 +153,7 @@ To summarise these data from individual and pair time periods, we can find the *
 
 <!-- add a reference about good practices to estimate distributions -->
 
-![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Lognormal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
+![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Log normal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
 
 Statistical distributions are summarised in terms of their **summary statistics** like the *location* (mean and percentiles) and *spread* (variance or standard deviation) of the distribution, or with their **distribution parameters** that inform about the *form* (shape and rate/scale) of the distribution. These estimated values can be reported with their **uncertainty** (95% confidence intervals).
 
@@ -200,78 +217,21 @@ The objective of the assessment above is to assess the interpretation of a large
 
 ## Choosing epidemiological parameters
 
-In this section, we will use `{epiparameter}` to obtain the generation time and the serial interval for COVID-19, so these metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent sections of this episode.
+In this section, we will use `{epiparameter}` to obtain the serial interval for COVID-19, as an alternative to the generation time.
 
-Let's start by looking at how many entries are available in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
+Let's ask now how many parameters we have in the epidemiological distributions database (`epidist_db()`) with the `disease` named `covid`-19. Run this locally!
 
 
-```r
+``` r
 epiparameter::epidist_db(
   disease = "covid"
 )
 ```
 
-```{.output}
-Returning 27 results that match the criteria (22 are parameterised). 
-Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
-```
-
-```{.output}
-List of <epidist> objects
-  Number of entries in library: 27
-  Number of studies in library: 10
-  Number of diseases: 1
-  Number of delay distributions: 27
-  Number of offspring distributions: 0
-```
-
-::::::::::::::::::: checklist
-
-### The double-colon
-
-The double-colon `::` in R is used to access functions or objects from a specific package without loading the entire package into the current environment. This allows for a more targeted approach to using package components and helps avoid namespace conflicts.
-
-`::` lets you call a specific function from a package by explicitly mentioning the package name. For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package without loading the entire package.
-
-:::::::::::::::::::
-
-From the `{epiparameter}` package, we can use the `epidist_db()` function to ask for any `disease` and also for a specific epidemiological distribution (`epi_dist`). 
-
-Let's ask now how many parameters we have in the epidemiological distributions database (`epidist_db`) with the generation time using the string `generation`:
+From the `{epiparameter}` package, we can use the `epidist_db()` function to ask for any `disease` and also for a specific epidemiological distribution (`epi_dist`). Run this in your console:
 
 
-```r
-epiparameter::epidist_db(
-  epi_dist = "generation"
-)
-```
-
-```{.output}
-Returning 1 results that match the criteria (1 are parameterised). 
-Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
-```
-
-```{.output}
-Disease: Influenza
-Pathogen: Influenza-A-H1N1
-Epi Distribution: generation time
-Study: Lessler J, Reich N, Cummings D, New York City Department of Health and
-Mental Hygiene Swine Influenza Investigation Team (2009). "Outbreak of
-2009 Pandemic Influenza A (H1N1) at a New York City School." _The New
-England Journal of Medicine_. doi:10.1056/NEJMoa0906089
-<https://doi.org/10.1056/NEJMoa0906089>.
-Distribution: weibull
-Parameters:
-  shape: 2.360
-  scale: 3.180
-```
-
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the above-mentioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
-
-
-```r
+``` r
 epiparameter::epidist_db(
   disease = "COVID",
   epi_dist = "serial"
@@ -288,34 +248,37 @@ With this query combination, we get more than one delay distribution. This outpu
 
 :::::::::::::::::::::::::
 
-To summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+As suggested in the outputs, to summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::parameter_tbl()` function to the previous code using the pipe `%>%`:
 
 
-```r
+``` r
 epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "serial"
 ) %>%
-  epiparameter::list_distributions()
+  epiparameter::parameter_tbl()
 ```
 
-```{.output}
+``` output
 Returning 4 results that match the criteria (3 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```{.output}
-   disease epi_distribution prob_distribution       author year
-1 COVID-19  serial interval              <NA> Muluneh .... 2021
-2 COVID-19  serial interval             lnorm Hiroshi .... 2020
-3 COVID-19  serial interval           weibull Hiroshi .... 2020
-4 COVID-19  serial interval              norm Lin Yang.... 2020
+``` output
+# Parameter table:
+# A data frame:    4 × 7
+  disease  pathogen  epi_distribution prob_distribution author  year sample_size
+  <chr>    <chr>     <chr>            <chr>             <chr>  <dbl>       <dbl>
+1 COVID-19 SARS-CoV… serial interval  <NA>              Alene…  2021        3924
+2 COVID-19 SARS-CoV… serial interval  lnorm             Nishi…  2020          28
+3 COVID-19 SARS-CoV… serial interval  weibull           Nishi…  2020          18
+4 COVID-19 SARS-CoV… serial interval  norm              Yang …  2020         131
 ```
 
-In the `epiparameter::list_distributions()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
+In the `epiparameter::parameter_tbl()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
 
-`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Lognormal** is called `lnorm`.
+`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Log normal** is called `lnorm`.
 
 ::::::::::::::::: spoiler
 
@@ -324,7 +287,7 @@ In the `epiparameter::list_distributions()` output, we can also find different t
 Entries with a missing value (`<NA>`) in the `prob_distribution` column are *non-parameterised* entries. They have summary statistics but no probability distribution. Compare these two outputs:
 
 
-```r
+``` r
 # get an <epidist> object
 distribution <-
   epiparameter::epidist_db(
@@ -350,7 +313,7 @@ distribution %>%
 As detailed in `?is_parameterised`, a parameterised distribution is the entry that has a probability distribution associated with it provided by an `inference_method` as shown in `metadata`:
 
 
-```r
+``` r
 distribution[[1]]$metadata$inference_method
 distribution[[2]]$metadata$inference_method
 distribution[[4]]$metadata$inference_method
@@ -371,7 +334,7 @@ Find:
 
 - How many delay distributions are for that disease?
 
-- How many types of probability distribution (e.g., gamma, lognormal) are for a given delay in that disease?
+- How many types of probability distribution (e.g., gamma, log normal) are for a given delay in that disease?
 
 Ask:
 
@@ -392,7 +355,7 @@ The `epidist_db()` function with `disease` and `epi_dist` gets a list of all ent
 - the **type** of a probability distribution, and 
 - distribution parameter values.
 
-The combo of `epidist_db()` plus `list_distributions()` gets a data frame of all entries with columns like:
+The combo of `epidist_db()` plus `parameter_tbl()` gets a data frame of all entries with columns like:
 
 - the **type** of the probability distribution per delay, and
 - author and year of the study.
@@ -404,26 +367,80 @@ The combo of `epidist_db()` plus `list_distributions()` gets a data frame of all
 We choose to explore Ebola's delay distributions:
 
 
-```r
+``` r
 # we expect 16 delays distributions for ebola
 epiparameter::epidist_db(
   disease = "ebola"
 )
 ```
 
-```{.output}
+``` output
 Returning 17 results that match the criteria (17 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```{.output}
-List of <epidist> objects
-  Number of entries in library: 17
-  Number of studies in library: 4
-  Number of diseases: 1
-  Number of delay distributions: 16
-  Number of offspring distributions: 1
+``` output
+# List of 17 <epidist> objects
+Number of diseases: 1
+❯ Ebola Virus Disease
+Number of epi distributions: 9
+❯ hospitalisation to death ❯ hospitalisation to discharge ❯ incubation period ❯ notification to death ❯ notification to discharge ❯ offspring distribution ❯ onset to death ❯ onset to discharge ❯ serial interval
+[[1]]
+Disease: Ebola Virus Disease
+Pathogen: Ebola Virus
+Epi Distribution: offspring distribution
+Study: Lloyd-Smith J, Schreiber S, Kopp P, Getz W (2005). "Superspreading and
+the effect of individual variation on disease emergence." _Nature_.
+doi:10.1038/nature04153 <https://doi.org/10.1038/nature04153>.
+Distribution: nbinom
+Parameters:
+  mean: 1.500
+  dispersion: 5.100
+
+[[2]]
+Disease: Ebola Virus Disease
+Pathogen: Ebola Virus-Zaire Subtype
+Epi Distribution: incubation period
+Study: Eichner M, Dowell S, Firese N (2011). "Incubation period of ebola
+hemorrhagic virus subtype zaire." _Osong Public Health and Research
+Perspectives_. doi:10.1016/j.phrp.2011.04.001
+<https://doi.org/10.1016/j.phrp.2011.04.001>.
+Distribution: lnorm
+Parameters:
+  meanlog: 2.487
+  sdlog: 0.330
+
+[[3]]
+Disease: Ebola Virus Disease
+Pathogen: Ebola Virus-Zaire Subtype
+Epi Distribution: onset to death
+Study: The Ebola Outbreak Epidemiology Team, Barry A, Ahuka-Mundeke S, Ali
+Ahmed Y, Allarangar Y, Anoko J, Archer B, Abedi A, Bagaria J, Belizaire
+M, Bhatia S, Bokenge T, Bruni E, Cori A, Dabire E, Diallo A, Diallo B,
+Donnelly C, Dorigatti I, Dorji T, Waeber A, Fall I, Ferguson N,
+FitzJohn R, Tengomo G, Formenty P, Forna A, Fortin A, Garske T,
+Gaythorpe K, Gurry C, Hamblion E, Djingarey M, Haskew C, Hugonnet S,
+Imai N, Impouma B, Kabongo G, Kalenga O, Kibangou E, Lee T, Lukoya C,
+Ly O, Makiala-Mandanda S, Mamba A, Mbala-Kingebeni P, Mboussou F,
+Mlanda T, Makuma V, Morgan O, Mulumba A, Kakoni P, Mukadi-Bamuleka D,
+Muyembe J, Bathé N, Ndumbi Ngamala P, Ngom R, Ngoy G, Nouvellet P, Nsio
+J, Ousman K, Peron E, Polonsky J, Ryan M, Touré A, Towner R, Tshapenda
+G, Van De Weerdt R, Van Kerkhove M, Wendland A, Yao N, Yoti Z, Yuma E,
+Kalambayi Kabamba G, Mwati J, Mbuy G, Lubula L, Mutombo A, Mavila O,
+Lay Y, Kitenge E (2018). "Outbreak of Ebola virus disease in the
+Democratic Republic of the Congo, April–May, 2018: an epidemiological
+study." _The Lancet_. doi:10.1016/S0140-6736(18)31387-4
+<https://doi.org/10.1016/S0140-6736%2818%2931387-4>.
+Distribution: gamma
+Parameters:
+  shape: 2.400
+  scale: 3.333
+
+# ℹ 14 more elements
+# ℹ Use `print(n = ...)` to see more elements.
+# ℹ Use `parameter_tbl()` to see a summary table of the parameters.
+# ℹ Explore database online at: https://epiverse-trace.github.io/epiparameter/dev/articles/database.html
 ```
 
 Now, from the output of `epiparameter::epidist_db()`, What is an [offspring distribution](../learners/reference.md#offspringdist)?
@@ -431,42 +448,45 @@ Now, from the output of `epiparameter::epidist_db()`, What is an [offspring dist
 We choose to find Ebola's incubation periods. This output list all the papers and parameters found. Run this locally if needed:
 
 
-```r
+``` r
 epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation"
 )
 ```
 
-We use `list_distributions()` to get a summary display of all:
+We use `parameter_tbl()` to get a summary display of all:
 
 
-```r
+``` r
 # we expect 2 different types of delay distributions
 # for ebola incubation period
 epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation"
 ) %>%
-  list_distributions()
+  parameter_tbl()
 ```
 
-```{.output}
+``` output
 Returning 5 results that match the criteria (5 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```{.output}
-              disease  epi_distribution prob_distribution       author year
-1 Ebola Virus Disease incubation period             lnorm Martin E.... 2011
-2 Ebola Virus Disease incubation period             gamma WHO Ebol.... 2015
-3 Ebola Virus Disease incubation period             gamma WHO Ebol.... 2015
-4 Ebola Virus Disease incubation period             gamma WHO Ebol.... 2015
-5 Ebola Virus Disease incubation period             gamma WHO Ebol.... 2015
+``` output
+# Parameter table:
+# A data frame:    5 × 7
+  disease   pathogen epi_distribution prob_distribution author  year sample_size
+  <chr>     <chr>    <chr>            <chr>             <chr>  <dbl>       <dbl>
+1 Ebola Vi… Ebola V… incubation peri… lnorm             Eichn…  2011         196
+2 Ebola Vi… Ebola V… incubation peri… gamma             WHO E…  2015        1798
+3 Ebola Vi… Ebola V… incubation peri… gamma             WHO E…  2015          49
+4 Ebola Vi… Ebola V… incubation peri… gamma             WHO E…  2015         957
+5 Ebola Vi… Ebola V… incubation peri… gamma             WHO E…  2015         792
 ```
 
-We find two types of probability distributions for this query: _lognormal_ and _gamma_.
+We find two types of probability distributions for this query: _log normal_ and _gamma_.
 
 How does `{epiparameter}` do the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
@@ -480,31 +500,34 @@ How does `{epiparameter}` do the collection and review of peer-reviewed literatu
 The `epiparameter::epidist_db()` function works as a filtering or subset function. Let's use the `author` argument to filter `Hiroshi Nishiura` parameters:
 
 
-```r
+``` r
 epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "serial",
   author = "Hiroshi"
 ) %>%
-  epiparameter::list_distributions()
+  epiparameter::parameter_tbl()
 ```
 
-```{.output}
+``` output
 Returning 2 results that match the criteria (2 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```{.output}
-   disease epi_distribution prob_distribution       author year
-1 COVID-19  serial interval             lnorm Hiroshi .... 2020
-2 COVID-19  serial interval           weibull Hiroshi .... 2020
+``` output
+# Parameter table:
+# A data frame:    2 × 7
+  disease  pathogen  epi_distribution prob_distribution author  year sample_size
+  <chr>    <chr>     <chr>            <chr>             <chr>  <dbl>       <dbl>
+1 COVID-19 SARS-CoV… serial interval  lnorm             Nishi…  2020          28
+2 COVID-19 SARS-CoV… serial interval  weibull           Nishi…  2020          18
 ```
 
 We still get more than one epidemiological parameter. We can set the `single_epidist` argument to `TRUE` to only one:
 
 
-```r
+``` r
 epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "serial",
@@ -513,15 +536,15 @@ epiparameter::epidist_db(
 )
 ```
 
-```{.output}
+``` output
 Using Nishiura H, Linton N, Akhmetzhanov A (2020). "Serial interval of novel
 coronavirus (COVID-19) infections." _International Journal of
 Infectious Diseases_. doi:10.1016/j.ijid.2020.02.060
 <https://doi.org/10.1016/j.ijid.2020.02.060>.. 
-To retrieve the short citation use the 'get_citation' function
+To retrieve the citation use the 'get_citation' function
 ```
 
-```{.output}
+``` output
 Disease: COVID-19
 Pathogen: SARS-CoV-2
 Epi Distribution: serial interval
@@ -552,7 +575,7 @@ What is a *parametrised* `<epidist>`? Look at `?is_parameterised`.
 Let's assign this `<epidist>` class object to the `covid_serialint` object.
 
 
-```r
+``` r
 covid_serialint <-
   epiparameter::epidist_db(
     disease = "covid",
@@ -567,13 +590,13 @@ covid_serialint <-
 But still, we need to extract them as usable numbers. We use `epiparameter::get_parameters()` for this:
 
 
-```r
+``` r
 covid_serialint_parameters <- epiparameter::get_parameters(covid_serialint)
 
 covid_serialint_parameters
 ```
 
-```{.output}
+``` output
   meanlog     sdlog 
 1.3862617 0.5679803 
 ```
@@ -598,7 +621,7 @@ You can use `plot()` to `<epidist>` objects to visualise:
 - the *Cumulative Distribution Function (CDF)*.
 
 
-```r
+``` r
 # plot <epidist> object
 plot(covid_serialint)
 ```
@@ -608,7 +631,7 @@ plot(covid_serialint)
 With the `day_range` argument, you can change the length or number of days in the `x` axis. Explore what this looks like:
 
 
-```r
+``` r
 # plot <epidist> object
 plot(covid_serialint, day_range = 0:20)
 ```
@@ -619,28 +642,27 @@ plot(covid_serialint, day_range = 0:20)
 We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving into the `summary_stats` object:
 
 
-```r
+``` r
 # get the mean
 covid_serialint$summary_stats$mean
 ```
 
-```{.output}
+``` output
 [1] 4.7
 ```
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into the `EpiNow2::dist_spec()` function:
+Now, we have an epidemiological parameter we can reuse! Given that the `covid_serialint` is a `lnorm` or log normal distribution, we can replace the **summary statistics** numbers we plug into the `EpiNow2::LogNormal()` function:
 
 ```r
 generation_time <- 
-  EpiNow2::dist_spec(
+  EpiNow2::LogNormal(
     mean = covid_serialint$summary_stats$mean, # replaced!
     sd = covid_serialint$summary_stats$sd, # replaced!
-    max = 20,
-    distribution = "gamma"
+    max = 20
   )
 ```
 
-In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::dist_spec()` and use `{epiparameter}` in your analysis.
+In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::LogNormal()` and use `{epiparameter}` in your analysis.
 
 :::::::::::::::::::::::::::::: callout
 
@@ -649,14 +671,14 @@ In the next episode we'll learn how to use `{EpiNow2}` to correctly specify dist
 If you need the log normal **distribution parameters** instead of the summary statistics, we can use `epiparameter::get_parameters()`:
 
 
-```r
+``` r
 covid_serialint_parameters <-
   epiparameter::get_parameters(covid_serialint)
 
 covid_serialint_parameters
 ```
 
-```{.output}
+``` output
   meanlog     sdlog 
 1.3862617 0.5679803 
 ```
@@ -696,7 +718,7 @@ Use the `str()` to display the structure of the `<epidist>` R object.
 :::::::::: solution
 
 
-```r
+``` r
 # ebola serial interval
 ebola_serial <-
   epiparameter::epidist_db(
@@ -706,7 +728,7 @@ ebola_serial <-
   )
 ```
 
-```{.output}
+``` output
 Using WHO Ebola Response Team, Agua-Agum J, Ariyarajah A, Aylward B, Blake I,
 Brennan R, Cori A, Donnelly C, Dorigatti I, Dye C, Eckmanns T, Ferguson
 N, Formenty P, Fraser C, Garcia E, Garske T, Hinsley W, Holmes D,
@@ -717,14 +739,14 @@ Kerkhove M, Varsaneux O, Kannangarage N (2015). "West African Ebola
 Epidemic after One Year — Slowing but Not Yet under Control." _The New
 England Journal of Medicine_. doi:10.1056/NEJMc1414992
 <https://doi.org/10.1056/NEJMc1414992>.. 
-To retrieve the short citation use the 'get_citation' function
+To retrieve the citation use the 'get_citation' function
 ```
 
-```r
+``` r
 ebola_serial
 ```
 
-```{.output}
+``` output
 Disease: Ebola Virus Disease
 Pathogen: Ebola Virus
 Epi Distribution: serial interval
@@ -745,21 +767,21 @@ Parameters:
 ```
 
 
-```r
+``` r
 # get the sd
 ebola_serial$summary_stats$sd
 ```
 
-```{.output}
+``` output
 [1] 9.6
 ```
 
-```r
+``` r
 # get the sample_size
 ebola_serial$metadata$sample_size
 ```
 
-```{.output}
+``` output
 [1] 305
 ```
 
@@ -781,11 +803,11 @@ Share about:
 An interesting element is the `method_assess` nested entry, which refers to the methods used by the study authors to assess for bias while estimating the serial interval distribution.
 
 
-```r
+``` r
 covid_serialint$method_assess
 ```
 
-```{.output}
+``` output
 $censored
 [1] TRUE
 
@@ -817,28 +839,28 @@ For Ebola:
 
 An informative delay should measure the time from symptom onset to recovery or death.
 
-Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `list_distributions()` output is a dataframe.
+Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `parameter_tbl()` output is a dataframe.
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
 
-```r
+``` r
 # one way to get the list of all the available parameters
 epidist_db(disease = "all") %>%
-  list_distributions() %>%
+  parameter_tbl() %>%
   as_tibble() %>%
   distinct(epi_distribution)
 ```
 
-```{.output}
+``` output
 Returning 122 results that match the criteria (99 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```{.output}
+``` output
 # A tibble: 12 × 1
    epi_distribution            
    <chr>                       
@@ -856,46 +878,46 @@ To retrieve the short citation for each use the 'get_citation' function
 12 onset to ventilation        
 ```
 
-```r
+``` r
 ebola_severity <- epidist_db(
   disease = "ebola",
   epi_dist = "onset to discharge"
 )
 ```
 
-```{.output}
+``` output
 Returning 1 results that match the criteria (1 are parameterised). 
 Use subset to filter by entry variables or single_epidist to return a single entry. 
-To retrieve the short citation for each use the 'get_citation' function
+To retrieve the citation for each use the 'get_citation' function
 ```
 
-```r
+``` r
 # point estimate
 ebola_severity$summary_stats$mean
 ```
 
-```{.output}
+``` output
 [1] 15.1
 ```
 
 Check that for some `{epiparameter}` entries you will also have the *uncertainty* around the *point estimate* of each summary statistic:
 
 
-```r
+``` r
 # 95% confidence intervals
 ebola_severity$summary_stats$mean_ci
 ```
 
-```{.output}
+``` output
 [1] 95
 ```
 
-```r
+``` r
 # limits of the confidence intervals
 ebola_severity$summary_stats$mean_ci_limits
 ```
 
-```{.output}
+``` output
 [1] 14.6 15.6
 ```
 
@@ -941,7 +963,7 @@ update it from last epiparameter test
 
 - Use `{epiparameter}` to access the literature catalogue of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
-- Use `list_distributions()` for an overview of multiple delay distributions.
+- Use `parameter_tbl()` for an overview of multiple delay distributions.
 - Reuse known estimates for unknown disease in the early stage of an outbreak when no contact tracing data is available.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

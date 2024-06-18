@@ -62,7 +62,7 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 
-```r
+``` r
 library("rio")
 library("here")
 
@@ -76,14 +76,6 @@ head(ebola_confirmed, 5)
 
 
 
-```{.output}
-        date confirm
-1 2014-05-18       1
-2 2014-05-20       2
-3 2014-05-21       4
-4 2014-05-22       6
-5 2014-05-23       1
-```
 
 Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
 
@@ -101,7 +93,7 @@ in the `{rio}` package on the package website. To expand {rio} to the full range
 
 
 
-```r
+``` r
 rio::install_formats()
 ```
 
@@ -114,7 +106,7 @@ You can use this template to read the file:
 ::::::::::::::::: solution
 
 
-```r
+``` r
 rio::import(here::here("data", "Marburg.zip"))
 ```
 ::::::::::::::::::::::::::
@@ -131,7 +123,7 @@ systems (DBMS) across different back-ends or servers. It offers a uniform method
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
 
 
-```r
+``` r
 library("DBI")
 library("RSQLite")
 
@@ -148,25 +140,13 @@ DBI::dbWriteTable(
   name = "cases",
   value = ebola_confirmed
 )
-```
 
-```{.error}
-Error in h(simpleError(msg, call)): error in evaluating the argument 'value' in selecting a method for function 'dbWriteTable': object 'ebola_confirmed' not found
-```
-
-```r
 # Read data from the 'cases' table
 result <- DBI::dbReadTable(
   conn = db_con,
   name = "cases"
 )
-```
 
-```{.error}
-Error: no such table: cases
-```
-
-```r
 # Close the database connection
 DBI::dbDisconnect(conn = db_con)
 
@@ -174,8 +154,14 @@ DBI::dbDisconnect(conn = db_con)
 base::print(utils::head(result))
 ```
 
-```{.error}
-Error in eval(expr, envir, enclos): object 'result' not found
+``` output
+   date confirm
+1 16208       1
+2 16210       2
+3 16211       4
+4 16212       6
+5 16213       1
+6 16214       2
 ```
 
 This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `ebola_confirmed` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`.

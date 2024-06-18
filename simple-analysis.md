@@ -44,7 +44,7 @@ The `i2extras` package provides methods for modelling the trend in case data, ca
 
 
 
-```r
+``` r
 # load packages which provides methods for modeling
 library("i2extras")
 library("incidence2")
@@ -92,7 +92,7 @@ Repeat the above analysis using Poisson distribution?
 :::::::::::::::::::::::: solution 
 
 
-```r
+``` r
 fitted_curve_poisson <-
   i2extras::fit_curve(
     x = df_incid,
@@ -116,14 +116,14 @@ The exponential growth or decay rate, denoted as $r$, serves as an indicator for
 Below is a code snippet demonstrating how to extract the growth/decay rate from the above **NB**-fitted  curve using the `growth_rate()` function:
 
 
-```r
+``` r
 rates_nb <- i2extras::growth_rate(fitted_curve_nb)
 rates_nb <- base::as.data.frame(rates_nb) |>
   subset(select = c(sex, r, r_lower, r_upper))
 base::print(rates_nb)
 ```
 
-```{.output}
+``` output
       sex            r      r_lower      r_upper
 1  female -0.008241228 -0.009182635 -0.007300403
 2    male -0.008346783 -0.009316775 -0.007377392
@@ -144,20 +144,20 @@ Extract growth rates from the **Poisson**-fitted curve of **Challenge 1**?
 The **Peak time ** is the time at which the highest number of cases is observed in the aggregated data. It can be estimated using the `i2extras::estimate_peak()` function as shown in the below code chunk, which identify peak time from the `incidenc2` object `df_incid`.
 
 
-```r
+``` r
 peaks_nb <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
   subset(select = -c(count_variable, bootstrap_peaks))
 
 base::print(peaks_nb)
 ```
 
-```{.output}
+``` output
 # A data frame: 3 × 6
   sex     observed_peak observed_count lower_ci   median     upper_ci  
 * <chr>   <date>                 <int> <date>     <date>     <date>    
-1 female  2020-03-26              1314 2020-03-18 2020-03-23 2020-03-31
-2 male    2020-03-27              1299 2020-03-19 2020-03-26 2020-03-30
-3 unknown 2020-04-10                32 2020-03-24 2020-04-07 2020-04-20
+1 female  2020-03-26              1314 2020-03-18 2020-03-26 2020-03-30
+2 male    2020-03-27              1299 2020-03-18 2020-03-25 2020-03-31
+3 unknown 2020-04-10                32 2020-03-24 2020-04-10 2020-04-11
 ```
 
 
@@ -166,7 +166,7 @@ base::print(peaks_nb)
 A moving or rolling average calculates the average number of cases within a specified time period. This can be achieved by utilizing the `add_rolling_average()` function from the `{i2extras}` package on an `incidence2 object`. The following code chunk demonstrates the computation of the weekly average number of cases from the `incidence2` object `df_incid`, followed by visualization.
 
 
-```r
+``` r
 library("ggplot2")
 
 moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
@@ -193,7 +193,7 @@ Compute and visualize the monthly moving average of cases on `df_incid`?
 :::::::::::::::::::::::: solution 
 
 
-```r
+``` r
 moving_Avg_mont <- i2extras::add_rolling_average(df_incid, n = 30L)
 
 base::plot(

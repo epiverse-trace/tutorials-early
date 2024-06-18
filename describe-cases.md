@@ -53,7 +53,7 @@ These latter distributions can be sourced from literature and are conveniently a
 package, see the below code chunk.
 
 
-```r
+``` r
 # Load simulist and epiparameter packages
 library("simulist")
 library("epiparameter")
@@ -101,7 +101,7 @@ Additionally, we assume that the outbreak started at the beginning of 2023, is h
 infection of $80\%$, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
 the mentioned distributions, the code chunk below generates a simulated line list:
 
-```r
+``` r
 # Set seed to 1 to  have the same results
 base::set.seed(1)
 
@@ -126,21 +126,21 @@ linelist <- simulist::sim_linelist(
 utils::head(linelist)
 ```
 
-```{.output}
-  id                  case_name case_type sex age date_onset date_admission
-1  1           Keegan Hardy-Roy confirmed   m   3 2023-01-01           <NA>
-2  6    Alexandria Torres-Perez  probable   f  13 2023-01-01           <NA>
-3  7          Mitchell Reinhart confirmed   m  74 2023-01-01     2023-01-08
-4  9 Stephanie Loadman-Copeland confirmed   f  65 2023-01-01     2023-01-10
-5 10           Sufyaan al-Irani confirmed   m   8 2023-01-02           <NA>
-6 11               Rohan Nguyen confirmed   m  27 2023-01-01           <NA>
-  date_death date_first_contact date_last_contact ct_value
-1       <NA>               <NA>              <NA>     24.9
-2       <NA>         2022-12-30        2023-01-02       NA
-3       <NA>         2022-12-31        2023-01-04     24.9
-4       <NA>         2023-01-03        2023-01-04     24.9
-5       <NA>         2022-12-31        2023-01-02     24.9
-6       <NA>         2023-01-01        2023-01-05     24.9
+``` output
+  id         case_name case_type sex age date_onset date_admission   outcome
+1  1  Yassir Hutchison confirmed   m   3 2023-01-01           <NA> recovered
+2  6 Lubaaba el-Hameed confirmed   f  13 2023-01-01           <NA> recovered
+3  7    Brandon Rivera confirmed   m  74 2023-01-01     2023-01-08 recovered
+4  9      Sierra Quint confirmed   f  65 2023-01-01     2023-01-10      died
+5 10          Levi Lee confirmed   m   8 2023-01-02           <NA> recovered
+6 11       Nelson Tran suspected   m  27 2023-01-01           <NA> recovered
+  date_outcome date_first_contact date_last_contact ct_value
+1         <NA>               <NA>              <NA>       26
+2         <NA>         2022-12-30        2023-01-02       26
+3         <NA>         2022-12-31        2023-01-04       26
+4   2023-01-01         2023-01-03        2023-01-04       26
+5         <NA>         2022-12-31        2023-01-02       26
+6         <NA>         2023-01-01        2023-01-05       NA
 ```
 ## Aggregating
 
@@ -151,7 +151,7 @@ and/or other factors. The code chunk provided below demonstrates the creation of
 simulated  Ebola `linelist` data based on the  date of onset.
 
 
-```r
+``` r
 # load incidence2 package
 library("incidence2")
 
@@ -166,11 +166,11 @@ dialy_incidence_data <- incidence2::incidence(
 utils::head(dialy_incidence_data, 5)
 ```
 
-```{.output}
+``` output
 # incidence:  5 x 3
 # count vars: date_onset
   date_index count_variable count
-* <period>   <chr>          <int>
+  <period>   <chr>          <int>
 1 2023-01-01 date_onset       475
 2 2023-01-02 date_onset      4904
 3 2023-01-03 date_onset      5478
@@ -181,7 +181,7 @@ Furthermore, with the `{incidence2}` package, you can specify the desired interv
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
 
 
-```r
+``` r
 # Grouping data by week
 weekly_incidence_data <- incidence2::incidence(
   linelist,
@@ -194,17 +194,17 @@ weekly_incidence_data <- incidence2::incidence(
 utils::head(weekly_incidence_data, 5)
 ```
 
-```{.output}
+``` output
 # incidence:  5 x 5
 # count vars: date_onset
 # groups:     sex, case_type
   date_index               sex   case_type count_variable count
-* <period>                 <chr> <chr>     <chr>          <int>
-1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5576
-2 2022-12-29 to 2023-01-04 f     probable  date_onset       766
-3 2022-12-29 to 2023-01-04 f     suspected date_onset      1612
-4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5760
-5 2022-12-29 to 2023-01-04 m     probable  date_onset       787
+  <period>                 <chr> <chr>     <chr>          <int>
+1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
+2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
+3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
+4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
+5 2022-12-29 to 2023-01-04 m     probable  date_onset       800
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -214,7 +214,7 @@ resulting `incidence2` object. The `incidence2` package provides a function call
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
 
-```r
+``` r
 # Create incidence object
 dialy_incidence_data_2 <- incidence2::incidence(
   linelist,
@@ -232,7 +232,7 @@ incidence2::complete_dates(
 )
 ```
 
-```{.output}
+``` output
 # incidence:  24 x 4
 # count vars: date_onset
 # groups:     sex
@@ -259,7 +259,7 @@ The resulting graph is referred to as an epidemic curve, or epi-curve for short.
 snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
 
 
-```r
+``` r
 # Load ggplot2 and tracetheme packages
 library("ggplot2")
 library("tracetheme")
@@ -277,7 +277,7 @@ base::plot(dialy_incidence_data) +
 
 
 
-```r
+``` r
 # Plot weekly incidence data
 
 base::plot(weekly_incidence_data) +
