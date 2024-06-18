@@ -76,15 +76,14 @@ This help us remember package functions and avoid namespace conflicts.
 
 ## The problem
 
-If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::dist_spec()` to specify a [generation time](../learners/reference.md#generationtime) as a probability `distribution` adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::Gamma()` to specify a [generation time](../learners/reference.md#generationtime) as a probability distribution adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
 
 ```r
 generation_time <- 
-  EpiNow2::dist_spec(
+  EpiNow2::Gamma(
     mean = 4,
     sd = 2,
-    max = 20,
-    distribution = "gamma"
+    max = 20
   )
 ```
 
@@ -135,7 +134,7 @@ To summarise these data from individual and pair time periods, we can find the *
 
 <!-- add a reference about good practices to estimate distributions -->
 
-![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Lognormal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
+![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Log normal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
 
 Statistical distributions are summarised in terms of their **summary statistics** like the *location* (mean and percentiles) and *spread* (variance or standard deviation) of the distribution, or with their **distribution parameters** that inform about the *form* (shape and rate/scale) of the distribution. These estimated values can be reported with their **uncertainty** (95% confidence intervals).
 
@@ -248,19 +247,19 @@ With this query combination, we get more than one delay distribution. This outpu
 
 :::::::::::::::::::::::::
 
-To summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::list_distributions()` function to the previous code using the pipe `%>%`:
+To summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::parameter_tbl()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
   disease = "covid",
   epi_dist = "serial"
 ) %>%
-  epiparameter::list_distributions()
+  epiparameter::parameter_tbl()
 ```
 
-In the `epiparameter::list_distributions()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
+In the `epiparameter::parameter_tbl()` output, we can also find different types of probability distributions (e.g., Log-normal, Weibull, Normal).
 
-`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Lognormal** is called `lnorm`.
+`{epiparameter}` uses the `base` R naming convention for distributions. This is why **Log normal** is called `lnorm`.
 
 ::::::::::::::::: spoiler
 
@@ -314,7 +313,7 @@ Find:
 
 - How many delay distributions are for that disease?
 
-- How many types of probability distribution (e.g., gamma, lognormal) are for a given delay in that disease?
+- How many types of probability distribution (e.g., gamma, log normal) are for a given delay in that disease?
 
 Ask:
 
@@ -335,7 +334,7 @@ The `epidist_db()` function with `disease` and `epi_dist` gets a list of all ent
 - the **type** of a probability distribution, and 
 - distribution parameter values.
 
-The combo of `epidist_db()` plus `list_distributions()` gets a data frame of all entries with columns like:
+The combo of `epidist_db()` plus `parameter_tbl()` gets a data frame of all entries with columns like:
 
 - the **type** of the probability distribution per delay, and
 - author and year of the study.
@@ -364,7 +363,7 @@ epiparameter::epidist_db(
 )
 ```
 
-We use `list_distributions()` to get a summary display of all:
+We use `parameter_tbl()` to get a summary display of all:
 
 ```{r,eval=TRUE}
 # we expect 2 different types of delay distributions
@@ -373,10 +372,10 @@ epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation"
 ) %>%
-  list_distributions()
+  parameter_tbl()
 ```
 
-We find two types of probability distributions for this query: _lognormal_ and _gamma_.
+We find two types of probability distributions for this query: _log normal_ and _gamma_.
 
 How does `{epiparameter}` do the collection and review of peer-reviewed literature? We invite you to read the vignette on ["Data Collation and Synthesis Protocol"](https://epiverse-trace.github.io/epiparameter/articles/data_protocol.html)!
 
@@ -395,7 +394,7 @@ epiparameter::epidist_db(
   epi_dist = "serial",
   author = "Hiroshi"
 ) %>%
-  epiparameter::list_distributions()
+  epiparameter::parameter_tbl()
 ```
 
 We still get more than one epidemiological parameter. We can set the `single_epidist` argument to `TRUE` to only one:
@@ -486,19 +485,18 @@ We can get the `mean` and standard deviation (`sd`) from this `<epidist>` diving
 covid_serialint$summary_stats$mean
 ```
 
-Now, we have an epidemiological parameter we can reuse! We can replace the **summary statistics** numbers we plug into the `EpiNow2::dist_spec()` function:
+Now, we have an epidemiological parameter we can reuse! Given that the `covid_serialint` is a `lnorm` or log normal distribution, we can replace the **summary statistics** numbers we plug into the `EpiNow2::LogNormal()` function:
 
 ```r
 generation_time <- 
-  EpiNow2::dist_spec(
+  EpiNow2::LogNormal(
     mean = covid_serialint$summary_stats$mean, # replaced!
     sd = covid_serialint$summary_stats$sd, # replaced!
-    max = 20,
-    distribution = "gamma"
+    max = 20
   )
 ```
 
-In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::dist_spec()` and use `{epiparameter}` in your analysis.
+In the next episode we'll learn how to use `{EpiNow2}` to correctly specify distributions, estimate transmissibility. Then, how to use **distribution functions** to get a maximum value (`max`) for `EpiNow2::LogNormal()` and use `{epiparameter}` in your analysis.
 
 :::::::::::::::::::::::::::::: callout
 
@@ -609,7 +607,7 @@ For Ebola:
 
 An informative delay should measure the time from symptom onset to recovery or death.
 
-Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `list_distributions()` output is a dataframe.
+Find a way to access the whole `{epiparameter}` database and find how that delay may be stored. The `parameter_tbl()` output is a dataframe.
 
 ::::::::::::::::::::::
 
@@ -618,7 +616,7 @@ Find a way to access the whole `{epiparameter}` database and find how that delay
 ```{r,eval=TRUE}
 # one way to get the list of all the available parameters
 epidist_db(disease = "all") %>%
-  list_distributions() %>%
+  parameter_tbl() %>%
   as_tibble() %>%
   distinct(epi_distribution)
 
@@ -682,7 +680,7 @@ update it from last epiparameter test
 
 - Use `{epiparameter}` to access the literature catalogue of epidemiological delay distributions.
 - Use `epidist_db()` to select single delay distributions.
-- Use `list_distributions()` for an overview of multiple delay distributions.
+- Use `parameter_tbl()` for an overview of multiple delay distributions.
 - Reuse known estimates for unknown disease in the early stage of an outbreak when no contact tracing data is available.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::

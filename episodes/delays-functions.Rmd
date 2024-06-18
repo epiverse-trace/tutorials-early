@@ -62,15 +62,14 @@ covid_serialint <-
   )
 ```
 
-Now, we have an epidemiological parameter we can use in our analysis! In the chunk below we replaced one of the **summary statistics** inputs into `EpiNow2::dist_spec()`
+Now, we have an epidemiological parameter we can use in our analysis! In the chunk below we replaced one of the **summary statistics** inputs into `EpiNow2::LogNormal()`
 
 ```r
 generation_time <- 
-  EpiNow2::dist_spec(
+  EpiNow2::LogNormal(
     mean = covid_serialint$summary_stats$mean, # replaced!
     sd = covid_serialint$summary_stats$sd, # replaced!
-    max = 20,
-    distribution = "gamma"
+    max = 20
   )
 ```
 
@@ -209,9 +208,9 @@ An interpretation could be:
 
 ## Discretise a continuous distribution
 
-We are getting closer to the end! `EpiNow2::dist_spec()` still needs a maximum value (`max`). 
+We are getting closer to the end! `EpiNow2::LogNormal()` still needs a maximum value (`max`). 
 
-One way to do this is to get the quantile value for the distribution's 99.9th percentile or `0.999` cumulative probability. For this, we need access to the set of distribution functions for our `<epidist>` object.
+One way to do this is to get the quantile value for the distribution's 99th percentile or `0.99` cumulative probability. For this, we need access to the set of distribution functions for our `<epidist>` object.
 
 We can use the set of distribution functions for a _continuous_ distribution (as above). However, these values will be _continuous_ numbers. We can **discretise** the continuous distribution stored in our `<epidist>` object to get discrete values from a continuous distribution.
 
@@ -240,11 +239,11 @@ plot(covid_serialint)
 plot(covid_serialint_discrete)
 ```
 
-To finally get a `max` value, let's access the quantile value of the 99.9th percentile or `0.999` probability of the distribution with the `prob_dist$q` notation, similarly to how we access the `summary_stats` values.
+To finally get a `max` value, let's access the quantile value of the 99th percentile or `0.99` probability of the distribution with the `prob_dist$q` notation, similarly to how we access the `summary_stats` values.
 
 ```{r}
 covid_serialint_discrete_max <-
-  quantile(covid_serialint_discrete, p = 0.999)
+  quantile(covid_serialint_discrete, p = 0.99)
 ```
 
 ::::::::::::::::::::::::::::::::: challenge
@@ -312,7 +311,7 @@ From a maximum value with `quantile()`, we can create a sequence of quantile val
 ```{r,eval=TRUE}
 # create a discrete distribution visualisation
 # from a maximum value from the distribution
-quantile(covid_serialint_discrete, p = 0.999) %>%
+quantile(covid_serialint_discrete, p = 0.99) %>%
   # generate quantile values
   # as a sequence for each natural number
   seq(1L, to = ., by = 1L) %>%
@@ -346,13 +345,13 @@ quantile(covid_serialint_discrete, p = 0.999) %>%
 
 ## Plug-in `{epiparameter}` to `{EpiNow2}`
 
-Now we can plug everything into the `EpiNow2::dist_spec()` function!
+Now we can plug everything into the `EpiNow2::LogNormal()` function!
 
 - the **summary statistics** `mean` and `sd` of the distribution,
 - a maximum value `max`,
 - the `distribution` name.
 
-However, when using `EpiNow2::dist_spec()`, to define a **Lognormal** distribution, like the one in the `covid_serialint` object, we need to convert its summary statistics to distribution parameters named logmean and logsd. With `{epiparameter}` we can directly get the *distribution parameters* using `epiparameter::get_parameters()`:
+When using `EpiNow2::LogNormal()` to define a **log normal** distribution like the one in the `covid_serialint` object we can specify the mean and sd as parameters. Alternatively, to get the "natural" parameters for a log normal distribution we can convert its summary statistics to distribution parameters named `meanlog` and `sdlog`. With `{epiparameter}` we can directly get the *distribution parameters* using `epiparameter::get_parameters()`:
 
 ```{r}
 covid_serialint_parameters <-
@@ -363,11 +362,10 @@ Then, we have:
 
 ```{r}
 serial_interval_covid <-
-  dist_spec(
-    mean = covid_serialint_parameters["meanlog"],
-    sd = covid_serialint_parameters["sdlog"],
-    max = covid_serialint_discrete_max,
-    distribution = "lognormal"
+  EpiNow2::LogNormal(
+    meanlog = covid_serialint_parameters["meanlog"],
+    sdlog = covid_serialint_parameters["sdlog"],
+    max = covid_serialint_discrete_max
   )
 
 serial_interval_covid
@@ -378,7 +376,7 @@ Assuming a COVID-19 scenario, let's use the first 60 days of the `example_confir
 ```{r,message=FALSE}
 epinow_estimates_cg <- epinow(
   # cases
-  reported_cases = example_confirmed[1:60],
+  data = example_confirmed[1:60],
   # delays
   generation_time = generation_time_opts(serial_interval_covid)
 )
@@ -449,17 +447,16 @@ covid_serialint <-
 covid_serialint_discrete_max <-
   covid_serialint %>%
   discretise() %>%
-  quantile(p = 0.999)
+  quantile(p = 0.99)
 
 covid_serialint_parameters <-
   epiparameter::get_parameters(covid_serialint)
 
 covid_serial_interval <-
-  dist_spec(
-    mean = covid_serialint_parameters["meanlog"],
-    sd = covid_serialint_parameters["sdlog"],
-    max = covid_serialint_discrete_max,
-    distribution = "lognormal"
+  EpiNow2::LogNormal(
+    meanlog = covid_serialint_parameters["meanlog"],
+    sdlog = covid_serialint_parameters["sdlog"],
+    max = covid_serialint_discrete_max
   )
 
 # incubation time ---------------------------------------------------------
@@ -476,17 +473,16 @@ covid_incubation <- epiparameter::epidist_db(
 covid_incubation_discrete_max <-
   covid_incubation %>%
   discretise() %>%
-  quantile(p = 0.999)
+  quantile(p = 0.99)
 
 covid_incubation_parameters <-
   epiparameter::get_parameters(covid_incubation)
 
 covid_incubation_time <-
-  dist_spec(
-    mean = covid_incubation_parameters["meanlog"],
-    sd = covid_incubation_parameters["sdlog"],
-    max = covid_incubation_discrete_max,
-    distribution = "lognormal" # do not forget this!
+  EpiNow2::LogNormal(
+    meanlog = covid_incubation_parameters["meanlog"],
+    sdlog = covid_incubation_parameters["sdlog"],
+    max = covid_incubation_discrete_max
   )
 
 # epinow ------------------------------------------------------------------
@@ -494,7 +490,7 @@ covid_incubation_time <-
 # run epinow
 epinow_estimates_cgi <- epinow(
   # cases
-  reported_cases = example_confirmed[1:60],
+  data = example_confirmed[1:60],
   # delays
   generation_time = generation_time_opts(covid_serial_interval),
   delays = delay_opts(covid_incubation_time)
@@ -559,8 +555,8 @@ To calculate the $R_t$ using `{EpiNow2}`, we need:
 
 To get delay distribution using `{epiparameter}` we can use functions like:
 
-- `epidist_db()`
-- `list_distributions()`
+- `epiparameter::epidist_db()`
+- `epiparameter::parameter_tbl()`
 - `discretise()`
 - `quantile()` 
 
@@ -582,7 +578,7 @@ ebola_confirmed <-
 
 # list distributions
 epidist_db(disease = "ebola") %>%
-  list_distributions()
+  epiparameter::parameter_tbl()
 ```
 
 ```{r,message=FALSE,eval=TRUE}
@@ -600,11 +596,10 @@ ebola_serial <- epidist_db(
 ebola_serial_discrete <- discretise(ebola_serial)
 
 serial_interval_ebola <-
-  dist_spec(
+  EpiNow2::Gamma(
     mean = ebola_serial$summary_stats$mean,
     sd = ebola_serial$summary_stats$sd,
-    max = quantile(ebola_serial_discrete, p = 0.999),
-    distribution = "gamma"
+    max = quantile(ebola_serial_discrete, p = 0.99)
   )
 
 # incubation time ---------------------------------------------------------
@@ -620,11 +615,10 @@ ebola_incubation <- epidist_db(
 ebola_incubation_discrete <- discretise(ebola_incubation)
 
 incubation_period_ebola <-
-  dist_spec(
+  EpiNow2::Gamma(
     mean = ebola_incubation$summary_stats$mean,
     sd = ebola_incubation$summary_stats$sd,
-    max = quantile(ebola_serial_discrete, p = 0.999),
-    distribution = "gamma"
+    max = quantile(ebola_serial_discrete, p = 0.99)
   )
 
 # epinow ------------------------------------------------------------------
@@ -632,7 +626,7 @@ incubation_period_ebola <-
 # run epinow
 epinow_estimates_egi <- epinow(
   # cases
-  reported_cases = ebola_confirmed,
+  data = ebola_confirmed,
   # delays
   generation_time = generation_time_opts(serial_interval_ebola),
   delays = delay_opts(incubation_period_ebola)
@@ -654,7 +648,7 @@ Use the `influenza_england_1978_school` dataset from the `{outbreaks}` package t
 
 ::::::::::::::::: hint
 
-`EpiNow2::dist_spec()` also accepts Probability Mass Functions (PMF) from any distribution family. Read the reference guide on [Specify a distribution](https://epiforecasts.io/EpiNow2/reference/dist_spec.html).
+`EpiNow2::NonParametric()` accepts Probability Mass Functions (PMF) from any distribution family. Read the reference guide on [Probability distributions](https://epiforecasts.io/EpiNow2/reference/Distributions.html).
 
 ::::::::::::::::::::::
 
@@ -663,8 +657,7 @@ Use the `influenza_england_1978_school` dataset from the `{outbreaks}` package t
 ```{r,message=FALSE,eval=TRUE}
 # What parameters are available for Influenza?
 epidist_db(disease = "influenza") %>%
-  list_distributions() %>%
-  as_tibble() %>%
+  epiparameter::parameter_tbl() %>%
   count(epi_distribution)
 
 # generation time ---------------------------------------------------------
@@ -685,7 +678,7 @@ influenza_generation_discrete <-
   epiparameter::discretise(influenza_generation)
 
 influenza_generation_max <-
-  quantile(influenza_generation_discrete, p = 0.999)
+  quantile(influenza_generation_discrete, p = 0.99)
 
 influenza_generation_pmf <-
   density(
@@ -695,9 +688,9 @@ influenza_generation_pmf <-
 
 influenza_generation_pmf
 
-# EpiNow2::dist_spec() can also accept the PMF values
+# EpiNow2::NonParametric() can also accept the PMF values
 generation_time_influenza <-
-  dist_spec(
+  EpiNow2::NonParametric(
     pmf = influenza_generation_pmf
   )
 
@@ -716,7 +709,7 @@ influenza_incubation_discrete <-
   epiparameter::discretise(influenza_incubation)
 
 influenza_incubation_max <-
-  quantile(influenza_incubation_discrete, p = 0.999)
+  quantile(influenza_incubation_discrete, p = 0.99)
 
 influenza_incubation_pmf <-
   density(
@@ -726,9 +719,9 @@ influenza_incubation_pmf <-
 
 influenza_incubation_pmf
 
-# EpiNow2::dist_spec() can also accept the PMF values
+# EpiNow2::NonParametric() can also accept the PMF values
 incubation_time_influenza <-
-  dist_spec(
+  EpiNow2::NonParametric(
     pmf = influenza_incubation_pmf
   )
 
@@ -761,7 +754,7 @@ plot(epinow_estimates_igi)
 
 ### How to get distribution parameters from statistical distributions?
 
-How to get the mean and standard deviation from a generation time with *only* distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::dist_spec()`?
+How to get the mean and standard deviation from a generation time with *only* distribution parameters but no summary statistics like `mean` or `sd` for `EpiNow2::Gamma()` or `EpiNow2::LogNormal()`?
 
 Look at the `{epiparameter}` vignette on [parameter extraction and conversion](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html) and its [use cases](https://epiverse-trace.github.io/epiparameter/articles/extract_convert.html#use-cases)!
 
