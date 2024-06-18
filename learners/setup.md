@@ -39,14 +39,14 @@ Our strategy is to gradually incorporate specialised **R packages** into a tradi
 
 :::::::::::::::::::::::::::: prereq
 
-This course assumes intermediate R knowledge. This workshop is for you if:
+This content assumes intermediate R knowledge. This tutorials are for you if:
 
 - You can read data into R, transform and reshape data, and make a wide variety of graphs
 - You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
 - You can use the magrittr pipe `%>%` and/or native pipe `|>`.
 
 
-We expect participants to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
+We expect learners to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
 
 ::::::::::::::::::::::::::::
 
