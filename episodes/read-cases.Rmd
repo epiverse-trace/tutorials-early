@@ -75,10 +75,9 @@ head(ebola_confirmed, 5)
 
 
 ```{r,eval=TRUE, echo=FALSE, message=FALSE}
+# internal for DBI::dbWriteTable()
 # read data
-case_data <- rio::import(file.path("data", "ebola_cases.csv"))
-# preview data
-head(case_data, 5)
+ebola_confirmed <- rio::import(file.path("data", "ebola_cases.csv"))
 ```
 
 Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
