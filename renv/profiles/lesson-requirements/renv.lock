@@ -482,7 +482,6 @@
       "RemoteRef": "HEAD",
       "RemoteSha": "4f1e888e6ec92eaa2c234a698508233a0e35a65a",
       "Requirements": [
-        "R",
         "arsenal",
         "checkmate",
         "dplyr",
@@ -498,7 +497,7 @@
         "utils",
         "withr"
       ],
-      "Hash": "5ed221b956f88e6c60f6c572765ec7a3"
+      "Hash": "a764d610b3572d869fdc56e39f5f9033"
     },
     "cli": {
       "Package": "cli",
@@ -2195,8 +2194,8 @@
       "Package": "simulist",
       "Version": "0.3.0",
       "Source": "GitHub",
-      "Remotes": "epiverse-trace/epiparameter",
       "RemoteType": "github",
+      "Remotes": "epiverse-trace/epiparameter",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "simulist",
       "RemoteUsername": "epiverse-trace",
