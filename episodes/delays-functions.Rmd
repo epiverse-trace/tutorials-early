@@ -733,7 +733,7 @@ influenza_cleaned <-
 # Run epinow()
 epinow_estimates_igi <- epinow(
   # cases
-  reported_cases = influenza_cleaned,
+  data = influenza_cleaned,
   # delays
   generation_time = generation_time_opts(generation_time_influenza),
   delays = delay_opts(incubation_time_influenza)
