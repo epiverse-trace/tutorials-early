@@ -444,9 +444,8 @@ covid_serialint <-
   )
 
 # adapt epidist to epinow2
-covid_serialint_discrete_max <-
-  covid_serialint %>%
-  discretise() %>%
+covid_serialint_discrete_max <- covid_serialint %>%
+  epiparameter::discretise() %>%
   quantile(p = 0.99)
 
 covid_serialint_parameters <-
@@ -470,9 +469,8 @@ covid_incubation <- epiparameter::epidist_db(
 )
 
 # adapt epiparameter to epinow2
-covid_incubation_discrete_max <-
-  covid_incubation %>%
-  discretise() %>%
+covid_incubation_discrete_max <- covid_incubation %>%
+  epiparameter::discretise() %>%
   quantile(p = 0.99)
 
 covid_incubation_parameters <-
@@ -577,7 +575,7 @@ ebola_confirmed <-
   read_csv(here::here("data", "raw-data", "ebola_cases.csv"))
 
 # list distributions
-epidist_db(disease = "ebola") %>%
+epiparameter::epidist_db(disease = "ebola") %>%
   epiparameter::parameter_tbl()
 ```
 
@@ -586,14 +584,14 @@ epidist_db(disease = "ebola") %>%
 # generation time ---------------------------------------------------------
 
 # subset one distribution for the generation time
-ebola_serial <- epidist_db(
+ebola_serial <- epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "serial",
   single_epidist = TRUE
 )
 
 # adapt epiparameter to epinow2
-ebola_serial_discrete <- discretise(ebola_serial)
+ebola_serial_discrete <- epiparameter::discretise(ebola_serial)
 
 serial_interval_ebola <-
   EpiNow2::Gamma(
@@ -605,14 +603,14 @@ serial_interval_ebola <-
 # incubation time ---------------------------------------------------------
 
 # subset one distribution for delay of the incubation period
-ebola_incubation <- epidist_db(
+ebola_incubation <- epiparameter::epidist_db(
   disease = "ebola",
   epi_dist = "incubation",
   single_epidist = TRUE
 )
 
 # adapt epiparameter to epinow2
-ebola_incubation_discrete <- discretise(ebola_incubation)
+ebola_incubation_discrete <- epiparameter::discretise(ebola_incubation)
 
 incubation_period_ebola <-
   EpiNow2::Gamma(
@@ -656,7 +654,7 @@ Use the `influenza_england_1978_school` dataset from the `{outbreaks}` package t
 
 ```{r,message=FALSE,eval=TRUE}
 # What parameters are available for Influenza?
-epidist_db(disease = "influenza") %>%
+epiparameter::epidist_db(disease = "influenza") %>%
   epiparameter::parameter_tbl() %>%
   count(epi_distribution)
 
@@ -664,7 +662,7 @@ epidist_db(disease = "influenza") %>%
 
 # Read the generation time
 influenza_generation <-
-  epidist_db(
+  epiparameter::epidist_db(
     disease = "influenza",
     epi_dist = "generation"
   )
@@ -698,7 +696,7 @@ generation_time_influenza <-
 
 # Read the incubation period
 influenza_incubation <-
-  epidist_db(
+  epiparameter::epidist_db(
     disease = "influenza",
     epi_dist = "incubation",
     single_epidist = TRUE
