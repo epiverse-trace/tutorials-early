@@ -50,9 +50,9 @@ However, early in an epidemic, modelling efforts can be delayed by the lack of a
 
 <!-- Early models for COVID-19 used parameters from other coronaviruses. https://www.thelancet.com/article/S1473-3099(20)30144-4/fulltext -->
 
-To exemplify how to use the `{epiparameter}` R package in your analysis pipeline, our goal in this episode will be to choose one specific set of epidemiological parameters from the literature, instead of copying-and-pasting them by hand, to plug them into an `{EpiNow2}` analysis workflow.
+To exemplify how to use the `{epiparameter}` R package in your analysis pipeline, our goal in this episode will be to access one specific set of epidemiological parameters from the literature, instead of copying-and-pasting them by hand, to plug them into an `{EpiNow2}` analysis workflow.
 
-<!-- In this episode, we'll learn how to choose one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
+<!-- In this episode, we'll learn how to access one specific set of epidemiological parameters from the literature and then get their **summary statistics** using `{epiparameter}`.  -->
 
 Let's start loading the `{epiparameter}` package. We'll use the pipe `%>%` to connect some of their functions, some `{tibble}` and `{dplyr}` functions, so let's also call to the `{tidyverse}` package:
 
@@ -76,7 +76,9 @@ This help us remember package functions and avoid namespace conflicts.
 
 ## The problem
 
-If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::Gamma()` to specify a [generation time](../learners/reference.md#generationtime) as a probability distribution adding its `mean`, standard deviation (`sd`), and maximum value (`max`). To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
+If we want to estimate the transmissibility of an infection, it's common to use a package such as `{EpiEstim}` or `{EpiNow2}`. However, both require some epidemiological information as an input. For example, in `{EpiNow2}` we use `EpiNow2::Gamma()` to specify a [generation time](../learners/reference.md#generationtime) as a probability distribution adding its `mean`, standard deviation (`sd`), and maximum value (`max`). 
+
+To specify a `generation_time` that follows a _Gamma_ distribution with mean $\mu = 4$, standard deviation $\sigma = 2$, and a maximum value of 20, we write:
 
 ```r
 generation_time <- 
@@ -89,23 +91,17 @@ generation_time <-
 
 It is a common practice for analysts to manually search the available literature and copy and paste the **summary statistics** or the **distribution parameters** from scientific publications. A challenge that is often faced is that the reporting of different statistical distributions is not consistent across the literature. `{epiparameter}`’s objective is to facilitate the access to reliable estimates of distribution parameters for a range of infectious diseases, so that they can easily be implemented in outbreak analytic pipelines.
 
-In this episode, we will *choose* the summary statistics from the library of epidemiological parameters provided by `{epiparameter}`.
+In this episode, we will *access* the summary statistics of generation time for COVID-19 from the library of epidemiological parameters provided by `{epiparameter}`. These metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent episodes.
 
-<!--
-```r
-epinow_estimates <- epinow(
-  # cases
-  reported_cases = example_confirmed[1:60],
-  # delays
-  generation_time = generation_time_opts(generation_time),
-  # computation
-  stan = stan_opts(
-    cores = 4, samples = 1000, chains = 3,
-    control = list(adapt_delta = 0.99)
-  )
+Let's start by looking at how many entries are available in the **epidemiological distributions database** in `{epiparameter}` using `epidist_db()` for the epidemiological distribution `epi_dist` called generation time with the string `"generation"`:
+
+```{r}
+epiparameter::epidist_db(
+  epi_dist = "generation"
 )
 ```
--->
+
+Currently, in the library of epidemiological parameters, we have one `"generation"` time entry for Influenza. Instead, we can look at the `serial` intervals for `COVID`-19. Let find what we need to consider for this!
 
 ## Generation time vs serial interval
 
@@ -198,27 +194,17 @@ The objective of the assessment above is to assess the interpretation of a large
 
 ## Choosing epidemiological parameters
 
-In this section, we will use `{epiparameter}` to obtain the generation time and the serial interval for COVID-19, so these metrics can be used to estimate the transmissibility of this disease using `{EpiNow2}` in subsequent sections of this episode.
+In this section, we will use `{epiparameter}` to obtain the serial interval for COVID-19, as an alternative to the generation time.
 
-Let's start by looking at how many entries are available in the epidemiological distributions database in `{epiparameter}` (`epidist_db`) for the `disease` named `covid`-19:
+Let's ask now how many parameters we have in the epidemiological distributions database (`epidist_db()`) with the `disease` named `covid`-19. Run this locally!
 
-```{r}
+```{r,eval=FALSE}
 epiparameter::epidist_db(
   disease = "covid"
 )
 ```
 
-From the `{epiparameter}` package, we can use the `epidist_db()` function to ask for any `disease` and also for a specific epidemiological distribution (`epi_dist`). 
-
-Let's ask now how many parameters we have in the epidemiological distributions database (`epidist_db`) with the generation time using the string `generation`:
-
-```{r}
-epiparameter::epidist_db(
-  epi_dist = "generation"
-)
-```
-
-Currently, in the library of epidemiological parameters, we have one `generation` time entry for Influenza. Considering the above-mentioned considerations, we can look at the `serial` intervals for `COVID`-19. Run this locally!
+From the `{epiparameter}` package, we can use the `epidist_db()` function to ask for any `disease` and also for a specific epidemiological distribution (`epi_dist`). Run this in your console:
 
 ```{r,eval=FALSE}
 epiparameter::epidist_db(
@@ -237,7 +223,7 @@ With this query combination, we get more than one delay distribution. This outpu
 
 :::::::::::::::::::::::::
 
-To summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::parameter_tbl()` function to the previous code using the pipe `%>%`:
+As suggested in the outputs, to summarise an `<epidist>` object and get the column names from the underlying parameter database, we can add the `epiparameter::parameter_tbl()` function to the previous code using the pipe `%>%`:
 
 ```{r}
 epiparameter::epidist_db(
