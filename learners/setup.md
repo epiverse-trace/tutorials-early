@@ -104,10 +104,12 @@ During the tutorial, we will need a number of R packages. Packages contain usefu
 Open RStudio and **copy and paste** the following code chunk into the [console window](https://docs.posit.co/ide/user/ide/guide/code/console.html), then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) to execute the command:
 
 ```r
-if(!require("pak")) install.packages("pak")
 # for episodes on read, clean, validate and visualize linelist
+
+if(!require("pak")) install.packages("pak")
+
 new_packages <- c(
-  "epiverse-trace/cleanepi",
+  "cleanepi",
   "rio",
   "here",
   "DBI",
@@ -121,27 +123,16 @@ new_packages <- c(
 )
 
 pak::pkg_install(new_packages)
-
-# for episodes on access delays and quantify transmission
-new_packages <- c(
-  "EpiNow2",
-  "epiverse-trace/epiparameter",
-  "incidence2",
-  "tidyverse"
-)
-
-pak::pkg_install(new_packages)
 ```
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
 
+<!--
 ::::::::::::::::::::::::::::: spoiler
 
 ### do you get an error with EpiNow2?
 
 Windows users will need a working installation of `Rtools` in order to build the package from source. `Rtools` is not an R package, but a software you need to download and install. We suggest you to follow:
-
-<!-- reference [these steps](http://jtleek.com/modules/01_DataScientistToolbox/02_10_rtools/#1) -->
 
 1. **Verify `Rtools` installation**. You can do so by using Windows search across your system. Optionally, you can use `{devtools}` running: 
 
@@ -162,7 +153,7 @@ devtools::find_rtools()
 ```
 
 :::::::::::::::::::::::::::::
-
+-->
 
 ::::::::::::::::::::::::::::: spoiler
 
@@ -171,8 +162,11 @@ devtools::find_rtools()
 If you get an error message when installing {epiparameter}, try this alternative code:
 
 ```r
-# for epiparameter
-install.packages("epiparameter", repos = c("https://epiverse-trace.r-universe.dev"))
+# for simulist
+install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev"))
+
+# for tracetheme
+install.packages("tracetheme", repos = c("https://epiverse-trace.r-universe.dev"))
 ```
 
 :::::::::::::::::::::::::::::
@@ -224,9 +218,18 @@ You should update **all of the packages** required for the tutorial, even if you
 When the installation has finished, you can try to load the packages by pasting the following code into the console:
 
 ```r
-library(EpiNow2)
-library(epiparameter)
+# for episodes on read, clean, validate and visualize linelist
+
+library(cleanepi)
+library(rio)
+library(here)
+library(DBI)
+library(RSQLite)
+library(dbplyr)
+library(linelist)
+library(simulist)
 library(incidence2)
+library(tracetheme)
 library(tidyverse)
 ```
 
