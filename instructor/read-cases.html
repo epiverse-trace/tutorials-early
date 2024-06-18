@@ -218,16 +218,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="quantify-transmissibility.html">6. Quantifying transmission</a>
-    </div><!--/div.accordion-header-->
-        
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush8">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading8">
-        <a href="delays-functions.html">7. Use delay distributions in analysis</a>
+        <a href="delays-functions.html">6. Use delay distributions in analysis</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -291,7 +282,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2024-06-17 |
+        <p>Last updated on 2024-06-18 |
         
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -412,16 +403,6 @@ in a wide range of formats.</p>
 <span><span class="co"># preview data</span></span>
 <span><span class="fu">head</span><span class="op">(</span><span class="va">ebola_confirmed</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>        date confirm
-1 2014-05-18       1
-2 2014-05-20       2
-3 2014-05-21       4
-4 2014-05-22       6
-5 2014-05-23       1</code></pre>
-</div>
 <p>Similarly, you can import files of other formats such as
 <code>tsv</code>, <code>xlsx</code>, … etc.</p>
 <div id="reading-compressed-data" class="callout challenge">
@@ -450,7 +431,7 @@ working environment.</p>
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
 package website. To expand {rio} to the full range of support for import
 and export formats run:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -469,7 +450,7 @@ and export formats run:</p>
 </button>
 <div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -488,7 +469,7 @@ for accessing and retrieving data from various database systems.</p>
 <p>The following code chunk demonstrates how to create a temporary
 SQLite database in memory, store the <code>ebola_confirmed</code> as a
 table on it, and subsequently read it:</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -507,42 +488,30 @@ table on it, and subsequently read it:</p>
 <span>  conn <span class="op">=</span> <span class="va">db_con</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"cases"</span>,</span>
 <span>  value <span class="op">=</span> <span class="va">ebola_confirmed</span></span>
-<span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error in h(simpleError(msg, call)): error in evaluating the argument 'value' in selecting a method for function 'dbWriteTable': object 'ebola_confirmed' not found</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Read data from the 'cases' table</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Read data from the 'cases' table</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbReadTable</span><span class="op">(</span></span>
 <span>  conn <span class="op">=</span> <span class="va">db_con</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"cases"</span></span>
-<span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="error" tabindex="0"><code>Error: no such table: cases</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Close the database connection</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Close the database connection</span></span>
 <span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span>conn <span class="op">=</span> <span class="va">db_con</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View the result</span></span>
 <span><span class="fu">base</span><span class="fu">::</span><span class="fu">print</span><span class="op">(</span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">result</span><span class="op">)</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="error" tabindex="0"><code>Error in eval(expr, envir, enclos): object 'result' not found</code></pre>
+<pre class="output" tabindex="0"><code>   date confirm
+1 16208       1
+2 16210       2
+3 16211       4
+4 16212       6
+5 16213       1
+6 16214       2</code></pre>
 </div>
 <p>This code first establishes a connection to an SQLite database
 created in memory using <code>dbConnect()</code>. Then, it writes the
@@ -657,8 +626,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
-  "dateCreated": "2024-06-17",
-  "dateModified": "2024-06-17",
+  "dateCreated": "2024-06-18",
+  "dateModified": "2024-06-18",
   "datePublished": "2024-06-18"
 }
 

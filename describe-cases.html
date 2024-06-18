@@ -98,11 +98,11 @@
   Read and clean case data, and make linelist for outbreak analytics with R
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 29%" class="percentage">
-    29%
+<aside class="col-md-12 lesson-progress"><div style="width: 33%" class="percentage">
+    33%
   </div>
   <div class="progress incubator">
-    <div class="progress-bar incubator" role="progressbar" style="width: 29%" aria-valuenow="29" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar incubator" role="progressbar" style="width: 33%" aria-valuenow="33" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -218,16 +218,7 @@
 <div class="accordion accordion-flush" id="accordionFlush7">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading7">
-        <a href="quantify-transmissibility.html">6. Quantifying transmission</a>
-    </div><!--/div.accordion-header-->
-        
-  </div><!--/div.accordion-item-->
-</div><!--/div.accordion-flush-->
-
-<div class="accordion accordion-flush" id="accordionFlush8">
-  <div class="accordion-item">
-    <div class="accordion-header" id="flush-heading8">
-        <a href="delays-functions.html">7. Use delay distributions in analysis</a>
+        <a href="delays-functions.html">6. Use delay distributions in analysis</a>
     </div><!--/div.accordion-header-->
         
   </div><!--/div.accordion-item-->
@@ -291,7 +282,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2024-06-17 |
+        <p>Last updated on 2024-06-18 |
         
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -447,20 +438,20 @@ list:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>  id                  case_name case_type sex age date_onset date_admission
-1  1           Keegan Hardy-Roy confirmed   m   3 2023-01-01           &lt;NA&gt;
-2  6    Alexandria Torres-Perez  probable   f  13 2023-01-01           &lt;NA&gt;
-3  7          Mitchell Reinhart confirmed   m  74 2023-01-01     2023-01-08
-4  9 Stephanie Loadman-Copeland confirmed   f  65 2023-01-01     2023-01-10
-5 10           Sufyaan al-Irani confirmed   m   8 2023-01-02           &lt;NA&gt;
-6 11               Rohan Nguyen confirmed   m  27 2023-01-01           &lt;NA&gt;
-  date_death date_first_contact date_last_contact ct_value
-1       &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;     24.9
-2       &lt;NA&gt;         2022-12-30        2023-01-02       NA
-3       &lt;NA&gt;         2022-12-31        2023-01-04     24.9
-4       &lt;NA&gt;         2023-01-03        2023-01-04     24.9
-5       &lt;NA&gt;         2022-12-31        2023-01-02     24.9
-6       &lt;NA&gt;         2023-01-01        2023-01-05     24.9</code></pre>
+<pre class="output" tabindex="0"><code>  id         case_name case_type sex age date_onset date_admission   outcome
+1  1  Yassir Hutchison confirmed   m   3 2023-01-01           &lt;NA&gt; recovered
+2  6 Lubaaba el-Hameed confirmed   f  13 2023-01-01           &lt;NA&gt; recovered
+3  7    Brandon Rivera confirmed   m  74 2023-01-01     2023-01-08 recovered
+4  9      Sierra Quint confirmed   f  65 2023-01-01     2023-01-10      died
+5 10          Levi Lee confirmed   m   8 2023-01-02           &lt;NA&gt; recovered
+6 11       Nelson Tran suspected   m  27 2023-01-01           &lt;NA&gt; recovered
+  date_outcome date_first_contact date_last_contact ct_value
+1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       26
+2         &lt;NA&gt;         2022-12-30        2023-01-02       26
+3         &lt;NA&gt;         2022-12-31        2023-01-04       26
+4   2023-01-01         2023-01-03        2023-01-04       26
+5         &lt;NA&gt;         2022-12-31        2023-01-02       26
+6         &lt;NA&gt;         2023-01-01        2023-01-05       NA</code></pre>
 </div>
 </section><section id="aggregating"><h2 class="section-heading">Aggregating<a class="anchor" aria-label="anchor" href="#aggregating"></a>
 </h2>
@@ -495,7 +486,7 @@ factors. The code chunk provided below demonstrates the creation of an
 <pre class="output" tabindex="0"><code># incidence:  5 x 3
 # count vars: date_onset
   date_index count_variable count
-* &lt;period&gt;   &lt;chr&gt;          &lt;int&gt;
+  &lt;period&gt;   &lt;chr&gt;          &lt;int&gt;
 1 2023-01-01 date_onset       475
 2 2023-01-02 date_onset      4904
 3 2023-01-03 date_onset      5478
@@ -528,12 +519,12 @@ the date of onset and gender.</p>
 # count vars: date_onset
 # groups:     sex, case_type
   date_index               sex   case_type count_variable count
-* &lt;period&gt;                 &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
-1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5576
-2 2022-12-29 to 2023-01-04 f     probable  date_onset       766
-3 2022-12-29 to 2023-01-04 f     suspected date_onset      1612
-4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5760
-5 2022-12-29 to 2023-01-04 m     probable  date_onset       787</code></pre>
+  &lt;period&gt;                 &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
+1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
+2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
+3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
+4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
+5 2022-12-29 to 2023-01-04 m     probable  date_onset       800</code></pre>
 </div>
 <div id="notes" class="callout">
 <div class="callout-square">
@@ -722,8 +713,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/describe-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/describe-cases.html",
-  "dateCreated": "2024-06-17",
-  "dateModified": "2024-06-17",
+  "dateCreated": "2024-06-18",
+  "dateModified": "2024-06-18",
   "datePublished": "2024-06-18"
 }
 
