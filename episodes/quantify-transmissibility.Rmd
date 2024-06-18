@@ -28,6 +28,8 @@ Learners should familiarise themselves with following concepts before working th
 
 **Epidemic theory**: Effective reproduction number.
 
+**Data science**: Data transformation and visualization. You can review the episode on [Aggregate and visualize](https://epiverse-trace.github.io/tutorials-early/describe-cases.html) incidence data.
+
 :::::::::::::::::::::::::::::::::
 
 
@@ -50,12 +52,18 @@ To estimate these key metrics using case data we must account for delays between
 
 In the next tutorials we will focus on how to use the functions in `{EpiNow2}` to estimate transmission metrics of case data. We will not cover the theoretical background of the models or inference framework, for details on these concepts see the [vignette](https://epiforecasts.io/EpiNow2/dev/articles/estimate_infections.html).
 
-In this tutorial we are going to learn how to use the `{EpiNow2}` package to estimate the time-varying reproduction number. We’ll use the `{dplyr}` package to arrange some of its inputs, `{ggplot2}` to visualize case distribution, and the pipe `%>%` to connect some of their functions, so let’s also call to the `{tidyverse}` package:
+In this tutorial we are going to learn how to use the `{EpiNow2}` package to estimate the time-varying reproduction number. We'll get input data from `{incidence2}`. We’ll use the `{tidyr}` and `{dplyr}` packages to arrange some of its outputs, `{ggplot2}` to visualize case distribution, and the pipe `%>%` to connect some of their functions, so let’s also call to the `{tidyverse}` package:
 
-```{r,message=FALSE,warning=FALSE}
+```r
 library(EpiNow2)
+library(incidence2)
 library(tidyverse)
 ```
+
+```{r,echo=FALSE,eval=TRUE,message=FALSE,warning=FALSE}
+library(tidyverse)
+```
+
 
 ::::::::::::::::::: checklist
 
@@ -111,61 +119,60 @@ To use the data, we must format the data to have two columns:
 + `date`: the date (as a date object see `?is.Date()`),
 + `confirm`: number of confirmed cases on that date.
 
-Let's use `{dplyr}` for this:
+Let's use `{tidyr}` and `{incidence2}` for this:
 
 ```{r, warning = FALSE, message = FALSE}
-library(dplyr)
-
 cases <- incidence2::covidregionaldataUK %>%
-  select(date, cases_new) %>%
-  group_by(date) %>%
-  summarise(confirm = sum(cases_new, na.rm = TRUE)) %>%
-  ungroup()
-```
-
-::::::::::::::::::::::::: spoiler
-
-### When to use incidence2?
-
-We can also use the `{incidence2}` package to:
-
-- Aggregate cases (similar to the code above) but in different time *intervals* (i.e., days, weeks or months) or per *group* categories. Explore later the [`incidence2::incidence()` reference manual](https://www.reconverse.org/incidence2/reference/incidence.html).
-
-- Complete dates for all the range of dates per group category using `incidence2::complete_dates()`. Read further in its [function reference manual](https://www.reconverse.org/incidence2/reference/complete_dates.html).
-
-```{r, warning = FALSE, message = FALSE, eval=FALSE}
-library(tidyr)
-library(dplyr)
-
-incidence2::covidregionaldataUK %>%
-  # preprocess missing values
-  tidyr::replace_na(list(cases_new = 0)) %>%
-  # compute the daily incidence
+  # use {tidyr} to preprocess missing values
+  tidyr::replace_na(base::list(cases_new = 0)) %>%
+  # use {incidence2} to compute the daily incidence
   incidence2::incidence(
     date_index = "date",
     counts = "cases_new",
     count_values_to = "confirm",
-    date_names_to = "date"
+    date_names_to = "date",
+    complete_dates = TRUE
   ) %>%
-  # complete range of dates
-  incidence2::complete_dates()
+  dplyr::select(-count_variable)
 ```
+
+With `incidence2::incidence()` we aggregate cases in different time *intervals* (i.e., days, weeks or months) or per *group* categories. Also we can have complete dates for all the range of dates per group category using `complete_dates = TRUE`
+Explore later the [`incidence2::incidence()` reference manual](https://www.reconverse.org/incidence2/reference/incidence.html)
+
+::::::::::::::::::::::::: spoiler
+
+### Can we replicate {incidence2} with {dplyr}?
+
+We can get an object similar to `cases` from the `incidence2::covidregionaldataUK` data frame using the `{dplyr}` package.
+
+```{r, warning = FALSE, message = FALSE, eval=FALSE}
+incidence2::covidregionaldataUK %>%
+  dplyr::select(date, cases_new) %>%
+  dplyr::group_by(date) %>%
+  dplyr::summarise(confirm = sum(cases_new, na.rm = TRUE)) %>%
+  dplyr::ungroup()
+```
+
+However, the `incidence2::incidence()` function contains convenient arguments like `complete_dates` that facilitate getting an incidence object with the same range of dates for each grouping without the need of extra code lines or a time-series package.
 
 :::::::::::::::::::::::::
 
 There are case data available for `r dim(cases)[1]` days, but in an outbreak situation it is likely we would only have access to the beginning of this data set. Therefore we assume we only have the first 90 days of this data. 
 
 ```{r echo = FALSE}
-ggplot(cases[1:90, ], aes(x = date, y = confirm)) +
+# keep the first 90 dates and visualize epicurve
+cases %>%
+  dplyr::slice_head(n = 90) %>%
+  # use ggplot2
+  ggplot(aes(x = date, y = confirm)) +
   geom_col() +
   theme_grey(
     base_size = 15
   )
 ```
 
-
-
 ### Delay distributions 
+
 We assume there are delays from the time of infection until the time a case is reported. We specify these delays as distributions to account for the uncertainty in individual level differences. The delay can consist of multiple types of delays/processes. A typical delay from time of infection to case reporting may consist of:
 
 <p class="text-center" style="background-color: aliceblue">**time from infection to symptom onset** (the [incubation period](../learners/reference.md#incubation)) + **time from symptom onset to case notification** (the reporting time)
@@ -174,6 +181,7 @@ We assume there are delays from the time of infection until the time a case is r
 The delay distribution for each of these processes can either estimated from data or obtained from the literature. We can express uncertainty about what the correct parameters of the distributions by assuming the distributions have **fixed** parameters or whether they have **variable** parameters. To understand the difference between **fixed** and **variable** distributions, let's consider the incubation period. 
 
 ::::::::::::::::::::::::::::::::::::: callout
+
 ### Delays and data
 The number of delays and type of delay are a flexible input that depend on the data. The examples below highlight how the delays can be specified for different data sources:
 
@@ -196,24 +204,27 @@ The number of delays and type of delay are a flexible input that depend on the d
 
 The distribution of incubation period for many diseases can usually be obtained from the literature. The package `{epiparameter}` contains a library of epidemiological parameters for different diseases obtained from the literature. 
 
-We specify a (fixed) gamma distribution with mean $\mu = 4$ and standard deviation $\sigma= 2$ (shape = $4$, scale = $1$) using the function `dist_spec()` as follows:
+We specify a (fixed) gamma distribution with mean $\mu = 4$ and standard deviation $\sigma= 2$ (shape = $4$, scale = $1$) using the function `Gamma()` as follows:
 
 ```{r}
-incubation_period_fixed <- dist_spec(
-  mean = 4, sd = 2,
-  max = 20, distribution = "gamma"
+incubation_period_fixed <- EpiNow2::Gamma(
+  mean = 4,
+  sd = 2,
+  max = 20
 )
+
 incubation_period_fixed
 ```
 
 The argument `max` is the maximum value the distribution can take, in this example 20 days. 
 
 ::::::::::::::::::::::::::::::::::::: callout
+
 ### Why a gamma distrubution? 
 
-The incubation period has to be positive in value. Therefore we must specific a distribution in `dist_spec` which is for positive values only. 
+The incubation period has to be positive in value. Therefore we must specific a distribution in `{EpiNow2}` which is for positive values only. 
 
-`dist_spec()` supports log normal and gamma distributions, which are distributions for positive values only. 
+`Gamma()` supports Gamma distributions and `LogNormal()` Log-normal distributions, which are distributions for positive values only. 
 
 For all types of delay, we will need to use distributions for positive values only - we don't want to include delays of negative days in our analysis!
 
@@ -231,73 +242,103 @@ and a standard deviation ($\sigma$) follows a Normal distribution with standard 
 
 $$\mbox{Normal}(\sigma,\sigma_{\sigma}^2).$$
 
-We specify this using `dist_spec` with the additional arguments `mean_sd` ($\sigma_{\mu}$) and `sd_sd` ($\sigma_{\sigma}$).
+We specify this using `Normal()` for each argument: the mean ($\mu=4$ with $\sigma_{\mu}=0.5$) and standard deviation ($\sigma=2$ with $\sigma_{\sigma}=0.5$).
 
-```{r}
-incubation_period_variable <- dist_spec(
-  mean = 4, sd = 2,
-  mean_sd = 0.5, sd_sd = 0.5,
-  max = 20, distribution = "gamma"
+```{r,warning=FALSE,message=FALSE}
+incubation_period_variable <- EpiNow2::Gamma(
+  mean = EpiNow2::Normal(mean = 4, sd = 0.5),
+  sd = EpiNow2::Normal(mean = 2, sd = 0.5),
+  max = 20
 )
+
 incubation_period_variable
 ```
-
 
 
 ####  Reporting delays
 
 After the incubation period, there will be an additional delay of time from symptom onset to case notification: the reporting delay. We can specify this as a fixed or variable distribution, or estimate a distribution from data. 
 
-When specifying a distribution, it is useful to visualise the probability density to see the peak and spread of the distribution, in this case we will use a log normal distribution. We can use the functions `convert_to_logmean()` and `convert_to_logsd()` to  convert the mean and standard deviation of a normal distribution to that of a log normal distribution. 
+When specifying a distribution, it is useful to visualise the probability density to see the peak and spread of the distribution, in this case we will use a *log normal* distribution. We can use the functions `convert_to_logmean()` and `convert_to_logsd()` to  convert the mean and standard deviation of a normal distribution to that of a log normal distribution. 
 
-If we want to assume that the mean reporting delay is 2 days (with a standard deviation of 1 day), the log normal distribution will look like: 
+If we want to assume that the mean reporting delay is 2 days (with a standard deviation of 1 day), we write: 
 
 ```{r}
-log_mean <- convert_to_logmean(2, 1)
-log_sd <- convert_to_logsd(2, 1)
-x <- seq(from = 0, to = 10, length = 1000)
-df <- data.frame(x = x, density = dlnorm(x, meanlog = log_mean, sdlog = log_sd))
-ggplot(df) +
-  geom_line(
-    aes(x, density)
-  ) +
-  theme_grey(
-    base_size = 15
-  )
+# convert mean to logmean
+log_mean <- EpiNow2::convert_to_logmean(mean = 2, sd = 1)
+
+# convert sd to logsd
+log_sd <- EpiNow2::convert_to_logsd(mean = 2, sd = 1)
 ```
 
-Using the mean and standard deviation for the log normal distribution, we can specify a fixed or variable distribution using `dist_spec()` as before: 
+:::::::::::::::::::::: spoiler
 
-```{r}
-reporting_delay_variable <- dist_spec(
-  mean = log_mean, sd = log_sd,
-  mean_sd = 0.5, sd_sd = 0.5,
-  max = 10, distribution = "lognormal"
+### Visualize a log Normal distribution using {epiparameter}
+
+Using `epiparameter::epidist()` we can create a custom distribution. The log normal distribution will look like:
+
+```r
+library(epiparameter)
+```
+
+```{r,message=FALSE,warning=FALSE}
+epiparameter::epidist(
+  disease = "covid",
+  epi_dist = "reporting delay",
+  prob_distribution = "lnorm",
+  prob_distribution_params = c(
+    meanlog = log_mean,
+    sdlog = log_sd
+  )
+) %>%
+  plot()
+```
+
+::::::::::::::::::::::
+
+Using the mean and standard deviation for the log normal distribution, we can specify a fixed or variable distribution using `LogNormal()` as before: 
+
+```{r,warning=FALSE,message=FALSE}
+reporting_delay_variable <- EpiNow2::LogNormal(
+  meanlog = EpiNow2::Normal(mean = log_mean, sd = 0.5),
+  sdlog = EpiNow2::Normal(mean = log_sd, sd = 0.5),
+  max = 10
 )
 ```
+
+We can plot single and combined distributions generated by `{EpiNow2}` using `plot()`. Let's combine in one plot the delay from infection to report which includes the incubation period and reporting delay:
+
+```{r}
+plot(incubation_period_variable + reporting_delay_variable)
+```
+
+
+:::::::::::::::::: callout
 
 If data is available on the time between symptom onset and reporting, we can use the function `estimate_delay()` to estimate a log normal distribution from a vector of delays. The code below illustrates how to use `estimate_delay()` with synthetic delay data. 
 
 ```{r, eval = FALSE }
 delay_data <- rlnorm(500, log(5), 1) # synthetic delay data
-reporting_delay <- estimate_delay(
+
+reporting_delay <- EpiNow2::estimate_delay(
   delay_data,
   samples = 1000,
   bootstraps = 10
 )
 ```
 
+::::::::::::::::::
 
 ####  Generation time
 
 We also must specify a distribution for the generation time. Here we will use a log normal distribution with mean 3.6 and standard deviation 3.1 ([Ganyani et al. 2020](https://doi.org/10.2807/1560-7917.ES.2020.25.17.2000257)).
 
 
-```{r}
-generation_time_variable <- dist_spec(
-  mean = 3.6, sd = 3.1,
-  mean_sd = 0.5, sd_sd = 0.5,
-  max = 20, distribution = "lognormal"
+```{r,warning=FALSE,message=FALSE}
+generation_time_variable <- EpiNow2::LogNormal(
+  mean = EpiNow2::Normal(mean = 3.6, sd = 0.5),
+  sd = EpiNow2::Normal(mean = 3.1, sd = 0.5),
+  max = 20
 )
 ```
 
@@ -306,24 +347,24 @@ generation_time_variable <- dist_spec(
 
 The function `epinow()` is a wrapper for the function `estimate_infections()` used to estimate cases by date of infection. The generation time distribution and delay distributions must be passed using the functions ` generation_time_opts()` and `delay_opts()` respectively. 
 
-There are numerous other inputs that can be passed to `epinow()`, see `EpiNow2::?epinow()` for more detail.
-One optional input is to specify a log normal prior for the effective reproduction number $R_t$ at the start of the outbreak. We specify a mean and standard deviation as arguments of `prior` within `rt_opts()`:
+There are numerous other inputs that can be passed to `epinow()`, see `?EpiNow2::epinow()` for more detail.
+One optional input is to specify a *log normal* prior for the effective reproduction number $R_t$ at the start of the outbreak. We specify a mean of 2 days and standard deviation of 2 days as arguments of `prior` within `rt_opts()`:
 
 ```{r, eval = TRUE}
-rt_log_mean <- convert_to_logmean(2, 1)
-rt_log_sd <- convert_to_logsd(2, 1)
-rt <- rt_opts(prior = list(mean = rt_log_mean, sd = rt_log_sd))
+# define Rt prior distribution
+rt_prior <- EpiNow2::rt_opts(prior = base::list(mean = 2, sd = 2))
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
+
 ### Bayesian inference using Stan 
 
 The Bayesian inference is performed using MCMC methods with the program [Stan](https://mc-stan.org/). There are a number of default inputs to the Stan functions including the number of chains and number of samples per chain (see `?EpiNow2::stan_opts()`).
 
 To reduce computation time, we can run chains in parallel. To do this, we must set the number of cores to be used. By default, 4 MCMC chains are run (see `stan_opts()$chains`), so we can set an equal number of cores to be used in parallel as follows:
 
-```{r}
-withr::local_options(list(mc.cores = 4))
+```{r,warning=FALSE,message=FALSE}
+withr::local_options(base::list(mc.cores = 4))
 ```
 
 To find the maximum number of available cores on your machine, use `parallel::detectCores()`.
@@ -336,14 +377,16 @@ To find the maximum number of available cores on your machine, use `parallel::de
 
 ```{r, echo = TRUE}
 # fixed alternatives
-generation_time_fixed <- dist_spec(
-  mean = 3.6, sd = 3.1,
-  max = 20, distribution = "lognormal"
+generation_time_fixed <- EpiNow2::LogNormal(
+  mean = 3.6,
+  sd = 3.1,
+  max = 20
 )
 
-reporting_delay_fixed <- dist_spec(
-  mean = log_mean, sd = log_sd,
-  max = 10, distribution = "lognormal"
+reporting_delay_fixed <- EpiNow2::LogNormal(
+  mean = log_mean,
+  sd = log_sd,
+  max = 10
 )
 ```
 
@@ -352,18 +395,17 @@ reporting_delay_fixed <- dist_spec(
 Now you are ready to run `EpiNow2::epinow()` to estimate the time-varying reproduction number:
 
 ```{r, message = FALSE, eval = TRUE}
-reported_cases <- cases[1:90, ]
+reported_cases <- cases %>%
+  dplyr::slice_head(n = 90)
 
-estimates <- epinow(
+estimates <- EpiNow2::epinow(
   # cases
-  reported_cases = reported_cases,
+  data = reported_cases,
   # delays
-  generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(incubation_period_fixed + reporting_delay_fixed),
+  generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
+  delays = EpiNow2::delay_opts(incubation_period_fixed + reporting_delay_fixed),
   # prior
-  rt = rt_opts(prior = list(mean = rt_log_mean, sd = rt_log_sd)),
-  # computation (optional)
-  stan = stan_opts(samples = 1000, chains = 3)
+  rt = rt_prior
 )
 ```
 
@@ -371,7 +413,15 @@ estimates <- epinow(
 
 ### Do not wait for this to continue
 
-Using `stan = stan_opts()` is optional. For the purpose of this tutorial on reducing computation time, we specified a fixed number of `samples = 1000` and `chains = 3` to the `stan` argument using the `stan_opts()` function. We expect this to take approximately 3 minutes.
+We can optionally use the `stan = stan_opts()` argument and function. For the purpose of this tutorial on reducing computation time, we can specify a fixed number of `samples = 1000` and `chains = 3` to the `stan` argument using the `stan_opts()` function. We expect this to take approximately 3 minutes.
+
+```r
+# you can add the `stan` argument
+EpiNow2::epinow(
+  ...,
+  stan = EpiNow2::stan_opts(samples = 1000, chains = 3)
+)
+```
 
 **Remember:** Using an appropriate number of *samples* and *chains* is crucial for ensuring convergence and obtaining reliable estimates in Bayesian computations using Stan. Inadequate sampling or insufficient chains may lead to issues such as divergent transitions, impacting the accuracy and stability of the inference process.
 
@@ -436,29 +486,48 @@ The outbreak data of the start of the COVID-19 pandemic from the United Kingdom 
 + `region`: the region, 
 + `confirm`: number of confirmed cases for a region on a given date.
 
-```{r}
-regional_cases <-
-  incidence2::covidregionaldataUK[, c("date", "cases_new", "region")]
-colnames(regional_cases) <- c("date", "confirm", "region")
+```{r,warning=FALSE,message=FALSE}
+regional_cases <- incidence2::covidregionaldataUK %>%
+  # use {tidyr} to preprocess missing values
+  tidyr::replace_na(base::list(cases_new = 0)) %>%
+  # use {incidence2} to convert aggregated data to incidence data
+  incidence2::incidence(
+    date_index = "date",
+    groups = "region",
+    counts = "cases_new",
+    count_values_to = "confirm",
+    date_names_to = "date",
+    complete_dates = TRUE
+  ) %>%
+  dplyr::select(-count_variable)
 
-# extract the first 90 dates for all regions
-dates <- sort(unique(regional_cases$date))[1:90]
-regional_cases <- regional_cases[which(regional_cases$date %in% dates), ]
+# keep the first 90 dates for all regions
 
-head(regional_cases)
+# get vector of first 90 dates
+date_range <- regional_cases %>%
+  dplyr::distinct(date) %>%
+  # from incidence2, dates are already arranged in ascendant order
+  dplyr::slice_head(n = 90) %>%
+  dplyr::pull(date)
+
+# filter dates in date_range
+regional_cases <- regional_cases %>%
+  dplyr::filter(magrittr::is_in(x = date, table = date_range))
+
+dplyr::as_tibble(regional_cases)
 ```
 
 To find regional estimates, we use the same inputs as `epinow()` to the function `regional_epinow()`:
 
 ```{r, message = FALSE, eval = TRUE}
-estimates_regional <- regional_epinow(
+estimates_regional <- EpiNow2::regional_epinow(
   # cases
-  reported_cases = regional_cases,
+  data = regional_cases,
   # delays
-  generation_time = generation_time_opts(generation_time_fixed),
-  delays = delay_opts(incubation_period_fixed + reporting_delay_fixed),
+  generation_time = EpiNow2::generation_time_opts(generation_time_fixed),
+  delays = EpiNow2::delay_opts(incubation_period_fixed + reporting_delay_fixed),
   # prior
-  rt = rt_opts(prior = list(mean = rt_log_mean, sd = rt_log_sd))
+  rt = rt_prior
 )
 
 estimates_regional$summary$summarised_results$table
@@ -466,13 +535,13 @@ estimates_regional$summary$summarised_results$table
 estimates_regional$summary$plots$R
 ```
 
-:::::::::::::::::::::::::: testimonial
+<!-- :::::::::::::::::::::::::: testimonial -->
 
-### the i2extras package
+<!-- ### the i2extras package -->
 
-`{i2extras}` package also estimate transmission metrics like growth rate and doubling/halving time at different time intervals (i.e., days, weeks, or months). `{i2extras}` require `{incidence2}` objects as inputs. Read further in its [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette.
+<!-- `{i2extras}` package also estimate transmission metrics like growth rate and doubling/halving time at different time intervals (i.e., days, weeks, or months). `{i2extras}` require `{incidence2}` objects as inputs. Read further in its [Fitting curves](https://www.reconverse.org/i2extras/articles/fitting_epicurves.html) vignette. -->
 
-::::::::::::::::::::::::::
+<!-- :::::::::::::::::::::::::: -->
 
 ## Summary
 
