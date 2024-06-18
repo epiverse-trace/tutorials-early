@@ -63,7 +63,7 @@ episodes:
 - clean-data.Rmd
 - describe-cases.Rmd
 - simple-analysis.Rmd
-- delays-reuse.Rmd
+- delays-access.Rmd
 # - quantify-transmissibility.Rmd
 - delays-functions.Rmd
 
