@@ -243,8 +243,16 @@ We suggest to use RStudio Projects.
 
 #### Follow these steps
 
-- **Create an RStudio project**. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
-- **Create** the `data/` folder tnside the RStudio project or corresponding folder. Use the `data/` folder to **save** the data sets to download.
+- **Create an RStudio Project**. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create a New Project in a New Directory.
+- **Create** the `data/` folder inside the RStudio project or corresponding directory. Use the `data/` folder to **save** the data sets to download.
+
+The directory of an RStudio Project named, for example `workshop`, should look like this:
+
+```
+workshop/
+|__ data/
+|__ workshop.Rproj
+```
 
 ::::::::::::::::::::::::::::::::: 
 
