@@ -235,6 +235,34 @@ library(tidyverse)
 
 If you do NOT see an error like `there is no package called ‘...’` you are good to go! If you do, [contact us](#your-questions)!
 
+### 3. Setup an RStudio project and folder
+
+We suggest to use RStudio Projects. 
+
+::::::::::::::::::::::::::::::::: checklist
+
+#### Follow these steps
+
+- **Create an RStudio project**. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
+- **Create** the `data/` folder tnside the RStudio project or corresponding folder. Use the `data/` folder to **save** the data sets to download.
+
+::::::::::::::::::::::::::::::::: 
+
+### 4. Create a GitHub Account
+
+We can use [GitHub](https://github.com) as a collaboration platform to communicate package issues and engage in [community discussions](https://github.com/orgs/epiverse-trace/discussions).
+
+::::::::::::::::::::::::::::::::: checklist
+
+#### Follow all these steps
+
+1. Go to <https://github.com> and follow the "Sign up" link at the top-right of the window.
+2. Follow the instructions to create an account.
+3. Verify your email address with GitHub.
+<!-- 4. Configure the Multi-factor Authentication (see below).-->
+
+:::::::::::::::::::::::::::::::::
+
 ## Data sets
 
 ### Download the data
