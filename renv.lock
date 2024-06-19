@@ -472,16 +472,11 @@
     },
     "cleanepi": {
       "Package": "cleanepi",
-      "Version": "0.0.2",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "cleanepi",
-      "RemoteUsername": "epiverse-trace",
-      "RemotePkgRef": "epiverse-trace/cleanepi",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "4f1e888e6ec92eaa2c234a698508233a0e35a65a",
+      "Version": "1.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
+        "R",
         "arsenal",
         "checkmate",
         "dplyr",
@@ -497,7 +492,7 @@
         "utils",
         "withr"
       ],
-      "Hash": "a764d610b3572d869fdc56e39f5f9033"
+      "Hash": "2b9d9c7abb275271aab4f8a55ebde050"
     },
     "cli": {
       "Package": "cli",
