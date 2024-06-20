@@ -28,8 +28,9 @@ This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved
 packages. A key observation in EDA of epidemic analysis is capturing the relationship between time and the number of 
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
- 
- ::::::::::::::::::: checklist
+
+
+::::::::::::::::::: checklist
 
 ### The double-colon
 
