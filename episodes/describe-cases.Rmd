@@ -214,11 +214,27 @@ base::plot(dialy_incidence_data) +
 
 base::plot(weekly_incidence_data) +
   ggplot2::labs(
-    x = "Time (in days)",
+    x = "Time (in weeks)",
     y = "weekly cases"
   ) +
   tracetheme::theme_trace()
 ``` 
+
+## Curve of cumulative cases
+
+The cumulative number of cases can calculated using `cumulate()` function from an `incidence2` object and visualize it, as in the below example.
+
+```{r, message=FALSE, warning=FALSE}
+cum_df <- incidence2::cumulate(dialy_incidence_data)
+base::plot(cum_df) +
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "weekly cases"
+  ) +
+  tracetheme::theme_trace()
+```
+
+Note that this function preserve grouping, i.e., if the the `incidence2` object contains groups, then it will accumlate the cases accrodingly. 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
