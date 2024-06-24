@@ -257,7 +257,7 @@ confidence interval and using 100 bootstrap samples.
 
 
 `{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs. However, using the `{ggplot2}` package, you can generate more sophisticated and better-annotated epicurves.
-`{ggplot2}` is a comprehensive package with many functionalities, but we will focus on three key elements essential for producing epicurves: histogram plots, scaling date axes and their labels, and general plot theme annotation.
+`{ggplot2}` is a comprehensive package with many functionalities. However, we will focus on three key elements for producing epicurves: histogram plots, scaling date axes and their labels, and general plot theme annotation.
 The example below demonstrates how to configure these three elements for a simple `{incidence2}` object.
 
 ```{r, message=FALSE, warning=FALSE}
@@ -301,7 +301,8 @@ ggplot2::ggplot(data = dialy_incidence_data) +
   )
 ```
 
-To visualize an epicurve with different groups, use the group option in the mapping function. If there is more than one grouping factor, use the facet_wrap option, as demonstrated in the example below
+Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
+
 ```{r, message=FALSE, warning=FALSE}
 ggplot2::ggplot(data = dialy_incidence_data_2) +
   geom_histogram(
