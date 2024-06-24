@@ -62,7 +62,7 @@ episodes:
 - read-cases.Rmd
 - clean-data.Rmd
 - describe-cases.Rmd
-- simple-analysis.Rmd
+#- simple-analysis.Rmd
 
 # Information for Learners
 learners:
