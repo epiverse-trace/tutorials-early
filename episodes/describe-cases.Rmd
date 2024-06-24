@@ -222,7 +222,7 @@ base::plot(weekly_incidence_data) +
 
 ## Curve of cumulative cases
 
-The cumulative number of cases can calculated using `cumulate()` function from an `incidence2` object and visualize it, as in the below example.
+The cumulative number of cases can be calculated using the `cumulate()` function from an `incidence2` object and visualized, as in the example below.
 
 ```{r, message=FALSE, warning=FALSE}
 cum_df <- incidence2::cumulate(dialy_incidence_data)
@@ -234,11 +234,11 @@ base::plot(cum_df) +
   tracetheme::theme_trace()
 ```
 
-Note that this function preserve grouping, i.e., if the the `incidence2` object contains groups, then it will accumlate the cases accrodingly. 
+Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly. Give it a try with the `weekly_incidence_data` object!
 
 ##  Peak estimation
 
-One can estimate the peak --the time with highest number of recorded cases-- using `estimate_peak()` function from the {incidence2} package. 
+One can estimate the peak --the time with the highest number of recorded cases-- using the `estimate_peak()` function from the {incidence2} package. 
 This function employs a bootstrapping method to determine the peak time.
 
 ```{r, message=FALSE, warning=FALSE}
