@@ -28,8 +28,9 @@ This episode focuses on  EDA of outbreaks and epidemic data, and how to achieved
 packages. A key observation in EDA of epidemic analysis is capturing the relationship between time and the number of 
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
- 
- ::::::::::::::::::: checklist
+
+
+::::::::::::::::::: checklist
 
 ### The double-colon
 
@@ -282,13 +283,61 @@ base::plot(dialy_incidence_data) +
 
 base::plot(weekly_incidence_data) +
   ggplot2::labs(
-    x = "Time (in days)",
+    x = "Time (in weeks)",
     y = "weekly cases"
   ) +
   tracetheme::theme_trace()
 ```
 
 <img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+
+## Curve of cumulative cases
+
+The cumulative number of cases can be calculated using the `cumulate()` function from an `incidence2` object and visualized, as in the example below.
+
+
+``` r
+cum_df <- incidence2::cumulate(dialy_incidence_data)
+base::plot(cum_df) +
+  ggplot2::labs(
+    x = "Time (in days)",
+    y = "weekly cases"
+  ) +
+  tracetheme::theme_trace()
+```
+
+<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+
+Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly. Give it a try with the `weekly_incidence_data` object!
+
+##  Peak estimation
+
+One can estimate the peak --the time with the highest number of recorded cases-- using the `estimate_peak()` function from the {incidence2} package. 
+This function employs a bootstrapping method to determine the peak time.
+
+
+``` r
+peak <- incidence2::estimate_peak(
+  dialy_incidence_data,
+  n = 100,
+  alpha = 0.05,
+  first_only = TRUE,
+  progress = FALSE
+)
+print(peak)
+```
+
+``` output
+# A tibble: 1 × 7
+  count_variable observed_peak observed_count bootstrap_peaks lower_ci   median 
+  <chr>          <period>               <int> <list>          <period>   <perio>
+1 date_onset     2023-01-03              5478 <df [100 × 1]>  2023-01-03 2023-0…
+# ℹ 1 more variable: upper_ci <period>
+```
+This example demonstrates how to estimate the peak time using the `estimate_peak()` function at $95%$ 
+confidence interval and using 100 bootstrap samples. 
+
+
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
