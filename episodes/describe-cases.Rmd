@@ -300,6 +300,39 @@ ggplot2::ggplot(data = dialy_incidence_data) +
   )
 ```
 
+To visualize an epicurve with different groups, use the group option in the mapping function. If there is more than one grouping factor, use the facet_wrap option, as demonstrated in the example below
+```{r, message=FALSE, warning=FALSE}
+ggplot2::ggplot(data = dialy_incidence_data_2) +
+  geom_histogram(
+    mapping = aes(
+      x = as.Date(date_index),
+      y = count,
+      group = sex,
+      fill = sex
+    ),
+    stat = "identity"
+  ) +
+  theme_minimal() + # simple theme
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.caption = element_text(face = "italic", hjust = 0),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45)
+  ) +
+  labs(
+    x = "Date", # x-label
+    y = "Number of cases", # y-label,
+    title = "Daily outbreak cases", # title
+    subtitle = "subtitle", # subtitle
+    caption = "informative caption"
+  ) +
+  facet_wrap(~sex) +
+  scale_x_date(
+    breaks = breaks,
+    label = scales::label_date_short()
+  )
+```
+
 
 
 
