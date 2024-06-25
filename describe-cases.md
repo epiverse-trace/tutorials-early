@@ -337,6 +337,96 @@ print(peak)
 This example demonstrates how to estimate the peak time using the `estimate_peak()` function at $95%$ 
 confidence interval and using 100 bootstrap samples. 
 
+## Visulaziantion with ggplot2
+
+
+`{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs. However, using the `{ggplot2}` package, you can generate more sophisticated and better-annotated epicurves.
+`{ggplot2}` is a comprehensive package with many functionalities. However, we will focus on three key elements for producing epicurves: histogram plots, scaling date axes and their labels, and general plot theme annotation.
+The example below demonstrates how to configure these three elements for a simple `{incidence2}` object.
+
+
+``` r
+breaks <- seq.Date(
+  from = min(as.Date(dialy_incidence_data$date_index,
+    na.rm = TRUE
+  )),
+  to = as.Date(max(dialy_incidence_data$date_index,
+    na.rm = TRUE
+  )),
+  by = 1
+)
+
+ggplot2::ggplot(data = dialy_incidence_data) +
+  geom_histogram(
+    mapping = aes(
+      x = as.Date(date_index),
+      y = count
+    ),
+    stat = "identity",
+    color = "blue",
+    width = 1
+  ) +
+  theme_minimal() + # simple theme
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.caption = element_text(face = "italic", hjust = 0),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45)
+  ) +
+  labs(
+    x = "Date", # x-label
+    y = "Number of cases", # y-label,
+    title = "Daily outbreak cases", # title
+    subtitle = "subtitle", # subtitle
+    caption = "informative caption"
+  ) +
+  scale_x_date(
+    breaks = breaks,
+    label = scales::label_date_short()
+  )
+```
+
+<img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+
+Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
+
+
+``` r
+ggplot2::ggplot(data = dialy_incidence_data_2) +
+  geom_histogram(
+    mapping = aes(
+      x = as.Date(date_index),
+      y = count,
+      group = sex,
+      fill = sex
+    ),
+    stat = "identity"
+  ) +
+  theme_minimal() + # simple theme
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5),
+    plot.caption = element_text(face = "italic", hjust = 0),
+    axis.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45)
+  ) +
+  labs(
+    x = "Date", # x-label
+    y = "Number of cases", # y-label,
+    title = "Daily outbreak cases", # title
+    subtitle = "subtitle", # subtitle
+    caption = "informative caption"
+  ) +
+  facet_wrap(~sex) +
+  scale_x_date(
+    breaks = breaks,
+    label = scales::label_date_short()
+  )
+```
+
+<img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+
+
+
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
