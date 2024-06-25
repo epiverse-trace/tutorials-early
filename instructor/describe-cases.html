@@ -193,6 +193,7 @@
 <li><a href="#visualization">Visualization</a></li>
 <li><a href="#curve-of-cumulative-cases">Curve of cumulative cases</a></li>
 <li><a href="#peak-estimation">Peak estimation</a></li>
+<li><a href="#visulaziantion-with-ggplot2">Visulaziantion with ggplot2</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
         
@@ -257,7 +258,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2024-06-24 |
+        <p>Last updated on 2024-06-25 |
         
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
         
@@ -655,7 +656,99 @@ determine the peak time.</p>
 <p>This example demonstrates how to estimate the peak time using the
 <code>estimate_peak()</code> function at <span class="math inline">\(95%\)</span> confidence interval and using 100
 bootstrap samples.</p>
-<div id="challenge-1-can-you-do-it" class="callout discussion">
+</section><section id="visulaziantion-with-ggplot2"><h2 class="section-heading">Visulaziantion with ggplot2<a class="anchor" aria-label="anchor" href="#visulaziantion-with-ggplot2"></a>
+</h2>
+<hr class="half-width"><p><a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> produces basic plots for epicurves, but
+additional work is required to create well-annotated graphs. However,
+using the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package, you can generate more
+sophisticated and better-annotated epicurves. <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> is
+a comprehensive package with many functionalities. However, we will
+focus on three key elements for producing epicurves: histogram plots,
+scaling date axes and their labels, and general plot theme annotation.
+The example below demonstrates how to configure these three elements for
+a simple <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> object.</p>
+<div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">breaks</span> <span class="op">&lt;-</span> <span class="fu">seq.Date</span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="fu">min</span><span class="op">(</span><span class="fu">as.Date</span><span class="op">(</span><span class="va">dialy_incidence_data</span><span class="op">$</span><span class="va">date_index</span>,</span>
+<span>    na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span><span class="op">)</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="fu">max</span><span class="op">(</span><span class="va">dialy_incidence_data</span><span class="op">$</span><span class="va">date_index</span>,</span>
+<span>    na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="op">)</span><span class="op">)</span>,</span>
+<span>  by <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dialy_incidence_data</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span></span>
+<span>    mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="va">date_index</span><span class="op">)</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">count</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    stat <span class="op">=</span> <span class="st">"identity"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>    width <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># simple theme</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Date"</span>, <span class="co"># x-label</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Number of cases"</span>, <span class="co"># y-label,</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Daily outbreak cases"</span>, <span class="co"># title</span></span>
+<span>    subtitle <span class="op">=</span> <span class="st">"subtitle"</span>, <span class="co"># subtitle</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"informative caption"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_date</span><span class="op">(</span></span>
+<span>    breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_date_short</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="../fig/describe-cases-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Use the <code>group</code> option in the mapping function to
+visualize an epicurve with different groups. If there is more than one
+grouping factor, use the <code>facet_wrap()</code> option, as
+demonstrated in the example below:</p>
+<div class="codewrapper sourceCode" id="cb16">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">dialy_incidence_data_2</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span></span>
+<span>    mapping <span class="op">=</span> <span class="fu">aes</span><span class="op">(</span></span>
+<span>      x <span class="op">=</span> <span class="fu">as.Date</span><span class="op">(</span><span class="va">date_index</span><span class="op">)</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">count</span>,</span>
+<span>      group <span class="op">=</span> <span class="va">sex</span>,</span>
+<span>      fill <span class="op">=</span> <span class="va">sex</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    stat <span class="op">=</span> <span class="st">"identity"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># simple theme</span></span>
+<span>  <span class="fu">theme</span><span class="op">(</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>,</span>
+<span>    plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>,</span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Date"</span>, <span class="co"># x-label</span></span>
+<span>    y <span class="op">=</span> <span class="st">"Number of cases"</span>, <span class="co"># y-label,</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Daily outbreak cases"</span>, <span class="co"># title</span></span>
+<span>    subtitle <span class="op">=</span> <span class="st">"subtitle"</span>, <span class="co"># subtitle</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"informative caption"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">facet_wrap</span><span class="op">(</span><span class="op">~</span><span class="va">sex</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">scale_x_date</span><span class="op">(</span></span>
+<span>    breaks <span class="op">=</span> <span class="va">breaks</span>,</span>
+<span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_date_short</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+</div>
+<figure><img src="../fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-1-can-you-do-it" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -748,8 +841,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/describe-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/describe-cases.html",
-  "dateCreated": "2024-06-24",
-  "dateModified": "2024-06-24",
+  "dateCreated": "2024-06-25",
+  "dateModified": "2024-06-25",
   "datePublished": "2024-06-25"
 }
 
