@@ -191,12 +191,13 @@ when analyzing infectious diseases where the timing of events like symptom onset
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
 
 Here's an example code chunk demonstrating the usage of `check_date_sequence()` function in our simulated Ebola dataset
- ```{r, warning=FALSE}
+
+```{r, warning=FALSE}
 sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
   target_columns = c("date_onset", "date_sample")
 )
- ```
+```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
 any inconsistencies or errors in the chronological order of events, allowing yor to address them appropriately.
