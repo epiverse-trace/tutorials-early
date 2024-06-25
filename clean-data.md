@@ -249,13 +249,14 @@ when analyzing infectious diseases where the timing of events like symptom onset
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
 
 Here's an example code chunk demonstrating the usage of `check_date_sequence()` function in our simulated Ebola dataset
- 
- ``` r
- sim_ebola_data <- cleanepi::check_date_sequence(
+
+
+``` r
+sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
   target_columns = c("date_onset", "date_sample")
- )
- ```
+)
+```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
 any inconsistencies or errors in the chronological order of events, allowing yor to address them appropriately.
@@ -315,7 +316,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-06-18).
+ until the date this document was generated (2024-06-25).
  
 
 ``` r
@@ -344,7 +345,7 @@ utils::head(sim_ebola_data)
 3                        9                3
 4                        9                5
 5                        7                8
-6                        8                4
+6                        8                5
 ```
 
 After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
