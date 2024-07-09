@@ -31,12 +31,12 @@
           </a>
           <span class="visually-hidden">This lesson is in the pre-alpha phase, which means that it is in early development, but has not yet been taught.</span>
         </abbr>
-        
+
       </div>
     </div>
     <div class="selector-container">
-      
-      
+
+
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Instructor View <i data-feather="chevron-down"></i>
@@ -133,7 +133,7 @@
                 </div><!--/div.accordion-flush-->
               </div><!--div.sidenav-view-selector -->
             </div><!--/div.col -->
-      
+
             <hr></div><!--/div.mobile-row -->
 
           <div class="accordion accordion-flush" id="accordionFlush11">
@@ -152,7 +152,7 @@
     <div class="accordion-header" id="flush-heading1">
         <a href="index.html">Summary and Schedule</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -166,7 +166,7 @@
         </span>
       </button>
     </div><!--/div.accordion-header-->
-        
+
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#introduction">Introduction</a></li>
@@ -175,7 +175,7 @@
 <li><a href="#reading-from-his-apis">Reading from HIS APIs</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -184,7 +184,7 @@
     <div class="accordion-header" id="flush-heading3">
         <a href="clean-data.html">2. Clean and validate</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -193,7 +193,7 @@
     <div class="accordion-header" id="flush-heading4">
         <a href="describe-cases.html">3. Aggregate and visualize</a>
     </div><!--/div.accordion-header-->
-        
+
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
 
@@ -225,10 +225,10 @@
               </div>
             </div>
             <hr class="half-width resources"><a href="../instructor/aio.html">See all in one page</a>
-            
+
 
             <hr class="d-none d-sm-block d-md-none"><div class="d-grid gap-1">
-            
+
             </div>
           </div><!-- /div.accordion -->
         </div><!-- /div.sidebar-inner -->
@@ -249,20 +249,20 @@
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/clean-data.html" rel="next">
-          Next: Clean and validate... 
+          Next: Clean and validate...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
         <p>Last updated on 2024-07-02 |
-        
+
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
-        
-        
-        
+
+
+
         <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
-        
+
         <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -306,8 +306,8 @@
 </div>
 </div>
 </div>
-<section id="introduction"><h2 class="section-heading">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-</h2>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>The initial step in outbreak analysis involves importing the target
 dataset into the <code>R</code> environment from various sources.
 Outbreak data is typically stored in files of diverse formats,
@@ -352,8 +352,8 @@ files.</li>
 </ul></div>
 </div>
 </div>
-</section><section id="reading-from-files"><h2 class="section-heading">Reading from files<a class="anchor" aria-label="anchor" href="#reading-from-files"></a>
-</h2>
+</section><section><h2 class="section-heading" id="reading-from-files">Reading from files<a class="anchor" aria-label="anchor" href="#reading-from-files"></a>
+<a class="anchor" aria-label="anchor" href="#reading-from-files"></a></h2>
 <hr class="half-width"><p>Several packages are available for importing outbreak data stored in
 individual files into <code>R</code>. These include <a href="http://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://readr.tidyverse.org/" class="external-link">readr</a> from the
 <code>tidyverse</code>, <a href="https://bitbucket.org/djhshih/io/src/master/" class="external-link">io</a>, <a href="https://cran.r-project.org/web/packages/ImportExport/index.html" class="external-link">ImportExport</a>,
@@ -433,8 +433,8 @@ and export formats run:</p>
 </div>
 </div>
 </div>
-</section><section id="reading-from-databases"><h2 class="section-heading">Reading from databases<a class="anchor" aria-label="anchor" href="#reading-from-databases"></a>
-</h2>
+</section><section><h2 class="section-heading" id="reading-from-databases">Reading from databases<a class="anchor" aria-label="anchor" href="#reading-from-databases"></a>
+<a class="anchor" aria-label="anchor" href="#reading-from-databases"></a></h2>
 <hr class="half-width"><p>The <a href="https://dbi.r-dbi.org/" class="external-link">DBI</a> package serves as a
 versatile interface for interacting with database management systems
 (DBMS) across different back-ends or servers. It offers a uniform method
@@ -515,8 +515,8 @@ local session with <code>collect()</code>!</p>
 </div>
 </div>
 </div>
-</section><section id="reading-from-his-apis"><h2 class="section-heading">Reading from HIS APIs<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a>
-</h2>
+</section><section><h2 class="section-heading" id="reading-from-his-apis">Reading from HIS APIs<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a>
+<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a></h2>
 <hr class="half-width"><p>Health related data are also increasingly stored in specialized HIS
 APIs like <strong>Fingertips</strong>, <strong>GoData</strong>,
 <strong>REDCap</strong>, and <strong>DHIS2</strong>. In such case one
@@ -538,9 +538,9 @@ RDBMS.</li>
 </ul></div>
 </div>
 </div>
-<!-- 
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
-any links that you are not going to use. 
+any links that you are not going to use.
  -->
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
@@ -554,7 +554,7 @@ any links that you are not going to use.
           Home
         </a>
         <a class="chapter-link float-end" href="../instructor/clean-data.html" rel="next">
-          Next: Clean and validate... 
+          Next: Clean and validate...
           <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i>
         </a>
       </div>
@@ -565,18 +565,18 @@ any links that you are not going to use.
       		<footer class="row footer mx-md-3"><hr><div class="col-md-6">
         <p>This lesson is subject to the <a href="CODE_OF_CONDUCT.html">Code of Conduct</a></p>
         <p>
-        
+
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit on GitHub</a>
-        
+
 	
         | <a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/epiverse-trace/tutorials-early/" class="external-link">Source</a></p>
 				<p><a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CITATION" class="external-link">Cite</a> | <a href="mailto:andree.valle-campos@lshtm.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
 			</div>
 			<div class="col-md-6">
-        
+
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
-        
+
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
         <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/ad2542f7f7b9c3f90cc871b355ff81ec14a09ca9" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.2)</a></p>
 			</div>
@@ -601,7 +601,7 @@ any links that you are not going to use.
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "dateCreated": "2024-06-25",
   "dateModified": "2024-07-02",
-  "datePublished": "2024-07-02"
+  "datePublished": "2024-07-09"
 }
 
   </script><script>
