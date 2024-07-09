@@ -249,13 +249,14 @@ when analyzing infectious diseases where the timing of events like symptom onset
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
 
 Here's an example code chunk demonstrating the usage of `check_date_sequence()` function in our simulated Ebola dataset
- 
- ``` r
- sim_ebola_data <- cleanepi::check_date_sequence(
+
+
+``` r
+sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
   target_columns = c("date_onset", "date_sample")
- )
- ```
+)
+```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
 any inconsistencies or errors in the chronological order of events, allowing yor to address them appropriately.
@@ -315,7 +316,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-07-02).
+ until the date this document was generated (2024-07-09).
  
 
 ``` r
@@ -339,8 +340,8 @@ utils::head(sim_ebola_data)
 5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
 6   6   14274  76 female      <NA>       <NA>  2016-01-23
   time_since_sampling_date remainder_months
-1                        9                2
-2                       10                5
+1                        9                3
+2                       10                6
 3                        9                4
 4                        9                6
 5                        7                8
