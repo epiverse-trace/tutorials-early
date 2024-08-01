@@ -328,6 +328,20 @@ new_df <- data |>
   dplyr::select(linelist::has_tag(c("id", "age")))
 ```
 
+The default options for lost  tags in a linelist object is warning. However, it can be change to error message using `lost_tags_action()`. 
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+- Set the action for lost tags in a linelist to error as follows:
+
+   ```{r, eval=FALSE}
+   linelist::lost_tags_action(action = "error")
+   ```  
+and re-run the above code segment. 
+- What do you learn for resulting complementary message?  
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 The `{linelist}` package supplies tags for the common epidemiological variables 
 and specify them the appropriate data types. You can view this by running the 
 following command:
