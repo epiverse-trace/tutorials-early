@@ -312,6 +312,27 @@ data <- linelist::make_linelist(
 )
 utils::head(data, 7)
 ```
+
+The `{linelist}` package supplies tags for the common epidemiological variables 
+and specify them the appropriate data types. You can view the tagged varibles 
+and their data types using `tags_types` function
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+- View the default tags features linelist
+
+:::::::::::::::::::: hint
+```{r, eval=FALSE}
+linelist::tags_types()
+```
+:::::::::::::::::::::::
+
+- How many variables are there? and what are their data types?
+
+::::::::::::::::::::::::::::::::::::::::::::::
+
+
+
 The resulting `linelist` object resembles a data frame but offers richer features 
 and functionalities. Packages that are linelist-aware can leverage these 
 features. For example, you can extract a dataframe of only the tagged columns 
@@ -324,7 +345,7 @@ Safeguarding is implicitly built into the linelist objects. If you try to delete
 columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
-new_df <- data |> 
+new_df <- data |>
   dplyr::select(linelist::has_tag(c("id", "age")))
 ```
 
@@ -334,20 +355,15 @@ The default options for lost  tags in a linelist object is warning. However, it 
 
 - Set the action for lost tags in a linelist to error as follows:
 
-   ```{r, eval=FALSE}
-   linelist::lost_tags_action(action = "error")
-   ```  
+```{r, eval=FALSE}
+linelist::lost_tags_action(action = "error")
+```  
 and re-run the above code segment. 
 - What do you learn for resulting complementary message?  
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-The `{linelist}` package supplies tags for the common epidemiological variables 
-and specify them the appropriate data types. You can view this by running the 
-following command:
-```{r, warning=FALSE}
-linelist::tags_types()
-```
+
 To ensure that all tagged variables are standardized and have the correct data 
 types, use the `linelist::validate_tags()` and `linelist::validate_types()` functions, respectively, as 
 shown in the example below:
@@ -362,6 +378,15 @@ linelist::validate_types(data,
 ```
 If your dataset contains a `non-default` tag, set the argument 
 `allow_extra = TRUE` when creating the linelist object.
+
+
+:::::::::::::::::::::::::::::::::::: callout
+- When I should use `{linelist}`?
+- linelist is more appropriate for ongoing/long-lasting analysis than
+historical/quick analysis. Check 
+[here](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.  
+
+:::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
