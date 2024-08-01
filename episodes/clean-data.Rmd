@@ -366,7 +366,20 @@ linelist::validate_linelist(data,
 )
 ```
 If your dataset contains a `non-default` tag, set the argument 
-`allow_extra = TRUE` when creating the linelist object.
+`allow_extra = TRUE` when creating the linelist object with its corresponding
+datatype. 
+
+
+
+::::::::::::::::::::::::: spoiler
+
+### Can we create {linelist} with `non-default` tags?
+
+- How to add extra tags? with the `allow_extra = TRUE` argument?
+- How to validate these extra tags? by defining their specific `tags_types()`?
+
+:::::::::::::::::::::::::
+
 
 
 
@@ -383,7 +396,8 @@ This allows, the extraction of use tagged-only columns in downstream analysis.
 
 
 :::::::::::::::::::::::::::::::::::: callout
-- When I should use `{linelist}`?
+
+### When I should use `{linelist}`?
 - linelist is more appropriate for ongoing/long-lasting analysis than
 historical/quick analysis. Check 
 [here](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.  
