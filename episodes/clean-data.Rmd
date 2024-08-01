@@ -357,15 +357,12 @@ and re-run the above code segment.
 
 
 To ensure that all tagged variables are standardized and have the correct data 
-types, use the `linelist::validate_tags()` and `linelist::validate_types()` functions, respectively, as 
+types, use the `linelist::validate_list()`, as 
 shown in the example below:
 
 ```r
-linelist::validate_tags(data,
+linelist::validate_linelist(data,
   allow_extra = FALSE
-)
-linelist::validate_types(data,
-  ref_types = tags_types()
 )
 ```
 If your dataset contains a `non-default` tag, set the argument 
