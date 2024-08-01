@@ -381,8 +381,6 @@ datatype.
 :::::::::::::::::::::::::
 
 
-
-
 A  `linelist` object resembles a data frame but offers richer features 
 and functionalities. Packages that are linelist-aware can leverage these 
 features. For example, you can extract a dataframe of only the tagged columns 
