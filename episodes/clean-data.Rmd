@@ -332,15 +332,6 @@ linelist::tags_types()
 ::::::::::::::::::::::::::::::::::::::::::::::
 
 
-
-The resulting `linelist` object resembles a data frame but offers richer features 
-and functionalities. Packages that are linelist-aware can leverage these 
-features. For example, you can extract a dataframe of only the tagged columns 
-using the `linelist::tags_df()` function, as shown below:
-```{r, warning=FALSE}
-head(linelist::tags_df(data), 5)
-```
-
 Safeguarding is implicitly built into the linelist objects. If you try to delete any of the tagged 
 columns, you will receive an error or warning message, as shown in the example below.
 
@@ -358,8 +349,9 @@ The default options for lost  tags in a linelist object is warning. However, it 
 ```{r, eval=FALSE}
 linelist::lost_tags_action(action = "error")
 ```  
-and re-run the above code segment. 
-- What do you learn for resulting complementary message?  
+and re-run the above code segment.
+
+- What do you learn from message?  
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -378,6 +370,19 @@ linelist::validate_types(data,
 ```
 If your dataset contains a `non-default` tag, set the argument 
 `allow_extra = TRUE` when creating the linelist object.
+
+
+
+A  `linelist` object resembles a data frame but offers richer features 
+and functionalities. Packages that are linelist-aware can leverage these 
+features. For example, you can extract a dataframe of only the tagged columns 
+using the `linelist::tags_df()` function, as shown below:
+```{r, warning=FALSE}
+head(linelist::tags_df(data), 5)
+```
+
+This allows, the extraction of use tagged-only columns in downstream analysis.
+
 
 
 :::::::::::::::::::::::::::::::::::: callout
