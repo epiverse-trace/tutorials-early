@@ -12,8 +12,16 @@ Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**]
 
 The tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
 
-![An overview of the tutorial topics](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
 
+<p><figure>
+    <img src="https://epiverse-trace.github.io/task_pipeline-minimal.svg"
+         alt="Outbreak analysis pipeline" 
+         width="600"/> 
+    <figcaption>
+            <p>An overview of the tutorial topics</p>
+    </figcaption>
+</figure>
+</p>
 Each task has its tutorial website. Each tutorial website consists of a set of episodes.
 
 | [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
@@ -35,7 +43,17 @@ Also check out the [glossary](../reference.md) for any terms you may be unfamili
 
 Our strategy is to gradually incorporate specialised **R packages** into a traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
 
-![In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png).
+![I](episodes/fig/pkgs-hexlogos-2.png).
+
+<p><figure>
+    <img src="episodes/fig/pkgs-hexlogos-2.png"
+         alt="Outbreak analysis **R** packages" 
+         width="600"/> 
+    <figcaption>
+            <p>In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))</p>
+    </figcaption>
+</figure>
+</p>
 
 :::::::::::::::::::::::::::: prereq
 
