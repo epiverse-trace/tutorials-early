@@ -348,8 +348,7 @@
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>In an analytic pipeline, exploratory data analysis (EDA) is an
 important step before formal modelling. EDA helps determine
 relationships between variables and summarize their main characteristics
@@ -365,8 +364,7 @@ and other demographic factors such as gender, age, etc.</p>
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
 <div id="the-double-colon" class="callout-inner">
-<h3 class="callout-title">The double-colon<a class="anchor" aria-label="anchor" href="#the-double-colon"></a>
-</h3>
+<h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
 <p>The double-colon <code>::</code> in R let you call a specific
 function from a package without loading the entire package into the
@@ -378,8 +376,7 @@ conflicts.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="synthetic-outbreak-data">Synthetic outbreak data<a class="anchor" aria-label="anchor" href="#synthetic-outbreak-data"></a>
-<a class="anchor" aria-label="anchor" href="#synthetic-outbreak-data"></a></h2>
+</section><section><h2 class="section-heading" id="synthetic-outbreak-data">Synthetic outbreak data<a class="anchor" aria-label="anchor" href="#synthetic-outbreak-data"></a></h2>
 <hr class="half-width"><p>To illustrate the process of conducting EDA on outbreak data, we will
 generate a line list for a hypothetical Ebola outbreak utilizing the
 <code>{simulist}</code> package. This line list dataset offers
@@ -488,8 +485,7 @@ list:</p>
 5         &lt;NA&gt;         2022-12-31        2023-01-02       26
 6         &lt;NA&gt;         2023-01-01        2023-01-05       NA</code></pre>
 </div>
-</section><section><h2 class="section-heading" id="aggregating">Aggregating<a class="anchor" aria-label="anchor" href="#aggregating"></a>
-<a class="anchor" aria-label="anchor" href="#aggregating"></a></h2>
+</section><section><h2 class="section-heading" id="aggregating">Aggregating<a class="anchor" aria-label="anchor" href="#aggregating"></a></h2>
 <hr class="half-width"><p>Downstream analysis involves working with aggregated data rather than
 individual cases. This requires grouping linelist data in the form of
 incidence data. The <a href="(https://www.reconverse.org/incidence2/articles/incidence2.html)%7B.external%20target=%22_blank%22%7D" class="external-link">incidence2</a>
@@ -566,8 +562,7 @@ the date of onset and gender.</p>
 <i class="callout-icon" data-feather="bell"></i>
 </div>
 <div id="notes" class="callout-inner">
-<h3 class="callout-title">Notes<a class="anchor" aria-label="anchor" href="#notes"></a>
-</h3>
+<h3 class="callout-title">Notes</h3>
 <div class="callout-content">
 <p>When cases are grouped by different factors, it’s possible that these
 groups may have different date ranges in the resulting
@@ -618,8 +613,7 @@ default, missing counts will be filled with 0.</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
-<a class="anchor" aria-label="anchor" href="#visualization"></a></h2>
+</section><section><h2 class="section-heading" id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a></h2>
 <hr class="half-width"><p>“The <code>incidence2</code> object can be visualized using the
 <code>plot()</code> function from the base R package. The resulting
 graph is referred to as an epidemic curve, or epi-curve for short. The
@@ -655,8 +649,7 @@ incidence objects mentioned above.”</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">tracetheme</span><span class="fu">::</span><span class="fu">theme_trace</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="curve-of-cumulative-cases">Curve of cumulative cases<a class="anchor" aria-label="anchor" href="#curve-of-cumulative-cases"></a>
-<a class="anchor" aria-label="anchor" href="#curve-of-cumulative-cases"></a></h2>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="curve-of-cumulative-cases">Curve of cumulative cases<a class="anchor" aria-label="anchor" href="#curve-of-cumulative-cases"></a></h2>
 <hr class="half-width"><p>The cumulative number of cases can be calculated using the
 <code>cumulate()</code> function from an <code>incidence2</code> object
 and visualized, as in the example below.</p>
@@ -676,8 +669,7 @@ and visualized, as in the example below.</p>
 <code>incidence2</code> object contains groups, it will accumulate the
 cases accordingly. Give it a try with the
 <code>weekly_incidence_data</code> object!</p>
-</section><section><h2 class="section-heading" id="peak-estimation">Peak estimation<a class="anchor" aria-label="anchor" href="#peak-estimation"></a>
-<a class="anchor" aria-label="anchor" href="#peak-estimation"></a></h2>
+</section><section><h2 class="section-heading" id="peak-estimation">Peak estimation<a class="anchor" aria-label="anchor" href="#peak-estimation"></a></h2>
 <hr class="half-width"><p>One can estimate the peak –the time with the highest number of
 recorded cases– using the <code>estimate_peak()</code> function from the
 {incidence2} package. This function employs a bootstrapping method to
@@ -707,8 +699,7 @@ determine the peak time.</p>
 <p>This example demonstrates how to estimate the peak time using the
 <code>estimate_peak()</code> function at <span class="math inline">\(95%\)</span> confidence interval and using 100
 bootstrap samples.</p>
-</section><section><h2 class="section-heading" id="visulaziantion-with-ggplot2">Visulaziantion with ggplot2<a class="anchor" aria-label="anchor" href="#visulaziantion-with-ggplot2"></a>
-<a class="anchor" aria-label="anchor" href="#visulaziantion-with-ggplot2"></a></h2>
+</section><section><h2 class="section-heading" id="visulaziantion-with-ggplot2">Visulaziantion with ggplot2<a class="anchor" aria-label="anchor" href="#visulaziantion-with-ggplot2"></a></h2>
 <hr class="half-width"><p><a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> produces basic plots for epicurves, but
 additional work is required to create well-annotated graphs. However,
 using the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package, you can generate more
@@ -804,8 +795,7 @@ demonstrated in the example below:</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div id="challenge-1-can-you-do-it" class="callout-inner">
-<h3 class="callout-title">Challenge 1: Can you do it?<a class="anchor" aria-label="anchor" href="#challenge-1-can-you-do-it"></a>
-</h3>
+<h3 class="callout-title">Challenge 1: Can you do it?</h3>
 <div class="callout-content">
 <ul><li>Using suitable distributions for contacts, contact interval,
 infectious period, onset to hospitalized, and onset to death, generate a
@@ -821,8 +811,7 @@ curves?</li>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Use <code>{simulist}</code> package to generate synthetic outbreak
 data</li>
@@ -871,7 +860,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/ad2542f7f7b9c3f90cc871b355ff81ec14a09ca9" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/ad2542f7f7b9c3f90cc871b355ff81ec14a09ca9" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.3)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -894,7 +883,7 @@ any links that you are not going to use.
   "identifier": "https://epiverse-trace.github.io/tutorials-early/describe-cases.html",
   "dateCreated": "2024-07-09",
   "dateModified": "2024-07-02",
-  "datePublished": "2024-08-27"
+  "datePublished": "2024-09-03"
 }
 
   </script><script>

@@ -357,8 +357,7 @@ case dataset.</li>
 <i class="callout-icon" data-feather="check"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Prerequisite<a class="anchor" aria-label="anchor" href="#prereq1"></a>
-</h3>
+<h3 class="callout-title">Prerequisite</h3>
 <div class="callout-content">
 <p>This episode requires you to:</p>
 <ul><li>Download the <a href="https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv" class="external-link">simulated_ebola_2.csv</a>
@@ -367,8 +366,7 @@ case dataset.</li>
 </ul></div>
 </div>
 </div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
-<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>In the process of analyzing outbreak data, it’s essential to ensure
 that the dataset is clean, curated, standardized, and valid to
 facilitate accurate and reproducible analysis. This episode focuses on
@@ -381,8 +379,7 @@ cases.</p>
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
 <div id="the-double-colon" class="callout-inner">
-<h3 class="callout-title">The double-colon<a class="anchor" aria-label="anchor" href="#the-double-colon"></a>
-</h3>
+<h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
 <p>The double-colon <code>::</code> in R let you call a specific
 function from a package without loading the entire package into the
@@ -429,8 +426,7 @@ structure and content.</p>
 4  4   14675      ninety   &lt;NA&gt;           10/19/2014  31/ 12 /14
 5  5   12648          74      F           08/06/2014  10/10/2016</code></pre>
 </div>
-</section><section><h2 class="section-heading" id="a-quick-inspection">A quick inspection<a class="anchor" aria-label="anchor" href="#a-quick-inspection"></a>
-<a class="anchor" aria-label="anchor" href="#a-quick-inspection"></a></h2>
+</section><section><h2 class="section-heading" id="a-quick-inspection">A quick inspection<a class="anchor" aria-label="anchor" href="#a-quick-inspection"></a></h2>
 <hr class="half-width"><p>Quick exploration and inspection of the dataset are crucial before
 diving into any analysis tasks. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package
 simplifies this process with the <code>scan_data()</code> function.
@@ -460,8 +456,7 @@ You can see that the column names in the dataset are descriptive but
 lack consistency, as some they are composed of multiple words separated
 by white spaces. Additionally, some columns contain more than one data
 type, and there are missing values in others.</p>
-</section><section><h2 class="section-heading" id="common-operations">Common operations<a class="anchor" aria-label="anchor" href="#common-operations"></a>
-<a class="anchor" aria-label="anchor" href="#common-operations"></a></h2>
+</section><section><h2 class="section-heading" id="common-operations">Common operations<a class="anchor" aria-label="anchor" href="#common-operations"></a></h2>
 <hr class="half-width"><p>This section demonstrate how to perform some common data cleaning
 operations using the <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package.</p>
 <div class="section level3">
@@ -490,8 +485,7 @@ details.</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion1"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <ul><li>What differences you can observe in the column names?</li>
 </ul></div>
@@ -507,8 +501,7 @@ unchanged.</p>
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Challenge<a class="anchor" aria-label="anchor" href="#discussion2"></a>
-</h3>
+<h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
 <p>Standardize the column names of the input dataset, but keep the “V1”
 column as it is.</p>
@@ -652,8 +645,7 @@ does such conversion as illustrated in the below code chunk.</p>
 6   6   14274  76 female      &lt;NA&gt;       &lt;NA&gt;  2016-01-23</code></pre>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="epidemiology-related-operations">Epidemiology related operations<a class="anchor" aria-label="anchor" href="#epidemiology-related-operations"></a>
-<a class="anchor" aria-label="anchor" href="#epidemiology-related-operations"></a></h2>
+</section><section><h2 class="section-heading" id="epidemiology-related-operations">Epidemiology related operations<a class="anchor" aria-label="anchor" href="#epidemiology-related-operations"></a></h2>
 <hr class="half-width"><p>In addition to common data cleansing tasks, such as those discussed
 in the above section, the <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers
 additional functionalities tailored specifically for processing and
@@ -804,8 +796,7 @@ named <code>time_since_sampling_date</code> and
 elapsed since the date of sampling for each case, measured in years, and
 the remaining time measured in months.</p>
 </div>
-</section><section><h2 class="section-heading" id="multiple-operations-at-once">Multiple operations at once<a class="anchor" aria-label="anchor" href="#multiple-operations-at-once"></a>
-<a class="anchor" aria-label="anchor" href="#multiple-operations-at-once"></a></h2>
+</section><section><h2 class="section-heading" id="multiple-operations-at-once">Multiple operations at once<a class="anchor" aria-label="anchor" href="#multiple-operations-at-once"></a></h2>
 <hr class="half-width"><p>Performing data cleaning operations individually can be
 time-consuming and error-prone. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package
 simplifies this process by offering a convenient wrapper function called
@@ -851,8 +842,7 @@ pipe operator in “|&gt;”, as shown in the below code snippet.</p>
 <pre class="warning" tabindex="0"><code>Warning: Detected incorrect subject ids at lines:
 Use the correct_subject_ids() function to adjust them.</code></pre>
 </div>
-</section><section><h2 class="section-heading" id="printing-the-clean-report">Printing the clean report<a class="anchor" aria-label="anchor" href="#printing-the-clean-report"></a>
-<a class="anchor" aria-label="anchor" href="#printing-the-clean-report"></a></h2>
+</section><section><h2 class="section-heading" id="printing-the-clean-report">Printing the clean report<a class="anchor" aria-label="anchor" href="#printing-the-clean-report"></a></h2>
 <hr class="half-width"><p>The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package generates a comprehensive report
 detailing the findings and actions of all data cleansing operations
 conducted during the analysis. This report is presented as a webpage
@@ -867,8 +857,7 @@ function.</p>
 <figure><img src="../fig/report_demo.png" alt="Example of data cleaning report generated by {cleanepi}" class="figure mx-auto d-block"><div class="figcaption">Example of data cleaning report generated by
 <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
 </div>
-</figure></section><section><h2 class="section-heading" id="validating-and-tagging-case-data">Validating and tagging case data<a class="anchor" aria-label="anchor" href="#validating-and-tagging-case-data"></a>
-<a class="anchor" aria-label="anchor" href="#validating-and-tagging-case-data"></a></h2>
+</figure></section><section><h2 class="section-heading" id="validating-and-tagging-case-data">Validating and tagging case data<a class="anchor" aria-label="anchor" href="#validating-and-tagging-case-data"></a></h2>
 <hr class="half-width"><p>In outbreak analysis, once you have completed the initial steps of
 reading and cleaning the case data, it’s essential to establish an
 additional foundational layer to ensure the integrity and reliability of
@@ -916,8 +905,7 @@ the below code chunk.</p>
 <i class="callout-icon" data-feather="key"></i>
 </div>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points<a class="anchor" aria-label="anchor" href="#keypoints1"></a>
-</h3>
+<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul><li>Use <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package to clean and standardize
 epidemic and outbreak data</li>
@@ -966,7 +954,7 @@ any links that you are not going to use.
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.5)</a>, <a href="https://github.com/carpentries/pegboard/tree/ad2542f7f7b9c3f90cc871b355ff81ec14a09ca9" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.3)</a></p>
+        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.6)</a>, <a href="https://github.com/carpentries/pegboard/tree/ad2542f7f7b9c3f90cc871b355ff81ec14a09ca9" class="external-link">pegboard (0.7.6)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.3)</a></p>
 			</div>
 		</footer></div> <!-- / div.container -->
 	<div id="to-top">
@@ -989,7 +977,7 @@ any links that you are not going to use.
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "dateCreated": "2024-07-09",
   "dateModified": "2024-07-09",
-  "datePublished": "2024-08-27"
+  "datePublished": "2024-09-03"
 }
 
   </script><script>
