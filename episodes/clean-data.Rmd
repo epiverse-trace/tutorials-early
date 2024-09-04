@@ -262,7 +262,7 @@ Further more, you can combine multiple data cleaning tasks via the pipe operator
 ```{r}
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
 cleaned_data <- raw_ebola_data |>
-  cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
+  cleanepi::standardize_column_names() |>
   cleanepi::replace_missing_values(na_strings = "") |>
   cleanepi::remove_constants(cutoff = 1.0) |>
   cleanepi::remove_duplicates(target_columns = NULL) |>
