@@ -307,9 +307,7 @@ library("linelist")
 data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
-  age = "age",
   date_onset = "date_onset",
-  date_reporting = "date_sample",
   gender = "gender"
 )
 utils::head(data, 7)
