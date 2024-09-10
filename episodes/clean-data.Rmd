@@ -374,7 +374,15 @@ This `Warning` message above is the default output option when we lose tags in a
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-- Set the action for lost tags in a linelist to error as follows:
+Let's test the implications of changing a `Warning` to an `Error` message.
+
+- First, run this code to count the frequency per category within a categorical variable:
+
+- `data |>`
+- `dplyr::select(case_id, gender) %>%` 
+- `dplyr::count(gender)`
+
+- Set behavior for lost tags in a `linelist` to "error" as follows:
 
 ```{r, eval=FALSE}
 linelist::lost_tags_action(action = "error")
