@@ -336,6 +336,8 @@ Now:
 - **Tag** those variables as above using `linelist::make_linelist()`.
 
 :::::::::::::::::::: hint
+
+Your can get access to the list of available tag names in {linelist} using:
 ```{r, eval=FALSE}
 linelist::tags_types()
 ```
