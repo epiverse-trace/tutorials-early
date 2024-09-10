@@ -467,7 +467,7 @@ using the `linelist::tags_df()` function, as shown below:
 head(linelist::tags_df(data), 5)
 ```
 
-This allows, the extraction of use tagged-only columns in downstream analysis.
+This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
 
 
 
