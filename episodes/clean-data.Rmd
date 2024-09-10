@@ -391,7 +391,7 @@ linelist::lost_tags_action()
 # set behavior to "error"
 linelist::lost_tags_action(action = "error")
 ```  
-and re-run the above code segment.
+- Now, re-run the above code segment with `dplyr::count()`.
 
 - What do you learn from message?  
 
