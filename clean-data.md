@@ -362,7 +362,7 @@ Further more, you can combine multiple data cleaning tasks via the pipe operator
 ``` r
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
 cleaned_data <- raw_ebola_data |>
-  cleanepi::standardize_column_names(keep = "V1", rename = NULL) |>
+  cleanepi::standardize_column_names() |>
   cleanepi::replace_missing_values(na_strings = "") |>
   cleanepi::remove_constants(cutoff = 1.0) |>
   cleanepi::remove_duplicates(target_columns = NULL) |>
@@ -426,14 +426,14 @@ utils::head(data, 7)
 ``` output
 
 // linelist object
-  V1 case_id age gender    status date_onset date_sample
-1  1   14905  90   male confirmed 2015-03-15  2015-04-06
-2  2   13043  25 female      <NA>       <NA>  2014-01-03
-3  3   14364  54 female      <NA> 2014-02-09  2015-03-03
-4  4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5  5   12648  74 female      <NA> 2014-06-08  2016-10-10
-6  6   14274  76 female      <NA>       <NA>  2016-01-23
-7  7   14132  16   male confirmed       <NA>  2015-10-05
+  v_1 case_id age gender    status date_onset date_sample
+1   1   14905  90   male confirmed 2015-03-15  2015-04-06
+2   2   13043  25 female      <NA>       <NA>  2014-01-03
+3   3   14364  54 female      <NA> 2014-02-09  2015-03-03
+4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
+5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
+6   6   14274  76 female      <NA>       <NA>  2016-01-23
+7   7   14132  16   male confirmed       <NA>  2015-10-05
 
 // tags: id:case_id, date_onset:date_onset, gender:gender 
 ```
