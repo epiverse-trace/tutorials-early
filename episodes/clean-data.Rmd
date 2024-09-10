@@ -343,9 +343,22 @@ Your can get access to the list of available tag names in {linelist} using:
 linelist::tags_types()
 ```
 :::::::::::::::::::::::
+::::::::::::::::: solution
 
-- How many variables are there? and what are their data types?
+- `linelist::make_linelist(`
+- `  x = cleaned_data,`
+- `  id = "case_id",`
+- `  date_onset = "date_onset",`
+- `  gender = "gender",`
+- `  age = "age", # same name in default list and dataset`
+- `  date_reporting = "date_sample", # different names but related`
+- `)`
 
+How these additional tags are visible in the output? 
+
+Explore the function `linelist::tags()` and its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).
+
+::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::
 
 
