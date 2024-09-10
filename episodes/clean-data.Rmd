@@ -424,9 +424,11 @@ This allows, the extraction of use tagged-only columns in downstream analysis.
 :::::::::::::::::::::::::::::::::::: callout
 
 ### When I should use `{linelist}`?
-- linelist is more appropriate for ongoing/long-lasting analysis than
-historical/quick analysis. Check 
-[here](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.  
+Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
+
+`{linelist}` is more appropriate for this type of ongoing or long-lasting analysis.
+Check the "Get started" vignette section about
+[When you should consider using {linelist}?](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.
 
 :::::::::::::::::::::::::::::::::::::::::::
 
