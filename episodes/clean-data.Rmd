@@ -399,12 +399,62 @@ linelist::validate_linelist(data)
 
 
 
-::::::::::::::::::::::::: spoiler
+::::::::::::::::::::::::: challenge
 
-### Can we create {linelist} with `non-default` tags?
+Let's change some variable data types to identify how `linelist::validate_linelist()` will react when your input data has a variable with a different data type.
 
-- How to add extra tags? with the `allow_extra = TRUE` argument?
-- How to validate these extra tags? by defining their specific `tags_types()`?
+Try to:
+
+- **Change** a variable data type,
+- **Tag** the linelist, and then 
+- **Validate** it
+
+Identify the correlation between the error messages and the output of `linelist::tags_types()`.
+
+:::::::::::::::::::::::::: hint
+
+If we change the `age` variable from numeric to character:
+
+- `cleaned_data %>%`
+- `# change data type`
+- `mutate(age_character = as.character(age)) %>%`
+- `# tag`
+- `linelist::make_linelist(`
+- `  age = "age_character"`
+- `) %>%`
+- `# validate`
+- `linelist::validate_linelist()`
+
+Other frequent changes can be having a date variable like `date_onset` changed to a character, or a factor variable like `gender` changed to an integer.
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: hint
+
+- `# example 2`
+- `cleaned_data %>% `
+-   `# mess`
+-   `mutate(date_onset_character = as.character(date_onset)) %>% `
+-   `# tag`
+-   `linelist::make_linelist(`
+-     `date_onset = "date_onset_character"`
+-   `) %>% `
+-   `# validate`
+-   `linelist::validate_linelist()`
+
+- `# example 3`
+- `cleaned_data %>% `
+-   `# mess`
+-   `mutate(gender = as.factor(gender)) %>% `
+-   `mutate(gender_integer = as.integer(gender)) %>% `
+-   `# tag`
+-   `linelist::make_linelist(`
+-     `gender = "gender_integer"`
+-   `) %>% `
+-   `# validate`
+-   `linelist::validate_linelist()`
+
+::::::::::::::::::::::::: 
 
 :::::::::::::::::::::::::
 
