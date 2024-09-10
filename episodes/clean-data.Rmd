@@ -385,6 +385,10 @@ Let's test the implications of changing a `Warning` to an `Error` message.
 - Set behavior for lost tags in a `linelist` to "error" as follows:
 
 ```{r, eval=FALSE}
+# set behavior to default "warning"
+linelist::lost_tags_action()
+
+# set behavior to "error"
 linelist::lost_tags_action(action = "error")
 ```  
 and re-run the above code segment.
