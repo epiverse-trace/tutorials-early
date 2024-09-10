@@ -339,6 +339,7 @@ Now:
 
 Your can get access to the list of available tag names in {linelist} using:
 ```{r, eval=FALSE}
+# Get a list of available tags by name and data types
 linelist::tags_types()
 ```
 :::::::::::::::::::::::
