@@ -367,7 +367,7 @@ columns, you will receive an error or warning message, as shown in the example b
 
 ```{r, warning=TRUE}
 new_df <- data |>
-  dplyr::select(linelist::has_tag(c("id", "age")))
+  dplyr::select(case_id, gender)
 ```
 
 The default options for lost  tags in a linelist object is warning. However, it can be change to error message using `lost_tags_action()`. 
