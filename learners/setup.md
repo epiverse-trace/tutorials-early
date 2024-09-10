@@ -47,7 +47,7 @@ Our strategy is to gradually incorporate specialised **R packages** into a tradi
 
 <p><figure>
     <img src="episodes/fig/pkgs-hexlogos-2.png"
-         alt="Outbreak analysis **R** packages" 
+         alt="Outbreak analysis R packages" 
          width="600"/> 
     <figcaption>
             <p>In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))</p>
