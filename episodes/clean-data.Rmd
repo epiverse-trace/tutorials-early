@@ -321,9 +321,9 @@ data <- linelist::make_linelist(
 utils::head(data, 7)
 ```
 
-The `{linelist}` package supplies tags for the common epidemiological variables 
-and specify them the appropriate data types. You can view the tagged varibles 
-and their data types using `tags_types` function
+The `{linelist}` package supplies tags for common epidemiological variables 
+and a set of appropriate data types for each. You can view the list of available tags by the variable name
+and their acceptable data types for each using `linelist::tags_types()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
