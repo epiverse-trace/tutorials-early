@@ -391,9 +391,7 @@ types, use the `linelist::validate_list()`, as
 shown in the example below:
 
 ```r
-linelist::validate_linelist(data,
-  allow_extra = FALSE
-)
+linelist::validate_linelist(data)
 ```
 If your dataset contains a `non-default` tag, set the argument 
 `allow_extra = TRUE` when creating the linelist object with its corresponding
