@@ -362,7 +362,7 @@ Explore the function `linelist::tags()` and its [reference documentation](https:
 ::::::::::::::::::::::::::::::::::::::::::::::
 
 
-Safeguarding is implicitly built into the linelist objects. If you try to delete any of the tagged 
+Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
 columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
