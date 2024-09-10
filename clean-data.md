@@ -417,9 +417,7 @@ library("linelist")
 data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
-  age = "age",
   date_onset = "date_onset",
-  date_reporting = "date_sample",
   gender = "gender"
 )
 utils::head(data, 7)
@@ -437,7 +435,7 @@ utils::head(data, 7)
 6  6   14274  76 female      <NA>       <NA>  2016-01-23
 7  7   14132  16   male confirmed       <NA>  2015-10-05
 
-// tags: id:case_id, date_onset:date_onset, date_reporting:date_sample, gender:gender, age:age 
+// tags: id:case_id, date_onset:date_onset, gender:gender 
 ```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
