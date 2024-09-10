@@ -327,7 +327,13 @@ and their acceptable data types for each using `linelist::tags_types()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-- View the default tags features linelist
+In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
+
+Now:
+
+- **Explore** the available tag names in {linelist}.
+- **Find** what other variables in the cleaned dataset can be associated with any of these available tags.
+- **Tag** those variables as above using `linelist::make_linelist()`.
 
 :::::::::::::::::::: hint
 ```{r, eval=FALSE}
