@@ -62,8 +62,8 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 ```{r,eval=FALSE,echo=TRUE}
-library("rio")
-library("here")
+library(rio)
+library(here)
 
 # read data
 # e.g., the path to our file is data/raw-data/ebola_cases.csv then:
@@ -124,8 +124,8 @@ systems (DBMS) across different back-ends or servers. It offers a uniform method
 The following code chunk demonstrates how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
 
 ```{r,warning=FALSE,message=FALSE}
-library("DBI")
-library("RSQLite")
+library(DBI)
+library(RSQLite)
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(

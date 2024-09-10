@@ -127,17 +127,17 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
-  "cleanepi",
-  "rio",
-  "here",
-  "DBI",
-  "RSQLite",
-  "dbplyr",
-  "linelist",
-  "epiverse-trace/simulist",
-  "incidence2",
-  "epiverse-trace/tracetheme",
-  "tidyverse"
+  cleanepi,
+  rio,
+  here,
+  DBI,
+  RSQLite,
+  dbplyr,
+  linelist,
+  epiverse-trace/simulist,
+  incidence2,
+  epiverse-trace/tracetheme,
+  tidyverse
 )
 
 pak::pkg_install(new_packages)

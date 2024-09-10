@@ -48,8 +48,8 @@ The first step is to import the dataset following the guidelines outlined in the
 
 ```{r,eval=FALSE,echo=TRUE,message=FALSE}
 # Load packages
-library("rio")
-library("here")
+library(rio)
+library(here)
 
 # Read data
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
@@ -75,7 +75,7 @@ utils::head(raw_ebola_data, 5)
 Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-library("cleanepi")
+library(cleanepi)
 cleanepi::scan_data(raw_ebola_data)
 ```
 
@@ -311,7 +311,7 @@ it's essential to establish an additional foundational layer to ensure the integ
   below code chunk.
 
 ```{r,warning=FALSE}
-library("linelist")
+library(linelist)
 data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
