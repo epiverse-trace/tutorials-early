@@ -393,7 +393,10 @@ linelist::lost_tags_action(action = "error")
 ```  
 - Now, re-run the above code segment with `dplyr::count()`.
 
-- What do you learn from message?  
+Identify:
+
+- What is the difference in the output between a `Warning` and an `Error`?
+- What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
