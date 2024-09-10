@@ -370,7 +370,7 @@ new_df <- data |>
   dplyr::select(case_id, gender)
 ```
 
-The default options for lost  tags in a linelist object is warning. However, it can be change to error message using `lost_tags_action()`. 
+This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using `linelist::lost_tags_action()`. 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
