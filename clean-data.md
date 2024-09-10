@@ -316,7 +316,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-07-09).
+ until the date this document was generated (2024-09-10).
  
 
 ``` r
@@ -340,12 +340,12 @@ utils::head(sim_ebola_data)
 5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
 6   6   14274  76 female      <NA>       <NA>  2016-01-23
   time_since_sampling_date remainder_months
-1                        9                3
-2                       10                6
-3                        9                4
-4                        9                6
-5                        7                8
-6                        8                5
+1                        9                5
+2                       10                8
+3                        9                6
+4                        9                8
+5                        7               11
+6                        8                7
 ```
 
 After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
