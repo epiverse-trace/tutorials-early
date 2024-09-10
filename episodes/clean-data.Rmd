@@ -393,9 +393,9 @@ shown in the example below:
 ```r
 linelist::validate_linelist(data)
 ```
-If your dataset contains a `non-default` tag, set the argument 
-`allow_extra = TRUE` when creating the linelist object with its corresponding
-datatype. 
+<!-- If your dataset requires a new tag, set the argument -->
+<!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
+<!-- datatype. -->
 
 
 
