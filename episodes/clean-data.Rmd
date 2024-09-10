@@ -402,7 +402,7 @@ Identify:
 
 
 To ensure that all tagged variables are standardized and have the correct data 
-types, use the `linelist::validate_list()`, as 
+types, use the `linelist::validate_linelist()`, as 
 shown in the example below:
 
 ```r
