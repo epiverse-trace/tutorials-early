@@ -345,14 +345,17 @@ linelist::tags_types()
 :::::::::::::::::::::::
 ::::::::::::::::: solution
 
-- `linelist::make_linelist(`
-- `  x = cleaned_data,`
-- `  id = "case_id",`
-- `  date_onset = "date_onset",`
-- `  gender = "gender",`
-- `  age = "age", # same name in default list and dataset`
-- `  date_reporting = "date_sample", # different names but related`
-- `)`
+```{r}
+linelist::make_linelist(
+  x = cleaned_data,
+  id = "case_id",
+  date_onset = "date_onset",
+  gender = "gender",
+  age = "age", # same name in default list and dataset
+  date_reporting = "date_sample", # different names but related
+)
+```
+
 
 How these additional tags are visible in the output? 
 
@@ -378,9 +381,11 @@ Let's test the implications of changing a `Warning` to an `Error` message.
 
 - First, run this code to count the frequency per category within a categorical variable:
 
-- `data |>`
-- `dplyr::select(case_id, gender) %>%` 
-- `dplyr::count(gender)`
+```{r,eval=FALSE}
+data |>
+  dplyr::select(case_id, gender) %>% 
+  dplyr::count(gender)
+```
 
 - Set behavior for lost tags in a `linelist` to "error" as follows:
 
@@ -416,7 +421,7 @@ linelist::validate_linelist(data)
 
 ::::::::::::::::::::::::: challenge
 
-Let's change some variable data types to identify how `linelist::validate_linelist()` will react when your input data has a variable with a different data type.
+Let's simulate that one variable change of data types to identify how `linelist::validate_linelist()` will react when your input data has a variable with a different data type.
 
 Try to:
 
@@ -428,46 +433,62 @@ Identify the correlation between the error messages and the output of `linelist:
 
 :::::::::::::::::::::::::: hint
 
+### Example
+
 If we change the `age` variable from numeric to character:
 
-- `cleaned_data %>%`
-- `# change data type`
-- `mutate(age_character = as.character(age)) %>%`
-- `# tag`
-- `linelist::make_linelist(`
-- `  age = "age_character"`
-- `) %>%`
-- `# validate`
-- `linelist::validate_linelist()`
+```{r}
+cleaned_data %>%
+  # simulate a change of data type
+  mutate(age_character = as.character(age)) %>%
+  # tag
+  linelist::make_linelist(
+    age = "age_character"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
 
-Other frequent changes can be having a date variable like `date_onset` changed to a character, or a factor variable like `gender` changed to an integer.
+
+Other frequent changes can be having:
+
+- a date variable like `date_onset` changed to a character, or 
+- a factor variable like `gender` changed to an integer.
+
+Give them a try!
 
 ::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::: hint
 
-- `# example 2`
-- `cleaned_data %>% `
--   `# mess`
--   `mutate(date_onset_character = as.character(date_onset)) %>% `
--   `# tag`
--   `linelist::make_linelist(`
--     `date_onset = "date_onset_character"`
--   `) %>% `
--   `# validate`
--   `linelist::validate_linelist()`
+```{r,eval=FALSE}
+# example 2
+cleaned_data %>% 
+  # simulate a change of data type
+  mutate(date_onset_character = as.character(date_onset)) %>% 
+  # tag
+  linelist::make_linelist(
+    date_onset = "date_onset_character"
+  ) %>% 
+  # validate
+  linelist::validate_linelist()
+```
 
-- `# example 3`
-- `cleaned_data %>% `
--   `# mess`
--   `mutate(gender = as.factor(gender)) %>% `
--   `mutate(gender_integer = as.integer(gender)) %>% `
--   `# tag`
--   `linelist::make_linelist(`
--     `gender = "gender_integer"`
--   `) %>% `
--   `# validate`
--   `linelist::validate_linelist()`
+
+```{r,eval=FALSE}
+# example 3
+cleaned_data %>% 
+  # simulate a change of data type
+  mutate(gender = as.factor(gender)) %>% 
+  mutate(gender_integer = as.integer(gender)) %>% 
+  # tag
+  linelist::make_linelist(
+    gender = "gender_integer"
+  ) %>% 
+  # validate
+  linelist::validate_linelist()
+```
+
 
 ::::::::::::::::::::::::: 
 
