@@ -345,7 +345,7 @@ linelist::tags_types()
 :::::::::::::::::::::::
 ::::::::::::::::: solution
 
-```{r}
+```{r,eval=FALSE}
 linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
@@ -421,7 +421,7 @@ linelist::validate_linelist(data)
 
 ::::::::::::::::::::::::: challenge
 
-Let's simulate that one variable change of data types to identify how `linelist::validate_linelist()` will react when your input data has a variable with a different data type.
+Let's simulate your data having a new set of entries but one variable change of data types. Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
 
 Try to:
 
@@ -438,9 +438,11 @@ Identify the correlation between the error messages and the output of `linelist:
 If we change the `age` variable from numeric to character:
 
 ```{r}
+library(tidyverse) # for {dplyr} functions and the pipe %>% 
+
 cleaned_data %>%
   # simulate a change of data type
-  mutate(age_character = as.character(age)) %>%
+  dplyr::mutate(age_character = as.character(age)) %>%
   # tag
   linelist::make_linelist(
     age = "age_character"
@@ -465,7 +467,7 @@ Give them a try!
 # example 2
 cleaned_data %>% 
   # simulate a change of data type
-  mutate(date_onset_character = as.character(date_onset)) %>% 
+  dplyr::mutate(date_onset_character = as.character(date_onset)) %>% 
   # tag
   linelist::make_linelist(
     date_onset = "date_onset_character"
@@ -479,8 +481,8 @@ cleaned_data %>%
 # example 3
 cleaned_data %>% 
   # simulate a change of data type
-  mutate(gender = as.factor(gender)) %>% 
-  mutate(gender_integer = as.integer(gender)) %>% 
+  dplyr::mutate(gender = as.factor(gender)) %>% 
+  dplyr::mutate(gender_integer = as.integer(gender)) %>% 
   # tag
   linelist::make_linelist(
     gender = "gender_integer"
