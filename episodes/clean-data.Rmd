@@ -362,7 +362,7 @@ linelist::make_linelist(
 
 How these additional tags are visible in the output? 
 
-Explore the function `linelist::tags()` and its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).
+<!-- Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html). -->
 
 ::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::
@@ -457,17 +457,20 @@ cleaned_data %>%
   linelist::validate_linelist()
 ```
 
+Why are we getting this error message?
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: hint
+
+### More examples
 
 Other frequent changes can be having:
 
 - a date variable like `date_onset` changed to a character, or 
 - a factor variable like `gender` changed to an integer.
 
-Give them a try!
-
-::::::::::::::::::::::::::
-
-::::::::::::::::::::::::: hint
+Run these examples and answer: Why are we getting an error message?
 
 ```{r,eval=FALSE}
 # example 2
