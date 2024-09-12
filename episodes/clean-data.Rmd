@@ -341,6 +341,9 @@ Your can get access to the list of available tag names in {linelist} using:
 ```{r, eval=FALSE}
 # Get a list of available tags by name and data types
 linelist::tags_types()
+
+# Get a list of names only
+linelist::tags_names()
 ```
 :::::::::::::::::::::::
 ::::::::::::::::: solution
@@ -437,9 +440,12 @@ Identify the correlation between the error messages and the output of `linelist:
 
 If we change the `age` variable from numeric to character:
 
-```{r}
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 library(tidyverse) # for {dplyr} functions and the pipe %>% 
+```
 
+
+```{r}
 cleaned_data %>%
   # simulate a change of data type
   dplyr::mutate(age_character = as.character(age)) %>%
