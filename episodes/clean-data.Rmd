@@ -327,7 +327,7 @@ and their acceptable data types for each using `linelist::tags_types()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
-In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
+Let's **tag** more variables. In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
 
 Now:
 
@@ -377,7 +377,7 @@ This `Warning` message above is the default output option when we lose tags in a
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-Let's test the implications of changing a `Warning` to an `Error` message.
+Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
 
 - First, run this code to count the frequency per category within a categorical variable:
 
@@ -421,7 +421,7 @@ linelist::validate_linelist(data)
 
 ::::::::::::::::::::::::: challenge
 
-Let's simulate your data having a new set of entries but one variable change of data types. Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
+Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries but one variable change of data types. Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
 
 Try to:
 
