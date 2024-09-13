@@ -308,7 +308,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2024-09-10 |
+        <p>Last updated on 2024-09-13 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -403,7 +403,7 @@ files.</li>
 </div>
 </section><section><h2 class="section-heading" id="reading-from-files">Reading from files<a class="anchor" aria-label="anchor" href="#reading-from-files"></a></h2>
 <hr class="half-width"><p>Several packages are available for importing outbreak data stored in
-individual files into <code>R</code>. These include <a href="http://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://readr.tidyverse.org/" class="external-link">readr</a> from the
+individual files into <code>R</code>. These include <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://readr.tidyverse.org/" class="external-link">readr</a> from the
 <code>tidyverse</code>, <a href="https://bitbucket.org/djhshih/io/src/master/" class="external-link">io</a>, <a href="https://cran.r-project.org/web/packages/ImportExport/index.html" class="external-link">ImportExport</a>,
 and <a href="https://rdatatable.gitlab.io/data.table/" class="external-link">data.table</a>.
 Together, these packages offer methods to read single or multiple files
@@ -414,8 +414,8 @@ in a wide range of formats.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"rio"</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="st">"here"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">rio</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">here</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># read data</span></span>
 <span><span class="co"># e.g., the path to our file is data/raw-data/ebola_cases.csv then:</span></span>
@@ -447,7 +447,7 @@ working environment.</p>
 </button>
 <div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
-<p>You can check the <a href="http://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
+<p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
 package website. To expand {rio} to the full range of support for import
 and export formats run:</p>
@@ -492,8 +492,8 @@ table on it, and subsequently read it:</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="st">"DBI"</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="st">"RSQLite"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">DBI</span><span class="op">)</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">RSQLite</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Create a temporary SQLite database in memory</span></span>
 <span><span class="va">db_con</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span></span>
@@ -642,9 +642,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
-  "dateCreated": "2024-09-10",
-  "dateModified": "2024-09-10",
-  "datePublished": "2024-09-10"
+  "dateCreated": "2024-09-13",
+  "dateModified": "2024-09-13",
+  "datePublished": "2024-09-13"
 }
 
   </script><script>
