@@ -56,8 +56,8 @@ package, see the below code chunk.
 
 ``` r
 # Load simulist and epiparameter packages
-library("simulist")
-library("epiparameter")
+library(simulist)
+library(epiparameter)
 
 # Define contact distribution
 contact_dist <- epiparameter::epidist(
@@ -154,7 +154,7 @@ simulated  Ebola `linelist` data based on the  date of onset.
 
 ``` r
 # load incidence2 package
-library("incidence2")
+library(incidence2)
 
 # create incidence object by aggregating case data  based on the date of onset
 dialy_incidence_data <- incidence2::incidence(
@@ -262,8 +262,8 @@ snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidenc
 
 ``` r
 # Load ggplot2 and tracetheme packages
-library("ggplot2")
-library("tracetheme")
+library(ggplot2)
+library(tracetheme)
 
 # Plot daily incidence data
 base::plot(dialy_incidence_data) +

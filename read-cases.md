@@ -57,14 +57,14 @@ This help us remember package functions and avoid namespace conflicts.
 
 ## Reading from files 
 
-Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](http://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](https://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 
 ``` r
-library("rio")
-library("here")
+library(rio)
+library(here)
 
 # read data
 # e.g., the path to our file is data/raw-data/ebola_cases.csv then:
@@ -88,7 +88,7 @@ Can you read data from a compressed file in `R`? Download this [zip file](https:
 
 ::::::::::::::::: hint
 
-You can check the [full list of supported file formats](http://gesistsa.github.io/rio/#supported-file-formats) 
+You can check the [full list of supported file formats](https://gesistsa.github.io/rio/#supported-file-formats) 
 in the `{rio}` package on the package website. To expand {rio} to the full range of support for import and export formats run:
 
 
@@ -124,8 +124,8 @@ The following code chunk demonstrates how to create a temporary SQLite database 
 
 
 ``` r
-library("DBI")
-library("RSQLite")
+library(DBI)
+library(RSQLite)
 
 # Create a temporary SQLite database in memory
 db_con <- DBI::dbConnect(
