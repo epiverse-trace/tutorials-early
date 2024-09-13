@@ -258,25 +258,25 @@ Performing data cleaning operations individually can be time-consuming and error
 The `clean_data()` function applies a series of predefined data cleaning operations to the input dataset. Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
 
 
-Further more, you can combine multiple data cleaning tasks via the pipe operator in "|>", as shown in the below code snippet. 
+Further more, you can combine multiple data cleaning tasks via the pipe operator in "%>%", as shown in the below code snippet. 
 ```{r}
 # PERFORM THE OPERATIONS USING THE pipe SYNTAX
-cleaned_data <- raw_ebola_data |>
-  cleanepi::standardize_column_names() |>
-  cleanepi::replace_missing_values(na_strings = "") |>
-  cleanepi::remove_constants(cutoff = 1.0) |>
-  cleanepi::remove_duplicates(target_columns = NULL) |>
+cleaned_data <- raw_ebola_data %>%
+  cleanepi::standardize_column_names() %>%
+  cleanepi::replace_missing_values(na_strings = "") %>%
+  cleanepi::remove_constants(cutoff = 1.0) %>%
+  cleanepi::remove_duplicates(target_columns = NULL) %>%
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample"),
     error_tolerance = 0.4,
     format = NULL,
     timeframe = NULL
-  ) |>
+  ) %>%
   cleanepi::check_subject_ids(
     target_columns = "case_id",
     range = c(1, 15000)
-  ) |>
-  cleanepi::convert_to_numeric(target_columns = "age") |>
+  ) %>%
+  cleanepi::convert_to_numeric(target_columns = "age") %>%
   cleanepi::clean_using_dictionary(dictionary = test_dict)
 ```
 
@@ -372,7 +372,7 @@ Safeguarding is implicitly built into the linelist objects. If you try to drop a
 columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
-new_df <- data |>
+new_df <- data %>%
   dplyr::select(case_id, gender)
 ```
 
@@ -385,7 +385,7 @@ Let's test the implications of changing the **safeguarding** configuration from 
 - First, run this code to count the frequency per category within a categorical variable:
 
 ```{r,eval=FALSE}
-data |>
+data %>%
   dplyr::select(case_id, gender) %>% 
   dplyr::count(gender)
 ```
