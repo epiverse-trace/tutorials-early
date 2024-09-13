@@ -355,7 +355,7 @@ linelist::make_linelist(
   date_onset = "date_onset",
   gender = "gender",
   age = "age", # same name in default list and dataset
-  date_reporting = "date_sample", # different names but related
+  date_reporting = "date_sample" # different names but related
 )
 ```
 
@@ -386,7 +386,7 @@ Let's test the implications of changing the **safeguarding** configuration from 
 
 ```{r,eval=FALSE}
 data %>%
-  dplyr::select(case_id, gender) %>% 
+  dplyr::select(case_id, gender) %>%
   dplyr::count(gender)
 ```
 
@@ -441,7 +441,7 @@ Identify the correlation between the error messages and the output of `linelist:
 If we change the `age` variable from numeric to character:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
-library(tidyverse) # for {dplyr} functions and the pipe %>% 
+library(tidyverse) # for {dplyr} functions and the pipe %>%
 ```
 
 
@@ -474,13 +474,13 @@ Run these examples and answer: Why are we getting an error message?
 
 ```{r,eval=FALSE}
 # example 2
-cleaned_data %>% 
+cleaned_data %>%
   # simulate a change of data type
-  dplyr::mutate(date_onset_character = as.character(date_onset)) %>% 
+  dplyr::mutate(date_onset_character = as.character(date_onset)) %>%
   # tag
   linelist::make_linelist(
     date_onset = "date_onset_character"
-  ) %>% 
+  ) %>%
   # validate
   linelist::validate_linelist()
 ```
@@ -488,14 +488,14 @@ cleaned_data %>%
 
 ```{r,eval=FALSE}
 # example 3
-cleaned_data %>% 
+cleaned_data %>%
   # simulate a change of data type
-  dplyr::mutate(gender = as.factor(gender)) %>% 
-  dplyr::mutate(gender_integer = as.integer(gender)) %>% 
+  dplyr::mutate(gender = as.factor(gender)) %>%
+  dplyr::mutate(gender_integer = as.integer(gender)) %>%
   # tag
   linelist::make_linelist(
     gender = "gender_integer"
-  ) %>% 
+  ) %>%
   # validate
   linelist::validate_linelist()
 ```
