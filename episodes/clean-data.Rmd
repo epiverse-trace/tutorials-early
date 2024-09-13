@@ -31,6 +31,16 @@ This episode requires you to:
 ## Introduction
 In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and valid to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
+Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from the package `{dplyr}`, so let's also call to the tidyverse package:
+
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# Load packages
+library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(rio) # for importing data
+library(here) # for easy file referencing
+library(cleanepi)
+```
+
 ::::::::::::::::::: checklist
 
 ### The double-colon
@@ -47,10 +57,6 @@ This help us remember package functions and avoid namespace conflicts.
 The first step is to import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading the dataset into our environment and view its structure and content. 
 
 ```{r,eval=FALSE,echo=TRUE,message=FALSE}
-# Load packages
-library(rio)
-library(here)
-
 # Read data
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
@@ -75,7 +81,6 @@ utils::head(raw_ebola_data, 5)
 Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-library(cleanepi)
 cleanepi::scan_data(raw_ebola_data)
 ```
 
@@ -439,11 +444,6 @@ Identify the correlation between the error messages and the output of `linelist:
 ### Example
 
 If we change the `age` variable from numeric to character:
-
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
-library(tidyverse) # for {dplyr} functions and the pipe %>%
-```
-
 
 ```{r}
 cleaned_data %>%
