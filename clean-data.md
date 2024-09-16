@@ -63,7 +63,8 @@ The first step is to import the dataset following the guidelines outlined in the
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
-)
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 
@@ -71,16 +72,24 @@ raw_ebola_data <- rio::import(
 
 ``` r
 # Return first five rows
-utils::head(raw_ebola_data, 5)
+raw_ebola_data
 ```
 
 ``` output
-  V1 case id         age gender    status date onset date sample
-1  1   14905          90      1 confirmed 03/15/2015  06/04/2015
-2  2   13043 twenty-five      2            Sep /11/Y  03/01/2014
-3  3   14364          54      f      <NA> 09/02/2014  03/03/2015
-4  4   14675      ninety   <NA>           10/19/2014  31/ 12 /14
-5  5   12648          74      F           08/06/2014  10/10/2016
+# A tibble: 15,000 × 7
+      V1 `case id` age         gender status      `date onset` `date sample`
+   <int>     <int> <chr>       <chr>  <chr>       <chr>        <chr>        
+ 1     1     14905 90          1      "confirmed" 03/15/2015   06/04/2015   
+ 2     2     13043 twenty-five 2      ""          Sep /11/Y    03/01/2014   
+ 3     3     14364 54          f       <NA>       09/02/2014   03/03/2015   
+ 4     4     14675 ninety      <NA>   ""          10/19/2014   31/ 12 /14   
+ 5     5     12648 74          F      ""          08/06/2014   10/10/2016   
+ 6     6     14274 seventy-six female ""          Apr /05/Y    01/23/2016   
+ 7     7     14132 sixteen     male   "confirmed" Dec /29/Y    05/10/2015   
+ 8     8     14715 44          f      "confirmed" Apr /06/Y    04/24/2016   
+ 9     9     13435 26          1      ""          09/07/2014   20/ 09 /14   
+10    10     14816 thirty      f      ""          06/29/2015   06/02/2015   
+# ℹ 14,990 more rows
 ```
 
 ##  A quick inspection
@@ -205,17 +214,24 @@ sim_ebola_data <- cleanepi::standardize_dates(
   )
 )
 
-utils::head(sim_ebola_data)
+sim_ebola_data
 ```
 
 ``` output
-  v_1 case_id         age gender    status date_onset date_sample
-1   1   14905          90      1 confirmed 2015-03-15  2015-04-06
-2   2   13043 twenty-five      2      <NA>       <NA>  2014-01-03
-3   3   14364          54      f      <NA> 2014-02-09  2015-03-03
-4   4   14675      ninety   <NA>      <NA> 2014-10-19  2014-12-31
-5   5   12648          74      F      <NA> 2014-06-08  2016-10-10
-6   6   14274 seventy-six female      <NA>       <NA>  2016-01-23
+# A tibble: 15,000 × 7
+     v_1 case_id age         gender status    date_onset date_sample
+   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>     
+ 1     1 14905   90          1      confirmed 2015-03-15 2015-04-06 
+ 2     2 13043   twenty-five 2      <NA>      NA         2014-01-03 
+ 3     3 14364   54          f      <NA>      2014-02-09 2015-03-03 
+ 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5 12648   74          F      <NA>      2014-06-08 2016-10-10 
+ 6     6 14274   seventy-six female <NA>      NA         2016-01-23 
+ 7     7 14132   sixteen     male   confirmed NA         2015-10-05 
+ 8     8 14715   44          f      confirmed NA         2016-04-24 
+ 9     9 13435   26          1      <NA>      2014-07-09 2014-09-20 
+10    10 14816   thirty      f      <NA>      2015-06-29 2015-02-06 
+# ℹ 14,990 more rows
 ```
 
 This function coverts the values in the target columns, or will automatically figure out the date columns within the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
@@ -229,17 +245,25 @@ The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illu
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
   target_columns = "age"
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 ``` output
-  v_1 case_id age gender    status date_onset date_sample
-1   1   14905  90      1 confirmed 2015-03-15  2015-04-06
-2   2   13043  25      2      <NA>       <NA>  2014-01-03
-3   3   14364  54      f      <NA> 2014-02-09  2015-03-03
-4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5   5   12648  74      F      <NA> 2014-06-08  2016-10-10
-6   6   14274  76 female      <NA>       <NA>  2016-01-23
+# A tibble: 15,000 × 7
+     v_1 case_id   age gender status    date_onset date_sample
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1 14905      90 1      confirmed 2015-03-15 2015-04-06 
+ 2     2 13043      25 2      <NA>      NA         2014-01-03 
+ 3     3 14364      54 f      <NA>      2014-02-09 2015-03-03 
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5 12648      74 F      <NA>      2014-06-08 2016-10-10 
+ 6     6 14274      76 female <NA>      NA         2016-01-23 
+ 7     7 14132      16 male   confirmed NA         2015-10-05 
+ 8     8 14715      44 f      confirmed NA         2016-04-24 
+ 9     9 13435      26 1      <NA>      2014-07-09 2014-09-20 
+10    10 14816      30 f      <NA>      2015-06-29 2015-02-06 
+# ℹ 14,990 more rows
 ```
 
 ## Epidemiology related operations
@@ -301,17 +325,25 @@ sim_ebola_data <- cleanepi::clean_using_dictionary(
   sim_ebola_data,
   dictionary = test_dict
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 ``` output
-  v_1 case_id age gender    status date_onset date_sample
-1   1   14905  90   male confirmed 2015-03-15  2015-04-06
-2   2   13043  25 female      <NA>       <NA>  2014-01-03
-3   3   14364  54 female      <NA> 2014-02-09  2015-03-03
-4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
-6   6   14274  76 female      <NA>       <NA>  2016-01-23
+# A tibble: 15,000 × 7
+     v_1 case_id   age gender status    date_onset date_sample
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2 13043      25 female <NA>      NA         2014-01-03 
+ 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
+ 6     6 14274      76 female <NA>      NA         2016-01-23 
+ 7     7 14132      16 male   confirmed NA         2015-10-05 
+ 8     8 14715      44 female confirmed NA         2016-04-24 
+ 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
+10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# ℹ 14,990 more rows
 ```
 
 This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
@@ -322,7 +354,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 In epidemiological data analysis it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak or the duration between sample collection and analysis.
 The `{cleanepi}` package  offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the `span()` function to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-09-13).
+ until the date this document was generated (2024-09-16).
  
 
 ``` r
@@ -334,24 +366,26 @@ sim_ebola_data <- cleanepi::timespan(
   span_column_name = "time_since_sampling_date",
   span_remainder_unit = "months"
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 ``` output
-  v_1 case_id age gender    status date_onset date_sample
-1   1   14905  90   male confirmed 2015-03-15  2015-04-06
-2   2   13043  25 female      <NA>       <NA>  2014-01-03
-3   3   14364  54 female      <NA> 2014-02-09  2015-03-03
-4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
-6   6   14274  76 female      <NA>       <NA>  2016-01-23
-  time_since_sampling_date remainder_months
-1                        9                5
-2                       10                8
-3                        9                6
-4                        9                8
-5                        7               11
-6                        8                7
+# A tibble: 15,000 × 9
+     v_1 case_id   age gender status    date_onset date_sample
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2 13043      25 female <NA>      NA         2014-01-03 
+ 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
+ 6     6 14274      76 female <NA>      NA         2016-01-23 
+ 7     7 14132      16 male   confirmed NA         2015-10-05 
+ 8     8 14715      44 female confirmed NA         2016-04-24 
+ 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
+10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# ℹ 14,990 more rows
+# ℹ 2 more variables: time_since_sampling_date <dbl>, remainder_months <dbl>
 ```
 
 After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
@@ -416,38 +450,47 @@ You can view the report using `cleanepi::print_report()` function.
 </figure>
 
 ## Validating and tagging case data
-In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
-it's essential to establish an additional foundational layer to ensure the integrity and reliability of subsequent
-  analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
-  your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
-  validate that these tagged columns are not inadvertently deleted during further data processing steps.
 
-  This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
-  below code chunk.
+In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
+it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
+analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
+your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
+validate that these tagged columns are not inadvertently deleted during further data processing steps.
+
+This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
+below code chunk.
 
 
 ``` r
 library(linelist)
-data <- linelist::make_linelist(
+
+linelist_data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
   date_onset = "date_onset",
   gender = "gender"
 )
-utils::head(data, 7)
+
+linelist_data
 ```
 
 ``` output
 
 // linelist object
-  v_1 case_id age gender    status date_onset date_sample
-1   1   14905  90   male confirmed 2015-03-15  2015-04-06
-2   2   13043  25 female      <NA>       <NA>  2014-01-03
-3   3   14364  54 female      <NA> 2014-02-09  2015-03-03
-4   4   14675  90   <NA>      <NA> 2014-10-19  2014-12-31
-5   5   12648  74 female      <NA> 2014-06-08  2016-10-10
-6   6   14274  76 female      <NA>       <NA>  2016-01-23
-7   7   14132  16   male confirmed       <NA>  2015-10-05
+# A tibble: 15,000 × 7
+     v_1 case_id   age gender status    date_onset date_sample
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2 13043      25 female <NA>      NA         2014-01-03 
+ 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
+ 6     6 14274      76 female <NA>      NA         2016-01-23 
+ 7     7 14132      16 male   confirmed NA         2015-10-05 
+ 8     8 14715      44 female confirmed NA         2016-04-24 
+ 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
+10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# ℹ 14,990 more rows
 
 // tags: id:case_id, date_onset:date_onset, gender:gender 
 ```
@@ -458,6 +501,7 @@ and their acceptable data types for each using `linelist::tags_types()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
+
 Let's **tag** more variables. In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
 
 Now:
@@ -470,6 +514,7 @@ Now:
 
 Your can get access to the list of available tag names in {linelist} using:
 
+
 ``` r
 # Get a list of available tags by name and data types
 linelist::tags_types()
@@ -477,7 +522,9 @@ linelist::tags_types()
 # Get a list of names only
 linelist::tags_names()
 ```
+
 :::::::::::::::::::::::
+
 ::::::::::::::::: solution
 
 
@@ -492,7 +539,6 @@ linelist::make_linelist(
 )
 ```
 
-
 How these additional tags are visible in the output? 
 
 <!-- Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html). -->
@@ -500,13 +546,173 @@ How these additional tags are visible in the output?
 ::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::
 
+To ensure that all tagged variables are standardized and have the correct data 
+types, use the `linelist::validate_linelist()`, as 
+shown in the example below:
+
+```r
+linelist::validate_linelist(linelist_data)
+```
+
+<!-- If your dataset requires a new tag, set the argument -->
+<!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
+<!-- datatype. -->
+
+
+
+::::::::::::::::::::::::: challenge
+
+Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
+
+For example, the variable:
+- `age` changes of type from a double (`<dbl>`) variable to character (`<chr>`),
+
+To simulate it:
+
+- **Change** the variable data type,
+- **Tag** the variable into a linelist, and then 
+- **Validate** it.
+
+Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
+
+:::::::::::::::::::::::::: hint
+
+We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
+
+
+``` r
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::... %>%
+  # validate the linelist
+  linelist::...
+```
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: hint
+
+> Please run the code line by line, focusing only on the parts before the pipe (`%>%`). After each step, observe the output before moving to the next line.
+
+If the `age` variable changes from double (`<dbl>`) to character (`<chr>`) we get the following:
+
+
+``` r
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist()
+```
+
+``` error
+Error: Some tags have the wrong class:
+  - age: Must inherit from class 'numeric'/'integer', but has class 'character'
+```
+
+Why are we getting an `Error` message?
+
+<!-- Should we have a `Warning` message instead? Explain why. -->
+
+Explore other situations to understand this behavior. Let's try these additional changes to variables:
+
+- `date_onset` changes from a `<date>` variable to character (`<chr>`), 
+- `gender` changes from a character (`<chr>`) variable to integer (`<int>`).
+
+Then tag them into a linelist for validation. Does the `Error` message propose to us the solution?
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: solution
+
+
+``` r
+# Change 2
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(date_onset = as.character(date_onset)) %>%
+  # tag
+  linelist::make_linelist(
+    date_onset = "date_onset"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+
+
+``` r
+# Change 3
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(gender = as.factor(gender)) %>%
+  dplyr::mutate(gender = as.integer(gender)) %>%
+  # tag
+  linelist::make_linelist(
+    gender = "gender"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+We get `Error` messages because of the mismatch between the predefined tag type (from `linelist::tags_types()`) and the tagged variable class in the linelist.
+
+The `Error` message inform us that in order to **validate** our linelist, we must fix the input variable type to fit the expected tag type. In a data analysis script, we can do this by adding one cleaning step into the pipeline.
+
+::::::::::::::::::::::::: 
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: discussion
+
+Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
+
+Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: instructor
+
+If learners do not have an experience to share, we as instructors can share one.
+
+An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
+
+About losing variables, you can suggest learners to simulate this scenario:
+
+
+``` r
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  select(-age) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  )
+```
+
+``` error
+Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
+ * Variable 'tag': Must be element of set
+ * {'v_1','case_id','gender','status','date_onset','date_sample'}, but
+ * is 'age'.
+```
+
+::::::::::::::::::::::::::
 
 Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
 columns, you will receive an error or warning message, as shown in the example below.
 
 
 ``` r
-new_df <- data %>%
+new_df <- linelist_data %>%
   dplyr::select(case_id, gender)
 ```
 
@@ -525,7 +731,7 @@ Let's test the implications of changing the **safeguarding** configuration from 
 
 
 ``` r
-data %>%
+linelist_data %>%
   dplyr::select(case_id, gender) %>%
   dplyr::count(gender)
 ```
@@ -534,9 +740,6 @@ data %>%
 
 
 ``` r
-# set behavior to default "warning"
-linelist::lost_tags_action()
-
 # set behavior to "error"
 linelist::lost_tags_action(action = "error")
 ```
@@ -547,134 +750,61 @@ Identify:
 - What is the difference in the output between a `Warning` and an `Error`?
 - What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
 
-::::::::::::::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::: solution
 
+Deciding between `Warning` or `Error` message will depend on the level of attention or flexibility you need when losing tags. One will alert you about a change but will continue running the code downstream. The other will stop your analysis pipeline and the rest will not be executed. 
 
-To ensure that all tagged variables are standardized and have the correct data 
-types, use the `linelist::validate_linelist()`, as 
-shown in the example below:
+A data reading, cleaning and validation script may require a more stable or fixed pipeline. An exploratory data analysis may require a more flexible approach. These two processes can be isolated in different scripts or repositories to adjust the safeguarding according to your needs.
 
-```r
-linelist::validate_linelist(data)
-```
-<!-- If your dataset requires a new tag, set the argument -->
-<!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
-<!-- datatype. -->
-
-
-
-::::::::::::::::::::::::: challenge
-
-Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries but one variable change of data types. Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
-
-Try to:
-
-- **Change** a variable data type,
-- **Tag** the linelist, and then 
-- **Validate** it
-
-Identify the correlation between the error messages and the output of `linelist::tags_types()`.
-
-:::::::::::::::::::::::::: hint
-
-### Example
-
-If we change the `age` variable from numeric to character:
+Before you continue, set the configuration back again to the default option of `Warning`:
 
 
 ``` r
-cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(age_character = as.character(age)) %>%
-  # tag
-  linelist::make_linelist(
-    age = "age_character"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
-```
-
-``` error
-Error: Some tags have the wrong class:
-  - age: Must inherit from class 'numeric'/'integer', but has class 'character'
-```
-
-Why are we getting this error message?
-
-::::::::::::::::::::::::::
-
-::::::::::::::::::::::::: hint
-
-### More examples
-
-Other frequent changes can be having:
-
-- a date variable like `date_onset` changed to a character, or 
-- a factor variable like `gender` changed to an integer.
-
-Run these examples and answer: Why are we getting an error message?
-
-
-``` r
-# example 2
-cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(date_onset_character = as.character(date_onset)) %>%
-  # tag
-  linelist::make_linelist(
-    date_onset = "date_onset_character"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
-```
-
-
-
-``` r
-# example 3
-cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(gender = as.factor(gender)) %>%
-  dplyr::mutate(gender_integer = as.integer(gender)) %>%
-  # tag
-  linelist::make_linelist(
-    gender = "gender_integer"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
-```
-
-
-::::::::::::::::::::::::: 
-
-:::::::::::::::::::::::::
-
-
-A  `linelist` object resembles a data frame but offers richer features 
-and functionalities. Packages that are linelist-aware can leverage these 
-features. For example, you can extract a dataframe of only the tagged columns 
-using the `linelist::tags_df()` function, as shown below:
-
-``` r
-head(linelist::tags_df(data), 5)
+# set behavior to the default option: "warning"
+linelist::lost_tags_action()
 ```
 
 ``` output
-     id date_onset gender
-1 14905 2015-03-15   male
-2 13043       <NA> female
-3 14364 2014-02-09 female
-4 14675 2014-10-19   <NA>
-5 12648 2014-06-08 female
+Lost tags will now issue a warning.
+```
+
+::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A  `linelist` object resembles a data frame but offers richer features 
+and functionalities. Packages that are linelist-aware can leverage these 
+features. For example, you can extract a data frame of only the tagged columns 
+using the `linelist::tags_df()` function, as shown below:
+
+
+``` r
+linelist::tags_df(linelist_data)
+```
+
+``` output
+# A tibble: 15,000 × 3
+   id    date_onset gender
+   <chr> <date>     <chr> 
+ 1 14905 2015-03-15 male  
+ 2 13043 NA         female
+ 3 14364 2014-02-09 female
+ 4 14675 2014-10-19 <NA>  
+ 5 12648 2014-06-08 female
+ 6 14274 NA         female
+ 7 14132 NA         male  
+ 8 14715 NA         female
+ 9 13435 2014-07-09 male  
+10 14816 2015-06-29 female
+# ℹ 14,990 more rows
 ```
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
 
-
-
 :::::::::::::::::::::::::::::::::::: callout
 
 ### When I should use `{linelist}`?
+
 Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
 
 `{linelist}` is more appropriate for this type of ongoing or long-lasting analysis.
