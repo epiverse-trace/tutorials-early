@@ -379,59 +379,6 @@ How these additional tags are visible in the output?
 ::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::
 
-
-Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
-columns, you will receive an error or warning message, as shown in the example below.
-
-```{r, warning=TRUE}
-new_df <- linelist_data %>%
-  dplyr::select(case_id, gender)
-```
-
-This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using `linelist::lost_tags_action()`. 
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
-
-- First, run this code to count the frequency per category within a categorical variable:
-
-```{r,eval=FALSE}
-linelist_data %>%
-  dplyr::select(case_id, gender) %>%
-  dplyr::count(gender)
-```
-
-- Set behavior for lost tags in a `linelist` to "error" as follows:
-
-```{r, eval=FALSE}
-# set behavior to "error"
-linelist::lost_tags_action(action = "error")
-```  
-- Now, re-run the above code segment with `dplyr::count()`.
-
-Identify:
-
-- What is the difference in the output between a `Warning` and an `Error`?
-- What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
-
-:::::::::::::::::::::::: solution
-
-Deciding between `Warning` or `Error` message will depend on the level of attention or flexibility you need when losing tags. One will alert you about a change but will continue running the code downstream. The other will stop your analysis pipeline and the rest will not be executed. 
-
-A data reading, cleaning and validation script may require a more stable or fixed pipeline. An exploratory data analysis may require a more flexible approach. These two processes can be isolated in different scripts or repositories to adjust the safeguarding according to your needs.
-
-Before you continue, set the configuration back again to the default option of `Warning`:
-
-```{r}
-# set behavior to the default option: "warning"
-linelist::lost_tags_action()
-```
-
-::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 To ensure that all tagged variables are standardized and have the correct data 
 types, use the `linelist::validate_linelist()`, as 
 shown in the example below:
@@ -561,10 +508,63 @@ An scenario like this usually happens when the institution doing the analysis is
 
 ::::::::::::::::::::::::::
 
+Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
+columns, you will receive an error or warning message, as shown in the example below.
+
+```{r, warning=TRUE}
+new_df <- linelist_data %>%
+  dplyr::select(case_id, gender)
+```
+
+This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using `linelist::lost_tags_action()`. 
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
+
+- First, run this code to count the frequency per category within a categorical variable:
+
+```{r,eval=FALSE}
+linelist_data %>%
+  dplyr::select(case_id, gender) %>%
+  dplyr::count(gender)
+```
+
+- Set behavior for lost tags in a `linelist` to "error" as follows:
+
+```{r, eval=FALSE}
+# set behavior to "error"
+linelist::lost_tags_action(action = "error")
+```  
+- Now, re-run the above code segment with `dplyr::count()`.
+
+Identify:
+
+- What is the difference in the output between a `Warning` and an `Error`?
+- What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
+
+:::::::::::::::::::::::: solution
+
+Deciding between `Warning` or `Error` message will depend on the level of attention or flexibility you need when losing tags. One will alert you about a change but will continue running the code downstream. The other will stop your analysis pipeline and the rest will not be executed. 
+
+A data reading, cleaning and validation script may require a more stable or fixed pipeline. An exploratory data analysis may require a more flexible approach. These two processes can be isolated in different scripts or repositories to adjust the safeguarding according to your needs.
+
+Before you continue, set the configuration back again to the default option of `Warning`:
+
+```{r}
+# set behavior to the default option: "warning"
+linelist::lost_tags_action()
+```
+
+::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 A  `linelist` object resembles a data frame but offers richer features 
 and functionalities. Packages that are linelist-aware can leverage these 
-features. For example, you can extract a dataframe of only the tagged columns 
+features. For example, you can extract a data frame of only the tagged columns 
 using the `linelist::tags_df()` function, as shown below:
+
 ```{r, warning=FALSE}
 linelist::tags_df(linelist_data)
 ```
