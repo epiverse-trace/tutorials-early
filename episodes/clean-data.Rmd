@@ -517,12 +517,12 @@ About losing variables, you can suggest learners to simulate this scenario:
 
 ```{r}
 cleaned_data %>%
-    # simulate a change of data type in one variable
-    select(-age) %>% 
-    # tag one variable
-    linelist::make_linelist(
-        age = "age"
-    )
+  # simulate a change of data type in one variable
+  select(-age) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  )
 ```
 
 ::::::::::::::::::::::::::
