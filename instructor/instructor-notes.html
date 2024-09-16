@@ -348,7 +348,41 @@ any links that you are not going to use.
 
       <section id="aggregate-instructor-notes"><section id="read-cases"><h2 class="section-heading"><a href="read-cases.html">Read case data</a></h2>
 <hr class="half-width"></section><section id="clean-data"><h2 class="section-heading"><a href="clean-data.html">Clean and validate</a></h2>
-<hr class="half-width"></section><section id="describe-cases"><h2 class="section-heading"><a href="describe-cases.html">Aggregate and visualize</a></h2>
+<hr class="half-width">
+<h3 id="clean-data-headingInstructor1">
+<a href="clean-data.html#headingInstructor1">Instructor Note</a><a class="anchor" aria-label="anchor" href="#clean-data-headingInstructor1"></a>
+</h3>
+<p>If learners do not have an experience to share, we as instructors can
+share one.</p>
+<p>An scenario like this usually happens when the institution doing the
+analysis is not the same as the institution collecting the data. The
+later can make decisions about the data structure that can affect
+downstream processes, impacting the time or the accuracy of the analysis
+results.</p>
+<p>About losing variables, you can suggest learners to simulate this
+scenario:</p>
+<div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cleaned_data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># simulate a change of data type in one variable</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="op">-</span><span class="va">age</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="co"># tag one variable</span></span>
+<span>  <span class="fu">linelist</span><span class="fu">::</span><span class="fu">make_linelist</span><span class="op">(</span></span>
+<span>    age <span class="op">=</span> <span class="st">"age"</span></span>
+<span>  <span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="error" tabindex="0"><code>Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
+ * Variable 'tag': Must be element of set
+ * {'v_1','case_id','gender','status','date_onset','date_sample'}, but
+ * is 'age'.</code></pre>
+</div>
+<hr>
+<br></section><section id="describe-cases"><h2 class="section-heading"><a href="describe-cases.html">Aggregate and visualize</a></h2>
 <hr class="half-width"></section></section>
 </div>
     </main>
@@ -396,9 +430,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/instructor-notes.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/instructor-notes.html",
-  "dateCreated": "2024-09-13",
-  "dateModified": "2024-09-13",
-  "datePublished": "2024-09-13"
+  "dateCreated": "2024-09-16",
+  "dateModified": "2024-09-16",
+  "datePublished": "2024-09-16"
 }
 
   </script><script>
