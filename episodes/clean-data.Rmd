@@ -311,14 +311,15 @@ You can view the report using `cleanepi::print_report()` function.
 </figure>
 
 ## Validating and tagging case data
-In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
-it's essential to establish an additional foundational layer to ensure the integrity and reliability of subsequent
-  analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
-  your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
-  validate that these tagged columns are not inadvertently deleted during further data processing steps.
 
-  This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
-  below code chunk.
+In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
+it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
+analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
+your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
+validate that these tagged columns are not inadvertently deleted during further data processing steps.
+
+This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
+below code chunk.
 
 ```{r,warning=FALSE}
 library(linelist)
@@ -339,6 +340,7 @@ and their acceptable data types for each using `linelist::tags_types()`.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
+
 Let's **tag** more variables. In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
 
 Now:
@@ -350,6 +352,7 @@ Now:
 :::::::::::::::::::: hint
 
 Your can get access to the list of available tag names in {linelist} using:
+
 ```{r, eval=FALSE}
 # Get a list of available tags by name and data types
 linelist::tags_types()
@@ -357,7 +360,9 @@ linelist::tags_types()
 # Get a list of names only
 linelist::tags_names()
 ```
+
 :::::::::::::::::::::::
+
 ::::::::::::::::: solution
 
 ```{r,eval=FALSE}
@@ -370,7 +375,6 @@ linelist::make_linelist(
   date_reporting = "date_sample" # different names but related
 )
 ```
-
 
 How these additional tags are visible in the output? 
 
@@ -386,6 +390,7 @@ shown in the example below:
 ```r
 linelist::validate_linelist(linelist_data)
 ```
+
 <!-- If your dataset requires a new tag, set the argument -->
 <!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
 <!-- datatype. -->
@@ -520,7 +525,6 @@ cleaned_data %>%
     )
 ```
 
-
 ::::::::::::::::::::::::::
 
 Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
@@ -586,11 +590,10 @@ linelist::tags_df(linelist_data)
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
 
-
-
 :::::::::::::::::::::::::::::::::::: callout
 
 ### When I should use `{linelist}`?
+
 Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
 
 `{linelist}` is more appropriate for this type of ongoing or long-lasting analysis.
