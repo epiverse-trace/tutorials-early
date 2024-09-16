@@ -61,19 +61,21 @@ The first step is to import the dataset following the guidelines outlined in the
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
-)
+) %>% 
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 ```{r,eval=TRUE,echo=FALSE,message=FALSE}
 # Read data
 raw_ebola_data <- rio::import(
   file.path("data", "simulated_ebola_2.csv")
-)
+) %>% 
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 ```{r, message=FALSE}
 # Return first five rows
-utils::head(raw_ebola_data, 5)
+raw_ebola_data
 ```
 
 ##  A quick inspection
@@ -167,7 +169,7 @@ sim_ebola_data <- cleanepi::standardize_dates(
   )
 )
 
-utils::head(sim_ebola_data)
+sim_ebola_data
 ```
 
 This function coverts the values in the target columns, or will automatically figure out the date columns within the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
@@ -180,7 +182,8 @@ The `convert_to_numeric()` function in `{cleanepi}` does such conversion as illu
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
   target_columns = "age"
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 ## Epidemiology related operations
@@ -229,7 +232,8 @@ sim_ebola_data <- cleanepi::clean_using_dictionary(
   sim_ebola_data,
   dictionary = test_dict
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
@@ -251,7 +255,8 @@ sim_ebola_data <- cleanepi::timespan(
   span_column_name = "time_since_sampling_date",
   span_remainder_unit = "months"
 )
-utils::head(sim_ebola_data)
+
+sim_ebola_data
 ```
 
 After executing the `span()` function, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
@@ -317,13 +322,15 @@ it's essential to establish an additional foundational layer to ensure the integ
 
 ```{r,warning=FALSE}
 library(linelist)
+
 linelist_data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
   date_onset = "date_onset",
   gender = "gender"
 )
-utils::head(linelist_data, 7)
+
+linelist_data
 ```
 
 The `{linelist}` package supplies tags for common epidemiological variables 
@@ -511,7 +518,7 @@ and functionalities. Packages that are linelist-aware can leverage these
 features. For example, you can extract a dataframe of only the tagged columns 
 using the `linelist::tags_df()` function, as shown below:
 ```{r, warning=FALSE}
-head(linelist::tags_df(linelist_data), 5)
+linelist::tags_df(linelist_data)
 ```
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
