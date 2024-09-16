@@ -317,13 +317,13 @@ it's essential to establish an additional foundational layer to ensure the integ
 
 ```{r,warning=FALSE}
 library(linelist)
-data <- linelist::make_linelist(
+linelist_data <- linelist::make_linelist(
   x = cleaned_data,
   id = "case_id",
   date_onset = "date_onset",
   gender = "gender"
 )
-utils::head(data, 7)
+utils::head(linelist_data, 7)
 ```
 
 The `{linelist}` package supplies tags for common epidemiological variables 
@@ -377,7 +377,7 @@ Safeguarding is implicitly built into the linelist objects. If you try to drop a
 columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
-new_df <- data %>%
+new_df <- linelist_data %>%
   dplyr::select(case_id, gender)
 ```
 
@@ -390,7 +390,7 @@ Let's test the implications of changing the **safeguarding** configuration from 
 - First, run this code to count the frequency per category within a categorical variable:
 
 ```{r,eval=FALSE}
-data %>%
+linelist_data %>%
   dplyr::select(case_id, gender) %>%
   dplyr::count(gender)
 ```
@@ -419,7 +419,7 @@ types, use the `linelist::validate_linelist()`, as
 shown in the example below:
 
 ```r
-linelist::validate_linelist(data)
+linelist::validate_linelist(linelist_data)
 ```
 <!-- If your dataset requires a new tag, set the argument -->
 <!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
@@ -511,7 +511,7 @@ and functionalities. Packages that are linelist-aware can leverage these
 features. For example, you can extract a dataframe of only the tagged columns 
 using the `linelist::tags_df()` function, as shown below:
 ```{r, warning=FALSE}
-head(linelist::tags_df(data), 5)
+head(linelist::tags_df(linelist_data), 5)
 ```
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
