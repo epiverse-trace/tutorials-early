@@ -61,7 +61,7 @@ The first step is to import the dataset following the guidelines outlined in the
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
-) %>% 
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 ```
 
@@ -69,7 +69,7 @@ raw_ebola_data <- rio::import(
 # Read data
 raw_ebola_data <- rio::import(
   file.path("data", "simulated_ebola_2.csv")
-) %>% 
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 ```
 
