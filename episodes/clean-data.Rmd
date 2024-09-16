@@ -398,7 +398,7 @@ linelist_data %>%
 - Set behavior for lost tags in a `linelist` to "error" as follows:
 
 ```{r, eval=FALSE}
-# set behavior to default "warning"
+# set behavior to the default option: "warning"
 linelist::lost_tags_action()
 
 # set behavior to "error"
@@ -457,7 +457,7 @@ cleaned_data %>%
   linelist::validate_linelist()
 ```
 
-Why are we getting this error message?
+Why are we getting this `Error` message? Should we have a `Warning` message instead? 
 
 ::::::::::::::::::::::::::
 
