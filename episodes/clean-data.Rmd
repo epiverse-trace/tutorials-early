@@ -411,7 +411,7 @@ Describe how `linelist::validate_linelist()` reacts when input data has a differ
 
 We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
 
-```{r}
+```{r,eval=FALSE}
 cleaned_data %>%
   # simulate a change of data type in one variable
   dplyr::mutate(age = as.character(age)) %>%
@@ -442,9 +442,11 @@ cleaned_data %>%
 ```
 
 Why are we getting an `Error` message?
-Should we have a `Warning` message instead? Explain why.
 
-Now, try these additional changes to variables:
+<!-- Should we have a `Warning` message instead? Explain why. -->
+
+Explore other situations to understand this behavior. Let's try these additional changes to variables:
+
 - `date_onset` changes from a `<date>` variable to character (`<chr>`), 
 - `gender` changes from a character (`<chr>`) variable to integer (`<int>`).
 
@@ -494,11 +496,9 @@ The `Error` message inform us that in order to **validate** our linelist, we mus
 
 ::::::::::::::::::::::::: discussion
 
-Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? 
+Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
 
-What actions did you take to overcome this inconvenience?
-
-Imagine you automated your analysis to read your date directly from source, but they remove a variable you where using. What step would be sensible to this action? 
+Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
 
 :::::::::::::::::::::::::
 
