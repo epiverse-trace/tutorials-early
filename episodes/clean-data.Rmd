@@ -498,6 +498,8 @@ Have you ever experienced an unexpected change of variable type when running a l
 
 What actions did you take to overcome this inconvenience?
 
+Imagine you automated your analysis to read your date directly from source, but they remove a variable you where using. What step would be sensible to this action? 
+
 :::::::::::::::::::::::::
 
 :::::::::::::::::::::::::: instructor
@@ -505,6 +507,19 @@ What actions did you take to overcome this inconvenience?
 If learners do not have an experience to share, we as instructors can share one.
 
 An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
+
+About losing variables, you can suggest learners to simulate this scenario:
+
+```{r}
+cleaned_data %>%
+    # simulate a change of data type in one variable
+    select(-age) %>% 
+    # tag one variable
+    linelist::make_linelist(
+        age = "age"
+    )
+```
+
 
 ::::::::::::::::::::::::::
 
