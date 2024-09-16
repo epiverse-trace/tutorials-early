@@ -436,57 +436,75 @@ linelist::validate_linelist(linelist_data)
 
 ::::::::::::::::::::::::: challenge
 
-Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries but one variable change of data types. Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
+Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
 
-Try to:
+For example, the variable:
+- `age` changes of type from a double (`<dbl>`) variable to character (`<chr>`),
 
-- **Change** a variable data type,
-- **Tag** the linelist, and then 
-- **Validate** it
+To simulate it:
 
-Identify the correlation between the error messages and the output of `linelist::tags_types()`.
+- **Change** the variable data type,
+- **Tag** the variable into a linelist, and then 
+- **Validate** it.
+
+Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
 
 :::::::::::::::::::::::::: hint
 
-### Example
-
-If we change the `age` variable from numeric to character:
+We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
 
 ```{r}
 cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(age_character = as.character(age)) %>%
-  # tag
-  linelist::make_linelist(
-    age = "age_character"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::... %>%
+  # validate the linelist
+  linelist::...
 ```
-
-Why are we getting this `Error` message? Should we have a `Warning` message instead? 
 
 ::::::::::::::::::::::::::
 
-::::::::::::::::::::::::: hint
+:::::::::::::::::::::::::: hint
 
-### More examples
+> Please run the code line by line, focusing only on the parts before the pipe (`%>%`). After each step, observe the output before moving to the next line.
 
-Other frequent changes can be having:
+If the `age` variable changes from double (`<dbl>`) to character (`<chr>`) we get the following:
 
-- a date variable like `date_onset` changed to a character, or 
-- a factor variable like `gender` changed to an integer.
+```{r}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist()
+```
 
-Run these examples and answer: Why are we getting an error message?
+Why are we getting an `Error` message?
+Should we have a `Warning` message instead? Explain why.
+
+Now, try these additional changes to variables:
+- `date_onset` changes from a `<date>` variable to character (`<chr>`), 
+- `gender` changes from a character (`<chr>`) variable to integer (`<int>`).
+
+Then tag them into a linelist for validation. Does the `Error` message propose to us the solution?
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: solution
 
 ```{r,eval=FALSE}
-# example 2
+# Change 2
+# Run this code line by line to identify changes
 cleaned_data %>%
   # simulate a change of data type
-  dplyr::mutate(date_onset_character = as.character(date_onset)) %>%
+  dplyr::mutate(date_onset = as.character(date_onset)) %>%
   # tag
   linelist::make_linelist(
-    date_onset = "date_onset_character"
+    date_onset = "date_onset"
   ) %>%
   # validate
   linelist::validate_linelist()
@@ -494,19 +512,23 @@ cleaned_data %>%
 
 
 ```{r,eval=FALSE}
-# example 3
+# Change 3
+# Run this code line by line to identify changes
 cleaned_data %>%
   # simulate a change of data type
   dplyr::mutate(gender = as.factor(gender)) %>%
-  dplyr::mutate(gender_integer = as.integer(gender)) %>%
+  dplyr::mutate(gender = as.integer(gender)) %>%
   # tag
   linelist::make_linelist(
-    gender = "gender_integer"
+    gender = "gender"
   ) %>%
   # validate
   linelist::validate_linelist()
 ```
 
+We get `Error` messages because of the mismatch between the predefined tag type (from `linelist::tags_types()`) and the tagged variable class in the linelist.
+
+The `Error` message inform us that in order to **validate** our linelist, we must fix the input variable type to fit the expected tag type. In a data analysis script, we can do this by adding one cleaning step into the pipeline.
 
 ::::::::::::::::::::::::: 
 
