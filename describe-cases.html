@@ -311,7 +311,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2024-09-13 |
+        <p>Last updated on 2024-09-17 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -359,6 +359,25 @@ observation in EDA of epidemic analysis is capturing the relationship
 between time and the number of reported cases, spanning various
 categories (confirmed, hospitalized, deaths, and recoveries), locations,
 and other demographic factors such as gender, age, etc.</p>
+<p>Let’s start by loading the package <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> to
+aggregate linelist data by groups and visualize epicurves. We’ll use
+<code>{simulist}</code> to simulate outbreak data,
+<code>{epiparameter}</code> to access delays for this simulation, and
+<code>{tracetheme}</code> for complementary figure formatting. We’ll use
+the pipe <code>%&gt;%</code> to connect some of their functions,
+including others from the packages <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> and
+<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>, so let’s also call to the tidyverse package:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load packages</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">incidence2</span><span class="op">)</span> <span class="co"># to aggregate and visualise</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span> <span class="co"># to simulate linelist data</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">epiparameter</span><span class="op">)</span> <span class="co"># to access delays</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">tracetheme</span><span class="op">)</span> <span class="co"># for figure formatting</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span> <span class="co"># for {dplyr} and {ggplot2} functions and the pipe %&gt;%</span></span></code></pre>
+</div>
 <div id="the-double-colon" class="callout checklist">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
@@ -388,15 +407,11 @@ contacts), and the delay distributions of onset to hospitalization and
 onset to death. These latter distributions can be sourced from
 literature and are conveniently available in the
 <code>{epiparameter}</code> package, see the below code chunk.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load simulist and epiparameter packages</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">epiparameter</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Define contact distribution</span></span>
+<code class="sourceCode R"><span><span class="co"># Define contact distribution</span></span>
 <span><span class="va">contact_dist</span> <span class="op">&lt;-</span> <span class="fu">epiparameter</span><span class="fu">::</span><span class="fu">epidist</span><span class="op">(</span></span>
 <span>  disease <span class="op">=</span> <span class="st">"Ebola"</span>,</span>
 <span>  epi_dist <span class="op">=</span> <span class="st">"contact distribution"</span>,</span>
@@ -440,7 +455,7 @@ literature and are conveniently available in the
 are 1000 and 10,000, respectively. Combining these assumptions with the
 mentioned distributions, the code chunk below generates a simulated line
 list:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -462,28 +477,31 @@ list:</p>
 <span>  population_age <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">90</span><span class="op">)</span>,</span>
 <span>  case_type_probs <span class="op">=</span> <span class="fu">c</span><span class="op">(</span>suspected <span class="op">=</span> <span class="fl">0.2</span>, probable <span class="op">=</span> <span class="fl">0.1</span>, confirmed <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span>,</span>
 <span>  config <span class="op">=</span> <span class="fu">simulist</span><span class="fu">::</span><span class="fu">create_config</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="co"># for a simple data frame output</span></span>
 <span></span>
 <span><span class="co"># View first few rows of the generated data</span></span>
-<span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">linelist</span><span class="op">)</span></span></code></pre>
+<span><span class="va">linelist</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>  id         case_name case_type sex age date_onset date_admission   outcome
-1  1  Yassir Hutchison confirmed   m   3 2023-01-01           &lt;NA&gt; recovered
-2  6 Lubaaba el-Hameed confirmed   f  13 2023-01-01           &lt;NA&gt; recovered
-3  7    Brandon Rivera confirmed   m  74 2023-01-01     2023-01-08 recovered
-4  9      Sierra Quint confirmed   f  65 2023-01-01     2023-01-10      died
-5 10          Levi Lee confirmed   m   8 2023-01-02           &lt;NA&gt; recovered
-6 11       Nelson Tran suspected   m  27 2023-01-01           &lt;NA&gt; recovered
-  date_outcome date_first_contact date_last_contact ct_value
-1         &lt;NA&gt;               &lt;NA&gt;              &lt;NA&gt;       26
-2         &lt;NA&gt;         2022-12-30        2023-01-02       26
-3         &lt;NA&gt;         2022-12-31        2023-01-04       26
-4   2023-01-01         2023-01-03        2023-01-04       26
-5         &lt;NA&gt;         2022-12-31        2023-01-02       26
-6         &lt;NA&gt;         2023-01-01        2023-01-05       NA</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 22,563 × 12
+      id case_name       case_type sex     age date_onset date_admission outcome
+   &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;
+ 1     1 Yassir Hutchis… confirmed m         3 2023-01-01 NA             recove…
+ 2     6 Lubaaba el-Ham… confirmed f        13 2023-01-01 NA             recove…
+ 3     7 Brandon Rivera  confirmed m        74 2023-01-01 2023-01-08     recove…
+ 4     9 Sierra Quint    confirmed f        65 2023-01-01 2023-01-10     died
+ 5    10 Levi Lee        confirmed m         8 2023-01-02 NA             recove…
+ 6    11 Nelson Tran     suspected m        27 2023-01-01 NA             recove…
+ 7    12 Aries Hines     suspected m        11 2023-01-02 NA             recove…
+ 8    13 Orville Miller  probable  m        49 2023-01-01 NA             recove…
+ 9    15 M'Leesa Pico    confirmed f        84 2023-01-01 NA             recove…
+10    16 Jeremy Enriquez confirmed m        55 2023-01-01 NA             recove…
+# ℹ 22,553 more rows
+# ℹ 4 more variables: date_outcome &lt;date&gt;, date_first_contact &lt;date&gt;,
+#   date_last_contact &lt;date&gt;, ct_value &lt;dbl&gt;</code></pre>
 </div>
 </section><section><h2 class="section-heading" id="aggregating">Aggregating<a class="anchor" aria-label="anchor" href="#aggregating"></a></h2>
 <hr class="half-width"><p>Downstream analysis involves working with aggregated data rather than
@@ -494,14 +512,11 @@ grouping case data, usually centered around dated events and/or other
 factors. The code chunk provided below demonstrates the creation of an
 <code>incidence2</code> object from the simulated Ebola
 <code>linelist</code> data based on the date of onset.</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># load incidence2 package</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">incidence2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># create incidence object by aggregating case data  based on the date of onset</span></span>
+<code class="sourceCode R"><span><span class="co"># create incidence object by aggregating case data  based on the date of onset</span></span>
 <span><span class="va">dialy_incidence_data</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">incidence</span><span class="op">(</span></span>
 <span>  <span class="va">linelist</span>,</span>
 <span>  date_index <span class="op">=</span> <span class="st">"date_onset"</span>,</span>
@@ -509,26 +524,33 @@ factors. The code chunk provided below demonstrates the creation of an
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View the first incidence data for the first 5 days</span></span>
-<span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">dialy_incidence_data</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre>
+<span><span class="va">dialy_incidence_data</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># incidence:  5 x 3
+<pre class="output" tabindex="0"><code># incidence:  12 x 3
 # count vars: date_onset
-  date_index count_variable count
-  &lt;period&gt;   &lt;chr&gt;          &lt;int&gt;
-1 2023-01-01 date_onset       475
-2 2023-01-02 date_onset      4904
-3 2023-01-03 date_onset      5478
-4 2023-01-04 date_onset      5319
-5 2023-01-05 date_onset      3520</code></pre>
+   date_index count_variable count
+   &lt;period&gt;   &lt;chr&gt;          &lt;int&gt;
+ 1 2023-01-01 date_onset       475
+ 2 2023-01-02 date_onset      4904
+ 3 2023-01-03 date_onset      5478
+ 4 2023-01-04 date_onset      5319
+ 5 2023-01-05 date_onset      3520
+ 6 2023-01-06 date_onset      1721
+ 7 2023-01-07 date_onset       705
+ 8 2023-01-08 date_onset       330
+ 9 2023-01-09 date_onset        86
+10 2023-01-10 date_onset        16
+11 2023-01-11 date_onset         6
+12 2023-01-12 date_onset         3</code></pre>
 </div>
 <p>Furthermore, with the <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> package, you can
 specify the desired interval and categorize cases by one or more
 factors. Below is a code snippet demonstrating weekly cases grouped by
 the date of onset and gender.</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -541,21 +563,29 @@ the date of onset and gender.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># View incidence data for the first 5 weeks</span></span>
-<span><span class="fu">utils</span><span class="fu">::</span><span class="fu">head</span><span class="op">(</span><span class="va">weekly_incidence_data</span>, <span class="fl">5</span><span class="op">)</span></span></code></pre>
+<span><span class="va">weekly_incidence_data</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># incidence:  5 x 5
+<pre class="output" tabindex="0"><code># incidence:  13 x 5
 # count vars: date_onset
 # groups:     sex, case_type
-  date_index               sex   case_type count_variable count
-  &lt;period&gt;                 &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
-1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
-2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
-3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
-4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
-5 2022-12-29 to 2023-01-04 m     probable  date_onset       800</code></pre>
+   date_index               sex   case_type count_variable count
+   &lt;period&gt;                 &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
+ 1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
+ 2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
+ 3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
+ 4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
+ 5 2022-12-29 to 2023-01-04 m     probable  date_onset       800
+ 6 2022-12-29 to 2023-01-04 m     suspected date_onset      1658
+ 7 2023-01-05 to 2023-01-11 f     confirmed date_onset      2242
+ 8 2023-01-05 to 2023-01-11 f     probable  date_onset       329
+ 9 2023-01-05 to 2023-01-11 f     suspected date_onset       624
+10 2023-01-05 to 2023-01-11 m     confirmed date_onset      2235
+11 2023-01-05 to 2023-01-11 m     probable  date_onset       339
+12 2023-01-05 to 2023-01-11 m     suspected date_onset       615
+13 2023-01-12 to 2023-01-18 f     confirmed date_onset         3</code></pre>
 </div>
 <div id="notes" class="callout">
 <div class="callout-square">
@@ -570,7 +600,7 @@ groups may have different date ranges in the resulting
 provides a function called <code>complete_dates()</code> to ensure that
 an incidence object has the same range of dates for each group. By
 default, missing counts will be filled with 0.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -620,15 +650,11 @@ graph is referred to as an epidemic curve, or epi-curve for short. The
 following code snippets generate epi-curves for the
 <code>dialy_incidence_data</code> and <code>weekly_incidence_data</code>
 incidence objects mentioned above.”</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load ggplot2 and tracetheme packages</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">ggplot2</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">tracetheme</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Plot daily incidence data</span></span>
+<code class="sourceCode R"><span><span class="co"># Plot daily incidence data</span></span>
 <span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">dialy_incidence_data</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Time (in days)"</span>,</span>
@@ -636,7 +662,7 @@ incidence objects mentioned above.”</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">tracetheme</span><span class="fu">::</span><span class="fu">theme_trace</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb11">
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -649,15 +675,16 @@ incidence objects mentioned above.”</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">tracetheme</span><span class="fu">::</span><span class="fu">theme_trace</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="curve-of-cumulative-cases">Curve of cumulative cases<a class="anchor" aria-label="anchor" href="#curve-of-cumulative-cases"></a></h2>
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="curve-of-cumulative-cases">Curve of cumulative cases<a class="anchor" aria-label="anchor" href="#curve-of-cumulative-cases"></a></h2>
 <hr class="half-width"><p>The cumulative number of cases can be calculated using the
 <code>cumulate()</code> function from an <code>incidence2</code> object
 and visualized, as in the example below.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cum_df</span> <span class="op">&lt;-</span> <span class="fu">incidence2</span><span class="fu">::</span><span class="fu">cumulate</span><span class="op">(</span><span class="va">dialy_incidence_data</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">base</span><span class="fu">::</span><span class="fu">plot</span><span class="op">(</span><span class="va">cum_df</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu">labs</span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Time (in days)"</span>,</span>
@@ -665,7 +692,7 @@ and visualized, as in the example below.</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">tracetheme</span><span class="fu">::</span><span class="fu">theme_trace</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that this function preserves grouping, i.e., if the
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Note that this function preserves grouping, i.e., if the
 <code>incidence2</code> object contains groups, it will accumulate the
 cases accordingly. Give it a try with the
 <code>weekly_incidence_data</code> object!</p>
@@ -674,7 +701,7 @@ cases accordingly. Give it a try with the
 recorded cases– using the <code>estimate_peak()</code> function from the
 {incidence2} package. This function employs a bootstrapping method to
 determine the peak time.</p>
-<div class="codewrapper sourceCode" id="cb13">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -685,7 +712,8 @@ determine the peak time.</p>
 <span>  first_only <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  progress <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu">print</span><span class="op">(</span><span class="va">peak</span><span class="op">)</span></span></code></pre>
+<span></span>
+<span><span class="va">peak</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -709,7 +737,7 @@ focus on three key elements for producing epicurves: histogram plots,
 scaling date axes and their labels, and general plot theme annotation.
 The example below demonstrates how to configure these three elements for
 a simple <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> object.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -752,11 +780,11 @@ a simple <a href="https://www.reconverse.org/incidence2/" class="external-link">
 <span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_date_short</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Use the <code>group</code> option in the mapping function to
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Use the <code>group</code> option in the mapping function to
 visualize an epicurve with different groups. If there is more than one
 grouping factor, use the <code>facet_wrap()</code> option, as
 demonstrated in the example below:</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -790,7 +818,7 @@ demonstrated in the example below:</p>
 <span>    label <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_date_short</span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-1-can-you-do-it" class="callout discussion">
+<figure><img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><div id="challenge-1-can-you-do-it" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -881,8 +909,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/describe-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/describe-cases.html",
-  "dateCreated": "2024-09-16",
-  "dateModified": "2024-09-13",
+  "dateCreated": "2024-09-17",
+  "dateModified": "2024-09-17",
   "datePublished": "2024-09-17"
 }
 
