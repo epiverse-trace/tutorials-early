@@ -127,7 +127,7 @@ linelist <- simulist::sim_linelist(
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
   config = simulist::create_config()
-) %>% 
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 
 # View first few rows of the generated data

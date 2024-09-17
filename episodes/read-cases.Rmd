@@ -88,7 +88,7 @@ ebola_confirmed
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases.csv")
-  ) %>%
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 ```
 
@@ -163,7 +163,7 @@ result <- DBI::dbReadTable(
 DBI::dbDisconnect(conn = db_con)
 
 # View the result
-result %>% 
+result %>%
   dplyr::as_tibble() # for a simple data frame output
 ```
 
