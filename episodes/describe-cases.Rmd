@@ -29,6 +29,16 @@ packages. A key observation in EDA of epidemic analysis is capturing the relatio
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
 
+Let's start by loading the package `{incidence2}` to aggregate linelist data by groups and visualize epicurves. We'll use `{simulist}` to simulate outbreak data, `{epiparameter}` to access delays for this simulation, and `{tracetheme}` for complementary figure formatting. We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and `{ggplot2}`, so let's also call to the tidyverse package:
+
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# Load packages
+library(incidence2) # to aggregate and visualise
+library(simulist) # to simulate linelist data
+library(epiparameter) # to access delays
+library(tracetheme) # for figure formatting
+library(tidyverse) # for {dplyr} and {ggplot2} functions and the pipe %>%
+```
 
 ::::::::::::::::::: checklist
 
@@ -54,10 +64,6 @@ These latter distributions can be sourced from literature and are conveniently a
 package, see the below code chunk.
 
 ```{r, warning=FALSE, message=FALSE}
-# Load simulist and epiparameter packages
-library(simulist)
-library(epiparameter)
-
 # Define contact distribution
 contact_dist <- epiparameter::epidist(
   disease = "Ebola",
@@ -97,9 +103,11 @@ infect_period <- epiparameter::epidist(
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 ```
+
 Additionally, we assume that the outbreak started at the beginning of 2023, is highly contagious with a probability of 
 infection of $80\%$, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
 the mentioned distributions, the code chunk below generates a simulated line list:
+
 ```{r, warning=FALSE, message=FALSE}
 # Set seed to 1 to  have the same results
 base::set.seed(1)
@@ -192,10 +200,6 @@ The resulting graph is referred to as an epidemic curve, or epi-curve for short.
 snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
 
 ```{r, message=FALSE, warning=FALSE}
-# Load ggplot2 and tracetheme packages
-library(ggplot2)
-library(tracetheme)
-
 # Plot daily incidence data
 base::plot(dialy_incidence_data) +
   ggplot2::labs(
