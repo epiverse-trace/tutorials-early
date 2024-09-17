@@ -119,10 +119,11 @@ linelist <- simulist::sim_linelist(
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
   config = simulist::create_config()
-)
+) %>% 
+  dplyr::as_tibble() # for a simple data frame output
 
 # View first few rows of the generated data
-utils::head(linelist)
+linelist
 ```
 ## Aggregating
 
@@ -133,9 +134,6 @@ and/or other factors. The code chunk provided below demonstrates the creation of
 simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
-# load incidence2 package
-library(incidence2)
-
 # create incidence object by aggregating case data  based on the date of onset
 dialy_incidence_data <- incidence2::incidence(
   linelist,
@@ -144,7 +142,7 @@ dialy_incidence_data <- incidence2::incidence(
 )
 
 # View the first incidence data for the first 5 days
-utils::head(dialy_incidence_data, 5)
+dialy_incidence_data
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
@@ -159,7 +157,7 @@ weekly_incidence_data <- incidence2::incidence(
 )
 
 # View incidence data for the first 5 weeks
-utils::head(weekly_incidence_data, 5)
+weekly_incidence_data
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -225,6 +223,7 @@ The cumulative number of cases can be calculated using the `cumulate()` function
 
 ```{r, message=FALSE, warning=FALSE}
 cum_df <- incidence2::cumulate(dialy_incidence_data)
+
 base::plot(cum_df) +
   ggplot2::labs(
     x = "Time (in days)",
@@ -248,7 +247,8 @@ peak <- incidence2::estimate_peak(
   first_only = TRUE,
   progress = FALSE
 )
-print(peak)
+
+peak
 ```
 This example demonstrates how to estimate the peak time using the `estimate_peak()` function at $95%$ 
 confidence interval and using 100 bootstrap samples. 

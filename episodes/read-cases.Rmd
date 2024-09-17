@@ -62,22 +62,25 @@ Several packages are available for importing outbreak data stored in individual 
 The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
 
 ```{r,eval=FALSE,echo=TRUE}
-library(rio)
-library(here)
-
 # read data
 # e.g., the path to our file is data/raw-data/ebola_cases.csv then:
-ebola_confirmed <- rio::import(here::here("data", "ebola_cases.csv"))
+ebola_confirmed <- rio::import(
+  here::here("data", "ebola_cases.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
 
 # preview data
-head(ebola_confirmed, 5)
+ebola_confirmed
 ```
 
 
 ```{r,eval=TRUE, echo=FALSE, message=FALSE}
 # internal for DBI::dbWriteTable()
 # read data
-ebola_confirmed <- rio::import(file.path("data", "ebola_cases.csv"))
+ebola_confirmed <- rio::import(
+  file.path("data", "ebola_cases.csv")
+  ) %>%
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
@@ -151,7 +154,8 @@ result <- DBI::dbReadTable(
 DBI::dbDisconnect(conn = db_con)
 
 # View the result
-base::print(utils::head(result))
+result %>% 
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `ebola_confirmed` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`.
