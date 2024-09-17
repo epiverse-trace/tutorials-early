@@ -32,6 +32,16 @@ This episode requires you to be familiar with:
 
 The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/), [DHIS2](https://dhis2.org/), etc. The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
 
+Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `%>%` to connect some of their functions, including others from the package `{dplyr}`, so let's also call to the tidyverse package:
+
+
+``` r
+# Load packages
+library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(rio) # for importing data
+library(here) # for easy file referencing
+```
+
 ::::::::::::::::::: checklist
 
 ### The double-colon
@@ -63,15 +73,15 @@ The below example shows how to import a `csv` file into `R` environment using `{
 
 
 ``` r
-library(rio)
-library(here)
-
 # read data
 # e.g., the path to our file is data/raw-data/ebola_cases.csv then:
-ebola_confirmed <- rio::import(here::here("data", "ebola_cases.csv"))
+ebola_confirmed <- rio::import(
+  here::here("data", "ebola_cases.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
 
 # preview data
-head(ebola_confirmed, 5)
+ebola_confirmed
 ```
 
 
@@ -151,17 +161,25 @@ result <- DBI::dbReadTable(
 DBI::dbDisconnect(conn = db_con)
 
 # View the result
-base::print(utils::head(result))
+result %>%
+  dplyr::as_tibble() # for a simple data frame output
 ```
 
 ``` output
-   date confirm
-1 16208       1
-2 16210       2
-3 16211       4
-4 16212       6
-5 16213       1
-6 16214       2
+# A tibble: 120 × 2
+    date confirm
+   <int>   <int>
+ 1 16208       1
+ 2 16210       2
+ 3 16211       4
+ 4 16212       6
+ 5 16213       1
+ 6 16214       2
+ 7 16216      10
+ 8 16217       8
+ 9 16218       2
+10 16219      12
+# ℹ 110 more rows
 ```
 
 This code first establishes a connection to an SQLite database created in memory using `dbConnect()`. Then, it writes the `ebola_confirmed` into a table named 'cases' within the database using the `dbWriteTable()` function. Subsequently, it reads the data from the 'cases' table using `dbReadTable()`. Finally, it closes the database connection with `dbDisconnect()`.

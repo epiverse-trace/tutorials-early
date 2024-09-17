@@ -29,6 +29,17 @@ packages. A key observation in EDA of epidemic analysis is capturing the relatio
 reported cases, spanning various categories (confirmed, hospitalized, deaths, and recoveries), locations, and other 
 demographic factors such as gender, age, etc.  
 
+Let's start by loading the package `{incidence2}` to aggregate linelist data by groups and visualize epicurves. We'll use `{simulist}` to simulate outbreak data, `{epiparameter}` to access delays for this simulation, and `{tracetheme}` for complementary figure formatting. We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and `{ggplot2}`, so let's also call to the tidyverse package:
+
+
+``` r
+# Load packages
+library(incidence2) # to aggregate and visualise
+library(simulist) # to simulate linelist data
+library(epiparameter) # to access delays
+library(tracetheme) # for figure formatting
+library(tidyverse) # for {dplyr} and {ggplot2} functions and the pipe %>%
+```
 
 ::::::::::::::::::: checklist
 
@@ -55,10 +66,6 @@ package, see the below code chunk.
 
 
 ``` r
-# Load simulist and epiparameter packages
-library(simulist)
-library(epiparameter)
-
 # Define contact distribution
 contact_dist <- epiparameter::epidist(
   disease = "Ebola",
@@ -98,9 +105,11 @@ infect_period <- epiparameter::epidist(
   prob_distribution_params = c(shape = 1, scale = 1)
 )
 ```
+
 Additionally, we assume that the outbreak started at the beginning of 2023, is highly contagious with a probability of 
 infection of $80\%$, and its minimum and maximum sizes are 1000 and 10,000, respectively. Combining these assumptions with 
 the mentioned distributions, the code chunk below generates a simulated line list:
+
 
 ``` r
 # Set seed to 1 to  have the same results
@@ -121,27 +130,30 @@ linelist <- simulist::sim_linelist(
   population_age = c(1, 90),
   case_type_probs = c(suspected = 0.2, probable = 0.1, confirmed = 0.7),
   config = simulist::create_config()
-)
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
 
 # View first few rows of the generated data
-utils::head(linelist)
+linelist
 ```
 
 ``` output
-  id         case_name case_type sex age date_onset date_admission   outcome
-1  1  Yassir Hutchison confirmed   m   3 2023-01-01           <NA> recovered
-2  6 Lubaaba el-Hameed confirmed   f  13 2023-01-01           <NA> recovered
-3  7    Brandon Rivera confirmed   m  74 2023-01-01     2023-01-08 recovered
-4  9      Sierra Quint confirmed   f  65 2023-01-01     2023-01-10      died
-5 10          Levi Lee confirmed   m   8 2023-01-02           <NA> recovered
-6 11       Nelson Tran suspected   m  27 2023-01-01           <NA> recovered
-  date_outcome date_first_contact date_last_contact ct_value
-1         <NA>               <NA>              <NA>       26
-2         <NA>         2022-12-30        2023-01-02       26
-3         <NA>         2022-12-31        2023-01-04       26
-4   2023-01-01         2023-01-03        2023-01-04       26
-5         <NA>         2022-12-31        2023-01-02       26
-6         <NA>         2023-01-01        2023-01-05       NA
+# A tibble: 22,563 × 12
+      id case_name       case_type sex     age date_onset date_admission outcome
+   <int> <chr>           <chr>     <chr> <int> <date>     <date>         <chr>  
+ 1     1 Yassir Hutchis… confirmed m         3 2023-01-01 NA             recove…
+ 2     6 Lubaaba el-Ham… confirmed f        13 2023-01-01 NA             recove…
+ 3     7 Brandon Rivera  confirmed m        74 2023-01-01 2023-01-08     recove…
+ 4     9 Sierra Quint    confirmed f        65 2023-01-01 2023-01-10     died   
+ 5    10 Levi Lee        confirmed m         8 2023-01-02 NA             recove…
+ 6    11 Nelson Tran     suspected m        27 2023-01-01 NA             recove…
+ 7    12 Aries Hines     suspected m        11 2023-01-02 NA             recove…
+ 8    13 Orville Miller  probable  m        49 2023-01-01 NA             recove…
+ 9    15 M'Leesa Pico    confirmed f        84 2023-01-01 NA             recove…
+10    16 Jeremy Enriquez confirmed m        55 2023-01-01 NA             recove…
+# ℹ 22,553 more rows
+# ℹ 4 more variables: date_outcome <date>, date_first_contact <date>,
+#   date_last_contact <date>, ct_value <dbl>
 ```
 ## Aggregating
 
@@ -153,9 +165,6 @@ simulated  Ebola `linelist` data based on the  date of onset.
 
 
 ``` r
-# load incidence2 package
-library(incidence2)
-
 # create incidence object by aggregating case data  based on the date of onset
 dialy_incidence_data <- incidence2::incidence(
   linelist,
@@ -164,19 +173,26 @@ dialy_incidence_data <- incidence2::incidence(
 )
 
 # View the first incidence data for the first 5 days
-utils::head(dialy_incidence_data, 5)
+dialy_incidence_data
 ```
 
 ``` output
-# incidence:  5 x 3
+# incidence:  12 x 3
 # count vars: date_onset
-  date_index count_variable count
-  <period>   <chr>          <int>
-1 2023-01-01 date_onset       475
-2 2023-01-02 date_onset      4904
-3 2023-01-03 date_onset      5478
-4 2023-01-04 date_onset      5319
-5 2023-01-05 date_onset      3520
+   date_index count_variable count
+   <period>   <chr>          <int>
+ 1 2023-01-01 date_onset       475
+ 2 2023-01-02 date_onset      4904
+ 3 2023-01-03 date_onset      5478
+ 4 2023-01-04 date_onset      5319
+ 5 2023-01-05 date_onset      3520
+ 6 2023-01-06 date_onset      1721
+ 7 2023-01-07 date_onset       705
+ 8 2023-01-08 date_onset       330
+ 9 2023-01-09 date_onset        86
+10 2023-01-10 date_onset        16
+11 2023-01-11 date_onset         6
+12 2023-01-12 date_onset         3
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
@@ -192,20 +208,28 @@ weekly_incidence_data <- incidence2::incidence(
 )
 
 # View incidence data for the first 5 weeks
-utils::head(weekly_incidence_data, 5)
+weekly_incidence_data
 ```
 
 ``` output
-# incidence:  5 x 5
+# incidence:  13 x 5
 # count vars: date_onset
 # groups:     sex, case_type
-  date_index               sex   case_type count_variable count
-  <period>                 <chr> <chr>     <chr>          <int>
-1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
-2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
-3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
-4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
-5 2022-12-29 to 2023-01-04 m     probable  date_onset       800
+   date_index               sex   case_type count_variable count
+   <period>                 <chr> <chr>     <chr>          <int>
+ 1 2022-12-29 to 2023-01-04 f     confirmed date_onset      5558
+ 2 2022-12-29 to 2023-01-04 f     probable  date_onset       771
+ 3 2022-12-29 to 2023-01-04 f     suspected date_onset      1625
+ 4 2022-12-29 to 2023-01-04 m     confirmed date_onset      5764
+ 5 2022-12-29 to 2023-01-04 m     probable  date_onset       800
+ 6 2022-12-29 to 2023-01-04 m     suspected date_onset      1658
+ 7 2023-01-05 to 2023-01-11 f     confirmed date_onset      2242
+ 8 2023-01-05 to 2023-01-11 f     probable  date_onset       329
+ 9 2023-01-05 to 2023-01-11 f     suspected date_onset       624
+10 2023-01-05 to 2023-01-11 m     confirmed date_onset      2235
+11 2023-01-05 to 2023-01-11 m     probable  date_onset       339
+12 2023-01-05 to 2023-01-11 m     suspected date_onset       615
+13 2023-01-12 to 2023-01-18 f     confirmed date_onset         3
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -261,10 +285,6 @@ snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidenc
 
 
 ``` r
-# Load ggplot2 and tracetheme packages
-library(ggplot2)
-library(tracetheme)
-
 # Plot daily incidence data
 base::plot(dialy_incidence_data) +
   ggplot2::labs(
@@ -274,7 +294,7 @@ base::plot(dialy_incidence_data) +
   tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
 
 
 
@@ -289,7 +309,7 @@ base::plot(weekly_incidence_data) +
   tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
 
 ## Curve of cumulative cases
 
@@ -298,6 +318,7 @@ The cumulative number of cases can be calculated using the `cumulate()` function
 
 ``` r
 cum_df <- incidence2::cumulate(dialy_incidence_data)
+
 base::plot(cum_df) +
   ggplot2::labs(
     x = "Time (in days)",
@@ -306,7 +327,7 @@ base::plot(cum_df) +
   tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly. Give it a try with the `weekly_incidence_data` object!
 
@@ -324,7 +345,8 @@ peak <- incidence2::estimate_peak(
   first_only = TRUE,
   progress = FALSE
 )
-print(peak)
+
+peak
 ```
 
 ``` output
@@ -386,7 +408,7 @@ ggplot2::ggplot(data = dialy_incidence_data) +
   )
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
 
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
@@ -423,7 +445,7 @@ ggplot2::ggplot(data = dialy_incidence_data_2) +
   )
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-11-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
 
 
 
