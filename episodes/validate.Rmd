@@ -21,7 +21,7 @@ exercises: 2
 
 This episode requires you to:
 
-- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/cleaned_data.csv)
+- Download the [cleaned_data.csv](https://epiverse-trace.github.io/tutorials-early/data/cleaned_data.csv)
 - Save it in the `data/` folder.
 
 :::::::::::::::::::::
@@ -75,13 +75,14 @@ cleaned_data <- rio::import(
 ```
 
 ```{r, echo=FALSE}
-# Read data
+# Import cleaned data without printing code
 cleaned_data <- rio::import(
   file.path("data", "cleaned_data.csv")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
-# Return first five rows
-cleaned_data
+  dplyr::as_tibble() # Convert to tibble for better data display
+
+# Display the first five rows of the dataset
+dplyr::slice_head(cleaned_data, n = 5)
 ```
 
 ## Creating a linelist and tagging elements
@@ -90,15 +91,15 @@ Then we convert the cleaned case data into a `linelist` object using `{linelist}
 below code chunk.
 
 ```{r}
-library(linelist)
-
+# Create a linelist object from cleaned data
 linelist_data <- linelist::make_linelist(
-  x = cleaned_data,
-  id = "case_id",
-  date_onset = "date_onset",
-  gender = "gender"
+  x = cleaned_data,         # Input data
+  id = "case_id",            # Column for unique case identifiers
+  date_onset = "date_onset", # Column for date of symptom onset
+  gender = "gender"          # Column for gender
 )
 
+# Display the resulting linelist object
 linelist_data
 ```
 
