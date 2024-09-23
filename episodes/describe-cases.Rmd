@@ -34,10 +34,10 @@ Let's start by loading the package `{incidence2}` to aggregate linelist data by 
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(incidence2) # to aggregate and visualise
-library(simulist) # to simulate linelist data
-library(tracetheme) # for figure formatting
-library(tidyverse) # for {dplyr} and {ggplot2} functions and the pipe %>%
+library(incidence2) # For aggregating and visualising
+library(simulist) # For simulating linelist data
+library(tracetheme) # For formatting figures
+library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe %>%
 ```
 
 ::::::::::::::::::: checklist
@@ -59,8 +59,11 @@ for a hypothetical disease outbreak utilizing the `{simulist}` package. `{simuli
 Its minimal configuration can generate a  linelist as shown in the below code chunk 
 
 ```{r, warning=FALSE, message=FALSE}
-set.seed(1)
+# Simulate linelist data for an outbreak with size between 1000 and 1500
+set.seed(1) # Set seed for reproducibility
 sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500))
+
+# Display the first few rows of the simulated dataset
 head(sim_data)
 ```
 
@@ -88,29 +91,30 @@ and/or other factors. The code chunk provided below demonstrates the creation of
 simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
-# create incidence object by aggregating case data  based on the date of onset
+# Create an incidence object by aggregating case data based on the date of onset
 dialy_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
-  interval = 1
+  interval = 1 # Aggregate by daily intervals
 )
 
-# View the first incidence data for the first 5 days
+# View the first 5 rows of the incidence data
 head(dialy_incidence, 5)
+
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
 
 ```{r}
-# Grouping data by week
+# Group incidence data by week, accounting for sex and case type
 weekly_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
-  interval = 7,
-  groups = c("sex", "case_type")
+  interval = 7, # Aggregate by weekly intervals
+  groups = c("sex", "case_type") # Group by sex and case type
 )
 
-# View incidence data for the first 5 weeks
+# View the incidence data for the first 5 weeks
 head(weekly_incidence, 5)
 ```
 
@@ -121,20 +125,21 @@ resulting `incidence2` object. The `incidence2` package provides a function call
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
 ```{r, message=FALSE, warning=FALSE}
-# Create incidence object
+# Create an incidence object grouped by sex, aggregating daily
 dialy_incidence_2 <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = 1
+  interval = 1 # Aggregate by daily intervals
 )
 
 # Complete missing dates in the incidence object
-incidence2::complete_dates(
+dialy_incidence_2_complete <- incidence2::complete_dates(
   x = dialy_incidence_2,
-  expand = TRUE,
-  fill = 0L, by = 1L,
-  allow_POSIXct = FALSE
+  expand = TRUE, # Expand to fill in missing dates
+  fill = 0L,     # Fill missing values with 0
+  by = 1L,       # Fill by daily intervals
+  allow_POSIXct = FALSE # Ensure that dates are not in POSIXct format
 )
 ```
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -158,10 +163,10 @@ snippets generate epi-curves for the `dialy_incidence` and `weekly_incidence` in
 # Plot daily incidence data
 base::plot(dialy_incidence) +
   ggplot2::labs(
-    x = "Time (in days)",
-    y = "Dialy cases"
+    x = "Time (in days)", # x-axis label
+    y = "Dialy cases" # y-axis label
   ) +
-  tracetheme::theme_trace()
+  tracetheme::theme_trace() # Apply the custom trace theme
 ``` 
 
 
@@ -170,10 +175,10 @@ base::plot(dialy_incidence) +
 
 base::plot(weekly_incidence) +
   ggplot2::labs(
-    x = "Time (in weeks)",
-    y = "weekly cases"
+    x = "Time (in weeks)", # x-axis label
+    y = "weekly cases" # y-axis label
   ) +
-  tracetheme::theme_trace()
+  tracetheme::theme_trace() # Apply the custom trace theme
 ``` 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -188,14 +193,16 @@ base::plot(weekly_incidence) +
 The cumulative number of cases can be calculated using the `cumulate()` function from an `incidence2` object and visualized, as in the example below.
 
 ```{r, message=FALSE, warning=FALSE}
+# Calculate cumulative incidence
 cum_df <- incidence2::cumulate(dialy_incidence)
 
+# Plot cumulative incidence data using ggplot2
 base::plot(cum_df) +
   ggplot2::labs(
-    x = "Time (in days)",
-    y = "weekly cases"
+    x = "Time (in days)", # x-axis label
+    y = "weekly cases" # y-axis label
   ) +
-  tracetheme::theme_trace()
+  tracetheme::theme_trace() # Apply the custom trace theme
 ```
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
@@ -214,15 +221,17 @@ One can estimate the peak --the time with the highest number of recorded cases--
 This function employs a bootstrapping method to determine the peak time.
 
 ```{r, message=FALSE, warning=FALSE}
+# Estimate the peak of the daily incidence data
 peak <- incidence2::estimate_peak(
   dialy_incidence,
-  n = 100,
-  alpha = 0.05,
-  first_only = TRUE,
-  progress = FALSE
+  n = 100,         # Number of simulations for the peak estimation
+  alpha = 0.05,    # Significance level for the confidence interval
+  first_only = TRUE, # Return only the first peak found
+  progress = FALSE  # Disable progress messages
 )
 
-peak
+# Display the estimated peak
+print(peak)
 ```
 This example demonstrates how to estimate the peak time using the `estimate_peak()` function at $95%$ 
 confidence interval and using 100 bootstrap samples. 
@@ -235,7 +244,7 @@ confidence interval and using 100 bootstrap samples.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Visulaziantion with ggplot2
+## Visualization with ggplot2
 
 
 `{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs. However, using the `{ggplot2}` package, you can generate more sophisticated and better-annotated epicurves.
@@ -243,16 +252,14 @@ confidence interval and using 100 bootstrap samples.
 The example below demonstrates how to configure these three elements for a simple `{incidence2}` object.
 
 ```{r, message=FALSE, warning=FALSE}
+# Define date breaks for the x-axis
 breaks <- seq.Date(
-  from = min(as.Date(dialy_incidence$date_index,
-    na.rm = TRUE
-  )),
-  to = as.Date(max(dialy_incidence$date_index,
-    na.rm = TRUE
-  )),
-  by = 20
+  from = min(as.Date(dialy_incidence$date_index, na.rm = TRUE)),
+  to = max(as.Date(dialy_incidence$date_index, na.rm = TRUE)),
+  by = 20 # every 20 days
 )
 
+# Create the plot
 ggplot2::ggplot(data = dialy_incidence) +
   geom_histogram(
     mapping = aes(
@@ -260,32 +267,37 @@ ggplot2::ggplot(data = dialy_incidence) +
       y = count
     ),
     stat = "identity",
-    color = "blue",
-    width = 1
+    color = "blue", # bar border color
+    fill = "lightblue", # bar fill color
+    width = 1 # bar width
   ) +
-  theme_minimal() + # simple theme
+  theme_minimal() + # apply a minimal theme for clean visuals
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    plot.caption = element_text(face = "italic", hjust = 0),
-    axis.title = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 45)
+    plot.title = element_text(face = "bold",
+                              hjust = 0.5), # center and bold title
+    plot.subtitle = element_text(hjust = 0.5), # center subtitle
+    plot.caption = element_text(face = "italic",
+                                hjust = 0), # italicized caption
+    axis.title = element_text(face = "bold"), # bold axis titles
+    axis.text.x = element_text(angle = 45, vjust = 0.5) # rotated x-axis text
   ) +
   labs(
-    x = "Date", # x-label
-    y = "Number of cases", # y-label,
-    title = "Daily outbreak cases", # title
-    subtitle = "subtitle", # subtitle
-    caption = "informative caption"
+    x = "Date", # x-axis label
+    y = "Number of cases", # y-axis label
+    title = "Daily Outbreak Cases", # plot title
+    subtitle = "Epidemiological Data for the Outbreak", # plot subtitle
+    caption = "Data Source: Simulated Data" # plot caption
   ) +
   scale_x_date(
-    breaks = breaks,
-    label = scales::label_date_short()
+    breaks = breaks, # set custom breaks on the x-axis
+    labels = scales::label_date_short() # shortened date labels
   )
 ```
 
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
 ```{r, message=FALSE, warning=FALSE}
+# Plot daily incidence by sex with facets
 ggplot2::ggplot(data = dialy_incidence_2) +
   geom_histogram(
     mapping = aes(
@@ -296,32 +308,37 @@ ggplot2::ggplot(data = dialy_incidence_2) +
     ),
     stat = "identity"
   ) +
-  theme_minimal() + # simple theme
+  theme_minimal() + # apply minimal theme
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5),
-    plot.caption = element_text(face = "italic", hjust = 0),
-    axis.title = element_text(face = "bold"),
-    axis.text.x = element_text(angle = 45)
+    plot.title = element_text(face = "bold",
+                              hjust = 0.5), # bold and center the title
+    plot.subtitle = element_text(hjust = 0.5), # center the subtitle
+    plot.caption = element_text(face = "italic", hjust = 0), # italic caption
+    axis.title = element_text(face = "bold"), # bold axis labels
+    axis.text.x = element_text(angle = 45,
+                               vjust = 0.5) # rotate x-axis text for readability
   ) +
   labs(
-    x = "Date", # x-label
-    y = "Number of cases", # y-label,
-    title = "Daily outbreak cases", # title
-    subtitle = "subtitle", # subtitle
-    caption = "informative caption"
+    x = "Date", # x-axis label
+    y = "Number of cases", # y-axis label
+    title = "Daily Outbreak Cases by Sex", # plot title
+    subtitle = "Incidence of Cases Grouped by Sex", # plot subtitle
+    caption = "Data Source: Simulated Data" # caption for additional context
   ) +
-  facet_wrap(~sex) +
+  facet_wrap(~sex) + # create separate panels by sex
   scale_x_date(
-    breaks = breaks,
-    label = scales::label_date_short()
-  )
+    breaks = breaks, # set custom date breaks
+    labels = scales::label_date_short() # short date format for x-axis labels
+  ) +
+  scale_fill_manual(values = c("lightblue",
+                               "lightpink")) # custom fill colors for sex
 ```
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Challenge 5: Can you do it?
- - **Task**: Produce an annotated figure for biweekly_incidence using `{ggplot2}`.
+ - **Task**: Produce an annotated figure for biweekly_incidence using `{ggplot2}` package.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -329,5 +346,6 @@ ggplot2::ggplot(data = dialy_incidence_2) +
 
 - Use `{simulist}` package to generate synthetic outbreak data
 - Use `{incidence2}` package to aggregate case data based on a date event, and produce epidemic curves. 
+- Use `{ggplot2}` package to produce better annotated epicurves. 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
