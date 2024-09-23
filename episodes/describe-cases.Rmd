@@ -32,7 +32,7 @@ Let's start by loading the package `{incidence2}` to aggregate linelist data by 
  We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and 
  `{ggplot2}`, so let's also call to the tidyverse package:
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r}
 # Load packages
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
@@ -58,7 +58,7 @@ To illustrate the process of conducting EDA on outbreak data, we will generate a
 for a hypothetical disease outbreak utilizing the `{simulist}` package. `{simulist}` generates simulation data for outbreak according to a given configuration. 
 Its minimal configuration can generate a  linelist as shown in the below code chunk 
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
 set.seed(1) # Set seed for reproducibility
 sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500))
@@ -90,7 +90,7 @@ package offers an essential function, called `incidence`, for grouping case data
 and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the 
 simulated  Ebola `linelist` data based on the  date of onset.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Create an incidence object by aggregating case data based on the date of onset
 dialy_incidence <- incidence2::incidence(
   sim_data,
@@ -124,7 +124,7 @@ When cases are grouped by different factors, it's possible that these groups may
 resulting `incidence2` object. The `incidence2` package provides a function called `complete_dates()` to ensure that an
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Create an incidence object grouped by sex, aggregating daily
 dialy_incidence_2 <- incidence2::incidence(
   sim_data,
@@ -159,7 +159,7 @@ The `incidence2` object can be visualized using the `plot()` function from the b
 The resulting graph is referred to as an epidemic curve, or epi-curve for short. The following code 
 snippets generate epi-curves for the `dialy_incidence` and `weekly_incidence` incidence objects mentioned above.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Plot daily incidence data
 base::plot(dialy_incidence) +
   ggplot2::labs(
@@ -170,7 +170,7 @@ base::plot(dialy_incidence) +
 ``` 
 
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Plot weekly incidence data
 
 base::plot(weekly_incidence) +
@@ -192,7 +192,7 @@ base::plot(weekly_incidence) +
 
 The cumulative number of cases can be calculated using the `cumulate()` function from an `incidence2` object and visualized, as in the example below.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Calculate cumulative incidence
 cum_df <- incidence2::cumulate(dialy_incidence)
 
@@ -220,7 +220,7 @@ Note that this function preserves grouping, i.e., if the `incidence2` object con
 One can estimate the peak --the time with the highest number of recorded cases-- using the `estimate_peak()` function from the {incidence2} package. 
 This function employs a bootstrapping method to determine the peak time.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Estimate the peak of the daily incidence data
 peak <- incidence2::estimate_peak(
   dialy_incidence,
@@ -251,7 +251,7 @@ confidence interval and using 100 bootstrap samples.
 `{ggplot2}` is a comprehensive package with many functionalities. However, we will focus on three key elements for producing epicurves: histogram plots, scaling date axes and their labels, and general plot theme annotation.
 The example below demonstrates how to configure these three elements for a simple `{incidence2}` object.
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Define date breaks for the x-axis
 breaks <- seq.Date(
   from = min(as.Date(dialy_incidence$date_index, na.rm = TRUE)),
@@ -296,7 +296,7 @@ ggplot2::ggplot(data = dialy_incidence) +
 
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 # Plot daily incidence by sex with facets
 ggplot2::ggplot(data = dialy_incidence_2) +
   geom_histogram(
