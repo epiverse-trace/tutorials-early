@@ -371,7 +371,7 @@ Check the "Get started" vignette section about
 :::::::::::::::::::::::::::::::::::::::::::
 
 
-::::::::::::::::::::::::::::::::::::: keypoints 
+::::::::::::::::::::::::::::::::::::: keypoints #
 
 - Use `{linelist}` package to tagg, validate, and prepare case data for downstream analysis.
 
