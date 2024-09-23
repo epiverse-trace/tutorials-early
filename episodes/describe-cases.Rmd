@@ -60,7 +60,7 @@ Its minimal configuration can generate a  linelist as shown in the below code ch
 
 ```{r, warning=FALSE, message=FALSE}
 set.seed(1)
-sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 2000))
+sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500))
 head(sim_data)
 ```
 
@@ -89,21 +89,21 @@ simulated  Ebola `linelist` data based on the  date of onset.
 
 ```{r, message=FALSE, warning=FALSE}
 # create incidence object by aggregating case data  based on the date of onset
-dialy_incidence_data <- incidence2::incidence(
+dialy_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   interval = 1
 )
 
 # View the first incidence data for the first 5 days
-dialy_incidence_data
+head(dialy_incidence, 5)
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
 
 ```{r}
 # Grouping data by week
-weekly_incidence_data <- incidence2::incidence(
+weekly_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   interval = 7,
@@ -111,18 +111,18 @@ weekly_incidence_data <- incidence2::incidence(
 )
 
 # View incidence data for the first 5 weeks
-weekly_incidence_data
+head(weekly_incidence, 5)
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
-## Notes 
+## Dates Completion  
 When cases are grouped by different factors, it's possible that these groups may have different date ranges in the 
 resulting `incidence2` object. The `incidence2` package provides a function called `complete_dates()` to ensure that an
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
 
 ```{r, message=FALSE, warning=FALSE}
 # Create incidence object
-dialy_incidence_data_2 <- incidence2::incidence(
+dialy_incidence_2 <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
@@ -131,7 +131,7 @@ dialy_incidence_data_2 <- incidence2::incidence(
 
 # Complete missing dates in the incidence object
 incidence2::complete_dates(
-  x = dialy_incidence_data_2,
+  x = dialy_incidence_2,
   expand = TRUE,
   fill = 0L, by = 1L,
   allow_POSIXct = FALSE
@@ -139,15 +139,24 @@ incidence2::complete_dates(
 ```
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 1: Can you do it?
+ - **Task**:Aggregate sim_data linelist based on admission date and case outcome in __biweekly__
+  intervals, and save the results in an object called `biweekly_incidence`.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Visualization
 
-"The `incidence2` object can be visualized using the `plot()` function from the base R package. 
+The `incidence2` object can be visualized using the `plot()` function from the base R package. 
 The resulting graph is referred to as an epidemic curve, or epi-curve for short. The following code 
-snippets generate epi-curves for the `dialy_incidence_data` and `weekly_incidence_data` incidence objects mentioned above."
+snippets generate epi-curves for the `dialy_incidence` and `weekly_incidence` incidence objects mentioned above.
 
 ```{r, message=FALSE, warning=FALSE}
 # Plot daily incidence data
-base::plot(dialy_incidence_data) +
+base::plot(dialy_incidence) +
   ggplot2::labs(
     x = "Time (in days)",
     y = "Dialy cases"
@@ -159,7 +168,7 @@ base::plot(dialy_incidence_data) +
 ```{r, message=FALSE, warning=FALSE}
 # Plot weekly incidence data
 
-base::plot(weekly_incidence_data) +
+base::plot(weekly_incidence) +
   ggplot2::labs(
     x = "Time (in weeks)",
     y = "weekly cases"
@@ -167,12 +176,19 @@ base::plot(weekly_incidence_data) +
   tracetheme::theme_trace()
 ``` 
 
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 2: Can you do it?
+ - **Task**: Visualize `biweekly_incidence` object.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Curve of cumulative cases
 
 The cumulative number of cases can be calculated using the `cumulate()` function from an `incidence2` object and visualized, as in the example below.
 
 ```{r, message=FALSE, warning=FALSE}
-cum_df <- incidence2::cumulate(dialy_incidence_data)
+cum_df <- incidence2::cumulate(dialy_incidence)
 
 base::plot(cum_df) +
   ggplot2::labs(
@@ -182,7 +198,15 @@ base::plot(cum_df) +
   tracetheme::theme_trace()
 ```
 
-Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly. Give it a try with the `weekly_incidence_data` object!
+Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 3: Can you do it?
+ - **Task**: Visulaize the cumulatie cases from `biweekly_incidence` object.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 ##  Peak estimation
 
@@ -191,7 +215,7 @@ This function employs a bootstrapping method to determine the peak time.
 
 ```{r, message=FALSE, warning=FALSE}
 peak <- incidence2::estimate_peak(
-  dialy_incidence_data,
+  dialy_incidence,
   n = 100,
   alpha = 0.05,
   first_only = TRUE,
@@ -203,6 +227,14 @@ peak
 This example demonstrates how to estimate the peak time using the `estimate_peak()` function at $95%$ 
 confidence interval and using 100 bootstrap samples. 
 
+::::::::::::::::::::::::::::::::::::: challenge 
+
+## Challenge 4: Can you do it?
+ - **Task**: Estimate the peak time from `biweekly_incidence` object.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Visulaziantion with ggplot2
 
 
@@ -212,16 +244,16 @@ The example below demonstrates how to configure these three elements for a simpl
 
 ```{r, message=FALSE, warning=FALSE}
 breaks <- seq.Date(
-  from = min(as.Date(dialy_incidence_data$date_index,
+  from = min(as.Date(dialy_incidence$date_index,
     na.rm = TRUE
   )),
-  to = as.Date(max(dialy_incidence_data$date_index,
+  to = as.Date(max(dialy_incidence$date_index,
     na.rm = TRUE
   )),
-  by = 1
+  by = 20
 )
 
-ggplot2::ggplot(data = dialy_incidence_data) +
+ggplot2::ggplot(data = dialy_incidence) +
   geom_histogram(
     mapping = aes(
       x = as.Date(date_index),
@@ -254,7 +286,7 @@ ggplot2::ggplot(data = dialy_incidence_data) +
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
 ```{r, message=FALSE, warning=FALSE}
-ggplot2::ggplot(data = dialy_incidence_data_2) +
+ggplot2::ggplot(data = dialy_incidence_2) +
   geom_histogram(
     mapping = aes(
       x = as.Date(date_index),
@@ -288,11 +320,8 @@ ggplot2::ggplot(data = dialy_incidence_data_2) +
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
-## Challenge 1: Can you do it?
-
- - Using suitable distributions for contacts, contact interval, infectious period, onset to hospitalized, and onset to 
- death, generate a simulated linelist data for  Marburg outbreak that has the probability of $0.5$ infection?
- - Aggregate the generated linelist and produce some epidemic curves?
+## Challenge 5: Can you do it?
+ - **Task**: Produce an annotated figure for biweekly_incidence using `{ggplot2}`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
