@@ -21,7 +21,7 @@ exercises: 2
 
 This episode requires you to:
 
-- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/cleaned_data.csv)
 - Save it in the `data/` folder.
 
 :::::::::::::::::::::
@@ -35,18 +35,17 @@ your dataset, a process commonly referred to as "tagging." Additionally, it's cr
 validate that these tagged columns are not inadvertently deleted during further data processing steps.
 
 
- This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.
-   
-Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
-to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
+ This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.  
+Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
+to create a linelist. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r}
 # Load packages
 library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data
 library(here) # for easy file referencing
-library(cleanepi)
+library(linelist)
 ```
 
 ::::::::::::::::::: checklist
@@ -62,12 +61,35 @@ This help us remember package functions and avoid namespace conflicts.
 :::::::::::::::::::
 
 
-## Creating a linelist
 
-This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
+Import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
+ This involves loading the dataset into our environment and view its structure and content. 
+
+```{r, eval=FALSE}
+# Read data
+# e.g.: if path to file is data/simulated_ebola_2.csv then:
+cleaned_data <- rio::import(
+  here::here("data", "cleaned_data.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+```
+
+```{r}
+# Read data
+cleaned_data <- rio::import(
+  file.path("data", "cleaned_data.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+# Return first five rows
+cleaned_data
+```
+
+## Creating a linelist and tagging
+
+Then we convert the cleaned case data into a `linelist` object using `{linelist}` package, see the 
 below code chunk.
 
-```{r,warning=FALSE}
+```{r}
 library(linelist)
 
 linelist_data <- linelist::make_linelist(

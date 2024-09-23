@@ -61,8 +61,8 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 episodes: 
 - read-cases.Rmd
 - clean-data.Rmd
-- describe-cases.Rmd
 - validate.Rmd
+- describe-cases.Rmd
 
 # Information for Learners
 learners: 
