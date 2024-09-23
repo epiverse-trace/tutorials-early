@@ -1,0 +1,356 @@
+---
+title: 'Data validation'
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to convert raw dataset into a `linelist` object?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Demonstrate how to covert case data to `linelist` data 
+- Demonstrate how to validate data
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::: prereq
+
+This episode requires you to:
+
+- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Save it in the `data/` folder.
+
+:::::::::::::::::::::
+
+## Introduction
+
+In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
+it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
+analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
+your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
+validate that these tagged columns are not inadvertently deleted during further data processing steps.
+
+
+ This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.
+   
+Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
+to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
+the package `{dplyr}`, so let's also call to the tidyverse package:
+
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# Load packages
+library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(rio) # for importing data
+library(here) # for easy file referencing
+library(cleanepi)
+```
+
+::::::::::::::::::: checklist
+
+### The double-colon
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This help us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
+## Creating a linelist
+
+This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
+below code chunk.
+
+```{r,warning=FALSE}
+library(linelist)
+
+linelist_data <- linelist::make_linelist(
+  x = cleaned_data,
+  id = "case_id",
+  date_onset = "date_onset",
+  gender = "gender"
+)
+
+linelist_data
+```
+
+The `{linelist}` package supplies tags for common epidemiological variables 
+and a set of appropriate data types for each. You can view the list of available tags by the variable name
+and their acceptable data types for each using `linelist::tags_types()`.
+
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+Let's **tag** more variables. In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
+
+Now:
+
+- **Explore** the available tag names in {linelist}.
+- **Find** what other variables in the cleaned dataset can be associated with any of these available tags.
+- **Tag** those variables as above using `linelist::make_linelist()`.
+
+:::::::::::::::::::: hint
+
+Your can get access to the list of available tag names in {linelist} using:
+
+```{r, eval=FALSE}
+# Get a list of available tags by name and data types
+linelist::tags_types()
+
+# Get a list of names only
+linelist::tags_names()
+```
+
+:::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+```{r,eval=FALSE}
+linelist::make_linelist(
+  x = cleaned_data,
+  id = "case_id",
+  date_onset = "date_onset",
+  gender = "gender",
+  age = "age", # same name in default list and dataset
+  date_reporting = "date_sample" # different names but related
+)
+```
+
+How these additional tags are visible in the output? 
+
+<!-- Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html). -->
+
+::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::
+
+To ensure that all tagged variables are standardized and have the correct data 
+types, use the `linelist::validate_linelist()`, as 
+shown in the example below:
+
+```r
+linelist::validate_linelist(linelist_data)
+```
+
+<!-- If your dataset requires a new tag, set the argument -->
+<!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
+<!-- datatype. -->
+
+
+
+::::::::::::::::::::::::: challenge
+
+Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
+
+For example, the variable:
+- `age` changes of type from a double (`<dbl>`) variable to character (`<chr>`),
+
+To simulate it:
+
+- **Change** the variable data type,
+- **Tag** the variable into a linelist, and then 
+- **Validate** it.
+
+Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
+
+:::::::::::::::::::::::::: hint
+
+We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
+
+```{r,eval=FALSE}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::... %>%
+  # validate the linelist
+  linelist::...
+```
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: hint
+
+> Please run the code line by line, focusing only on the parts before the pipe (`%>%`). After each step, observe the output before moving to the next line.
+
+If the `age` variable changes from double (`<dbl>`) to character (`<chr>`) we get the following:
+
+```{r}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist()
+```
+
+Why are we getting an `Error` message?
+
+<!-- Should we have a `Warning` message instead? Explain why. -->
+
+Explore other situations to understand this behavior. Let's try these additional changes to variables:
+
+- `date_onset` changes from a `<date>` variable to character (`<chr>`), 
+- `gender` changes from a character (`<chr>`) variable to integer (`<int>`).
+
+Then tag them into a linelist for validation. Does the `Error` message propose to us the solution?
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: solution
+
+```{r,eval=FALSE}
+# Change 2
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(date_onset = as.character(date_onset)) %>%
+  # tag
+  linelist::make_linelist(
+    date_onset = "date_onset"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+
+```{r,eval=FALSE}
+# Change 3
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(gender = as.factor(gender)) %>%
+  dplyr::mutate(gender = as.integer(gender)) %>%
+  # tag
+  linelist::make_linelist(
+    gender = "gender"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+We get `Error` messages because of the mismatch between the predefined tag type (from `linelist::tags_types()`) and the tagged variable class in the linelist.
+
+The `Error` message inform us that in order to **validate** our linelist, we must fix the input variable type to fit the expected tag type. In a data analysis script, we can do this by adding one cleaning step into the pipeline.
+
+::::::::::::::::::::::::: 
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: discussion
+
+Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
+
+Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: instructor
+
+If learners do not have an experience to share, we as instructors can share one.
+
+An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
+
+About losing variables, you can suggest learners to simulate this scenario:
+
+```{r}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  select(-age) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  )
+```
+
+::::::::::::::::::::::::::
+
+Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
+columns, you will receive an error or warning message, as shown in the example below.
+
+```{r, warning=TRUE}
+new_df <- linelist_data %>%
+  dplyr::select(case_id, gender)
+```
+
+This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using `linelist::lost_tags_action()`. 
+
+::::::::::::::::::::::::::::::::::::: challenge 
+
+Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
+
+- First, run this code to count the frequency per category within a categorical variable:
+
+```{r,eval=FALSE}
+linelist_data %>%
+  dplyr::select(case_id, gender) %>%
+  dplyr::count(gender)
+```
+
+- Set behavior for lost tags in a `linelist` to "error" as follows:
+
+```{r, eval=FALSE}
+# set behavior to "error"
+linelist::lost_tags_action(action = "error")
+```  
+- Now, re-run the above code segment with `dplyr::count()`.
+
+Identify:
+
+- What is the difference in the output between a `Warning` and an `Error`?
+- What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
+
+:::::::::::::::::::::::: solution
+
+Deciding between `Warning` or `Error` message will depend on the level of attention or flexibility you need when losing tags. One will alert you about a change but will continue running the code downstream. The other will stop your analysis pipeline and the rest will not be executed. 
+
+A data reading, cleaning and validation script may require a more stable or fixed pipeline. An exploratory data analysis may require a more flexible approach. These two processes can be isolated in different scripts or repositories to adjust the safeguarding according to your needs.
+
+Before you continue, set the configuration back again to the default option of `Warning`:
+
+```{r}
+# set behavior to the default option: "warning"
+linelist::lost_tags_action()
+```
+
+::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A  `linelist` object resembles a data frame but offers richer features 
+and functionalities. Packages that are linelist-aware can leverage these 
+features. For example, you can extract a data frame of only the tagged columns 
+using the `linelist::tags_df()` function, as shown below:
+
+```{r, warning=FALSE}
+linelist::tags_df(linelist_data)
+```
+
+This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
+
+:::::::::::::::::::::::::::::::::::: callout
+
+### When I should use `{linelist}`?
+
+Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
+
+`{linelist}` is more appropriate for this type of ongoing or long-lasting analysis.
+Check the "Get started" vignette section about
+[When you should consider using {linelist}?](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Use `{linelist}` package to tagg, validate, and prepare case data for downstream analysis.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
