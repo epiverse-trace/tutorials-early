@@ -9,6 +9,6 @@
 "episodes/describe-cases.Rmd" "b4db44af62d6e22bff8775de52c93642" "site/built/describe-cases.md" "2024-09-24"
 "instructors/instructor-notes.md" "ca3834a1b0f9e70c4702aa7a367a6bb5" "site/built/instructor-notes.md" "2024-09-24"
 "learners/reference.md" "106717912e909a7c8d9e3e8fea48e17d" "site/built/reference.md" "2024-09-24"
-"learners/setup.md" "5c9a063bf22448b199af2c048844a5ff" "site/built/setup.md" "2024-09-26"
+"learners/setup.md" "2e483bc976e2e24b0a7120245256bf2c" "site/built/setup.md" "2024-09-26"
 "profiles/learner-profiles.md" "31b503c4b5bd1f0960ada730eca4a25e" "site/built/learner-profiles.md" "2024-09-24"
 "renv/profiles/lesson-requirements/renv.lock" "dfd79f8b07b44b23c8db7cd2abd69770" "site/built/renv.lock" "2024-09-24"
