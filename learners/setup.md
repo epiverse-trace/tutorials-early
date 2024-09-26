@@ -127,51 +127,23 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
-  cleanepi,
-  rio,
-  here,
-  DBI,
-  RSQLite,
-  dbplyr,
-  linelist,
-  epiverse-trace/simulist,
-  incidence2,
-  epiverse-trace/tracetheme,
-  tidyverse
+  "cleanepi",
+  "rio",
+  "here",
+  "DBI",
+  "RSQLite",
+  "dbplyr",
+  "linelist",
+  "epiverse-trace/simulist",
+  "incidence2",
+  "epiverse-trace/tracetheme",
+  "tidyverse"
 )
 
 pak::pkg_install(new_packages)
 ```
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
-
-<!--
-::::::::::::::::::::::::::::: spoiler
-
-### do you get an error with EpiNow2?
-
-Windows users will need a working installation of `Rtools` in order to build the package from source. `Rtools` is not an R package, but a software you need to download and install. We suggest you to follow:
-
-1. **Verify `Rtools` installation**. You can do so by using Windows search across your system. Optionally, you can use `{devtools}` running: 
-
-```r
-if(!require("devtools")) install.packages("devtools")
-devtools::find_rtools()
-```
-
-If the result is `FALSE`, then you should do step 2.
-
-2. **Install `Rtools`**. Download the `Rtools` installer from <https://cran.r-project.org/bin/windows/Rtools/>. Install with default selections.
-
-3. **Verify `Rtools` installation**. Again, we can use `{devtools}`:
-
-```r
-if(!require("devtools")) install.packages("devtools")
-devtools::find_rtools()
-```
-
-:::::::::::::::::::::::::::::
--->
 
 ::::::::::::::::::::::::::::: spoiler
 
@@ -185,6 +157,18 @@ install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev"))
 
 # for tracetheme
 install.packages("tracetheme", repos = c("https://epiverse-trace.r-universe.dev"))
+```
+
+:::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::: spoiler
+
+### do you get an error with other package?
+
+Try using the classical code function to install one package, for example:
+
+```r
+install.packages("rio")
 ```
 
 :::::::::::::::::::::::::::::
