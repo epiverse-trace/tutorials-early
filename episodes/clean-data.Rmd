@@ -163,7 +163,7 @@ sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
-Note that, our simulated Ebola does not contain duplicated nor constant rows or columns. 
+<!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
 
 ### Replacing missing values
 
