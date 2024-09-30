@@ -365,8 +365,9 @@ The `clean_data()` function applies a series of predefined data cleaning operati
 
 
 Further more, you can combine multiple data cleaning tasks via the pipe operator in "%>%", as shown in the below code snippet. 
-```{r}
-# PERFORM THE OPERATIONS USING THE pipe SYNTAX
+
+```{r,warning = FALSE, message = FALSE}
+# Perfom the cleaning operations using the pipe (%>%) operator
 cleaned_data <- raw_ebola_data %>%
   cleanepi::standardize_column_names() %>%
   cleanepi::replace_missing_values(na_strings = "") %>%
