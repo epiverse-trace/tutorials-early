@@ -650,7 +650,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-clean-data"><p>Content from <a href="clean-data.html">Clean and validate</a></p>
 <hr>
-<p>Last updated on 2024-09-24 |
+<p>Last updated on 2024-09-30 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -765,7 +765,7 @@ structure and content.</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Return first five rows</span></span>
+<code class="sourceCode R"><span><span class="co"># Print data frame</span></span>
 <span><span class="va">raw_ebola_data</span></span></code></pre>
 </div>
 <div class="codewrapper">
@@ -785,6 +785,63 @@ structure and content.</p>
  9     9     13435 26          1      ""          09/07/2014   20/ 09 /14
 10    10     14816 thirty      f      ""          06/29/2015   06/02/2015
 # ℹ 14,990 more rows</code></pre>
+</div>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Discussion</h3>
+<div class="callout-content">
+<p>Let’s <strong>diagnose</strong> the data frame. List all the
+characteristics in the data frame above that are problematic for data
+analysis.</p>
+<p>Are any of those characteristics familiar with any previous data
+analysis you performed?</p>
+</div>
+</div>
+</div>
+<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
+  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+</button>
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div class="accordion-body">
+<p>Mediate a short discussion to relate the diagnosed characteristic
+with required cleaning operations.</p>
+<p>You can use these terms to <strong>diagnose
+characteristics</strong>:</p>
+<ul>
+<li>
+<em>Codification</em>, like sex and age entries using numbers,
+letters, and words. Also dates in different arrangement (“dd/mm/yyyy” or
+“yyyy/mm/dd”) and formats. Less visible, but also the column names.</li>
+<li>
+<em>Missing</em>, how to interpret an entry like “” in status or
+“-99” in another column? do we have a data dictionary from the data
+collection process?</li>
+<li>
+<em>Inconsistencies</em>, like having a date of sample before the
+date of onset.</li>
+<li>
+<em>Non-plausible values</em>, like outlier observations with dates
+outside of an expected timeframe.</li>
+<li>
+<em>Duplicates</em>, are all observations unique?</li>
+</ul>
+<p>You can use these terms to relate to <strong>cleaning
+operations</strong>:</p>
+<ul>
+<li>Standardize column name</li>
+<li>Standardize categorical variables like sex/gender</li>
+<li>Standardize date columns</li>
+<li>Convert from character to numeric values</li>
+<li>Check the sequence of dated events</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="a-quick-inspection">A quick inspection<a class="anchor" aria-label="anchor" href="#a-quick-inspection"></a>
 </h2>
@@ -844,7 +901,7 @@ details.</p>
 <pre class="output" tabindex="0"><code>[1] "v_1"         "case_id"     "age"         "gender"      "status"
 [6] "date_onset"  "date_sample"</code></pre>
 </div>
-<div id="discussion1" class="callout discussion">
+<div id="discussion2" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -859,18 +916,31 @@ details.</p>
 </div>
 <p>If you want to maintain certain column names without subjecting them
 to the standardization process, you can utilize the <code>keep</code>
-parameter of the <code>standardize_column_names()</code> function. This
-parameter accepts a vector of column names that are intended to be kept
-unchanged.</p>
-<div id="discussion2" class="callout discussion">
+argument of the function
+<code>cleanepi::standardize_column_names()</code>. This argument accepts
+a vector of column names that are intended to be kept unchanged.</p>
+<div id="challenge1" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Standardize the column names of the input dataset, but keep the “V1”
-column as it is.</p>
+<p>Standardize the column names of the input dataset, but keep the first
+column names as it is.</p>
+</div>
+</div>
+</div>
+<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
+  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+</button>
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div class="accordion-body">
+<p>You can try
+<code>cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V1")</code></p>
+</div>
 </div>
 </div>
 </div>
@@ -878,9 +948,11 @@ column as it is.</p>
 <div class="section level3">
 <h3 id="removing-irregularities">Removing irregularities<a class="anchor" aria-label="anchor" href="#removing-irregularities"></a>
 </h3>
-<p>Raw data may contain irregularities such as duplicated and empty rows
-and columns, as well as constant columns. <code>remove_duplicates</code>
-and <code>remove_constants</code> functions from <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
+<p>Raw data may contain irregularities such as
+<strong>duplicated</strong> rows, <strong>empty</strong> rows and
+columns, or <strong>constant</strong> columns (where all entries have
+the same value.) Functions from <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> like
+<code>remove_duplicates()</code> and <code>remove_constants()</code>
 remove such irregularities as demonstrated in the below code chunk.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -917,10 +989,10 @@ demonstrating how you can achieve this in <a href="https://epiverse-trace.github
 distinguishable by a specific column formatted in a particular way, such
 as falling within a specified range, containing certain prefixes and/or
 suffixes, containing a specific number of characters. The
-<a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers the
-<code>check_subject_ids</code> function designed precisely for this task
-as shown in the below code chunk. This function validates whether they
-are unique and meet the required criteria.</p>
+<a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers the function
+<code>check_subject_ids()</code> designed precisely for this task as
+shown in the below code chunk. This function validates whether they are
+unique and meet the required criteria.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -945,15 +1017,33 @@ Use the correct_subject_ids() function to adjust them.</code></pre>
 </div>
 <p>Note that our simulated dataset does contain duplicated subject
 IDS.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to correct the subject IDs? </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>Let’s print a preliminary report with
+<code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
+“Unexpected subject ids” tab to identify what IDs require an extra
+treatment.</p>
+<p>After finishing this tutorial, we invite you to explore the package
+reference guide of <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> to find the function that can
+fix this situation.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="standardizing-dates">Standardizing dates<a class="anchor" aria-label="anchor" href="#standardizing-dates"></a>
 </h3>
-<p>Certainly an epidemic dataset contains date columns for different
-events, such as the date of infection, date of symptoms onset, ..etc,
-and these dates can come in different date forms, and it good practice
-to unify them. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package provides
-functionality for converting date columns in epidemic datasets into ISO
+<p>Certainly, an epidemic dataset contains date columns for different
+events, such as the date of infection, date of symptoms onset, etc.
+These dates can come in different date forms, and it is good practice to
+standardize them. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package provides
+functionality for converting date columns of epidemic datasets into ISO
 format, ensuring consistency across the different date columns. Here’s
 how you can use it on our simulated dataset:</p>
 <div class="codewrapper sourceCode" id="cb14">
@@ -999,9 +1089,9 @@ automatically figure out the date columns within the dataset (if
 <p>In the raw dataset, some column can come with mixture of character
 and numerical values, and you want to covert the character values
 explicitly into numeric. For example, in our simulated data set, in the
-age column some entries are written in words. The
-<code>convert_to_numeric()</code> function in <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
-does such conversion as illustrated in the below code chunk.</p>
+age column some entries are written in words. In <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
+the function <code>convert_to_numeric()</code> does such conversion as
+illustrated in the below code chunk.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1030,6 +1120,19 @@ does such conversion as illustrated in the below code chunk.</p>
 10    10 14816      30 f      &lt;NA&gt;      2015-06-29 2015-02-06
 # ℹ 14,990 more rows</code></pre>
 </div>
+<div id="multiple-language-support" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="multiple-language-support" class="callout-inner">
+<h3 class="callout-title">Multiple language support</h3>
+<div class="callout-content">
+<p>Thanks to the <a href="https://github.com/epiverse-trace/numberize" class="external-link">numberize</a> package, we can convert
+numbers written as English, French or Spanish words to positive integer
+values!</p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="epidemiology-related-operations">Epidemiology related operations<a class="anchor" aria-label="anchor" href="#epidemiology-related-operations"></a>
 </h2>
@@ -1048,9 +1151,8 @@ diseases where the timing of events like symptom onset and sample
 collection is essential. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package provides a
 helpful function called <code>check_date_sequence()</code> precisely for
 this purpose.</p>
-<p>Here’s an example code chunk demonstrating the usage of
-<code>check_date_sequence()</code> function in our simulated Ebola
-dataset</p>
+<p>Here’s an example code chunk demonstrating the usage of the function
+<code>check_date_sequence()</code> in our simulated Ebola dataset</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1063,7 +1165,21 @@ dataset</p>
 <p>This functionality is crucial for ensuring data integrity and
 accuracy in epidemiological analyses, as it helps identify any
 inconsistencies or errors in the chronological order of events, allowing
-yor to address them appropriately.</p>
+you to address them appropriately.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What are the incorrect date sequences? </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div class="accordion-body">
+<p>Let’s print another preliminary report with
+<code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
+“Incorrect date sequence” tab to identify what IDs had this issue.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="dictionary-based-substitution">Dictionary-based substitution<a class="anchor" aria-label="anchor" href="#dictionary-based-substitution"></a>
@@ -1086,19 +1202,23 @@ below includes mappings for the “gender” column.</p>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_dict</span> <span class="op">&lt;-</span> <span class="fu">base</span><span class="fu">::</span><span class="fu">readRDS</span><span class="op">(</span></span>
 <span>  <span class="fu">system.file</span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"test_dict.RDS"</span>, package <span class="op">=</span> <span class="st">"cleanepi"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="fu">base</span><span class="fu">::</span><span class="fu">print</span><span class="op">(</span><span class="va">test_dict</span><span class="op">)</span></span></code></pre>
+<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="op">)</span> <span class="co"># for a simple data frame output</span></span>
+<span></span>
+<span><span class="va">test_dict</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>  options values    grp orders
-1       1   male gender      1
-2       2 female gender      2
-3       M   male gender      3
-4       F female gender      4
-5       m   male gender      5
-6       f female gender      6</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 6 × 4
+  options values grp    orders
+  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;int&gt;
+1 1       male   gender      1
+2 2       female gender      2
+3 M       male   gender      3
+4 F       female gender      4
+5 m       male   gender      5
+6 f       female gender      6</code></pre>
 </div>
 <p>Now, we can use this dictionary to standardize values of the the
 “gender” column according to predefined categories. Below is an example
@@ -1135,28 +1255,73 @@ code chunk demonstrating how to utilize this functionality:</p>
 <p>This approach simplifies the data cleaning process, ensuring that
 categorical data in epidemiological datasets is accurately categorized
 and ready for further analysis.</p>
-<blockquote>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to create your own data dictionary? </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div class="accordion-body">
 <p>Note that, when the column in the dataset contains values that are
-not in the dictionary, the clean_using_dictionary() will raise an error.
-Users can use the cleanepi::add_to_dictionary() function to include the
-missing value into the dictionary. See the corresponding section in the
-package <a href="https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html" class="external-link">vignette</a>
-for more details.</p>
-</blockquote>
+not in the dictionary, the function
+<code>cleanepi::clean_using_dictionary()</code> will raise an error.</p>
+<p>You can start a custom dictionary with a data frame inside or outside
+R. You can use the function <code>cleanepi::add_to_dictionary()</code>
+to include new elements in the dictionary. For example:</p>
+<div class="codewrapper sourceCode" id="cb23">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">new_dictionary</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu">tibble</span><span class="op">(</span></span>
+<span>  options <span class="op">=</span> <span class="st">"0"</span>,</span>
+<span>  values <span class="op">=</span> <span class="st">"female"</span>,</span>
+<span>  grp <span class="op">=</span> <span class="st">"sex"</span>,</span>
+<span>  orders <span class="op">=</span> <span class="fl">1L</span></span>
+<span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">add_to_dictionary</span><span class="op">(</span></span>
+<span>    option <span class="op">=</span> <span class="st">"1"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"male"</span>,</span>
+<span>    grp <span class="op">=</span> <span class="st">"sex"</span>,</span>
+<span>    order <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">new_dictionary</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 2 × 4
+  options values grp   orders
+  &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;  &lt;int&gt;
+1 0       female sex        1
+2 1       male   sex        2</code></pre>
+</div>
+<p>You can read more details in the section about “Dictionary-based data
+substituting” in the package <a href="https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting" class="external-link">“Get
+started” vignette</a>.</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="calculating-time-span-between-different-date-events">Calculating time span between different date events<a class="anchor" aria-label="anchor" href="#calculating-time-span-between-different-date-events"></a>
 </h3>
-<p>In epidemiological data analysis it is also useful to track and
+<p>In epidemiological data analysis, it is also useful to track and
 analyze time-dependent events, such as the progression of a disease
-outbreak or the duration between sample collection and analysis. The
-<a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers a convenient function for
+outbreak (i.e., the time difference between today and the first case
+reported) or the duration between sample collection and analysis (i.e.,
+the time difference between today and the sample collection). The most
+common example is to calculate the age of all the subjects given their
+date of birth (i.e., the time difference between today and the date of
+birth).</p>
+<p>The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers a convenient function for
 calculating the time elapsed between two dated events at different time
-scales. For example, the below code snippet utilizes the
-<code>span()</code> function to compute the time elapsed since the date
-of sample for the case identified until the date this document was
-generated (2024-09-24).</p>
-<div class="codewrapper sourceCode" id="cb23">
+scales. For example, the below code snippet utilizes the function
+<code>cleanepi::timespan()</code> to compute the time elapsed since the
+date of sample for the case identified until the date this document was
+generated (2024-09-30).</p>
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1165,37 +1330,37 @@ generated (2024-09-24).</p>
 <span>  target_column <span class="op">=</span> <span class="st">"date_sample"</span>,</span>
 <span>  end_date <span class="op">=</span> <span class="fu">Sys.Date</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  span_unit <span class="op">=</span> <span class="st">"years"</span>,</span>
-<span>  span_column_name <span class="op">=</span> <span class="st">"time_since_sampling_date"</span>,</span>
+<span>  span_column_name <span class="op">=</span> <span class="st">"years_since_collection"</span>,</span>
 <span>  span_remainder_unit <span class="op">=</span> <span class="st">"months"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">sim_ebola_data</span></span></code></pre>
+<span><span class="va">sim_ebola_data</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">case_id</span>, <span class="va">date_sample</span>, <span class="va">years_since_collection</span>, <span class="va">remainder_months</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 9
-     v_1 case_id   age gender status    date_onset date_sample
-   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;
- 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06
- 2     2 13043      25 female &lt;NA&gt;      NA         2014-01-03
- 3     3 14364      54 female &lt;NA&gt;      2014-02-09 2015-03-03
- 4     4 14675      90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
- 5     5 12648      74 female &lt;NA&gt;      2014-06-08 2016-10-10
- 6     6 14274      76 female &lt;NA&gt;      NA         2016-01-23
- 7     7 14132      16 male   confirmed NA         2015-10-05
- 8     8 14715      44 female confirmed NA         2016-04-24
- 9     9 13435      26 male   &lt;NA&gt;      2014-07-09 2014-09-20
-10    10 14816      30 female &lt;NA&gt;      2015-06-29 2015-02-06
-# ℹ 14,990 more rows
-# ℹ 2 more variables: time_since_sampling_date &lt;dbl&gt;, remainder_months &lt;dbl&gt;</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 4
+   case_id date_sample years_since_collection remainder_months
+   &lt;chr&gt;   &lt;date&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
+ 1 14905   2015-04-06                       9                5
+ 2 13043   2014-01-03                      10                8
+ 3 14364   2015-03-03                       9                6
+ 4 14675   2014-12-31                       9                8
+ 5 12648   2016-10-10                       7               11
+ 6 14274   2016-01-23                       8                8
+ 7 14132   2015-10-05                       8               11
+ 8 14715   2016-04-24                       8                5
+ 9 13435   2014-09-20                      10                0
+10 14816   2015-02-06                       9                7
+# ℹ 14,990 more rows</code></pre>
 </div>
-<p>After executing the <code>span()</code> function, two new columns
-named <code>time_since_sampling_date</code> and
+<p>After executing the function <code>cleanepi::timespan()</code>, two
+new columns named <code>years_since_collection</code> and
 <code>remainder_months</code> are added to the
 <strong>sim_ebola_data</strong> dataset, containing the calculated time
-elapsed since the date of sampling for each case, measured in years, and
-the remaining time measured in months.</p>
+elapsed since the date of sample collection for each case, measured in
+years, and the remaining time measured in months.</p>
 </div>
 </section><section><h2 class="section-heading" id="multiple-operations-at-once">Multiple operations at once<a class="anchor" aria-label="anchor" href="#multiple-operations-at-once"></a>
 </h2>
@@ -1211,39 +1376,28 @@ chunk illustrating how to use <code>clean_data()</code> on a raw
 simulated Ebola dataset:</p>
 <p>Further more, you can combine multiple data cleaning tasks via the
 pipe operator in “%&gt;%”, as shown in the below code snippet.</p>
-<div class="codewrapper sourceCode" id="cb25">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># PERFORM THE OPERATIONS USING THE pipe SYNTAX</span></span>
+<code class="sourceCode R"><span><span class="co"># Perfom the cleaning operations using the pipe (%&gt;%) operator</span></span>
 <span><span class="va">cleaned_data</span> <span class="op">&lt;-</span> <span class="va">raw_ebola_data</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">standardize_column_names</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">replace_missing_values</span><span class="op">(</span>na_strings <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_constants</span><span class="op">(</span>cutoff <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_duplicates</span><span class="op">(</span>target_columns <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_constants</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_duplicates</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">standardize_dates</span><span class="op">(</span></span>
-<span>    target_columns <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_sample"</span><span class="op">)</span>,</span>
-<span>    error_tolerance <span class="op">=</span> <span class="fl">0.4</span>,</span>
-<span>    format <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>    timeframe <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>    target_columns <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_sample"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">check_subject_ids</span><span class="op">(</span></span>
 <span>    target_columns <span class="op">=</span> <span class="st">"case_id"</span>,</span>
 <span>    range <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="fl">1</span>, <span class="fl">15000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">convert_to_numeric</span><span class="op">(</span>target_columns <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">check_date_sequence</span><span class="op">(</span></span>
+<span>    target_columns <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_sample"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">clean_using_dictionary</span><span class="op">(</span>dictionary <span class="op">=</span> <span class="va">test_dict</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Found 1957 duplicated rows. Please consult the report for more details.</code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning: Detected incorrect subject ids at lines:
-Use the correct_subject_ids() function to adjust them.</code></pre>
 </div>
 </section><section><h2 class="section-heading" id="printing-the-clean-report">Printing the clean report<a class="anchor" aria-label="anchor" href="#printing-the-clean-report"></a>
 </h2>
@@ -1257,8 +1411,8 @@ the results of that particular operation. This interactive approach
 enables users to efficiently review and analyze the outcomes of
 individual cleansing steps within the broader data cleansing
 process.</p>
-<p>You can view the report using <code>cleanepi::print_report()</code>
-function.</p>
+<p>You can view the report using the function
+<code>cleanepi::print_report(cleaned_data)</code>.</p>
 <p>
 <figure><img src="../fig/report_demo.png" alt="Data cleaning report" width="600" class="figure"><figcaption><p>
 Example of data cleaning report generated by <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
@@ -1319,7 +1473,7 @@ epidemiological variables and a set of appropriate data types for each.
 You can view the list of available tags by the variable name and their
 acceptable data types for each using
 <code>linelist::tags_types()</code>.</p>
-<div id="challenge1" class="callout challenge">
+<div id="challenge2" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1344,12 +1498,12 @@ can be associated with any of these available tags.</li>
 </div>
 </div>
 </div>
-<div id="accordionHint1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
-  <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in {linelist}
 using:</p>
@@ -1372,7 +1526,7 @@ using:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1405,7 +1559,7 @@ as shown in the example below:</p>
 <!-- If your dataset requires a new tag, set the argument -->
 <!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
 <!-- datatype. -->
-<div id="challenge2" class="callout challenge">
+<div id="challenge3" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1415,8 +1569,8 @@ as shown in the example below:</p>
 <p>Let’s <strong>validate</strong> tagged variables. Let’s simulate that
 in an ongoing outbreak; the next day, your data has a new set of entries
 (i.e., rows or observations) but one variable change of data type.</p>
-<p>For example, the variable: - <code>age</code> changes of type from a
-double (<code>&lt;dbl&gt;</code>) variable to character
+<p>For example, let’s make the variable <code>age</code> change of type
+from a double (<code>&lt;dbl&gt;</code>) variable to character
 (<code>&lt;chr&gt;</code>),</p>
 <p>To simulate it:</p>
 <ul>
@@ -1432,12 +1586,12 @@ input data has a different variable data type.</p>
 </div>
 </div>
 </div>
-<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
-  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
+  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -1457,12 +1611,12 @@ before tagging for validation. For example:</p>
 </div>
 </div>
 </div>
-<div id="accordionHint3" class="accordion challenge-accordion accordion-flush">
+<div id="accordionHint4" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
-  <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint4" aria-expanded="false" aria-controls="collapseHint4">
+  <h4 class="accordion-header" id="headingHint4"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint4" class="accordion-collapse collapse" data-bs-parent="#accordionHint4" aria-labelledby="headingHint4">
 <div class="accordion-body">
 <blockquote>
 <p>Please run the code line by line, focusing only on the parts before
@@ -1516,7 +1670,7 @@ variable to character (<code>&lt;chr&gt;</code>),</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb36">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1580,12 +1734,12 @@ response to the absence of a variable?</p>
 </div>
 </div>
 </div>
-<div id="accordionInstructor1" class="accordion instructor-note accordion-flush">
+<div id="accordionInstructor2" class="accordion instructor-note accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
-  <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
+<button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
+  <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
 <div class="accordion-body">
 <p>If learners do not have an experience to share, we as instructors can
 share one.</p>
@@ -1640,7 +1794,7 @@ warning message, as shown in the example below.</p>
 when we lose tags in a <code>linelist</code> object. However, it can be
 changed to an <code>Error</code> message using
 <code>linelist::lost_tags_action()</code>.</p>
-<div id="challenge3" class="callout challenge">
+<div id="challenge4" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -1692,7 +1846,7 @@ analysis pipeline during an outbreak response?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -1753,12 +1907,12 @@ function, as shown below:</p>
 </div>
 <p>This allows, the extraction of use tagged-only columns in downstream
 analysis, which will be useful for the next episode!</p>
-<div id="when-i-should-use-linelist" class="callout">
+<div id="when-should-i-use-linelist" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="when-i-should-use-linelist" class="callout-inner">
-<h3 class="callout-title">When I should use
+<div id="when-should-i-use-linelist" class="callout-inner">
+<h3 class="callout-title">When should I use
 <code>{linelist}</code>?</h3>
 <div class="callout-content">
 <p>Data analysis during an outbreak response or mass-gathering
@@ -1783,7 +1937,7 @@ you should consider using {linelist}?</a> for more information.</p>
 <ul>
 <li>Use <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package to clean and standardize
 epidemic and outbreak data</li>
-<li>Use <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> to tagg, validate, and prepare case data
+<li>Use <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> to tag, validate, and prepare case data
 for downstream analysis.</li>
 </ul>
 </div>
@@ -2400,9 +2554,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
-  "dateCreated": "2024-09-26",
-  "dateModified": "2024-09-26",
-  "datePublished": "2024-09-26"
+  "dateCreated": "2024-09-30",
+  "dateModified": "2024-09-30",
+  "datePublished": "2024-09-30"
 }
 
   </script><script>
