@@ -183,7 +183,6 @@ You can get the number and location of the duplicated rows that where found. Run
 cleanepi::print_report(sim_ebola_data)
 ```
 
-
 :::::::::::::::::::::
 
 ### Replacing missing values
