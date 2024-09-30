@@ -352,7 +352,7 @@ sim_ebola_data <- cleanepi::timespan(
 )
 
 sim_ebola_data %>%
-  dplyr::glimpse()
+  dplyr::select(case_id, date_sample, time_since_sampling_date, remainder_months)
 ```
 
 After executing the function `cleanepi::timespan()`, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
