@@ -194,7 +194,11 @@ sim_ebola_data <- cleanepi::replace_missing_values(
   data = sim_ebola_data,
   na_strings = ""
 )
+
+sim_ebola_data
 ```
+
+<!-- idea: after solving issue with multiple na_string, add a challenge about it + add them to the raw data set! -->
 
 ### Validating subject IDs
 
