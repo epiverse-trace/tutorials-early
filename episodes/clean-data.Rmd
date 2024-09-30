@@ -284,8 +284,10 @@ Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for 
 ```{r}
 test_dict <- base::readRDS(
   system.file("extdata", "test_dict.RDS", package = "cleanepi")
-)
-base::print(test_dict)
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+
+test_dict
 ```
 
 Now, we can use this dictionary to standardize values of the the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to utilize this functionality:
@@ -345,7 +347,8 @@ sim_ebola_data <- cleanepi::timespan(
   span_remainder_unit = "months"
 )
 
-sim_ebola_data
+sim_ebola_data %>% 
+  dplyr::glimpse()
 ```
 
 After executing the function `cleanepi::timespan()`, two new columns named `time_since_sampling_date` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
@@ -363,19 +366,19 @@ Further more, you can combine multiple data cleaning tasks via the pipe operator
 cleaned_data <- raw_ebola_data %>%
   cleanepi::standardize_column_names() %>%
   cleanepi::replace_missing_values(na_strings = "") %>%
-  cleanepi::remove_constants(cutoff = 1.0) %>%
-  cleanepi::remove_duplicates(target_columns = NULL) %>%
+  cleanepi::remove_constants() %>%
+  cleanepi::remove_duplicates() %>%
   cleanepi::standardize_dates(
-    target_columns = c("date_onset", "date_sample"),
-    error_tolerance = 0.4,
-    format = NULL,
-    timeframe = NULL
+    target_columns = c("date_onset", "date_sample")
   ) %>%
   cleanepi::check_subject_ids(
     target_columns = "case_id",
     range = c(1, 15000)
   ) %>%
   cleanepi::convert_to_numeric(target_columns = "age") %>%
+  cleanepi::check_date_sequence(
+    target_columns = c("date_onset", "date_sample")
+  ) %>%
   cleanepi::clean_using_dictionary(dictionary = test_dict)
 ```
 
