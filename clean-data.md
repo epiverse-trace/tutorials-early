@@ -76,20 +76,20 @@ raw_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-      V1 `case id` age         gender status      `date onset` `date sample`
-   <int>     <int> <chr>       <chr>  <chr>       <chr>        <chr>        
- 1     1     14905 90          1      "confirmed" 03/15/2015   06/04/2015   
- 2     2     13043 twenty-five 2      ""          Sep /11/Y    03/01/2014   
- 3     3     14364 54          f       <NA>       09/02/2014   03/03/2015   
- 4     4     14675 ninety      <NA>   ""          10/19/2014   31/ 12 /14   
- 5     5     12648 74          F      ""          08/06/2014   10/10/2016   
- 6     6     14274 seventy-six female ""          Apr /05/Y    01/23/2016   
- 7     7     14132 sixteen     male   "confirmed" Dec /29/Y    05/10/2015   
- 8     8     14715 44          f      "confirmed" Apr /06/Y    04/24/2016   
- 9     9     13435 26          1      ""          09/07/2014   20/ 09 /14   
-10    10     14816 thirty      f      ""          06/29/2015   06/02/2015   
-# ℹ 14,990 more rows
+# A tibble: 15,003 × 9
+      V1 `case id` age     gender status `date onset` `date sample` lab   region
+   <int>     <int> <chr>   <chr>  <chr>  <chr>        <chr>         <lgl> <chr> 
+ 1     1     14905 90      1      "conf… 03/15/2015   06/04/2015    NA    valdr…
+ 2     2     13043 twenty… 2      ""     Sep /11/13   03/01/2014    NA    valdr…
+ 3     3     14364 54      f       <NA>  09/02/2014   03/03/2015    NA    valdr…
+ 4     4     14675 ninety  <NA>   ""     10/19/2014   31/ 12 /14    NA    valdr…
+ 5     5     12648 74      F      ""     08/06/2014   10/10/2016    NA    valdr…
+ 6     5     12648 74      F      ""     08/06/2014   10/10/2016    NA    valdr…
+ 7     6     14274 sevent… female ""     Apr /05/15   01/23/2016    NA    valdr…
+ 8     7     14132 sixteen male   "conf… Dec /29/Y    05/10/2015    NA    valdr…
+ 9     8     14715 44      f      "conf… Apr /06/Y    04/24/2016    NA    valdr…
+10     9     13435 26      1      ""     09/07/2014   20/ 09 /14    NA    valdr…
+# ℹ 14,993 more rows
 ```
 
 ::::::::::::::::: discussion
@@ -132,14 +132,16 @@ cleanepi::scan_data(raw_ebola_data)
 ```
 
 ``` output
-  Field_names  missing numeric     date character logical
-1          V1 0.000000  1.0000 0.000000  0.000000       0
-2     case id 0.000000  1.0000 0.000000  0.000000       0
-3         age 0.064600  0.8348 0.000000  0.100600       0
-4      gender 0.157867  0.0472 0.000000  0.794933       0
-5      status 0.053533  0.0000 0.000000  0.946467       0
-6  date onset 0.000067  0.0000 0.915733  0.084200       0
-7 date sample 0.000133  0.0000 0.999867  0.000000       0
+  Field_names  missing  numeric     date character logical
+1          V1 0.000000 1.000000 0.000000  0.000000       0
+2     case id 0.000000 1.000000 0.000000  0.000000       0
+3         age 0.064587 0.834833 0.000000  0.100580       0
+4      gender 0.157835 0.047191 0.000000  0.794974       0
+5      status 0.053523 0.000000 0.000000  0.946477       0
+6  date onset 0.000067 0.000000 0.915883  0.084050       0
+7 date sample 0.000133 0.000000 0.999867  0.000000       0
+8         lab 1.000000 0.000000 0.000000  0.000000       0
+9      region 0.000000 0.000000 0.000000  1.000000       0
 ```
 
 
@@ -163,7 +165,7 @@ names(sim_ebola_data)
 
 ``` output
 [1] "v_1"         "case_id"     "age"         "gender"      "status"     
-[6] "date_onset"  "date_sample"
+[6] "date_onset"  "date_sample" "lab"         "region"     
 ```
 
 ::::::::::::::::::::::::::::::::::::: challenge 
@@ -192,11 +194,37 @@ Raw data may contain irregularities such as **duplicated** rows, **empty** rows 
 
 
 ``` r
+# Remove constants
 sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
+```
+
+Now, print the output to identify what constant column you removed!
+
+
+``` r
+# Remove duplicates
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
-Note that, our simulated Ebola does not contain duplicated nor constant rows or columns. 
+``` output
+Found 5 duplicated rows. Please consult the report for more details.
+```
+
+<!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
+
+::::::::::::::::::::: spoiler
+
+### How many rows you removed? What rows where removed?
+
+You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and find the "Duplicates" tab.
+
+
+``` r
+# Print a report
+cleanepi::print_report(sim_ebola_data)
+```
+
+:::::::::::::::::::::
 
 ### Replacing missing values
 
@@ -208,7 +236,28 @@ sim_ebola_data <- cleanepi::replace_missing_values(
   data = sim_ebola_data,
   na_strings = ""
 )
+
+sim_ebola_data
 ```
+
+``` output
+# A tibble: 15,000 × 8
+     v_1 case_id age         gender status    date_onset date_sample row_id
+   <int>   <int> <chr>       <chr>  <chr>     <chr>      <chr>        <int>
+ 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015       1
+ 2     2   13043 twenty-five 2      <NA>      Sep /11/13 03/01/2014       2
+ 3     3   14364 54          f      <NA>      09/02/2014 03/03/2015       3
+ 4     4   14675 ninety      <NA>   <NA>      10/19/2014 31/ 12 /14       4
+ 5     5   12648 74          F      <NA>      08/06/2014 10/10/2016       5
+ 6     6   14274 seventy-six female <NA>      Apr /05/15 01/23/2016       7
+ 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015       8
+ 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016       9
+ 9     9   13435 26          1      <NA>      09/07/2014 20/ 09 /14      10
+10    10   14816 thirty      f      <NA>      06/29/2015 06/02/2015      11
+# ℹ 14,990 more rows
+```
+
+<!-- idea: after solving issue with multiple na_string, add a challenge about it + add them to the raw data set! -->
 
 ### Validating subject IDs
 
@@ -264,19 +313,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-     v_1 case_id age         gender status    date_onset date_sample
-   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>     
- 1     1 14905   90          1      confirmed 2015-03-15 2015-04-06 
- 2     2 13043   twenty-five 2      <NA>      NA         2014-01-03 
- 3     3 14364   54          f      <NA>      2014-02-09 2015-03-03 
- 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648   74          F      <NA>      2014-06-08 2016-10-10 
- 6     6 14274   seventy-six female <NA>      NA         2016-01-23 
- 7     7 14132   sixteen     male   confirmed NA         2015-10-05 
- 8     8 14715   44          f      confirmed NA         2016-04-24 
- 9     9 13435   26          1      <NA>      2014-07-09 2014-09-20 
-10    10 14816   thirty      f      <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+     v_1 case_id age         gender status    date_onset date_sample row_id
+   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905   90          1      confirmed 2015-03-15 2015-04-06       1
+ 2     2 13043   twenty-five 2      <NA>      2013-09-11 2014-01-03       2
+ 3     3 14364   54          f      <NA>      2014-02-09 2015-03-03       3
+ 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2014-12-31       4
+ 5     5 12648   74          F      <NA>      2014-06-08 2016-10-10       5
+ 6     6 14274   seventy-six female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132   sixteen     male   confirmed NA         2015-10-05       8
+ 8     8 14715   44          f      confirmed NA         2016-04-24       9
+ 9     9 13435   26          1      <NA>      2014-07-09 2014-09-20      10
+10    10 14816   thirty      f      <NA>      2015-06-29 2015-02-06      11
 # ℹ 14,990 more rows
 ```
 
@@ -296,19 +345,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-     v_1 case_id   age gender status    date_onset date_sample
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
- 1     1 14905      90 1      confirmed 2015-03-15 2015-04-06 
- 2     2 13043      25 2      <NA>      NA         2014-01-03 
- 3     3 14364      54 f      <NA>      2014-02-09 2015-03-03 
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648      74 F      <NA>      2014-06-08 2016-10-10 
- 6     6 14274      76 female <NA>      NA         2016-01-23 
- 7     7 14132      16 male   confirmed NA         2015-10-05 
- 8     8 14715      44 f      confirmed NA         2016-04-24 
- 9     9 13435      26 1      <NA>      2014-07-09 2014-09-20 
-10    10 14816      30 f      <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+     v_1 case_id   age gender status    date_onset date_sample row_id
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905      90 1      confirmed 2015-03-15 2015-04-06       1
+ 2     2 13043      25 2      <NA>      2013-09-11 2014-01-03       2
+ 3     3 14364      54 f      <NA>      2014-02-09 2015-03-03       3
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31       4
+ 5     5 12648      74 F      <NA>      2014-06-08 2016-10-10       5
+ 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132      16 male   confirmed NA         2015-10-05       8
+ 8     8 14715      44 f      confirmed NA         2016-04-24       9
+ 9     9 13435      26 1      <NA>      2014-07-09 2014-09-20      10
+10    10 14816      30 f      <NA>      2015-06-29 2015-02-06      11
 # ℹ 14,990 more rows
 ```
 
@@ -397,19 +446,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-     v_1 case_id   age gender status    date_onset date_sample
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
- 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
- 2     2 13043      25 female <NA>      NA         2014-01-03 
- 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
- 6     6 14274      76 female <NA>      NA         2016-01-23 
- 7     7 14132      16 male   confirmed NA         2015-10-05 
- 8     8 14715      44 female confirmed NA         2016-04-24 
- 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
-10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+     v_1 case_id   age gender status    date_onset date_sample row_id
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06       1
+ 2     2 13043      25 female <NA>      2013-09-11 2014-01-03       2
+ 3     3 14364      54 female <NA>      2014-02-09 2015-03-03       3
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31       4
+ 5     5 12648      74 female <NA>      2014-06-08 2016-10-10       5
+ 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132      16 male   confirmed NA         2015-10-05       8
+ 8     8 14715      44 female confirmed NA         2016-04-24       9
+ 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20      10
+10    10 14816      30 female <NA>      2015-06-29 2015-02-06      11
 # ℹ 14,990 more rows
 ```
 
@@ -575,19 +624,19 @@ linelist_data
 ``` output
 
 // linelist object
-# A tibble: 15,000 × 7
-     v_1 case_id   age gender status    date_onset date_sample
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
- 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
- 2     2 13043      25 female <NA>      NA         2014-01-03 
- 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
- 6     6 14274      76 female <NA>      NA         2016-01-23 
- 7     7 14132      16 male   confirmed NA         2015-10-05 
- 8     8 14715      44 female confirmed NA         2016-04-24 
- 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
-10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+     v_1 case_id   age gender status    date_onset date_sample row_id
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06       1
+ 2     2 13043      25 female <NA>      2013-09-11 2014-01-03       2
+ 3     3 14364      54 female <NA>      2014-02-09 2015-03-03       3
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31       4
+ 5     5 12648      74 female <NA>      2014-06-08 2016-10-10       5
+ 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132      16 male   confirmed NA         2015-10-05       8
+ 8     8 14715      44 female confirmed NA         2016-04-24       9
+ 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20      10
+10    10 14816      30 female <NA>      2015-06-29 2015-02-06      11
 # ℹ 14,990 more rows
 
 // tags: id:case_id, date_onset:date_onset, gender:gender 
@@ -798,8 +847,8 @@ cleaned_data %>%
 ``` error
 Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
  * Variable 'tag': Must be element of set
- * {'v_1','case_id','gender','status','date_onset','date_sample'}, but
- * is 'age'.
+ * {'v_1','case_id','gender','status','date_onset','date_sample','row_id'},
+ * but is 'age'.
 ```
 
 ::::::::::::::::::::::::::
@@ -884,11 +933,11 @@ linelist::tags_df(linelist_data)
    id    date_onset gender
    <chr> <date>     <chr> 
  1 14905 2015-03-15 male  
- 2 13043 NA         female
+ 2 13043 2013-09-11 female
  3 14364 2014-02-09 female
  4 14675 2014-10-19 <NA>  
  5 12648 2014-06-08 female
- 6 14274 NA         female
+ 6 14274 2015-04-05 female
  7 14132 NA         male  
  8 14715 NA         female
  9 13435 2014-07-09 male  
