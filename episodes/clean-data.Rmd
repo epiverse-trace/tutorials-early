@@ -402,8 +402,7 @@ linelist::validate_linelist(linelist_data)
 
 Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
 
-For example, the variable:
-- `age` changes of type from a double (`<dbl>`) variable to character (`<chr>`),
+For example, let's make the variable `age` change of type from a double (`<dbl>`) variable to character (`<chr>`),
 
 To simulate it:
 
