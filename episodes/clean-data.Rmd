@@ -318,7 +318,7 @@ new_dictionary <- tibble::tibble(
   values = "female",
   grp = "sex",
   orders = 1L
-) %>% 
+) %>%
   cleanepi::add_to_dictionary(
     option = "1",
     value = "male",
