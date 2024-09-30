@@ -347,15 +347,15 @@ sim_ebola_data <- cleanepi::timespan(
   target_column = "date_sample",
   end_date = Sys.Date(),
   span_unit = "years",
-  span_column_name = "time_since_collection",
+  span_column_name = "years_since_collection",
   span_remainder_unit = "months"
 )
 
 sim_ebola_data %>%
-  dplyr::select(case_id, date_sample, time_since_collection, remainder_months)
+  dplyr::select(case_id, date_sample, years_since_collection, remainder_months)
 ```
 
-After executing the function `cleanepi::timespan()`, two new columns named `time_since_collection` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sampling for each case, measured in years, and the remaining time measured in months.
+After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sample collection for each case, measured in years, and the remaining time measured in months.
 
 ## Multiple operations at once
 
