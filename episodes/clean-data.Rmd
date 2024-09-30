@@ -310,20 +310,24 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 Note that, when the column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error. 
 
-You can use the function `cleanepi::add_to_dictionary()` to include the missing value in the dictionary. You can start a custom dictionary with a data frame:
+You can start a custom dictionary with a data frame inside or outside R. You can use the function `cleanepi::add_to_dictionary()` to include new elements in the dictionary. For example:
 
-- `new_dictionary <- tibble::tibble(`
-- `  options = "0",`
-- `  values = "female",`
-- `  grp = "sex",`
-- `  orders = 1L`
-- `) %>% `
-- `  cleanepi::add_to_dictionary(`
-- `    option = "1",`
-- `    value = "male",`
-- `    grp = "sex",`
-- `    order = NULL`
-- `  )`
+```{r}
+new_dictionary <- tibble::tibble(
+  options = "0",
+  values = "female",
+  grp = "sex",
+  orders = 1L
+) %>% 
+  cleanepi::add_to_dictionary(
+    option = "1",
+    value = "male",
+    grp = "sex",
+    order = NULL
+  )
+
+new_dictionary
+```
 
 You can read more details in the section about "Dictionary-based data substituting" in the package ["Get started" vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
 
