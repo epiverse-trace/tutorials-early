@@ -159,11 +159,32 @@ You can try `cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V
 Raw data may contain irregularities such as **duplicated** rows, **empty** rows and columns, or **constant** columns (where all entries have the same value.) Functions from `{cleanepi}` like `remove_duplicates()` and `remove_constants()` remove such irregularities as demonstrated in the below code chunk. 
 
 ```{r}
+# Remove constants
 sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
+```
+
+Now, print the output to identify what constant column you removed!
+
+```{r}
+# Remove duplicates
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
 <!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
+
+::::::::::::::::::::: spoiler
+
+### How many rows you removed? What rows where removed?
+
+You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and find the "Duplicates" tab.
+
+```{r,eval=FALSE,echo=TRUE}
+# Print a report
+cleanepi::print_report(sim_ebola_data)
+```
+
+
+:::::::::::::::::::::
 
 ### Replacing missing values
 
