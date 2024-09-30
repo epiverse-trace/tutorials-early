@@ -347,7 +347,7 @@ sim_ebola_data <- cleanepi::timespan(
   span_remainder_unit = "months"
 )
 
-sim_ebola_data %>% 
+sim_ebola_data %>%
   dplyr::glimpse()
 ```
 
