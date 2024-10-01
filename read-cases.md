@@ -61,7 +61,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 - Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
 - Inside the RStudio project, create the `data/` folder.
-- Inside the `data/` folder, save the [ebola_cases.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
+- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
 
 ::::::::::
 
@@ -74,9 +74,9 @@ The below example shows how to import a `csv` file into `R` environment using `{
 
 ``` r
 # read data
-# e.g., the path to our file is data/raw-data/ebola_cases.csv then:
+# e.g., the path to our file is data/raw-data/ebola_cases_2.csv then:
 ebola_confirmed <- rio::import(
-  here::here("data", "ebola_cases.csv")
+  here::here("data", "ebola_cases_2.csv")
 ) %>%
   dplyr::as_tibble() # for a simple data frame output
 
@@ -87,19 +87,19 @@ ebola_confirmed
 
 
 ``` output
-# A tibble: 120 × 2
-   date       confirm
-   <IDate>      <int>
- 1 2014-05-18       1
- 2 2014-05-20       2
- 3 2014-05-21       4
- 4 2014-05-22       6
- 5 2014-05-23       1
- 6 2014-05-24       2
- 7 2014-05-26      10
- 8 2014-05-27       8
- 9 2014-05-28       2
-10 2014-05-29      12
+# A tibble: 120 × 4
+    year month   day confirm
+   <int> <int> <int>   <int>
+ 1  2014     5    18       1
+ 2  2014     5    20       2
+ 3  2014     5    21       4
+ 4  2014     5    22       6
+ 5  2014     5    23       1
+ 6  2014     5    24       2
+ 7  2014     5    26      10
+ 8  2014     5    27       8
+ 9  2014     5    28       2
+10  2014     5    29      12
 # ℹ 110 more rows
 ```
 
@@ -113,7 +113,7 @@ The `{here}` package is designed to simplify file referencing in R projects by p
 
 - **Relative Paths**: Allows you to use relative file paths with respect to the `R` Project, making your code more portable and less error-prone.
 
-- **Cross-Environment Compatibility**: Works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. This notation `here::here("data", "ebola_cases.csv")` avoids using `"data\ebola_cases.csv"` in some and `"data/ebola_cases.csv"` in others!
+- **Cross-Environment Compatibility**: Works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. This notation `here::here("data", "ebola_cases_2.csv")` avoids using `"data\ebola_cases_2.csv"` in some and `"data/ebola_cases_2.csv"` in others!
 
 - **Reduces Errors**: Avoids the need to use `setwd()` or absolute paths, reducing errors in scripts shared across machines. This avoids notations like `"C:/Users/mycomputer/Documents/projects/helloworld"`.
 
@@ -281,12 +281,12 @@ extracted_data
 ```
 
 ``` output
-# A tibble: 3 × 2
-   date confirm
-  <int>   <int>
-1 16329      84
-2 16328      68
-3 16330      56
+# A tibble: 3 × 4
+   year month   day confirm
+  <int> <int> <int>   <int>
+1  2014     9    16      84
+2  2014     9    15      68
+3  2014     9    17      56
 ```
 
 :::::::::::::::::::::: callout
