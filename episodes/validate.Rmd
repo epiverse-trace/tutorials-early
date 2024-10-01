@@ -1,5 +1,5 @@
 ---
-title: 'Data validation'
+title: 'Validate case data'
 teaching: 10
 exercises: 2
 ---
