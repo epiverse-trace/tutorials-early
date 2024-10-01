@@ -189,8 +189,7 @@ linelist::validate_linelist(linelist_data)
 
 Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
 
-For example, the variable:
-- `age` changes of type from a double (`<dbl>`) variable to character (`<chr>`),
+For example, let's make the variable `age` change of type from a double (`<dbl>`) variable to character (`<chr>`).
 
 To simulate it:
 
@@ -307,6 +306,9 @@ cleaned_data %>%
 
 ::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::
+
+
 ## Safeguarding
 
 Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
@@ -372,9 +374,9 @@ linelist::tags_df(linelist_data)
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
 
-:::::::::::::::::::::::::::::::::::: callout
+:::::::::::::::::::::::::::::::::::: checkpoint
 
-### When I should use `{linelist}`?
+### When should I use `{linelist}`?
 
 Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
 
@@ -387,6 +389,6 @@ Check the "Get started" vignette section about
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{linelist}` package to tagg, validate, and prepare case data for downstream analysis.
+- Use `{linelist}` package to tag, validate, and prepare case data for downstream analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
