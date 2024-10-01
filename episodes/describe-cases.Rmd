@@ -32,7 +32,7 @@ Let's start by loading the package `{incidence2}` to aggregate linelist data by 
  We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and 
  `{ggplot2}`, so let's also call to the tidyverse package:
 
-```{r}
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
@@ -61,10 +61,11 @@ Its minimal configuration can generate a  linelist as shown in the below code ch
 ```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
 set.seed(1) # Set seed for reproducibility
-sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500))
+sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+  dplyr::as_tibble() # for a simple data frame output
 
-# Display the first few rows of the simulated dataset
-head(sim_data)
+# Display the simulated dataset
+sim_data
 ```
 
  This linelist dataset offers individual-level information about the outbreak. 
@@ -73,10 +74,10 @@ head(sim_data)
 
 ## Additional Resources on Outbreak Data
 
- - This is the default configuration of `{simulist}`, should want to know more about its functionalities, 
+This is the default configuration of `{simulist}`, should want to know more about its functionalities, 
 check [middle](https://github.com/epiverse-trace/tutorials-middle/) and [late](https://epiverse-trace.github.io/tutorials-late/) tutorials.
 
- - You can find more information at the [`{outbreak}` documentation](https://outbreak-info.github.io/R-outbreak-info/)
+You can find datasets from real emergencies from the past at the [`{outbreak}` R package documentation](https://outbreak-info.github.io/R-outbreak-info/)
 
 :::::::::::::::::::
 
@@ -86,21 +87,20 @@ check [middle](https://github.com/epiverse-trace/tutorials-middle/) and [late](h
 
 Downstream analysis involves working with aggregated data rather than individual cases. This requires grouping linelist 
 data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
-package offers an essential function, called `incidence`, for grouping case data, usually centered around dated events 
-and/or other factors. The code chunk provided below demonstrates the creation of an `incidence2` object from the 
-simulated  Ebola `linelist` data based on the  date of onset.
+package offers an essential function, called `incidence2::incidence()`, for grouping case data, usually centered around dated events 
+and/or other factors. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the 
+simulated  Ebola `linelist` data based on the date of onset.
 
 ```{r}
 # Create an incidence object by aggregating case data based on the date of onset
 dialy_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
-  interval = 1 # Aggregate by daily intervals
+  interval = "day" # Aggregate by daily intervals
 )
 
-# View the first 5 rows of the incidence data
-head(dialy_incidence, 5)
-
+# View the incidence data
+dialy_incidence
 ```
 Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
 more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
@@ -110,12 +110,12 @@ more factors. Below is a code snippet demonstrating weekly cases grouped by the 
 weekly_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
-  interval = 7, # Aggregate by weekly intervals
+  interval = "week", # Aggregate by weekly intervals
   groups = c("sex", "case_type") # Group by sex and case type
 )
 
-# View the incidence data for the first 5 weeks
-head(weekly_incidence, 5)
+# View the incidence data
+weekly_incidence
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
@@ -123,6 +123,8 @@ head(weekly_incidence, 5)
 When cases are grouped by different factors, it's possible that these groups may have different date ranges in the 
 resulting `incidence2` object. The `incidence2` package provides a function called `complete_dates()` to ensure that an
  incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
+ 
+This functionality is also available as an argument within `incidence2::incidence()` adding `complete_dates = TRUE`.
 
 ```{r}
 # Create an incidence object grouped by sex, aggregating daily
@@ -130,10 +132,12 @@ dialy_incidence_2 <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = 1 # Aggregate by daily intervals
+  interval = "day", # Aggregate by daily intervals
+  complete_dates = TRUE # Complete missing dates in the incidence object
 )
+```
 
-# Complete missing dates in the incidence object
+```{r,echo=FALSE,eval=FALSE}
 dialy_incidence_2_complete <- incidence2::complete_dates(
   x = dialy_incidence_2,
   expand = TRUE, # Expand to fill in missing dates
@@ -142,13 +146,15 @@ dialy_incidence_2_complete <- incidence2::complete_dates(
   allow_POSIXct = FALSE # Ensure that dates are not in POSIXct format
 )
 ```
+
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
 ## Challenge 1: Can you do it?
- - **Task**:Aggregate sim_data linelist based on admission date and case outcome in __biweekly__
+ - **Task**: Aggregate `sim_data` linelist based on admission date and case outcome in __biweekly__
   intervals, and save the results in an object called `biweekly_incidence`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -172,7 +178,6 @@ base::plot(dialy_incidence) +
 
 ```{r}
 # Plot weekly incidence data
-
 base::plot(weekly_incidence) +
   ggplot2::labs(
     x = "Time (in weeks)", # x-axis label
@@ -180,6 +185,20 @@ base::plot(weekly_incidence) +
   ) +
   tracetheme::theme_trace() # Apply the custom trace theme
 ``` 
+
+:::::::::::::::::::::::: callout
+
+#### easy aesthetics
+
+We invite you to skim the `{incidence2}` package ["Get started" vignette](https://www.reconverse.org/incidence2/articles/incidence2.html). Find how you can use arguments within `plot()` to provide aesthetics to your incidence2 class objects!
+
+```{r}
+base::plot(weekly_incidence, fill = "sex")
+```
+
+Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`. Give them a try!
+
+::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge 
 
