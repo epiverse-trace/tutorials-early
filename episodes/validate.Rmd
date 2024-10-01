@@ -35,12 +35,12 @@ your dataset, a process commonly referred to as "tagging." Additionally, it's cr
 validate that these tagged columns are not inadvertently deleted during further data processing steps.
 
 
- This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.  
+This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.  
 Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
 to create a linelist. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
 
-```{r}
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
 library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data
