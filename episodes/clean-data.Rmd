@@ -197,17 +197,15 @@ library(tidyverse)
 
 #create dataset
 df <- tibble(
-  col1 = c(1,2),
-  col2 = c(1,3)
-) %>% 
-  mutate(col3 = rep("a",nrow(.))) %>% 
-  mutate(col4 = rep("b",nrow(.))) %>% 
-  mutate(col5 = rep(NA_Date_, nrow(.))) %>% 
-  # mutate(col6 = rep(NA_Date_, nrow(.))) %>% 
-  # mutate(col7 = rep(NA_Date_, nrow(.))) %>% 
-  add_row(col1 = NA_integer_, col3 = "a") %>% 
+  col1 = c(1, 2),
+  col2 = c(1, 3)
+) %>%
+  mutate(col3 = rep("a", nrow(.))) %>%
+  mutate(col4 = rep("b", nrow(.))) %>%
+  mutate(col5 = rep(NA_Date_, nrow(.))) %>%
   add_row(col1 = NA_integer_, col3 = "a") %>%
-  add_row(col1 = NA_integer_, col3 = "a") %>% 
+  add_row(col1 = NA_integer_, col3 = "a") %>%
+  add_row(col1 = NA_integer_, col3 = "a") %>%
   add_row(col1 = NA_integer_)
 
 df
@@ -232,11 +230,11 @@ What columns or rows are:
 Notice to learners that the user can create new constant columns or rows after removing some initial ones.
 
 ```{r}
-df %>% 
+df %>%
   cleanepi::remove_constants()
 
-df %>% 
-  cleanepi::remove_constants() %>% 
+df %>%
+  cleanepi::remove_constants() %>%
   cleanepi::remove_constants()
 ```
 
@@ -457,7 +455,7 @@ Read the `test_df.RDS` data frame within the `{cleanepi}` package:
 ```{r}
 dat <- readRDS(
   file = system.file("extdata", "test_df.RDS", package = "cleanepi")
-) %>% 
+) %>%
   dplyr::as_tibble()
 ```
 
@@ -475,17 +473,20 @@ Before calculating the age, you may need to:
 
 :::::::::::::::::::::::::: solution
 
+In the solution we add `date_first_pcr_positive_test` given that it will provide the temporal scale for descriptive and statistical downstream analysis of the disease outbreak.
+
 ```{r}
-dat_clean <- dat %>% 
+dat_clean <- dat %>%
   # standardize column names and dates
-  cleanepi::standardize_column_names() %>% 
+  cleanepi::standardize_column_names() %>%
   cleanepi::standardize_dates(
-    target_columns = c("date_of_birth","date_first_pcr_positive_test")
-  ) %>% 
+    target_columns = c("date_of_birth", "date_first_pcr_positive_test")
+  ) %>%
   # replace from strings to a valid missing entry
   cleanepi::replace_missing_values(
     target_columns = "sex",
-    na_strings = "-99") %>% 
+    na_strings = "-99"
+  ) %>%
   # calculate the age in 'years' and return the remainder in 'months'
   cleanepi::timespan(
     target_column = "date_of_birth",
@@ -559,7 +560,7 @@ cleaned_data <- raw_ebola_data %>%
   cleanepi::check_date_sequence(
     target_columns = c("date_onset", "date_sample")
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict) %>% 
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
   cleanepi::timespan(
     target_column = "date_sample",
     end_date = Sys.Date(),
@@ -570,11 +571,11 @@ cleaned_data <- raw_ebola_data %>%
 ```
 
 ```{r,echo=FALSE,eval=TRUE}
-cleaned_data %>% 
+cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 
-:::::::::::::::::::::::::::::::::::: checkpoint
+:::::::::::::::::::::::::::::::::::: checklist
 
 ### Printing the clean report
 
