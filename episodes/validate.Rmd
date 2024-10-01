@@ -82,8 +82,24 @@ cleaned_data <- rio::import(
   dplyr::as_tibble() # Convert to tibble for better data display
 
 # Display the first five rows of the dataset
-dplyr::slice_head(cleaned_data, n = 5)
+cleaned_data
 ```
+
+:::::::::::::::::::::::: discussion
+
+Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
+
+Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. How can you detect if the data input is still **valid** to replicate the analysis code you wrote the day before?
+
+::::::::::::::::::::::::
+
+:::::::::::::::::::::::: instructor
+
+If learners do not have an experience to share, we as instructors can share one.
+
+An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
+
+::::::::::::::::::::::::
 
 ## Creating a linelist and tagging elements
 
@@ -271,21 +287,13 @@ The `Error` message inform us that in order to **validate** our linelist, we mus
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::: discussion
+::::::::::::::::::::::::: challenge
 
-Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
+What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
 
-Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
+:::::::::::::::::::::::::: solution
 
-:::::::::::::::::::::::::
-
-:::::::::::::::::::::::::: instructor
-
-If learners do not have an experience to share, we as instructors can share one.
-
-An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
-
-About losing variables, you can suggest learners to simulate this scenario:
+About losing variables, you can simulate this scenario:
 
 ```{r}
 cleaned_data %>%
