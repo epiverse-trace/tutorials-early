@@ -1,5 +1,5 @@
 ---
-title: 'Clean and validate'
+title: 'Clean case data'
 teaching: 20
 exercises: 10
 ---
@@ -7,14 +7,11 @@ exercises: 10
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - How to clean and standardize case data?
-- How to convert raw dataset into a `linelist` object?
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain how to clean, curate, and standardize case data using `{cleanepi}` package
-- Demonstrate how to covert case data to `linelist` data 
 - Perform essential data-cleaning operations to be performed in a raw case dataset.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -29,9 +26,15 @@ This episode requires you to:
 :::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and valid to facilitate accurate and reproducible analysis. This episode focuses on cleaning epidemics and outbreaks data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package, and validate it using the [linelist](https://epiverse-trace.github.io/linelist/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, 
+and valid to facilitate accurate and reproducible analysis.
+ This episode focuses on cleaning epidemics and outbreaks data using the 
+ [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
+   For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
-Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from the package `{dplyr}`, so let's also call to the tidyverse package:
+Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
+to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
+the package `{dplyr}`, so let's also call to the tidyverse package:
 
 
 ``` r
@@ -168,17 +171,13 @@ names(sim_ebola_data)
 [6] "date_onset"  "date_sample" "lab"         "region"     
 ```
 
-::::::::::::::::::::::::::::::::::::: challenge 
-
-- What differences you can observe in the column names?
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` argument of the function `cleanepi::standardize_column_names()`. This argument accepts a vector of column names that are intended to be kept unchanged.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-Standardize the column names of the input dataset, but keep the first column names as it is.
+- What differences you can observe in the column names?
+
+- Standardize the column names of the input dataset, but keep the first column names as it is.
 
 ::::::::::::::::: hint
 
@@ -214,7 +213,7 @@ Found 5 duplicated rows. Please consult the report for more details.
 
 ::::::::::::::::::::: spoiler
 
-### How many rows you removed? What rows where removed?
+#### How many rows you removed? What rows where removed?
 
 You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and find the "Duplicates" tab.
 
@@ -225,6 +224,82 @@ cleanepi::print_report(sim_ebola_data)
 ```
 
 :::::::::::::::::::::
+
+::::::::::::::::::::: challenge
+
+In the following data frame:
+
+
+``` output
+# A tibble: 6 × 5
+   col1  col2 col3  col4  col5  
+  <dbl> <dbl> <chr> <chr> <date>
+1     1     1 a     b     NA    
+2     2     3 a     b     NA    
+3    NA    NA a     <NA>  NA    
+4    NA    NA a     <NA>  NA    
+5    NA    NA a     <NA>  NA    
+6    NA    NA <NA>  <NA>  NA    
+```
+
+What columns or rows are:
+
+- duplicates?
+- empty?
+- constant?
+
+::::::::::::::: hint
+
+Duplicates mostly refers to replicated rows. Empty rows or columns can be a subset within the set of constant rows or columns.
+
+:::::::::::::::
+
+:::::::::::::::::::::
+
+::::::::::::::: instructor
+
+- duplicated rows: 3, 4, 5
+- empty rows: 6
+- empty cols: 5
+- constant rows: 6
+- constant cols: 5
+
+Notice to learners that the user can create new constant columns or rows after removing some initial ones.
+
+
+``` r
+df %>%
+  cleanepi::remove_constants()
+```
+
+``` output
+# A tibble: 5 × 3
+   col1  col2 col4 
+  <dbl> <dbl> <chr>
+1     1     1 b    
+2     2     3 b    
+3    NA    NA <NA> 
+4    NA    NA <NA> 
+5    NA    NA <NA> 
+```
+
+``` r
+df %>%
+  cleanepi::remove_constants() %>%
+  cleanepi::remove_constants()
+```
+
+``` output
+# A tibble: 2 × 2
+   col1  col2
+  <dbl> <dbl>
+1     1     1
+2     2     3
+```
+
+
+:::::::::::::::
+
 
 ### Replacing missing values
 
@@ -287,7 +362,7 @@ Note that our simulated  dataset does contain duplicated subject IDS.
 
 ::::::::::::::::: spoiler
 
-### How to correct the subject IDs?
+#### How to correct the subject IDs?
 
 Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" tab to identify what IDs require an extra treatment. 
 
@@ -330,6 +405,14 @@ sim_ebola_data
 ```
 
 This function coverts the values in the target columns, or will automatically figure out the date columns within the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
+
+::::::::::::::::::: discussion
+
+#### How is this possible?
+
+We invite you to find the key package that works internally by reading the Details section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
+
+:::::::::::::::::::
 
 ### Converting to numeric values
 
@@ -396,7 +479,7 @@ any inconsistencies or errors in the chronological order of events, allowing you
 
 ::::::::::::::::: spoiler
 
-### What are the incorrect date sequences?
+#### What are the incorrect date sequences?
 
 Let's print another preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Incorrect date sequence" tab to identify what IDs had this issue. 
 
@@ -467,7 +550,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 :::::::::::::::::::::::::: spoiler
 
-### How to create your own data dictionary?
+#### How to create your own data dictionary?
 
 Note that, when the column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error. 
 
@@ -509,7 +592,7 @@ You can read more details in the section about "Dictionary-based data substituti
 In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time difference between today and the first case reported) or the duration between sample collection and analysis (i.e., the time difference between today and the sample collection). The most common example is to calculate the age of all the subjects given their date of birth (i.e., the time difference between today and the date of birth).
 
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the time elapsed since the date of sample for the case identified
- until the date this document was generated (2024-09-30).
+ until the date this document was generated (2024-10-01).
  
 
 ``` r
@@ -533,7 +616,7 @@ sim_ebola_data %>%
  1 14905   2015-04-06                       9                5
  2 13043   2014-01-03                      10                8
  3 14364   2015-03-03                       9                6
- 4 14675   2014-12-31                       9                8
+ 4 14675   2014-12-31                       9                9
  5 12648   2016-10-10                       7               11
  6 14274   2016-01-23                       8                8
  7 14132   2015-10-05                       8               11
@@ -544,6 +627,112 @@ sim_ebola_data %>%
 ```
 
 After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sample collection for each case, measured in years, and the remaining time measured in months.
+
+::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+Age data is useful in any downstream analysis. You can categorize it to generate stratified estimates.
+
+Read the `test_df.RDS` data frame within the `{cleanepi}` package:
+
+
+``` r
+dat <- readRDS(
+  file = system.file("extdata", "test_df.RDS", package = "cleanepi")
+) %>%
+  dplyr::as_tibble()
+```
+
+Calculate the age in years of the subjects with date of birth, and the remainder time un months. Clean and standardize the required elements to get this done.
+
+:::::::::::::::::::::::::::: hint
+
+Before calculating the age, you may need to:
+
+- standardize column names 
+- standardize dates columns
+- replace missing as strings to a valid missing entry
+
+::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: solution
+
+In the solution we add `date_first_pcr_positive_test` given that it will provide the temporal scale for descriptive and statistical downstream analysis of the disease outbreak.
+
+
+``` r
+dat_clean <- dat %>%
+  # standardize column names and dates
+  cleanepi::standardize_column_names() %>%
+  cleanepi::standardize_dates(
+    target_columns = c("date_of_birth", "date_first_pcr_positive_test")
+  ) %>%
+  # replace from strings to a valid missing entry
+  cleanepi::replace_missing_values(
+    target_columns = "sex",
+    na_strings = "-99"
+  ) %>%
+  # calculate the age in 'years' and return the remainder in 'months'
+  cleanepi::timespan(
+    target_column = "date_of_birth",
+    end_date = Sys.Date(),
+    span_unit = "years",
+    span_column_name = "age_in_years",
+    span_remainder_unit = "months"
+  )
+```
+
+Now, How would you categorize a numerical variable?
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: solution
+
+The simplest alternative is using `Hmisc::cut2()`. You can also use `dplyr::case_when()` however, this requires more lines of code and is more appropriate for custom categorizations. Here we provide one solution using `base::cut()`:
+
+
+``` r
+dat_clean %>%
+  # select to conveniently view timespan output
+  dplyr::select(
+    study_id,
+    sex,
+    date_first_pcr_positive_test,
+    date_of_birth,
+    age_in_years
+  ) %>%
+  # categorize the age numerical variable [add as a challenge hint]
+  dplyr::mutate(
+    age_category = base::cut(
+      x = age_in_years,
+      breaks = c(0, 20, 35, 60, Inf), # replace with max value if known
+      include.lowest = TRUE,
+      right = FALSE
+    )
+  )
+```
+
+``` output
+# A tibble: 10 × 6
+   study_id sex   date_first_pcr_posit…¹ date_of_birth age_in_years age_category
+   <chr>    <chr> <date>                 <date>               <dbl> <fct>       
+ 1 PS001P2  1     2020-12-01             1972-01-06              52 [35,60)     
+ 2 PS002P2  1     2021-01-01             1952-02-20              72 [60,Inf]    
+ 3 PS004P2… <NA>  2021-02-11             1961-06-15              63 [60,Inf]    
+ 4 PS003P2  1     2021-02-01             1947-11-11              76 [60,Inf]    
+ 5 P0005P2  2     2021-02-16             2000-09-26              24 [20,35)     
+ 6 PS006P2  2     2021-05-02             1899-09-22             125 [60,Inf]    
+ 7 PB500P2  1     2021-02-19             1989-03-11              35 [35,60)     
+ 8 PS008P2  2     2021-09-20             1976-05-10              48 [35,60)     
+ 9 PS010P2  1     2021-02-26             1991-09-23              33 [20,35)     
+10 PS011P2  2     2021-03-03             1991-08-02              33 [20,35)     
+# ℹ abbreviated name: ¹​date_first_pcr_positive_test
+```
+
+You can investigate the maximum values of variables using `skimr::skim()`. Instead of `base::cut()` you can also use `Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))`, which gives calculate the maximum value and do not require more arguments. 
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Multiple operations at once
 
@@ -559,24 +748,35 @@ Further more, you can combine multiple data cleaning tasks via the pipe operator
 # Perfom the cleaning operations using the pipe (%>%) operator
 cleaned_data <- raw_ebola_data %>%
   cleanepi::standardize_column_names() %>%
-  cleanepi::replace_missing_values(na_strings = "") %>%
   cleanepi::remove_constants() %>%
   cleanepi::remove_duplicates() %>%
-  cleanepi::standardize_dates(
-    target_columns = c("date_onset", "date_sample")
-  ) %>%
+  cleanepi::replace_missing_values(na_strings = "") %>%
   cleanepi::check_subject_ids(
     target_columns = "case_id",
     range = c(1, 15000)
+  ) %>%
+  cleanepi::standardize_dates(
+    target_columns = c("date_onset", "date_sample")
   ) %>%
   cleanepi::convert_to_numeric(target_columns = "age") %>%
   cleanepi::check_date_sequence(
     target_columns = c("date_onset", "date_sample")
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict)
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
+  cleanepi::timespan(
+    target_column = "date_sample",
+    end_date = Sys.Date(),
+    span_unit = "years",
+    span_column_name = "years_since_collection",
+    span_remainder_unit = "months"
+  )
 ```
 
-## Printing the clean report
+
+
+:::::::::::::::::::::::::::::::::::: checklist
+
+### Printing the clean report
 
 The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing 
 operations conducted during the analysis. This report is presented as a webpage with multiple sections. Each section 
@@ -596,374 +796,10 @@ You can view the report using the function `cleanepi::print_report(cleaned_data)
     </figcaption>
 </figure>
 
-## Validating and tagging case data
-
-In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
-it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
-analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
-your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
-validate that these tagged columns are not inadvertently deleted during further data processing steps.
-
-This is achieved by converting the cleaned case data into a `linelist` object using `{linelist}` package, see the 
-below code chunk.
-
-
-``` r
-library(linelist)
-
-linelist_data <- linelist::make_linelist(
-  x = cleaned_data,
-  id = "case_id",
-  date_onset = "date_onset",
-  gender = "gender"
-)
-
-linelist_data
-```
-
-``` output
-
-// linelist object
-# A tibble: 15,000 × 8
-     v_1 case_id   age gender status    date_onset date_sample row_id
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
- 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06       1
- 2     2 13043      25 female <NA>      2013-09-11 2014-01-03       2
- 3     3 14364      54 female <NA>      2014-02-09 2015-03-03       3
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31       4
- 5     5 12648      74 female <NA>      2014-06-08 2016-10-10       5
- 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
- 7     7 14132      16 male   confirmed NA         2015-10-05       8
- 8     8 14715      44 female confirmed NA         2016-04-24       9
- 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20      10
-10    10 14816      30 female <NA>      2015-06-29 2015-02-06      11
-# ℹ 14,990 more rows
-
-// tags: id:case_id, date_onset:date_onset, gender:gender 
-```
-
-The `{linelist}` package supplies tags for common epidemiological variables 
-and a set of appropriate data types for each. You can view the list of available tags by the variable name
-and their acceptable data types for each using `linelist::tags_types()`.
-
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-Let's **tag** more variables. In new datasets, it will be frequent to have variable names different to the available tag names. However, we can associate them based on how variables were defined for data collection.
-
-Now:
-
-- **Explore** the available tag names in {linelist}.
-- **Find** what other variables in the cleaned dataset can be associated with any of these available tags.
-- **Tag** those variables as above using `linelist::make_linelist()`.
-
-:::::::::::::::::::: hint
-
-Your can get access to the list of available tag names in {linelist} using:
-
-
-``` r
-# Get a list of available tags by name and data types
-linelist::tags_types()
-
-# Get a list of names only
-linelist::tags_names()
-```
-
-:::::::::::::::::::::::
-
-::::::::::::::::: solution
-
-
-``` r
-linelist::make_linelist(
-  x = cleaned_data,
-  id = "case_id",
-  date_onset = "date_onset",
-  gender = "gender",
-  age = "age", # same name in default list and dataset
-  date_reporting = "date_sample" # different names but related
-)
-```
-
-How these additional tags are visible in the output? 
-
-<!-- Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html). -->
-
-::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::
-
-To ensure that all tagged variables are standardized and have the correct data 
-types, use the `linelist::validate_linelist()`, as 
-shown in the example below:
-
-```r
-linelist::validate_linelist(linelist_data)
-```
-
-<!-- If your dataset requires a new tag, set the argument -->
-<!-- `allow_extra = TRUE` when creating the linelist object with its corresponding-->
-<!-- datatype. -->
-
-
-
-::::::::::::::::::::::::: challenge
-
-Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
-
-For example, let's make the variable `age` change of type from a double (`<dbl>`) variable to character (`<chr>`),
-
-To simulate it:
-
-- **Change** the variable data type,
-- **Tag** the variable into a linelist, and then 
-- **Validate** it.
-
-Describe how `linelist::validate_linelist()` reacts when input data has a different variable data type.
-
-:::::::::::::::::::::::::: hint
-
-We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
-
-
-``` r
-cleaned_data %>%
-  # simulate a change of data type in one variable
-  dplyr::mutate(age = as.character(age)) %>%
-  # tag one variable
-  linelist::... %>%
-  # validate the linelist
-  linelist::...
-```
-
-::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::: hint
-
-> Please run the code line by line, focusing only on the parts before the pipe (`%>%`). After each step, observe the output before moving to the next line.
-
-If the `age` variable changes from double (`<dbl>`) to character (`<chr>`) we get the following:
-
-
-``` r
-cleaned_data %>%
-  # simulate a change of data type in one variable
-  dplyr::mutate(age = as.character(age)) %>%
-  # tag one variable
-  linelist::make_linelist(
-    age = "age"
-  ) %>%
-  # validate the linelist
-  linelist::validate_linelist()
-```
-
-``` error
-Error: Some tags have the wrong class:
-  - age: Must inherit from class 'numeric'/'integer', but has class 'character'
-```
-
-Why are we getting an `Error` message?
-
-<!-- Should we have a `Warning` message instead? Explain why. -->
-
-Explore other situations to understand this behavior. Let's try these additional changes to variables:
-
-- `date_onset` changes from a `<date>` variable to character (`<chr>`), 
-- `gender` changes from a character (`<chr>`) variable to integer (`<int>`).
-
-Then tag them into a linelist for validation. Does the `Error` message propose to us the solution?
-
-::::::::::::::::::::::::::
-
-::::::::::::::::::::::::: solution
-
-
-``` r
-# Change 2
-# Run this code line by line to identify changes
-cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(date_onset = as.character(date_onset)) %>%
-  # tag
-  linelist::make_linelist(
-    date_onset = "date_onset"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
-```
-
-
-
-``` r
-# Change 3
-# Run this code line by line to identify changes
-cleaned_data %>%
-  # simulate a change of data type
-  dplyr::mutate(gender = as.factor(gender)) %>%
-  dplyr::mutate(gender = as.integer(gender)) %>%
-  # tag
-  linelist::make_linelist(
-    gender = "gender"
-  ) %>%
-  # validate
-  linelist::validate_linelist()
-```
-
-We get `Error` messages because of the mismatch between the predefined tag type (from `linelist::tags_types()`) and the tagged variable class in the linelist.
-
-The `Error` message inform us that in order to **validate** our linelist, we must fix the input variable type to fit the expected tag type. In a data analysis script, we can do this by adding one cleaning step into the pipeline.
-
-::::::::::::::::::::::::: 
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::: discussion
-
-Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
-
-Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. What step along the `{linelist}` workflow of tagging and validating would response to the absence of a variable?
-
-:::::::::::::::::::::::::
-
-:::::::::::::::::::::::::: instructor
-
-If learners do not have an experience to share, we as instructors can share one.
-
-An scenario like this usually happens when the institution doing the analysis is not the same as the institution collecting the data. The later can make decisions about the data structure that can affect downstream processes, impacting the time or the accuracy of the analysis results.
-
-About losing variables, you can suggest learners to simulate this scenario:
-
-
-``` r
-cleaned_data %>%
-  # simulate a change of data type in one variable
-  select(-age) %>%
-  # tag one variable
-  linelist::make_linelist(
-    age = "age"
-  )
-```
-
-``` error
-Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
- * Variable 'tag': Must be element of set
- * {'v_1','case_id','gender','status','date_onset','date_sample','row_id'},
- * but is 'age'.
-```
-
-::::::::::::::::::::::::::
-
-Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged 
-columns, you will receive an error or warning message, as shown in the example below.
-
-
-``` r
-new_df <- linelist_data %>%
-  dplyr::select(case_id, gender)
-```
-
-``` warning
-Warning: The following tags have lost their variable:
- date_onset:date_onset
-```
-
-This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using `linelist::lost_tags_action()`. 
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
-
-- First, run this code to count the frequency per category within a categorical variable:
-
-
-``` r
-linelist_data %>%
-  dplyr::select(case_id, gender) %>%
-  dplyr::count(gender)
-```
-
-- Set behavior for lost tags in a `linelist` to "error" as follows:
-
-
-``` r
-# set behavior to "error"
-linelist::lost_tags_action(action = "error")
-```
-- Now, re-run the above code segment with `dplyr::count()`.
-
-Identify:
-
-- What is the difference in the output between a `Warning` and an `Error`?
-- What could be the implications of this change for your daily data analysis pipeline during an outbreak response?
-
-:::::::::::::::::::::::: solution
-
-Deciding between `Warning` or `Error` message will depend on the level of attention or flexibility you need when losing tags. One will alert you about a change but will continue running the code downstream. The other will stop your analysis pipeline and the rest will not be executed. 
-
-A data reading, cleaning and validation script may require a more stable or fixed pipeline. An exploratory data analysis may require a more flexible approach. These two processes can be isolated in different scripts or repositories to adjust the safeguarding according to your needs.
-
-Before you continue, set the configuration back again to the default option of `Warning`:
-
-
-``` r
-# set behavior to the default option: "warning"
-linelist::lost_tags_action()
-```
-
-``` output
-Lost tags will now issue a warning.
-```
-
-::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-A  `linelist` object resembles a data frame but offers richer features 
-and functionalities. Packages that are linelist-aware can leverage these 
-features. For example, you can extract a data frame of only the tagged columns 
-using the `linelist::tags_df()` function, as shown below:
-
-
-``` r
-linelist::tags_df(linelist_data)
-```
-
-``` output
-# A tibble: 15,000 × 3
-   id    date_onset gender
-   <chr> <date>     <chr> 
- 1 14905 2015-03-15 male  
- 2 13043 2013-09-11 female
- 3 14364 2014-02-09 female
- 4 14675 2014-10-19 <NA>  
- 5 12648 2014-06-08 female
- 6 14274 2015-04-05 female
- 7 14132 NA         male  
- 8 14715 NA         female
- 9 13435 2014-07-09 male  
-10 14816 2015-06-29 female
-# ℹ 14,990 more rows
-```
-
-This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
-
-:::::::::::::::::::::::::::::::::::: callout
-
-### When should I use `{linelist}`?
-
-Data analysis during an outbreak response or mass-gathering surveillance demands a different set of "data safeguards" if compared to usual research situations. For example, your data will change or be updated over time (e.g. new entries, new variables, renamed variables).
-
-`{linelist}` is more appropriate for this type of ongoing or long-lasting analysis.
-Check the "Get started" vignette section about
-[When you should consider using {linelist}?](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) for more information.
-
-:::::::::::::::::::::::::::::::::::::::::::
-
+::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{cleanepi}` package to clean and standardize epidemic and outbreak data
-- Use `{linelist}` to tag, validate, and prepare case data for downstream analysis.
-
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
