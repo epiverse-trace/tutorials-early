@@ -277,7 +277,7 @@ Note that our simulated  dataset does contain duplicated subject IDS.
 
 ::::::::::::::::: spoiler
 
-### How to correct the subject IDs?
+#### How to correct the subject IDs?
 
 Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" tab to identify what IDs require an extra treatment. 
 
@@ -357,7 +357,7 @@ any inconsistencies or errors in the chronological order of events, allowing you
 
 ::::::::::::::::: spoiler
 
-### What are the incorrect date sequences?
+#### What are the incorrect date sequences?
 
 Let's print another preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Incorrect date sequence" tab to identify what IDs had this issue. 
 
@@ -397,7 +397,7 @@ This approach simplifies the data cleaning process, ensuring that categorical da
 
 :::::::::::::::::::::::::: spoiler
 
-### How to create your own data dictionary?
+#### How to create your own data dictionary?
 
 Note that, when the column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error. 
 
@@ -596,6 +596,7 @@ You can view the report using the function `cleanepi::print_report(cleaned_data)
     </figcaption>
 </figure>
 
+::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
