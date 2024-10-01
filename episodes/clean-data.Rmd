@@ -137,17 +137,13 @@ sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
 names(sim_ebola_data)
 ```
 
-::::::::::::::::::::::::::::::::::::: challenge 
-
-- What differences you can observe in the column names?
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
 If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` argument of the function `cleanepi::standardize_column_names()`. This argument accepts a vector of column names that are intended to be kept unchanged.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-Standardize the column names of the input dataset, but keep the first column names as it is.
+- What differences you can observe in the column names?
+
+- Standardize the column names of the input dataset, but keep the first column names as it is.
 
 ::::::::::::::::: hint
 
@@ -216,6 +212,12 @@ What columns or rows are:
 - duplicates?
 - empty?
 - constant?
+
+::::::::::::::: hint
+
+Duplicates mostly refers to replicated rows. Empty rows or columns can be a subset within the set of constant rows or columns.
+
+:::::::::::::::
 
 :::::::::::::::::::::
 
@@ -506,28 +508,27 @@ Now, How would you categorize a numerical variable?
 The simplest alternative is using `Hmisc::cut2()`. You can also use `dplyr::case_when()` however, this requires more lines of code and is more appropriate for custom categorizations. Here we provide one solution using `base::cut()`:
 
 ```{r}
-dat_clean %>% 
+dat_clean %>%
   # select to conveniently view timespan output
   dplyr::select(
     study_id,
     sex,
-    date_first_pcr_positive_test, 
+    date_first_pcr_positive_test,
     date_of_birth,
     age_in_years
-  ) %>% 
+  ) %>%
   # categorize the age numerical variable [add as a challenge hint]
   dplyr::mutate(
     age_category = base::cut(
       x = age_in_years,
-      breaks = c(0,20,35,60,Inf), # replace with max value if known
+      breaks = c(0, 20, 35, 60, Inf), # replace with max value if known
       include.lowest = TRUE,
       right = FALSE
     )
-    # age_category = Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))
   )
 ```
 
-You can investigate the maximum values of variables using `skimr::skim()`
+You can investigate the maximum values of variables using `skimr::skim()`. Instead of `base::cut()` you can also use `Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))`, which gives calculate the maximum value and do not require more arguments. 
 
 ::::::::::::::::::::::::::
 
