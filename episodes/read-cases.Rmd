@@ -60,7 +60,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 - Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
 - Inside the RStudio project, create the `data/` folder.
-- Inside the `data/` folder, save the [ebola_cases.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
+- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
 
 ::::::::::
 
@@ -72,9 +72,9 @@ The below example shows how to import a `csv` file into `R` environment using `{
 
 ```{r,eval=FALSE,echo=TRUE}
 # read data
-# e.g., the path to our file is data/raw-data/ebola_cases.csv then:
+# e.g., the path to our file is data/raw-data/ebola_cases_2.csv then:
 ebola_confirmed <- rio::import(
-  here::here("data", "ebola_cases.csv")
+  here::here("data", "ebola_cases_2.csv")
 ) %>%
   dplyr::as_tibble() # for a simple data frame output
 
@@ -87,7 +87,7 @@ ebola_confirmed
 # internal for DBI::dbWriteTable()
 # read data
 ebola_confirmed <- rio::import(
-  file.path("data", "ebola_cases.csv")
+  file.path("data", "ebola_cases_2.csv")
 ) %>%
   dplyr::as_tibble() # for a simple data frame output
 
@@ -105,7 +105,7 @@ The `{here}` package is designed to simplify file referencing in R projects by p
 
 - **Relative Paths**: Allows you to use relative file paths with respect to the `R` Project, making your code more portable and less error-prone.
 
-- **Cross-Environment Compatibility**: Works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. This notation `here::here("data", "ebola_cases.csv")` avoids using `"data\ebola_cases.csv"` in some and `"data/ebola_cases.csv"` in others!
+- **Cross-Environment Compatibility**: Works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. This notation `here::here("data", "ebola_cases_2.csv")` avoids using `"data\ebola_cases_2.csv"` in some and `"data/ebola_cases_2.csv"` in others!
 
 - **Reduces Errors**: Avoids the need to use `setwd()` or absolute paths, reducing errors in scripts shared across machines. This avoids notations like `"C:/Users/mycomputer/Documents/projects/helloworld"`.
 
