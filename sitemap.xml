@@ -91,6 +91,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/simple-analysis.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/validate.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor-notes.html</loc>
   </url>
   <url>
@@ -113,5 +116,8 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/simple-analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/validate.html</loc>
   </url>
 </urlset>
