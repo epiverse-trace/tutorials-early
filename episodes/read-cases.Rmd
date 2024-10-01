@@ -90,6 +90,9 @@ ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases.csv")
 ) %>%
   dplyr::as_tibble() # for a simple data frame output
+
+# preview data
+ebola_confirmed
 ```
 
 Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
@@ -148,7 +151,7 @@ rio::import(here::here("data", "Marburg.zip"))
 The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management 
 systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
-::::::::::::: discuss
+::::::::::::: discussion
 
 ### When to read directly from a database?
 
@@ -250,8 +253,7 @@ The `extracted_data` object represents the extracted, ideally after specifying q
 
 ```{r,warning=FALSE,message=FALSE}
 # View the extracted_data
-extracted_data %>%
-  dplyr::as_tibble() # for a simple data frame output
+extracted_data
 ```
 
 :::::::::::::::::::::: callout
