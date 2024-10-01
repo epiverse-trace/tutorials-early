@@ -397,24 +397,38 @@ Further more, you can combine multiple data cleaning tasks via the pipe operator
 # Perfom the cleaning operations using the pipe (%>%) operator
 cleaned_data <- raw_ebola_data %>%
   cleanepi::standardize_column_names() %>%
-  cleanepi::replace_missing_values(na_strings = "") %>%
   cleanepi::remove_constants() %>%
   cleanepi::remove_duplicates() %>%
-  cleanepi::standardize_dates(
-    target_columns = c("date_onset", "date_sample")
-  ) %>%
+  cleanepi::replace_missing_values(na_strings = "") %>%
   cleanepi::check_subject_ids(
     target_columns = "case_id",
     range = c(1, 15000)
+  ) %>%
+  cleanepi::standardize_dates(
+    target_columns = c("date_onset", "date_sample")
   ) %>%
   cleanepi::convert_to_numeric(target_columns = "age") %>%
   cleanepi::check_date_sequence(
     target_columns = c("date_onset", "date_sample")
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict)
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>% 
+  cleanepi::timespan(
+    target_column = "date_sample",
+    end_date = Sys.Date(),
+    span_unit = "years",
+    span_column_name = "years_since_collection",
+    span_remainder_unit = "months"
+  )
 ```
 
-## Printing the clean report
+```{r,echo=FALSE,eval=TRUE}
+cleaned_data %>% 
+  write_csv(file = file.path("data", "cleaned_data.csv"))
+```
+
+:::::::::::::::::::::::::::::::::::: checkpoint
+
+### Printing the clean report
 
 The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing 
 operations conducted during the analysis. This report is presented as a webpage with multiple sections. Each section 
