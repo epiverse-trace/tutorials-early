@@ -1,5 +1,5 @@
 ---
-title: 'Data cleaning'
+title: 'Clean case data'
 teaching: 20
 exercises: 10
 ---
