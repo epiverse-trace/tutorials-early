@@ -228,9 +228,9 @@ If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be t
 
 ```{r}
 # Show the SQL queries translated
-mytable_db %>% 
-  dplyr::filter(confirm > 50) %>% 
-  dplyr::arrange(desc(confirm)) %>% 
+mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
   dplyr::show_query()
 ```
 
@@ -240,9 +240,9 @@ Use `dplyr::collect()` to force computation of a database query and extract the 
 
 ```{r}
 # Pull all data down to a local tibble
-extracted_data <- mytable_db %>% 
-  dplyr::filter(confirm > 50) %>% 
-  dplyr::arrange(desc(confirm)) %>% 
+extracted_data <- mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
   dplyr::collect()
 ```
 
