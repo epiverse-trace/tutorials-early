@@ -374,7 +374,7 @@ linelist::tags_df(linelist_data)
 
 This allows, the extraction of use tagged-only columns in downstream analysis, which will be useful for the next episode!
 
-:::::::::::::::::::::::::::::::::::: checkpoint
+:::::::::::::::::::::::::::::::::::: checklist
 
 ### When should I use `{linelist}`?
 
