@@ -248,13 +248,18 @@ We suggest to use RStudio Projects.
 - **Create an RStudio Project**. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create a New Project in a New Directory.
 - **Create** the `data/` folder inside the RStudio project or corresponding directory. Use the `data/` folder to **save** the data sets to download.
 
-The directory of an RStudio Project named, for example `workshop`, should look like this:
+The directory of an RStudio Project named, for example `training`, should look like this:
 
 ```
-workshop/
+training/
 |__ data/
-|__ workshop.Rproj
+|__ training.Rproj
 ```
+
+**RStudio Projects** allows you to use _relative file_ paths with respect to the `R` Project, 
+making your code more portable and less error-prone. 
+Avoids using `setwd()` with _absolute paths_ 
+like `"C:/Users/MyName/WeirdPath/training/data/file.csv"`.
 
 ::::::::::::::::::::::::::::::::: 
 
