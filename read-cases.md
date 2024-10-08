@@ -109,13 +109,12 @@ Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
 
 ### Why should we use the {here} package?
 
-The `{here}` package is designed to simplify file referencing in R projects by providing a reliable way to construct file paths relative to the project root. Here are the three key reasons to use it:
+The `{here}` package is designed to simplify file referencing in R projects by providing a reliable way to construct file paths relative to the project root. The main reason to use it is **Cross-Environment Compatibility**.
 
-- **Relative Paths**: Allows you to use relative file paths with respect to the `R` Project, making your code more portable and less error-prone.
+It works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. 
 
-- **Cross-Environment Compatibility**: Works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. This notation `here::here("data", "ebola_cases_2.csv")` avoids using `"data\ebola_cases_2.csv"` in some and `"data/ebola_cases_2.csv"` in others!
-
-- **Reduces Errors**: Avoids the need to use `setwd()` or absolute paths, reducing errors in scripts shared across machines. This avoids notations like `"C:/Users/mycomputer/Documents/projects/helloworld"`.
+- On Windows, paths are written using backslashes ( `\` ) as the separator between folder names: `"data\raw-data\file.csv"` 
+- On Unix based operating system such as macOS or Linux the forward slash ( `/` ) is used as the path separator: `"data/raw-data/file.csv"`
 
 The `{here}` package is ideal for adding one more layer of reproducibility to your work. If you are interested in reproducibility, we invite you to [read this tutorial to increase the openess, sustainability, and reproducibility of your epidemic analysis with R](https://epiverse-trace.github.io/research-compendium/)
 
