@@ -87,9 +87,13 @@ cleaned_data
 
 :::::::::::::::::::::::: discussion
 
-Have you ever experienced an unexpected change of variable type when running a lengthy analysis during an emergency response? What actions did you take to overcome this inconvenience?
+<!-- Have you ever experienced an unexpected change in the input data set when running an analysis during an emergency? How do you safeguard your analysis from this inconvenience? -->
 
-Imagine you automated your analysis to read your date directly from source, but the people in charge of the data collection decided to remove a variable you found useful. How can you detect if the data input is still **valid** to replicate the analysis code you wrote the day before?
+### An unexpected change
+
+You are in an emergency response situation. You need to generate daily situation reports. You automated your analysis to read data directly from the online server :grin:.  However, the people in charge of the data collection/administration needed to **remove/rename/reformat** one variable you found helpful :disappointed:!
+
+How can you detect if the data input is **still valid** to replicate the analysis code you wrote the day before?
 
 ::::::::::::::::::::::::
 
