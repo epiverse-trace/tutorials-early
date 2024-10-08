@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2024-10-01 |
+        <p>Last updated on 2024-10-08 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -476,21 +476,18 @@ in a wide range of formats.</p>
 <div class="callout-content">
 <p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is designed to simplify file
 referencing in R projects by providing a reliable way to construct file
-paths relative to the project root. Here are the three key reasons to
-use it:</p>
-<ul><li><p><strong>Relative Paths</strong>: Allows you to use relative file
-paths with respect to the <code>R</code> Project, making your code more
-portable and less error-prone.</p></li>
-<li><p><strong>Cross-Environment Compatibility</strong>: Works across
-different operating systems (Windows, Mac, Linux) without needing to
-adjust file paths. This notation
-<code>here::here("data", "ebola_cases_2.csv")</code> avoids using
-<code>"data\ebola_cases_2.csv"</code> in some and
-<code>"data/ebola_cases_2.csv"</code> in others!</p></li>
-<li><p><strong>Reduces Errors</strong>: Avoids the need to use
-<code>setwd()</code> or absolute paths, reducing errors in scripts
-shared across machines. This avoids notations like
-<code>"C:/Users/mycomputer/Documents/projects/helloworld"</code>.</p></li>
+paths relative to the project root. The main reason to use it is
+<strong>Cross-Environment Compatibility</strong>.</p>
+<p>It works across different operating systems (Windows, Mac, Linux)
+without needing to adjust file paths.</p>
+<ul><li>On Windows, paths are written using backslashes ( <code>\</code> )
+as the separator between folder names:
+<code>"data\raw-data\file.csv"</code>
+</li>
+<li>On Unix based operating system such as macOS or Linux the forward
+slash ( <code>/</code> ) is used as the path separator:
+<code>"data/raw-data/file.csv"</code>
+</li>
 </ul><p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is ideal for adding one more layer of
 reproducibility to your work. If you are interested in reproducibility,
 we invite you to <a href="https://epiverse-trace.github.io/research-compendium/" class="external-link">read this
@@ -518,7 +515,7 @@ working environment.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
@@ -541,7 +538,7 @@ and export formats run:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -828,8 +825,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
-  "dateCreated": "2024-10-01",
-  "dateModified": "2024-10-01",
+  "dateCreated": "2024-10-08",
+  "dateModified": "2024-10-08",
   "datePublished": "2024-10-08"
 }
 

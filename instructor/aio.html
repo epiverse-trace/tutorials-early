@@ -352,7 +352,7 @@
         
 <section id="aio-read-cases"><p>Content from <a href="read-cases.html">Read case data</a></p>
 <hr>
-<p>Last updated on 2024-10-01 |
+<p>Last updated on 2024-10-08 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -514,22 +514,19 @@ in a wide range of formats.</p>
 <div class="callout-content">
 <p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is designed to simplify file
 referencing in R projects by providing a reliable way to construct file
-paths relative to the project root. Here are the three key reasons to
-use it:</p>
+paths relative to the project root. The main reason to use it is
+<strong>Cross-Environment Compatibility</strong>.</p>
+<p>It works across different operating systems (Windows, Mac, Linux)
+without needing to adjust file paths.</p>
 <ul>
-<li><p><strong>Relative Paths</strong>: Allows you to use relative file
-paths with respect to the <code>R</code> Project, making your code more
-portable and less error-prone.</p></li>
-<li><p><strong>Cross-Environment Compatibility</strong>: Works across
-different operating systems (Windows, Mac, Linux) without needing to
-adjust file paths. This notation
-<code>here::here("data", "ebola_cases_2.csv")</code> avoids using
-<code>"data\ebola_cases_2.csv"</code> in some and
-<code>"data/ebola_cases_2.csv"</code> in others!</p></li>
-<li><p><strong>Reduces Errors</strong>: Avoids the need to use
-<code>setwd()</code> or absolute paths, reducing errors in scripts
-shared across machines. This avoids notations like
-<code>"C:/Users/mycomputer/Documents/projects/helloworld"</code>.</p></li>
+<li>On Windows, paths are written using backslashes ( <code>\</code> )
+as the separator between folder names:
+<code>"data\raw-data\file.csv"</code>
+</li>
+<li>On Unix based operating system such as macOS or Linux the forward
+slash ( <code>/</code> ) is used as the path separator:
+<code>"data/raw-data/file.csv"</code>
+</li>
 </ul>
 <p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is ideal for adding one more layer of
 reproducibility to your work. If you are interested in reproducibility,
@@ -558,7 +555,7 @@ working environment.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
@@ -581,7 +578,7 @@ and export formats run:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2070,7 +2067,7 @@ the day before?</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>If learners do not have an experience to share, we as instructors can
 share one.</p>
@@ -2162,7 +2159,7 @@ can be associated with any of these available tags.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in {linelist}
 using:</p>
@@ -2185,7 +2182,7 @@ using:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2253,7 +2250,7 @@ input data has a different variable data type.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -2278,7 +2275,7 @@ before tagging for validation. For example:</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
 <div class="accordion-body">
 <blockquote>
 <p>Please run the code line by line, focusing only on the parts before
@@ -2332,7 +2329,7 @@ variable to character (<code>&lt;chr&gt;</code>),</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2395,7 +2392,7 @@ validating would response to the absence of a variable?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>About losing variables, you can simulate this scenario:</p>
 <div class="codewrapper sourceCode" id="cb14">
@@ -2497,7 +2494,7 @@ analysis pipeline during an outbreak response?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -2741,7 +2738,7 @@ outbreak.</p>
   Additional Resources on Outbreak Data
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>This is the default configuration of <code>{simulist}</code>, should
 want to know more about its functionalities, check <a href="https://github.com/epiverse-trace/tutorials-middle/" class="external-link">middle</a>
@@ -3243,7 +3240,7 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
-  "dateCreated": "2024-10-01",
+  "dateCreated": "2024-10-08",
   "dateModified": "2024-10-08",
   "datePublished": "2024-10-08"
 }
