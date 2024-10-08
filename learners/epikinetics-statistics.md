@@ -2,20 +2,19 @@
 title: Solutions using epikinetics data and package
 ---
 
-# Descriptive analysis
+# Statistical analysis
 
 ```r
 
 #' goal:
-#' vaccination incidence stratified by vaccine type
-#' observation incidence stratified by censoring status
+#' model the kinetics of neutralising-antibody titres after antigenic SARS-CoV-2 exposure?
 
 # load packages -----------------------------------------------------------
 
 library(tidyverse)
 library(cleanepi)
 library(datatagr) # a generalization of {linelist}
-library(incidence2)
+# library(epikinetics)
 
 # read data ---------------------------------------------------------------
 
@@ -98,13 +97,13 @@ dat_clean <- dat %>%
     span_unit = "days",
     span_column_name = "t_since_last_exp",
     span_remainder_unit = "days"
-    ) %>% 
+  ) %>% 
   # extra wrangling
   mutate(
     last_vax_type = forcats::fct_infreq(last_vax_type),
     exp_num = forcats::as_factor(exp_num),
     titre_type = forcats::fct_relevel(titre_type,"Ancestral", "Alpha"),
-    censored = forcats::as_factor(censored)
+    # censored = forcats::as_factor(censored) # in {epikinetics} censored needs to be numeric
   ) %>% 
   # tag with {datatagr}
   datatagr::make_datatagr(
@@ -129,7 +128,7 @@ dat_clean <- dat %>%
     date = "Date",
     titre_type = "factor",
     value = "numeric",
-    censored = "factor",
+    censored = "numeric",
     t_since_last_exp = "numeric"
   ) %>% 
   # datatagr::labels_df() %>% # this extract labels as column names [affects downstream] 
@@ -137,77 +136,76 @@ dat_clean <- dat %>%
 
 dat_clean
 
-# distribution of the time from the last vaccine to first observation
-dat_clean %>% 
-  group_by(pid) %>% 
-  filter(date == min(date)) %>% 
-  slice(1) %>% 
-  ungroup() %>% 
-  ggplot(aes(t_since_last_exp)) + 
-  geom_histogram()
 
-## subject table -----------------------------------------------------------
-
-# subject time-invariant data
-dat_subject <- dat_clean %>% 
-  # {datatagr} reacts with dplyr::select() but not with dplyr::count() when losing tags
-  dplyr::select(pid, infection_history, exp_num, last_exp_date, last_vax_type) %>% 
-  dplyr::count(pid, infection_history, exp_num, last_exp_date, last_vax_type)
-  
-# table 1: time-invariant columns
-dat_subject %>% 
-  compareGroups::compareGroups(
-    data = .,
-    formula = ~infection_history + exp_num + last_exp_date + last_vax_type 
-  ) %>% 
-  compareGroups::createTable()
-
-# table 2: were vaccine type differently applied between naive and non-naive?
-dat_subject %>% 
-  compareGroups::compareGroups(
-    data = .,
-    formula = last_vax_type~infection_history,
-    byrow = TRUE
-  ) %>% 
-  compareGroups::createTable(show.all = TRUE)
-
-# vaccinations ------------------------------------------------------------
-
-## by vaccine type ---------------------------------------------
-
-dat_subject %>% 
-  # aggregate
-  incidence2::incidence(
-    date_index = "last_exp_date", # change: "date" or "last_exp_date"
-    groups = ("last_vax_type"), # change: "titre_type" or "infection_history" or "last_vax_type" or c("infection_history", "titre_type")
-    interval = "month", # change: "day" or "week" or "epiweek" or "month"
-    # complete_dates = TRUE, # relevant to downstream analysis [time-series data]
-  ) %>% 
-  # transform to cumulative per group (optional display)
-  # incidence2::cumulate() %>% 
-  # plot
-  incidence2:::plot.incidence2(
-    fill = "last_vax_type"
-  )
-
-# observations ------------------------------------------------------------
-
-# by history-variants
-# not required, this reflect the proportion of "infection_history" in the cohort
-
-## by censored -----------------------------------------------
-
-dat_clean %>% count(censored)
+# visualization: data to model --------------------------------------------
 
 dat_clean %>% 
-  incidence2::incidence(
-    date_index = "date", # change: "date" or "last_exp_date"
-    groups = "censored", # change: "censored" or "titre_type" or "infection_history" or "last_vax_type" or c("infection_history", "titre_type")
-    interval = "month", # change: "day", "week", "month"
-    # complete_dates = TRUE # relevant to downstream analysis [time-series data]
-  ) %>% 
-  incidence2:::plot.incidence2(
-    fill = "censored"
-  )
+  mutate(log2_value = log2(value)) %>% 
+  filter(censored == "0") %>% 
+  # skimr::skim(log2_value)
+  ggplot(aes(x = t_since_last_exp, y = value)) +
+  geom_point() +
+  geom_smooth() +
+  scale_y_continuous(trans = "log2") +
+  facet_wrap(~infection_history+titre_type) +
+  xlim(0,150)
 
+
+# model -------------------------------------------------------------------
+
+#' In this vignette we use a dataset representing the Delta wave 
+#' which is installed with this package, 
+#' specifying a regression model that 
+#' just looks at the effect of infection history.
+#' 
+#' Figure 2 from the paper shows population level fits for each wave, 
+#' disaggregated by infection history and titre type. 
+#' Here we reproduce the facets for the Delta wave. 
+#' Once the model has been fitted, 
+#' simulate population trajectories using the fitted population parameters.
+
+dat_clean %>% class()
+
+mod <- epikinetics::biokinetics$new(
+  data = dat_clean %>% data.table::as.data.table(), 
+  covariate_formula = ~0 + infection_history
+)
+
+# WAIT this takes 14 minutes
+# tictoc::tic()
+delta <- mod$fit(
+  parallel_chains = 4,
+  iter_warmup = 50,
+  iter_sampling = 200,
+  threads_per_chain = 4
+)
+# tictoc::toc()
+
+# this takes 10 seconds
+# tictoc::tic()
+res <- mod$simulate_population_trajectories()
+head(res)
+# tictoc::toc()
+
+# visualize output --------------------------------------------------------
+
+plot_data <- res
+
+plot_data[, titre_type := forcats::fct_relevel(
+  titre_type,
+  c("Ancestral", "Alpha", "Delta"))]
+
+ggplot(data = plot_data) +
+  geom_line(aes(x = t,
+                y = me,
+                colour = titre_type)) +
+  geom_ribbon(aes(x = t,
+                  ymin = lo,
+                  ymax = hi,
+                  fill = titre_type), alpha = 0.65) +
+  scale_y_continuous(trans = "log2") +
+  labs(x = "Time since last exposure (days)",
+       y = expression(paste("Titre (IC"[50], ")"))) +
+  facet_wrap(infection_history ~ titre_type)
 ```
+
