@@ -1,5 +1,5 @@
 ---
-title: Solutions using epikinetics data and package
+title: Statistical analysis using epikinetics data
 ---
 
 # Statistical analysis

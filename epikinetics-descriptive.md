@@ -1,5 +1,5 @@
 ---
-title: Solutions using epikinetics data and package
+title: Descriptive analysis with epikinetics data
 ---
 
 # Descriptive analysis
