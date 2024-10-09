@@ -20,74 +20,40 @@ library(incidence2)
 # read data ---------------------------------------------------------------
 
 # rawdata <- "data-raw/delta.csv"
-rawdata <- "https://raw.githubusercontent.com/seroanalytics/epikinetics/refs/heads/main/inst/delta_full.rds"
+# rawdata <- "https://raw.githubusercontent.com/seroanalytics/epikinetics/refs/heads/main/inst/delta_full.rds"
+rawdata <- "data-out/delta_full-messy.csv" # fix this path
 
 dat <- read_csv(rawdata)
 
-dat %>% glimpse()
+dat #%>% glimpse()
 
-# what these columns mean? ------------------------------------------------
+# dat %>% 
+#   # arrange columns
+#   dplyr::select(
+#     pid, infection_history, exp_num, last_exp_date, last_vax_type,
+#     dplyr::everything()
+#   ) %>% 
+#   # arrange rows
+#   dplyr::arrange(
+#     pid, infection_history, exp_num, last_exp_date, last_vax_type, date
+#   ) %>% 
+#   write_csv("data-out/delta_full-messy.csv")
 
-#' data dictionary: https://seroanalytics.org/epikinetics/articles/data.html
-#' reference paper: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00484-5/fulltext
-#' location: https://github.com/seroanalytics/epikinetics/tree/main/inst
+# datatagr 
 
-# 335 subjects where followed up
-dat %>% count(pid)
-
-## what "titre type" means? -------------------------------------------------
-
-#' In the time series, 
-#' each subject had monthly serum measurements 
-#' for three types of antigens ("titre_type").
-#' 
-#' Serum samples where challenged against Ancestral, Alpha and Delta antigens.
-#' 
-#' The column "value" measures the titre of 
-#' the neutralizing effect of each sample against each antigen 
-
-dat %>%
-  dplyr::filter(pid == 2) %>% 
-  dplyr::arrange(date) %>% 
-  # select time invariant columns
-  dplyr::select(
-    pid, infection_history, exp_num, last_exp_date, last_vax_type,
-    dplyr::everything()
-  )
-
-## what "censored" means? ----------------------------------------------------
-
-# context: censored regression model
-# the "value" as the outcome is censored above or below
-# because the it was measured outside the limits of detection
-# threshold limit below: 5
-# threshold limit above: 2560
-
-dat %>% 
-  ggplot(aes(value, fill = as.factor(censored))) + 
-  geom_histogram()
-
-# datatagr ----------------------------------------------------------------
-
-datatagr::lost_labels_action()
-datatagr::get_lost_labels_action()
-# datatagr::lost_labels_action(action = "error")
+# datatagr::lost_labels_action()
+# datatagr::get_lost_labels_action()
+# # datatagr::lost_labels_action(action = "error")
 
 # cleanepi ----------------------------------------------------------------
 
 # check sequence of events
 
 dat_clean <- dat %>% 
-  # arrange columns
-  dplyr::select(
-    pid, infection_history, exp_num, last_exp_date, last_vax_type,
-    dplyr::everything()
-  ) %>% 
-  # arrange rows
-  dplyr::arrange(
-    pid, infection_history, exp_num, last_exp_date, last_vax_type, date
-  ) %>% 
   # cleanepi
+  cleanepi::standardize_column_names() %>% 
+  cleanepi::standardize_dates(target_columns = "date") %>%
+  cleanepi::convert_to_numeric(target_columns = "exp_num") %>% 
   cleanepi::check_date_sequence(
     target_columns = c("last_exp_date", "date")
   ) %>% 
@@ -106,53 +72,101 @@ dat_clean <- dat %>%
     titre_type = forcats::fct_relevel(titre_type,"Ancestral", "Alpha"),
     censored = forcats::as_factor(censored)
   ) %>% 
-  # tag with {datatagr}
-  datatagr::make_datatagr(
-    pid = "subject id",
-    infection_history = "subject infection history",
-    exp_num = "number of vaccine exposures",
-    last_exp_date = "date of last exposure",
-    last_vax_type = "type of vaccine in the last exposure",
-    date = "date of observation of titre in serum sample",
-    titre_type = "type of antigen challenged against serum sample",
-    value = "titre value",
-    censored = "censored titre value out of limit of detection [5 - 2560] bellow (-1) or above (+1)",
-    t_since_last_exp = "time interval between last vaccine exposure and observed serum sample titre"
+  # tag with {linelist}
+  linelist::make_linelist( # ISSUE: make_linelist can rearrange columns
+    id = "pid",
+    allow_extra = TRUE,
+    infection_history = "infection_history",
+    exp_num = "exp_num",
+    last_exp_date = "last_exp_date",
+    last_vax_type = "last_vax_type",
+    date = "date",
+    titre_type = "titre_type",
+    value = "value",
+    censored = "censored",
+    # last_vax_type = "last_vax_type", # ISSUE: can tolerate replicates
+    t_since_last_exp = "t_since_last_exp" # it is possible to pass validation without tagging?
   ) %>% 
-  # validate with {datatagr}
-  datatagr::validate_datatagr(
-    pid = "numeric",
-    infection_history = "character",
-    exp_num = "factor",
-    last_exp_date="Date",
-    last_vax_type = "factor",
-    date = "Date",
-    titre_type = "factor",
-    value = "numeric",
-    censored = "factor",
-    t_since_last_exp = "numeric"
+  # validate 
+  linelist::validate_linelist(
+    allow_extra = TRUE,
+    ref_types = linelist::tags_types(
+      infection_history = c("character"),
+      exp_num = c("factor"),
+      last_exp_date = c("Date"),
+      last_vax_type = c("factor"),
+      date = c("Date"),
+      titre_type = c("factor"),
+      value = c("numeric"),
+      censored = c("factor"),
+      t_since_last_exp = c("numeric"),
+      allow_extra = TRUE
+    )
   ) %>% 
-  # datatagr::labels_df() %>% # this extract labels as column names [affects downstream] 
-  identity()
+  # keep tags data frame
+  linelist::tags_df()
 
 dat_clean
 
 # distribution of the time from the last vaccine to first observation
 dat_clean %>% 
-  group_by(pid) %>% 
+  group_by(id) %>% 
   filter(date == min(date)) %>% 
   slice(1) %>% 
   ungroup() %>% 
   ggplot(aes(t_since_last_exp)) + 
   geom_histogram()
 
+# what these columns mean? ------------------------------------------------
+
+#' data dictionary: https://seroanalytics.org/epikinetics/articles/data.html
+#' reference paper: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00484-5/fulltext
+#' location: https://github.com/seroanalytics/epikinetics/tree/main/inst
+
+# 335 subjects where followed up
+dat_clean %>% count(pid)
+
+
+## what "titre type" means? -------------------------------------------------
+
+#' In the time series, 
+#' each subject had monthly serum measurements 
+#' for three types of antigens ("titre_type").
+#' 
+#' Serum samples where challenged against Ancestral, Alpha and Delta antigens.
+#' 
+#' The column "value" measures the titre of 
+#' the neutralizing effect of each sample against each antigen 
+
+dat_clean %>%
+  dplyr::filter(id == 2) %>% 
+  dplyr::arrange(date) #%>% 
+  # # select time invariant columns
+  # dplyr::select(
+  #   id, infection_history, exp_num, last_exp_date, last_vax_type,
+  #   dplyr::everything()
+  # )
+
+## what "censored" means? ----------------------------------------------------
+
+# context: censored regression model
+# the "value" as the outcome is censored above or below
+# because the it was measured outside the limits of detection
+# threshold limit below: 5
+# threshold limit above: 2560
+
+dat_clean %>% 
+  ggplot(aes(value, fill = as.factor(censored))) + 
+  geom_histogram()
+
+
 ## subject table -----------------------------------------------------------
 
 # subject time-invariant data
 dat_subject <- dat_clean %>% 
   # {datatagr} reacts with dplyr::select() but not with dplyr::count() when losing tags
-  dplyr::select(pid, infection_history, exp_num, last_exp_date, last_vax_type) %>% 
-  dplyr::count(pid, infection_history, exp_num, last_exp_date, last_vax_type)
+  dplyr::select(id, infection_history, exp_num, last_exp_date, last_vax_type) %>% 
+  dplyr::count(id, infection_history, exp_num, last_exp_date, last_vax_type)
   
 # table 1: time-invariant columns
 dat_subject %>% 
@@ -187,7 +201,7 @@ dat_subject %>%
   # incidence2::cumulate() %>% 
   # plot
   incidence2:::plot.incidence2(
-    fill = "last_vax_type"
+    fill = "last_vax_type" # change: "infection_history", "titre_type", or "last_vax_type"
   )
 
 # observations ------------------------------------------------------------
@@ -207,7 +221,7 @@ dat_clean %>%
     # complete_dates = TRUE # relevant to downstream analysis [time-series data]
   ) %>% 
   incidence2:::plot.incidence2(
-    fill = "censored"
+    fill = "censored" # change: "censored" or "infection_history", "titre_type", or "last_vax_type"
   )
 
 ```
