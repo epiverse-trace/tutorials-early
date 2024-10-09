@@ -303,7 +303,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Descriptive analysis with epikinetics data</h1>
-        <p>Last updated on 2024-10-08 |
+        <p>Last updated on 2024-10-09 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/learners/epikinetics-descriptive.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -337,74 +337,40 @@
 <span><span class="co"># read data ---------------------------------------------------------------</span></span>
 <span></span>
 <span><span class="co"># rawdata &lt;- "data-raw/delta.csv"</span></span>
-<span><span class="va">rawdata</span> <span class="op">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/seroanalytics/epikinetics/refs/heads/main/inst/delta_full.rds"</span></span>
+<span><span class="co"># rawdata &lt;- "https://raw.githubusercontent.com/seroanalytics/epikinetics/refs/heads/main/inst/delta_full.rds"</span></span>
+<span><span class="va">rawdata</span> <span class="op">&lt;-</span> <span class="st">"data-out/delta_full-messy.csv"</span> <span class="co"># fix this path</span></span>
 <span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="va">rawdata</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">dat</span> <span class="op">%&gt;%</span> <span class="fu">glimpse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="co">#%&gt;% glimpse()</span></span>
 <span></span>
-<span><span class="co"># what these columns mean? ------------------------------------------------</span></span>
+<span><span class="co"># dat %&gt;% </span></span>
+<span><span class="co">#   # arrange columns</span></span>
+<span><span class="co">#   dplyr::select(</span></span>
+<span><span class="co">#     pid, infection_history, exp_num, last_exp_date, last_vax_type,</span></span>
+<span><span class="co">#     dplyr::everything()</span></span>
+<span><span class="co">#   ) %&gt;% </span></span>
+<span><span class="co">#   # arrange rows</span></span>
+<span><span class="co">#   dplyr::arrange(</span></span>
+<span><span class="co">#     pid, infection_history, exp_num, last_exp_date, last_vax_type, date</span></span>
+<span><span class="co">#   ) %&gt;% </span></span>
+<span><span class="co">#   write_csv("data-out/delta_full-messy.csv")</span></span>
 <span></span>
-<span><span class="co">#' data dictionary: https://seroanalytics.org/epikinetics/articles/data.html</span></span>
-<span><span class="co">#' reference paper: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00484-5/fulltext</span></span>
-<span><span class="co">#' location: https://github.com/seroanalytics/epikinetics/tree/main/inst</span></span>
+<span><span class="co"># datatagr </span></span>
 <span></span>
-<span><span class="co"># 335 subjects where followed up</span></span>
-<span><span class="va">dat</span> <span class="op">%&gt;%</span> <span class="fu">count</span><span class="op">(</span><span class="va">pid</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## what "titre type" means? -------------------------------------------------</span></span>
-<span></span>
-<span><span class="co">#' In the time series, </span></span>
-<span><span class="co">#' each subject had monthly serum measurements </span></span>
-<span><span class="co">#' for three types of antigens ("titre_type").</span></span>
-<span><span class="co">#' </span></span>
-<span><span class="co">#' Serum samples where challenged against Ancestral, Alpha and Delta antigens.</span></span>
-<span><span class="co">#' </span></span>
-<span><span class="co">#' The column "value" measures the titre of </span></span>
-<span><span class="co">#' the neutralizing effect of each sample against each antigen </span></span>
-<span></span>
-<span><span class="va">dat</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">pid</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># select time invariant columns</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span></span>
-<span>    <span class="va">pid</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span>,</span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="co">## what "censored" means? ----------------------------------------------------</span></span>
-<span></span>
-<span><span class="co"># context: censored regression model</span></span>
-<span><span class="co"># the "value" as the outcome is censored above or below</span></span>
-<span><span class="co"># because the it was measured outside the limits of detection</span></span>
-<span><span class="co"># threshold limit below: 5</span></span>
-<span><span class="co"># threshold limit above: 2560</span></span>
-<span></span>
-<span><span class="va">dat</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">value</span>, fill <span class="op">=</span> <span class="fu">as.factor</span><span class="op">(</span><span class="va">censored</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># datatagr ----------------------------------------------------------------</span></span>
-<span></span>
-<span><span class="fu">datatagr</span><span class="fu">::</span><span class="fu">lost_labels_action</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu">datatagr</span><span class="fu">::</span><span class="fu">get_lost_labels_action</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co"># datatagr::lost_labels_action(action = "error")</span></span>
+<span><span class="co"># datatagr::lost_labels_action()</span></span>
+<span><span class="co"># datatagr::get_lost_labels_action()</span></span>
+<span><span class="co"># # datatagr::lost_labels_action(action = "error")</span></span>
 <span></span>
 <span><span class="co"># cleanepi ----------------------------------------------------------------</span></span>
 <span></span>
 <span><span class="co"># check sequence of events</span></span>
 <span></span>
 <span><span class="va">dat_clean</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># arrange columns</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span></span>
-<span>    <span class="va">pid</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span>,</span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># arrange rows</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span></span>
-<span>    <span class="va">pid</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span>, <span class="va">date</span></span>
-<span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="co"># cleanepi</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">standardize_column_names</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">standardize_dates</span><span class="op">(</span>target_columns <span class="op">=</span> <span class="st">"date"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">convert_to_numeric</span><span class="op">(</span>target_columns <span class="op">=</span> <span class="st">"exp_num"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">check_date_sequence</span><span class="op">(</span></span>
 <span>    target_columns <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"last_exp_date"</span>, <span class="st">"date"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -423,53 +389,101 @@
 <span>    titre_type <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">fct_relevel</span><span class="op">(</span><span class="va">titre_type</span>,<span class="st">"Ancestral"</span>, <span class="st">"Alpha"</span><span class="op">)</span>,</span>
 <span>    censored <span class="op">=</span> <span class="fu">forcats</span><span class="fu">::</span><span class="fu">as_factor</span><span class="op">(</span><span class="va">censored</span><span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># tag with {datatagr}</span></span>
-<span>  <span class="fu">datatagr</span><span class="fu">::</span><span class="fu">make_datatagr</span><span class="op">(</span></span>
-<span>    pid <span class="op">=</span> <span class="st">"subject id"</span>,</span>
-<span>    infection_history <span class="op">=</span> <span class="st">"subject infection history"</span>,</span>
-<span>    exp_num <span class="op">=</span> <span class="st">"number of vaccine exposures"</span>,</span>
-<span>    last_exp_date <span class="op">=</span> <span class="st">"date of last exposure"</span>,</span>
-<span>    last_vax_type <span class="op">=</span> <span class="st">"type of vaccine in the last exposure"</span>,</span>
-<span>    date <span class="op">=</span> <span class="st">"date of observation of titre in serum sample"</span>,</span>
-<span>    titre_type <span class="op">=</span> <span class="st">"type of antigen challenged against serum sample"</span>,</span>
-<span>    value <span class="op">=</span> <span class="st">"titre value"</span>,</span>
-<span>    censored <span class="op">=</span> <span class="st">"censored titre value out of limit of detection [5 - 2560] bellow (-1) or above (+1)"</span>,</span>
-<span>    t_since_last_exp <span class="op">=</span> <span class="st">"time interval between last vaccine exposure and observed serum sample titre"</span></span>
+<span>  <span class="co"># tag with {linelist}</span></span>
+<span>  <span class="fu">linelist</span><span class="fu">::</span><span class="fu">make_linelist</span><span class="op">(</span> <span class="co"># ISSUE: make_linelist can rearrange columns</span></span>
+<span>    id <span class="op">=</span> <span class="st">"pid"</span>,</span>
+<span>    allow_extra <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    infection_history <span class="op">=</span> <span class="st">"infection_history"</span>,</span>
+<span>    exp_num <span class="op">=</span> <span class="st">"exp_num"</span>,</span>
+<span>    last_exp_date <span class="op">=</span> <span class="st">"last_exp_date"</span>,</span>
+<span>    last_vax_type <span class="op">=</span> <span class="st">"last_vax_type"</span>,</span>
+<span>    date <span class="op">=</span> <span class="st">"date"</span>,</span>
+<span>    titre_type <span class="op">=</span> <span class="st">"titre_type"</span>,</span>
+<span>    value <span class="op">=</span> <span class="st">"value"</span>,</span>
+<span>    censored <span class="op">=</span> <span class="st">"censored"</span>,</span>
+<span>    <span class="co"># last_vax_type = "last_vax_type", # ISSUE: can tolerate replicates</span></span>
+<span>    t_since_last_exp <span class="op">=</span> <span class="st">"t_since_last_exp"</span> <span class="co"># it is possible to pass validation without tagging?</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># validate with {datatagr}</span></span>
-<span>  <span class="fu">datatagr</span><span class="fu">::</span><span class="fu">validate_datatagr</span><span class="op">(</span></span>
-<span>    pid <span class="op">=</span> <span class="st">"numeric"</span>,</span>
-<span>    infection_history <span class="op">=</span> <span class="st">"character"</span>,</span>
-<span>    exp_num <span class="op">=</span> <span class="st">"factor"</span>,</span>
-<span>    last_exp_date<span class="op">=</span><span class="st">"Date"</span>,</span>
-<span>    last_vax_type <span class="op">=</span> <span class="st">"factor"</span>,</span>
-<span>    date <span class="op">=</span> <span class="st">"Date"</span>,</span>
-<span>    titre_type <span class="op">=</span> <span class="st">"factor"</span>,</span>
-<span>    value <span class="op">=</span> <span class="st">"numeric"</span>,</span>
-<span>    censored <span class="op">=</span> <span class="st">"factor"</span>,</span>
-<span>    t_since_last_exp <span class="op">=</span> <span class="st">"numeric"</span></span>
+<span>  <span class="co"># validate </span></span>
+<span>  <span class="fu">linelist</span><span class="fu">::</span><span class="fu">validate_linelist</span><span class="op">(</span></span>
+<span>    allow_extra <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    ref_types <span class="op">=</span> <span class="fu">linelist</span><span class="fu">::</span><span class="fu">tags_types</span><span class="op">(</span></span>
+<span>      infection_history <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"character"</span><span class="op">)</span>,</span>
+<span>      exp_num <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"factor"</span><span class="op">)</span>,</span>
+<span>      last_exp_date <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span>,</span>
+<span>      last_vax_type <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"factor"</span><span class="op">)</span>,</span>
+<span>      date <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"Date"</span><span class="op">)</span>,</span>
+<span>      titre_type <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"factor"</span><span class="op">)</span>,</span>
+<span>      value <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span>,</span>
+<span>      censored <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"factor"</span><span class="op">)</span>,</span>
+<span>      t_since_last_exp <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"numeric"</span><span class="op">)</span>,</span>
+<span>      allow_extra <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="co"># datatagr::labels_df() %&gt;% # this extract labels as column names [affects downstream] </span></span>
-<span>  <span class="fu">identity</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="co"># keep tags data frame</span></span>
+<span>  <span class="fu">linelist</span><span class="fu">::</span><span class="fu">tags_df</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">dat_clean</span></span>
 <span></span>
 <span><span class="co"># distribution of the time from the last vaccine to first observation</span></span>
 <span><span class="va">dat_clean</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">pid</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">filter</span><span class="op">(</span><span class="va">date</span> <span class="op">==</span> <span class="fu">min</span><span class="op">(</span><span class="va">date</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">slice</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">t_since_last_exp</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># what these columns mean? ------------------------------------------------</span></span>
+<span></span>
+<span><span class="co">#' data dictionary: https://seroanalytics.org/epikinetics/articles/data.html</span></span>
+<span><span class="co">#' reference paper: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(24)00484-5/fulltext</span></span>
+<span><span class="co">#' location: https://github.com/seroanalytics/epikinetics/tree/main/inst</span></span>
+<span></span>
+<span><span class="co"># 335 subjects where followed up</span></span>
+<span><span class="va">dat_clean</span> <span class="op">%&gt;%</span> <span class="fu">count</span><span class="op">(</span><span class="va">pid</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">## what "titre type" means? -------------------------------------------------</span></span>
+<span></span>
+<span><span class="co">#' In the time series, </span></span>
+<span><span class="co">#' each subject had monthly serum measurements </span></span>
+<span><span class="co">#' for three types of antigens ("titre_type").</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' Serum samples where challenged against Ancestral, Alpha and Delta antigens.</span></span>
+<span><span class="co">#' </span></span>
+<span><span class="co">#' The column "value" measures the titre of </span></span>
+<span><span class="co">#' the neutralizing effect of each sample against each antigen </span></span>
+<span></span>
+<span><span class="va">dat_clean</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">id</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="va">date</span><span class="op">)</span> <span class="co">#%&gt;% </span></span>
+<span>  <span class="co"># # select time invariant columns</span></span>
+<span>  <span class="co"># dplyr::select(</span></span>
+<span>  <span class="co">#   id, infection_history, exp_num, last_exp_date, last_vax_type,</span></span>
+<span>  <span class="co">#   dplyr::everything()</span></span>
+<span>  <span class="co"># )</span></span>
+<span></span>
+<span><span class="co">## what "censored" means? ----------------------------------------------------</span></span>
+<span></span>
+<span><span class="co"># context: censored regression model</span></span>
+<span><span class="co"># the "value" as the outcome is censored above or below</span></span>
+<span><span class="co"># because the it was measured outside the limits of detection</span></span>
+<span><span class="co"># threshold limit below: 5</span></span>
+<span><span class="co"># threshold limit above: 2560</span></span>
+<span></span>
+<span><span class="va">dat_clean</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">value</span>, fill <span class="op">=</span> <span class="fu">as.factor</span><span class="op">(</span><span class="va">censored</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span></span>
 <span><span class="co">## subject table -----------------------------------------------------------</span></span>
 <span></span>
 <span><span class="co"># subject time-invariant data</span></span>
 <span><span class="va">dat_subject</span> <span class="op">&lt;-</span> <span class="va">dat_clean</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="co"># {datatagr} reacts with dplyr::select() but not with dplyr::count() when losing tags</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">pid</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">pid</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">count</span><span class="op">(</span><span class="va">id</span>, <span class="va">infection_history</span>, <span class="va">exp_num</span>, <span class="va">last_exp_date</span>, <span class="va">last_vax_type</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="co"># table 1: time-invariant columns</span></span>
 <span><span class="va">dat_subject</span> <span class="op">%&gt;%</span> </span>
@@ -504,7 +518,7 @@
 <span>  <span class="co"># incidence2::cumulate() %&gt;% </span></span>
 <span>  <span class="co"># plot</span></span>
 <span>  <span class="fu">incidence2</span><span class="fu">:::</span><span class="fu">plot.incidence2</span><span class="op">(</span></span>
-<span>    fill <span class="op">=</span> <span class="st">"last_vax_type"</span></span>
+<span>    fill <span class="op">=</span> <span class="st">"last_vax_type"</span> <span class="co"># change: "infection_history", "titre_type", or "last_vax_type"</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="co"># observations ------------------------------------------------------------</span></span>
@@ -524,7 +538,7 @@
 <span>    <span class="co"># complete_dates = TRUE # relevant to downstream analysis [time-series data]</span></span>
 <span>  <span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">incidence2</span><span class="fu">:::</span><span class="fu">plot.incidence2</span><span class="op">(</span></span>
-<span>    fill <span class="op">=</span> <span class="st">"censored"</span></span>
+<span>    fill <span class="op">=</span> <span class="st">"censored"</span> <span class="co"># change: "censored" or "infection_history", "titre_type", or "last_vax_type"</span></span>
 <span>  <span class="op">)</span></span></code></pre>
 </div>
 <!--
@@ -592,7 +606,7 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/epikinetics-descriptive.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/epikinetics-descriptive.html",
   "dateCreated": "2024-10-09",
-  "dateModified": "2024-10-08",
+  "dateModified": "2024-10-09",
   "datePublished": "2024-10-09"
 }
 
