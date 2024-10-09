@@ -290,6 +290,7 @@ The data files for the tutorial can be downloaded manually here:
 - <https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip>
 - <https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv>
 - <https://epiverse-trace.github.io/tutorials-early/data/delta_full-messy.csv>
+- <https://epiverse-trace.github.io/tutorials-early/data/linelist-date_of_birth.csv>
 
 ## Your Questions
 
