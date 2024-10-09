@@ -74,10 +74,10 @@ sim_data
 
 ## Additional Resources on Outbreak Data
 
-This is the default configuration of `{simulist}`, should want to know more about its functionalities, 
-check [middle](https://github.com/epiverse-trace/tutorials-middle/) and [late](https://epiverse-trace.github.io/tutorials-late/) tutorials.
+This is the default configuration of `{simulist}`, if you want to know more about its functionalities
+check the [documentation website](https://epiverse-trace.github.io/simulist/).
 
-You can find datasets from real emergencies from the past at the [`{outbreak}` R package documentation](https://outbreak-info.github.io/R-outbreak-info/)
+You can also find data sets from real emergencies from the past at the [`{outbreaks}` R package](https://www.reconverse.org/outbreaks/).
 
 :::::::::::::::::::
 
