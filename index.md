@@ -2,8 +2,7 @@
 site: sandpaper::sandpaper_site
 ---
 
-This is a new lesson built with [The Carpentries Workbench][workbench]. 
+This is an [Epiverse-TRACE][epiversetrace] tutorial built with [The Carpentries Workbench][workbench]. 
 
-
-[workbench]: https://carpentries.github.io/sandpaper-docs
-
+[epiversetrace]: https://epiverse-trace.github.io/
+[workbench]: https://carpentries.github.io/workbench/
