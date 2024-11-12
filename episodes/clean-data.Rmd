@@ -392,18 +392,23 @@ any inconsistencies or errors in the chronological order of events, allowing you
 
 #### What are the incorrect date sequences?
 
-Let's print another preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Incorrect date sequence" tab to identify what IDs had this issue. 
+Let's print another preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the 
+"Incorrect date sequence" tab to identify what IDs had this issue. 
 
 :::::::::::::::::::::::::
 
 
 ### Dictionary-based substitution
 
-In the realm of data pre-processing, it's common to encounter scenarios where certain columns in a dataset, such as the “gender” column in our simulated Ebola dataset,
-are expected to have specific values or factors. However, it's also common for unexpected or erroneous values to appear in these columns, which need to be replaced with appropriate values. The `{cleanepi}` package offers support for dictionary-based substitution, a method that allows you to replace values in specific columns based on mappings defined in a dictionary. 
+In the realm of data pre-processing, it's common to encounter scenarios where certain columns in a dataset, 
+such as the “gender” column in our simulated Ebola dataset, are expected to have specific values or factors. 
+However, it's also common for unexpected or erroneous values to appear in these columns, which need to be replaced with
+appropriate values. The `{cleanepi}` package offers support for dictionary-based substitution, a method that allows you 
+to replace values in specific columns based on mappings defined in a dictionary. 
 This approach ensures consistency and accuracy in data cleaning.
 
-Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for epidemiological data. The example dictionary below includes mappings for the “gender” column.
+Moreover, `{cleanepi}` provides a built-in dictionary specifically tailored for epidemiological data. The example 
+dictionary below includes mappings for the “gender” column.
 
 ```{r}
 test_dict <- base::readRDS(
@@ -414,7 +419,8 @@ test_dict <- base::readRDS(
 test_dict
 ```
 
-Now, we can use this dictionary to standardize values of the the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to utilize this functionality:
+Now, we can use this dictionary to standardize values of the the “gender” column according to predefined categories. 
+Below is an example code chunk demonstrating how to utilize this functionality:
 
 ```{r}
 sim_ebola_data <- cleanepi::clean_using_dictionary(
@@ -425,16 +431,19 @@ sim_ebola_data <- cleanepi::clean_using_dictionary(
 sim_ebola_data
 ```
 
-This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is accurately categorized and ready for further analysis.
+This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is 
+accurately categorized and ready for further analysis.
 
 
 :::::::::::::::::::::::::: spoiler
 
 #### How to create your own data dictionary?
 
-Note that, when the column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error. 
+Note that, when the column in the dataset contains values that are not in the dictionary, the function 
+`cleanepi::clean_using_dictionary()` will raise an error. 
 
-You can start a custom dictionary with a data frame inside or outside R. You can use the function `cleanepi::add_to_dictionary()` to include new elements in the dictionary. For example:
+You can start a custom dictionary with a data frame inside or outside R. You can use the function 
+`cleanepi::add_to_dictionary()` to include new elements in the dictionary. For example:
 
 ```{r}
 new_dictionary <- tibble::tibble(
@@ -453,16 +462,23 @@ new_dictionary <- tibble::tibble(
 new_dictionary
 ```
 
-You can read more details in the section about "Dictionary-based data substituting" in the package ["Get started" vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
+You can read more details in the section about "Dictionary-based data substituting" in the package 
+["Get started" vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
 
 ::::::::::::::::::::::::::
 
 
 ### Calculating time span between different date events
 
-In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time difference between today and the first case reported) or the duration between sample collection and analysis (i.e., the time difference between today and the sample collection). The most common example is to calculate the age of all the subjects given their date of birth (i.e., the time difference between today and the date of birth).
+In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression 
+of a disease outbreak (i.e., the time difference between today and the first case reported) or the duration between 
+sample collection and analysis (i.e., the time difference between today and the sample collection). The most common 
+example is to calculate the age of all the subjects given their date of birth (i.e., the time difference between today 
+and the date of birth).
 
-The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the time elapsed since the date of sample for the case identified
+The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at 
+different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
+time elapsed since the date of sample for the case identified
  until the date this document was generated (`r Sys.Date()`).
  
 ```{r}
@@ -479,7 +495,9 @@ sim_ebola_data %>%
   dplyr::select(case_id, date_sample, years_since_collection, remainder_months)
 ```
 
-After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and `remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date of sample collection for each case, measured in years, and the remaining time measured in months.
+After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and 
+`remainder_months` are added to the **sim_ebola_data** dataset, containing the calculated time elapsed since the date 
+of sample collection for each case, measured in years, and the remaining time measured in months.
 
 ::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -561,7 +579,9 @@ dat_clean %>%
   )
 ```
 
-You can investigate the maximum values of variables using `skimr::skim()`. Instead of `base::cut()` you can also use `Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))`, which gives calculate the maximum value and do not require more arguments. 
+You can investigate the maximum values of variables using `skimr::skim()`. Instead of `base::cut()` you can also use 
+`Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))`, which gives calculate the maximum value and do not require more 
+arguments. 
 
 ::::::::::::::::::::::::::
 
@@ -569,12 +589,16 @@ You can investigate the maximum values of variables using `skimr::skim()`. Inste
 
 ## Multiple operations at once
 
-Performing data cleaning operations individually can be time-consuming and error-prone. The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
+Performing data cleaning operations individually can be time-consuming and error-prone. The `{cleanepi}` package 
+simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform 
+multiple operations at once.
 
-The `clean_data()` function applies a series of predefined data cleaning operations to the input dataset. Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
+The `clean_data()` function applies a series of predefined data cleaning operations to the input dataset. Here's an 
+example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
 
 
-Further more, you can combine multiple data cleaning tasks via the pipe operator in "%>%", as shown in the below code snippet. 
+Further more, you can combine multiple data cleaning tasks via the pipe operator in "%>%", as shown in the below code 
+snippet. 
 
 ```{r,warning = FALSE, message = FALSE}
 # Perfom the cleaning operations using the pipe (%>%) operator
@@ -633,8 +657,13 @@ You can view the report using the function `cleanepi::print_report(cleaned_data)
 
 ::::::::::::::::::::::::::::::::::::
 
+
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Use `{cleanepi}` package to clean and standardize epidemic and outbreak data
+- Understand how to use `{cleanepi}` to perform common data cleansing tasks and epidemiology related operations
+- View the data cleaning report in a browser, consult it and make decisions. 
+ 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
