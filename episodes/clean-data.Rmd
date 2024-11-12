@@ -329,20 +329,24 @@ sim_ebola_data <- cleanepi::standardize_dates(
 sim_ebola_data
 ```
 
-This function coverts the values in the target columns, or will automatically figure out the date columns within the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
+This function converts the values in the target columns, or will automatically figure out the date columns within 
+the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  format.
 
 ::::::::::::::::::: discussion
 
 #### How is this possible?
 
-We invite you to find the key package that works internally by reading the Details section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
+We invite you to find the key package that works internally by reading the Details section of the 
+[Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
 :::::::::::::::::::
 
 ### Converting to numeric values
 
-In the raw dataset, some column can come with mixture of character and numerical values, and you want to covert the character values explicitly into numeric. For example, in our simulated data set, in the age column some entries are written in words. 
-In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below code chunk.
+In the raw dataset, some column can come with mixture of character and numerical values, and you want to convert the 
+character values explicitly into numeric. For example, in our simulated data set, in the age column some entries are 
+written in words. In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below 
+code chunk.
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
   target_columns = "age"
@@ -355,7 +359,8 @@ sim_ebola_data
 
 ### Multiple language support
 
-Thanks to the `{numberize}` package, we can convert numbers written as English, French or Spanish words to positive integer values!
+Thanks to the `{numberize}` package, we can convert numbers written as English, French or Spanish words to positive 
+integer values!
 
 :::::::::::::::::::::::::
 
