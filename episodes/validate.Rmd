@@ -30,13 +30,13 @@ This episode requires you to:
 
 In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
 it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
-analyses. Specifically, this involves verifying the presence and correct data type of certain input columns within
-your dataset, a process commonly referred to as "tagging." Additionally, it's crucial to implement measures to 
+analyses. Specifically, this involves verifying the presence and correct data type of certain  columns within
+your dataset, a process commonly referred to as "tagging." Additionally. it's crucial to implement measures to 
 validate that these tagged columns are not inadvertently deleted during further data processing steps.
 
 
-This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package.  
-Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
+This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
+ package. Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
 to create a linelist. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
 
@@ -45,14 +45,15 @@ the package `{dplyr}`, so let's also call to the tidyverse package:
 library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data
 library(here) # for easy file referencing
-library(linelist)
+library(linelist) # for taggin and validating
 ```
 
 ::::::::::::::::::: checklist
 
 ### The double-colon
 
-The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the 
+current environment. 
 
 For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
 
@@ -63,7 +64,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 
 Import the dataset following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
- This involves loading the dataset into our environment and view its structure and content. 
+ This involves loading the dataset into the working environment and view its structure and content. 
 
 ```{r, eval=FALSE}
 # Read data
