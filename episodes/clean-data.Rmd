@@ -633,9 +633,8 @@ cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 
-:::::::::::::::::::::::::::::::::::: checklist
 
-### Printing the clean report
+## Cleaning report
 
 The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing 
 operations conducted during the analysis. This report is presented as a webpage with multiple sections. Each section 
@@ -644,8 +643,6 @@ that particular operation. This interactive approach enables users to efficientl
 individual cleansing steps within the broader data cleansing process.
 
 You can view the report using the function `cleanepi::print_report(cleaned_data)`. 
-
-
 <p><figure>
     <img src="fig/report_demo.png"
          alt="Data cleaning report" 
@@ -655,8 +652,6 @@ You can view the report using the function `cleanepi::print_report(cleaned_data)
     </figcaption>
 </figure>
 
-::::::::::::::::::::::::::::::::::::
-
 
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
@@ -664,6 +659,7 @@ You can view the report using the function `cleanepi::print_report(cleaned_data)
 - Use `{cleanepi}` package to clean and standardize epidemic and outbreak data
 - Understand how to use `{cleanepi}` to perform common data cleansing tasks and epidemiology related operations
 - View the data cleaning report in a browser, consult it and make decisions. 
- 
-::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::
+
 
