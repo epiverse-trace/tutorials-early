@@ -73,7 +73,7 @@ Load contact and population data from socialmixr
 ## Output
  
 ```{r polymod_uk, echo = FALSE}
-2+2
+2 + 2
 ```
 
 
@@ -104,7 +104,7 @@ Load contact and population data for Poland from socialmixr::polymod using the f
 :::::::::::::::::::::::: solution 
 
 ```{r polymod_poland}
-2+2
+2 + 2
 ```
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
