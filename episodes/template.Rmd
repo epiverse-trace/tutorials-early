@@ -62,17 +62,10 @@ Lesson content
 
 ## Challenge 1 : can the learner run existing code
 
-Load contact and population data from socialmixr::polymod
+Load contact and population data from socialmixr
 
 ```r
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
-contact_data
+2+2
 ```
 
 :::::::::::::::::::::::: solution 
@@ -80,14 +73,7 @@ contact_data
 ## Output
  
 ```{r polymod_uk, echo = FALSE}
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  polymod,
-  countries = "United Kingdom",
-  age.limits = c(0, 20, 40),
-  symmetric = TRUE
-)
-contact_data
+2+2
 ```
 
 
@@ -118,14 +104,7 @@ Load contact and population data for Poland from socialmixr::polymod using the f
 :::::::::::::::::::::::: solution 
 
 ```{r polymod_poland}
-polymod <- socialmixr::polymod
-contact_data <- socialmixr::contact_matrix(
-  polymod,
-  countries = "Poland",
-  age.limits = c(0, 15, 50),
-  symmetric = TRUE
-)
-contact_data
+2+2
 ```
 :::::::::::::::::::::::::::::::::
 ::::::::::::::::::::::::::::::::::::::::::::::::
