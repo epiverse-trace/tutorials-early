@@ -116,15 +116,13 @@ Puedes utilizar estos términos para referirte a **operaciones de limpieza**:
 
 ## Una inspección rápida
 
-La exploración e inspección rápidas del conjunto de datos son cruciales antes de sumergirse en cualquier tarea de análisis. En `{cleanepi}`
-simplifica este proceso con la función `scan_data()` función Veamos cómo puedes utilizarla:
+La exploración e inspección rápidas del conjunto de datos son cruciales antes de sumergirse en cualquier tarea de análisis. `{cleanepi}` simplifica este proceso con la función `scan_data()`. Veamos cómo puedes utilizarla:
 
 ```{r}
 cleanepi::scan_data(raw_ebola_data)
 ```
 
-Los resultados ofrecen una visión general del contenido de cada columna, incluidos los nombres de las columnas y el porcentaje de algunos datos
-tipos de datos por columna.
+Los resultados ofrecen una visión general del contenido de cada columna, incluidos los nombres de las columnas y el porcentaje de algunos datos y los tipos de datos por columna.
 Puedes ver que los nombres de las columnas del conjunto de datos son descriptivos pero carecen de coherencia, ya que algunas están compuestas por
 varias palabras separadas por espacios en blanco. Además, algunas columnas contienen más de un tipo de datos, y hay
 valores perdidos en otras.
@@ -144,15 +142,14 @@ sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
 names(sim_ebola_data)
 ```
 
-Si quieres mantener ciertos nombres de columna sin someterlos al proceso de normalización, puedes utilizar
-la dirección `keep` argumento de la función `cleanepi::standardize_column_names()`. Este argumento acepta un vector de columna
+Si quieres mantener ciertos nombres de columna sin someterlos al proceso de normalización, puedes utilizar el argumento `keep` de la función `cleanepi::standardize_column_names()`. Este argumento acepta un vector de nombres de columnas
 que deben mantenerse sin cambios.
 
 ::::::::::::::::::::::::::::::::::::: desafío
 
 - ¿Qué diferencias puedes observar en los nombres de las columnas?
 
-- Normaliza los nombres de las columnas del conjunto de datos de entrada, pero mantén los nombres de la primera columna tal cual.
+- Normaliza los nombres de las columnas del conjunto de datos de entrada, pero mantén los nombres de la primera columna tal cual está.
 
 ::::::::::::::::: sugerencia
 
@@ -164,19 +161,19 @@ Puedes probar `cleanepi::standardize_column_names(data = raw_ebola_data, keep = 
 
 ### Eliminar irregularidades
 
-Los datos brutos pueden contener irregularidades como **duplicados** filas, **vacío** filas y columnas, o **constante** columnas
+Los datos brutos pueden contener irregularidades como filas **duplicadas**, filas y columnas **vacías**, o columnas **constantes**
 (donde todas las entradas tienen el mismo valor.) Funciones de `{cleanepi}` como `remove_duplicates()` y `remove_constants()`
-eliminar esas irregularidades, como se demuestra en el fragmento de código siguiente.
+eliminar esas irregularidades, como se demuestra en el código siguiente.
 
 ```{r}
-# Remove constants
+# Remueve constantes
 sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
 ```
 
 Ahora, ¡imprime la salida para identificar qué columna constante has eliminado!
 
 ```{r}
-# Remove duplicates
+# Remueve duplicados
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
@@ -198,12 +195,12 @@ cleanepi::print_report(sim_ebola_data)
 
 ::::::::::::::::::::: desafío
 
-En el siguiente marco de datos:
+En el siguiente conjunto de datos:
 
 ```{r, echo=FALSE, eval=TRUE}
 library(tidyverse)
 
-#create dataset
+#crea conjunto de datos
 df <- tibble(
   col1 = c(1, 2),
   col2 = c(1, 3)
@@ -222,13 +219,12 @@ df
 Qué columnas o filas son:
 
 - ¿Duplicadas?
-- ¿vacío?
-- ¿constante?
+- ¿Vacía?
+- ¿Constante?
 
 ::::::::::::::: pista
 
-Duplicados se refiere sobre todo a filas replicadas. Las filas o columnas vacías pueden ser un subconjunto dentro del conjunto de filas constantes
-o columnas.
+Duplicados se refiere sobre todo a filas repetidas. Las filas o columnas vacías pueden ser un subconjunto dentro del conjunto de filas constantes o columnas.
 
 :::::::::::::::
 
@@ -240,9 +236,9 @@ o columnas.
 - filas vacías: 6
 - columnas vacías: 5
 - filas constantes: 6
-- cols constantes: 5
+- columnas constantes: 5
 
-Observa a los alumnos que el usuario puede crear nuevas columnas o filas constantes tras eliminar algunas iniciales.
+Haz notar a tus estudiantes que el usuario puede crear nuevas columnas o filas constantes tras eliminar algunas.
 
 ```{r}
 df %>%
@@ -257,8 +253,8 @@ df %>%
 
 ### Sustitución de valores perdidos
 
-Además de las regularidades, los datos brutos pueden contener valores perdidos que pueden estar codificados por diferentes cadenas,
-incluidas las vacías. Para garantizar un análisis sólido, es una buena práctica sustituir todos los valores perdidos por `NA` en el
+Además de las irregularidades, los datos brutos pueden contener valores perdidos que pueden estar codificados por diferentes cadenas,
+incluidas las vacías. Para garantizar un análisis sólido, es una buena práctica es sustituir todos los valores perdidos por `NA` en el
 conjunto de datos completo. A continuación se muestra un fragmento de código que demuestra cómo puedes conseguirlo en `{cleanepi}`:
 
 ```{r}
@@ -329,17 +325,15 @@ del conjunto de datos (si `target_columns = NULL`) y las convertirá en **Ymd** 
 
 #### ¿Cómo es posible?
 
-Te invitamos a que encuentres el paquete de claves que funciona internamente leyendo la sección Detalles del
-[Manual de referencia de las variables de fecha normalizadas](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details) ¡!
+¡Te invitamos a que encuentres el paquete de claves que funciona internamente leyendo la sección Detalles del
+[Manual de referencia de las variables de fecha normalizadas](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
 :::::::::::::::::::
 
 ### Convertir a valores numéricos
 
-En el conjunto de datos sin procesar, algunas columnas pueden contener una mezcla de valores numéricos y de caracteres, y querrás convertirlos en valores numéricos.
-valores de caracteres explícitamente en numéricos. Por ejemplo, en nuestro conjunto de datos simulado, en la columna edad algunas entradas son
-escritas con palabras. En `{cleanepi}` la función `convert_to_numeric()` realiza dicha conversión como se ilustra a continuación
-fragmento de código.
+En el conjunto de datos sin procesar, algunas columnas pueden contener una mezcla de valores numéricos y de caracteres.  Querrás convertir los valores de caracteres explícitamente en numéricos. Por ejemplo, en nuestro conjunto de datos simulado, en la columna edad algunas entradas están
+escritas con palabras. En `{cleanepi}` la función `convert_to_numeric()` realiza dicha conversión como se ilustra a continuación en el código.
 
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
@@ -353,21 +347,20 @@ sim_ebola_data
 
 ### Soporte para varios idiomas
 
-Gracias al `{numberize}` paquete, podemos convertir números escritos como palabras en inglés, francés o español a positivo
-¡enteros positivos!
+Gracias al `{numberize}` paquete, podemos convertir números escritos como palabras en inglés, francés o español a ¡números enteros positivos!
 
 :::::::::::::::::::::::::
 
 ## Operaciones relacionadas con la epidemiología
 
-Además de las tareas habituales de limpieza de datos, como las comentadas en la sección anterior, el `{cleanepi}` paquete ofrece
+Además de las tareas habituales de limpieza de datos, como las comentadas en la sección anterior, el paquete `{cleanepi}` ofrece
 funcionalidades adicionales adaptadas específicamente para procesar y analizar datos de brotes y epidemias. Esta sección
 cubre algunas de estas tareas especializadas.
 
-### Comprobación de la secuencia de eventos fechados
+### Comprobación de la secuencia de eventos con fechas
 
-Garantizar el orden y la secuencia correctos de los eventos fechados es crucial en el análisis de datos epidemiológicos, especialmente
-cuando se analizan enfermedades infecciosas, en las que la cronología de acontecimientos como la aparición de síntomas y la recogida de muestras es esencial.
+Garantizar el orden y la secuencia correctos de los eventos con fechas es crucial en el análisis de datos epidemiológicos, especialmente
+cuando se analizan enfermedades infecciosas, en las que la cronología de acontecimientos como la aparición de síntomas y la recolección de muestras es esencial.
 El sitio `{cleanepi}` proporciona una útil función llamada `check_date_sequence()` precisamente para este fin.
 
 Aquí tienes un fragmento de código de ejemplo que demuestra el uso de la función `check_date_sequence()` en nuestro conjunto de datos simulados sobre el ébola
@@ -407,7 +400,7 @@ de abajo incluye correspondencias para la columna "sexo".
 test_dict <- base::readRDS(
   system.file("extdata", "test_dict.RDS", package = "cleanepi")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
+  dplyr::as_tibble() # para una salida simple del conjunto de datos
 
 test_dict
 ```
@@ -434,7 +427,7 @@ categorizados con precisión y listos para su posterior análisis.
 Ten en cuenta que, cuando la columna del conjunto de datos contiene valores que no están en el diccionario, la función
 `cleanepi::clean_using_dictionary()` provocará un error.
 
-Puedes iniciar un diccionario personalizado con un marco de datos dentro o fuera de R. Puedes utilizar la función
+Puedes iniciar un diccionario personalizado con un conjunto de datos dentro o fuera de R. Puedes utilizar la función
 `cleanepi::add_to_dictionary()` para incluir nuevos elementos en el diccionario. Por ejemplo
 
 ```{r}
@@ -455,7 +448,7 @@ new_dictionary
 ```
 
 Puedes leer más detalles en la sección sobre "Sustitución de datos basada en el diccionario" del paquete
-["Viñeta "Primeros pasos](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
+[Viñeta "Primeros pasos"](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
 
 ::::::::::::::::::::::::::
 
@@ -463,11 +456,11 @@ Puedes leer más detalles en la sección sobre "Sustitución de datos basada en 
 
 En el análisis de datos epidemiológicos, también es útil seguir y analizar acontecimientos dependientes del tiempo, como la progresión
 de un brote de enfermedad (es decir, la diferencia de tiempo entre el día de hoy y el primer caso notificado) o la duración entre
-la recogida de muestras y el análisis (es decir, la diferencia de tiempo entre hoy y la recogida de muestras). Lo más habitual
-es calcular la edad de todos los sujetos a partir de su fecha de nacimiento (es decir, la diferencia de tiempo entre el día de hoy y la recogida de muestras).
+la recogida de muestras y el análisis (es decir, la diferencia de tiempo entre hoy y la recolección de muestras). Lo más habitual
+es calcular la edad de todos los sujetos a partir de su fecha de nacimiento (es decir, la diferencia de tiempo entre el día de hoy
 y la fecha de nacimiento).
 
-En `{cleanepi}` ofrece una cómoda función para calcular el tiempo transcurrido entre dos acontecimientos fechados en
+En `{cleanepi}` se ofrece una cómoda función para calcular el tiempo transcurrido entre dos acontecimientos en
 diferentes escalas temporales. Por ejemplo, el siguiente fragmento de código utiliza la función `cleanepi::timespan()` para calcular el
 tiempo transcurrido desde la fecha de la muestra para el caso identificado
 hasta la fecha en que se generó este documento (`r Sys.Date()`).
@@ -488,7 +481,7 @@ sim_ebola_data %>%
 
 Después de ejecutar la función `cleanepi::timespan()` dos nuevas columnas llamadas `years_since_collection` y
 `remainder_months` se añaden a **sim\_ebola\_datos** que contiene el tiempo transcurrido calculado desde la fecha
-de recogida de la muestra para cada caso, medido en años, y el tiempo restante medido en meses.
+de recolección de la muestra para cada caso, medido en años, y el tiempo restante medido en meses.
 
 ::::::::::::::::::::::::::::::::::::::::::::::: desafío
 
@@ -511,7 +504,7 @@ Antes de calcular la edad, puede que necesites
 
 - normalizar los nombres de las columnas
 - normalizar fechas columnas
-- reemplazar las cadenas missing as por una entrada missing válida
+- reemplazar las cadenas con datos faltantes por una entrada de datos faltantes válida
 
 ::::::::::::::::::::::::::::
 
@@ -521,17 +514,18 @@ En la solución añadimos `date_first_pcr_positive_test` dado que proporcionará
 
 ```{r}
 dat_clean <- dat %>%
-  # standardize column names and dates
+  # estandarizar los nombres de columnas y las fechas
   cleanepi::standardize_column_names() %>%
   cleanepi::standardize_dates(
     target_columns = c("date_of_birth", "date_first_pcr_positive_test")
   ) %>%
-  # replace from strings to a valid missing entry
+  # reemplazar desde cadenas de caracteres por entradas con valores faltantes que
+  # son válidas
   cleanepi::replace_missing_values(
     target_columns = "sex",
     na_strings = "-99"
   ) %>%
-  # calculate the age in 'years' and return the remainder in 'months'
+  # calcular la edad en años y devolver el tiempo restante en meses
   cleanepi::timespan(
     target_column = "date_of_birth",
     end_date = Sys.Date(),
@@ -551,7 +545,7 @@ La alternativa más sencilla es utilizar `Hmisc::cut2()`. También puedes utiliz
 
 ```{r}
 dat_clean %>%
-  # select to conveniently view timespan output
+  # seleccionar para ver cómodamente los resultados de los intervalos de tiempo
   dplyr::select(
     study_id,
     sex,
@@ -559,19 +553,19 @@ dat_clean %>%
     date_of_birth,
     age_in_years
   ) %>%
-  # categorize the age numerical variable [add as a challenge hint]
+  # categorizar la variable numérica edad [añadir como pista de desafío].
   dplyr::mutate(
     age_category = base::cut(
       x = age_in_years,
-      breaks = c(0, 20, 35, 60, Inf), # replace with max value if known
+      breaks = c(0, 20, 35, 60, Inf), # reemplazar con el valor máximo si es conocido
       include.lowest = TRUE,
       right = FALSE
     )
   )
 ```
 
-Puedes investigar los valores máximos de las variables utilizando `skimr::skim()`. en lugar de `base::cut()` también puedes utilizar
-`Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))` que da calcular el valor máximo y no requiere más
+Puedes investigar los valores máximos de las variables utilizando `skimr::skim()` en lugar de `base::cut()`. También puedes utilizar
+`Hmisc::cut2(x = age_in_years,cuts = c(20,35,60))` que calcula el valor máximo y no requiere más
 argumentos.
 
 ::::::::::::::::::::::::::
@@ -580,18 +574,17 @@ argumentos.
 
 ## Varias operaciones a la vez
 
-Realizar las operaciones de limpieza de datos individualmente puede llevar mucho tiempo y ser propenso a errores. El sitio `{cleanepi}` paquete
+Realizar las operaciones de limpieza de datos individualmente puede llevar mucho tiempo y ser propenso a errores. El sitio del paquete `{cleanepi}` 
 simplifica este proceso ofreciendo una cómoda función envolvente llamada `clean_data()` que te permite realizar
 varias operaciones a la vez.
 
-La página `clean_data()` aplica una serie de operaciones predefinidas de limpieza de datos al conjunto de datos de entrada. Aquí tienes una
+La página `clean_data()` aplica una serie de operaciones predefinidas de limpieza de datos al conjunto de datos de entrada. Aquí tienes un
 fragmento de código de ejemplo que ilustra cómo utilizar `clean_data()` en un conjunto de datos de Ébola simulado sin procesar:
 
-Además, puedes combinar varias tareas de limpieza de datos mediante el operador de tubería "%>%", como se muestra en el código siguiente
-fragmento.
+Además, puedes combinar varias tareas de limpieza de datos mediante el operador pipe "%>%", como se muestra en el código siguiente:
 
 ```{r, warning=FALSE, message=FALSE}
-# Perfom the cleaning operations using the pipe (%>%) operator
+# Realiza las operaciones de limpieza mediante el operador pipe (%>%)
 cleaned_data <- raw_ebola_data %>%
   cleanepi::standardize_column_names() %>%
   cleanepi::remove_constants() %>%
@@ -625,7 +618,7 @@ cleaned_data %>%
 
 ## Informe de limpieza
 
-En `{cleanepi}` El paquete genera un informe completo en el que se detallan las conclusiones y acciones de toda la limpieza de datos
+El paquete `{cleanepi}` genera un informe completo en el que se detallan las conclusiones y acciones de toda la limpieza de datos
 realizadas durante el análisis. Este informe se presenta como una página web con varias secciones. Cada sección
 corresponde a una operación específica de limpieza de datos, y al hacer clic en cada sección puedes acceder a los resultados de
 esa operación concreta. Este enfoque interactivo permite a los usuarios revisar y analizar eficazmente los resultados de
@@ -644,7 +637,7 @@ Puedes ver el informe utilizando la función `cleanepi::print_report(cleaned_dat
 
 ::::::::::::::::::::::::::::::::::::: puntos clave
 
-- Utiliza `{cleanepi}` para limpiar y normalizar los datos de epidemias y brotes epidémicos
+- Utilizar `{cleanepi}` para limpiar y normalizar los datos de epidemias y brotes epidémicos
 - Comprender cómo utilizar `{cleanepi}` para realizar tareas comunes de limpieza de datos y operaciones relacionadas con la epidemiología
 - Ver el informe de limpieza de datos en un navegador, consultarlo y tomar decisiones.
 
