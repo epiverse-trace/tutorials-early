@@ -18,76 +18,73 @@ exercises: 10
 
 ::::::::::::::::::::: prerrequisito
 
-Este episodio requiere que
+Este episodio requiere:
 
-- Descargar el [ébola\_simulada\_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
-- Guárdalo en la carpeta `data/` carpeta.
+- Descargar el archivo [ébola\_simulada\_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Guárdalo en la carpeta `data/`.
 
 :::::::::::::::::::::
 
 ## Introducción
 
-En el proceso de análisis de datos sobre brotes, es esencial asegurarse de que el conjunto de datos está limpio, curado y estandarizado,
+En el proceso de análisis de datos sobre brotes es esencial asegurarse de que el conjunto de datos está limpio, curado, estandarizado
 y válido para facilitar un análisis preciso y reproducible.
-Este episodio se centra en la limpieza de los datos de epidemias y brotes epidémicos mediante el programa
-[cleanepi](https://epiverse-trace.github.io/cleanepi/) paquete,
+Este episodio se centra en la limpieza de los datos de epidemias y brotes epidémicos mediante el paquete
+[cleanepi](https://epiverse-trace.github.io/cleanepi/),
 A efectos de demostración, trabajaremos con un conjunto de datos simulado de casos de ébola.
 
 Empecemos cargando el paquete `{rio}` para leer los datos y el paquete `{cleanepi}`
-para limpiarlos. Utilizaremos la tubería `%>%` para conectar algunas de sus funciones, incluidas otras de
-el paquete `{dplyr}` así que vamos a llamar también al paquete tidyverse:
+para limpiarlos. Utilizaremos el _pipe_ `%>%` para conectar algunas de sus funciones e incluir otras del paquete `{dplyr}` así que vamos a llamar también al paquete `{tidyverse}`:
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-# Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
-library(rio) # for importing data
-library(here) # for easy file referencing
+# Cargar paquetes
+library(tidyverse) # para poder usar las funciones de {dplyr} y el pipe %>%
+library(rio) # para importar los datos
+library(here) # para referencia sencilla de archivos
 library(cleanepi)
 ```
 
 ::::::::::::::::::: lista de comprobación
 
-### El doble punto
+### Doble dos puntos
 
-El doble punto `::` en R te permite llamar a una función específica de un paquete sin cargar todo el paquete en la función
-en el entorno actual.
+El doble dos punto `::` en R te permite llamar a una función específica de un paquete sin cargar todo el paquete en el entorno actual.
 
-Por ejemplo `dplyr::filter(data, condition)` utiliza `filter()` del `{dplyr}` paquete.
+Por ejemplo `dplyr::filter(data, condition)` utiliza la función `filter()` del paquete `{dplyr}`.
 
 Esto nos ayuda a recordar las funciones del paquete y a evitar conflictos de espacio de nombres.
 
 :::::::::::::::::::
 
 El primer paso es importar el conjunto de datos al entorno de trabajo, lo que puede hacerse siguiendo las directrices
-descritas en el [Leer datos del caso](../episodes/read-cases.Rmd) episodio. Esto implica cargar
-el conjunto de datos en `R` entorno y ver su estructura y contenido.
+descritas en el episodio [Leer datos del caso](../episodes/read-cases.Rmd). Esto implica cargar
+el conjunto de datos en el entorno de `R` y ver su estructura y contenido.
 
 ```{r, eval=FALSE, echo=TRUE, message=FALSE}
-# Read data
-# e.g.: if path to file is data/simulated_ebola_2.csv then:
+# Leer los datos
+# ej.: si el camino al archivo es data/simulated_ebola_2.csv entonces:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
+  dplyr::as_tibble() # para una salida sencilla del conjunto de datos
 ```
 
 ```{r, eval=TRUE, echo=FALSE, message=FALSE}
-# Read data
+# Leer los datos
 raw_ebola_data <- rio::import(
   file.path("data", "simulated_ebola_2.csv")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
+  dplyr::as_tibble() # para una salida sencilla del conjunto de datos
 ```
 
 ```{r, message=FALSE}
-# Print data frame
+# Muestra el conjunto de datos
 raw_ebola_data
 ```
 
 ::::::::::::::::: debate
 
-Vamos a **diagnosticar** el marco de datos. Enumera todas las características del marco de datos anterior que son problemáticas para los datos
-análisis de datos.
+Vamos a **diagnosticar** el conjunto de datos. Enumera todas las características del conjunto de datos anterior que son problemáticas para el análisis de datos.
 
 ¿Alguna de esas características te resulta familiar de algún análisis de datos anterior que hayas realizado?
 
@@ -95,16 +92,16 @@ análisis de datos.
 
 ::::::::::::::::::: instructor
 
-Media un breve debate para relacionar la característica diagnosticada con las operaciones de limpieza necesarias.
+Falicita un debate breve para relacionar la característica diagnosticada con las operaciones de limpieza necesarias.
 
 Puedes utilizar estos términos para **diagnosticar características**:
 
-- *Codificación*, como entradas de sexo y edad utilizando números, letras y palabras. También fechas en diferente disposición
-  ("dd/mm/aaaa" o "aaaa/mm/dd") y formatos. Menos visibles, pero también los nombres de las columnas.
-- *Falta* ¿cómo interpretar una entrada como "" en estado o "-99" en otra columna? ¿tenemos un diccionario de datos de
-  el proceso de recogida de datos?
+- *Codificación*, como entradas de sexo y edad utilizando números, letras y palabras. También fechas en diferente disposición y formatos
+  ("dd/mm/aaaa" o "aaaa/mm/dd"). Menos visibles, pero también los nombres de las columnas.
+- *Datos Faltantes* ¿cómo interpretar una entrada como "" en estado o "-99" en otra columna? ¿tenemos un diccionario de datos de
+  el proceso de recolección de datos?
 - *Inconsistencias* como tener una fecha de muestra anterior a la fecha de inicio.
-- *Valores no plausibles* como observaciones atípicas con fechas fuera de un marco temporal previsto.
+- *Valores no posibles* como observaciones atípicas con fechas fuera de un marco temporal previsto.
 - *Duplicados* ¿todas las observaciones son únicas?
 
 Puedes utilizar estos términos para referirte a **operaciones de limpieza**:
@@ -113,7 +110,7 @@ Puedes utilizar estos términos para referirte a **operaciones de limpieza**:
 - Normalizar variables categóricas como sexo/género
 - Normalizar columnas de fechas
 - Convertir de valores de caracteres a valores numéricos
-- Comprueba la secuencia de eventos fechados
+- Comprobar la secuencia de eventos con fechas
 
 ::::::::::::::::::::::::::::::
 
