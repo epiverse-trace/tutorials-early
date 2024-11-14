@@ -22,7 +22,7 @@ title: 'Glossary of Terms: Epiverse-TRACE'
 : The contact matrix is a square matrix consisting of rows/columns equal to the number age groups. Each element represents the frequency of contacts between age groups. If we believe that transmission of an infection is driven by contact, and that contact rates are very different for different age groups, then specifying a contact matrix allows us to account for age specific rates of transmission. 
 
 [C++]{#cplusplus}
-: C++ is a high-level programming language that can be used within R to speed up sections of code. To learn more about C++ check out these [tutorials](https://cplusplus.com/doc/tutorial/) and learn more about the integration of C++ and R [here](https://www.rcpp.org/).
+: C++ is a high-level programming language that can be used within R to speed up sections of code. To learn more about C++ check out these [tutorials](https://cplusplus.com/doc/tutorial/) and learn more about the integration of C++ and R in the [rcpp documentation](https://www.rcpp.org/).
 [Censoring]{#censoring}
 : 
 Means that we know an event happened, but we do not know exactly when it happened. Most epidemiological data are “doubly censored” because there is uncertainty surrounding both primary and secondary event times. Not accounting for censoring can lead to biased estimates of the delay’s standard deviation ([Park et al., in progress](https://github.com/parksw3/epidist-paper)).
