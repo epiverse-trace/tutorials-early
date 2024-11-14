@@ -37,13 +37,13 @@ Each episode contains:
 + **Challenges**: complete challenges to test your understanding.
 + **Explainers**: add to your understanding of mathematical and modelling concepts with the explainer boxes.
 
-Also check out the [glossary](../reference.md) for any terms you may be unfamiliar with.
+Also check out the [glossary](./reference.md) for any terms you may be unfamiliar with.
 
 ### Epiverse-TRACE R packages
 
 Our strategy is to gradually incorporate specialised **R packages** into a traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
 
-![I](episodes/fig/pkgs-hexlogos-2.png).
+![I](episodes/fig/pkgs-hexlogos-2.png){alt='Outbreak analysis R packages hexagonal logos'}.
 
 <p><figure>
     <img src="episodes/fig/pkgs-hexlogos-2.png"
