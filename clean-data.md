@@ -638,7 +638,7 @@ and the date of birth).
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at 
 different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sample for the case identified
- until the date this document was generated (2025-02-04).
+ until the date this document was generated (2025-02-11).
  
 
 ``` r
@@ -663,9 +663,9 @@ sim_ebola_data %>%
  2 13043   2014-03-01                      10               11
  3 14364   2015-03-03                       9               11
  4 14675   2031-12-14                      -6              -10
- 5 12648   2016-10-10                       8                3
+ 5 12648   2016-10-10                       8                4
  6 14274   2016-01-23                       9                0
- 7 14132   2015-05-10                       9                8
+ 7 14132   2015-05-10                       9                9
  8 14715   2016-04-24                       8                9
  9 13435   2020-09-14                       4                4
 10 14816   2015-06-02                       9                8
@@ -772,7 +772,7 @@ dat_clean %>%
  7 PB500P2      1 2021-02-19             1989-11-03              35 [35,60)     
  8 PS008P2      2 2021-09-20             1976-10-05              48 [35,60)     
  9 PS010P2      1 2021-02-26             1991-09-23              33 [20,35)     
-10 PS011P2      2 2021-03-03             1991-02-08              33 [20,35)     
+10 PS011P2      2 2021-03-03             1991-02-08              34 [20,35)     
 # ℹ abbreviated name: ¹​date_first_pcr_positive_test
 ```
 
