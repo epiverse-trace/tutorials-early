@@ -9,8 +9,8 @@ editor_options:
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - Where do you usually store your outbreak data?
-- How many different data formats can I read? 
-- Is it possible to import data from databases and health APIs? 
+- How many different data formats can you use for analysis? 
+- Can you import data from databases and health APIs? 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
@@ -25,14 +25,14 @@ environment.
 
 This episode requires you to be familiar with:
 
-**Data science** : Basic programming with R.
+**Data science** : Basic tasks with R.
 :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-The initial step in outbreak analysis involves importing the target dataset into the `R` environment from various sources. Outbreak data is typically stored in files of diverse formats, relational database management systems (RDBMS), or health information system (HIS) application program interfaces (APIs) such as [REDCap](https://www.project-redcap.org/), [DHIS2](https://dhis2.org/), etc. The latter  option is particularly well-suited for storing institutional health data. This episode will elucidate the process of reading cases from these sources.
+The initial step in outbreak analysis typically involves importing the target dataset into the `R` environment from either a local source (like a file on your computer) or external source (like a database). Outbreak data can be stored in diverse formats, relational database management systems (RDBMS), or health information systems (HIS), such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/), which provide application program interfaces (APIs) to the database systems so verified users can easily add and access data entries. The latter option is particularly well-suited for collecting and storing large-scal institutional health data. This episode will elucidate the process of reading cases from these sources.
 
-Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `%>%` to connect some of their functions, including others from the package `{dplyr}`, so let's also call to the tidyverse package:
+Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `%>%` to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both the pipe and `{dplyr}`:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
@@ -47,9 +47,9 @@ library(here) # for easy file referencing
 
 The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
 
-For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package, without having to use `library(dplyr)` at the start of a script.
 
-This help us remember package functions and avoid namespace conflicts.
+This help us remember package functions and avoid namespace conflicts (i.e. when two different packages include functions with the same name, so R does not know which to use).
 
 :::::::::::::::::::
 
@@ -59,8 +59,8 @@ This help us remember package functions and avoid namespace conflicts.
 ### Setup a project and folder
 
 - Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
-- Inside the RStudio project, create the `data/` folder.
-- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) files.
+- Inside the RStudio project, create a `data/` folder.
+- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) CSV files.
 
 ::::::::::
 
@@ -68,7 +68,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](https://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
 
-The below example shows how to import a `csv` file into `R` environment using `{rio}` package.
+The below example shows how to import a `csv` file into `R` environment using `{rio}` package. We use the `{here}` package to tell R to look for the file in the `data/` folder of your project, and `as_tibble()` to convert into a tidier format for subsequent analysis in R.
 
 ```{r,eval=FALSE,echo=TRUE}
 # read data
@@ -147,14 +147,15 @@ rio::import(here::here("data", "Marburg.zip"))
 
 ## Reading from databases
 
-The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management 
-systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
+The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
 
 ::::::::::::: discussion
 
 ### When to read directly from a database?
 
-We can use database interface packages to optimize memory usage. If we process the database with "queries" (e.g., select, filter, summarise) before extraction, we can reduce the memory load in our RStudio session. Conversely, conducting all data manipulation outside the database management system can lead to occupying more disk space than desired running out of memory.
+We can use database interface packages to optimize memory usage. If we process the database with "queries" (e.g., select, filter, summarise) before extraction, we can reduce the memory load in our RStudio session. Conversely, conducting all data manipulation outside the database management system by loading the full dataset into R can use up much more computer memory (i.e. RAM) than is feasible on a local machine, which can lead RStudio to slow down or even freeze.
+
+External relational database management systems (RDBMS) also have the advantage that multiple users can access, store and analyse parts of the dataset simultaneously, without having to transfer individual files, which would make it very difficult to track which version is up-to-date.
 
 :::::::::::::
 
@@ -162,7 +163,7 @@ The following code chunk demonstrates in four steps how to create a temporary SQ
 
 ### 1. Connect with a database
 
-First, we establish a connection to an SQLite database created in memory using `DBI::dbConnect()`. 
+First, we establish a connection to an SQLite database created on our machine and stored in its local memory with `DBI::dbConnect()`. 
 
 ```{r,warning=FALSE,message=FALSE}
 library(DBI)
@@ -177,7 +178,7 @@ db_connection <- DBI::dbConnect(
 
 ::::::::::::::::: callout
 
-A real-life connection would look like this:
+A real-life connection to an external SQLite database would look like this:
 
 ```r
 # in real-life
