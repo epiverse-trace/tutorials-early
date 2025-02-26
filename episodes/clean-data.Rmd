@@ -47,7 +47,7 @@ library(cleanepi)
 
 ### The double-colon
 
-The double-colon `::` in R let you call a specific function from a package without loading the entire package into the 
+The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the 
 current environment. 
 
 For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
