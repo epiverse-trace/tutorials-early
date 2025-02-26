@@ -6,7 +6,7 @@ exercises: 10
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to aggregate case data? 
+- How to aggregate and summarise case data? 
 - How to visualize aggregated data?
 - What is distribution of cases in time, place, gender, age?
 
@@ -15,20 +15,20 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Simulate synthetic outbreak data
-- Convert linelist data to incidence 
+- Convert indivdual linelist data to incidence over time
 - Create epidemic curves from incidence data
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Introduction
 
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps 
-determine relationships between variables and summarize their main characteristics often by means of data visualization. 
+determine relationships between variables and summarize their main characteristics, often by means of data visualization. 
 
-This episode focuses on EDA of outbreak data using a few essential R packages. 
-A key aspect of EDA in epidemic analysis is identifying the relationship between time and the  observed epidemic outcome, such as confirmed cases, hospitalizations, deaths, and recoveries across different locations and demographic factors, including gender, age, and more.
+This episode focuses on EDA of outbreak data using R packages. 
+A key aspect of EDA in epidemic analysis is 'person, place and time'. It is useful to identify how observed events - such as confirmed cases, hospitalizations, deaths, and recoveries - change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
 
-Let's start by loading the package `{incidence2}` to aggregate linelist data by groups and visualize epicurves.
- We'll use `{simulist}` to simulate outbreak data,  and `{tracetheme}` for complementary figure formatting.
+Let's start by loading the package `{incidence2}` to aggregate linelist data according to specific characteristics, and visualize the resulting epidemic curves (epicurves) that plot the number of new events (i.e. incidence) over time.
+ We'll use `{simulist}` to simulate some outbreak data to analyse,  and `{tracetheme}` for figure formatting.
  We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and 
  `{ggplot2}`, so let's also call to the tidyverse package:
 
@@ -44,7 +44,7 @@ library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe %>%
 
 ### The double-colon
 
-The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the current environment. 
 
 For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
 This help us remember package functions and avoid namespace conflicts.
@@ -56,7 +56,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
 for a hypothetical disease outbreak utilizing the `{simulist}` package. `{simulist}` generates simulation data for outbreak according to a given configuration. 
-Its minimal configuration can generate a  linelist as shown in the below code chunk 
+Its minimal configuration can generate a linelist, as shown in the below code chunk :
 
 ```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
@@ -68,13 +68,13 @@ sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
 sim_data
 ```
 
- This linelist dataset offers individual-level information about the outbreak. 
+This linelist dataset has entries on individual-level simulated events during the outbreak.
 
 ::::::::::::::::::: spoiler
 
 ## Additional Resources on Outbreak Data
 
-This is the default configuration of `{simulist}`, if you want to know more about its functionalities
+The above is the default configuration of `{simulist}`, so includes a number of assumptions about the transmissibility and severity of the pathogen. If you want to know more about `sim_linelist()` and other functionalities
 check the [documentation website](https://epiverse-trace.github.io/simulist/).
 
 You can also find data sets from real emergencies from the past at the [`{outbreaks}` R package](https://www.reconverse.org/outbreaks/).
@@ -85,25 +85,25 @@ You can also find data sets from real emergencies from the past at the [`{outbre
 
 ## Aggregating
 
-Downstream analysis involves working with aggregated data rather than individual cases. This requires grouping linelist 
-data in the form of incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
-package offers an essential function, called `incidence2::incidence()`, for grouping case data, usually centered around dated events 
-and/or other factors. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the 
+Often we want to analyse and visualise the number of events that occur on a particular day or week, rather than focusing on individual cases. This requires grouping linelist 
+data into incidence data. The [incidence2]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) 
+package offers a useful function called `incidence2::incidence()` for grouping case data, usually based around dated events 
+and/or other characteristics. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the 
 simulated  Ebola `linelist` data based on the date of onset.
 
 ```{r}
 # Create an incidence object by aggregating case data based on the date of onset
-dialy_incidence <- incidence2::incidence(
+daily_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   interval = "day" # Aggregate by daily intervals
 )
 
 # View the incidence data
-dialy_incidence
+daily_incidence
 ```
-Furthermore, with the `{incidence2}` package, you can specify the desired interval and categorize cases by one or 
-more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset and gender.
+With the `{incidence2}` package, you can specify the desired interval (e.g. day, week) and categorize cases by one or 
+more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset, sex, and type of case.
 
 ```{r}
 # Group incidence data by week, accounting for sex and case type
@@ -120,15 +120,15 @@ weekly_incidence
 
 ::::::::::::::::::::::::::::::::::::: callout
 ## Dates Completion  
-When cases are grouped by different factors, it's possible that these groups may have different date ranges in the 
+When cases are grouped by different factors, it's possible that the events involving these groups may have different date ranges in the 
 resulting `incidence2` object. The `incidence2` package provides a function called `complete_dates()` to ensure that an
- incidence object has the same range of dates for each group. By default, missing counts will be filled with 0.
+ incidence object has the same range of dates for each group. By default, missing counts for a particular group will be filled with 0 for that date.
  
 This functionality is also available as an argument within `incidence2::incidence()` adding `complete_dates = TRUE`.
 
 ```{r}
 # Create an incidence object grouped by sex, aggregating daily
-dialy_incidence_2 <- incidence2::incidence(
+daily_incidence_2 <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
@@ -138,8 +138,8 @@ dialy_incidence_2 <- incidence2::incidence(
 ```
 
 ```{r,echo=FALSE,eval=FALSE}
-dialy_incidence_2_complete <- incidence2::complete_dates(
-  x = dialy_incidence_2,
+daily_incidence_2_complete <- incidence2::complete_dates(
+  x = daily_incidence_2,
   expand = TRUE, # Expand to fill in missing dates
   fill = 0L,     # Fill missing values with 0
   by = 1L,       # Fill by daily intervals
@@ -163,11 +163,11 @@ dialy_incidence_2_complete <- incidence2::complete_dates(
 
 The `incidence2` object can be visualized using the `plot()` function from the base R package. 
 The resulting graph is referred to as an epidemic curve, or epi-curve for short. The following code 
-snippets generate epi-curves for the `dialy_incidence` and `weekly_incidence` incidence objects mentioned above.
+snippets generate epi-curves for the `daily_incidence` and `weekly_incidence` incidence objects mentioned above.
 
 ```{r}
 # Plot daily incidence data
-base::plot(dialy_incidence) +
+base::plot(daily_incidence) +
   ggplot2::labs(
     x = "Time (in days)", # x-axis label
     y = "Dialy cases" # y-axis label
@@ -213,7 +213,7 @@ The cumulative number of cases can be calculated using the `cumulate()` function
 
 ```{r}
 # Calculate cumulative incidence
-cum_df <- incidence2::cumulate(dialy_incidence)
+cum_df <- incidence2::cumulate(daily_incidence)
 
 # Plot cumulative incidence data using ggplot2
 base::plot(cum_df) +
@@ -242,7 +242,7 @@ This function employs a bootstrapping method to determine the peak time.
 ```{r}
 # Estimate the peak of the daily incidence data
 peak <- incidence2::estimate_peak(
-  dialy_incidence,
+  daily_incidence,
   n = 100,         # Number of simulations for the peak estimation
   alpha = 0.05,    # Significance level for the confidence interval
   first_only = TRUE, # Return only the first peak found
@@ -273,13 +273,13 @@ The example below demonstrates how to configure these three elements for a simpl
 ```{r}
 # Define date breaks for the x-axis
 breaks <- seq.Date(
-  from = min(as.Date(dialy_incidence$date_index, na.rm = TRUE)),
-  to = max(as.Date(dialy_incidence$date_index, na.rm = TRUE)),
+  from = min(as.Date(daily_incidence$date_index, na.rm = TRUE)),
+  to = max(as.Date(daily_incidence$date_index, na.rm = TRUE)),
   by = 20 # every 20 days
 )
 
 # Create the plot
-ggplot2::ggplot(data = dialy_incidence) +
+ggplot2::ggplot(data = daily_incidence) +
   geom_histogram(
     mapping = aes(
       x = as.Date(date_index),
@@ -317,7 +317,7 @@ Use the `group` option in the mapping function to visualize an epicurve with dif
 
 ```{r}
 # Plot daily incidence by sex with facets
-ggplot2::ggplot(data = dialy_incidence_2) +
+ggplot2::ggplot(data = daily_incidence_2) +
   geom_histogram(
     mapping = aes(
       x = as.Date(date_index),
