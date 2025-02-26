@@ -4,13 +4,13 @@ title: Setup
 
 ## Motivation
 
-**Outbreaks** appear with different diseases and in different contexts, but what all of them have in common is the key public health questions ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). We can relate these key public health questions to outbreak data analysis tasks.
+**Outbreaks** of infectious diseases can appear as a result of different pathogens, and in different contexts, but they typically lead to similar public health questions, from understanding patterns of transmission and severity to examining the effect of control measures ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). We can relate each of these public health questions to a series of outbreak data analysis tasks. The more efficiently and reliably we can perform these tasks, the faster and more accurately we can answer the underlying questions.
 
-Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of R packages, make the existing ones interoperable for the user experience, and stimulate a community of practice.
+Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of new R packages, help link together existing tools to make them more user-friendly, and contribute to a community of practice, spanning field epidemiologists, data scientists, lab researchers, health agency analysts, software engineers and more.
 
 ### Epiverse-TRACE tutorials
 
-The tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**.
+Our tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**. The outputs of tasks completed in earlier stages commonly feed into the tasks required for later ones.
 
 
 <p><figure>
@@ -22,7 +22,7 @@ The tutorials are built around an outbreak analysis pipeline split into three st
     </figcaption>
 </figure>
 </p>
-Each task has its tutorial website. Each tutorial website consists of a set of episodes.
+Each task has its tutorial website and each tutorial website consists of a set of episodes covering different topics.
 
 | [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
 |---|---|---|
@@ -31,11 +31,11 @@ Each task has its tutorial website. Each tutorial website consists of a set of e
 
 Each episode contains:
 
-+ **Overview**: describes what questions will be answered and what are the objectives of the episode.
-+ **Prerequisites**: describes what episodes/packages need to be covered before the current episode.
-+ **Example R code**: work through the episodes on your own computer using the example R code.
-+ **Challenges**: complete challenges to test your understanding.
-+ **Explainers**: add to your understanding of mathematical and modelling concepts with the explainer boxes.
++ **Overview**: describes what questions will be answered and the objectives of the episode.
++ **Prerequisites**: describes what episodes/packages ideally need to be covered before the current episode.
++ **Example R code**: example R code so you can work through the episodes on your own computer.
++ **Challenges**: challenges that can be completed to test your understanding.
++ **Explainers**: boxes to enhance your understanding of mathematical and modelling concepts.
 
 Also check out the [glossary](./reference.md) for any terms you may be unfamiliar with.
 

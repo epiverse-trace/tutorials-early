@@ -51,3 +51,4 @@ po/*~
 
 # renv detritus
 renv/sandbox/
+.DS_Store
