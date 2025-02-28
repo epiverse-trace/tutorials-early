@@ -188,15 +188,15 @@ base::plot(weekly_incidence) +
 
 :::::::::::::::::::::::: callout
 
-#### easy aesthetics
+#### Easy aesthetics
 
-We invite you to skim the `{incidence2}` package ["Get started" vignette](https://www.reconverse.org/incidence2/articles/incidence2.html). Find how you can use arguments within `plot()` to provide aesthetics to your incidence2 class objects!
+We invite you to skim the `{incidence2}` package ["Get started" vignette](https://www.reconverse.org/incidence2/articles/incidence2.html). Find how you can use arguments within `plot()` to provide aesthetics to your incidence2 class objects.
 
 ```{r}
 base::plot(weekly_incidence, fill = "sex")
 ```
 
-Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`. Give them a try!
+Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`. Feel free to give them a try.
 
 ::::::::::::::::::::::::
 
@@ -236,8 +236,8 @@ Note that this function preserves grouping, i.e., if the `incidence2` object con
 
 ##  Peak estimation
 
-One can estimate the peak --the time with the highest number of recorded cases-- using the `estimate_peak()` function from the {incidence2} package. 
-This function employs a bootstrapping method to determine the peak time.
+You can estimate the peak -- the time with the highest number of recorded cases-- using the `estimate_peak()` function from the {incidence2} package. 
+This function employs a bootstrapping method to determine the peak time (i.e. by resampling dates with replacement, resulting in a distribution of estimated peak times).
 
 ```{r}
 # Estimate the peak of the daily incidence data
@@ -266,7 +266,7 @@ confidence interval and using 100 bootstrap samples.
 ## Visualization with ggplot2
 
 
-`{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs. However, using the `{ggplot2}` package, you can generate more sophisticated and better-annotated epicurves.
+`{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs. However, using the `{ggplot2}` package, you can generate more sophisticated and epicurves with more flexibility in annotation.
 `{ggplot2}` is a comprehensive package with many functionalities. However, we will focus on three key elements for producing epicurves: histogram plots, scaling date axes and their labels, and general plot theme annotation.
 The example below demonstrates how to configure these three elements for a simple `{incidence2}` object.
 
