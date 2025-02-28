@@ -6,14 +6,14 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to convert raw dataset into a `linelist` object?
+- How to convert a raw dataset into a `linelist` object?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Demonstrate how to covert case data to `linelist` data 
-- Demonstrate how to validate data
+- Demonstrate how to covert case data to `linelist` data
+- Demonstrate how to tag and validate data to make analysis more reliable
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -30,14 +30,14 @@ This episode requires you to:
 
 In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
 it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
-analyses. Specifically, this involves verifying the presence and correct data type of certain  columns within
-your dataset, a process commonly referred to as "tagging." Additionally. it's crucial to implement measures to 
-validate that these tagged columns are not inadvertently deleted during further data processing steps.
+analyses. Otherwise you might find that your analysis suddenly stops working when specific variables appear or disappear, or their underlying data types (like `<date>` or `<chr>`) change. Specifically, this additional layer involves: 1) verifying the presence and correct data type of certain columns within
+your dataset, a process commonly referred to as "tagging"; 2) implementing measures to 
+check that these tagged columns are not inadvertently deleted during further data processing steps, known as "validation".
 
 
 This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
  package. Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
-to create a linelist. We'll use the pipe `%>%` to connect some of their functions, including others from 
+to create a linelist object. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
@@ -52,7 +52,7 @@ library(linelist) # for taggin and validating
 
 ### The double-colon
 
-The double-colon `::` in R let you call a specific function from a package without loading the entire package into the 
+The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the 
 current environment. 
 
 For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
@@ -108,7 +108,7 @@ An scenario like this usually happens when the institution doing the analysis is
 
 ## Creating a linelist and tagging elements
 
-Then we convert the cleaned case data into a `linelist` object using `{linelist}` package, see the 
+Once the data is loaded and cleaned, we convert the cleaned case data into a `linelist` object using `{linelist}` package, as in the 
 below code chunk.
 
 ```{r}
@@ -192,11 +192,11 @@ linelist::validate_linelist(linelist_data)
 
 ::::::::::::::::::::::::: challenge
 
-Let's **validate** tagged variables. Let's simulate that in an ongoing outbreak; the next day, your data has a new set of entries (i.e., rows or observations) but one variable change of data type. 
+Let's **validate** some tagged variables. Let's simulate a situation in an ongoing outbreak. You wake up one day to discover that the data stream you have rely on has a new set of entries (i.e., rows or observations) and one variable that has a change of data type. 
 
-For example, let's make the variable `age` change of type from a double (`<dbl>`) variable to character (`<chr>`).
+For example, let's assume the variable `age` changed from a double (`<dbl>`) variable to character (`<chr>`).
 
-To simulate it:
+To simulate this situation:
 
 - **Change** the variable data type,
 - **Tag** the variable into a linelist, and then 
