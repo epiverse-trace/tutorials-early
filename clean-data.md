@@ -638,7 +638,7 @@ and the date of birth).
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at 
 different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sample for the case identified
- until the date this document was generated (2025-02-11).
+ until the date this document was generated (2025-03-04).
  
 
 ``` r
@@ -660,15 +660,15 @@ sim_ebola_data %>%
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
  1 14905   2015-06-04                       9                8
- 2 13043   2014-03-01                      10               11
- 3 14364   2015-03-03                       9               11
- 4 14675   2031-12-14                      -6              -10
+ 2 13043   2014-03-01                      11                0
+ 3 14364   2015-03-03                      10                0
+ 4 14675   2031-12-14                      -6               -9
  5 12648   2016-10-10                       8                4
- 6 14274   2016-01-23                       9                0
+ 6 14274   2016-01-23                       9                1
  7 14132   2015-05-10                       9                9
- 8 14715   2016-04-24                       8                9
- 9 13435   2020-09-14                       4                4
-10 14816   2015-06-02                       9                8
+ 8 14715   2016-04-24                       8               10
+ 9 13435   2020-09-14                       4                5
+10 14816   2015-06-02                       9                9
 # ℹ 14,990 more rows
 ```
 
@@ -764,7 +764,7 @@ dat_clean %>%
    study_id   sex date_first_pcr_posit…¹ date_of_birth age_in_years age_category
    <chr>    <int> <date>                 <date>               <dbl> <fct>       
  1 PS001P2      1 2020-12-01             1972-06-01              52 [35,60)     
- 2 PS002P2      1 2021-01-01             1952-02-20              72 [60,Inf]    
+ 2 PS002P2      1 2021-01-01             1952-02-20              73 [60,Inf]    
  3 PS004P2…    NA 2021-02-11             1961-06-15              63 [60,Inf]    
  4 PS003P2      1 2021-02-01             1947-11-11              77 [60,Inf]    
  5 P0005P2      2 2021-02-16             2000-09-26              24 [20,35)     
