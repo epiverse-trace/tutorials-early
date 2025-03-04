@@ -319,7 +319,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean case data</h1>
-        <p>Last updated on 2025-02-11 |
+        <p>Last updated on 2025-03-04 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -470,7 +470,7 @@ analysis you performed?</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Mediate a short discussion to relate the diagnosed characteristic
 with required cleaning operations.</p>
@@ -578,7 +578,7 @@ first column names as it is.</p></li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can try
 <code>cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V1")</code></p>
@@ -622,7 +622,7 @@ removed!</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How many rows you removed? What rows where removed? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>You can get the number and location of the duplicated rows that where
 found. Run <code>cleanepi::print_report()</code>, wait for the report to
@@ -671,7 +671,7 @@ open in your browser, and find the “Duplicates” tab.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>Duplicates mostly refers to replicated rows. Empty rows or columns
 can be a subset within the set of constant rows or columns.</p>
@@ -684,7 +684,7 @@ can be a subset within the set of constant rows or columns.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor2" aria-expanded="false" aria-controls="collapseInstructor2">
   <h3 class="accordion-header" id="headingInstructor2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor2" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor2" aria-labelledby="headingInstructor2">
+<div id="collapseInstructor2" class="accordion-collapse collapse" aria-labelledby="headingInstructor2" data-bs-parent="#accordionInstructor2">
 <div class="accordion-body">
 <ul><li>duplicated rows: 3, 4, 5</li>
 <li>empty rows: 6</li>
@@ -812,7 +812,7 @@ IDS.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to correct the subject IDs? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Let’s print a preliminary report with
 <code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
@@ -969,7 +969,7 @@ you to address them appropriately.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
   <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What are the incorrect date sequences? </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>Let’s print another preliminary report with
 <code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
@@ -1057,7 +1057,7 @@ and ready for further analysis.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
   <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to create your own data dictionary? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler4" aria-labelledby="headingSpoiler4">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <p>Note that, when the column in the dataset contains values that are
 not in the dictionary, the function
@@ -1116,7 +1116,7 @@ calculating the time elapsed between two dated events at different time
 scales. For example, the below code snippet utilizes the function
 <code>cleanepi::timespan()</code> to compute the time elapsed since the
 date of sample for the case identified until the date this document was
-generated (2025-02-11).</p>
+generated (2025-03-04).</p>
 <div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1140,15 +1140,15 @@ generated (2025-02-11).</p>
    case_id date_sample years_since_collection remainder_months
    &lt;chr&gt;   &lt;date&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
  1 14905   2015-06-04                       9                8
- 2 13043   2014-03-01                      10               11
- 3 14364   2015-03-03                       9               11
- 4 14675   2031-12-14                      -6              -10
+ 2 13043   2014-03-01                      11                0
+ 3 14364   2015-03-03                      10                0
+ 4 14675   2031-12-14                      -6               -9
  5 12648   2016-10-10                       8                4
- 6 14274   2016-01-23                       9                0
+ 6 14274   2016-01-23                       9                1
  7 14132   2015-05-10                       9                9
- 8 14715   2016-04-24                       8                9
- 9 13435   2020-09-14                       4                4
-10 14816   2015-06-02                       9                8
+ 8 14715   2016-04-24                       8               10
+ 9 13435   2020-09-14                       4                5
+10 14816   2015-06-02                       9                9
 # ℹ 14,990 more rows</code></pre>
 </div>
 <p>After executing the function <code>cleanepi::timespan()</code>, two
@@ -1188,7 +1188,7 @@ elements to get this done.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
 <div class="accordion-body">
 <p>Before calculating the age, you may need to:</p>
 <ul><li>standardize column names</li>
@@ -1203,7 +1203,7 @@ elements to get this done.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>In the solution we add <code>date_first_pcr_positive_test</code>
 given that it will provide the temporal scale for descriptive and
@@ -1242,7 +1242,7 @@ statistical downstream analysis of the disease outbreak.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>The simplest alternative is using <code>Hmisc::cut2()</code>. You can
 also use <code>dplyr::case_when()</code> however, this requires more
@@ -1278,7 +1278,7 @@ we provide one solution using <code>base::cut()</code>:</p>
    study_id   sex date_first_pcr_posit…¹ date_of_birth age_in_years age_category
    &lt;chr&gt;    &lt;int&gt; &lt;date&gt;                 &lt;date&gt;               &lt;dbl&gt; &lt;fct&gt;
  1 PS001P2      1 2020-12-01             1972-06-01              52 [35,60)
- 2 PS002P2      1 2021-01-01             1952-02-20              72 [60,Inf]
+ 2 PS002P2      1 2021-01-01             1952-02-20              73 [60,Inf]
  3 PS004P2…    NA 2021-02-11             1961-06-15              63 [60,Inf]
  4 PS003P2      1 2021-02-01             1947-11-11              77 [60,Inf]
  5 P0005P2      2 2021-02-16             2000-09-26              24 [20,35)
@@ -1436,8 +1436,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "dateCreated": "2024-11-24",
-  "dateModified": "2025-02-11",
-  "datePublished": "2025-02-25"
+  "dateModified": "2025-03-04",
+  "datePublished": "2025-03-04"
 }
 
   </script><script>
