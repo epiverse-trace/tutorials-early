@@ -3,18 +3,19 @@ linters: all_linters(
     object_name_linter = NULL,
     implicit_integer_linter = NULL,
     brace_linter = NULL,
-    extraction_operator_linter = NULL,
     missing_package_linter = NULL,
     library_call_linter = NULL,
     namespace_linter = NULL,
+    one_call_pipe_linter = NULL,
+    unused_import_linter = NULL,
+    consecutive_mutate_linter = NULL,
+    nrow_subset_linter = NULL,
+    return_linter = NULL,
+    cyclocomp_linter = NULL,
     undesirable_function_linter(
       modify_defaults(
         default_undesirable_functions,
         library = NULL # this is fine in Rmd files
       )
-    ),
-   unused_import_linter(
-      allow_ns_usage = TRUE,
-      except_packages = c("bit64", "data.table", "tidyverse")
     )
   )
