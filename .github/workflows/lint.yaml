@@ -10,7 +10,9 @@ name: lint
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    # vise (via remotes) doesn't support ubuntu 24.04 yet
+    # https://github.com/carpentries/actions/pull/101
+    runs-on: ubuntu-22.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       RENV_PATHS_ROOT: ~/.local/share/renv/
