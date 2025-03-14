@@ -43,9 +43,11 @@ abstract: >-
   modelling to simulate disease spread and investigate
   interventions, and modelling disease burden.
 keywords:
-  - outbreak analytics
-  - exploratory data analysis
-  - data cleaning
+  - outbreak-analytics
+  - exploratory-data-analysis
+  - data-cleaning
+  - data-validation
+  - data-visualization
   - carpentries
   - rstats
   - english-language
