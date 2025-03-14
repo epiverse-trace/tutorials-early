@@ -218,7 +218,9 @@ sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
 ``` output
-Found 5 duplicated rows in the dataset. Please consult the report for more details.
+! Found 5 duplicated rows in the dataset.
+ℹ Use `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat" is
+  the object used to store the output from this operation.
 ```
 
 <!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
@@ -287,7 +289,10 @@ df %>%
 ```
 
 ``` output
-Constant data was removed after 2 iterations. See the report for more details.
+! Constant data was removed after 2 iterations.
+ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
+  "dat" represents the object used to store the output from
+  `remove_constants()`.
 ```
 
 ``` output
@@ -305,7 +310,10 @@ df %>%
 ```
 
 ``` output
-Constant data was removed after 2 iterations. See the report for more details.
+! Constant data was removed after 2 iterations.
+ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
+  "dat" represents the object used to store the output from
+  `remove_constants()`.
 ```
 
 ``` output
@@ -375,7 +383,10 @@ sim_ebola_data <-
 ```
 
 ``` output
-Found 1957 duplicated rows in the subject IDs. Please consult the report for more details.
+! Found 1957 duplicated values in the subject Ids.
+ℹ Enter `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat"
+  is the object used to store the output from this operation.
+ℹ No incorrect subject id was detected.
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -502,6 +513,62 @@ sim_ebola_data <- cleanepi::check_date_sequence(
   data = sim_ebola_data,
   target_columns = c("date_onset", "date_sample")
 )
+```
+
+``` output
+! Detected 680 incorrect date sequences at lines: "10, 20, 22, 26, 29, 44, 46,
+  54, 60, 63, 70, 71, 73, 80, 81, 90, 101, 104, 105, 107, 109, 110, 113, 117,
+  122, 126, 127, 137, 138, 142, 152, 158, 159, 167, 174, 177, 182, 185, 187,
+  189, 191, 193, 197, 198, 204, 208, 215, 230, 235, 243, 246, 261, 265, 273,
+  282, 288, 289, 290, 295, 296, 297, 305, 308, 309, 320, 321, 330, 333, 339,
+  344, 347, 351, 353, 357, 359, 371, 373, 374, 375, 376, 378, 380, 381, 388,
+  398, 399, 402, 403, 406, 410, 412, 418, 419, 424, 425, 426, 435, 437, 453,
+  454, 456, 458, 461, 466, 469, 473, 476, 478, 483, 484, 485, 491, 492, 500,
+  507, 508, 509, 511, 516, 520, 524, 526, 527, 530, 533, 537, 543, 545, 560,
+  565, 568, 576, 586, 587, 595, 600, 604, 606, 609, 613, 615, 617, 622, 633,
+  645, 650, 657, 662, 664, 668, 672, 676, 678, 680, 683, 696, 701, 704, 705,
+  707, 709, 710, 711, 717, 721, 724, 730, 732, 733, 744, 746, 757, 759, 762,
+  764, 769, 784, 789, 793, 795, 798, 803, 807, 810, 811, 812, 814, 817, 819,
+  820, 822, 824, 828, 833, 838, 841, 842, 843, 847, 849, 850, 851, 864, 872,
+  875, 878, 886, 888, 889, 895, 897, 901, 903, 909, 910, 923, 924, 926, 934,
+  940, 942, 944, 947, 952, 953, 955, 961, 963, 976, 982, 989, 992, 1002, 1003,
+  1005, 1012, 1014, 1015, 1019, 1023, 1025, 1026, 1040, 1043, 1045, 1052, 1055,
+  1072, 1073, 1083, 1084, 1086, 1087, 1093, 1098, 1099, 1100, 1111, 1116, 1117,
+  1123, 1128, 1132, 1135, 1139, 1157, 1161, 1166, 1169, 1172, 1190, 1193, 1196,
+  1199, 1202, 1203, 1205, 1206, 1214, 1216, 1227, 1233, 1237, 1255, 1268, 1278,
+  1279, 1280, 1281, 1293, 1299, 1306, 1311, 1313, 1317, 1319, 1324, 1325, 1329,
+  1335, 1348, 1350, 1352, 1357, 1358, 1360, 1362, 1364, 1371, 1379, 1380, 1384,
+  1386, 1388, 1396, 1399, 1406, 1411, 1420, 1428, 1431, 1434, 1442, 1450, 1453,
+  1461, 1464, 1472, 1474, 1476, 1480, 1481, 1487, 1494, 1501, 1505, 1506, 1523,
+  1536, 1539, 1542, 1546, 1547, 1550, 1551, 1553, 1554, 1560, 1573, 1574, 1579,
+  1580, 1587, 1588, 1589, 1592, 1593, 1596, 1598, 1600, 1601, 1609, 1611, 1618,
+  1621, 1623, 1628, 1631, 1634, 1638, 1642, 1643, 1648, 1650, 1660, 1667, 1670,
+  1673, 1676, 1677, 1679, 1681, 1682, 1687, 1688, 1689, 1691, 1695, 1698, 1699,
+  1704, 1706, 1708, 1711, 1712, 1714, 1721, 1727, 1729, 1731, 1733, 1734, 1743,
+  1748, 1750, 1751, 1772, 1778, 1784, 1791, 1795, 1799, 1803, 1805, 1807, 1809,
+  1810, 1821, 1829, 1830, 1836, 1837, 1845, 1846, 1878, 1880, 1891, 1892, 1897,
+  1898, 1908, 1912, 1915, 1917, 1919, 1927, 1936, 1943, 1945, 1946, 1951, 1953,
+  1954, 1959, 1960, 1962, 1966, 1972, 1986, 1989, 1992, 1996, 2002, 2023, 2028,
+  2029, 2030, 2036, 2037, 2039, 2044, 2045, 2047, 2048, 2052, 2054, 2059, 2060,
+  2063, 2064, 2074, 2075, 2078, 2081, 2087, 2094, 2095, 2112, 2114, 2118, 2122,
+  2127, 2128, 2146, 2158, 2167, 2168, 2171, 2177, 2188, 2189, 2193, 2194, 2195,
+  2208, 2210, 2225, 2226, 2227, 2231, 2237, 2240, 2242, 2250, 2257, 2261, 2264,
+  2271, 2272, 2277, 2278, 2282, 2286, 2287, 2310, 2313, 2316, 2317, 2330, 2331,
+  2333, 2337, 2338, 2343, 2347, 2350, 2353, 2362, 2371, 2377, 2379, 2382, 2383,
+  2387, 2409, 2411, 2412, 2413, 2425, 2427, 2428, 2432, 2433, 2435, 2439, 2441,
+  2444, 2449, 2452, 2453, 2460, 2461, 2462, 2476, 2479, 2482, 2483, 2491, 2496,
+  2499, 2504, 2515, 2516, 2519, 2526, 2532, 2535, 2538, 2540, 2541, 2547, 2548,
+  2556, 2558, 2563, 2568, 2572, 2585, 2594, 2604, 2616, 2617, 2628, 2641, 2647,
+  2655, 2686, 2689, 2690, 2692, 2695, 2700, 2705, 2711, 2714, 2721, 2727, 2735,
+  2741, 2742, 2745, 2749, 2756, 2759, 2765, 2767, 2768, 2776, 2783, 2788, 2789,
+  2792, 2793, 2797, 2801, 2807, 2809, 2811, 2814, 2828, 2830, 2833, 2847, 2848,
+  2849, 2855, 2863, 2865, 2877, 2889, 2890, 2892, 2894, 2897, 2901, 2906, 2907,
+  2923, 2926, 2932, 2936, 2940, 2941, 2942, 2944, 2945, 2947, 2954, 2955, 2961,
+  2965, 2973, 2975, 2981, 2986, 2988, 2992, 2994, 3002, 3009, 3010, 3012, 3013,
+  3015, 3020, 3021, 3036, 3041, 3046, 3058, 3070, 3071, 3073, 3077, 3078, 3080,
+  3087, 3092, 3093, 3096".
+ℹ Enter `attr(dat, "report")[["incorrect_date_sequence"]]` to access them,
+  where "dat" is the object used to store the output from this operation.
 ```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
@@ -638,7 +705,7 @@ and the date of birth).
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at 
 different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sample for the case identified
- until the date this document was generated (2025-03-04).
+ until the date this document was generated (2025-03-14).
  
 
 ``` r
@@ -659,13 +726,13 @@ sim_ebola_data %>%
 # A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
- 1 14905   2015-06-04                       9                8
+ 1 14905   2015-06-04                       9                9
  2 13043   2014-03-01                      11                0
  3 14364   2015-03-03                      10                0
  4 14675   2031-12-14                      -6               -9
- 5 12648   2016-10-10                       8                4
+ 5 12648   2016-10-10                       8                5
  6 14274   2016-01-23                       9                1
- 7 14132   2015-05-10                       9                9
+ 7 14132   2015-05-10                       9               10
  8 14715   2016-04-24                       8               10
  9 13435   2020-09-14                       4                5
 10 14816   2015-06-02                       9                9
@@ -727,6 +794,15 @@ dat_clean <- dat %>%
     span_column_name = "age_in_years",
     span_remainder_unit = "months"
   )
+```
+
+``` output
+! Found <numeric> values that could also be of type <Date> in column:
+  date_of_birth.
+ℹ It is possible to convert them into <Date> using: `lubridate::as_date(x,
+  origin = as.Date("1900-01-01"))`
+• where "x" represents here the vector of values from these columns
+  (`data$target_column`).
 ```
 
 Now, How would you categorize a numerical variable?
