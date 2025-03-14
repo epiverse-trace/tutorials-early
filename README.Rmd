@@ -11,45 +11,76 @@ knitr::opts_chunk$set(
 )
 ```
 
-# tutorials
+# Epiverse-TRACE Tutorials Early
 
 <!-- badges: start -->
-[![](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![Project Status: WIP - Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
+[![](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
-The goal of `tutorials` is to host tutorials for Outbreak analytics with R.
+Tutorials on read and clean case data, and make line list for outbreak analytics with R developed by the Epiverse-TRACE initiative. These tutorials are visible at: <https://epiverse-trace.github.io/tutorials-early/>. 
 
-## Usage
-
-> NOTE: The expected date for the deployment of the first set of tutorials is mid-November 2023.
-
-Visualize this content as a webpage at <https://epiverse-trace.github.io/tutorials/>
-
-To build the website locally, please refer to [the contributing guidelines](CONTRIBUTING.md).
+More information about Epiverse-TRACE learning material is available at: <https://epiverse-trace.github.io/learn.html>
 
 ## Contributing
 
-Contributions are always welcome!
+Please see the [CONTRIBUTING.md](CONTRIBUTING.md) for contributing guidelines and details on how to get involved with this project. Please adhere to this project's [Code of Conduct](CODE_OF_CONDUCT.md).
 
-See our [Contributing guide](CONTRIBUTING.md) for ways to get started.
+Also see the current list of [issues](https://github.com/epiverse-trace/tutorials-early/issues) for ideas on how to contribute to this training curriculum.
 
-Please adhere to this project's [Code of Conduct](CODE_OF_CONDUCT.md).
+To learn more about how this lesson site is built and how you can edit the pages, see the [Introduction to The Carpentries Workbench](https://carpentries.github.io/sandpaper-docs/).
 
 <!-- ## Support -->
 
 <!-- Please see our [Getting help guide](/.github/SUPPORT.md) for support. -->
 
 ## License
+Lesson content is published with a [CC-BY license](LICENSE.md).
 
-Read the [License](LICENSE.md) of this tutorial.
+## Maintainer(s)
 
-## Authors
+Current maintainers of these tutorials are:
 
-- [@amanda-minter](https://github.com/amanda-minter/)
-- [@avallecam](https://github.com/avallecam/)
+- [Andree Valle-Campos](https://github.com/avallecam/) (Content)
+- [Hugo Gruson](https://github.com/Bisaloo/) (Infrastructure)
 
+<!--
+Former maintainers:
 
-```{r,eval=FALSE,echo=FALSE}
-readCitationFile(file = file.path("inst", "CITATION", fsep = "/"))
+- [Andree Valle-Campos](https://github.com/avallecam/) 
+
+-->
+
+<!--## Acknowledgements-->
+
+## Related
+
+Epiverse-TRACE documentation:
+
++ [How-to guides](https://epiverse-trace.github.io/howto/): Reproducible recipes with concrete steps to solve specific Outbreak Analysis questions using multiple packages.
++ [Reference manuals and vignettes](https://epiverse-trace.github.io/getting-started.html#epiverse-trace-packages): Package-specific usage guides and function examples, along with explanatory articles.
+
+Preliminary learning materials:
+
++ [Introductory R tutorials](https://appliedepi.org/resources/tutorials.html): Refresh your R knowledge with interactive online self-paced tutorials from the Applied Epi organization.
++ [The Epidemiologist R Handbook](https://www.epirhandbook.com/en/index.html): Online book on basics, data management, epidemiological analysis, visualization, and reporting from the Applied Epi organization.
+
+## Citation
+
+See [CITATION.cff](CITATION.cff) for citation information, including a list of authors.
+([Read more about the Citation File Format and how to use it](https://citation-file-format.github.io/).)
+
+To cite these tutorials in publications use:
+
+```{r,eval=TRUE,echo=FALSE,comment=""}
+cffr::as_bibentry(x = "CITATION.cff")
 ```
+
+A BibTeX entry for LaTeX users is:
+
+```{r,eval=TRUE,echo=FALSE,comment=""}
+utils::toBibtex(cffr::as_bibentry(x = "CITATION.cff"))
+```
+
+## Contact
+Please contact [Andree Valle-Campos](mailto:andree.valle-campos@lshtm.ac.uk) with any questions about this tutorial.
