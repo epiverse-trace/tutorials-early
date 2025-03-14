@@ -3,7 +3,7 @@
 
 cff-version: 1.2.0
 title: >-
-  Epiverse TRACE Tutorials Early: Read and clean case data,
+  Epiverse-TRACE Tutorials Early: Read and clean case data,
   and make linelist for outbreak analytics with R
 message: >-
   Please cite this lesson using the information in this file
