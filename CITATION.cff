@@ -1,0 +1,53 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Epiverse-TRACE Tutorials Early: Read and clean case data,
+  and make linelist for outbreak analytics with R
+message: >-
+  Please cite this lesson using the information in this file
+  when you refer to it in publications, and/or if you
+  re-use, adapt, or expand on the content in your own
+  training material.
+type: dataset
+authors:
+  - given-names: Andree
+    family-names: Valle-Campos
+    email: andree.valle-campos@lshtm.ac.uk
+    orcid: 'https://orcid.org/0000-0002-7779-481X'
+  - given-names: Abdoelnaser
+    family-names: Degoot
+    email: abdoelnaser-mahmood.degoot@lshtm.ac.uk
+    orcid: 'https://orcid.org/0000-0001-8788-2496'
+repository-code: 'https://github.com/epiverse-trace/tutorials-early'
+url: 'https://epiverse-trace.github.io/tutorials-early/'
+abstract: >-
+  The Epiverse-TRACE initiative aims to provide a software
+  ecosystem for outbreak analytics with integrated,
+  generalisable and scalable community-driven software. We
+  support the development of R packages, make the existing
+  ones interoperable for the user experience, and stimulate
+  a community of practice. In the outbreak analytics
+  curriculum, we built three tutorials around an outbreak
+  analysis pipeline split into three stages: Early, Middle,
+  and Late tasks. Early tasks include reading, cleaning and
+  validating case data, and converting line list data to
+  incidence for visualizing epidemic curves. Middle tasks
+  host real-time analysis that includes accessing
+  epidemiological delays, estimating transmission metrics,
+  forecasting, severity and superspreading from case data
+  and simulating transmission chains. Late tasks include
+  accessing and analyzing social contact matrices, scenario
+  modelling to simulate disease spread and investigate
+  interventions, and modelling disease burden.
+keywords:
+  - outbreak analytics
+  - exploratory data analysis
+  - data cleaning
+  - carpentries
+  - rstats
+  - english-language
+license: CC-BY-4.0
+version: v2025-03-11
+date-released: '2025-03-11'
