@@ -3,7 +3,7 @@
 
 cff-version: 1.2.0
 title: >-
-  Epiverse-TRACE Tutorials Early: Read and clean case data,
+  Epiverse TRACE Tutorials Early: Read and clean case data,
   and make linelist for outbreak analytics with R
 message: >-
   Please cite this lesson using the information in this file
@@ -36,8 +36,9 @@ abstract: >-
   incidence for visualizing epidemic curves. Middle tasks
   host real-time analysis that includes accessing
   epidemiological delays, estimating transmission metrics,
-  forecasting, severity and superspreading from case data
-  and simulating transmission chains. Late tasks include
+  forecasting, and severity from incidence data,
+  superspreading from line list and contact data, and
+  simulating transmission chains. Late tasks include
   accessing and analyzing social contact matrices, scenario
   modelling to simulate disease spread and investigate
   interventions, and modelling disease burden.
