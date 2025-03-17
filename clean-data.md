@@ -638,14 +638,14 @@ and the date of birth).
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at 
 different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sample for the case identified
- until the date this document was generated (2025-03-17).
+ until the 3rd of January 2025 (`"2025-01-03"`).
  
 
 ``` r
 sim_ebola_data <- cleanepi::timespan(
   sim_ebola_data,
   target_column = "date_sample",
-  end_date = Sys.Date(),
+  end_date = lubridate::ymd("2025-01-03"),
   span_unit = "years",
   span_column_name = "years_since_collection",
   span_remainder_unit = "months"
@@ -659,16 +659,16 @@ sim_ebola_data %>%
 # A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
- 1 14905   2015-06-04                       9                9
- 2 13043   2014-03-01                      11                0
- 3 14364   2015-03-03                      10                0
- 4 14675   2031-12-14                      -6               -8
- 5 12648   2016-10-10                       8                5
- 6 14274   2016-01-23                       9                1
- 7 14132   2015-05-10                       9               10
- 8 14715   2016-04-24                       8               10
- 9 13435   2020-09-14                       4                6
-10 14816   2015-06-02                       9                9
+ 1 14905   2015-06-04                       9                7
+ 2 13043   2014-03-01                      10               10
+ 3 14364   2015-03-03                       9               10
+ 4 14675   2031-12-14                      -6              -11
+ 5 12648   2016-10-10                       8                2
+ 6 14274   2016-01-23                       8               11
+ 7 14132   2015-05-10                       9                7
+ 8 14715   2016-04-24                       8                8
+ 9 13435   2020-09-14                       4                3
+10 14816   2015-06-02                       9                7
 # ℹ 14,990 more rows
 ```
 
@@ -690,7 +690,7 @@ dat <- readRDS(
   dplyr::as_tibble()
 ```
 
-Calculate the age in years of the subjects with date of birth, and the remainder time un months. Clean and standardize the required elements to get this done.
+Calculate the age in years __until the 1st of March__ of the subjects with the date of birth, and the remainder time in months. Clean and standardize the required elements to get this done.
 
 :::::::::::::::::::::::::::: hint
 
@@ -722,7 +722,7 @@ dat_clean <- dat %>%
   # calculate the age in 'years' and return the remainder in 'months'
   cleanepi::timespan(
     target_column = "date_of_birth",
-    end_date = Sys.Date(),
+    end_date = lubridate::ymd("2025-03-01"),
     span_unit = "years",
     span_column_name = "age_in_years",
     span_remainder_unit = "months"
@@ -819,7 +819,7 @@ cleaned_data <- raw_ebola_data %>%
   cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
   cleanepi::timespan(
     target_column = "date_sample",
-    end_date = Sys.Date(),
+    end_date = lubridate::ymd("2025-01-03"),
     span_unit = "years",
     span_column_name = "years_since_collection",
     span_remainder_unit = "months"
