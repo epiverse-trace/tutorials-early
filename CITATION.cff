@@ -12,14 +12,14 @@ message: >-
   training material.
 type: dataset
 authors:
-  - given-names: Andree
-    family-names: Valle-Campos
-    email: andree.valle-campos@lshtm.ac.uk
-    orcid: 'https://orcid.org/0000-0002-7779-481X'
   - given-names: Abdoelnaser
     family-names: Degoot
     email: abdoelnaser-mahmood.degoot@lshtm.ac.uk
     orcid: 'https://orcid.org/0000-0001-8788-2496'
+  - given-names: Andree
+    family-names: Valle-Campos
+    email: andree.valle-campos@lshtm.ac.uk
+    orcid: 'https://orcid.org/0000-0002-7779-481X'
 repository-code: 'https://github.com/epiverse-trace/tutorials-early'
 url: 'https://epiverse-trace.github.io/tutorials-early/'
 abstract: >-
