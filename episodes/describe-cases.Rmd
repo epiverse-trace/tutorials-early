@@ -56,7 +56,7 @@ This help us remember package functions and avoid namespace conflicts.
 
 To illustrate the process of conducting EDA on outbreak data, we will generate a line list 
 for a hypothetical disease outbreak utilizing the `{simulist}` package. `{simulist}` generates simulation data for outbreak according to a given configuration. 
-Its minimal configuration can generate a linelist, as shown in the below code chunk :
+Its minimal configuration can generate a linelist, as shown in the below code chunk:
 
 ```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
