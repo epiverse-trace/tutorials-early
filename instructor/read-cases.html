@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2025-03-17 |
+        <p>Last updated on 2025-03-18 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -339,8 +339,8 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul><li>Where do you usually store your outbreak data?</li>
-<li>How many different data formats can I read?</li>
-<li>Is it possible to import data from databases and health APIs?</li>
+<li>How many different data formats can you use for analysis?</li>
+<li>Can you import data from databases and health APIs?</li>
 </ul></div>
 </div>
 </div>
@@ -363,24 +363,30 @@
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
 <p>This episode requires you to be familiar with:</p>
-<p><strong>Data science</strong> : Basic programming with R.</p>
+<p><strong>Data science</strong> : Basic tasks with R.</p>
 </div>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
-<hr class="half-width"><p>The initial step in outbreak analysis involves importing the target
-dataset into the <code>R</code> environment from various sources.
-Outbreak data is typically stored in files of diverse formats,
-relational database management systems (RDBMS), or health information
-system (HIS) application program interfaces (APIs) such as <a href="https://www.project-redcap.org/" class="external-link">REDCap</a>, <a href="https://dhis2.org/" class="external-link">DHIS2</a>, etc. The latter option is
-particularly well-suited for storing institutional health data. This
-episode will elucidate the process of reading cases from these
-sources.</p>
+<hr class="half-width"><p>The initial step in outbreak analysis typically involves importing
+the target dataset into the <code>R</code> environment from either a
+local source (like a file on your computer) or external source (like a
+database). Outbreak data can be stored in diverse formats, relational
+database management systems (RDBMS), or health information systems
+(HIS), such as <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> and
+<a href="https://dhis2.org/" class="external-link">DHIS2</a>, which provide application
+program interfaces (APIs) to the database systems so verified users can
+easily add and access data entries. The latter option is particularly
+well-suited for collecting and storing large-scal institutional health
+data. This episode will elucidate the process of reading cases from
+these sources.</p>
 <p>Let’s start by loading the package <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data
 and the package <a href="https://here.r-lib.org/" class="external-link">here</a> to easily find a file path within
-your RStudio project. We’ll use the pipe <code>%&gt;%</code> to connect
-some of their functions, including others from the package
-<a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>, so let’s also call to the tidyverse package:</p>
+your RStudio project. We’ll use the pipe <code>%&gt;%</code> to easily
+connect some of their functions, including functions from the data
+formatting package <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>. We’ll therefore call the
+tidyverse package, which includes both the pipe and
+<a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -397,13 +403,15 @@ some of their functions, including others from the package
 <div id="the-double-colon" class="callout-inner">
 <h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
-<p>The double-colon <code>::</code> in R let you call a specific
+<p>The double-colon <code>::</code> in R lets you call a specific
 function from a package without loading the entire package into the
 current environment.</p>
 <p>For example, <code>dplyr::filter(data, condition)</code> uses
-<code>filter()</code> from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> package.</p>
-<p>This help us remember package functions and avoid namespace
-conflicts.</p>
+<code>filter()</code> from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> package, without
+having to use <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code> at the start of a script.</p>
+<p>This help us remember package functions and avoid namespace conflicts
+(i.e. when two different packages include functions with the same name,
+so R does not know which to use).</p>
 </div>
 </div>
 </div>
@@ -416,11 +424,10 @@ conflicts.</p>
 <div class="callout-content">
 <ul><li>Create an RStudio project. If needed, follow this <a href="https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects" class="external-link">how-to
 guide on “Hello RStudio Projects”</a> to create one.</li>
-<li>Inside the RStudio project, create the <code>data/</code>
-folder.</li>
+<li>Inside the RStudio project, create a <code>data/</code> folder.</li>
 <li>Inside the <code>data/</code> folder, save the <a href="https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv" class="external-link">ebola_cases_2.csv</a>
 and <a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="external-link">marburg.zip</a>
-files.</li>
+CSV files.</li>
 </ul></div>
 </div>
 </div>
@@ -432,7 +439,10 @@ and <a href="https://rdatatable.gitlab.io/data.table/" class="external-link">dat
 Together, these packages offer methods to read single or multiple files
 in a wide range of formats.</p>
 <p>The below example shows how to import a <code>csv</code> file into
-<code>R</code> environment using <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package.</p>
+<code>R</code> environment using <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package. We use the
+<a href="https://here.r-lib.org/" class="external-link">here</a> package to tell R to look for the file in the
+<code>data/</code> folder of your project, and <code>as_tibble()</code>
+to convert into a tidier format for subsequent analysis in R.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -566,8 +576,14 @@ for accessing and retrieving data from various database systems.</p>
 we process the database with “queries” (e.g., select, filter, summarise)
 before extraction, we can reduce the memory load in our RStudio session.
 Conversely, conducting all data manipulation outside the database
-management system can lead to occupying more disk space than desired
-running out of memory.</p>
+management system by loading the full dataset into R can use up much
+more computer memory (i.e. RAM) than is feasible on a local machine,
+which can lead RStudio to slow down or even freeze.</p>
+<p>External relational database management systems (RDBMS) also have the
+advantage that multiple users can access, store and analyse parts of the
+dataset simultaneously, without having to transfer individual files,
+which would make it very difficult to track which version is
+up-to-date.</p>
 </div>
 </div>
 </div>
@@ -577,8 +593,9 @@ temporary SQLite database in memory, store the
 it:</p>
 <div class="section level3">
 <h3 id="connect-with-a-database">1. Connect with a database<a class="anchor" aria-label="anchor" href="#connect-with-a-database"></a></h3>
-<p>First, we establish a connection to an SQLite database created in
-memory using <code>DBI::dbConnect()</code>.</p>
+<p>First, we establish a connection to an SQLite database created on our
+machine and stored in its local memory with
+<code>DBI::dbConnect()</code>.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -599,7 +616,8 @@ memory using <code>DBI::dbConnect()</code>.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Callout</h3>
 <div class="callout-content">
-<p>A real-life connection would look like this:</p>
+<p>A real-life connection to an external SQLite database would look like
+this:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -825,8 +843,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
-  "dateCreated": "2025-03-17",
-  "dateModified": "2025-03-17",
+  "dateCreated": "2025-03-18",
+  "dateModified": "2025-03-18",
   "datePublished": "2025-03-18"
 }
 

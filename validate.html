@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Validate case data</h1>
-        <p>Last updated on 2025-03-17 |
+        <p>Last updated on 2025-03-18 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/validate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -336,7 +336,8 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How to convert raw dataset into a <code>linelist</code> object?</li>
+<ul><li>How to convert a raw dataset into a <code>linelist</code>
+object?</li>
 </ul></div>
 </div>
 </div>
@@ -346,7 +347,8 @@
 <h3 class="card-title">Objectives</h3>
 <ul><li>Demonstrate how to covert case data to <code>linelist</code>
 data</li>
-<li>Demonstrate how to validate data</li>
+<li>Demonstrate how to tag and validate data to make analysis more
+reliable</li>
 </ul></div>
 </div>
 </div>
@@ -370,17 +372,21 @@ data</li>
 <hr class="half-width"><p>In outbreak analysis, once you have completed the initial steps of
 reading and cleaning the case data, it’s essential to establish an
 additional foundation layer to ensure the integrity and reliability of
-subsequent analyses. Specifically, this involves verifying the presence
-and correct data type of certain columns within your dataset, a process
-commonly referred to as “tagging.” Additionally. it’s crucial to
-implement measures to validate that these tagged columns are not
-inadvertently deleted during further data processing steps.</p>
+subsequent analyses. Otherwise you might find that your analysis
+suddenly stops working when specific variables appear or disappear, or
+their underlying data types (like <code>&lt;date&gt;</code> or
+<code>&lt;chr&gt;</code>) change. Specifically, this additional layer
+involves: 1) verifying the presence and correct data type of certain
+columns within your dataset, a process commonly referred to as
+“tagging”; 2) implementing measures to check that these tagged columns
+are not inadvertently deleted during further data processing steps,
+known as “validation”.</p>
 <p>This episode focuses tagging and validate outbreak data using the <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> package.
 Let’s start by loading the package <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data and
-the package <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> to create a linelist. We’ll use the
-pipe <code>%&gt;%</code> to connect some of their functions, including
-others from the package <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>, so let’s also call to the
-tidyverse package:</p>
+the package <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> to create a linelist object. We’ll
+use the pipe <code>%&gt;%</code> to connect some of their functions,
+including others from the package <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>, so let’s also
+call to the tidyverse package:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -398,7 +404,7 @@ tidyverse package:</p>
 <div id="the-double-colon" class="callout-inner">
 <h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
-<p>The double-colon <code>::</code> in R let you call a specific
+<p>The double-colon <code>::</code> in R lets you call a specific
 function from a package without loading the entire package into the
 current environment.</p>
 <p>For example, <code>dplyr::filter(data, condition)</code> uses
@@ -465,9 +471,9 @@ to replicate the analysis code you wrote the day before?</p>
 </div>
 
 </section><section><h2 class="section-heading" id="creating-a-linelist-and-tagging-elements">Creating a linelist and tagging elements<a class="anchor" aria-label="anchor" href="#creating-a-linelist-and-tagging-elements"></a></h2>
-<hr class="half-width"><p>Then we convert the cleaned case data into a <code>linelist</code>
-object using <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> package, see the below code
-chunk.</p>
+<hr class="half-width"><p>Once the data is loaded and cleaned, we convert the cleaned case data
+into a <code>linelist</code> object using <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a>
+package, as in the below code chunk.</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -539,7 +545,7 @@ can be associated with any of these available tags.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in {linelist}
 using:</p>
@@ -562,7 +568,7 @@ using:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -603,13 +609,14 @@ as shown in the example below:</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p>Let’s <strong>validate</strong> tagged variables. Let’s simulate that
-in an ongoing outbreak; the next day, your data has a new set of entries
-(i.e., rows or observations) but one variable change of data type.</p>
-<p>For example, let’s make the variable <code>age</code> change of type
-from a double (<code>&lt;dbl&gt;</code>) variable to character
+<p>Let’s <strong>validate</strong> some tagged variables. Let’s simulate
+a situation in an ongoing outbreak. You wake up one day to discover that
+the data stream you have rely on has a new set of entries (i.e., rows or
+observations) and one variable that has a change of data type.</p>
+<p>For example, let’s assume the variable <code>age</code> changed from
+a double (<code>&lt;dbl&gt;</code>) variable to character
 (<code>&lt;chr&gt;</code>).</p>
-<p>To simulate it:</p>
+<p>To simulate this situation:</p>
 <ul><li>
 <strong>Change</strong> the variable data type,</li>
 <li>
@@ -626,7 +633,7 @@ input data has a different variable data type.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -651,7 +658,7 @@ before tagging for validation. For example:</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
 <div class="accordion-body">
 <blockquote>
 <p>Please run the code line by line, focusing only on the parts before
@@ -703,7 +710,7 @@ variable to character (<code>&lt;chr&gt;</code>),</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -766,7 +773,7 @@ validating would response to the absence of a variable?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>About losing variables, you can simulate this scenario:</p>
 <div class="codewrapper sourceCode" id="cb14">
@@ -858,7 +865,7 @@ analysis pipeline during an outbreak response?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -1012,8 +1019,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/validate.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/validate.html",
-  "dateCreated": "2025-03-17",
-  "dateModified": "2025-03-17",
+  "dateCreated": "2025-03-18",
+  "dateModified": "2025-03-18",
   "datePublished": "2025-03-18"
 }
 

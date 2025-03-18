@@ -319,7 +319,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean case data</h1>
-        <p>Last updated on 2025-03-17 |
+        <p>Last updated on 2025-03-18 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -371,9 +371,12 @@ case dataset.</li>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>In the process of analyzing outbreak data, it’s essential to ensure
-that the dataset is clean, curated, standardized, and valid to
-facilitate accurate and reproducible analysis. This episode focuses on
-cleaning epidemics and outbreaks data using the <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package,
+that the dataset is clean, curated, standardized, and validated. This
+will ensure that analysis is accurate (i.e. you are analysing what you
+think you are analysing) and reproducible (i.e. if someone wants to go
+back and repeat your analysis steps with your code, you can be confident
+they will get the same results). This episode focuses on cleaning
+epidemics and outbreaks data using the <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package,
 For demonstration purposes, we’ll work with a simulated dataset of Ebola
 cases.</p>
 <p>Let’s start by loading the package <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data
@@ -398,7 +401,7 @@ tidyverse package:</p>
 <div id="the-double-colon" class="callout-inner">
 <h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
-<p>The double-colon <code>::</code> in R let you call a specific
+<p>The double-colon <code>::</code> in R lets you call a specific
 function from a package without loading the entire package into the
 current environment.</p>
 <p>For example, <code>dplyr::filter(data, condition)</code> uses
@@ -455,20 +458,21 @@ content.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Discussion</h3>
 <div class="callout-content">
-<p>Let’s <strong>diagnose</strong> the data frame. List all the
+<p>Let’s first <strong>diagnose</strong> the data frame. List all the
 characteristics in the data frame above that are problematic for data
 analysis.</p>
-<p>Are any of those characteristics familiar with any previous data
-analysis you performed?</p>
+<p>Are any of those characteristics familiar from any previous data
+analysis you have performed?</p>
 </div>
 </div>
 </div>
 
 </section><section><h2 class="section-heading" id="a-quick-inspection">A quick inspection<a class="anchor" aria-label="anchor" href="#a-quick-inspection"></a></h2>
-<hr class="half-width"><p>Quick exploration and inspection of the dataset are crucial before
-diving into any analysis tasks. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package
-simplifies this process with the <code>scan_data()</code> function.
-Let’s take a look at how you can use it:</p>
+<hr class="half-width"><p>Quick exploration and inspection of the dataset are crucial to
+identify potential data issues before diving into any analysis tasks.
+The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package simplifies this process with the
+<code>scan_data()</code> function. Let’s take a look at how you can use
+it:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -644,11 +648,13 @@ can be a subset within the set of constant rows or columns.</p>
 </div>
 <div class="section level3">
 <h3 id="replacing-missing-values">Replacing missing values<a class="anchor" aria-label="anchor" href="#replacing-missing-values"></a></h3>
-<p>In addition to the regularities, raw data can contain missing values
-that may be encoded by different strings, including the empty. To ensure
-robust analysis, it is a good practice to replace all missing values by
-<code>NA</code> in the entire dataset. Below is a code snippet
-demonstrating how you can achieve this in <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>:</p>
+<p>In addition to the irregularities, raw data may contain missing
+values, and these may be encoded by different strings
+(e.g. <code>"NA"</code>, <code>""</code>, <code>character(0)</code>). To
+ensure robust analysis, it is a good practice to replace all missing
+values by <code>NA</code> in the entire dataset. Below is a code snippet
+demonstrating how you can achieve this in <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> for
+missing entries represented by an empty string <code>"</code>:</p>
 <div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -682,14 +688,14 @@ demonstrating how you can achieve this in <a href="https://epiverse-trace.github
 </div>
 <div class="section level3">
 <h3 id="validating-subject-ids">Validating subject IDs<a class="anchor" aria-label="anchor" href="#validating-subject-ids"></a></h3>
-<p>Each entry in the dataset represents a subject and should be
-distinguishable by a specific column formatted in a particular way, such
-as falling within a specified range, containing certain prefixes and/or
-suffixes, containing a specific number of characters. The
-<a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers the function
-<code>check_subject_ids()</code> designed precisely for this task as
-shown in the below code chunk. This function validates whether they are
-unique and meet the required criteria.</p>
+<p>Each entry in the dataset represents a subject (e.g. a disease case
+or study participant) and should be distinguishable by a specific column
+formatted in a particular way, such as falling within a specified range,
+containing certain prefixes and/or suffixes, containing a specific
+number of characters. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package offers the
+function <code>check_subject_ids()</code> designed precisely for this
+task as shown in the below code chunk. This function validates whether
+they are unique and meet the required criteria.</p>
 <div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -729,10 +735,11 @@ fix this situation.</p>
 </div>
 <div class="section level3">
 <h3 id="standardizing-dates">Standardizing dates<a class="anchor" aria-label="anchor" href="#standardizing-dates"></a></h3>
-<p>Certainly, an epidemic dataset contains date columns for different
+<p>An epidemic dataset typically contains date columns for different
 events, such as the date of infection, date of symptoms onset, etc.
 These dates can come in different date formats, and it is good practice
-to standardize them. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package provides
+to standardize them to ensure that subsequent analysis is comparing
+like-with-like. The <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package provides
 functionality for converting date columns of epidemic datasets into ISO
 format, ensuring consistency across the different date columns. Here’s
 how you can use it on our simulated dataset:</p>
@@ -779,8 +786,9 @@ automatically figure out the date columns within the dataset (if
 <div id="how-is-this-possible" class="callout-inner">
 <h3 class="callout-title">How is this possible?</h3>
 <div class="callout-content">
-<p>We invite you to find the key package that works internally by
-reading the Details section of the <a href="https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details" class="external-link">Standardize
+<p>We invite you to find the key package that makes this standardisation
+possible inside <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> by reading the Details section
+of the <a href="https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details" class="external-link">Standardize
 date variables reference manual</a>!</p>
 </div>
 </div>
@@ -788,12 +796,14 @@ date variables reference manual</a>!</p>
 </div>
 <div class="section level3">
 <h3 id="converting-to-numeric-values">Converting to numeric values<a class="anchor" aria-label="anchor" href="#converting-to-numeric-values"></a></h3>
-<p>In the raw dataset, some column can come with mixture of character
-and numerical values, and you want to convert the character values
-explicitly into numeric. For example, in our simulated data set, in the
-age column some entries are written in words. In <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a>
-the function <code>convert_to_numeric()</code> does such conversion as
-illustrated in the below code chunk.</p>
+<p>In the raw dataset, some columns can come with mixture of character
+and numerical values, and you will often want to convert character
+values for numbers explicitly into numeric values
+(e.g. <code>"seven"</code> to <code>7</code>). For example, in our
+simulated data set, in the age column some entries are written in words.
+In <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> the function
+<code>convert_to_numeric()</code> does such conversion as illustrated in
+the below code chunk.</p>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1336,8 +1346,8 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/clean-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/clean-data.html",
-  "dateCreated": "2025-03-17",
-  "dateModified": "2025-03-17",
+  "dateCreated": "2025-03-18",
+  "dateModified": "2025-03-18",
   "datePublished": "2025-03-18"
 }
 
