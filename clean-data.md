@@ -26,8 +26,7 @@ This episode requires you to:
 :::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, 
-and valid to facilitate accurate and reproducible analysis.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
  This episode focuses on cleaning epidemics and outbreaks data using the 
  [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
    For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
@@ -49,7 +48,7 @@ library(cleanepi)
 
 ### The double-colon
 
-The double-colon `::` in R let you call a specific function from a package without loading the entire package into the 
+The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the 
 current environment. 
 
 For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
@@ -100,16 +99,15 @@ raw_ebola_data
 
 ::::::::::::::::: discussion
 
-Let's **diagnose** the data frame. List all the characteristics in the data frame above that are problematic for data
- analysis.
+Let's first **diagnose** the data frame. List all the characteristics in the data frame above that are problematic for data analysis.
 
-Are any of those characteristics familiar with any previous data analysis you performed?
+Are any of those characteristics familiar from any previous data analysis you have performed?
 
 ::::::::::::::::::::::::::::
 
 ::::::::::::::::::: instructor
 
-Mediate a short discussion to relate the diagnosed characteristic with required cleaning operations. 
+Lead a short discussion to relate the diagnosed characteristics with required cleaning operations. 
 
 You can use these terms to **diagnose characteristics**: 
 
@@ -133,7 +131,8 @@ You can use these terms to relate to **cleaning operations**:
 
 ##  A quick inspection
 
-Quick exploration and inspection of the dataset are crucial before diving into any analysis tasks. The `{cleanepi}` 
+Quick exploration and inspection of the dataset are crucial to identify potential data issues before 
+diving into any analysis tasks. The `{cleanepi}` 
 package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 
@@ -278,7 +277,7 @@ or columns.
 - constant rows: 6
 - constant cols: 5
 
-Notice to learners that the user can create new constant columns or rows after removing some initial ones.
+Point out to learners that the user can create new constant columns or rows after removing some initial ones.
 
 
 ``` r
@@ -322,9 +321,8 @@ Constant data was removed after 2 iterations. See the report for more details.
 
 ### Replacing missing values
 
-In addition to the regularities, raw data can contain missing values that may be encoded by different strings, 
-including the empty. To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the 
-entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}`:
+In addition to the irregularities, raw data may contain missing values, and these may be encoded by different strings (e.g. `"NA"`, `""`, `character(0)`). To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the 
+entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}` for missing entries represented by an empty string `"`:
 
 
 ``` r
@@ -357,7 +355,7 @@ sim_ebola_data
 
 ### Validating subject IDs
 
-Each entry in the dataset represents a subject and should be distinguishable by a specific column formatted in a 
+Each entry in the dataset represents a subject (e.g. a disease case or study participant) and should be distinguishable by a specific column formatted in a 
 particular way, such as falling within a specified range, containing certain prefixes and/or suffixes, containing a 
 specific number of characters. The `{cleanepi}` package offers the function `check_subject_ids()` designed precisely 
 for this task as shown in the below code chunk. This function validates whether they are unique and meet the required 
@@ -394,8 +392,8 @@ function that can fix this situation.
 
 ### Standardizing dates
 
-Certainly, an epidemic dataset contains date columns for different events, such as the date of infection, 
-date of symptoms onset, etc. These dates can come in different date formats, and it is good practice to standardize them.
+An epidemic dataset typically contains date columns for different events, such as the date of infection, 
+date of symptoms onset, etc. These dates can come in different date formats, and it is good practice to standardize them to ensure that subsequent analysis is comparing like-with-like.
  The `{cleanepi}` package provides functionality for converting date columns of epidemic datasets into ISO format, 
  ensuring consistency across the different date columns. Here's how you can use it on our simulated dataset:
 
@@ -436,15 +434,15 @@ the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  form
 
 #### How is this possible?
 
-We invite you to find the key package that works internally by reading the Details section of the 
+We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the Details section of the 
 [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
 :::::::::::::::::::
 
 ### Converting to numeric values
 
-In the raw dataset, some column can come with mixture of character and numerical values, and you want to convert the 
-character values explicitly into numeric. For example, in our simulated data set, in the age column some entries are 
+In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert 
+character values for numbers explicitly into numeric values (e.g. `"seven"` to `7`). For example, in our simulated data set, in the age column some entries are 
 written in words. In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below 
 code chunk.
 
