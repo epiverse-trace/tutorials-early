@@ -21,7 +21,7 @@ exercises: 10
 
 ## Introduction
 
-Understanding trends in surveillance data is crucial for understanding epidemic drivers and dynamics This may include forecasting disease burden, planning future public health interventions, and assessing the effectiveness of past control measures. By analyzing trends, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health. This episode focuses on how to perform a simple early analysis on incidence data. It uses the same dataset of **Covid-19 case data from England** that utilized it in [Aggregate and visualize](../episodes/describe-cases.Rmd) episode. 
+Understanding trends in surveillance data is crucial for understanding epidemic drivers and dynamics. This may include forecasting disease burden, planning future public health interventions, and assessing the effectiveness of past control measures. By analyzing trends, policymakers and public health experts can make informed decisions to mitigate the spread of diseases and protect public health. This episode focuses on how to perform a simple early analysis on incidence data. It uses the same dataset of **Covid-19 case data from England** that utilized it in [Aggregate and visualize](../episodes/describe-cases.Rmd) episode. 
 
 ::::::::::::::::::: checklist
 
