@@ -78,22 +78,23 @@ sim_data
 ```
 
 ``` output
-# A tibble: 1,546 × 12
-      id case_name       case_type sex     age date_onset date_admission outcome
-   <int> <chr>           <chr>     <chr> <int> <date>     <date>         <chr>  
- 1     1 Kaylin Alberts  probable  f        70 2023-01-01 2023-01-06     recove…
- 2     3 Guirnalda Azuc… probable  f        25 2023-01-11 2023-01-18     died   
- 3     6 Kevin Lee       suspected m        80 2023-01-18 NA             recove…
- 4     8 Ashraf al-Raha… probable  m         8 2023-01-23 2023-02-01     recove…
- 5    11 Jacob Miller    probable  m        69 2023-01-30 NA             recove…
- 6    14 Rocky Bustillos suspected m        40 2023-01-24 2023-01-29     recove…
- 7    15 Jim Soriano     confirmed m        37 2023-01-31 NA             recove…
- 8    16 Abdul Wadood e… suspected m        67 2023-01-30 NA             recove…
- 9    20 Kristy Neish    probable  f        57 2023-01-27 NA             recove…
-10    21 Azeema al-Shab… confirmed f        70 2023-02-09 2023-02-13     died   
+# A tibble: 1,546 × 13
+      id case_name           case_type sex     age date_onset date_reporting
+   <int> <chr>               <chr>     <chr> <int> <date>     <date>        
+ 1     1 Zahra al-Masri      probable  f        37 2023-01-01 2023-01-01    
+ 2     3 Waleeda al-Muhammad probable  f        12 2023-01-11 2023-01-11    
+ 3     6 Rhett Jackson       confirmed m        53 2023-01-18 2023-01-18    
+ 4     8 Sunnique Sims       confirmed f        36 2023-01-23 2023-01-23    
+ 5    11 Danielle Griggs     probable  f        77 2023-01-30 2023-01-30    
+ 6    14 Mohamed Parker      probable  m        37 2023-01-24 2023-01-24    
+ 7    15 Melissa Eriacho     probable  f        67 2023-01-31 2023-01-31    
+ 8    16 Maria Laughlin      probable  f        80 2023-01-30 2023-01-30    
+ 9    20 Phillip Park        confirmed m        70 2023-01-27 2023-01-27    
+10    21 Dewarren Newton     probable  m        87 2023-02-09 2023-02-09    
 # ℹ 1,536 more rows
-# ℹ 4 more variables: date_outcome <date>, date_first_contact <date>,
-#   date_last_contact <date>, ct_value <dbl>
+# ℹ 6 more variables: date_admission <date>, outcome <chr>,
+#   date_outcome <date>, date_first_contact <date>, date_last_contact <date>,
+#   ct_value <dbl>
 ```
 
 This linelist dataset has entries on individual-level simulated events during the outbreak.
@@ -167,22 +168,22 @@ weekly_incidence
 ```
 
 ``` output
-# incidence:  202 x 5
+# incidence:  201 x 5
 # count vars: date_onset
 # groups:     sex, case_type
    date_index sex   case_type count_variable count
    <isowk>    <chr> <chr>     <chr>          <int>
  1 2022-W52   f     probable  date_onset         1
  2 2023-W02   f     probable  date_onset         1
- 3 2023-W03   m     suspected date_onset         1
- 4 2023-W04   f     probable  date_onset         1
- 5 2023-W04   m     confirmed date_onset         2
- 6 2023-W04   m     probable  date_onset         1
- 7 2023-W04   m     suspected date_onset         1
- 8 2023-W05   f     confirmed date_onset         4
- 9 2023-W05   f     probable  date_onset         2
-10 2023-W05   f     suspected date_onset         2
-# ℹ 192 more rows
+ 3 2023-W03   m     confirmed date_onset         1
+ 4 2023-W04   f     confirmed date_onset         2
+ 5 2023-W04   f     probable  date_onset         1
+ 6 2023-W04   m     confirmed date_onset         1
+ 7 2023-W04   m     probable  date_onset         1
+ 8 2023-W05   f     confirmed date_onset         3
+ 9 2023-W05   f     probable  date_onset         4
+10 2023-W05   f     suspected date_onset         1
+# ℹ 191 more rows
 ```
 
 ::::::::::::::::::::::::::::::::::::: callout
