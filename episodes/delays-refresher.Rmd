@@ -15,8 +15,6 @@ exercises: 2
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Use the pipe operator `%>%` to structure sequences of data operations.
-- Count observations in each group using `count()` function.
-- Pivot data from wide-to-long or long-to-wide using family of `pivot_*()` functions.
 - Create new columns from existing columns using `mutate()` function.
 - Keep or drop columns by their names using `select()`.
 - Keep rows that match a condition using `filter()`.
@@ -31,7 +29,6 @@ Useful concepts maps to teach this episode are
 
 - <https://github.com/rstudio/concept-maps?tab=readme-ov-file#dplyr>
 - <https://github.com/rstudio/concept-maps?tab=readme-ov-file#pipe-operator>
-- <https://github.com/rstudio/concept-maps?tab=readme-ov-file#pivoting>
 
 ::::::::::
 
