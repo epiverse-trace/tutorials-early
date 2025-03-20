@@ -45,7 +45,9 @@ cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
   as_tibble() %>%
   dplyr::select(id, date_onset, date_admission) %>%
   dplyr::mutate(diff_onset_to_admission = date_admission - date_onset) %>%
-  dplyr::mutate(diff_onset_to_admission_num = as.numeric(diff_onset_to_admission)) %>%
+  dplyr::mutate(
+    diff_onset_to_admission_num = as.numeric(diff_onset_to_admission)
+  ) %>%
   dplyr::filter(diff_onset_to_admission_num > 0)
 
 # reporting delay
@@ -145,7 +147,7 @@ Let's start by simulating a line list using `{simulist}`:
 
 ```{r}
 # Set seed for reproducibility
-set.seed(33) 
+set.seed(33)
 
 # Read data
 cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
