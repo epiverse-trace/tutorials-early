@@ -38,14 +38,14 @@ library(fitdistrplus)
 library(tidyverse) # loads readr, dplyr, tidyr and ggplot2
 
 # Set seed for reproducibility
-set.seed(33) 
+set.seed(33)
 
 # Read data
-cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>% 
-  as_tibble() %>% 
+cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+  as_tibble() %>%
   dplyr::select(id, date_onset, date_admission) %>%
-  dplyr::mutate(diff_onset_to_admission = date_admission - date_onset) %>% 
-  dplyr::mutate(diff_onset_to_admission_num = as.numeric(diff_onset_to_admission)) %>% 
+  dplyr::mutate(diff_onset_to_admission = date_admission - date_onset) %>%
+  dplyr::mutate(diff_onset_to_admission_num = as.numeric(diff_onset_to_admission)) %>%
   dplyr::filter(diff_onset_to_admission_num > 0)
 
 # reporting delay
@@ -55,7 +55,10 @@ diff_fit <- cases %>%
 
 cases %>%
   ggplot() +
-  geom_histogram(aes(x = diff_onset_to_admission_num, y = ..density..), binwidth = 1) +
+  geom_histogram(
+    aes(x = diff_onset_to_admission_num, y = ..density..),
+    binwidth = 1
+  ) +
   stat_function(
     fun = dlnorm,
     args = list(
@@ -145,7 +148,7 @@ Let's start by simulating a line list using `{simulist}`:
 set.seed(33) 
 
 # Read data
-cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>% 
+cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
   as_tibble()
 ```
 
