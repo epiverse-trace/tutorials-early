@@ -631,6 +631,25 @@ cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 
+:::::::::::::: challenge
+
+Have you noticed that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status and another set to **perform** a cleaning action?
+
+To identify both groups:
+
+- On a piece of paper, write the names of each function under the corresponding column:
+
+| **Diagnose** cleaning status | **Performs** cleaning action |
+|---|---|
+| ... | ... |
+
+::::::::::::::
+
+:::::::::::::: instructor
+
+Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status (e.g., `check_subject_ids()` and `check_date_sequence()` in the chunk above) and another set to **perform** a cleaning action (the complementary functions from the chunk above).
+
+::::::::::::::
 
 ## Cleaning report
 
