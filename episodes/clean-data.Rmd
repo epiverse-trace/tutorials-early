@@ -374,11 +374,11 @@ Ensuring the correct order and sequence of dated events is crucial in epidemiolo
 when analyzing infectious diseases where the timing of events like symptom onset and sample collection is essential. 
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
 
-Here's an example code chunk demonstrating the usage of the function `check_date_sequence()` in our simulated Ebola dataset
+Here's an example of a code chunk demonstrating the usage of the function `check_date_sequence()` in the first 100 records of our simulated Ebola dataset
 
 ```{r, warning=FALSE}
 sim_ebola_data <- cleanepi::check_date_sequence(
-  data = sim_ebola_data,
+  data = sim_ebola_data[1:100, ],
   target_columns = c("date_onset", "date_sample")
 )
 ```
