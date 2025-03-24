@@ -217,7 +217,9 @@ sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
 ``` output
-Found 5 duplicated rows in the dataset. Please consult the report for more details.
+! Found 5 duplicated rows in the dataset.
+ℹ Use `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat" is
+  the object used to store the output from this operation.
 ```
 
 <!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
@@ -286,7 +288,10 @@ df %>%
 ```
 
 ``` output
-Constant data was removed after 2 iterations. See the report for more details.
+! Constant data was removed after 2 iterations.
+ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
+  "dat" represents the object used to store the output from
+  `remove_constants()`.
 ```
 
 ``` output
@@ -304,7 +309,10 @@ df %>%
 ```
 
 ``` output
-Constant data was removed after 2 iterations. See the report for more details.
+! Constant data was removed after 2 iterations.
+ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
+  "dat" represents the object used to store the output from
+  `remove_constants()`.
 ```
 
 ``` output
@@ -373,7 +381,10 @@ sim_ebola_data <-
 ```
 
 ``` output
-Found 1957 duplicated rows in the subject IDs. Please consult the report for more details.
+! Found 1957 duplicated values in the subject Ids.
+ℹ Enter `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat"
+  is the object used to store the output from this operation.
+ℹ No incorrect subject id was detected.
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -492,14 +503,21 @@ Ensuring the correct order and sequence of dated events is crucial in epidemiolo
 when analyzing infectious diseases where the timing of events like symptom onset and sample collection is essential. 
 The `{cleanepi}` package provides a helpful function called `check_date_sequence()` precisely for this purpose.
 
-Here's an example code chunk demonstrating the usage of the function `check_date_sequence()` in our simulated Ebola dataset
+Here's an example of a code chunk demonstrating the usage of the function `check_date_sequence()` in the first 100 records of our simulated Ebola dataset
 
 
 ``` r
 sim_ebola_data <- cleanepi::check_date_sequence(
-  data = sim_ebola_data,
+  data = sim_ebola_data[1:100, ],
   target_columns = c("date_onset", "date_sample")
 )
+```
+
+``` output
+! Detected 16 incorrect date sequences at lines: "10, 20, 22, 26, 29, 44, 46,
+  54, 60, 63, 70, 71, 73, 80, 81, 90".
+ℹ Enter `attr(dat, "report")[["incorrect_date_sequence"]]` to access them,
+  where "dat" is the object used to store the output from this operation.
 ```
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
@@ -563,7 +581,7 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 8
+# A tibble: 100 × 8
       v1 case_id   age gender status    date_onset date_sample row_id
    <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
  1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
@@ -576,7 +594,7 @@ sim_ebola_data
  8     8 14715      44 female confirmed NA         2016-04-24       9
  9     9 13435      26 male   <NA>      2014-09-07 2020-09-14      10
 10    10 14816      30 female <NA>      2015-06-29 2015-06-02      11
-# ℹ 14,990 more rows
+# ℹ 90 more rows
 ```
 
 This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is 
@@ -654,7 +672,7 @@ sim_ebola_data %>%
 ```
 
 ``` output
-# A tibble: 15,000 × 4
+# A tibble: 100 × 4
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
  1 14905   2015-06-04                       9                7
@@ -667,7 +685,7 @@ sim_ebola_data %>%
  8 14715   2016-04-24                       8                8
  9 13435   2020-09-14                       4                3
 10 14816   2015-06-02                       9                7
-# ℹ 14,990 more rows
+# ℹ 90 more rows
 ```
 
 After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and 
@@ -725,6 +743,15 @@ dat_clean <- dat %>%
     span_column_name = "age_in_years",
     span_remainder_unit = "months"
   )
+```
+
+``` output
+! Found <numeric> values that could also be of type <Date> in column:
+  date_of_birth.
+ℹ It is possible to convert them into <Date> using: `lubridate::as_date(x,
+  origin = as.Date("1900-01-01"))`
+• where "x" represents here the vector of values from these columns
+  (`data$target_column`).
 ```
 
 Now, How would you categorize a numerical variable?
