@@ -633,13 +633,13 @@ cleaned_data %>%
 
 :::::::::::::: challenge
 
-Have you noticed that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status and another set to **perform** a cleaning action?
+Have you noticed that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status and another set to **perform**  cleaning actions?
 
 To identify both groups:
 
 - On a piece of paper, write the names of each function under the corresponding column:
 
-| **Diagnose** cleaning status | **Performs** cleaning action |
+| **Diagnose** cleaning status | **Perform** cleaning action |
 |---|---|
 | ... | ... |
 
