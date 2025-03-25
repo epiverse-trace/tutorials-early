@@ -376,7 +376,7 @@ The `{cleanepi}` package provides a helpful function called `check_date_sequence
 
 Here's an example of a code chunk demonstrating the usage of the function `check_date_sequence()` in the first 100 records of our simulated Ebola dataset
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, results = 'hide'}
 cleanepi::check_date_sequence(
   data = sim_ebola_data[1:100, ],
   target_columns = c("date_onset", "date_sample")
