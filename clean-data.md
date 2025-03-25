@@ -396,7 +396,7 @@ Note that our simulated  dataset does contain duplicated subject IDS.
 Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" 
 tab to identify what IDs require an extra treatment. 
 
-After finishing this tutorial, we invite you to explore the package reference guide of `{cleanepi}` to find the 
+After finishing this tutorial, we invite you to explore the package reference guide of [`cleanepi::check_subject_ids()`](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the 
 function that can fix this situation.
 
 :::::::::::::::::::::::::
@@ -507,7 +507,7 @@ Here's an example of a code chunk demonstrating the usage of the function `check
 
 
 ``` r
-sim_ebola_data <- cleanepi::check_date_sequence(
+cleanepi::check_date_sequence(
   data = sim_ebola_data[1:100, ],
   target_columns = c("date_onset", "date_sample")
 )
@@ -522,16 +522,6 @@ sim_ebola_data <- cleanepi::check_date_sequence(
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify 
 any inconsistencies or errors in the chronological order of events, allowing you to address them appropriately.
-
-::::::::::::::::: spoiler
-
-#### What are the incorrect date sequences?
-
-Let's print another preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the 
-"Incorrect date sequence" tab to identify what IDs had this issue. 
-
-:::::::::::::::::::::::::
-
 
 ### Dictionary-based substitution
 
@@ -581,7 +571,7 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 100 × 8
+# A tibble: 15,000 × 8
       v1 case_id   age gender status    date_onset date_sample row_id
    <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
  1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
@@ -594,7 +584,7 @@ sim_ebola_data
  8     8 14715      44 female confirmed NA         2016-04-24       9
  9     9 13435      26 male   <NA>      2014-09-07 2020-09-14      10
 10    10 14816      30 female <NA>      2015-06-29 2015-06-02      11
-# ℹ 90 more rows
+# ℹ 14,990 more rows
 ```
 
 This approach simplifies the data cleaning process, ensuring that categorical data in epidemiological datasets is 
@@ -672,7 +662,7 @@ sim_ebola_data %>%
 ```
 
 ``` output
-# A tibble: 100 × 4
+# A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
  1 14905   2015-06-04                       9                7
@@ -685,7 +675,7 @@ sim_ebola_data %>%
  8 14715   2016-04-24                       8                8
  9 13435   2020-09-14                       4                3
 10 14816   2015-06-02                       9                7
-# ℹ 90 more rows
+# ℹ 14,990 more rows
 ```
 
 After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and 
