@@ -1266,8 +1266,8 @@ IDS.</p>
 “Unexpected subject ids” tab to identify what IDs require an extra
 treatment.</p>
 <p>After finishing this tutorial, we invite you to explore the package
-reference guide of <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> to find the function that can
-fix this situation.</p>
+reference guide of <a href="https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html" class="external-link"><code>cleanepi::check_subject_ids()</code></a>
+to find the function that can fix this situation.</p>
 </div>
 </div>
 </div>
@@ -1412,7 +1412,7 @@ our simulated Ebola dataset</p>
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sim_ebola_data</span> <span class="op">&lt;-</span> <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">check_date_sequence</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">check_date_sequence</span><span class="op">(</span></span>
 <span>  data <span class="op">=</span> <span class="va">sim_ebola_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span>, <span class="op">]</span>,</span>
 <span>  target_columns <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"date_onset"</span>, <span class="st">"date_sample"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
@@ -1429,20 +1429,6 @@ our simulated Ebola dataset</p>
 accuracy in epidemiological analyses, as it helps identify any
 inconsistencies or errors in the chronological order of events, allowing
 you to address them appropriately.</p>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> What are the incorrect date sequences? </h3>
-</button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
-<div class="accordion-body">
-<p>Let’s print another preliminary report with
-<code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
-“Incorrect date sequence” tab to identify what IDs had this issue.</p>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="section level3">
 <h3 id="dictionary-based-substitution">Dictionary-based substitution<a class="anchor" aria-label="anchor" href="#dictionary-based-substitution"></a>
@@ -1500,7 +1486,7 @@ code chunk demonstrating how to utilize this functionality:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 100 × 8
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 8
       v1 case_id   age gender status    date_onset date_sample row_id
    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;
  1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
@@ -1513,17 +1499,17 @@ code chunk demonstrating how to utilize this functionality:</p>
  8     8 14715      44 female confirmed NA         2016-04-24       9
  9     9 13435      26 male   &lt;NA&gt;      2014-09-07 2020-09-14      10
 10    10 14816      30 female &lt;NA&gt;      2015-06-29 2015-06-02      11
-# ℹ 90 more rows</code></pre>
+# ℹ 14,990 more rows</code></pre>
 </div>
 <p>This approach simplifies the data cleaning process, ensuring that
 categorical data in epidemiological datasets is accurately categorized
 and ready for further analysis.</p>
-<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
-  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to create your own data dictionary? </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> How to create your own data dictionary? </h3>
 </button>
-<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>Note that, when the column in the dataset contains values that are
 not in the dictionary, the function
@@ -1603,7 +1589,7 @@ date of sample for the case identified until the 3rd of January 2025
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 100 × 4
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    &lt;chr&gt;   &lt;date&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
  1 14905   2015-06-04                       9                7
@@ -1616,7 +1602,7 @@ date of sample for the case identified until the 3rd of January 2025
  8 14715   2016-04-24                       8                8
  9 13435   2020-09-14                       4                3
 10 14816   2015-06-02                       9                7
-# ℹ 90 more rows</code></pre>
+# ℹ 14,990 more rows</code></pre>
 </div>
 <p>After executing the function <code>cleanepi::timespan()</code>, two
 new columns named <code>years_since_collection</code> and
@@ -2131,7 +2117,7 @@ can be associated with any of these available tags.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in {linelist}
 using:</p>
@@ -2154,7 +2140,7 @@ using:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2223,7 +2209,7 @@ input data has a different variable data type.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -2248,7 +2234,7 @@ before tagging for validation. For example:</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <blockquote>
 <p>Please run the code line by line, focusing only on the parts before
@@ -2302,7 +2288,7 @@ variable to character (<code>&lt;chr&gt;</code>),</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2365,7 +2351,7 @@ validating would response to the absence of a variable?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>About losing variables, you can simulate this scenario:</p>
 <div class="codewrapper sourceCode" id="cb14">
@@ -2467,7 +2453,7 @@ analysis pipeline during an outbreak response?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
