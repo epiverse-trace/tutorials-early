@@ -1,0 +1,415 @@
+---
+title: 'Introduction to delays'
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions 
+
+- How to fit a probability distribution to delay data?
+- How to interpret distribution parameters?
+- How to access distribution parameters from fitting objects
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Fit a probability distribution to data using `{fitdistrplus}`
+- Extract a single column using `pull()`, dollar sign `$`, or square brackets `[]`.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+## Introduction
+
+Delays are key for downstream task in outbreak analytics. To estimate the outbreak severity, we need to assume a known delay from onset to death. To quantify transmission, we need to consider delays from the moment of infection to the time of data collection.
+In order to account for _epidemiological delays_ when estimating indicators of severity or transmission, in our analysis we need to input delays as **Probability Distributions**.
+
+Let's start by loading the package `{dplyr}` to manipulate data. We'll use the pipe `%>%` to connect some of their functions, including others from the package `{ggplot2}`, so let's call to the package `{tidyverse}` that loads them all. We will also use `{fitdistrplus}` to fit probability distributions to delays:
+
+```{r}
+# Load packages
+library(tidyverse) # loads dplyr, the pipe, and ggplot2
+library(fitdistrplus)
+```
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+# Load packages
+library(tidyverse) # loads readr, dplyr, tidyr and ggplot2
+
+# Set seed for reproducibility
+set.seed(33)
+
+# Read data
+cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+  as_tibble() %>%
+  dplyr::select(id, date_onset, date_admission) %>%
+  dplyr::mutate(diff_onset_to_admission = date_admission - date_onset) %>%
+  dplyr::mutate(
+    diff_onset_to_admission_num = as.numeric(diff_onset_to_admission)
+  ) %>%
+  dplyr::filter(diff_onset_to_admission_num > 0)
+
+# reporting delay
+diff_fit <- cases %>%
+  dplyr::pull(diff_onset_to_admission_num) %>%
+  fitdistrplus::fitdist(distr = "lnorm")
+
+cases %>%
+  ggplot() +
+  geom_histogram(
+    aes(x = diff_onset_to_admission_num, y = ..density..),
+    binwidth = 1
+  ) +
+  stat_function(
+    fun = dlnorm,
+    args = list(
+      meanlog = diff_fit$estimate["meanlog"],
+      sdlog = diff_fit$estimate["sdlog"]
+    ),
+    color = "red",
+    size = 1.2
+  ) +
+  labs(
+    x = "Days from onset to admission",
+    y = "Density",
+    title = "Histogram with Lognormal PDF Overlay"
+  ) +
+  theme_minimal()
+```
+
+
+::::::::::::::::::: checklist
+
+**The double-colon**
+
+The double-colon `::` in R let you call a specific function from a package without loading the entire package into the current environment. 
+
+For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+
+This helps us remember package functions and avoid namespace conflicts.
+
+:::::::::::::::::::
+
+
+## Fit a probability distribution to delays
+
+::::::::::::::::::: instructor
+
+Assess learners based on video refreshers on distributions, likelihood, and maximum likelihood from setup instructions.
+
+:::::::::::::::::::
+
+We fit a probability distribution to data (like delays) to make inferences about it. These inferences can be useful for Public health interventions and decision making. For example:
+
+- From the [incubation period](reference.md#incubation) distribution we can inform the length of active monitoring or quarantine. We can infer the time by which 99% of infected individuals are expected to show symptoms ([Lauer et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32150748/)).
+
+- From the [serial interval](reference.md#serialinterval) distribution we can optimize contact tracing. We can evaluate the need to expand the number of days pre-onset to consider in the contact tracing to include more backwards contacts ([Claire Blackmore, 2021](https://www.paho.org/sites/default/files/backward_contact_tracing_v3_0.pdf); [Davis et al., 2020](https://assets.publishing.service.gov.uk/media/61e9ab3f8fa8f50597fb3078/S0523_Oxford_-_Backwards_contact_tracing.pdf)).
+
+![A schematic of the relationship of different time periods of transmission between a primary case and a secondary case in a transmission pair. Adapted from [Zhao et al, 2021](https://www.sciencedirect.com/science/article/pii/S1755436521000359#fig0005)](fig/delays-adapted.png)
+
+::::::::::::::::: callout
+
+**From time periods to probability distributions**
+
+When we calculate the *serial interval*, we see that not all case pairs have the same time length. We will observe this variability for any case pair and individual time period.
+
+![Serial intervals of possible case pairs in (a) COVID-19 and (b) MERS-CoV. Pairs represent a presumed infector and their presumed infectee plotted by date of symptom onset ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig6)).](fig/serial-interval-pairs.jpg)
+
+To summarise these data from individual and pair time periods, we can find the **statistical distributions** that best fit the data ([McFarland et al., 2023](https://www.eurosurveillance.org/content/10.2807/1560-7917.ES.2023.28.27.2200806)).
+
+<!-- add a reference about good practices to estimate distributions -->
+
+![Fitted serial interval distribution for (a) COVID-19 and (b) MERS-CoV based on reported transmission pairs in Saudi Arabia. We fitted three commonly used distributions, Log normal, Gamma, and Weibull distributions, respectively ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#fig5)).](fig/seria-interval-fitted-distributions.jpg)
+
+Statistical distributions are summarised in terms of their **summary statistics** like the *location* (mean and percentiles) and *spread* (variance or standard deviation) of the distribution, or with their **distribution parameters** that inform about the *form* (shape and rate/scale) of the distribution. These estimated values can be reported with their **uncertainty** (95% confidence intervals).
+
+| Gamma | mean | shape | rate/scale |
+|:--------------|:--------------|:--------------|:--------------|
+| MERS-CoV | 14.13(13.9–14.7) | 6.31(4.88–8.52) | 0.43(0.33–0.60) |
+| COVID-19 | 5.1(5.0–5.5) | 2.77(2.09–3.88) | 0.53(0.38–0.76) |
+
+| Weibull | mean | shape | rate/scale |
+|:--------------|:--------------|:--------------|:--------------|
+| MERS-CoV | 14.2(13.3–15.2) | 3.07(2.64–3.63) | 16.1(15.0–17.1) |
+| COVID-19 | 5.2(4.6–5.9) | 1.74(1.46–2.11) | 5.83(5.08–6.67) |
+
+| Log normal | mean | mean-log | sd-log |
+|:--------------|:--------------|:--------------|:--------------|
+| MERS-CoV | 14.08(13.1–15.2) | 2.58(2.50–2.68) | 0.44(0.39–0.5) |
+| COVID-19 | 5.2(4.2–6.5) | 1.45(1.31–1.61) | 0.63(0.54–0.74) |
+
+Table: Serial interval estimates using Gamma, Weibull, and Log Normal distributions. 95% confidence intervals for the shape and scale (logmean and sd for Log Normal) parameters are shown in brackets ([Althobaity et al., 2022](https://www.sciencedirect.com/science/article/pii/S2468042722000537#tbl3)).
+
+:::::::::::::::::::::::::
+
+Let's start by simulating a line list using `{simulist}`:
+
+```{r}
+# Set seed for reproducibility
+set.seed(33)
+
+# Read data
+cases <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+  as_tibble()
+```
+
+From the `cases` object we can use:
+
+- `dplyr::mutate()` to transform the `reporting_delay` class object from `<time>` to `<numeric>`,
+- `dplyr::filter()` to keep the positive values,
+- `dplyr::pull()` to extract a single column,
+- `fitdistrplus::fitdist()` to fit a probability distribution using Maximum Likelihood. We can test distributions like the Log Normal (`"lnorm"`), `"gamma"`, or `"weibull"`.
+
+```{r}
+reporting_delay_fit <- cases %>%
+  dplyr::select(id, date_onset, date_admission) %>%
+  dplyr::mutate(reporting_delay = date_admission - date_onset) %>%
+  dplyr::mutate(reporting_delay_num = as.numeric(reporting_delay)) %>%
+  dplyr::filter(reporting_delay_num > 0) %>%
+  dplyr::pull(reporting_delay_num) %>%
+  fitdistrplus::fitdist(distr = "lnorm")
+
+reporting_delay_fit
+```
+
+Use `summary()` to find goodness-of-fit statistics from the Maximum likelihood. Use `plot()` to visualize the fitted density function and other quality control plots. To compare multiple distributions you can use [`superspreading::ic_tbl()`](https://epiverse-trace.github.io/superspreading/reference/ic_tbl.html). We'll explore that package later!
+
+Now we can do inferences from the probability distribution fitted to the epidemiological delay! Want to learn how? Read the "Show details" :)
+
+:::::::::::::::: spoiler
+
+**Making inferences from probability distributions**
+
+From probability distributions we can infer estimates like cumulative probability, maximum values, or generate random values. We can access to them using R probability functions.
+
+We recommend you read the definitions of the [R probability functions for the Normal distribution](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc). From it we can relate with any other family of statistical distributions!
+
+![The four probability functions for the normal distribution ([Jack Weiss, 2012](https://sakai.unc.edu/access/content/group/3d1eb92e-7848-4f55-90c3-7c72a54e7e43/public/docs/lectures/lecture13.htm#probfunc))](fig/fig5a-normaldistribution.png)
+
+Each probability distribution has a unique set of **parameters** and **probability functions**. Read the [Distributions in the stats package](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Distributions.html) or `?stats::Distributions` to find the ones available in R.
+
+For example, assuming that the reporting delay follows a **Log Normal** distribution, we can use `plnorm()` to calculate the probability of observing a reporting delay of 14 days or less:
+
+```{r}
+plnorm(q = 14, meanlog = 1.0488098, sdlog = 0.8465102)
+```
+
+Or the amount of time by which 99% of symptomatic individuals are expected to be reported in the hospitalization record:
+
+```{r}
+qlnorm(p = 0.99, meanlog = 1.0488098, sdlog = 0.8465102)
+```
+
+You will find more examples of how to use delays for decision-making at the **Use delay distributions in analysis** at Tutorials Middle!
+
+To interactively explore probability distributions, their parameters and access to their distribution functions, we suggest to explore a shinyapp called **The Distribution Zoo**: <https://ben18785.shinyapps.io/distribution-zoo/>
+
+::::::::::::::::::::
+
+::::::::::::: checklist
+
+Let's review some operators used until now:
+
+- Assignment `<-` assigns a value to a variable from right to left.
+- Double colon `::` to call a function from a specific package.
+- Pipe `%>%` to structure sequences of data operations left-to-right
+<!-- - Logical negation `!` to indicate a logical negation (NOT). -->
+
+We need to add two more to the list: 
+
+- Dollar sign `$`
+- Square brackets `[]`
+
+:::::::::::::
+
+Last step is to access to this parameters. Most modeling outputs from R functions will be stored as `list` class objects. In R, the dollar sign operator `$` is used to access elements (like columns) within a data frame or list by name, allowing for easy retrieval of specific components.
+
+::::::::::::::: tab
+
+### Get elements from list
+
+Let's assign to `reporting_delay_fit` the output of an statistical model fitting a distribution to data.
+
+```{r}
+reporting_delay_fit <- cases %>%
+  dplyr::select(id, date_onset, date_admission) %>%
+  dplyr::mutate(reporting_delay = date_admission - date_onset) %>%
+  dplyr::mutate(reporting_delay_num = as.numeric(reporting_delay)) %>%
+  dplyr::filter(reporting_delay_num > 0) %>%
+  dplyr::pull(reporting_delay_num) %>%
+  fitdistrplus::fitdist(distr = "lnorm")
+```
+
+Usually, statistical outputs in R are stored as `List` class objects. Run the chunk below to explore it:
+
+```{r,eval=FALSE,echo=TRUE}
+reporting_delay_fit %>%
+  str()
+```
+
+You can use `purrr::pluck()` to safely get an element deep within a nested data structure.
+
+```{r,eval=FALSE}
+reporting_delay_fit %>%
+  purrr::pluck("estimate")
+```
+
+The code below provides an equivalent result, and can provide more fluency when writing your code:
+
+```{r,echo=TRUE}
+reporting_delay_fit$estimate
+```
+
+But, how do you access to one specific parameter?
+
+### Get elements from column
+
+<!-- this usage is secondary in tutorials -->
+
+Let's assign to `cases_delay` the filtered data frame with positive values for the observed reporting delays.
+
+```{r}
+cases_delay <- cases %>%
+  dplyr::select(id, date_onset, date_admission) %>%
+  dplyr::mutate(reporting_delay = date_admission - date_onset) %>%
+  dplyr::mutate(reporting_delay_num = as.numeric(reporting_delay)) %>%
+  dplyr::filter(reporting_delay_num > 0)
+```
+
+We can use `dplyr::pull()` to extract a single column:
+
+```{r}
+cases_delay %>%
+  dplyr::pull(reporting_delay_num)
+```
+
+The code below provides an equivalent result. Try this yourself:
+
+```{r,eval=FALSE,echo=TRUE}
+cases_delay$reporting_delay_num
+```
+
+:::::::::::::::
+
+:::::::::::::::::::::::::::::: testimonial
+
+**A code completion tip**
+
+If we write the **square brackets** `[]` next to the object `reporting_delay_fit$estimate[]`, within `[]` we can use the 
+Tab key <kbd>↹</kbd> 
+for [code completion feature](https://support.posit.co/hc/en-us/articles/205273297-Code-Completion-in-the-RStudio-IDE) 
+
+This gives quick access to `"meanlog"` and `"sdlog"`. We invite you to try this out in code chunks and the R console!
+
+```{r,eval=FALSE,echo=TRUE}
+# 1. Place the cursor within the square brackets
+# 2. Use the Tab key
+# 3. Explore the completion list
+# 4. Select for "meanlog" or "sdlog"
+reporting_delay_fit$estimate[]
+```
+
+::::::::::::::::::::::::::::::
+
+
+::::::::::::::: callout
+
+**Estimating epidemiological delays is CHALLENGING!**
+
+Epidemiological delays need to account for biases like censoring, right truncation, or epidemic phase ([Charniga et al., 2024](https://doi.org/10.1371/journal.pcbi.1012520)). 
+ 
+Additionally, at the beginning of an outbreak, limited data or resources exist to perform this during a real-time analysis. Until we have more appropriate data for the specific disease and region of the ongoing outbreak, we can **reuse delays from past outbreaks** from the same pathogens or close in its phylogeny, independent of the area of origin.
+
+:::::::::::::::
+
+In the following tutorial episodes, we will:
+
+<!-- - Efficiently clean and produce **epidemic curves** to explore patterns of disease spread by difference group and time aggregates. Find more in [Tutorials Early](https://epiverse-trace.github.io/tutorials-early/)! -->
+- Access to epidemiological **delay distributions** to estimate delay-adjusted transmission and severity metrics (e.g. reproduction number and case fatality risk). Find more in [Tutorials Middle](https://epiverse-trace.github.io/tutorials-middle/)!
+- Use parameter values like the basic reproduction number, and **delays** like the [latent period](reference.md#latent) and [infectious period](reference.md#infectiousness) to simulate transmission trajectories and intervention scenarios. Find more in [Tutorials Late](https://epiverse-trace.github.io/tutorials-late/)!
+
+## Challenges
+
+:::::::::::::::::::::::: challenge
+
+<!-- summative assessment -->
+
+**Relevant delays when estimating transmission**
+
+- Review the definition of the [incubation period](reference.md#incubation) in our glossary page.
+
+- Calculate the summary statistics of the incubation period distribution observed in the line list.
+
+- Visualize the distribution of the incubation period from the line list.
+
+- Fit a log-normal distribution to get the probability distribution parameters of the the observed incubation period.
+
+- (Optional) Infer the time by which 99% of infected individuals are expected to show symptoms.
+
+::::::::::::: solution
+
+Calculate the summary statistics:
+
+```{r}
+cases %>%
+  dplyr::select(case_id, date_of_infection, date_of_onset) %>%
+  dplyr::mutate(incubation_period = date_of_onset - date_of_infection) %>%
+  skimr::skim(incubation_period)
+```
+
+Visualize the distribution:
+
+```{r,warning=FALSE,message=FALSE}
+cases %>%
+  dplyr::select(case_id, date_of_infection, date_of_onset) %>%
+  dplyr::mutate(incubation_period = date_of_onset - date_of_infection) %>%
+  ggplot(aes(x = incubation_period)) +
+  geom_histogram(binwidth = 1)
+```
+
+Fit a log-normal distribution:
+
+```{r}
+incubation_period_dist <- cases %>%
+  dplyr::select(case_id, date_of_infection, date_of_onset) %>%
+  dplyr::mutate(incubation_period = date_of_onset - date_of_infection) %>%
+  mutate(incubation_period_num = as.numeric(incubation_period)) %>%
+  filter(!is.na(incubation_period_num)) %>%
+  pull(incubation_period_num) %>%
+  fitdistrplus::fitdist(distr = "lnorm")
+
+incubation_period_dist
+```
+
+(Optional) Infer the time by which 99% of infected individuals are expected to show symptoms:
+
+```{r}
+qlnorm(
+  p = 0.99,
+  meanlog = incubation_period_dist$estimate["meanlog"],
+  sdlog = incubation_period_dist$estimate["sdlog"]
+)
+```
+
+With the distribution parameters of the incubation period we can infer the length of active monitoring or quarantine. 
+[Lauer et al., 2020](https://pubmed.ncbi.nlm.nih.gov/32150748/) estimated the incubation period of Coronavirus Disease 2019 (COVID-19) from publicly reported confirmed cases.
+
+:::::::::::::
+
+::::::::::::::::::::::::::
+
+
+::::::::::::::::::::::::::::::::::::: keypoints 
+
+- Epidemiological delays condition the estimation of indicators for severity or transmission.
+- Fit probability distribution to delays to make inferences from them for decision-making.
+- Fitting epidemiological delays need to account for biases like censoring, right truncation, or epidemic phase.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+### References
+
+- Cori, A. et al. (2019) Real-time outbreak analysis: Ebola as a case study - part 1 · Recon Learn, RECON learn. Available at: https://www.reconlearn.org/post/real-time-response-1 (Accessed: 06 November 2024).
+
+- Cori, A. et al. (2019) Real-time outbreak analysis: Ebola as a case study - part 2 · Recon Learn, RECON learn. Available at: https://www.reconlearn.org/post/real-time-response-2 (Accessed: 07 November 2024).
