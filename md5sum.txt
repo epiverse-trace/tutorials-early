@@ -9,6 +9,7 @@
 "episodes/validate.Rmd" "1b90aff68a63ccbe0a9dce0a85a92889" "site/built/validate.md" "2025-03-24"
 "episodes/describe-cases.Rmd" "a84ee88c6c11aad9b282200084803ac1" "site/built/describe-cases.md" "2025-03-24"
 "instructors/instructor-notes.md" "ca3834a1b0f9e70c4702aa7a367a6bb5" "site/built/instructor-notes.md" "2025-03-24"
+"instructors/practical-early.md" "cd4a7a17eea6ceabd6ec4de8c0897ec8" "site/built/practical-early.md" "2025-04-04"
 "learners/epikinetics-descriptive.md" "50400941620956b3366fd99d51ed465b" "site/built/epikinetics-descriptive.md" "2025-03-24"
 "learners/epikinetics-statistics.md" "26868caf5a6b4a948ecb8f95c40694ab" "site/built/epikinetics-statistics.md" "2025-03-24"
 "learners/reference.md" "f081702f1c557d1ce455b7d38306737b" "site/built/reference.md" "2025-03-24"
