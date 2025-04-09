@@ -319,7 +319,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean case data</h1>
-        <p>Last updated on 2025-03-25 |
+        <p>Last updated on 2025-04-09 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -776,19 +776,19 @@ missing entries represented by an empty string <code>"</code>:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 8
-      v1 case_id age         gender status    date_onset date_sample row_id
-   &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;        &lt;int&gt;
- 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015       1
- 2     2   13043 twenty-five 2      &lt;NA&gt;      Sep /11/13 03/01/2014       2
- 3     3   14364 54          f      &lt;NA&gt;      09/02/2014 03/03/2015       3
- 4     4   14675 ninety      &lt;NA&gt;   &lt;NA&gt;      10/19/2014 31/ 12 /14       4
- 5     5   12648 74          F      &lt;NA&gt;      08/06/2014 10/10/2016       5
- 6     6   14274 seventy-six female &lt;NA&gt;      Apr /05/15 01/23/2016       7
- 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015       8
- 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016       9
- 9     9   13435 26          1      &lt;NA&gt;      09/07/2014 20/ 09 /14      10
-10    10   14816 thirty      f      &lt;NA&gt;      06/29/2015 06/02/2015      11
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 7
+      v1 case_id age         gender status    date_onset date_sample
+   &lt;int&gt;   &lt;int&gt; &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;
+ 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015
+ 2     2   13043 twenty-five 2      &lt;NA&gt;      Sep /11/13 03/01/2014
+ 3     3   14364 54          f      &lt;NA&gt;      09/02/2014 03/03/2015
+ 4     4   14675 ninety      &lt;NA&gt;   &lt;NA&gt;      10/19/2014 31/ 12 /14
+ 5     5   12648 74          F      &lt;NA&gt;      08/06/2014 10/10/2016
+ 6     6   14274 seventy-six female &lt;NA&gt;      Apr /05/15 01/23/2016
+ 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015
+ 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016
+ 9     9   13435 26          1      &lt;NA&gt;      09/07/2014 20/ 09 /14
+10    10   14816 thirty      f      &lt;NA&gt;      06/29/2015 06/02/2015
 # ℹ 14,990 more rows</code></pre>
 </div>
 <!-- idea: after solving issue with multiple na_string, add a challenge about it + add them to the raw data set! -->
@@ -870,19 +870,19 @@ how you can use it on our simulated dataset:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 8
-      v1 case_id age         gender status    date_onset date_sample row_id
-   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;
- 1     1 14905   90          1      confirmed 2015-03-15 2015-06-04       1
- 2     2 13043   twenty-five 2      &lt;NA&gt;      2013-09-11 2014-03-01       2
- 3     3 14364   54          f      &lt;NA&gt;      2014-09-02 2015-03-03       3
- 4     4 14675   ninety      &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2031-12-14       4
- 5     5 12648   74          F      &lt;NA&gt;      2014-08-06 2016-10-10       5
- 6     6 14274   seventy-six female &lt;NA&gt;      2015-04-05 2016-01-23       7
- 7     7 14132   sixteen     male   confirmed NA         2015-05-10       8
- 8     8 14715   44          f      confirmed NA         2016-04-24       9
- 9     9 13435   26          1      &lt;NA&gt;      2014-09-07 2020-09-14      10
-10    10 14816   thirty      f      &lt;NA&gt;      2015-06-29 2015-06-02      11
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 7
+      v1 case_id age         gender status    date_onset date_sample
+   &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;
+ 1     1 14905   90          1      confirmed 2015-03-15 2015-04-06
+ 2     2 13043   twenty-five 2      &lt;NA&gt;      2013-09-11 2014-01-03
+ 3     3 14364   54          f      &lt;NA&gt;      2014-02-09 2015-03-03
+ 4     4 14675   ninety      &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
+ 5     5 12648   74          F      &lt;NA&gt;      2014-06-08 2016-10-10
+ 6     6 14274   seventy-six female &lt;NA&gt;      2015-04-05 2016-01-23
+ 7     7 14132   sixteen     male   confirmed NA         2015-10-05
+ 8     8 14715   44          f      confirmed NA         2016-04-24
+ 9     9 13435   26          1      &lt;NA&gt;      2014-07-09 2014-09-20
+10    10 14816   thirty      f      &lt;NA&gt;      2015-06-29 2015-02-06
 # ℹ 14,990 more rows</code></pre>
 </div>
 <p>This function converts the values in the target columns, or will
@@ -927,19 +927,19 @@ the below code chunk.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 8
-      v1 case_id   age gender status    date_onset date_sample row_id
-   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;
- 1     1 14905      90 1      confirmed 2015-03-15 2015-06-04       1
- 2     2 13043      25 2      &lt;NA&gt;      2013-09-11 2014-03-01       2
- 3     3 14364      54 f      &lt;NA&gt;      2014-09-02 2015-03-03       3
- 4     4 14675      90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2031-12-14       4
- 5     5 12648      74 F      &lt;NA&gt;      2014-08-06 2016-10-10       5
- 6     6 14274      76 female &lt;NA&gt;      2015-04-05 2016-01-23       7
- 7     7 14132      16 male   confirmed NA         2015-05-10       8
- 8     8 14715      44 f      confirmed NA         2016-04-24       9
- 9     9 13435      26 1      &lt;NA&gt;      2014-09-07 2020-09-14      10
-10    10 14816      30 f      &lt;NA&gt;      2015-06-29 2015-06-02      11
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 7
+      v1 case_id   age gender status    date_onset date_sample
+   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;
+ 1     1 14905      90 1      confirmed 2015-03-15 2015-04-06
+ 2     2 13043      25 2      &lt;NA&gt;      2013-09-11 2014-01-03
+ 3     3 14364      54 f      &lt;NA&gt;      2014-02-09 2015-03-03
+ 4     4 14675      90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
+ 5     5 12648      74 F      &lt;NA&gt;      2014-06-08 2016-10-10
+ 6     6 14274      76 female &lt;NA&gt;      2015-04-05 2016-01-23
+ 7     7 14132      16 male   confirmed NA         2015-10-05
+ 8     8 14715      44 f      confirmed NA         2016-04-24
+ 9     9 13435      26 1      &lt;NA&gt;      2014-07-09 2014-09-20
+10    10 14816      30 f      &lt;NA&gt;      2015-06-29 2015-02-06
 # ℹ 14,990 more rows</code></pre>
 </div>
 <div id="multiple-language-support" class="callout">
@@ -985,8 +985,8 @@ our simulated Ebola dataset</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>! Detected 16 incorrect date sequences at lines: "10, 20, 22, 26, 29, 44, 46,
-  54, 60, 63, 70, 71, 73, 80, 81, 90".
+<pre class="output" tabindex="0"><code>! Detected 24 incorrect date sequences at lines: "10, 20, 24, 26, 27, 29, 39,
+  44, 46, 54, 59, 60, 62, 63, 65, 70, 73, 78, 81, 85, 88, 90, 94, 99".
 ℹ Enter `attr(dat, "report")[["incorrect_date_sequence"]]` to access them,
   where "dat" is the object used to store the output from this operation.</code></pre>
 </div>
@@ -1050,19 +1050,19 @@ code chunk demonstrating how to utilize this functionality:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 8
-      v1 case_id   age gender status    date_onset date_sample row_id
-   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;       &lt;int&gt;
- 1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
- 2     2 13043      25 female &lt;NA&gt;      2013-09-11 2014-03-01       2
- 3     3 14364      54 female &lt;NA&gt;      2014-09-02 2015-03-03       3
- 4     4 14675      90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2031-12-14       4
- 5     5 12648      74 female &lt;NA&gt;      2014-08-06 2016-10-10       5
- 6     6 14274      76 female &lt;NA&gt;      2015-04-05 2016-01-23       7
- 7     7 14132      16 male   confirmed NA         2015-05-10       8
- 8     8 14715      44 female confirmed NA         2016-04-24       9
- 9     9 13435      26 male   &lt;NA&gt;      2014-09-07 2020-09-14      10
-10    10 14816      30 female &lt;NA&gt;      2015-06-29 2015-06-02      11
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 7
+      v1 case_id   age gender status    date_onset date_sample
+   &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06
+ 2     2 13043      25 female &lt;NA&gt;      2013-09-11 2014-01-03
+ 3     3 14364      54 female &lt;NA&gt;      2014-02-09 2015-03-03
+ 4     4 14675      90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
+ 5     5 12648      74 female &lt;NA&gt;      2014-06-08 2016-10-10
+ 6     6 14274      76 female &lt;NA&gt;      2015-04-05 2016-01-23
+ 7     7 14132      16 male   confirmed NA         2015-10-05
+ 8     8 14715      44 female confirmed NA         2016-04-24
+ 9     9 13435      26 male   &lt;NA&gt;      2014-07-09 2014-09-20
+10    10 14816      30 female &lt;NA&gt;      2015-06-29 2015-02-06
 # ℹ 14,990 more rows</code></pre>
 </div>
 <p>This approach simplifies the data cleaning process, ensuring that
@@ -1155,16 +1155,16 @@ date of sample for the case identified until the 3rd of January 2025
 <pre class="output" tabindex="0"><code># A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    &lt;chr&gt;   &lt;date&gt;                       &lt;dbl&gt;            &lt;dbl&gt;
- 1 14905   2015-06-04                       9                7
- 2 13043   2014-03-01                      10               10
+ 1 14905   2015-04-06                       9                8
+ 2 13043   2014-01-03                      11                0
  3 14364   2015-03-03                       9               10
- 4 14675   2031-12-14                      -6              -11
+ 4 14675   2014-12-31                      10                0
  5 12648   2016-10-10                       8                2
  6 14274   2016-01-23                       8               11
- 7 14132   2015-05-10                       9                7
+ 7 14132   2015-10-05                       9                2
  8 14715   2016-04-24                       8                8
- 9 13435   2020-09-14                       4                3
-10 14816   2015-06-02                       9                7
+ 9 13435   2014-09-20                      10                3
+10 14816   2015-02-06                       9               10
 # ℹ 14,990 more rows</code></pre>
 </div>
 <p>After executing the function <code>cleanepi::timespan()</code>, two
@@ -1303,16 +1303,16 @@ we provide one solution using <code>base::cut()</code>:</p>
 <pre class="output" tabindex="0"><code># A tibble: 10 × 6
    study_id   sex date_first_pcr_posit…¹ date_of_birth age_in_years age_category
    &lt;chr&gt;    &lt;int&gt; &lt;date&gt;                 &lt;date&gt;               &lt;dbl&gt; &lt;fct&gt;
- 1 PS001P2      1 2020-12-01             1972-06-01              52 [35,60)
+ 1 PS001P2      1 2020-12-01             1972-01-06              53 [35,60)
  2 PS002P2      1 2021-01-01             1952-02-20              73 [60,Inf]
  3 PS004P2…    NA 2021-02-11             1961-06-15              63 [60,Inf]
  4 PS003P2      1 2021-02-01             1947-11-11              77 [60,Inf]
  5 P0005P2      2 2021-02-16             2000-09-26              24 [20,35)
  6 PS006P2      2 2021-05-02             NA                      NA &lt;NA&gt;
- 7 PB500P2      1 2021-02-19             1989-11-03              35 [35,60)
- 8 PS008P2      2 2021-09-20             1976-10-05              48 [35,60)
+ 7 PB500P2      1 2021-02-19             1989-03-11              35 [35,60)
+ 8 PS008P2      2 2021-09-20             1976-05-10              48 [35,60)
  9 PS010P2      1 2021-02-26             1991-09-23              33 [20,35)
-10 PS011P2      2 2021-03-03             1991-02-08              34 [20,35)
+10 PS011P2      2 2021-03-03             1991-08-02              33 [20,35)
 # ℹ abbreviated name: ¹​date_first_pcr_positive_test</code></pre>
 </div>
 <p>You can investigate the maximum values of variables using
@@ -1500,7 +1500,7 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "dateCreated": "2025-04-09",
-  "dateModified": "2025-03-25",
+  "dateModified": "2025-04-09",
   "datePublished": "2025-04-09"
 }
 
