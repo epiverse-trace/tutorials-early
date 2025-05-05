@@ -343,19 +343,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-      v1 case_id age         gender status    date_onset date_sample
-   <int>   <int> <chr>       <chr>  <chr>     <chr>      <chr>      
- 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015 
- 2     2   13043 twenty-five 2      <NA>      Sep /11/13 03/01/2014 
- 3     3   14364 54          f      <NA>      09/02/2014 03/03/2015 
- 4     4   14675 ninety      <NA>   <NA>      10/19/2014 31/ 12 /14 
- 5     5   12648 74          F      <NA>      08/06/2014 10/10/2016 
- 6     6   14274 seventy-six female <NA>      Apr /05/15 01/23/2016 
- 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015 
- 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016 
- 9     9   13435 26          1      <NA>      09/07/2014 20/ 09 /14 
-10    10   14816 thirty      f      <NA>      06/29/2015 06/02/2015 
+# A tibble: 15,000 × 8
+      v1 case_id age         gender status    date_onset date_sample row_id
+   <int>   <int> <chr>       <chr>  <chr>     <chr>      <chr>        <int>
+ 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015       1
+ 2     2   13043 twenty-five 2      <NA>      Sep /11/13 03/01/2014       2
+ 3     3   14364 54          f      <NA>      09/02/2014 03/03/2015       3
+ 4     4   14675 ninety      <NA>   <NA>      10/19/2014 31/ 12 /14       4
+ 5     5   12648 74          F      <NA>      08/06/2014 10/10/2016       5
+ 6     6   14274 seventy-six female <NA>      Apr /05/15 01/23/2016       7
+ 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015       8
+ 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016       9
+ 9     9   13435 26          1      <NA>      09/07/2014 20/ 09 /14      10
+10    10   14816 thirty      f      <NA>      06/29/2015 06/02/2015      11
 # ℹ 14,990 more rows
 ```
 
@@ -422,19 +422,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-      v1 case_id age         gender status    date_onset date_sample
-   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>     
- 1     1 14905   90          1      confirmed 2015-03-15 2015-04-06 
- 2     2 13043   twenty-five 2      <NA>      2013-09-11 2014-01-03 
- 3     3 14364   54          f      <NA>      2014-02-09 2015-03-03 
- 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648   74          F      <NA>      2014-06-08 2016-10-10 
- 6     6 14274   seventy-six female <NA>      2015-04-05 2016-01-23 
- 7     7 14132   sixteen     male   confirmed NA         2015-10-05 
- 8     8 14715   44          f      confirmed NA         2016-04-24 
- 9     9 13435   26          1      <NA>      2014-07-09 2014-09-20 
-10    10 14816   thirty      f      <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+      v1 case_id age         gender status    date_onset date_sample row_id
+   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905   90          1      confirmed 2015-03-15 2015-06-04       1
+ 2     2 13043   twenty-five 2      <NA>      2013-09-11 2014-03-01       2
+ 3     3 14364   54          f      <NA>      2014-09-02 2015-03-03       3
+ 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2031-12-14       4
+ 5     5 12648   74          F      <NA>      2014-08-06 2016-10-10       5
+ 6     6 14274   seventy-six female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132   sixteen     male   confirmed NA         2015-05-10       8
+ 8     8 14715   44          f      confirmed NA         2016-04-24       9
+ 9     9 13435   26          1      <NA>      2014-09-07 2020-09-14      10
+10    10 14816   thirty      f      <NA>      2015-06-29 2015-06-02      11
 # ℹ 14,990 more rows
 ```
 
@@ -466,19 +466,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-      v1 case_id   age gender status    date_onset date_sample
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
- 1     1 14905      90 1      confirmed 2015-03-15 2015-04-06 
- 2     2 13043      25 2      <NA>      2013-09-11 2014-01-03 
- 3     3 14364      54 f      <NA>      2014-02-09 2015-03-03 
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648      74 F      <NA>      2014-06-08 2016-10-10 
- 6     6 14274      76 female <NA>      2015-04-05 2016-01-23 
- 7     7 14132      16 male   confirmed NA         2015-10-05 
- 8     8 14715      44 f      confirmed NA         2016-04-24 
- 9     9 13435      26 1      <NA>      2014-07-09 2014-09-20 
-10    10 14816      30 f      <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+      v1 case_id   age gender status    date_onset date_sample row_id
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905      90 1      confirmed 2015-03-15 2015-06-04       1
+ 2     2 13043      25 2      <NA>      2013-09-11 2014-03-01       2
+ 3     3 14364      54 f      <NA>      2014-09-02 2015-03-03       3
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2031-12-14       4
+ 5     5 12648      74 F      <NA>      2014-08-06 2016-10-10       5
+ 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132      16 male   confirmed NA         2015-05-10       8
+ 8     8 14715      44 f      confirmed NA         2016-04-24       9
+ 9     9 13435      26 1      <NA>      2014-09-07 2020-09-14      10
+10    10 14816      30 f      <NA>      2015-06-29 2015-06-02      11
 # ℹ 14,990 more rows
 ```
 
@@ -514,8 +514,8 @@ cleanepi::check_date_sequence(
 ```
 
 ``` output
-! Detected 24 incorrect date sequences at lines: "10, 20, 24, 26, 27, 29, 39,
-  44, 46, 54, 59, 60, 62, 63, 65, 70, 73, 78, 81, 85, 88, 90, 94, 99".
+! Detected 16 incorrect date sequences at lines: "10, 20, 22, 26, 29, 44, 46,
+  54, 60, 63, 70, 71, 73, 80, 81, 90".
 ℹ Enter `attr(dat, "report")[["incorrect_date_sequence"]]` to access them,
   where "dat" is the object used to store the output from this operation.
 ```
@@ -571,19 +571,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 7
-      v1 case_id   age gender status    date_onset date_sample
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>     
- 1     1 14905      90 male   confirmed 2015-03-15 2015-04-06 
- 2     2 13043      25 female <NA>      2013-09-11 2014-01-03 
- 3     3 14364      54 female <NA>      2014-02-09 2015-03-03 
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2014-12-31 
- 5     5 12648      74 female <NA>      2014-06-08 2016-10-10 
- 6     6 14274      76 female <NA>      2015-04-05 2016-01-23 
- 7     7 14132      16 male   confirmed NA         2015-10-05 
- 8     8 14715      44 female confirmed NA         2016-04-24 
- 9     9 13435      26 male   <NA>      2014-07-09 2014-09-20 
-10    10 14816      30 female <NA>      2015-06-29 2015-02-06 
+# A tibble: 15,000 × 8
+      v1 case_id   age gender status    date_onset date_sample row_id
+   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
+ 1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
+ 2     2 13043      25 female <NA>      2013-09-11 2014-03-01       2
+ 3     3 14364      54 female <NA>      2014-09-02 2015-03-03       3
+ 4     4 14675      90 <NA>   <NA>      2014-10-19 2031-12-14       4
+ 5     5 12648      74 female <NA>      2014-08-06 2016-10-10       5
+ 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
+ 7     7 14132      16 male   confirmed NA         2015-05-10       8
+ 8     8 14715      44 female confirmed NA         2016-04-24       9
+ 9     9 13435      26 male   <NA>      2014-09-07 2020-09-14      10
+10    10 14816      30 female <NA>      2015-06-29 2015-06-02      11
 # ℹ 14,990 more rows
 ```
 
@@ -665,16 +665,16 @@ sim_ebola_data %>%
 # A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
    <chr>   <date>                       <dbl>            <dbl>
- 1 14905   2015-04-06                       9                8
- 2 13043   2014-01-03                      11                0
+ 1 14905   2015-06-04                       9                7
+ 2 13043   2014-03-01                      10               10
  3 14364   2015-03-03                       9               10
- 4 14675   2014-12-31                      10                0
+ 4 14675   2031-12-14                      -6              -11
  5 12648   2016-10-10                       8                2
  6 14274   2016-01-23                       8               11
- 7 14132   2015-10-05                       9                2
+ 7 14132   2015-05-10                       9                7
  8 14715   2016-04-24                       8                8
- 9 13435   2014-09-20                      10                3
-10 14816   2015-02-06                       9               10
+ 9 13435   2020-09-14                       4                3
+10 14816   2015-06-02                       9                7
 # ℹ 14,990 more rows
 ```
 
@@ -778,16 +778,16 @@ dat_clean %>%
 # A tibble: 10 × 6
    study_id   sex date_first_pcr_posit…¹ date_of_birth age_in_years age_category
    <chr>    <int> <date>                 <date>               <dbl> <fct>       
- 1 PS001P2      1 2020-12-01             1972-01-06              53 [35,60)     
+ 1 PS001P2      1 2020-12-01             1972-06-01              52 [35,60)     
  2 PS002P2      1 2021-01-01             1952-02-20              73 [60,Inf]    
  3 PS004P2…    NA 2021-02-11             1961-06-15              63 [60,Inf]    
  4 PS003P2      1 2021-02-01             1947-11-11              77 [60,Inf]    
  5 P0005P2      2 2021-02-16             2000-09-26              24 [20,35)     
  6 PS006P2      2 2021-05-02             NA                      NA <NA>        
- 7 PB500P2      1 2021-02-19             1989-03-11              35 [35,60)     
- 8 PS008P2      2 2021-09-20             1976-05-10              48 [35,60)     
+ 7 PB500P2      1 2021-02-19             1989-11-03              35 [35,60)     
+ 8 PS008P2      2 2021-09-20             1976-10-05              48 [35,60)     
  9 PS010P2      1 2021-02-26             1991-09-23              33 [20,35)     
-10 PS011P2      2 2021-03-03             1991-08-02              33 [20,35)     
+10 PS011P2      2 2021-03-03             1991-02-08              34 [20,35)     
 # ℹ abbreviated name: ¹​date_first_pcr_positive_test
 ```
 
