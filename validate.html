@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Validate case data</h1>
-        <p>Last updated on 2025-04-22 |
+        <p>Last updated on 2025-05-05 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/validate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -431,19 +431,19 @@ content.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 15,000 × 9
-      v1 case_id   age gender status    date_onset date_sample
-   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;IDate&gt;    &lt;IDate&gt;
- 1     1   14905    90 male   confirmed 2015-03-15 2015-04-06
- 2     2   13043    25 female &lt;NA&gt;      2013-09-11 2014-01-03
- 3     3   14364    54 female &lt;NA&gt;      2014-02-09 2015-03-03
- 4     4   14675    90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
- 5     5   12648    74 female &lt;NA&gt;      2014-06-08 2016-10-10
- 6     6   14274    76 female &lt;NA&gt;      2015-04-05 2016-01-23
- 7     7   14132    16 male   confirmed NA         2015-10-05
- 8     8   14715    44 female confirmed NA         2016-04-24
- 9     9   13435    26 male   &lt;NA&gt;      2014-07-09 2014-09-20
-10    10   14816    30 female &lt;NA&gt;      2015-06-29 2015-02-06
+<pre class="output" tabindex="0"><code># A tibble: 15,000 × 10
+      v1 case_id   age gender status    date_onset date_sample row_id
+   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;IDate&gt;    &lt;IDate&gt;      &lt;int&gt;
+ 1     1   14905    90 male   confirmed 2015-03-15 2015-06-04       1
+ 2     2   13043    25 female &lt;NA&gt;      2013-09-11 2014-03-01       2
+ 3     3   14364    54 female &lt;NA&gt;      2014-09-02 2015-03-03       3
+ 4     4   14675    90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2031-12-14       4
+ 5     5   12648    74 female &lt;NA&gt;      2014-08-06 2016-10-10       5
+ 6     6   14274    76 female &lt;NA&gt;      2015-04-05 2016-01-23       7
+ 7     7   14132    16 male   confirmed NA         2015-05-10       8
+ 8     8   14715    44 female confirmed NA         2016-04-24       9
+ 9     9   13435    26 male   &lt;NA&gt;      2014-09-07 2020-09-14      10
+10    10   14816    30 female &lt;NA&gt;      2015-06-29 2015-06-02      11
 # ℹ 14,990 more rows
 # ℹ 2 more variables: years_since_collection &lt;int&gt;, remainder_months &lt;int&gt;</code></pre>
 </div>
@@ -494,19 +494,19 @@ package, as in the below code chunk.</p>
 </h3>
 <pre class="output" tabindex="0"><code>
 // linelist object
-# A tibble: 15,000 × 9
-      v1 case_id   age gender status    date_onset date_sample
-   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;IDate&gt;    &lt;IDate&gt;
- 1     1   14905    90 male   confirmed 2015-03-15 2015-04-06
- 2     2   13043    25 female &lt;NA&gt;      2013-09-11 2014-01-03
- 3     3   14364    54 female &lt;NA&gt;      2014-02-09 2015-03-03
- 4     4   14675    90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2014-12-31
- 5     5   12648    74 female &lt;NA&gt;      2014-06-08 2016-10-10
- 6     6   14274    76 female &lt;NA&gt;      2015-04-05 2016-01-23
- 7     7   14132    16 male   confirmed NA         2015-10-05
- 8     8   14715    44 female confirmed NA         2016-04-24
- 9     9   13435    26 male   &lt;NA&gt;      2014-07-09 2014-09-20
-10    10   14816    30 female &lt;NA&gt;      2015-06-29 2015-02-06
+# A tibble: 15,000 × 10
+      v1 case_id   age gender status    date_onset date_sample row_id
+   &lt;int&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;     &lt;IDate&gt;    &lt;IDate&gt;      &lt;int&gt;
+ 1     1   14905    90 male   confirmed 2015-03-15 2015-06-04       1
+ 2     2   13043    25 female &lt;NA&gt;      2013-09-11 2014-03-01       2
+ 3     3   14364    54 female &lt;NA&gt;      2014-09-02 2015-03-03       3
+ 4     4   14675    90 &lt;NA&gt;   &lt;NA&gt;      2014-10-19 2031-12-14       4
+ 5     5   12648    74 female &lt;NA&gt;      2014-08-06 2016-10-10       5
+ 6     6   14274    76 female &lt;NA&gt;      2015-04-05 2016-01-23       7
+ 7     7   14132    16 male   confirmed NA         2015-05-10       8
+ 8     8   14715    44 female confirmed NA         2016-04-24       9
+ 9     9   13435    26 male   &lt;NA&gt;      2014-09-07 2020-09-14      10
+10    10   14816    30 female &lt;NA&gt;      2015-06-29 2015-06-02      11
 # ℹ 14,990 more rows
 # ℹ 2 more variables: years_since_collection &lt;int&gt;, remainder_months &lt;int&gt;
 
@@ -545,7 +545,7 @@ can be associated with any of these available tags.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in {linelist}
 using:</p>
@@ -568,7 +568,7 @@ using:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -633,7 +633,7 @@ input data has a different variable data type.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -658,7 +658,7 @@ before tagging for validation. For example:</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint3" aria-expanded="false" aria-controls="collapseHint3">
   <h4 class="accordion-header" id="headingHint3"> Give me a hint </h4>
 </button>
-<div id="collapseHint3" class="accordion-collapse collapse" aria-labelledby="headingHint3" data-bs-parent="#accordionHint3">
+<div id="collapseHint3" class="accordion-collapse collapse" data-bs-parent="#accordionHint3" aria-labelledby="headingHint3">
 <div class="accordion-body">
 <blockquote>
 <p>Please run the code line by line, focusing only on the parts before
@@ -710,7 +710,7 @@ variable to character (<code>&lt;chr&gt;</code>),</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -773,7 +773,7 @@ validating would response to the absence of a variable?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>About losing variables, you can simulate this scenario:</p>
 <div class="codewrapper sourceCode" id="cb14">
@@ -793,7 +793,7 @@ validating would response to the absence of a variable?</p>
 </h3>
 <pre class="error" tabindex="0"><code>Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
  * Variable 'tag': Must be element of set
- * {'v1','case_id','gender','status','date_onset','date_sample','years_since_collection','remainder_months'},
+ * {'v1','case_id','gender','status','date_onset','date_sample','row_id','years_since_collection','remainder_months'},
  * but is 'age'.</code></pre>
 </div>
 </div>
@@ -865,7 +865,7 @@ analysis pipeline during an outbreak response?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -914,13 +914,13 @@ function, as shown below:</p>
    &lt;int&gt; &lt;IDate&gt;    &lt;chr&gt;
  1 14905 2015-03-15 male
  2 13043 2013-09-11 female
- 3 14364 2014-02-09 female
+ 3 14364 2014-09-02 female
  4 14675 2014-10-19 &lt;NA&gt;
- 5 12648 2014-06-08 female
+ 5 12648 2014-08-06 female
  6 14274 2015-04-05 female
  7 14132 NA         male
  8 14715 NA         female
- 9 13435 2014-07-09 male
+ 9 13435 2014-09-07 male
 10 14816 2015-06-29 female
 # ℹ 14,990 more rows</code></pre>
 </div>
@@ -1019,9 +1019,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/validate.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/validate.html",
-  "dateCreated": "2025-05-01",
-  "dateModified": "2025-04-22",
-  "datePublished": "2025-05-01"
+  "dateCreated": "2025-05-05",
+  "dateModified": "2025-05-05",
+  "datePublished": "2025-05-05"
 }
 
   </script><script>
