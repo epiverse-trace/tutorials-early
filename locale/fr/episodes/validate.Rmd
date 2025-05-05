@@ -1,0 +1,392 @@
+---
+title: Valider les données du dossier
+teaching: 10
+exercises: 2
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
+- Comment convertir un ensemble de données brutes en un fichier `linelist` objet ?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Démontrez comment convertir des données de cas en `linelist` données
+- Démontrer comment étiqueter et valider les données pour rendre l'analyse plus fiable
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::: prereq
+
+Cet épisode vous demande de :
+
+- Télécharger le [données\_nettoyées.csv](https://epiverse-trace.github.io/tutorials-early/data/cleaned_data.csv)
+- Sauvegardez-le dans le fichier `data/` dossier.
+
+:::::::::::::::::::::
+
+## Introduction
+
+Dans l'analyse des épidémies, une fois que vous avez terminé les étapes initiales de lecture et de nettoyage des données de cas,
+il est essentiel d'établir une couche de fondation supplémentaire pour garantir l'intégrité et la fiabilité des données ultérieures.
+analyses ultérieures. Dans le cas contraire, vous risquez de constater que votre analyse cesse soudainement de fonctionner lorsque des variables spécifiques apparaissent ou disparaissent, ou que leurs types de données sous-jacents (tels que `<date>` ou `<chr>`). Plus précisément, cette couche supplémentaire implique : 1) de vérifier la présence et le type de données correctes de certaines colonnes au sein de
+dans votre ensemble de données, un processus communément appelé "étiquetage" ; 2) la mise en œuvre de mesures pour
+vérifier que ces colonnes marquées ne sont pas supprimées par inadvertance lors d'étapes ultérieures de traitement des données, ce que l'on appelle la "validation".
+
+Cet épisode se concentre sur le balisage et la validation des données de foyers à l'aide de l'outil [liste de lignes](https://epiverse-trace.github.io/linelist/)
+à l'aide du paquetage linelist. Commençons par charger le paquet `{rio}` pour lire les données et le paquet `{linelist}`
+pour créer un objet linelist. Nous utiliserons le tuyau `%>%` pour connecter certaines de leurs fonctions, y compris celles de
+du paquet `{dplyr}` Nous allons donc également faire appel au paquet tidyverse :
+
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+# Load packages
+library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(rio) # for importing data
+library(here) # for easy file referencing
+library(linelist) # for taggin and validating
+```
+
+::::::::::::::::::: checklist
+
+### Le double point-virgule
+
+Le double point-virgule `::` dans R vous permet d'appeler une fonction spécifique d'un paquetage sans charger le paquetage entier dans le fichier
+l'environnement actuel.
+
+Par exemple, vous pouvez appeler une fonction spécifique d'un paquetage sans charger le paquetage entier dans l'environnement actuel, `dplyr::filter(data, condition)` utilise `filter()` à partir de l'outil `{dplyr}` paquet.
+
+Cela nous permet de nous souvenir des fonctions du paquet et d'éviter les conflits d'espace de noms.
+
+:::::::::::::::::::
+
+Importez l'ensemble de données en suivant les directives énoncées dans le document [Lire les données de l'affaire](../episodes/read-cases.Rmd) de l'épisode Lire les données de l'affaire.
+Il s'agit de charger l'ensemble de données dans l'environnement de travail et de visualiser sa structure et son contenu.
+
+```{r, eval=FALSE}
+# Read data
+# e.g.: if path to file is data/simulated_ebola_2.csv then:
+cleaned_data <- rio::import(
+  here::here("data", "cleaned_data.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+```
+
+```{r, echo=FALSE}
+# Import cleaned data without printing code
+cleaned_data <- rio::import(
+  file.path("data", "cleaned_data.csv")
+) %>%
+  dplyr::as_tibble() # Convert to tibble for better data display
+
+# Display the first five rows of the dataset
+cleaned_data
+```
+
+:::::::::::::::::::::::: discussion
+
+<Avez-vous déjà été confronté à une modification inattendue de l'ensemble des données d'entrée lors de l'exécution d'une analyse en situation d'urgence ? Comment protégez-vous votre analyse de ce désagrément ? -->
+
+### Un changement inattendu
+
+Vous êtes dans une situation d'urgence. Vous devez produire des rapports de situation quotidiens. Vous avez automatisé votre analyse pour lire les données directement à partir du serveur en ligne :grin :.  Cependant, les personnes chargées de la collecte et de l'administration des données devaient **supprimer/renommer/reformater** une variable que vous aviez trouvée utile :disappointed: !
+
+Comment pouvez-vous détecter si les données saisies sont **toujours valides** pour reproduire le code d'analyse que vous avez écrit la veille ?
+
+::::::::::::::::::::::::
+
+:::::::::::::::::::::::: instructor
+
+Si les apprenants n'ont pas d'expérience à partager, nous, en tant qu'instructeurs, pouvons en partager une.
+
+Un tel scénario se produit généralement lorsque l'institution qui effectue l'analyse n'est pas la même que celle qui collecte les données. Cette dernière peut prendre des décisions sur la structure des données qui peuvent affecter les processus en aval et avoir un impact sur le temps ou la précision des résultats de l'analyse.
+
+::::::::::::::::::::::::
+
+## Création d'une liste de contrôle et étiquetage des éléments
+
+Une fois les données chargées et nettoyées, nous les convertissons en un fichier `linelist` à l'aide d'un objet `{linelist}` comme dans l'exemple suivant
+ci-dessous.
+
+```{r}
+# Create a linelist object from cleaned data
+linelist_data <- linelist::make_linelist(
+  x = cleaned_data,         # Input data
+  id = "case_id",            # Column for unique case identifiers
+  date_onset = "date_onset", # Column for date of symptom onset
+  gender = "gender"          # Column for gender
+)
+
+# Display the resulting linelist object
+linelist_data
+```
+
+Le paquet `{linelist}` fournit des étiquettes pour les variables épidémiologiques courantes
+et un ensemble de types de données appropriés pour chacune d'entre elles. Vous pouvez consulter la liste des étiquettes disponibles à partir du nom de la variable
+et les types de données acceptables pour chacune d'entre elles en utilisant `linelist::tags_types()`.
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+Voyons **tag** plus de variables. Dans les nouveaux ensembles de données, il sera fréquent que les noms de variables soient différents des noms de balises disponibles. Cependant, nous pouvons les associer en fonction de la façon dont les variables ont été définies pour la collecte des données.
+
+Maintenant, vous pouvez les associer en fonction de la façon dont les variables ont été définies pour la collecte des données :
+
+- **Explorer** les noms de balises disponibles dans {linelist}.
+- **Trouver** quelles autres variables de l'ensemble de données nettoyé peuvent être associées à l'une des étiquettes disponibles.
+- **Étiquette** ces variables comme ci-dessus en utilisant `linelist::make_linelist()`.
+
+:::::::::::::::::::: hint
+
+Vous pouvez accéder à la liste des noms de balises disponibles dans la rubrique {linelist} en utilisant :
+
+```{r, eval=FALSE}
+# Get a list of available tags by name and data types
+linelist::tags_types()
+
+# Get a list of names only
+linelist::tags_names()
+```
+
+:::::::::::::::::::::::
+
+::::::::::::::::: solution
+
+```{r, eval=FALSE}
+linelist::make_linelist(
+  x = cleaned_data,
+  id = "case_id",
+  date_onset = "date_onset",
+  gender = "gender",
+  age = "age", # same name in default list and dataset
+  date_reporting = "date_sample" # different names but related
+)
+```
+
+Comment ces balises supplémentaires sont-elles visibles dans le résultat ?
+
+::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::
+
+## Validation
+
+S'assurer que toutes les variables marquées sont normalisées et que les données sont correctes.
+utilisez la fonction `linelist::validate_linelist()` comme
+comme le montre l'exemple ci-dessous :
+
+```r
+linelist::validate_linelist(linelist_data)
+```
+
+<!-- Si votre jeu de données nécessite une nouvelle balise, définissez l'argument -->
+
+<!-- `allow_extra = TRUE` lors de la création de l'objet linelist avec son correspondant-->
+
+<!-- correspondant. -->
+
+::::::::::::::::::::::::: challenge
+
+Faisons en sorte que **validons** quelques variables marquées. Simulons une situation dans le cadre d'une épidémie en cours. Vous vous réveillez un jour et découvrez que le flux de données sur lequel vous vous appuyez comporte un nouvel ensemble d'entrées (c'est-à-dire de lignes ou d'observations) et une variable dont le type de données a changé.
+
+Par exemple, supposons que la variable `age` est passée d'un double (`<dbl>`) en caractère (`<chr>`).
+
+Pour simuler cette situation :
+
+- **Changer** le type de données de la variable,
+- **étiquette** la variable dans une liste de lignes, puis
+- **valider** il.
+
+Décrivez comment `linelist::validate_linelist()` réagit lorsque les données d'entrée ont un type de données variable différent.
+
+:::::::::::::::::::::::::: hint
+
+Nous pouvons utiliser `dplyr::mutate()` pour modifier le type de la variable avant de l'étiqueter pour la validation. Par exemple, nous pouvons changer le type de variable avant de la baliser pour la validation :
+
+```{r, eval=FALSE}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::... %>%
+  # validate the linelist
+  linelist::...
+```
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: hint
+
+> Veuillez exécuter le code ligne par ligne, en vous concentrant uniquement sur les parties situées avant le tuyau (`%>%`). Après chaque étape, observez la sortie avant de passer à la ligne suivante.
+
+Si le résultat `age` passe de double (`<dbl>`) en caractère (`<chr>`), nous obtenons ce qui suit :
+
+```{r}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist()
+```
+
+Pourquoi recevons-nous un `Error` message ?
+
+<Devrions-nous avoir un message d'avertissement à la place ? Expliquez pourquoi. -->
+
+Explorez d'autres situations pour comprendre ce comportement. Essayons ces modifications supplémentaires des variables :
+
+- `date_onset` changements de a `<date>` en caractère (`<chr>`),
+- `gender` passe d'un caractère (`<chr>`) à un nombre entier (`<int>`).
+
+Ensuite, marquez-les dans une liste de lignes pour validation. Est-ce que le `Error` nous propose-t-il la solution ?
+
+::::::::::::::::::::::::::
+
+::::::::::::::::::::::::: solution
+
+```{r, eval=FALSE}
+# Change 2
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(date_onset = as.character(date_onset)) %>%
+  # tag
+  linelist::make_linelist(
+    date_onset = "date_onset"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+```{r, eval=FALSE}
+# Change 3
+# Run this code line by line to identify changes
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(gender = as.factor(gender)) %>%
+  dplyr::mutate(gender = as.integer(gender)) %>%
+  # tag
+  linelist::make_linelist(
+    gender = "gender"
+  ) %>%
+  # validate
+  linelist::validate_linelist()
+```
+
+Nous obtenons `Error` des messages en raison de la non-concordance entre le type de balise prédéfini (de `linelist::tags_types()`) et la classe de variables balisées dans la liste de contrôle.
+
+Les `Error` Le message nous informe que pour **valider** notre liste de lignes, nous devons fixer le type de variable d'entrée pour qu'il corresponde au type d'étiquette attendu. Dans un script d'analyse de données, nous pouvons le faire en ajoutant une étape de nettoyage dans le pipeline.
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::: challenge
+
+Quelle étape de la `{linelist}` workflow de marquage et de validation répondrait à l'absence d'une variable ?
+
+:::::::::::::::::::::::::: solution
+
+En ce qui concerne la perte de variables, vous pouvez simuler ce scénario :
+
+```{r}
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  select(-age) %>%
+  # tag one variable
+  linelist::make_linelist(
+    age = "age"
+  )
+```
+
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::
+
+## Sauvegarde
+
+La sauvegarde est implicitement intégrée dans les objets de la liste de diffusion. Si vous essayez d'abandonner l'un des objets
+vous recevrez un message d'erreur ou d'avertissement, comme le montre l'exemple ci-dessous.
+
+```{r, warning=TRUE}
+new_df <- linelist_data %>%
+  dplyr::select(case_id, gender)
+```
+
+Ce message d'erreur ou d'avertissement s'affiche dans l'exemple ci-dessous. `Warning` ci-dessus est l'option de sortie par défaut lorsque nous perdons des balises dans un fichier `linelist` dans un objet. Cependant, il peut être remplacé par un message `Error` en utilisant `linelist::lost_tags_action()`.
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+Testons les implications de la modification de l'élément **sauvegarde** d'une configuration `Warning` à une `Error` message.
+
+- Tout d'abord, exécutez ce code pour compter la fréquence par catégorie au sein d'une variable catégorielle :
+
+```{r, eval=FALSE}
+linelist_data %>%
+  dplyr::select(case_id, gender) %>%
+  dplyr::count(gender)
+```
+
+- Définir le comportement pour les étiquettes perdues dans un `linelist` à "erreur" comme suit :
+
+```{r, eval=FALSE}
+# set behavior to "error"
+linelist::lost_tags_action(action = "error")
+```
+
+- Maintenant, réexécutez le segment de code ci-dessus avec `dplyr::count()`.
+
+Identifiez :
+
+- Quelle est la différence entre la production d'un `Warning` et un `Error`?
+- Quelles pourraient être les implications de ce changement pour votre pipeline quotidien d'analyse de données lors d'une réponse à une épidémie ?
+
+:::::::::::::::::::::::: solution
+
+Décider entre `Warning` ou `Error` dépendra du niveau d'attention ou de flexibilité dont vous avez besoin lorsque vous perdez des balises. L'un vous alertera d'un changement mais continuera à exécuter le code en aval. L'autre arrêtera votre pipeline d'analyse et le reste ne sera pas exécuté.
+
+Un script de lecture, de nettoyage et de validation des données peut nécessiter un pipeline plus stable ou fixe. Une analyse exploratoire des données peut nécessiter une approche plus souple. Ces deux processus peuvent être isolés dans des scripts ou des référentiels différents afin d'adapter la sauvegarde à vos besoins.
+
+Avant de continuer, rétablissez la configuration à l'option par défaut de `Warning`:
+
+```{r}
+# set behavior to the default option: "warning"
+linelist::lost_tags_action()
+```
+
+::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+A `linelist` ressemble à un cadre de données mais offre des caractéristiques plus riches.
+et des fonctionnalités plus riches. Les paquets qui prennent en compte les listes de liens peuvent exploiter ces objets.
+fonctionnalités. Par exemple, vous pouvez extraire un cadre de données contenant uniquement les colonnes étiquetées
+à l'aide de la fonction `linelist::tags_df()` comme indiqué ci-dessous :
+
+```{r, warning=FALSE}
+linelist::tags_df(linelist_data)
+```
+
+Cela permet d'extraire les colonnes étiquetées uniquement dans l'analyse en aval, ce qui sera utile pour le prochain épisode !
+
+:::::::::::::::::::::::::::::::::::: checklist
+
+### Quand dois-je utiliser `{linelist}`?
+
+L'analyse des données au cours d'une réponse à une épidémie ou d'une surveillance de masse exige un ensemble différent de "sauvegardes des données" par rapport aux situations de recherche habituelles. Par exemple, vos données changeront ou seront mises à jour au fil du temps (nouvelles entrées, nouvelles variables, variables renommées).
+
+`{linelist}` L'outil de collecte de données est plus approprié pour ce type d'analyse continue ou à long terme.
+Consultez la section de la vignette "Pour commencer" à propos de
+[Quand devriez-vous envisager d'utiliser {linelist}?](https://epiverse-trace.github.io/linelist/articles/linelist.html#should-i-use-linelist) pour plus d'informations.
+
+:::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- Utiliser `{linelist}` pour étiqueter, valider et préparer les données de cas pour l'analyse en aval.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
