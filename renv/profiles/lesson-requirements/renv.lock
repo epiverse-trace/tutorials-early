@@ -1138,8 +1138,8 @@
     },
     "cleanepi": {
       "Package": "cleanepi",
-      "Version": "1.1.0.9000",
-      "Source": "GitHub",
+      "Version": "1.1.0",
+      "Source": "Repository",
       "Title": "Clean and Standardize Epidemiological Data",
       "Authors@R": "c( person(\"Karim\", \"Mané\", , \"karim.mane@lshtm.ac.uk\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-9892-2999\")), person(\"Thibaut\", \"Jombart\", , \"thibautjombart@gmail.com\", role = \"ctb\", comment = \"Thibault contributed in development of date_guess().\"), person(\"Abdoelnaser\", \"Degoot\", , \"abdoelnaser-mahmood.degoot@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0001-8788-2496\")), person(\"Bankolé\", \"Ahadzie\", , \"Bankole.Ahadzie@lshtm.ac.uk\", role = \"aut\"), person(\"Nuredin\", \"Mohammed\", , \"Nuredin.Mohammed@lshtm.ac.uk\", role = \"aut\"), person(\"Bubacarr\", \"Bah\", , \"Bubacarr.Bah1@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0003-3318-6668\")), person(\"Hugo\", \"Gruson\", , \"hugo@data.org\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Pratik R.\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"James M.\", \"Azam\", , \"james.azam@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5782-7330\")), person(\"Joshua W.\", \"Lambert\", , \"joshua.lambert@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5218-3046\")), person(\"Chris\", \"Hartgerink\", , \"chris@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0003-1050-6809\")), person(\"Andree\", \"Valle-Campos\", , \"avallecam@gmail.com\", role = c(\"rev\", \"ctb\"), comment = c(ORCID = \"0000-0002-7779-481X\")), person(\"London School of Hygiene and Tropical Medicine, LSHTM\", role = \"cph\", comment = c(ROR = \"00a0jsq62\")), person(\"data.org\", role = \"fnd\") )",
       "Description": "Cleaning and standardizing tabular data package, tailored specifically for curating epidemiological data. It streamlines various data cleaning tasks that are typically expected when working with datasets in epidemiology. It returns the processed data in the same format, and generates a comprehensive report detailing the outcomes of each cleaning task.",
@@ -1173,7 +1173,6 @@
         "reactable",
         "rmarkdown",
         "spelling",
-        "systemfonts",
         "testthat (>= 3.0.0)"
       ],
       "VignetteBuilder": "knitr",
@@ -1183,15 +1182,11 @@
       "Encoding": "UTF-8",
       "Language": "en-US",
       "LazyData": "true",
-      "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
       "Author": "Karim Mané [aut, cre] (<https://orcid.org/0000-0002-9892-2999>), Thibaut Jombart [ctb] (Thibault contributed in development of date_guess().), Abdoelnaser Degoot [aut] (<https://orcid.org/0000-0001-8788-2496>), Bankolé Ahadzie [aut], Nuredin Mohammed [aut], Bubacarr Bah [aut] (<https://orcid.org/0000-0003-3318-6668>), Hugo Gruson [ctb, rev] (<https://orcid.org/0000-0002-4094-1476>), Pratik R. Gupte [rev] (<https://orcid.org/0000-0001-5294-7819>), James M. Azam [rev] (<https://orcid.org/0000-0001-5782-7330>), Joshua W. Lambert [rev] (<https://orcid.org/0000-0001-5218-3046>), Chris Hartgerink [rev] (<https://orcid.org/0000-0003-1050-6809>), Andree Valle-Campos [rev, ctb] (<https://orcid.org/0000-0002-7779-481X>), London School of Hygiene and Tropical Medicine, LSHTM [cph] (00a0jsq62), data.org [fnd]",
       "Maintainer": "Karim Mané <karim.mane@lshtm.ac.uk>",
-      "RemoteType": "github",
-      "RemoteUsername": "epiverse-trace",
-      "RemoteRepo": "cleanepi",
-      "RemoteSha": "bc188a70d0de4bf995cefcefb6b1341c359ca37a",
-      "RemoteHost": "api.github.com"
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "cli": {
       "Package": "cli",
@@ -1883,8 +1878,8 @@
     },
     "epiparameter": {
       "Package": "epiparameter",
-      "Version": "0.4.1.9000",
-      "Source": "GitHub",
+      "Version": "0.4.1",
+      "Source": "Repository",
       "Title": "Classes and Helper Functions for Working with Epidemiological Parameters",
       "Authors@R": "c( person(\"Joshua W.\", \"Lambert\", , \"joshua.lambert@lshtm.ac.uk\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0001-5218-3046\")), person(\"Adam\", \"Kucharski\", , \"adam.kucharski@lshtm.ac.uk\", role = c(\"aut\", \"cph\"), comment = c(ORCID = \"0000-0001-8814-9421\")), person(\"Carmen\", \"Tamayo\", , \"carmen.tamayo-cuartero@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0003-4184-2864\")), person(\"Hugo\", \"Gruson\", , \"hugo.gruson@data.org\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Sebastian\", \"Funk\", , \"sebastian.funk@lshtm.ac.uk\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2842-3406\")), person(\"Pratik\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"James M.\", \"Azam\", , \"james.azam@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5782-7330\")), person(\"Chris\", \"Hartgerink\", , \"chris@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0003-1050-6809\")), person(\"Tim\", \"Taylor\", , \"tim.taylor@hiddenelephants.co.uk\", role = \"rev\", comment = c(ORCID = \"0000-0002-8587-7113\")) )",
       "Description": "Classes and helper functions for loading, extracting, converting,  manipulating, plotting and aggregating epidemiological parameters for infectious diseases.  Epidemiological parameters extracted from the literature are loaded from the 'epiparameterDB' R package.",
@@ -1929,16 +1924,11 @@
       "Encoding": "UTF-8",
       "Language": "en-GB",
       "LazyData": "true",
-      "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
       "Author": "Joshua W. Lambert [aut, cre, cph] (<https://orcid.org/0000-0001-5218-3046>), Adam Kucharski [aut, cph] (<https://orcid.org/0000-0001-8814-9421>), Carmen Tamayo [aut] (<https://orcid.org/0000-0003-4184-2864>), Hugo Gruson [ctb, rev] (<https://orcid.org/0000-0002-4094-1476>), Sebastian Funk [ctb] (<https://orcid.org/0000-0002-2842-3406>), Pratik Gupte [rev] (<https://orcid.org/0000-0001-5294-7819>), James M. Azam [rev] (<https://orcid.org/0000-0001-5782-7330>), Chris Hartgerink [rev] (<https://orcid.org/0000-0003-1050-6809>), Tim Taylor [rev] (<https://orcid.org/0000-0002-8587-7113>)",
       "Maintainer": "Joshua W. Lambert <joshua.lambert@lshtm.ac.uk>",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "epiverse-trace",
-      "RemoteRepo": "epiparameter",
-      "RemoteRef": "main",
-      "RemoteSha": "786d77ad7e5b8b73b06cc3dfee90b339b8c4f3bf"
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "epiparameterDB": {
       "Package": "epiparameterDB",
@@ -5010,8 +5000,8 @@
     },
     "simulist": {
       "Package": "simulist",
-      "Version": "0.5.0.9000",
-      "Source": "GitHub",
+      "Version": "0.5.0",
+      "Source": "Repository",
       "Title": "Simulate Disease Outbreak Line List and Contacts Data",
       "Authors@R": "c( person(\"Joshua W.\", \"Lambert\", , \"joshua.lambert@lshtm.ac.uk\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0001-5218-3046\")), person(\"Carmen\", \"Tamayo\", , \"carmen.tamayo-cuartero@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0003-4184-2864\")), person(\"Hugo\", \"Gruson\", , \"hugo@data.org\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Pratik R.\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"Adam\", \"Kucharski\", , \"adam.kucharski@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-8814-9421\")), person(\"Chris\", \"Hartgerink\", , \"chris@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0003-1050-6809\")), person(\"Sebastian\", \"Funk\", , \"sebastian.funk@lshtm.ac.uk\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2842-3406\")), person(\"London School of Hygiene and Tropical Medicine, LSHTM\", role = \"cph\", comment = c(ROR = \"00a0jsq62\")) )",
       "Description": "Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age-structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.",
@@ -5045,15 +5035,11 @@
       "Config/testthat/edition": "3",
       "Encoding": "UTF-8",
       "Language": "en-GB",
-      "Roxygen": "list(markdown = TRUE)",
       "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
       "Author": "Joshua W. Lambert [aut, cre, cph] (<https://orcid.org/0000-0001-5218-3046>), Carmen Tamayo [aut] (<https://orcid.org/0000-0003-4184-2864>), Hugo Gruson [ctb, rev] (<https://orcid.org/0000-0002-4094-1476>), Pratik R. Gupte [ctb, rev] (<https://orcid.org/0000-0001-5294-7819>), Adam Kucharski [rev] (<https://orcid.org/0000-0001-8814-9421>), Chris Hartgerink [rev] (<https://orcid.org/0000-0003-1050-6809>), Sebastian Funk [ctb] (<https://orcid.org/0000-0002-2842-3406>), London School of Hygiene and Tropical Medicine, LSHTM [cph] (00a0jsq62)",
       "Maintainer": "Joshua W. Lambert <joshua.lambert@lshtm.ac.uk>",
-      "RemoteType": "github",
-      "RemoteUsername": "epiverse-trace",
-      "RemoteRepo": "simulist",
-      "RemoteSha": "28a05a5d509e1349163e6581d0ae2a1f77e19b4c",
-      "RemoteHost": "api.github.com"
+      "Repository": "CRAN"
     },
     "snakecase": {
       "Package": "snakecase",
