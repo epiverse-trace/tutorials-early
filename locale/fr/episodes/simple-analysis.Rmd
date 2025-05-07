@@ -1,0 +1,194 @@
+---
+title: Une analyse simple
+teaching: 20
+exercises: 10
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
+- Quel est le taux de croissance de l'épidémie ?
+- Comment identifier le pic d'une épidémie ?
+- Comment calculer la moyenne mobile des cas ?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectives
+
+- Effectuer une analyse préliminaire des données relatives aux épidémies
+- Identifier les tendances, l'exponentiel, le doublement et l'heure de pointe
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+Il est essentiel de comprendre les tendances des données de surveillance pour comprendre les moteurs et la dynamique des épidémies. Il peut s'agir de prévoir la charge de morbidité, de planifier les futures interventions de santé publique et d'évaluer l'efficacité des mesures de contrôle antérieures. En analysant les tendances, les décideurs politiques et les experts en santé publique peuvent prendre des décisions éclairées pour limiter la propagation des maladies et protéger la santé publique. Cet épisode se concentre sur la manière d'effectuer une simple analyse préliminaire des données d'incidence. Il utilise le même ensemble de données de **données sur les cas de Covid-19 en Angleterre** qui a été utilisé dans l'épisode [Agréger et visualiser](../episodes/describe-cases.Rmd) épisode.
+
+::::::::::::::::::: checklist
+
+### Le double point-virgule
+
+Le double point-virgule `::` dans R vous permettent d'appeler une fonction spécifique d'un paquet sans charger l'ensemble du paquet dans l'environnement actuel.
+
+Par exemple, vous pouvez appeler une fonction spécifique d'un package sans charger le package entier dans l'environnement actuel, `dplyr::filter(data, condition)` utilise `filter()` à partir de l'outil `{dplyr}` paquet.
+
+Cela nous permet de nous souvenir des fonctions du paquet et d'éviter les conflits d'espace de noms.
+
+:::::::::::::::::::
+
+## Modèle simple
+
+Les données agrégées sur les cas au cours d'unités de temps spécifiques (c'est-à-dire les données d'incidence) représentent généralement le nombre de cas qui surviennent au cours de cette période. Nous pouvons considérer ces cas comme des observations bruitées générées par le processus épidémique sous-jacent (que nous ne pouvons pas observer directement). Pour tenir compte du caractère aléatoire des observations, nous pouvons supposer que les cas observés suivent soit `Poisson distribution` (si les cas sont signalés à un taux moyen constant au fil du temps) ou un `negative binomial (NB) distribution` (s'il existe une variabilité potentielle dans la déclaration au fil du temps). Lors de l'analyse de ces données, une approche courante consiste à examiner la tendance au fil du temps en calculant le taux de changement, qui peut indiquer s'il y a une croissance ou une décroissance exponentielle du nombre de cas. Une croissance exponentielle implique que le nombre de cas augmente à un rythme accéléré au fil du temps, tandis qu'une décroissance exponentielle suggère que le nombre de cas diminue à un rythme décéléré.
+
+Les `i2extras` fournit des méthodes pour modéliser la tendance des données sur les cas, calculer les moyennes mobiles et le taux de croissance ou de décroissance exponentielle. Le morceau de code ci-dessous calcule la tendance de la Covid-19 au Royaume-Uni au cours des trois premiers mois en utilisant une distribution binomiale négative.
+
+```{r, warning=FALSE, message=FALSE}
+# load packages which provides methods for modeling
+library(i2extras)
+library(incidence2)
+
+# read data from {outbreaks} package
+covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
+
+# subset the covid19_eng_case_data to include only the first 3 months of data
+df <- base::subset(
+  covid19_eng_case_data,
+  covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90
+)
+
+# uses the incidence function from the incidence2 package to compute the
+# incidence data
+df_incid <- incidence2::incidence(
+  df,
+  date_index = "date",
+  groups = "sex"
+)
+
+# fit a curve to the incidence data. The model chosen is the negative binomial
+# distribution with a significance level (alpha) of 0.05.
+fitted_curve_nb <-
+  i2extras::fit_curve(
+    df_incid,
+    model = "negbin",
+    alpha = 0.05
+  )
+
+# plot fitted curve
+base::plot(fitted_curve_nb, angle = 45) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Défi 1 : Distribution de Poisson
+
+Répétez l'analyse ci-dessus en utilisant la distribution de Poisson.
+
+:::::::::::::::::::::::: solution
+
+```{r, warning=FALSE, message=FALSE}
+fitted_curve_poisson <-
+  i2extras::fit_curve(
+    x = df_incid,
+    model = "poisson",
+    alpha = 0.05
+  )
+
+base::plot(fitted_curve_poisson, angle = 45) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Taux de croissance ou de décroissance exponentiel
+
+Le taux de croissance ou de décroissance exponentielle, noté $r$ sert d'indicateur de la tendance des cas, indiquant s'ils augmentent (croissance) ou diminuent (décroissance) sur une échelle exponentielle. Ce taux est calculé à l'aide de la méthode dite **équation de renouvellement** [(Wallinga et al. 2006)](https://royalsocietypublishing.org/doi/10.1098/rspb.2006.3754) qui relie mécaniquement le nombre de reproducteurs $R$ de nouveaux cas (c'est-à-dire le nombre moyen de personnes infectées par un cas typique) à l'intervalle de génération de la maladie (c'est-à-dire le délai moyen entre une infection et la suivante dans une chaîne de transmission). Cette méthode de calcul est mise en œuvre dans le `{i2extras}` paquet.
+
+Vous trouverez ci-dessous un extrait de code démontrant comment extraire le taux de croissance/décroissance à partir des données ci-dessus. **binomiale négative** ci-dessus à l'aide de la fonction `growth_rate()` fonction :
+
+```{r, message=FALSE, warning=FALSE}
+rates_nb <- i2extras::growth_rate(fitted_curve_nb)
+rates_nb <- base::as.data.frame(rates_nb) |>
+  subset(select = c(sex, r, r_lower, r_upper))
+base::print(rates_nb)
+```
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Défi 2 : Taux de croissance à partir d'une **Poisson**\-courbe ajustée
+
+Extraire les taux de croissance de la **Poisson**\-de Poisson de **Défi 1**?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Temps de pointe
+
+L'heure de pointe **heure de pointe** est l'heure à laquelle le plus grand nombre de cas est observé dans les données agrégées. Elle peut être estimée à l'aide de la méthode `i2extras::estimate_peak()` comme le montre le morceau de code ci-dessous, qui identifie l'heure de pointe à partir des données de l'enquête. `incidenc2` l'objet `df_incid`.
+
+```{r, message=FALSE, warning=FALSE}
+peaks_nb <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
+  subset(select = -c(count_variable, bootstrap_peaks))
+
+base::print(peaks_nb)
+```
+
+## Moyenne mobile
+
+Une moyenne mobile ou glissante calcule le nombre moyen de cas au cours d'une période donnée. Pour ce faire, vous pouvez utiliser la fonction `add_rolling_average()` de la fonction `{i2extras}` sur un fichier `incidence2 object`. Le morceau de code suivant illustre le calcul de la moyenne hebdomadaire du nombre de cas à partir de la fonction `incidence2` l'objet `df_incid` suivi d'une visualisation.
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
+
+base::plot(moving_Avg_week, border_colour = "white", angle = 45) +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      x = date_index,
+      y = rolling_average,
+      color = "red"
+    )
+  ) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: challenge
+
+## Défi 3 : Moyenne mobile mensuelle
+
+Calculez et visualisez la moyenne mobile mensuelle des cas sur `df_incid`?
+
+:::::::::::::::::::::::: solution
+
+```{r, warning=FALSE, message=FALSE}
+moving_Avg_mont <- i2extras::add_rolling_average(df_incid, n = 30L)
+
+base::plot(
+  moving_Avg_mont,
+  border_colour = "white",
+  angle = 45
+) +
+  ggplot2::geom_line(
+    ggplot2::aes(
+      x = date_index,
+      y = rolling_average,
+      color = "red"
+    )
+  ) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: keypoints
+
+- Utilisez `{i2extras}` pour :
+  - ajuster l'épi-courbe en utilisant soit **Poisson** ou **binomiale négative** négative,
+  - calculer la croissance ou la décroissance exponentielle des cas,
+  - trouver l'heure de pointe, et
+  - calculer la moyenne mobile des cas dans la fenêtre temporelle spécifiée.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
