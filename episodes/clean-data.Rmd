@@ -31,7 +31,7 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
 downstream analyses. This episode focuses on cleaning epidemics and outbreaks data using the [{cleanepi}](https://epiverse-trace.github.io/cleanepi/) package.
 To demonstrate the functionalities of this package, we'll apply them on a simulated dataset of Ebola cases.
 
-## Set up
+### Set up
 
 In addition to the {cleanepi} package, we will use the following R packages in
 this data cleaning workflow:
@@ -67,14 +67,17 @@ library(cleanepi)
 
 ::::::::::::::::::: checklist
 
-### The double-colon
+### The double-colon (`::`) operator
 
-The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the 
-current environment. 
+The `::` in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
+advantages including the followings:
 
-For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package.
+* Telling explicitly which package a function comes from, reducing ambiguity and potential conflicts when several packages have functions with the same name.
+* Allowing to call a function from a package without loading the whole package
+with library().
 
-This help us remember package functions and avoid namespace conflicts.
+For example, the command `dplyr::filter(data, condition)` means we are calling
+the `filter()` function from the `{dplyr}` package.
 
 :::::::::::::::::::
 
