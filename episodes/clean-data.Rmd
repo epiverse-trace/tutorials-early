@@ -12,34 +12,56 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::: objectives
 
 - Explain how to clean, curate, and standardize case data using `{cleanepi}` package
-- Perform essential data-cleaning operations to be performed in a raw case dataset.
+- Perform essential data-cleaning operations on a real case dataset.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::: prereq
 
-This episode requires you to:
+In this episode, we will use a simulated Ebola dataset that can be:
 
-- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
-- Save it in the `data/` folder.
+- Downloaded from [here](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- And saved into the `data/` folder.
 
 :::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
- This episode focuses on cleaning epidemics and outbreaks data using the 
- [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
-   For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
-Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
-to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
-the package `{dplyr}`, so let's also call to the tidyverse package:
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will increase the accuracy (i.e. you are analysing what you think you are analysing) and reproducibility (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results) of the
+downstream analyses. This episode focuses on cleaning epidemics and outbreaks data using the [{cleanepi}](https://epiverse-trace.github.io/cleanepi/) package.
+To demonstrate the functionalities of this package, we'll apply them on a simulated dataset of Ebola cases.
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
-# Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
-library(rio) # for importing data
-library(here) # for easy file referencing
+## Set up
+
+We will use the following R packages to clean this dataset:
+
+* `{here}` for easy file referencing,
+* `{rio}` to import the data into R,
+* `{cleanepi}` to clean it,
+* `{dplyr}` to perform some data processing operations,
+* `{magrittr}` to use its **pipe operator (`%>%`)**.
+
+We encourage users with recent versions of R (version > 4.2) to use the base R
+pipe operator (`|>`) instead of `%>%`.
+
+We also encourage using the `{pak}` package when installing R packages as shown
+below. You can refer to the [{pak} reference document](https://pak.r-lib.org/reference/features.html) for more details about
+the advantages of using this.
+
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+# Check if a package is already installed and install it if not
+if (!require("pak")) install.packages("pak")
+if (!require("here")) pak::pak("here")
+if (!require("rio")) pak::pak("rio")
+if (!require("dplyr")) pak::pak("dplyr")
+if (!require("magrittr")) pak::pak("magrittr")
+if (!require("cleanepi")) pak::pak("cleanepi")
+
+# load the packages
+library(here)
+library(rio)
+library(dplyr)
+library(magrittr)
 library(cleanepi)
 ```
 
