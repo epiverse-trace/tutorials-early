@@ -33,15 +33,15 @@ To demonstrate the functionalities of this package, we'll apply them on a simula
 
 ## Set up
 
-We will use the following R packages to clean this dataset:
+In addition to the {cleanepi} package, we will use the following R packages in
+this data cleaning workflow:
 
 * `{here}` for easy file referencing,
 * `{rio}` to import the data into R,
-* `{cleanepi}` to clean it,
 * `{dplyr}` to perform some data processing operations,
 * `{magrittr}` to use its **pipe operator (`%>%`)**.
 
-We encourage users with recent versions of R (version > 4.2) to use the base R
+We encourage users with recent versions of R (version > 4.4.1) to use the base R
 pipe operator (`|>`) instead of `%>%`.
 
 We also encourage using the `{pak}` package when installing R packages as shown
