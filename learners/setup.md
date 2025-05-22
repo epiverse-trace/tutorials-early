@@ -111,6 +111,7 @@ if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
   "cleanepi",
+  "reactable",
   "rio",
   "here",
   "DBI",
@@ -203,6 +204,7 @@ When the installation has finished, you can try to load the packages by pasting 
 # for episodes on read, clean, validate and visualize linelist
 
 library(cleanepi)
+library(reactable)
 library(rio)
 library(here)
 library(DBI)
