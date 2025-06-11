@@ -82,9 +82,9 @@ the `filter()` function from the `{dplyr}` package.
 :::::::::::::::::::
 
 
-The first step is to import the dataset into working environment, which can be done by following the guidelines 
-outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This involves loading 
- the dataset into `R` environment and view its structure and content. 
+The first step is to import the dataset into working environment. This can be
+done by following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. It involves loading the dataset into
+`R` environment and view its structure and content.
 
 ```{r,eval=FALSE,echo=TRUE,message=FALSE}
 # Read data
@@ -120,30 +120,31 @@ Are any of those characteristics familiar from any previous data analysis you ha
 
 Lead a short discussion to relate the diagnosed characteristics with required cleaning operations. 
 
-You can use these terms to **diagnose characteristics**: 
+You can use the following terms to **diagnose characteristics**: 
 
-- *Codification*, like sex and age entries using numbers, letters, and words. Also dates in different arrangement 
-("dd/mm/yyyy" or "yyyy/mm/dd") and formats. Less visible, but also the column names.
-- *Missing*, how to interpret an entry like "" in status or "-99" in another column? do we have a data dictionary from 
-the data collection process?
+- *Codification*, like the codification of values in columns like 'gender' and 'age' using numbers, letters, and words. Also the presence of multiple dates
+formats ("dd/mm/yyyy", "yyyy/mm/dd", etc) in the same column like in
+'date_onset'. Less visible, but also the column names.
+- *Missing*, how to interpret an entry like "" in the 'status' column or "-99"
+in other circumstances? Do we have a data dictionary from the data collection process?
 - *Inconsistencies*, like having a date of sample before the date of onset.
-- *Non-plausible values*, like outlier observations with dates outside of an expected timeframe.
+- *Non-plausible values*, like observations where some dates values are outside of the expected timeframe.
 - *Duplicates*, are all observations unique?
 
 You can use these terms to relate to **cleaning operations**:
 
 - Standardize column name
-- Standardize categorical variables like sex/gender
+- Standardize categorical variables like 'gender'
 - Standardize date columns
-- Convert from character to numeric values
+- Convert character values into numeric 
 - Check the sequence of dated events
 
 ::::::::::::::::::::::::::::::
 
 ##  A quick inspection
 
-Quick exploration and inspection of the dataset are crucial to identify potential data issues before 
-diving into any analysis tasks. The `{cleanepi}` 
+Quick exploration and inspection of the dataset are crucial to identify
+potential data issues before diving into any analysis tasks. The `{cleanepi}` 
 package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
@@ -151,11 +152,9 @@ cleanepi::scan_data(raw_ebola_data)
 ```
 
 
-The results provide an overview of the content of every column, including column names, and the percent of some data 
-types per column.
-You can see that the column names in the dataset are descriptive but lack consistency, as some they are composed of 
-multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are 
-missing values in others.
+The results provide an overview of the content of all character columns, including column names, and the percent of some data types within them.
+You can see that the column names in the dataset are descriptive but lack consistency. Some are composed of multiple words separated by white spaces. Additionally, some columns contain more than one data type, and there are 
+missing values in the form of an empty string in others.
 
 ## Common operations
 
@@ -163,22 +162,20 @@ This section  demonstrate how to perform some common data cleaning operations us
 
 ### Standardizing column names
 
-For this example dataset, standardizing column names typically involves removing spaces and connecting different words 
-with “_”. This practice helps maintain consistency and readability in the dataset. However, the function used for 
-standardizing column names offers more options. Type `?cleanepi::standardize_column_names` for more details.
+For this example dataset, standardizing column names typically involves removing with spaces and connecting different words with “_”. This practice helps
+maintain consistency and readability in the dataset. However, the function used for standardizing column names offers more options. Type `?cleanepi::standardize_column_names` in the console for more details.
 
 ```{r}
 sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
 names(sim_ebola_data)
 ```
 
-If you want to maintain certain column names without subjecting them to the standardization process, you can utilize 
-the `keep` argument of the function `cleanepi::standardize_column_names()`. This argument accepts a vector of column 
-names that are intended to be kept unchanged.
+If you want to maintain certain column names without subjecting them to the standardization process, you can utilize the `keep` argument of the function `cleanepi::standardize_column_names()`. This argument accepts a vector of
+column names that are intended to be kept unchanged.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-- What differences you can observe in the column names?
+- What differences can you observe in the column names?
 
 - Standardize the column names of the input dataset, but keep the first column names as it is.
 
@@ -192,9 +189,8 @@ You can try `cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V
 
 ### Removing irregularities
 
-Raw data may contain irregularities such as **duplicated** rows, **empty** rows and columns, or **constant** columns 
-(where all entries have the same value.) Functions from `{cleanepi}` like `remove_duplicates()` and `remove_constants()`
- remove such irregularities as demonstrated in the below code chunk. 
+Raw data may contain fields that don't add any variability to the data such as **empty** rows and columns, or **constant** columns (where all entries have the same value). It can also contain **duplicated** rows. Functions from
+`{cleanepi}` like `remove_duplicates()` and `remove_constants()` remove such irregularities as demonstrated in the below code chunk. 
 
 ```{r}
 # Remove constants
@@ -208,14 +204,15 @@ Now, print the output to identify what constant column you removed!
 sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 ```
 
-<!-- Note that, our simulated Ebola does not contain duplicated nor constant rows or columns.  -->
+<!-- Note that, our simulated Ebola contains few duplicates and few constant
+columns.  -->
 
 ::::::::::::::::::::: spoiler
 
 #### How many rows you removed? What rows where removed?
 
-You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, 
-wait for the report to open in your browser, and find the "Duplicates" tab.
+You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and
+find the "Duplicates" tab.
 
 ```{r,eval=FALSE,echo=TRUE}
 # Print a report
@@ -238,7 +235,7 @@ df <- tibble(
 ) %>%
   mutate(col3 = rep("a", nrow(.))) %>%
   mutate(col4 = rep("b", nrow(.))) %>%
-  mutate(col5 = rep(NA_Date_, nrow(.))) %>%
+  mutate(col5 = rep(lubridate::NA_Date_, nrow(.))) %>%
   add_row(col1 = NA_integer_, col3 = "a") %>%
   add_row(col1 = NA_integer_, col3 = "a") %>%
   add_row(col1 = NA_integer_, col3 = "a") %>%
@@ -247,16 +244,14 @@ df <- tibble(
 df
 ```
 
-What columns or rows are:
+What columns are the:
 
-- duplicates?
-- empty?
-- constant?
+- constant data?
+- duplicated rows?
 
 ::::::::::::::: hint
 
-Duplicates mostly refers to replicated rows. Empty rows or columns can be a subset within the set of constant rows 
-or columns.
+Constant data mostly refers to empty rows or columns as well as constant columns.
 
 :::::::::::::::
 
@@ -264,21 +259,17 @@ or columns.
 
 ::::::::::::::: instructor
 
-- duplicated rows: 3, 4, 5
-- empty rows: 6
-- empty cols: 5
-- constant rows: 6
-- constant cols: 5
+Make sure they start by removing duplicates before removing constant data.
 
-Point out to learners that the user can create new constant columns or rows after removing some initial ones.
+- indices of duplicated rows: 3, 4, 5
+- indices of empty rows: 4 (from the first iteration); 3 (from the second iteration)
+- empty cols: "col5"
+- constant cols: "col3", and "col4"
+
+Point out to learners that they create a different set of constant data after removing by varying the value of the `cutoff` argument.
 
 ```{r}
-df %>%
-  cleanepi::remove_constants()
-
-df %>%
-  cleanepi::remove_constants() %>%
-  cleanepi::remove_constants()
+df <- df %>% cleanepi::remove_constants(cutoff = 0.5)
 ```
 
 
