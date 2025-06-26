@@ -31,11 +31,11 @@ This episode requires you to:
 In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
 it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
 analyses. Otherwise you might find that your analysis suddenly stops working when specific variables appear or disappear, or their underlying data types (like `<date>` or `<chr>`) change. Specifically, this additional layer involves: 1) verifying the presence and correct data type of certain columns within
-your dataset, a process commonly referred to as "tagging"; 2) implementing measures to 
-check that these tagged columns are not inadvertently deleted during further data processing steps, known as "validation".
+your dataset, a process commonly referred to as **tagging**; 2) implementing measures to 
+check that these tagged columns are not inadvertently deleted during further data processing steps, known as **validation**.
 
 
-This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
+This episode focuses on tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
  package. Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
 to create a linelist object. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
@@ -79,19 +79,19 @@ cleaned_data <- rio::import(
 
 
 ``` output
-# A tibble: 15,000 × 10
-      v1 case_id   age gender status    date_onset date_sample row_id
-   <int>   <int> <dbl> <chr>  <chr>     <IDate>    <IDate>      <int>
- 1     1   14905    90 male   confirmed 2015-03-15 2015-06-04       1
- 2     2   13043    25 female <NA>      2013-09-11 2014-03-01       2
- 3     3   14364    54 female <NA>      2014-09-02 2015-03-03       3
- 4     4   14675    90 <NA>   <NA>      2014-10-19 2031-12-14       4
- 5     5   12648    74 female <NA>      2014-08-06 2016-10-10       5
- 6     6   14274    76 female <NA>      2015-04-05 2016-01-23       7
- 7     7   14132    16 male   confirmed NA         2015-05-10       8
- 8     8   14715    44 female confirmed NA         2016-04-24       9
- 9     9   13435    26 male   <NA>      2014-09-07 2020-09-14      10
-10    10   14816    30 female <NA>      2015-06-29 2015-06-02      11
+# A tibble: 15,000 × 9
+      v1 case_id   age gender status    date_onset date_sample
+   <int>   <int> <dbl> <chr>  <chr>     <IDate>    <IDate>    
+ 1     1   14905    90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2   13043    25 female <NA>      2013-09-11 2014-01-03 
+ 3     3   14364    54 female <NA>      2014-02-09 2015-03-03 
+ 4     4   14675    90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5   12648    74 female <NA>      2014-06-08 2016-10-10 
+ 6     6   14274    76 female <NA>      2015-04-05 2016-01-23 
+ 7     7   14132    16 male   confirmed NA         2015-10-05 
+ 8     8   14715    44 female confirmed NA         2016-04-24 
+ 9     9   13435    26 male   <NA>      2014-07-09 2014-09-20 
+10    10   14816    30 female <NA>      2015-06-29 2015-02-06 
 # ℹ 14,990 more rows
 # ℹ 2 more variables: years_since_collection <int>, remainder_months <int>
 ```
@@ -138,19 +138,19 @@ linelist_data
 ``` output
 
 // linelist object
-# A tibble: 15,000 × 10
-      v1 case_id   age gender status    date_onset date_sample row_id
-   <int>   <int> <dbl> <chr>  <chr>     <IDate>    <IDate>      <int>
- 1     1   14905    90 male   confirmed 2015-03-15 2015-06-04       1
- 2     2   13043    25 female <NA>      2013-09-11 2014-03-01       2
- 3     3   14364    54 female <NA>      2014-09-02 2015-03-03       3
- 4     4   14675    90 <NA>   <NA>      2014-10-19 2031-12-14       4
- 5     5   12648    74 female <NA>      2014-08-06 2016-10-10       5
- 6     6   14274    76 female <NA>      2015-04-05 2016-01-23       7
- 7     7   14132    16 male   confirmed NA         2015-05-10       8
- 8     8   14715    44 female confirmed NA         2016-04-24       9
- 9     9   13435    26 male   <NA>      2014-09-07 2020-09-14      10
-10    10   14816    30 female <NA>      2015-06-29 2015-06-02      11
+# A tibble: 15,000 × 9
+      v1 case_id   age gender status    date_onset date_sample
+   <int>   <int> <dbl> <chr>  <chr>     <IDate>    <IDate>    
+ 1     1   14905    90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2   13043    25 female <NA>      2013-09-11 2014-01-03 
+ 3     3   14364    54 female <NA>      2014-02-09 2015-03-03 
+ 4     4   14675    90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5   12648    74 female <NA>      2014-06-08 2016-10-10 
+ 6     6   14274    76 female <NA>      2015-04-05 2016-01-23 
+ 7     7   14132    16 male   confirmed NA         2015-10-05 
+ 8     8   14715    44 female confirmed NA         2016-04-24 
+ 9     9   13435    26 male   <NA>      2014-07-09 2014-09-20 
+10    10   14816    30 female <NA>      2015-06-29 2015-02-06 
 # ℹ 14,990 more rows
 # ℹ 2 more variables: years_since_collection <int>, remainder_months <int>
 
@@ -357,7 +357,7 @@ cleaned_data %>%
 ``` error
 Error in base::tryCatch(base::withCallingHandlers({: 1 assertions failed:
  * Variable 'tag': Must be element of set
- * {'v1','case_id','gender','status','date_onset','date_sample','row_id','years_since_collection','remainder_months'},
+ * {'v1','case_id','gender','status','date_onset','date_sample','years_since_collection','remainder_months'},
  * but is 'age'.
 ```
 
@@ -449,13 +449,13 @@ linelist::tags_df(linelist_data)
    <int> <IDate>    <chr> 
  1 14905 2015-03-15 male  
  2 13043 2013-09-11 female
- 3 14364 2014-09-02 female
+ 3 14364 2014-02-09 female
  4 14675 2014-10-19 <NA>  
- 5 12648 2014-08-06 female
+ 5 12648 2014-06-08 female
  6 14274 2015-04-05 female
  7 14132 NA         male  
  8 14715 NA         female
- 9 13435 2014-09-07 male  
+ 9 13435 2014-07-09 male  
 10 14816 2015-06-29 female
 # ℹ 14,990 more rows
 ```
