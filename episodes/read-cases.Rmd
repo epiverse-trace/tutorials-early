@@ -184,7 +184,7 @@ db_connection <- DBI::dbConnect(
 
 A real-life connection to an external SQLite database would look like this:
 
-```{r}
+```{r, eval=FALSE}
 # in real-life
 db_connection <- DBI::dbConnect(
   RSQLite::SQLite(), 
