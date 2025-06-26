@@ -31,11 +31,11 @@ This episode requires you to:
 In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data,
 it's essential to establish an additional foundation layer to ensure the integrity and reliability of subsequent
 analyses. Otherwise you might find that your analysis suddenly stops working when specific variables appear or disappear, or their underlying data types (like `<date>` or `<chr>`) change. Specifically, this additional layer involves: 1) verifying the presence and correct data type of certain columns within
-your dataset, a process commonly referred to as "tagging"; 2) implementing measures to 
-check that these tagged columns are not inadvertently deleted during further data processing steps, known as "validation".
+your dataset, a process commonly referred to as **tagging**; 2) implementing measures to 
+check that these tagged columns are not inadvertently deleted during further data processing steps, known as **validation**.
 
 
-This episode focuses tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
+This episode focuses on tagging and validate outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/)
  package. Let's start by loading the package `{rio}` to read data and the package `{linelist}` 
 to create a linelist object. We'll use the pipe `%>%` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
