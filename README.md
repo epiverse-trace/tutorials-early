@@ -44,8 +44,7 @@ Lesson content is published with a [CC-BY license](LICENSE.md).
 
 Current maintainers of these tutorials are:
 
-- [Andree Valle-Campos](https://github.com/avallecam/) (Content)
-- [Hugo Gruson](https://github.com/Bisaloo/) (Infrastructure)
+- [Andree Valle-Campos](https://github.com/avallecam/)
 
 <!--
 Former maintainers:
