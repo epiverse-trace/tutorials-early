@@ -12,7 +12,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectives
+::::::::::::::::::::::::::::::::::::: objectifs
 
 - Effectuer une analyse préliminaire des données épidémiologiques
 - Identifier les tendances, les dates ou périodes de pic, doublage du nombre de cas
