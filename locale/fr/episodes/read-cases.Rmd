@@ -33,6 +33,7 @@ Commençons par charger la librairie `{rio}` pour importer les données stockée
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 # installer les librairies si elles ne le sont pas déjà
+if (!require("pak")) install.packages("pak")
 if (!require("tidyverse")) pak::pak("tidyverse")
 if (!require("rio")) pak::pak("rio")
 if (!require("here")) pak::pak("here")
