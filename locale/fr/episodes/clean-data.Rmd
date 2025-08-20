@@ -9,7 +9,7 @@ exercises: 10
 - Comment nettoyer et standardiser les données épidémiologiques ?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectives
+::::::::::::::::::::::::::::::::::::: objectifs
 
 - Expliquez comment nettoyer, organiser et standardiser les données épidémioloques en utilisant la librairie `{cleanepi}`
 - Appliquer les opérations de nettoyage de données sur des données épidémiologiques simulées
@@ -104,7 +104,7 @@ Certaines de ces anormalies vous sont-elles familières dans le cadre d'une anal
 
 ::::::::::::::::::::::::::::
 
-::::::::::::::::::: instructor
+::::::::::::::::::: instructeur
 
 Animez une brève discussion pour établir un lien entre les anormalies détectées et les opérations de nettoyage requises.
 
@@ -153,7 +153,7 @@ names(sim_ebola_data)
 
 Si vous souhaitez conserver certains noms de colonnes sans les soumettre au processus de normalisation, vous pouvez utiliser l'argument `keep` de la fonction `cleanepi::standardize_column_names()`. Cet argument accepte un vecteur de noms de colonnes qui doivent rester inchangés.
 
-::::::::::::::::::::::::::::::::::::: challenge
+::::::::::::::::::::::::::::::::::::: défi
 
 - Quelles différences pouvez-vous observer dans les noms de colonnes ?
 
@@ -197,7 +197,7 @@ doublons
 
 :::::::::::::::::::::
 
-::::::::::::::::::::: challenge
+::::::::::::::::::::: défi
 
 Dans le jeu de données suivant :
 
@@ -234,7 +234,7 @@ Les données constantes se réfèrent principalement aux lignes et colonnes vide
 
 :::::::::::::::::::::
 
-::::::::::::::: instructor
+::::::::::::::: instructeur
 
 ```{r}
 cleaned_df <- df %>%
@@ -607,7 +607,7 @@ cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 
-:::::::::::::: challenge
+:::::::::::::: défi
 
 Avez-vous remarqué que `{cleanepi}` contient un ensemble de fonctions pour **diagnostiquer** l'état de propreté des données et un autre ensemble pour **effectuer** le nettoyage ?
 
@@ -621,7 +621,7 @@ Identifier les deux groupes :
 
 ::::::::::::::
 
-:::::::::::::: instructor
+:::::::::::::: instructeur
 
 Notez que `{cleanepi}` contient un ensemble de fonctions pour **diagnostiquer** l'état de propreté des données (par exemple `check_subject_ids()` et `check_date_sequence()` dans l'extrait de code ci-dessus) et un autre pour **effecture** les opérations de nettoyage (le reste des fonctions dans l'exemple ci-dessus).
 
@@ -643,7 +643,7 @@ Vous pouvez consulter le rapport de nettage de données à l'aide de la fonction
     </figcaption>
 </figure>
 
-::::::::::::::::::::::::::::::::::::: points majeurs
+::::::::::::::::::::::::::::::::::::: points clés
 
 - Utiliser `{cleanepi}` pour nettoyer et normaliser les données à caractère épidémiologiques.
 - Comprendre comment utiliser `{cleanepi}` pour effectuer des tâches courantes de nettoyage de données.
