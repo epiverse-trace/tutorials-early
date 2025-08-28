@@ -9,7 +9,7 @@ exercises: 10
 - Comment nettoyer et standardiser les données épidémiologiques ?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectifs
+::::::::::::::::::::::::::::::::::::: objectives
 
 - Expliquez comment nettoyer, organiser et standardiser les données épidémioloques en utilisant la librairie `{cleanepi}`
 - Appliquer les opérations de nettoyage de données sur des données épidémiologiques simulées
@@ -96,7 +96,7 @@ Certaines de ces anormalies vous sont-elles familières dans le cadre d'une anal
 
 ::::::::::::::::::::::::::::
 
-::::::::::::::::::: instructeur
+::::::::::::::::::: instructor
 
 Animez une brève discussion pour établir un lien entre les anormalies détectées et les opérations de nettoyage requises.
 
@@ -145,13 +145,13 @@ names(sim_ebola_data)
 
 Si vous souhaitez conserver certains noms de colonnes sans les soumettre au processus de normalisation, vous pouvez utiliser l'argument `keep` de la fonction `cleanepi::standardize_column_names()`. Cet argument accepte un vecteur de noms de colonnes qui doivent rester inchangés.
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 - Quelles différences pouvez-vous observer dans les noms de colonnes ?
 
 - Normalisez les noms des colonnes de l'ensemble de données d'entrée, mais conservez le nom de la première colonne tel quel.
 
-::::::::::::::::: indice
+::::::::::::::::: hint
 
 Vous pouvez essayer `cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V1")`
 
@@ -189,7 +189,7 @@ doublons
 
 :::::::::::::::::::::
 
-::::::::::::::::::::: défi
+::::::::::::::::::::: challenge
 
 Dans le jeu de données suivant :
 
@@ -218,7 +218,7 @@ Quelles sont les colonnes ou les lignes:
 - vides ?
 - contenant des données constantes ?
 
-::::::::::::::: indice
+::::::::::::::: hint
 
 Les données constantes se réfèrent principalement aux lignes et colonnes vides, mais aussi aux colonnes invariables.
 
@@ -226,14 +226,14 @@ Les données constantes se réfèrent principalement aux lignes et colonnes vide
 
 :::::::::::::::::::::
 
-::::::::::::::: instructeur
+::::::::::::::: instructor
 
 ```{r}
 cleaned_df <- df %>%
   cleanepi::remove_constants() %>%
   cleanepi::remove_duplicates()
 
-print_report(cleaned_df, "constant_data")
+#print_report(cleaned_df, "constant_data")
 ```
 
 - indices des doublon : aucun
@@ -251,7 +251,7 @@ Faites remarquer aux apprenants qu'ils peuvent obtenir des résultats différent
 cleaned_df <- df %>%
   cleanepi::remove_constants(cutoff = 0.5)
 
-print_report(cleaned_df, "constant_data")
+#print_report(cleaned_df, "constant_data")
 ```
 :::::::::::::::
 
@@ -391,6 +391,7 @@ sim_ebola_data
 Cette approche simplifie le processus de nettoyage des données, en garantissant que les variables catégorielles dans les jeux de données épidémiologiques sont
 catégorisées avec précision et prêtes pour une analyse plus ultérieures.
 
+<!--
 :::::::::::::::::::::::::: spoiler
 
 #### Comment créer votre propre dictionnaire de données ?
@@ -445,6 +446,7 @@ Notez qu'il faudrait préalablement convertir les colonnes cibles en `charactèr
 avant de procéder à la substitution.
 
 ::::::::::::::::::::::::::
+-->
 
 ### Calcul de l'intervalle de temps entre différentes dates
 
@@ -469,7 +471,7 @@ sim_ebola_data %>%
 
 Après avoir exécuté la fonction `cleanepi::timespan()`, deux nouvelles colonnes nommées `years_since_collection` et `remainder_months` ont été ajoutées à la base de données **sim_ebola_data**. Ces colonnes contiennent respectivement le temps écoulé depuis la date de prélèvement de l'échantillon de chaque individu, mesuré en années, et le temps restant mesuré en mois.
 
-::::::::::::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 Les données relatives à l'âge sont utiles dans beaucoup d'analyses qui seront menées après le nettoyage des données. Vous pouvez classer les âges en catégories pour générer des estimations stratifiées.
 
@@ -599,7 +601,7 @@ cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 
-:::::::::::::: défi
+:::::::::::::: challenge
 
 Avez-vous remarqué que `{cleanepi}` contient un ensemble de fonctions pour **diagnostiquer** l'état de propreté des données et un autre ensemble pour **effectuer** le nettoyage ?
 
@@ -613,7 +615,7 @@ Identifier les deux groupes :
 
 ::::::::::::::
 
-:::::::::::::: instructeur
+:::::::::::::: instructor
 
 Notez que `{cleanepi}` contient un ensemble de fonctions pour **diagnostiquer** l'état de propreté des données (par exemple `check_subject_ids()` et `check_date_sequence()` dans l'extrait de code ci-dessus) et un autre pour **effecture** les opérations de nettoyage (le reste des fonctions dans l'exemple ci-dessus).
 
@@ -635,7 +637,7 @@ Vous pouvez consulter le rapport de nettage de données à l'aide de la fonction
     </figcaption>
 </figure>
 
-::::::::::::::::::::::::::::::::::::: points clés
+::::::::::::::::::::::::::::::::::::: keypoints 
 
 - Utiliser `{cleanepi}` pour nettoyer et normaliser les données à caractère épidémiologiques.
 - Comprendre comment utiliser `{cleanepi}` pour effectuer des tâches courantes de nettoyage de données.
