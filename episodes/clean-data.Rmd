@@ -232,9 +232,12 @@ Les données constantes se réfèrent principalement aux lignes et colonnes vide
 cleaned_df <- df %>%
   cleanepi::remove_constants() %>%
   cleanepi::remove_duplicates()
-
-#print_report(cleaned_df, "constant_data")
 ```
+
+```r
+print_report(cleaned_df, "constant_data")
+```
+
 
 - indices des doublon : aucun
 - colonnes vides :
@@ -250,9 +253,12 @@ Faites remarquer aux apprenants qu'ils peuvent obtenir des résultats différent
 ```{r}
 cleaned_df <- df %>%
   cleanepi::remove_constants(cutoff = 0.5)
-
-#print_report(cleaned_df, "constant_data")
 ```
+
+```r
+print_report(cleaned_df, "constant_data")
+```
+
 :::::::::::::::
 
 ### Remplacer les valeurs manquantes
@@ -276,7 +282,8 @@ Chaque entrée du jeu de données représente un individu (par exemple, un patie
 La librairie `{cleanepi}` propose la fonction `check_subject_ids()` permettant de vérifier si les identifiants des individus sont uniques et s'ils satisfont aux critères établis par l'utilisateur.
 
 ```{r}
-# vérifier si les identifiants des individus comportent des nombres variant entre 0 et 15000
+# vérifier si les identifiants des individus comportent des nombres
+# variant entre 0 et 15000
 sim_ebola_data <- cleanepi::check_subject_ids(
   data = sim_ebola_data,
   target_columns = "case_id",
@@ -425,7 +432,8 @@ Pour simplifier la correction des valeurs mals orthographiées, nous avons intro
 orthographiées seront ainsi substituées par les vraies valeurs qui leurs sont orthographiquement plus proches.
 
 ```{r}
-# remplacer automatiquement les valeurs mals orthographiées de la colonne 'status' avec les vraies
+# remplacer automatiquement les valeurs mals orthographiées de la
+# colonne 'status' avec les vraies
 sim_ebola_data <- cleanepi::correct_misspelled_values(
   data = sim_ebola_data,
   target_columns = "status",
@@ -433,7 +441,8 @@ sim_ebola_data <- cleanepi::correct_misspelled_values(
   confirm = FALSE # remplacement sans demander l'avis de l'utilisateur
 )
 
-# remplacer les valeurs mals orthographiées de la colonne 'status' avec les vraies apres avoir demander la confirmation à l'utilisateur
+# remplacer les valeurs mals orthographiées de la colonne 'status' avec
+# les vraies apres avoir demander la confirmation à l'utilisateur
 sim_ebola_data <- cleanepi::correct_misspelled_values(
   data = sim_ebola_data,
   target_columns = "status",
@@ -506,7 +515,8 @@ dat_clean <- dat %>%
   cleanepi::standardize_dates(
     target_columns = c("date_of_birth", "date_first_pcr_positive_test")
   ) %>%
-  # replacer les chaînes de caractères représentant les données manquantes avec NA
+  # replacer les chaînes de caractères représentant les données
+  # manquantes avec NA
   cleanepi::replace_missing_values(
     target_columns = c("sex", "date_of_birth"),
     na_strings = "-99"
@@ -540,10 +550,11 @@ dat_clean %>%
     age_in_years
   ) %>%
   # categoriser la variable age [ajouter comme indice dans le challenge]
+  # replacer avec la valeur maximale si elle est connue
   dplyr::mutate(
     age_category = base::cut(
       x = age_in_years,
-      breaks = c(0, 20, 35, 60, Inf), # replacer avec la valeur maximale si elle est connue
+      breaks = c(0, 20, 35, 60, Inf),
       include.lowest = TRUE,
       right = FALSE
     )
