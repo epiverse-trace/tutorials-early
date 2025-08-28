@@ -110,6 +110,7 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
+  "epiverse-trace/readepi@readepi_no_his_spc_deps",
   "cleanepi",
   "reactable",
   "rio",
@@ -203,6 +204,7 @@ When the installation has finished, you can try to load the packages by pasting 
 ```r
 # for episodes on read, clean, validate and visualize linelist
 
+library(readepi)
 library(cleanepi)
 library(reactable)
 library(rio)
