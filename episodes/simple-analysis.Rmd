@@ -59,11 +59,7 @@ df <- base::subset(
 
 # uses the incidence function from the incidence2 package to compute the
 # incidence data
-df_incid <- incidence2::incidence(
-  df,
-  date_index = "date",
-  groups = "sex"
-) %>% 
+df_incid <- incidence2::incidence(df, date_index = "date", groups = "sex") %>%
   filter(sex != "unknown")
 
 # fit a curve to the incidence data. The model chosen is the negative binomial
@@ -71,45 +67,36 @@ df_incid <- incidence2::incidence(
 fitted_curve_nb <-
   df_incid %>%
   nest(.key = "data") %>%
-  mutate(
-    model = lapply(
-      data,
-      function(x) MASS::glm.nb(count ~ date_index, data = x)
-    )
-  )
+  mutate(model = lapply(
+    X = data,
+    FUN = function(x)
+      MASS::glm.nb(count ~ date_index, data = x)
+  ))
 
 intervals <-
-    fitted_curve_nb %>%
-    mutate(result = Map(
-        function(data, model) {
-            data %>%
-                ciTools::add_ci(
-                    model,
-                    alpha = 0.05,
-                    names = c("lower_ci", "upper_ci")
-                ) %>%
-                as_tibble()
-        },
-        data,
-        model
-    )) %>%
-    select(sex,result) %>%
-    unnest()
+  fitted_curve_nb %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
 
 # plot fitted curve
 plot(df_incid, angle = 45) +
-    ggplot2::geom_line(
-        ggplot2::aes(date_index, y = pred),
-        data = intervals,
-        inherit.aes = FALSE
-    ) +
-    ggplot2::geom_ribbon(
-        ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
-        alpha = 0.2,
-        data = intervals,
-        inherit.aes = FALSE,
-        fill = "#BBB67E"
-    ) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -126,45 +113,35 @@ Repeat the above analysis using Poisson distribution.
 fitted_curve_poisson <-
   df_incid %>%
   nest(.key = "data") %>%
-  mutate(
-    model = lapply(
-      data,
-      function(x) glm(count ~ date_index, data = x, family = poisson)
-    )
-  )
+  mutate(model = lapply(data, function(x)
+    glm(
+      count ~ date_index, data = x, family = poisson
+    )))
 
 intervals <-
-    fitted_curve_poisson %>%
-    mutate(result = Map(
-        function(data, model) {
-            data %>%
-                ciTools::add_ci(
-                    model,
-                    alpha = 0.05,
-                    names = c("lower_ci", "upper_ci")
-                ) %>%
-                as_tibble()
-        },
-        data,
-        model
-    )) %>%
-    select(sex,result) %>%
-    unnest()
+  fitted_curve_poisson %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
 
 # plot fitted curve
 plot(df_incid, angle = 45) +
-    ggplot2::geom_line(
-        ggplot2::aes(date_index, y = pred),
-        data = intervals,
-        inherit.aes = FALSE
-    ) +
-    ggplot2::geom_ribbon(
-        ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
-        alpha = 0.2,
-        data = intervals,
-        inherit.aes = FALSE,
-        fill = "#BBB67E"
-    ) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -225,7 +202,7 @@ library(ggplot2)
 df_incid %>%
   mutate(
     rolling_average = data.table::frollmean(count, n = 7L, align = "right")
-  ) %>% 
+  ) %>%
   plot(border_colour = "white", angle = 45) +
   ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
   ggplot2::labs(x = "Date", y = "Cases")
@@ -243,7 +220,7 @@ Compute and visualize the monthly moving average of cases on `df_incid`?
 df_incid %>%
   mutate(
     rolling_average = data.table::frollmean(count, n = 30L, align = "right")
-  ) %>% 
+  ) %>%
   plot(border_colour = "white", angle = 45) +
   ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
   ggplot2::labs(x = "Date", y = "Cases")
