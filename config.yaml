@@ -11,7 +11,7 @@
 carpentry: 'epiverse-trace'
 
 # Overall title for pages.
-title: 'Read and clean case data, and make linelist for outbreak analytics with R'
+title: 'Lire et nettoyer les données de cas, puis créer une tableau de données de cas pour l’analyse d’épidémie avec R'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
 created:
