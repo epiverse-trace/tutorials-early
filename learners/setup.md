@@ -106,6 +106,7 @@ if(!require("pak")) install.packages("pak")
 new_packages <- c(
   "epiverse-trace/readepi@readepi_no_his_spc_deps",
   "cleanepi@1.1.0",
+  "reactable",
   "rio",
   "here",
   "DBI",
@@ -202,6 +203,7 @@ Lorsque l'installation est terminée, vous pouvez essayer de charger les paquets
 
 library(readepi)
 library(cleanepi)
+library(reactable)
 library(rio)
 library(here)
 library(DBI)
