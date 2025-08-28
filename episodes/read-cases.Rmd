@@ -272,7 +272,7 @@ covid_cases <- readepi::read_sormas(
   base_url = "https://demo.sormas.org/sormas-rest",
   user_name = "SurvSup",
   password = "Lk5R7JXeZSEc",
-  disease = "coronavirus",
+  disease = "coronavirus"
 )
 ```
 
