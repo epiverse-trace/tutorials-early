@@ -264,6 +264,35 @@
       "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
+    "RMySQL": {
+      "Package": "RMySQL",
+      "Version": "0.11.1",
+      "Source": "Repository",
+      "Title": "Database Interface and 'MySQL' Driver for R",
+      "Description": "Legacy 'DBI' interface to 'MySQL' / 'MariaDB' based on old code ported from S-PLUS. A modern 'MySQL' client written in 'C++' is available from the 'RMariaDB' package.",
+      "Authors@R": "c(person(\"Jeroen\", \"Ooms\", email = \"jeroenooms@gmail.com\",  role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4035-0289\")), person(\"David\", \"James\", role = \"aut\"), person(\"Saikat\", \"DebRoy\", role = \"aut\"), person(\"Hadley\", \"Wickham\", email = \"hadley@rstudio.com\", role = \"aut\"), person(\"Jeffrey\", \"Horner\", role = \"aut\"), person(\"RStudio\", role = \"cph\"))",
+      "Depends": [
+        "R (>= 2.8.0)",
+        "DBI (>= 0.4)"
+      ],
+      "Imports": [
+        "methods"
+      ],
+      "License": "GPL-2",
+      "URL": "https://r-dbi.r-universe.dev/RMySQL https://downloads.mariadb.org/connector-c/",
+      "BugReports": "https://github.com/r-dbi/rmysql/issues",
+      "SystemRequirements": "libmariadb-client-dev | libmariadb-client-lgpl-dev | libmysqlclient-dev (deb), mariadb-devel (rpm), mariadb | mysql-connector-c (brew), mysql56_dev (csw)",
+      "NeedsCompilation": "yes",
+      "Collate": "'mysql.R' 'driver.R' 'connection.R' 'data-type.R' 'default.R' 'escaping.R' 'result.R' 'extension.R' 'is-valid.R' 'table.R' 'transaction.R'",
+      "Suggests": [
+        "testthat",
+        "curl"
+      ],
+      "RoxygenNote": "7.3.2.9000",
+      "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>), David James [aut], Saikat DebRoy [aut], Hadley Wickham [aut], Jeffrey Horner [aut], RStudio [cph]",
+      "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+      "Repository": "CRAN"
+    },
     "RSQLite": {
       "Package": "RSQLite",
       "Version": "2.4.3",
@@ -2759,6 +2788,64 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "RSPM"
     },
+    "httr2": {
+      "Package": "httr2",
+      "Version": "1.1.2",
+      "Source": "Repository",
+      "Title": "Perform HTTP Requests and Process the Responses",
+      "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"Maximilian\", \"Girlich\", role = \"ctb\") )",
+      "Description": "Tools for creating and modifying HTTP requests, then performing them and processing the results. 'httr2' is a modern re-imagining of 'httr' that uses a pipe-based interface and solves more of the problems that API wrapping packages face.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://httr2.r-lib.org, https://github.com/r-lib/httr2",
+      "BugReports": "https://github.com/r-lib/httr2/issues",
+      "Depends": [
+        "R (>= 4.0)"
+      ],
+      "Imports": [
+        "cli (>= 3.0.0)",
+        "curl (>= 6.2.1)",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "openssl",
+        "R6",
+        "rappdirs",
+        "rlang (>= 1.1.0)",
+        "vctrs (>= 0.6.3)",
+        "withr"
+      ],
+      "Suggests": [
+        "askpass",
+        "bench",
+        "clipr",
+        "covr",
+        "docopt",
+        "httpuv",
+        "jose",
+        "jsonlite",
+        "knitr",
+        "later (>= 1.4.0)",
+        "nanonext",
+        "paws.common",
+        "promises",
+        "rmarkdown",
+        "testthat (>= 3.1.8)",
+        "tibble",
+        "webfakes",
+        "xml2"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "true",
+      "Config/testthat/start-first": "multi-req, resp-stream, req-perform",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd], Maximilian Girlich [ctb]",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
+      "Repository": "CRAN"
+    },
     "ids": {
       "Package": "ids",
       "Version": "1.0.1",
@@ -3083,6 +3170,39 @@
         "stats",
         "graphics"
       ],
+      "Repository": "CRAN"
+    },
+    "later": {
+      "Package": "later",
+      "Version": "1.4.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Utilities for Scheduling Functions to Execute Later with Event Loops",
+      "Authors@R": "c( person(\"Winston\", \"Chang\", role = c(\"aut\", \"cre\"), email = \"winston@posit.co\"), person(\"Joe\", \"Cheng\", role = c(\"aut\"), email = \"joe@posit.co\"), person(\"Charlie\", \"Gao\", role = c(\"aut\"), email = \"charlie.gao@shikokuchuo.net\", comment = c(ORCID = \"0000-0002-0750-061X\")), person(family = \"Posit Software, PBC\", role = \"cph\"), person(\"Marcus\", \"Geelnard\", role = c(\"ctb\", \"cph\"), comment = \"TinyCThread library, https://tinycthread.github.io/\"), person(\"Evan\", \"Nemerson\", role = c(\"ctb\", \"cph\"), comment = \"TinyCThread library, https://tinycthread.github.io/\") )",
+      "Description": "Executes arbitrary R or C functions some time after the current time, after the R execution stack has emptied. The functions are scheduled in an event loop.",
+      "URL": "https://r-lib.github.io/later/, https://github.com/r-lib/later",
+      "BugReports": "https://github.com/r-lib/later/issues",
+      "License": "MIT + file LICENSE",
+      "Imports": [
+        "Rcpp (>= 0.12.9)",
+        "rlang"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "RoxygenNote": "7.3.2",
+      "Suggests": [
+        "knitr",
+        "nanonext",
+        "R6",
+        "rmarkdown",
+        "testthat (>= 2.1.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Winston Chang [aut, cre], Joe Cheng [aut], Charlie Gao [aut] (<https://orcid.org/0000-0002-0750-061X>), Posit Software, PBC [cph], Marcus Geelnard [ctb, cph] (TinyCThread library, https://tinycthread.github.io/), Evan Nemerson [ctb, cph] (TinyCThread library, https://tinycthread.github.io/)",
+      "Maintainer": "Winston Chang <winston@posit.co>",
       "Repository": "CRAN"
     },
     "lattice": {
@@ -3632,6 +3752,61 @@
       "Maintainer": "Bankole Ahadzie <bankole.ahadzie@lshtm.ac.uk>",
       "Repository": "CRAN"
     },
+    "odbc": {
+      "Package": "odbc",
+      "Version": "1.6.1",
+      "Source": "Repository",
+      "Title": "Connect to ODBC Compatible Databases (using the DBI Interface)",
+      "Authors@R": "c( person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Oliver\", \"Gjoneski\", role = \"aut\"), person(\"lexicalunit\", role = \"cph\", comment = \"nanodbc library\"), person(\"Google Inc.\", role = \"cph\", comment = \"cctz library\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "A DBI-compatible interface to ODBC databases.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://odbc.r-dbi.org, https://github.com/r-dbi/odbc, https://solutions.posit.co/connections/db/",
+      "BugReports": "https://github.com/r-dbi/odbc/issues",
+      "Depends": [
+        "R (>= 4.0.0)"
+      ],
+      "Imports": [
+        "bit64",
+        "blob (>= 1.2.0)",
+        "cli",
+        "DBI (>= 1.0.0)",
+        "hms",
+        "lifecycle",
+        "methods",
+        "Rcpp (>= 0.12.11)",
+        "rlang (>= 1.1.0)"
+      ],
+      "Suggests": [
+        "connectcreds",
+        "covr",
+        "DBItest",
+        "httr2",
+        "knitr",
+        "magrittr",
+        "paws.common",
+        "rmarkdown",
+        "RSQLite",
+        "testthat (>= 3.0.0)",
+        "tibble",
+        "withr"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "ByteCompile": "true",
+      "Config/Needs/check": "pkgbuild",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "SystemRequirements": "GNU make, An ODBC3 driver manager and drivers.",
+      "Collate": "'RcppExports.R' 'aaa-odbc-data-type.R' 'connection-pane.R' 'dbi-connection.R' 'odbc-connection.R' 'db.R' 'dbi-driver.R' 'dbi-result.R' 'dbi-table.R' 'dbi.R' 'driver-access.R' 'driver-bigquery.R' 'driver-databricks.R' 'driver-db2.R' 'driver-hana.R' 'driver-hive.R' 'driver-impala.R' 'driver-mysql.R' 'driver-netezza.R' 'driver-oracle.R' 'driver-postgres.R' 'driver-redshift.R' 'driver-snowflake.R' 'driver-spark.R' 'driver-sql-server.R' 'driver-sqlite.R' 'driver-teradata.R' 'driver-vertica.R' 'import-standalone-obj-type.R' 'import-standalone-types-check.R' 'odbc-config.R' 'odbc-data-sources.R' 'odbc-drivers.R' 'odbc-package.R' 'odbc.R' 'utils.R' 'zzz.R'",
+      "VignetteBuilder": "knitr",
+      "NeedsCompilation": "yes",
+      "Author": "Jim Hester [aut], Hadley Wickham [aut, cre], Oliver Gjoneski [aut], lexicalunit [cph] (nanodbc library), Google Inc. [cph] (cctz library), Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
+      "Repository": "CRAN"
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.3.3",
@@ -3882,6 +4057,48 @@
       "Author": "Kirill Müller [aut, cre], Sergey Podobry [cph] (Author of the bundled plog library)",
       "Maintainer": "Kirill Müller <krlmlr+r@mailbox.org>",
       "Repository": "RSPM"
+    },
+    "pool": {
+      "Package": "pool",
+      "Version": "1.0.4",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Object Pooling",
+      "Authors@R": "c( person(\"Joe\", \"Cheng\", , \"joe@posit.co\", role = \"aut\"), person(\"Barbara\", \"Borges\", role = \"aut\"), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "Enables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are 'DBI' connections.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://github.com/rstudio/pool, https://rstudio.github.io/pool/",
+      "BugReports": "https://github.com/rstudio/pool/issues",
+      "Depends": [
+        "methods",
+        "R (>= 3.6.0)"
+      ],
+      "Imports": [
+        "DBI (>= 1.2.1)",
+        "later (>= 1.0.0)",
+        "R6",
+        "rlang (>= 1.0.0)"
+      ],
+      "Suggests": [
+        "covr",
+        "dbplyr (>= 2.4.0)",
+        "dplyr",
+        "knitr",
+        "rmarkdown",
+        "RSQLite",
+        "shiny",
+        "testthat (>= 3.0.0)",
+        "tibble"
+      ],
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Author": "Joe Cheng [aut], Barbara Borges [aut], Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Hadley Wickham <hadley@posit.co>",
+      "Repository": "CRAN"
     },
     "praise": {
       "Package": "praise",
@@ -4211,6 +4428,60 @@
       "Author": "Georgi N. Boshnakov [aut, cre] (R port, R code, new C code and modifications to bibutils' C code, conversion to Bibentry (R and C code)), Chris Putman [aut] (src/*, author of the bibutils libraries, https://sourceforge.net/projects/bibutils/), Richard Mathar [ctb] (src/addsout.c), Johannes Wilm [ctb] (src/biblatexin.c, src/bltypes.c), R Core Team [ctb] (base R's bibentry and bibstyle implementation)",
       "Maintainer": "Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>",
       "Repository": "RSPM"
+    },
+    "readepi": {
+      "Package": "readepi",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "Title": "Read Data from Relational Database Management Systems and Health Information Systems",
+      "Authors@R": "c( person(\"Karim\", \"Mané\", , \"karim.mane@lshtm.ac.uk\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0002-9892-2999\")), person(\"Emmanuel\", \"Kabuga\", , \"kabuga@aims.ac.za\", role = c(\"ctb\"), comment = c(ORCID = \"0009-0006-2291-709X\")), person(\"Bubacarr\", \"Bah\", , \"Bubacarr.Bah1@lshtm.ac.uk\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3318-6668\")), person(\"Bankolé\", \"Ahadzie\", , \"Bankole.Ahadzie@lshtm.ac.uk\", role = \"ctb\"), person(\"Nuredin\", \"Mohammed\", , \"Nuredin.Mohammed@lshtm.ac.uk\", role = \"ctb\"), person(\"Abdoelnaser\", \"Degoot\", , \"abdoelnaser-mahmood.degoot@lshtm.ac.uk\", role = \"ctb\"), person(\"Hugo\", \"Gruson\", , \"hugo@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Pratik\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"Andree\", \"Valle-Campos\", , \"andree.valle-campos@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0002-7779-481X\")), person(\"London School of Hygiene and Tropical Medicine, LSHTM\", role = \"cph\"), person(\"data.org\", role = \"fnd\") )",
+      "Description": "Data import from several Relational Database Management Systems (RDBMS) and Health Information Systems ('HIS'). The current version of the package covers RDBMS such as'MS SQL', 'MySQL', 'PostGRESQL', and 'SQLite', and two HIS ('DHIS2' and 'SORMAS').",
+      "License": "MIT + file LICENSE",
+      "URL": "https://epiverse-trace.github.io/readepi/, https://github.com/epiverse-trace/readepi/",
+      "BugReports": "https://github.com/epiverse-trace/readepi/issues",
+      "Imports": [
+        "checkmate",
+        "cli",
+        "DBI",
+        "dplyr",
+        "httr2",
+        "odbc",
+        "pool",
+        "purrr",
+        "RMySQL",
+        "RSQLite",
+        "tidyr"
+      ],
+      "Suggests": [
+        "DiagrammeR",
+        "httptest",
+        "kableExtra",
+        "knitr",
+        "rmarkdown",
+        "testthat (>= 3.0.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Remotes": "rOpenSci/fingertipsR",
+      "Config/Needs/website": "epiverse-trace/epiversetheme",
+      "Config/testthat/edition": "3",
+      "SystemRequirements": "odbc, libmariadbclient-dev",
+      "Encoding": "UTF-8",
+      "Roxygen": "list(markdown = TRUE)",
+      "RoxygenNote": "7.3.2",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "LazyData": "true",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "readepi",
+      "RemoteUsername": "epiverse-trace",
+      "RemotePkgRef": "epiverse-trace/readepi@readepi_no_his_spc_deps",
+      "RemoteRef": "readepi_no_his_spc_deps",
+      "RemoteSha": "40a694364c2908d2910ab43cc0c0fc86d52473ac",
+      "NeedsCompilation": "no",
+      "Author": "Karim Mané [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-9892-2999>), Emmanuel Kabuga [ctb] (ORCID: <https://orcid.org/0009-0006-2291-709X>), Bubacarr Bah [ctb] (ORCID: <https://orcid.org/0000-0003-3318-6668>), Bankolé Ahadzie [ctb], Nuredin Mohammed [ctb], Abdoelnaser Degoot [ctb], Hugo Gruson [rev] (ORCID: <https://orcid.org/0000-0002-4094-1476>), Pratik Gupte [rev] (ORCID: <https://orcid.org/0000-0001-5294-7819>), Andree Valle-Campos [rev] (ORCID: <https://orcid.org/0000-0002-7779-481X>), London School of Hygiene and Tropical Medicine, LSHTM [cph], data.org [fnd]",
+      "Maintainer": "Karim Mané <karim.mane@lshtm.ac.uk>"
     },
     "readr": {
       "Package": "readr",
