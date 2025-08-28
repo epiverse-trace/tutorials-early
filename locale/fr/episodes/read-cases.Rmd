@@ -148,7 +148,7 @@ La lecture de données directement à partir d'une base de données permet d'opt
 Les systèmes de gestion de bases de données relationnelles (SGBDR) présentent également l'avantage de permettre à plusieurs utilisateurs d'accéder, de stocker et d'analyser simultanément différentes parties de l'ensemble de données, sans devoir transférer des fichiers individuels, ce qui rendrait très difficile le suivi de la version la plus à jour.
 
 :::::::::::::
-
+<!--
 ### 1. Etablir la connection à une base de données
 
 Vous pouvez utiliser la fonction `readepi::login()` pour établir une connection avec la base de données comme illuster ci-dessous.
@@ -193,6 +193,115 @@ dat <- read_rdbms(
   query = list(table = "author", fields = NULL, filter = NULL)
 )
 ```
+-->
+
+Le morceau de code suivant montre en quatre étapes comment créer une base de données SQLite temporaire en mémoire, stocker le fichier `ebola_confirmed` en tant que table, puis la lire :
+
+### 1. Connectez-vous à une base de données
+
+Tout d'abord, nous établissons une connexion avec une base de données SQLite créée sur notre machine et stockée en mémoire locale avec `DBI::dbConnect()`.
+
+```{r, warning=FALSE, message=FALSE}
+library(DBI)
+library(RSQLite)
+
+db_connection <- DBI::dbConnect(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+```
+
+::::::::::::::::: callout
+
+Une connexion réelle à une base de données SQLite externe pourrait ressembler à ceci (bien que SQLite ne nécessite normalement pas de `host`, `user` ou `password`; cet exemple est plus typique pour MySQL/PostgreSQL) :
+
+```r
+db_connection <- DBI::dbConnect(
+  RSQLite::SQLite(), 
+  host = "database.epiversetrace.com",
+  user = "juanito",
+  password = epiversetrace::askForPassword("Database password")
+)
+```
+
+:::::::::::::::::
+
+### 2. Écrire un dataframe local en tant que table dans la base de données
+
+Ensuite, nous pouvons écrire `ebola_confirmed` dans une table nommée `cases` dans la base de données à l'aide de `DBI::dbWriteTable()` :
+
+```{r, warning=FALSE, message=FALSE}
+DBI::dbWriteTable(
+  conn = db_connection,
+  name = "cases",
+  value = ebola_confirmed
+)
+```
+
+Dans un contexte de base de données, vous pouvez avoir plusieurs tables. Chaque table peut représenter une `entity` (par exemple, les patients, les unités de soins, les emplois). Toutes les tables peuvent être reliées par un identifiant commun ou `primary key`.
+
+### 3. Lire les données d'une table dans une base de données
+
+<!-- Subsequently, we reads the data from the `cases` table using `DBI::dbReadTable()`. -->
+
+<!-- ```{r,warning=FALSE,message=FALSE} -->
+<!-- # Read data from the 'cases' table -->
+<!-- extracted_data <- DBI::dbReadTable( -->
+<!--   conn = db_connection, -->
+<!--   name = "cases" -->
+<!-- ) -->
+<!-- ``` -->
+
+Ensuite, nous lisons les données de la table `cases` en utilisant `dplyr::tbl()`.
+
+```{r}
+mytable_db <- dplyr::tbl(src = db_connection, "cases")
+```
+
+Si nous appliquons `{dplyr}` à cette base de données SQLite, ces verbes seront traduits en requêtes SQL.
+
+```{r}
+mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
+  dplyr::show_query()
+```
+
+### 4. Extraire des données de la base de données
+
+Utiliser `dplyr::collect()` pour forcer le calcul d'une requête de base de données et extraire la sortie sur votre ordinateur local.
+
+```{r}
+extracted_data <- mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
+  dplyr::collect()
+```
+
+L'objet `extracted_data` représente l'extrait, idéalement après avoir spécifié des requêtes qui réduisent sa taille.
+
+```{r, warning=FALSE, message=FALSE}
+extracted_data
+```
+
+:::::::::::::::::::::: callout
+
+### Exécutez des requêtes SQL dans R à l'aide de dbplyr
+
+Entraînez-vous à faire des requêtes SQL sur des bases de données relationnelles en utilisant plusieurs logiciels. Les verbes `{dplyr}` comme `dplyr::left_join()` peuvent être appliqués entre les tables avant d'extraire les données vers votre session locale avec `dplyr::collect()` !
+
+Vous pouvez également consulter le package `{dbplyr}` en R. Pour un tutoriel pas à pas sur SQL, nous recommandons le [tutoriel sur la gestion des données avec SQL pour écologistes](https://datacarpentry.org/sql-ecology-lesson/), qui montre l'utilisation de `{dplyr}` avec SQL.
+
+::::::::::::::::::::::
+
+### 5. Fermez la connexion à la base de données
+
+Enfin, nous pouvons fermer la connexion à la base de données avec `dbDisconnect()`.
+
+```{r, warning=FALSE, message=FALSE}
+DBI::dbDisconnect(conn = db_connection)
+```
+
 
 ## Lecture de données à partir de SIS
 
@@ -227,13 +336,18 @@ data <- readepi::read_dhis2(
   program = "E5IUQuHg3Mg"
 )
 
+```
+
+<!--
+```{r}
 # importer les donnees a partir de DHIS2 en utilisant les noms
-data <- read_dhis2(
+data <- readepi::read_dhis2(
   login = dhis2_login,
   org_unit = "Keneba",
   program = "Child Registration & Treatment "
 )
 ```
+-->
 
 Il est important de savoir que toutes les unités organisationnelles (structures sanitaires) ne sont pas enregistrées pour un programme spécifique. Pour connaître les unités organisationnelles qui exécutent un programme particulier, utilisez la fonction `get_program_org_units()` comme illustré dans l'exemple ci-dessous.
 
