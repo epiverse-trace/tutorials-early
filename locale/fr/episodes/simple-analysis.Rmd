@@ -44,7 +44,6 @@ La library `{i2extras}` fournit des méthodes pour modéliser la tendance dans l
 
 ```{r, warning=FALSE, message=FALSE}
 # charger les librairies offrant les functions la modélisation
-library(i2extras)
 library(incidence2)
 library(outbreaks)
 ```
@@ -64,17 +63,43 @@ df_incid <- incidence2::incidence(
   df,
   date_index = "date",
   groups = "sex"
-)
+) %>%
+  filter(sex != "unknown")
 
 # Adapter une courbe aux données d'incidence. Le modèle choisi est une distribution binomiale négative avec un seuil de significativité (alpha) de 0.05
-fitted_curve_nb <- i2extras::fit_curve(
-  df_incid,
-  model = "negbin",
-  alpha = 0.05
-)
+fitted_curve_nb <-
+  df_incid %>%
+  nest(.key = "data") %>%
+  mutate(model = lapply(
+    X = data,
+    FUN = function(x)
+      MASS::glm.nb(count ~ date_index, data = x)
+  ))
+
+intervals <-
+  fitted_curve_nb %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
 
 # tracer la courbe adaptée
-base::plot(fitted_curve_nb, angle = 45) +
+plot(df_incid, angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -87,13 +112,37 @@ Répétez l'analyse ci-dessus en utilisant la distribution de Poisson.
 :::::::::::::::::::::::: solution
 
 ```{r, warning=FALSE, message=FALSE}
-fitted_curve_poisson <- i2extras::fit_curve(
-  x = df_incid,
-  model = "poisson",
-  alpha = 0.05
-)
+fitted_curve_poisson <-
+  df_incid %>%
+  nest(.key = "data") %>%
+  mutate(model = lapply(data, function(x)
+    glm(
+      count ~ date_index, data = x, family = poisson
+    )))
 
-base::plot(fitted_curve_poisson, angle = 45) +
+intervals <-
+  fitted_curve_poisson %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
+
+plot(df_incid, angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -107,10 +156,20 @@ Le taux de croissance ou de décroissance exponentielle, noté $r$ sert d'indica
 Vous trouverez ci-dessous un extrait de code démontrant comment obtenir le taux de croissance/décroissance à partir de la courbe générée en utilisant la distribution binomiale négative à l'aide de la fonction `growth_rate()`.
 
 ```{r, message=FALSE, warning=FALSE}
-rates_nb <- i2extras::growth_rate(fitted_curve_nb)
-rates_nb <- base::as.data.frame(rates_nb) |>
-  subset(select = c(sex, r, r_lower, r_upper))
-base::print(rates_nb)
+growth_rates <-
+  fitted_curve_nb %>%
+  mutate(
+    growth = bind_rows(lapply(
+      model,
+      function(m) {
+        ci <- confint(m, 2L, level = 0.95)
+        tibble(lower = ci[1L], estimate = coef(m)[2L], upper = ci[2L])
+      }
+    ))
+  ) %>%
+  unpack(growth)
+
+growth_rates
 ```
 
 ::::::::::::::::::::::::::::::::::::: défi
@@ -126,7 +185,7 @@ Extraire les taux de croissance à partir d'une **distribution de Poisson** ajus
 La période du pic de l'épidémie **date du pic** correspond à la période à laquelle le plus grand nombre de cas est observé dans les données agrégées. Elle peut être estimée à l'aide de la fonction `i2extras::estimate_peak()` comme le montre le morceau de code ci-dessous, qui identifie la date du pic à partir d'un object de la classe `incidenc2`: `df_incid`.
 
 ```{r, message=FALSE, warning=FALSE}
-peaks_nb <- i2extras::estimate_peak(df_incid, progress = FALSE) |>
+peaks_nb <- incidence2::estimate_peak(df_incid, progress = FALSE) %>%
   subset(select = -c(count_variable, bootstrap_peaks))
 
 base::print(peaks_nb)
@@ -139,16 +198,12 @@ Une moyenne mobile ou glissante correspond au nombre moyen de cas sur une pério
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
 
-moving_Avg_week <- i2extras::add_rolling_average(df_incid, n = 7L)
-
-base::plot(moving_Avg_week, border_colour = "white", angle = 45) +
-  ggplot2::geom_line(
-    ggplot2::aes(
-      x = date_index,
-      y = rolling_average,
-      color = "red"
-    )
-  ) +
+df_incid %>%
+  mutate(
+    rolling_average = data.table::frollmean(count, n = 7L, align = "right")
+  ) %>%
+  plot(border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
@@ -161,20 +216,12 @@ Calculez et visualisez la moyenne mobile mensuelle des cas sur l'objet `df_incid
 :::::::::::::::::::::::: solution
 
 ```{r, warning=FALSE, message=FALSE}
-moving_Avg_mont <- i2extras::add_rolling_average(df_incid, n = 30L)
-
-base::plot(
-  moving_Avg_mont,
-  border_colour = "white",
-  angle = 45
-) +
-  ggplot2::geom_line(
-    ggplot2::aes(
-      x = date_index,
-      y = rolling_average,
-      color = "red"
-    )
-  ) +
+df_incid %>%
+  mutate(
+    rolling_average = data.table::frollmean(count, n = 30L, align = "right")
+  ) %>%
+  plot(border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
   ggplot2::labs(x = "Date", y = "Cases")
 ```
 
