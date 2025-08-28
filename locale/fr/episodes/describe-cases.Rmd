@@ -30,12 +30,6 @@ L'un des aspects clés de l'analyse des données épidémiologiques est la notio
 Commençons par charger la librairie `{simulist}` pour simuler des données épidémiologiques à analyser. Nous utiliserons ensuite la librairie `{incidence2}` permettant d'agréger un tableau des données individuelles en fonction de caractéristiques spécifiques et de visualiser les courbes épidémiques (épicourbes) qui en résultent. Le tableau de données agrégées obtenu représente le nombre de nouveaux événements (c'est-à-dire l'incidence des cas au fil du temps). Pour le formatage des figures, nous utiliserons la librairie `{tracetheme}`. Nous utiliserons l'opérateur pipe (`%>%`) pour connecter certaines de leurs fonctions, y compris celles des packages `{dplyr}` et `{ggplot2}`, ferons donc faire appel à la librairie {tidyverse}.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-# installer les librairies si elles ne le sont pas déjà
-if (!require("incidence2")) pak::pak("incidence2")
-if (!require("simulist")) pak::pak("simulist")
-if (!require("tracetheme")) pak::pak("tracetheme")
-if (!require("tidyverse")) pak::pak("tidyverse")
-
 # Charger les librairies
 library(incidence2) # Pour aggréger et visualiser les données
 library(simulist) # Pour simuler les données
