@@ -1,175 +1,210 @@
 ---
-title: 'Read case data'
+title: Lecture des données épidémiologiques
 teaching: 20
 exercises: 10
-editor_options: 
+editor_options:
   chunk_output_type: inline
 ---
 
-:::::::::::::::::::::::::::::::::::::: questions 
+:::::::::::::::::::::::::::::::::::::: questions
 
-- Where do you usually store your outbreak data?
-- How many different data formats can you use for analysis? 
-- Can you import data from databases and health APIs? 
+- Où stockez-vous habituellement vos données épidémiologiques ?
+- Quels sont les formats des données que vous utilisez pour vos analyses ?
+- Pouvez-vous importer des données à partir de bases de données et de system d'information de santé (SIS) à travers leur API ?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to import outbreak data from different sources into `R` 
-environment.
+- Expliquez comment importer des données épidémiologiques dans `R` à partir de différentes sources.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: prereq
 
-## Prerequisites
+## Conditions préalables à l'utilisation du logiciel
 
-This episode requires you to be familiar with:
-
-**Data science** : Basic tasks with R.
+Cet épisode nécessite que vous soyez familier avec **Science des données**: Tâches de base avec R.
 :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-The initial step in outbreak analysis typically involves importing the target dataset into the `R` environment from either a local source (like a file on your computer) or external source (like a database). Outbreak data can be stored in diverse formats, relational database management systems (RDBMS), or health information systems (HIS), such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/), which provide application program interfaces (APIs) to the database systems so verified users can easily add and access data entries. The latter option is particularly well-suited for collecting and storing large-scal institutional health data. This episode will elucidate the process of reading cases from these sources.
+L'étape initiale de l'analyse de données épidémiologiques consiste généralement à importer le jeu de données d'intérêt dans le logiciel `R` à partir d'une source locale (comme un fichier sur votre ordinateur) ou d'une source externe (comme une base de données). Les données relatives aux épidémies peuvent être stockées dans des fichiers sous multiples formats, dans des systèmes de gestion de bases de données relationnelles (SGBDR) ou dans des systèmes d'information sanitaires (SIS), tels que [SORMAS](https://sormas.org/) et [DHIS2](https://dhis2.org/) qui fournissent une interface de programme d'application (API) à la base de données du système afin que les utilisateurs vérifiés puissent facilement y ajouter et en extraire des données. Cette dernière option est particulièrement adaptée à la collecte et au stockage de large données de santé par les institutions. Cet épisode élucidera le processus de lecture de données à partir de ces sources.
 
-Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `%>%` to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both the pipe and `{dplyr}`:
+Commençons par charger la librairie `{rio}` pour importer les données stockées dans des fichiers et la librairie `{here}` pour trouver facilement un chemin d'accès à ces fichiers dans votre projet RStudio. Nous utiliserons l'opérateur pipe (`%>%`) de la librairie `{magrittr}` pour relier facilement certaines de leurs fonctions, y compris les fonctions de la librairie de formatage de données `{dplyr}`. Nous chargerons donc la librairie `{tidyverse}`, qui comprend à la fois les librairies `{magrittr}` et `{dplyr}`.
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
-# Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
-library(rio) # for importing data
-library(here) # for easy file referencing
+```{r, eval=TRUE, message=FALSE, warning=FALSE}
+# charger les librairies
+library(tidyverse)
+library(rio)
+library(here)
+library(readepi)
 ```
 
 ::::::::::::::::::: checklist
 
-### The double-colon
+### L'opérateur double deux-points (`::`)
 
-The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the current environment. 
+L'opérateur `::` de R permet d'accéder aux fonctions ou aux objets d'un package spécifique sans attacher l'intégralité du package (sans faire appel à la function`libray()`). Il offre plusieurs avantages, notamment :
 
-For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package, without having to use `library(dplyr)` at the start of a script.
+* Indiquer explicitement le package d'origine d'une fonction, réduisant ainsi les ambiguïtés et les conflits potentiels lorsque plusieurs packages possèdent des fonctions portant le même nom.
+* Permettre d'appeler une fonction depuis un package sans charger l'intégralité du package avec `library()`.
 
-This help us remember package functions and avoid namespace conflicts (i.e. when two different packages include functions with the same name, so R does not know which to use).
+Par exemple, la commande `dplyr::filter(data, condition)` signifie que nous appelons la fonction `filter()` depuis la librairie `{dplyr}`.
 
 :::::::::::::::::::
 
-
 :::::::::: prereq
 
-### Setup a project and folder
+### Créez un projet et un dossier
 
-- Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
-- Inside the RStudio project, create a `data/` folder.
-- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) CSV files.
-
+- Créez un projet RStudio. Si nécessaire, suivez la procédure dans [guide pratique sur "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) pour en créer un.
+- Dans le projet RStudio, créez un dossier `data/` dossier.
+- Dans le dossier `data/` enregistrez les fichiers au format CSV [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) et [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip).
 ::::::::::
 
-## Reading from files 
+## Lecture de fichiers
 
-Several packages are available for importing outbreak data stored in individual files into `R`. These include [rio](https://gesistsa.github.io/rio/), [readr](https://readr.tidyverse.org/) from the `tidyverse`, [io](https://bitbucket.org/djhshih/io/src/master/), [ImportExport](https://cran.r-project.org/web/packages/ImportExport/index.html), and [data.table](https://rdatatable.gitlab.io/data.table/). Together, these packages offer methods to read single or multiple files in a wide range of formats.
+Ils existent plusieurs librairies pour importer des données épidémiologiques dans `R` à partir de fichiers individuels. Il s'agit notamment de [{rio}](https://gesistsa.github.io/rio/), [{readr}](https://readr.tidyverse.org/) de la `{tidyverse}`, [{io}](https://bitbucket.org/djhshih/io/src/master/), [{ImportExport}](https://cran.r-project.org/web/packages/ImportExport/index.html) et [{data.table}](https://rdatatable.gitlab.io/data.table/), et des fonctions similaires de la librairie de base de R. Ensemble, ces librairies offrent des méthodes pour lire un ou plusieurs fichiers de différents formats.
 
-The below example shows how to import a `csv` file into `R` environment using `{rio}` package. We use the `{here}` package to tell R to look for the file in the `data/` folder of your project, and `as_tibble()` to convert into a tidier format for subsequent analysis in R.
+L'exemple ci-dessous montre comment importer un fichier `csv` dans `R` à l'aide de la librairie `{rio}`. Nous avons utilisé la librairie `{here}` pour indiquer à R de rechercher le fichier dans le dossier `data/` de votre projet, et la fonction `dplyr::as_tibble()` pour le convertir dans un format plus ordonné en vue d'une analyse ultérieure dans R.
 
-```{r,eval=FALSE,echo=TRUE}
-# read data
-# e.g., the path to our file is data/raw-data/ebola_cases_2.csv then:
+```{r eval=FALSE, echo=TRUE}
+# lire les données
+# exemple: si le chemin d'accès au fichier est "data/raw-data/ebola_cases_2.csv", alors:
 ebola_confirmed <- rio::import(
   here::here("data", "ebola_cases_2.csv")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
+  dplyr::as_tibble()
 
-# preview data
+# obtenir un aperçu des données
 ebola_confirmed
 ```
 
-
-```{r,eval=TRUE, echo=FALSE, message=FALSE}
-# internal for DBI::dbWriteTable()
-# read data
+```{r eval=TRUE, echo=FALSE, message=FALSE}
+# lire les données
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
 ) %>%
-  dplyr::as_tibble() # for a simple data frame output
+  dplyr::as_tibble()
 
-# preview data
+# obtenir un aperçu des données
 ebola_confirmed
 ```
 
-Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
+Vous pouvez aussi importer des fichiers d'autres formats tels que `tsv`, `xlsx`, etc en utilisant la même fonction.
 
 :::::::::::::::::::: checklist
 
-### Why should we use the {here} package?
+### Pourquoi devrions-nous utiliser la librairie {here}
 
-The `{here}` package is designed to simplify file referencing in R projects by providing a reliable way to construct file paths relative to the project root. The main reason to use it is **Cross-Environment Compatibility**.
+La librairie `{here}` est conçue pour simplifier le référencement des fichiers dans un projet R en fournissant un moyen fiable de construire les chemins d'accès aux fichiers par rapport à la racine du projet. La principale raison de l'utiliser est de s'assurer la **Compatibilité entre environnements**.
 
-It works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. 
+Elle fonctionne à travers différents systèmes d'exploitation (Windows, Mac, Linux) sans qu'il soit nécessaire d'ajuster les chemins d'accès aux fichiers.
 
-- On Windows, paths are written using backslashes ( `\` ) as the separator between folder names: `"data\raw-data\file.csv"` 
-- On Unix based operating system such as macOS or Linux the forward slash ( `/` ) is used as the path separator: `"data/raw-data/file.csv"`
+- Sous Windows, les chemins d'accès sont écrits en utilisant des barres obliques inverses ( `\` ) comme séparateur entre les noms de dossiers : `"data\raw-data\file.csv"`
+- Sur les systèmes d'exploitation Unix tels que macOS ou Linux, on utilise la barre oblique ( `/` ) pour séparer les noms de dossiers : `"data/raw-data/file.csv"`
 
-The `{here}` package is ideal for adding one more layer of reproducibility to your work. If you are interested in reproducibility, we invite you to [read this tutorial to increase the openess, sustainability, and reproducibility of your epidemic analysis with R](https://epiverse-trace.github.io/research-compendium/)
+La librairie `{here}` permet de renforcer la reproductibilité de votre travail à travers différents systèmes d'exploitation. Si vous êtes intéressé par la reproductibilité, nous vous invitons à [lire ce tutoriel pour accroître l'accès, la durabilité et la reproductibilité de vos analyses épidémiques avec R](https://epiverse-trace.github.io/research-compendium/).
 
 ::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::: challenge
 
-###  Reading compressed data 
+### Lecture de données compressées
 
-Take 1 minute:
-Can you read data from a compressed file in `R`? Download this [zip file](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) containing data for Marburg outbreak and then import it to your working environment.
+Pouvez-vous importer les données d'un fichier compressé dans `R`?
+
+Téléchargez le [fichier compressé](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) contenant les données relatives à l'épidémie de Marburg et importez-le dans votre environnement de travail.
 
 ::::::::::::::::: hint
 
-You can check the [full list of supported file formats](https://gesistsa.github.io/rio/#supported-file-formats) 
-in the `{rio}` package on the package website. To expand {rio} to the full range of support for import and export formats run:
+Vous pouvez  consulter la [liste complète des formats de fichiers pris en charge](https://gesistsa.github.io/rio/#supported-file-formats) sur le site web de la librairie `{rio}`. Pour étendre {rio} à d'autres formats, vous pouvez installer les librairies correspondantes à l'aide de la fonction ci-dessous :
 
-
-```{r, eval=FALSE}
+```{r eval=FALSE}
 rio::install_formats()
 ```
-
-You can use this template to read the file: 
-
-`rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))`
 
 ::::::::::::::::::::::
 
 ::::::::::::::::: solution
 
-```{r,eval=FALSE}
+```{r eval=FALSE}
 rio::import(here::here("data", "Marburg.zip"))
 ```
+
 ::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::::::
 
+## Lecture de données à partir d'une bases de données
 
-## Reading from databases
-
-The [DBI](https://dbi.r-dbi.org/) package serves as a versatile interface for interacting with database management systems (DBMS) across different back-ends or servers. It offers a uniform method for accessing and retrieving data from various database systems.
+La librarie `{readepi}` contient des fonctionalités qui permettent d'importer des données directement des SGBDR ou de SIS (à travers leurs API). La fonction `readepi::read_rdbms()` permet d'importer des données à partir de serveurs tels que Microsoft SQL, MySQL, PostgreSQL, et SQLite. Elle repose essentiellement sur la librairie [{DBI}](https://dbi.r-dbi.org/) qui sert d'interface polyvalente pour interagir avec les systèmes de gestion de bases de données relationnelles (SGBDR).
 
 ::::::::::::: discussion
 
-### When to read directly from a database?
+### Avantages liées à l'importation des données à partir d'une base de données ?
 
-We can use database interface packages to optimize memory usage. If we process the database with "queries" (e.g., select, filter, summarise) before extraction, we can reduce the memory load in our RStudio session. Conversely, conducting all data manipulation outside the database management system by loading the full dataset into R can use up much more computer memory (i.e. RAM) than is feasible on a local machine, which can lead RStudio to slow down or even freeze.
+La lecture de données directement à partir d'une base de données permet d'optimiser la quantité de mémoire utilisée par la session R. Si nous envoyons une requête à la base de données avec des instructions de filtrage des données (par exemple, select, filter, summarise) avant d'extraire les données, nous pouvons réduire la charge de mémoire dans notre session RStudio. À l'inverse, en effectuant toutes les manipulations de données en dehors du système de gestion de base de données après lecture de toute la base de données dans R peut entrainer l'utilisation de beaucoup plus de mémoire (RAM) que possible sur un ordinateur, pouvant entraîner un ralentissement, voire un blocage de RStudio.
 
-External relational database management systems (RDBMS) also have the advantage that multiple users can access, store and analyse parts of the dataset simultaneously, without having to transfer individual files, which would make it very difficult to track which version is up-to-date.
+Les systèmes de gestion de bases de données relationnelles (SGBDR) présentent également l'avantage de permettre à plusieurs utilisateurs d'accéder, de stocker et d'analyser simultanément différentes parties de l'ensemble de données, sans devoir transférer des fichiers individuels, ce qui rendrait très difficile le suivi de la version la plus à jour.
 
 :::::::::::::
+<!--
+### 1. Etablir la connection à une base de données
 
-The following code chunk demonstrates in four steps how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
+Vous pouvez utiliser la fonction `readepi::login()` pour établir une connection avec la base de données comme illuster ci-dessous.
 
-### 1. Connect with a database
+```{r warning=FALSE, message=FALSE, eval=FALSE}
+# etablir la connection avec la base de donnees
+rdbms_login <- login(
+  from = "mysql-rfam-public.ebi.ac.uk",
+  type = "MySQL",
+  user_name = "rfamro",
+  password = "",
+  driver_name = "",
+  db_name = "Rfam",
+  port = 4497
+)
+```
 
-First, we establish a connection to an SQLite database created on our machine and stored in its local memory with `DBI::dbConnect()`. 
+### 2. Accéder á la liste des tables de la base de données
 
-```{r,warning=FALSE,message=FALSE}
+Vous pouvez accéder à la liste des noms de tables qui existent dans une base de données en utilisant la function `readepi::show_tables()`.
+
+```{r eval=FALSE}
+# obtenir la liste des tables dans la base de donnees
+tables <- show_tables(login = rdbms_login)
+tables
+```
+
+### 3. Lire les données d'une table dans une base de données
+
+La fonction `readepi::read_rdbms()` permet d'importer les données à travers une requête SQL ou une liste de paramètres.
+
+```{r eval=FALSE}
+# lire les donnees de la table 'author' en utilisant une requete SQL
+dat <- readepi::read_rdbms(
+  login = rdbms_login,
+  query = "select * from author"
+)
+
+# lire les donnees de la table 'author' en utilisant une liste de parametres
+dat <- read_rdbms(
+  login = rdbms_login,
+  query = list(table = "author", fields = NULL, filter = NULL)
+)
+```
+-->
+
+Le morceau de code suivant montre en quatre étapes comment créer une base de données SQLite temporaire en mémoire, stocker le fichier `ebola_confirmed` en tant que table, puis la lire :
+
+### 1. Connectez-vous à une base de données
+
+Tout d'abord, nous établissons une connexion avec une base de données SQLite créée sur notre machine et stockée en mémoire locale avec `DBI::dbConnect()`.
+
+```{r, warning=FALSE, message=FALSE}
 library(DBI)
 library(RSQLite)
 
-# Create a temporary SQLite database in memory
 db_connection <- DBI::dbConnect(
   drv = RSQLite::SQLite(),
   dbname = ":memory:"
@@ -178,10 +213,9 @@ db_connection <- DBI::dbConnect(
 
 ::::::::::::::::: callout
 
-A real-life connection to an external SQLite database would look like this:
+Une connexion réelle à une base de données SQLite externe pourrait ressembler à ceci (bien que SQLite ne nécessite normalement pas de `host`, `user` ou `password`; cet exemple est plus typique pour MySQL/PostgreSQL) :
 
 ```r
-# in real-life
 db_connection <- DBI::dbConnect(
   RSQLite::SQLite(), 
   host = "database.epiversetrace.com",
@@ -192,13 +226,11 @@ db_connection <- DBI::dbConnect(
 
 :::::::::::::::::
 
-### 2. Write a local data frame as a table in a database
+### 2. Écrire un dataframe local en tant que table dans la base de données
 
-Then, we can write the `ebola_confirmed` into a table named `cases` within the database using the `DBI::dbWriteTable()` function.
+Ensuite, nous pouvons écrire `ebola_confirmed` dans une table nommée `cases` dans la base de données à l'aide de `DBI::dbWriteTable()` :
 
-```{r,warning=FALSE,message=FALSE}
-# Store the 'ebola_confirmed' dataframe as a table named 'cases'
-# in the SQLite database
+```{r, warning=FALSE, message=FALSE}
 DBI::dbWriteTable(
   conn = db_connection,
   name = "cases",
@@ -206,9 +238,9 @@ DBI::dbWriteTable(
 )
 ```
 
-In a database framework, you can have more than one table. Each table can belong to a specific `entity` (e.g., patients, care units, jobs). All tables will be related by a common ID or `primary key`.
+Dans un contexte de base de données, vous pouvez avoir plusieurs tables. Chaque table peut représenter une `entity` (par exemple, les patients, les unités de soins, les emplois). Toutes les tables peuvent être reliées par un identifiant commun ou `primary key`.
 
-### 3. Read data from a table in a database
+### 3. Lire les données d'une table dans une base de données
 
 <!-- Subsequently, we reads the data from the `cases` table using `DBI::dbReadTable()`. -->
 
@@ -220,68 +252,143 @@ In a database framework, you can have more than one table. Each table can belong
 <!-- ) -->
 <!-- ``` -->
 
-Subsequently, we reads the data from the `cases` table using `dplyr::tbl()`.
+Ensuite, nous lisons les données de la table `cases` en utilisant `dplyr::tbl()`.
 
 ```{r}
-# Read one table from the database
 mytable_db <- dplyr::tbl(src = db_connection, "cases")
 ```
 
-If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be translated to SQL queries.
+Si nous appliquons `{dplyr}` à cette base de données SQLite, ces verbes seront traduits en requêtes SQL.
 
 ```{r}
-# Show the SQL queries translated
 mytable_db %>%
   dplyr::filter(confirm > 50) %>%
   dplyr::arrange(desc(confirm)) %>%
   dplyr::show_query()
 ```
 
-### 4. Extract data from the database
+### 4. Extraire des données de la base de données
 
-Use `dplyr::collect()` to force computation of a database query and extract the output to your local computer.
+Utiliser `dplyr::collect()` pour forcer le calcul d'une requête de base de données et extraire la sortie sur votre ordinateur local.
 
 ```{r}
-# Pull all data down to a local tibble
 extracted_data <- mytable_db %>%
   dplyr::filter(confirm > 50) %>%
   dplyr::arrange(desc(confirm)) %>%
   dplyr::collect()
 ```
 
-The `extracted_data` object represents the extracted, ideally after specifying queries that reduces its size.
+L'objet `extracted_data` représente l'extrait, idéalement après avoir spécifié des requêtes qui réduisent sa taille.
 
-```{r,warning=FALSE,message=FALSE}
-# View the extracted_data
+```{r, warning=FALSE, message=FALSE}
 extracted_data
 ```
 
 :::::::::::::::::::::: callout
 
-### Run SQL queries in R using dbplyr
+### Exécutez des requêtes SQL dans R à l'aide de dbplyr
 
-Practice how to make relational database SQL queries using multiple `{dplyr}` verbs like `dplyr::left_join()` among tables before pulling down data to your local session with `dplyr::collect()`! 
+Entraînez-vous à faire des requêtes SQL sur des bases de données relationnelles en utilisant plusieurs logiciels. Les verbes `{dplyr}` comme `dplyr::left_join()` peuvent être appliqués entre les tables avant d'extraire les données vers votre session locale avec `dplyr::collect()` !
 
-You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/). You will find close to `{dplyr}`!
+Vous pouvez également consulter le package `{dbplyr}` en R. Pour un tutoriel pas à pas sur SQL, nous recommandons le [tutoriel sur la gestion des données avec SQL pour écologistes](https://datacarpentry.org/sql-ecology-lesson/), qui montre l'utilisation de `{dplyr}` avec SQL.
 
 ::::::::::::::::::::::
 
+### 5. Fermez la connexion à la base de données
 
-### 5. Close the database connection
+Enfin, nous pouvons fermer la connexion à la base de données avec `dbDisconnect()`.
 
-Finally, we can close the database connection with `dbDisconnect()`.
-
-```{r,warning=FALSE,message=FALSE}
-# Close the database connection
+```{r, warning=FALSE, message=FALSE}
 DBI::dbDisconnect(conn = db_connection)
 ```
 
-## Reading from HIS APIs
 
-Health related data are also increasingly stored in specialized HIS APIs like **Fingertips**, **GoData**, **REDCap**, and **DHIS2**. In such case one can resort to [readepi](https://epiverse-trace.github.io/readepi/) package, which enables reading  data from HIS-APIs.  
--[TBC]
+## Lecture de données à partir de SIS
 
-::::::::::::::::::::::::::::::::::::: keypoints 
-- Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.
-- Use `{readepi}` to read data form HIS APIs and RDBMS.
+Les données relatives à la santé sont de plus en plus souvent stockées dans des SIS spécialisées telles que **Fingertips**, **GoData**, **REDCap**, **DHIS2**, **SORMAS**, etc. La version actuelle de la librairie `{readepi}` permet d'importer des données à partir de **DHIS2** et **SORMAS**.
+
+### Lecture des données à partir de DHIS2
+
+Le système d'information sanitaire de district [DHIS2](https://dhis2.org/about/) est un logiciel open source qui a révolutionné la gestion des informations sanitaires mondiales. La fonction `readepi::read_dhis2()` permet d'importer des données depuis le system [Tracker](https://dhis2.org/tracker-in-action/) de DHIS2 via leurs API.
+
+Pour cela, il faudra établir la connection au système en utilisant la fonction `readepi::login()`, puis fornir le nom ou l'identifiant du programme et de l'unité organisationnelle (structure sanitaire, localité, pays, etc) cible.
+
+Pour un système donné, vous pouvez accéder aux identifiants et noms des programmes et structure sanitaires en utilisant les fonctions `get_programs()` et `get_organisation_units()` respectivement.
+
+```{r eval=FALSE}
+# etablir la connection au systeme
+dhis2_login <- readepi::login(
+  from = "https://smc.moh.gm/dhis",
+  user_name = "test",
+  password = "Gambia@123"
+)
+
+# obtenir les noms et identifiants des programmes
+programs <- readepi::get_programs(login = dhis2_login)
+
+# obtenir les noms et identifiants des unites organisationnelles
+org_units <- get_organisation_units(login = dhis2_login)
+
+# importer les donnees a partir de DHIS2 en utilisant les identifiants
+data <- readepi::read_dhis2(
+  login = dhis2_login,
+  org_unit = "GcLhRNAFppR",
+  program = "E5IUQuHg3Mg"
+)
+
+```
+
+<!--
+```{r}
+# importer les donnees a partir de DHIS2 en utilisant les noms
+data <- readepi::read_dhis2(
+  login = dhis2_login,
+  org_unit = "Keneba",
+  program = "Child Registration & Treatment "
+)
+```
+-->
+
+Il est important de savoir que toutes les unités organisationnelles (structures sanitaires) ne sont pas enregistrées pour un programme spécifique. Pour connaître les unités organisationnelles qui exécutent un programme particulier, utilisez la fonction `get_program_org_units()` comme illustré dans l'exemple ci-dessous.
+
+```{r eval=TRUE}
+# obtenir les unités organisationnelles qui exécutent un programme "E5IUQuHg3Mg"
+target_org_units <- readepi::get_program_org_units(
+  login = dhis2_login,
+  program = "E5IUQuHg3Mg",
+  org_units = org_units
+)
+```
+
+
+### Lecture des données à partir de SORMAS
+
+Le Système de surveillance, de gestion et d'analyse des réponses aux épidémies [SORMAS](https://sormas.org/) est un système de santé digital open source qui optimise les processus de surveillance de la propagation des maladies infectieuses et de réponse aux épidémies. La fonction `readepi::read_sormas()` permet d'importer des données depuis SORMAS via son API.
+
+Dans la version actuelle de la librairie `{readepi}`, la fonction `read_sormas()` renvoie des données pour les colonnes suivantes: **case_id, person_id, sex, date_of_birth, case_origin, country, city, lat, long, case_status, date_onset, date_admission, date_last_contact, date_first_contact, outcome, date_outcome, Ct_values**.
+
+Un des arguments fondamentals est le nom de la maladie pour laquelle l'utilisateur souhaite obtenir des données. Pour vous assurez de la vraie synthaxe à utiliser lors de l'appel à la fonction, vous pouvez obtenir la liste des noms de maladies à travers la fonction `sormas_get_diseases()`.
+
+```{r eval=TRUE}
+# obtenir la liste des noms de maladies
+disease_names <- readepi::sormas_get_diseases(
+  base_url = "https://demo.sormas.org/sormas-rest",
+  user_name = "SurvSup",
+  password = "Lk5R7JXeZSEc"
+)
+
+# obtenir les donnees de tous les cas de COVID-19
+covid_cases <- readepi::read_sormas(
+  base_url = "https://demo.sormas.org/sormas-rest",
+  user_name = "SurvSup",
+  password = "Lk5R7JXeZSEc",
+  disease = "coronavirus"
+)
+```
+
+::::::::::::::::::::::::::::::::::::: keypoints
+- Utilisez `{rio}`, `{io}`, `{readr}` et `{ImportExport}` pour importer les données à partir des fichiers.
+- Utilisez `{readepi}` pour importer les données à partir des SIS et SGBDR.
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+

@@ -1,108 +1,102 @@
 ---
-title: Setup
+title: Mise en place
 ---
 
 ## Motivation
 
-**Outbreaks** of infectious diseases can appear as a result of different pathogens, and in different contexts, but they typically lead to similar public health questions, from understanding patterns of transmission and severity to examining the effect of control measures ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). We can relate each of these public health questions to a series of outbreak data analysis tasks. The more efficiently and reliably we can perform these tasks, the faster and more accurately we can answer the underlying questions.
+**Éclosions** de maladies infectieuses peuvent apparaître à cause de différents agents pathogènes et dans différents contextes, mais elles conduisent généralement à des questions de santé publique similaires, allant de la compréhension des schémas de transmission et de gravité à l'examen de l'effet des mesures de contrôle ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371#d1e605)). Nous pouvons relier chacune de ces questions de santé publique à une série de tâches d'analyse des données relatives aux épidémies. Plus ces tâches sont efficaces et fiables, plus nous pouvons répondre rapidement et avec précision aux questions sous-jacentes.
 
-Epiverse-TRACE aims to provide a software ecosystem for [**outbreak analytics**](reference.md#outbreakanalytics) with integrated, generalisable and scalable community-driven software. We support the development of new R packages, help link together existing tools to make them more user-friendly, and contribute to a community of practice, spanning field epidemiologists, data scientists, lab researchers, health agency analysts, software engineers and more.
+Epiverse-TRACE vise à fournir un écosystème logiciel pour [**l'analyse des épidémies**](reference.md#outbreakanalytics) grâce à des logiciels intégrés, généralisables et évolutifs pilotés par la communauté. Nous soutenons le développement de nouveaux progiciels R, nous aidons à relier les outils existants pour les rendre plus conviviaux et nous contribuons à une communauté de pratique composée d'épidémiologistes de terrain, de scientifiques des données, de chercheurs de laboratoire, d'analystes d'agences de santé, d'ingénieurs en logiciel et bien d'autres encore.
 
-### Epiverse-TRACE tutorials
+### Tutoriels Epiverse-TRACE
 
-Our tutorials are built around an outbreak analysis pipeline split into three stages: **Early tasks**, **Middle tasks** and **Late tasks**. The outputs of tasks completed in earlier stages commonly feed into the tasks required for later ones.
+Nos tutoriels sont construits autour d'un pipeline d'analyse d'épidémies divisé en trois étapes : **Tâches préliminaires**, **Tâches intermédiaires** et **Tâches tardives**. Les résultats des tâches accomplies au cours des étapes précédentes alimentent généralement les tâches requises pour les étapes ultérieures.
 
+![Aperçu des thèmes abordés dans le cadre du tutorat](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
 
-![An overview of the tutorial topics](https://epiverse-trace.github.io/task_pipeline-minimal.svg)
+Chaque tâche a son site web de tutorat et chaque site web de tutorat consiste en un ensemble d'épisodes couvrant différents sujets.
 
-Each task has its tutorial website and each tutorial website consists of a set of episodes covering different topics.
+| [Tutoriels pour les premières tâches ➠](https://epiverse-trace.github.io/tutorials-early/)                                                                                                                                | [Didacticiels pour les tâches intermédiaires ➠](https://epiverse-trace.github.io/tutorials-middle)                                                                                                                                          | [Travaux dirigés tardifs ➠](https://epiverse-trace.github.io/tutorials-late/)                                                                   | 
+| ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Lire et nettoyer les données de l'affaire, et établir une liste de contrôle                                                     | Analyse et prévision en temps réel                                                                                                        | Modélisation de scénarios                                          | 
+| Lire, nettoyer et valider les données des cas, convertir les données de la liste des lignes en incidence pour la visualisation. | Accéder aux distributions des retards et estimer les paramètres de transmission, prévoir les cas, estimer la gravité et la superposition. | Simulez la propagation de la maladie et étudiez les interventions. | 
 
-| [Early task tutorials ➠](https://epiverse-trace.github.io/tutorials-early/) | [Middle task tutorials ➠](https://epiverse-trace.github.io/tutorials-middle) | [Late task tutorials ➠](https://epiverse-trace.github.io/tutorials-late/) |
-|---|---|---|
-| Read and clean case data, and make linelist | Real-time analysis and forecasting | Scenario modelling |
-| Read, clean and validate case data, convert linelist data to incidence for visualization. | Access delay distributions and estimate transmission metrics, forecast cases, estimate severity and superspreading. | Simulate disease spread and investigate interventions. |
+Chaque épisode contient :
 
-Each episode contains:
+- **Vue d'ensemble** Cet épisode décrit les questions auxquelles il sera répondu et les objectifs de l'épisode.
+- **Conditions préalables** La description des épisodes/paquets qui doivent idéalement être couverts avant l'épisode en cours.
+- **Exemple de code R** Le site web de la Commission européenne contient des exemples de code R afin que vous puissiez travailler sur les épisodes sur votre propre ordinateur.
+- **Défis** Les défis : des défis à relever pour tester votre compréhension.
+- **Explicatifs** Les Explicateurs sont des boîtes qui vous permettent de mieux comprendre les concepts mathématiques et de modélisation.
 
-+ **Overview**: describes what questions will be answered and the objectives of the episode.
-+ **Prerequisites**: describes what episodes/packages ideally need to be covered before the current episode.
-+ **Example R code**: example R code so you can work through the episodes on your own computer.
-+ **Challenges**: challenges that can be completed to test your understanding.
-+ **Explainers**: boxes to enhance your understanding of mathematical and modelling concepts.
+Consultez également le site [glossaire](./reference.md) pour connaître les termes qui ne vous sont pas familiers.
 
-Also check out the [glossary](./reference.md) for any terms you may be unfamiliar with.
+### Paquets Epiverse-TRACE R
 
-### Epiverse-TRACE R packages
+Notre stratégie consiste à incorporer progressivement des **R spécial** dans un pipeline d'analyse traditionnel. Ces progiciels devraient combler les lacunes dans les tâches spécifiques à l'épidémiologie en réponse aux épidémies.
 
-Our strategy is to gradually incorporate specialised **R packages** into a traditional analysis pipeline. These packages should fill the gaps in these epidemiology-specific tasks in response to outbreaks.
-
-![In **R**, the fundamental unit of shareable code is the **package**. A package bundles together code, data, documentation, and tests and is easy to share with others ([Wickham and Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png)
+![Dans le cadre de l'analyse de l'épidémie de grippe aviaire, le **R** l'unité fondamentale du code partageable est le **paquet**. Un paquetage regroupe du code, des données, de la documentation et des tests et est facile à partager avec d'autres ([Wickham et Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png)
 
 :::::::::::::::::::::::::::: prereq
 
-This content assumes intermediate R knowledge. This tutorials are for you if:
+Ce contenu suppose une connaissance intermédiaire de R. Ces tutoriels sont pour vous si :
 
-- You can read data into R, transform and reshape data, and make a wide variety of graphs
-- You are familiar with functions from `{dplyr}`, `{tidyr}`, and `{ggplot2}`
-- You can use the magrittr pipe `%>%` and/or native pipe `|>`.
+- Vous savez lire des données dans R, les transformer et les remodeler, et créer une grande variété de graphiques.
+- Vous connaissez les fonctions de `{dplyr}`, `{tidyr}` et `{ggplot2}`
+- Vous pouvez utiliser le tube magrittr `%>%` et/ou le tuyau natif `|>`.
 
-
-We expect learners to have some exposure to basic Statistical, Mathematical and Epidemic theory concepts, but NOT intermediate or expert familiarity with modeling.
+Nous attendons des apprenants qu'ils soient familiarisés avec les concepts de base de la statistique, des mathématiques et de la théorie des épidémies, mais PAS avec une connaissance intermédiaire ou experte de la modélisation.
 
 ::::::::::::::::::::::::::::
 
-## Software Setup
+## Configuration du logiciel
 
-Follow these two steps:
+Suivez ces deux étapes :
 
-### 1. Install or upgrade R and RStudio
+### 1\. Installez ou mettez à jour R et RStudio
 
-R and RStudio are two separate pieces of software:
+R et RStudio sont deux logiciels distincts :
 
-* **R** is a programming language and software used to run code written in R.
-* **RStudio** is an integrated development environment (IDE) that makes using R easier. We recommend to use RStudio to interact with R.
+- **R** est un langage de programmation et un logiciel utilisé pour exécuter du code écrit en R.
+- **RStudio** est un environnement de développement intégré (IDE) qui facilite l'utilisation de R. Nous vous recommandons d'utiliser RStudio pour interagir avec R.
 
-To install R and RStudio, follow these instructions <https://posit.co/download/rstudio-desktop/>.
-
-::::::::::::::::::::::::::::: callout
-
-### Already installed?
-
-Hold on: This is a great time to make sure your R installation is current.
-
-This tutorial requires **R version 4.0.0 or later**.
-
-:::::::::::::::::::::::::::::
-
-To check if your R version is up to date:
-
-- In RStudio your R version will be printed in [the console window](https://docs.posit.co/ide/user/ide/guide/code/console.html). Or run `sessionInfo()`.
-
-- **To update R**, download and install the latest version from the [R project website](https://cran.rstudio.com/) for your operating system.
-
-  - After installing a new version, you will have to reinstall all your packages with the new version.
-
-  - For Windows, the `{installr}` package can upgrade your R version and migrate your package library.
-
-- **To update RStudio**, open RStudio and click on
-`Help > Check for Updates`. If a new version is available follow the
-instructions on the screen.
+Pour installer R et RStudio, suivez les instructions suivantes <https://posit.co/download/rstudio-desktop/>.
 
 ::::::::::::::::::::::::::::: callout
 
-### Check for Updates regularly
+### Déjà installé ?
 
-While this may sound scary, it is **far more common** to run into issues due to using out-of-date versions of R or R packages. Keeping up with the latest versions of R, RStudio, and any packages you regularly use is a good practice.
+Ne perdez pas de temps : C'est le moment idéal pour vous assurer que votre installation R est à jour.
+
+Ce tutoriel nécessite **R version 4.0.0 ou ultérieure**.
 
 :::::::::::::::::::::::::::::
 
-### 2. Install the required R packages
+Pour vérifier si votre version de R est à jour :
 
-<!--
-During the tutorial, we will need a number of R packages. Packages contain useful R code written by other people. We will use packages from the [Epiverse-TRACE](https://epiverse-trace.github.io/).
--->
+- Dans RStudio, votre version de R sera imprimée en [la fenêtre de la console](https://docs.posit.co/ide/user/ide/guide/code/console.html). Ou exécutez `sessionInfo()`.
 
-Open RStudio and **copy and paste** the following code chunk into the [console window](https://docs.posit.co/ide/user/ide/guide/code/console.html), then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) to execute the command:
+- **Pour mettre à jour R** téléchargez et installez la dernière version à partir du site [site web du projet R](https://cran.rstudio.com/) pour votre système d'exploitation.
+  
+  - Après l'installation d'une nouvelle version, vous devrez réinstaller tous vos paquets avec la nouvelle version.
+  
+  - Pour Windows, l'option `{installr}` peut mettre à jour votre version de R et migrer votre bibliothèque de paquets.
+
+- **Pour mettre à jour RStudio** ouvrez RStudio et cliquez sur
+  `Help > Check for Updates`. Si une nouvelle version est disponible, suivez les instructions suivantes
+  instructions à l'écran.
+
+::::::::::::::::::::::::::::: callout
+
+### Vérifiez régulièrement les mises à jour
+
+Bien que cela puisse paraître effrayant, c'est **bien plus courant** de rencontrer des problèmes dus à l'utilisation de versions obsolètes de R ou de paquets R. Il est donc recommandé de se tenir au courant des dernières versions de R, de RStudio et de tous les paquets que vous utilisez régulièrement.
+
+:::::::::::::::::::::::::::::
+
+### 2\. Installez les paquets R requis
+
+Ouvrez RStudio et **copiez et collez** le morceau de code suivant dans la fenêtre [fenêtre de la console](https://docs.posit.co/ide/user/ide/guide/code/console.html) puis appuyez sur la touche <kbd>Entrer</kbd> (Windows et Linux) ou <kbd>Retour</kbd> (MacOS) pour exécuter la commande :
 
 ```r
 # for episodes on read, clean, validate and visualize linelist
@@ -110,8 +104,8 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
-  "cleanepi",
-  "reactable",
+  "epiverse-trace/readepi@readepi_no_his_spc_deps",
+  "cleanepi@1.1.0",
   "rio",
   "here",
   "DBI",
@@ -127,15 +121,18 @@ new_packages <- c(
 pak::pkg_install(new_packages)
 ```
 
-These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
+Ces étapes d'installation peuvent vous demander `? Do you want to continue (Y/n)` écrire `Y` et d'appuyer sur <kbd>Entrez</kbd>.
 
 ::::::::::::::::::::::::::::: spoiler
 
-### do you get an error with epiverse-trace packages?
+### obtenez-vous une erreur avec les paquets epiverse-trace ?
 
-If you get an error message when installing `{tracetheme}`, try this alternative code:
+Si vous obtenez un message d'erreur lors de l'installation de {simulist} essayez ce code alternatif :
 
 ```r
+# for simulist
+install.packages("simulist", repos = c("https://epiverse-trace.r-universe.dev"))
+
 # for tracetheme
 install.packages("tracetheme", repos = c("https://epiverse-trace.r-universe.dev"))
 ```
@@ -144,9 +141,9 @@ install.packages("tracetheme", repos = c("https://epiverse-trace.r-universe.dev"
 
 ::::::::::::::::::::::::::::: spoiler
 
-### do you get an error with other package?
+### obtenez-vous un message d'erreur avec un autre paquet ?
 
-Try using the classical code function to install one package, for example:
+Essayez d'utiliser la fonction de code classique pour installer un paquet, par exemple :
 
 ```r
 install.packages("rio")
@@ -156,11 +153,11 @@ install.packages("rio")
 
 ::::::::::::::::::::::::::: spoiler
 
-### What to do if an error persists?
+### Que faire si une erreur persiste ?
 
-If the error message keyword include an string like `Personal access token (PAT)`, you may need to [set up your GitHub token](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token).
+Si le mot-clé du message d'erreur contient une chaîne de caractères comme `Personal access token (PAT)` vous devrez peut-être [configurer votre jeton GitHub](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token).
 
-First, install these R packages:
+Installez d'abord ces paquets R :
 
 ```r
 if(!require("pak")) install.packages("pak")
@@ -172,39 +169,39 @@ new <- c("gh",
 pak::pak(new)
 ```
 
-Then, follow these three steps to [set up your GitHub token (read this step-by-step guide)](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token):
+Ensuite, suivez ces trois étapes pour [configurer votre jeton GitHub (lisez ce guide étape par étape)](https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token):
 
 ```r
 # Generate a token
 usethis::create_github_token()
 
-# Configure your token
+# Configure your token 
 gitcreds::gitcreds_set()
 
 # Get a situational report
 usethis::git_sitrep()
 ```
 
-Try again installing `{tracetheme}`:
+Réessayez d'installer {epiparameter}:
 
 ```r
 if(!require("remotes")) install.packages("remotes")
-remotes::install_github("epiverse-trace/tracetheme")
+remotes::install_github("epiverse-trace/epiparameter")
 ```
 
-If the error persist, [contact us](#your-questions)!
+Si l'erreur persiste, [contactez-nous](#your-questions)!
 
 :::::::::::::::::::::::::::
 
-You should update **all of the packages** required for the tutorial, even if you installed them relatively recently. New versions bring improvements and important bug fixes.
+Vous devez mettre à jour **tous les paquets** nécessaires au tutoriel, même si vous les avez installés relativement récemment. Les nouvelles versions apportent des améliorations et d'importantes corrections de bogues.
 
-When the installation has finished, you can try to load the packages by pasting the following code into the console:
+Lorsque l'installation est terminée, vous pouvez essayer de charger les paquets en collant le code suivant dans la console :
 
 ```r
 # for episodes on read, clean, validate and visualize linelist
 
+library(readepi)
 library(cleanepi)
-library(reactable)
 library(rio)
 library(here)
 library(DBI)
@@ -217,20 +214,20 @@ library(tracetheme)
 library(tidyverse)
 ```
 
-If you do NOT see an error like `there is no package called ‘...’` you are good to go! If you do, [contact us](#your-questions)!
+Si vous ne voyez PAS d'erreur comme `there is no package called '...'` vous êtes prêt à partir ! Si c'est le cas, [contactez-nous](#your-questions)!
 
-### 3. Setup an RStudio project and folder
+### 3\. Créez un projet et un dossier RStudio
 
-We suggest to use RStudio Projects.
+Nous vous suggérons d'utiliser les projets RStudio.
 
 ::::::::::::::::::::::::::::::::: checklist
 
-#### Follow these steps
+#### Suivez les étapes suivantes
 
-- **Create an RStudio Project**. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create a New Project in a New Directory.
-- **Create** the `data/` folder inside the RStudio project or corresponding directory. Use the `data/` folder to **save** the data sets to download.
+- **Créer un projet RStudio**. Si nécessaire, suivez cette procédure [guide pratique sur "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) pour créer un nouveau projet dans un nouveau répertoire.
+- **Créez** l'entreprise `data/` dans le projet RStudio ou dans le répertoire correspondant. Utilisez l'option `data/` pour **enregistrer** les ensembles de données à télécharger.
 
-The directory of an RStudio Project named, for example `training`, should look like this:
+Le répertoire d'un projet RStudio nommé par exemple `training` devrait ressembler à ceci :
 
 ```
 training/
@@ -238,35 +235,36 @@ training/
 |__ training.Rproj
 ```
 
-**RStudio Projects** allows you to use _relative file_ paths with respect to the `R` Project,
-making your code more portable and less error-prone.
-Avoids using `setwd()` with _absolute paths_
-like `"C:/Users/MyName/WeirdPath/training/data/file.csv"`.
+**Projets RStudio** vous permet d'utiliser *fichier relatif* relatifs par rapport à l'élément `R` projet,
+ce qui rend votre code plus portable et moins sujet aux erreurs.
+Évite d'utiliser `setwd()` avec *chemins absolus*
+comme `"C:/Users/MyName/WeirdPath/training/data/file.csv"`.
 
 :::::::::::::::::::::::::::::::::
 
-### 4. Create a GitHub Account
+### 4\. Créez un compte GitHub
 
-We can use [GitHub](https://github.com) as a collaboration platform to communicate package issues and engage in [community discussions](https://github.com/orgs/epiverse-trace/discussions).
+Nous pouvons utiliser [GitHub](https://github.com) comme plateforme de collaboration pour communiquer sur les problèmes liés aux paquets et s'engager dans des projets de développement. [discussions au sein de la communauté](https://github.com/orgs/epiverse-trace/discussions).
 
 ::::::::::::::::::::::::::::::::: checklist
 
-#### Follow all these steps
+#### Suivez toutes ces étapes
 
-1. Go to <https://github.com> and follow the "Sign up" link at the top-right of the window.
-2. Follow the instructions to create an account.
-3. Verify your email address with GitHub.
-<!-- 4. Configure the Multi-factor Authentication (see below).-->
+1. Allez à l'adresse suivante <https://github.com> et suivez le lien "S'inscrire" en haut à droite de la fenêtre.
+2. Suivez les instructions pour créer un compte.
+3. Vérifiez votre adresse électronique auprès de GitHub.
+
+<Configurez l'authentification multi-facteurs (voir ci-dessous).
 
 :::::::::::::::::::::::::::::::::
 
-## Data sets
+## Jeux de données
 
-### Download the data
+### Téléchargez les données
 
-We will download the data directly from R during the tutorial. However, if you are expecting problems with the network, it may be better to download the data beforehand and store it on your machine.
+Nous téléchargerons les données directement à partir de R au cours du tutoriel. Cependant, si vous vous attendez à des problèmes de réseau, il peut être préférable de télécharger les données à l'avance et de les stocker sur votre machine.
 
-The data files for the tutorial can be downloaded manually here:
+Les fichiers de données pour le tutoriel peuvent être téléchargés manuellement ici :
 
 - <https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv>
 - <https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip>
@@ -274,6 +272,8 @@ The data files for the tutorial can be downloaded manually here:
 - <https://epiverse-trace.github.io/tutorials-early/data/delta_full-messy.csv>
 - <https://epiverse-trace.github.io/tutorials-early/data/linelist-date_of_birth.csv>
 
-## Your Questions
+## Vos questions
 
-If you need any assistance installing the software or have any other questions about this tutorial, please send an email to <andree.valle-campos@lshtm.ac.uk>
+Si vous avez besoin d'aide pour installer le logiciel ou si vous avez d'autres questions concernant ce tutoriel, veuillez envoyer un courriel à l'adresse suivante [andree.valle-campos@lshtm.ac.uk](mailto:andree.valle-campos@lshtm.ac.uk)
+
+
