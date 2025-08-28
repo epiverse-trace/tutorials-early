@@ -166,7 +166,7 @@ rdbms_login <- readepi::login(
   type = "MySQL",
   user_name = "rfamro",
   password = NULL,
-  # driver_name = "",
+  driver_name = "",
   db_name = "Rfam",
   port = 3306
 )
