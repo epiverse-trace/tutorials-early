@@ -162,8 +162,7 @@
       "URL": "https://github.com/HenrikBengtsson/R.methodsS3",
       "BugReports": "https://github.com/HenrikBengtsson/R.methodsS3/issues",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "R.oo": {
       "Package": "R.oo",
@@ -190,8 +189,7 @@
       "URL": "https://henrikbengtsson.github.io/R.oo/, https://github.com/HenrikBengtsson/R.oo",
       "BugReports": "https://github.com/HenrikBengtsson/R.oo/issues",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "R.utils": {
       "Package": "R.utils",
@@ -221,8 +219,7 @@
       "URL": "https://henrikbengtsson.github.io/R.utils/, https://github.com/HenrikBengtsson/R.utils",
       "BugReports": "https://github.com/HenrikBengtsson/R.utils/issues",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "R6": {
       "Package": "R6",
@@ -265,17 +262,16 @@
       "Description": "Provides color schemes for maps (and other graphics) designed by Cynthia Brewer as described at http://colorbrewer2.org.",
       "License": "Apache License 2.0",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "RSQLite": {
       "Package": "RSQLite",
-      "Version": "2.4.1",
+      "Version": "2.4.3",
       "Source": "Repository",
       "Title": "SQLite Interface for R",
-      "Date": "2025-06-08",
+      "Date": "2025-08-01",
       "Authors@R": "c( person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-1416-3412\")), person(\"Hadley\", \"Wickham\", role = \"aut\"), person(c(\"David\", \"A.\"), \"James\", role = \"aut\"), person(\"Seth\", \"Falcon\", role = \"aut\"), person(\"D. Richard\", \"Hipp\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Dan\", \"Kennedy\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Joe\", \"Mistachkin\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(, \"SQLite Authors\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Liam\", \"Healy\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"R Consortium\", role = \"fnd\"), person(, \"RStudio\", role = \"cph\") )",
-      "Description": "Embeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions in a recent version is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.",
+      "Description": "Embeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine (version 3.50.4) and for various extensions is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.",
       "License": "LGPL (>= 2.1)",
       "URL": "https://rsqlite.r-dbi.org, https://github.com/r-dbi/RSQLite",
       "BugReports": "https://github.com/r-dbi/RSQLite/issues",
@@ -388,8 +384,7 @@
       "NeedsCompilation": "yes",
       "Author": "Doug Bates [aut] (<https://orcid.org/0000-0001-8316-9503>), Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>), Romain Francois [aut] (<https://orcid.org/0000-0002-2444-4226>), Yixuan Qiu [aut] (<https://orcid.org/0000-0003-0109-6692>), Authors of Eigen [cph] (Authorship and copyright in included Eigen library as detailed in inst/COPYRIGHTS)",
       "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "Rdpack": {
       "Package": "Rdpack",
@@ -423,8 +418,7 @@
       "NeedsCompilation": "no",
       "Author": "Georgi N. Boshnakov [aut, cre] (<https://orcid.org/0000-0003-2839-346X>), Duncan Murdoch [ctb]",
       "Maintainer": "Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "V8": {
       "Package": "V8",
@@ -481,8 +475,7 @@
       "License": "MIT + file LICENSE",
       "NeedsCompilation": "no",
       "Author": "Tony Plate [aut, cre], Richard Heiberger [aut]",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "arm": {
       "Package": "arm",
@@ -514,8 +507,7 @@
       "License": "GPL (> 2)",
       "URL": "https://CRAN.R-project.org/package=arm",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "askpass": {
       "Package": "askpass",
@@ -581,8 +573,7 @@
       "License": "GPL-2 | GPL-3",
       "URL": "http://www.rforge.net/base64enc",
       "NeedsCompilation": "yes",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "bit": {
       "Package": "bit",
@@ -1008,8 +999,7 @@
       "NeedsCompilation": "no",
       "Author": "Jennifer Bryan [cre, aut], Hadley Wickham [ctb]",
       "Maintainer": "Jennifer Bryan <jenny@stat.ubc.ca>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "cffr": {
       "Package": "cffr",
@@ -1285,8 +1275,7 @@
       "NeedsCompilation": "no",
       "Author": "Martyn Plummer [aut, cre, trl], Nicky Best [aut], Kate Cowles [aut], Karen Vines [aut], Deepayan Sarkar [aut], Douglas Bates [aut], Russell Almond [aut], Arni Magnusson [aut]",
       "Maintainer": "Martyn Plummer <martyn.plummer@gmail.com>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "conflicted": {
       "Package": "conflicted",
@@ -1652,8 +1641,7 @@
       "NeedsCompilation": "no",
       "Author": "Steph Locke [cre], Rich FitzJohn [aut], Anne Cori [aut], Thibaut Jombart [aut]",
       "Maintainer": "Steph Locke <steph@itsalocke.com>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "distributional": {
       "Package": "distributional",
@@ -2771,49 +2759,6 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "RSPM"
     },
-    "i2extras": {
-      "Package": "i2extras",
-      "Version": "0.2.1",
-      "Source": "Repository",
-      "Type": "Package",
-      "Title": "Functions to Work with 'incidence2' Objects",
-      "Authors@R": "c( person(\"Tim\", \"Taylor\", role = c(\"aut\", \"cre\"), email = \"tim.taylor@hiddenelephants.co.uk\", comment = c(ORCID = \"0000-0002-8587-7113\")), person(\"Thibaut\", \"Jombart\", role = c(\"aut\"), email = \"thibautjombart@gmail.com\") )",
-      "Description": "Provides functions to work with 'incidence2' objects, including a simplified interface for trend fitting and peak estimation. This package is part of the RECON (<https://www.repidemicsconsortium.org/>) toolkit for  outbreak analysis (<https://www.reconverse.org/).",
-      "URL": "https://www.reconverse.org/i2extras/",
-      "BugReports": "https://github.com/reconverse/i2extras/issues",
-      "Encoding": "UTF-8",
-      "License": "MIT + file LICENSE",
-      "RoxygenNote": "7.2.3",
-      "Depends": [
-        "incidence2 (>= 2.0.0)"
-      ],
-      "Imports": [
-        "utils",
-        "stats",
-        "MASS",
-        "ciTools",
-        "dplyr",
-        "tibble",
-        "rlang",
-        "tidyr",
-        "vctrs",
-        "ggplot2",
-        "data.table",
-        "tidyselect"
-      ],
-      "Suggests": [
-        "testthat",
-        "outbreaks",
-        "knitr",
-        "rmarkdown",
-        "covr"
-      ],
-      "VignetteBuilder": "knitr",
-      "NeedsCompilation": "no",
-      "Author": "Tim Taylor [aut, cre] (<https://orcid.org/0000-0002-8587-7113>), Thibaut Jombart [aut]",
-      "Maintainer": "Tim Taylor <tim.taylor@hiddenelephants.co.uk>",
-      "Repository": "RSPM"
-    },
     "ids": {
       "Package": "ids",
       "Version": "1.0.1",
@@ -2839,8 +2784,7 @@
       "NeedsCompilation": "no",
       "Author": "Rich FitzJohn [aut, cre]",
       "Maintainer": "Rich FitzJohn <rich.fitzjohn@gmail.com>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "incidence2": {
       "Package": "incidence2",
@@ -3139,8 +3083,7 @@
         "stats",
         "graphics"
       ],
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "lattice": {
       "Package": "lattice",
@@ -3179,8 +3122,7 @@
       "NeedsCompilation": "yes",
       "Author": "Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>), Felix Andrews [ctb], Kevin Wright [ctb] (documentation), Neil Klepeis [ctb], Johan Larsson [ctb] (miscellaneous improvements), Zhijian (Jason) Wen [cph] (filled contour code), Paul Murrell [ctb], Stefan Eng [ctb] (violin plot improvements), Achim Zeileis [ctb] (modern colors), Alexandre Courtiol [ctb] (generics for larrows, lpolygon, lrect and lsegments)",
       "Maintainer": "Deepayan Sarkar <deepayan.sarkar@r-project.org>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -3466,10 +3408,9 @@
     },
     "mgcv": {
       "Package": "mgcv",
-      "Version": "1.9-1",
+      "Version": "1.9-3",
       "Source": "Repository",
-      "Author": "Simon Wood <simon.wood@r-project.org>",
-      "Maintainer": "Simon Wood <simon.wood@r-project.org>",
+      "Authors@R": "person(given = \"Simon\", family = \"Wood\", role = c(\"aut\", \"cre\"), email = \"simon.wood@r-project.org\")",
       "Title": "Mixed GAM Computation Vehicle with Automatic Smoothness Estimation",
       "Description": "Generalized additive (mixed) models, some of their extensions and  other generalized ridge regression with multiple smoothing  parameter estimation by (Restricted) Marginal Likelihood,  Generalized Cross Validation and similar, or using iterated  nested Laplace approximation for fully Bayesian inference. See  Wood (2017) <doi:10.1201/9781315370279> for an overview.  Includes a gam() function, a wide variety of smoothers, 'JAGS'  support and distributions beyond the exponential family.",
       "Priority": "recommended",
@@ -3494,6 +3435,8 @@
       "ByteCompile": "yes",
       "License": "GPL (>= 2)",
       "NeedsCompilation": "yes",
+      "Author": "Simon Wood [aut, cre]",
+      "Maintainer": "Simon Wood <simon.wood@r-project.org>",
       "Repository": "CRAN"
     },
     "mime": {
@@ -3536,9 +3479,8 @@
       ],
       "SystemRequirements": "GNU make",
       "NeedsCompilation": "yes",
-      "Repository": "RSPM",
-      "Author": "Douglas Bates [aut], Katharine M. Mullen [aut, cre], John C. Nash [aut], Ravi Varadhan [aut]",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN",
+      "Author": "Douglas Bates [aut], Katharine M. Mullen [aut, cre], John C. Nash [aut], Ravi Varadhan [aut]"
     },
     "modelr": {
       "Package": "modelr",
@@ -3657,8 +3599,7 @@
       "Maintainer": "Paul Gilbert <pgilbert.ttv9z@ncf.ca>",
       "URL": "http://optimizer.r-forge.r-project.org/",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "numberize": {
       "Package": "numberize",
@@ -3959,8 +3900,7 @@
       ],
       "Collate": "'adjective.R' 'adverb.R' 'exclamation.R' 'verb.R' 'rpackage.R' 'package.R'",
       "NeedsCompilation": "no",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "prettyunits": {
       "Package": "prettyunits",
@@ -4213,8 +4153,7 @@
       "License": "GPL-3",
       "NeedsCompilation": "no",
       "Author": "Damian W. Betebenner [aut, cre], Lambert Joshua [ctb]",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "rappdirs": {
       "Package": "rappdirs",
@@ -4444,7 +4383,7 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.1.4",
+      "Version": "1.1.5",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Project Environments",
@@ -4463,6 +4402,7 @@
         "covr",
         "cpp11",
         "devtools",
+        "generics",
         "gitcreds",
         "jsonlite",
         "jsonvalidate",
@@ -4491,7 +4431,7 @@
       "Config/testthat/parallel": "true",
       "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
       "NeedsCompilation": "no",
-      "Author": "Kevin Ushey [aut, cre] (<https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (<https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
+      "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
       "Repository": "CRAN"
     },
@@ -4928,26 +4868,26 @@
       "NeedsCompilation": "no",
       "Author": "Simon Potter [aut, trl, cre], Simon Sapin [aut], Ian Bicking [aut]",
       "Maintainer": "Simon Potter <simon@sjp.co.nz>",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "simulist": {
       "Package": "simulist",
-      "Version": "0.5.0",
+      "Version": "0.6.0",
       "Source": "Repository",
       "Title": "Simulate Disease Outbreak Line List and Contacts Data",
-      "Authors@R": "c( person(\"Joshua W.\", \"Lambert\", , \"joshua.lambert@lshtm.ac.uk\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0001-5218-3046\")), person(\"Carmen\", \"Tamayo\", , \"carmen.tamayo-cuartero@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0003-4184-2864\")), person(\"Hugo\", \"Gruson\", , \"hugo@data.org\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Pratik R.\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"Adam\", \"Kucharski\", , \"adam.kucharski@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-8814-9421\")), person(\"Chris\", \"Hartgerink\", , \"chris@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0003-1050-6809\")), person(\"Sebastian\", \"Funk\", , \"sebastian.funk@lshtm.ac.uk\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2842-3406\")), person(\"London School of Hygiene and Tropical Medicine, LSHTM\", role = \"cph\", comment = c(ROR = \"00a0jsq62\")) )",
+      "Authors@R": "c( person(\"Joshua W.\", \"Lambert\", , \"joshua.lambert@lshtm.ac.uk\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0001-5218-3046\")), person(\"Carmen\", \"Tamayo Cuartero\", , \"carmen.tamayo-cuartero@lshtm.ac.uk\", role = \"aut\", comment = c(ORCID = \"0000-0003-4184-2864\")), person(\"Hugo\", \"Gruson\", , \"hugo@data.org\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Pratik R.\", \"Gupte\", , \"pratik.gupte@lshtm.ac.uk\", role = c(\"ctb\", \"rev\"), comment = c(ORCID = \"0000-0001-5294-7819\")), person(\"Adam\", \"Kucharski\", , \"adam.kucharski@lshtm.ac.uk\", role = \"rev\", comment = c(ORCID = \"0000-0001-8814-9421\")), person(\"Chris\", \"Hartgerink\", , \"chris@data.org\", role = \"rev\", comment = c(ORCID = \"0000-0003-1050-6809\")), person(\"Sebastian\", \"Funk\", , \"sebastian.funk@lshtm.ac.uk\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2842-3406\")), person(\"London School of Hygiene and Tropical Medicine, LSHTM\", role = \"cph\", comment = c(ROR = \"00a0jsq62\")) )",
       "Description": "Tools to simulate realistic raw case data for an epidemic in the form of line lists and contacts using a branching process. Simulated outbreaks are parameterised with epidemiological parameters and can have age-structured populations, age-stratified hospitalisation and death risk and time-varying case fatality risk.",
       "License": "MIT + file LICENSE",
       "URL": "https://github.com/epiverse-trace/simulist, https://epiverse-trace.github.io/simulist/",
       "BugReports": "https://github.com/epiverse-trace/simulist/issues",
       "Depends": [
-        "R (>= 4.1.0)"
+        "R (>= 4.2.0)"
       ],
       "Imports": [
         "checkmate",
         "english",
         "epiparameter (>= 0.4.0)",
+        "grates",
         "randomNames",
         "rlang",
         "stats"
@@ -4956,7 +4896,7 @@
         "dplyr",
         "epicontacts (>= 1.1.3)",
         "ggplot2",
-        "incidence2 (>= 2.3.0)",
+        "incidence2 (>= 2.6.2)",
         "knitr",
         "rmarkdown",
         "spelling",
@@ -4970,7 +4910,7 @@
       "Language": "en-GB",
       "RoxygenNote": "7.3.2",
       "NeedsCompilation": "no",
-      "Author": "Joshua W. Lambert [aut, cre, cph] (<https://orcid.org/0000-0001-5218-3046>), Carmen Tamayo [aut] (<https://orcid.org/0000-0003-4184-2864>), Hugo Gruson [ctb, rev] (<https://orcid.org/0000-0002-4094-1476>), Pratik R. Gupte [ctb, rev] (<https://orcid.org/0000-0001-5294-7819>), Adam Kucharski [rev] (<https://orcid.org/0000-0001-8814-9421>), Chris Hartgerink [rev] (<https://orcid.org/0000-0003-1050-6809>), Sebastian Funk [ctb] (<https://orcid.org/0000-0002-2842-3406>), London School of Hygiene and Tropical Medicine, LSHTM [cph] (00a0jsq62)",
+      "Author": "Joshua W. Lambert [aut, cre, cph] (ORCID: <https://orcid.org/0000-0001-5218-3046>), Carmen Tamayo Cuartero [aut] (ORCID: <https://orcid.org/0000-0003-4184-2864>), Hugo Gruson [ctb, rev] (ORCID: <https://orcid.org/0000-0002-4094-1476>), Pratik R. Gupte [ctb, rev] (ORCID: <https://orcid.org/0000-0001-5294-7819>), Adam Kucharski [rev] (ORCID: <https://orcid.org/0000-0001-8814-9421>), Chris Hartgerink [rev] (ORCID: <https://orcid.org/0000-0003-1050-6809>), Sebastian Funk [ctb] (ORCID: <https://orcid.org/0000-0002-2842-3406>), London School of Hygiene and Tropical Medicine, LSHTM [cph] (ROR: <https://ror.org/00a0jsq62>)",
       "Maintainer": "Joshua W. Lambert <joshua.lambert@lshtm.ac.uk>",
       "Repository": "CRAN"
     },
@@ -5611,8 +5551,7 @@
       "License": "GPL-3",
       "NeedsCompilation": "no",
       "Author": "Damian W. Betebenner [aut, cre], Andrew Martin [ctb], Jeff Erickson [ctb]",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "tracetheme": {
       "Package": "tracetheme",
@@ -5653,13 +5592,15 @@
       "LazyData": "true",
       "URL": "https://github.com/epiverse-trace/tracetheme",
       "BugReports": "https://github.com/epiverse-trace/tracetheme/issues",
-      "Author": "Hugo Gruson [aut, cre] (ORCID: <https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
+      "NeedsCompilation": "no",
+      "Author": "Hugo Gruson [aut, cre] (<https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
       "Maintainer": "Hugo Gruson <hugo@data.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "tracetheme",
       "RemoteUsername": "epiverse-trace",
       "RemotePkgRef": "epiverse-trace/tracetheme",
+      "RemoteRef": "HEAD",
       "RemoteSha": "caff2f46c93c27d0bf2bffda6ef2eefff3ba125e"
     },
     "tzdb": {
@@ -5739,8 +5680,7 @@
       "URL": "https://www.rforge.net/uuid",
       "BugReports": "https://github.com/s-u/uuid/issues",
       "NeedsCompilation": "yes",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "vctrs": {
       "Package": "vctrs",
@@ -6094,8 +6034,7 @@
       "URL": "https://github.com/vubiostat/r-yaml/",
       "BugReports": "https://github.com/vubiostat/r-yaml/issues",
       "NeedsCompilation": "yes",
-      "Repository": "RSPM",
-      "Encoding": "UTF-8"
+      "Repository": "CRAN"
     },
     "ympes": {
       "Package": "ympes",
