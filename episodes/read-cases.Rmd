@@ -142,7 +142,8 @@ rio::import(here::here("data", "Marburg.zip"))
 
 ## Reading from databases
 
-The `{readepi}` library contains functions that allow you to import data directly from RDBMS or HIS (through their APIs). The `readepi::read_rdbms()` function allows you to import data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It is primarily based on the [{DBI}](https://dbi.r-dbi.org/) library, which serves as a general-purpose interface for interacting with relational database management systems (RDBMS).
+The `{readepi}` library contains functions that allow you to import data directly from RDBMS or HIS (through their APIs). 
+The `readepi::read_rdbms()` function allows you to import data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It is primarily based on the [{DBI}](https://dbi.r-dbi.org/) library, which serves as a general-purpose interface for interacting with relational database management systems (RDBMS).
 
 ::::::::::::: discussion
 
@@ -153,7 +154,7 @@ Importing data directly from a database optimizes the memory usage in the R sess
 Relational database management systems (RDBMS) also have the advantage that multiple users can access, store and analyse parts of the dataset simultaneously, without having to transfer individual files, which would make it very difficult to track which version is up-to-date.
 
 :::::::::::::
-
+<!--
 ### 1. Connect with a database
 
 You can use the `readepi::login()` function to establish a connection to the database as shown below.
@@ -164,10 +165,10 @@ rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
   type = "MySQL",
   user_name = "rfamro",
-  password = "",
-  driver_name = "",
+  password = NULL,
+  # driver_name = "",
   db_name = "Rfam",
-  port = 4497
+  port = 3306
 )
 ```
 
@@ -198,6 +199,124 @@ dat <- read_rdbms(
   query = list(table = "author", fields = NULL, filter = NULL)
 )
 ```
+-->
+
+The following code chunk demonstrates in four steps how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
+
+### 1. Connect with a database
+
+First, we establish a connection to an SQLite database created on our machine and stored in its local memory with `DBI::dbConnect()`. 
+
+```{r,warning=FALSE,message=FALSE}
+library(DBI)
+library(RSQLite)
+
+# Create a temporary SQLite database in memory
+db_connection <- DBI::dbConnect(
+  drv = RSQLite::SQLite(),
+  dbname = ":memory:"
+)
+```
+
+::::::::::::::::: callout
+
+A real-life connection to an external SQLite database would look like this:
+
+```r
+# in real-life
+db_connection <- DBI::dbConnect(
+  RSQLite::SQLite(), 
+  host = "database.epiversetrace.com",
+  user = "juanito",
+  password = epiversetrace::askForPassword("Database password")
+)
+```
+
+:::::::::::::::::
+
+### 2. Write a local data frame as a table in a database
+
+Then, we can write the `ebola_confirmed` into a table named `cases` within the database using the `DBI::dbWriteTable()` function.
+
+```{r,warning=FALSE,message=FALSE}
+# Store the 'ebola_confirmed' dataframe as a table named 'cases'
+# in the SQLite database
+DBI::dbWriteTable(
+  conn = db_connection,
+  name = "cases",
+  value = ebola_confirmed
+)
+```
+
+In a database framework, you can have more than one table. Each table can belong to a specific `entity` (e.g., patients, care units, jobs). All tables will be related by a common ID or `primary key`.
+
+### 3. Read data from a table in a database
+
+<!-- Subsequently, we reads the data from the `cases` table using `DBI::dbReadTable()`. -->
+
+<!-- ```{r,warning=FALSE,message=FALSE} -->
+<!-- # Read data from the 'cases' table -->
+<!-- extracted_data <- DBI::dbReadTable( -->
+<!--   conn = db_connection, -->
+<!--   name = "cases" -->
+<!-- ) -->
+<!-- ``` -->
+
+Subsequently, we reads the data from the `cases` table using `dplyr::tbl()`.
+
+```{r}
+# Read one table from the database
+mytable_db <- dplyr::tbl(src = db_connection, "cases")
+```
+
+If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be translated to SQL queries.
+
+```{r}
+# Show the SQL queries translated
+mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
+  dplyr::show_query()
+```
+
+### 4. Extract data from the database
+
+Use `dplyr::collect()` to force computation of a database query and extract the output to your local computer.
+
+```{r}
+# Pull all data down to a local tibble
+extracted_data <- mytable_db %>%
+  dplyr::filter(confirm > 50) %>%
+  dplyr::arrange(desc(confirm)) %>%
+  dplyr::collect()
+```
+
+The `extracted_data` object represents the extracted, ideally after specifying queries that reduces its size.
+
+```{r,warning=FALSE,message=FALSE}
+# View the extracted_data
+extracted_data
+```
+
+:::::::::::::::::::::: callout
+
+### Run SQL queries in R using dbplyr
+
+Practice how to make relational database SQL queries using multiple `{dplyr}` verbs like `dplyr::left_join()` among tables before pulling down data to your local session with `dplyr::collect()`! 
+
+You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/). You will find close to `{dplyr}`!
+
+::::::::::::::::::::::
+
+
+### 5. Close the database connection
+
+Finally, we can close the database connection with `dbDisconnect()`.
+
+```{r,warning=FALSE,message=FALSE}
+# Close the database connection
+DBI::dbDisconnect(conn = db_connection)
+```
 
 ## Reading from HIS APIs
 
@@ -223,7 +342,7 @@ dhis2_login <- readepi::login(
 programs <- readepi::get_programs(login = dhis2_login)
 
 # get the names and IDs of the organisation units
-org_units <- get_organisation_units(login = dhis2_login)
+org_units <- readepi::get_organisation_units(login = dhis2_login)
 
 # import data from DHIS2 using IDs
 data <- readepi::read_dhis2(
@@ -231,14 +350,18 @@ data <- readepi::read_dhis2(
   org_unit = "GcLhRNAFppR",
   program = "E5IUQuHg3Mg"
 )
+```
 
+<!--
+```{r}
 # import data from DHIS2 using names
-data <- read_dhis2(
+data <- readepi::read_dhis2(
   login = dhis2_login,
   org_unit = "Keneba",
   program = "Child Registration & Treatment "
 )
 ```
+-->
 
 It is important to know that not all organisation units are registered for a specific program. To find out which organisation units are running a particular program, use the `get_program_org_units()` function as shown in the example below.
 
@@ -277,6 +400,6 @@ covid_cases <- readepi::read_sormas(
 ```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
-- Use `{rio}, {io}, {readr}` and `{ImportExport}` to read data from individual files.
+- Use `{rio}`, `{io}`, `{readr}` and `{ImportExport}` to read data from individual files.
 - Use `{readepi}` to read data form HIS APIs and RDBMS.
 ::::::::::::::::::::::::::::::::::::::::::::::::
