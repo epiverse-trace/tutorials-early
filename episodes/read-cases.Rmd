@@ -69,9 +69,7 @@ L'exemple ci-dessous montre comment importer un fichier `csv` dans `R` à l'aide
 
 ```{r eval=FALSE, echo=TRUE}
 # lire les données
-# exemple:
-# si le chemin d'accès au fichier est "data/raw-data/ebola_cases_2.csv",
-# alors:
+# exemple: si le chemin d'accès au fichier est "data/raw-data/ebola_cases_2.csv", alors:
 ebola_confirmed <- rio::import(
   here::here("data", "ebola_cases_2.csv")
 ) %>%
@@ -317,7 +315,7 @@ Pour cela, il faudra établir la connection au système en utilisant la fonction
 
 Pour un système donné, vous pouvez accéder aux identifiants et noms des programmes et structure sanitaires en utilisant les fonctions `get_programs()` et `get_organisation_units()` respectivement.
 
-```{r eval=FALSE}
+```{r, eval=FALSE}
 # etablir la connection au systeme
 dhis2_login <- readepi::login(
   from = "https://smc.moh.gm/dhis",
@@ -341,19 +339,19 @@ data <- readepi::read_dhis2(
 ```
 
 <!--
-```{r}
-# importer les donnees a partir de DHIS2 en utilisant les noms
-data <- readepi::read_dhis2(
-  login = dhis2_login,
-  org_unit = "Keneba",
-  program = "Child Registration & Treatment "
-)
-```
+<!--` ` ` r
+<!--# importer les donnees a partir de DHIS2 en utilisant les noms
+<!--data <- readepi::read_dhis2(
+<!--  login = dhis2_login,
+<!--  org_unit = "Keneba",
+<!--  program = "Child Registration & Treatment "
+<!--)
+<!--` ` `
 -->
 
 Il est important de savoir que toutes les unités organisationnelles (structures sanitaires) ne sont pas enregistrées pour un programme spécifique. Pour connaître les unités organisationnelles qui exécutent un programme particulier, utilisez la fonction `get_program_org_units()` comme illustré dans l'exemple ci-dessous.
 
-```{r eval=TRUE}
+```{r, eval=FALSE}
 # obtenir les unités organisationnelles qui exécutent un programme "E5IUQuHg3Mg"
 target_org_units <- readepi::get_program_org_units(
   login = dhis2_login,
@@ -371,7 +369,7 @@ Dans la version actuelle de la librairie `{readepi}`, la fonction `read_sormas()
 
 Un des arguments fondamentals est le nom de la maladie pour laquelle l'utilisateur souhaite obtenir des données. Pour vous assurez de la vraie synthaxe à utiliser lors de l'appel à la fonction, vous pouvez obtenir la liste des noms de maladies à travers la fonction `sormas_get_diseases()`.
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 # obtenir la liste des noms de maladies
 disease_names <- readepi::sormas_get_diseases(
   base_url = "https://demo.sormas.org/sormas-rest",
