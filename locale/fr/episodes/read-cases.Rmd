@@ -69,7 +69,9 @@ L'exemple ci-dessous montre comment importer un fichier `csv` dans `R` à l'aide
 
 ```{r eval=FALSE, echo=TRUE}
 # lire les données
-# exemple: si le chemin d'accès au fichier est "data/raw-data/ebola_cases_2.csv", alors:
+# exemple:
+# si le chemin d'accès au fichier est "data/raw-data/ebola_cases_2.csv",
+# alors:
 ebola_confirmed <- rio::import(
   here::here("data", "ebola_cases_2.csv")
 ) %>%
