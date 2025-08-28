@@ -13,7 +13,7 @@ editor_options:
 - Pouvez-vous importer des données à partir de bases de données et de system d'information de santé (SIS) à travers leur API ?
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectif
+::::::::::::::::::::::::::::::::::::: objectives
 
 - Expliquez comment importer des données épidémiologiques dans `R` à partir de différentes sources.
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -107,7 +107,7 @@ La librairie `{here}` permet de renforcer la reproductibilité de votre travail 
 
 ::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::: challenge
 
 ### Lecture de données compressées
 
@@ -115,7 +115,7 @@ Pouvez-vous importer les données d'un fichier compressé dans `R`?
 
 Téléchargez le [fichier compressé](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) contenant les données relatives à l'épidémie de Marburg et importez-le dans votre environnement de travail.
 
-::::::::::::::::: indice
+::::::::::::::::: hint
 
 Vous pouvez  consulter la [liste complète des formats de fichiers pris en charge](https://gesistsa.github.io/rio/#supported-file-formats) sur le site web de la librairie `{rio}`. Pour étendre {rio} à d'autres formats, vous pouvez installer les librairies correspondantes à l'aide de la fonction ci-dessous :
 
@@ -268,13 +268,12 @@ covid_cases <- readepi::read_sormas(
   base_url = "https://demo.sormas.org/sormas-rest",
   user_name = "SurvSup",
   password = "Lk5R7JXeZSEc",
-  disease = "coronavirus",
+  disease = "coronavirus"
 )
 ```
 
-::::::::::::::::::::::::::::::::::::: points clés
-
-- Utilisez `{rio}, {io}, {readr}` et `{ImportExport}` pour importer les données à partir des fichiers.
+::::::::::::::::::::::::::::::::::::: keypoints
+- Utilisez `{rio}`, `{io}`, `{readr}` et `{ImportExport}` pour importer les données à partir des fichiers.
 - Utilisez `{readepi}` pour importer les données à partir des SIS et SGBDR.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
