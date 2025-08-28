@@ -38,19 +38,11 @@ En plus du package {cleanepi}, nous utiliserons d'autres fonctions qui provienne
 * `{dplyr}` pour effectuer certaines opérations de traitement de données,
 * `{magrittr}` pour utiliser son **opérateur pipe (`%>%`)**.
 
-Nous encourageons les utilisateurs disposant de versions récentes de R (version > 4.4.1) à utiliser l'opérateur de pipe de la librairie de base de R (`|>`) au lieu de `%>%`.
+<!-- Nous encourageons les utilisateurs disposant de versions récentes de R (version > 4.4.1) à utiliser l'opérateur de pipe de la librairie de base de R (`|>`) au lieu de `%>%`. -->
 
-Nous vous recommandons également d'utiliser le package `{pak}` pour l'installation des packages dans R, comme indiqué ci-dessous. Vous pouvez consulter le [document de référence de`{pak}`](https://pak.r-lib.org/reference/features.html) pour plus de détails sur ses avantages.
+<!-- Nous vous recommandons également d'utiliser le package `{pak}` pour l'installation des packages dans R, comme indiqué ci-dessous. Vous pouvez consulter le [document de référence de`{pak}`](https://pak.r-lib.org/reference/features.html) pour plus de détails sur ses avantages. -->
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-# Vérifier si une librairie est déjà installée et l'installer sinon
-if (!require("pak")) install.packages("pak")
-if (!require("here")) pak::pak("here")
-if (!require("rio")) pak::pak("rio")
-if (!require("dplyr")) pak::pak("dplyr")
-if (!require("magrittr")) pak::pak("magrittr")
-if (!require("cleanepi")) pak::pak("cleanepi")
-
 # charger les librairies
 library(tidyverse)
 library(rio)

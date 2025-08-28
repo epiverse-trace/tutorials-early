@@ -43,11 +43,6 @@ Les données épidémiologiques agrégées sur une échelle de temps spécifique
 La library `{i2extras}` fournit des méthodes pour modéliser la tendance dans les des données épidémiologiques, calculer le nombre moyen de cas dans un interval de temps dèfini (moyenne mobile) et le taux de croissance ou de décroissance exponentielle. Le morceau de code ci-dessous évalue la tendance de la Covid-19 au Royaume-Uni au cours des trois premiers mois en utilisant une distribution binomiale négative.
 
 ```{r, warning=FALSE, message=FALSE}
-# installer les librairies si elles ne le sont pas déjà
-if (!require("i2extras")) pak::pak("i2extras")
-if (!require("incidence2")) pak::pak("incidence2")
-if (!require("outbreaks")) pak::pak("outbreaks")
-
 # charger les librairies offrant les functions la modélisation
 library(i2extras)
 library(incidence2)

@@ -37,12 +37,6 @@ Dans le cas contraire, vous risquez de rencontrer des problèmes lors de l'analy
 Cet épisode est consacré à l'étiquettage et la validation des données épidémiologiques à l'aide de la librairie [{linelist}](https://epiverse-trace.github.io/linelist/). Nous aurons besoin de la librairie `{rio}` pour importer les données, de `{linelist}` pour créer un objet de la classe linelist. Nous utiliserons l'opérateur pipe (`%>%`) pour connecter certaines de leurs fonctions, y compris celles de la librairie `{dplyr}`. Pour cette raison, nous allons donc charger la librairie {tidyverse}.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-# installer les librairies si elles ne le sont pas déjà
-if (!require("tidyverse")) pak::pak("tidyverse")
-if (!require("rio")) pak::pak("rio")
-if (!require("here")) pak::pak("here")
-if (!require("linelist")) pak::pak("linelist")
-
 # charger packages
 library(tidyverse) # pour acceder aux fonctions de la librairie {dplyr} et à l'opérateur pipe %>% du package {magrittr}
 library(rio) # pour importer les donnees

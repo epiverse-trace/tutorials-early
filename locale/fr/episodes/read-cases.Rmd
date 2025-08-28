@@ -32,12 +32,6 @@ L'étape initiale de l'analyse de données épidémiologiques consiste général
 Commençons par charger la librairie `{rio}` pour importer les données stockées dans des fichiers et la librairie `{here}` pour trouver facilement un chemin d'accès à ces fichiers dans votre projet RStudio. Nous utiliserons l'opérateur pipe (`%>%`) de la librairie `{magrittr}` pour relier facilement certaines de leurs fonctions, y compris les fonctions de la librairie de formatage de données `{dplyr}`. Nous chargerons donc la librairie `{tidyverse}`, qui comprend à la fois les librairies `{magrittr}` et `{dplyr}`.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
-# installer les librairies si elles ne le sont pas déjà
-if (!require("pak")) install.packages("pak")
-if (!require("tidyverse")) pak::pak("tidyverse")
-if (!require("rio")) pak::pak("rio")
-if (!require("here")) pak::pak("here")
-
 # charger les librairies
 library(tidyverse)
 library(rio)
