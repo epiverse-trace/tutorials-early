@@ -33,16 +33,11 @@ The initial step in outbreak analysis typically involves importing the target da
 Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe operator (`%>%`) from the `{magrittr}` package to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both `{magrittr}` and `{dplyr}`:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
-# install the packages if they are not already installed
-if (!require("pak")) install.packages("pak")
-if (!require("tidyverse")) pak::pak("tidyverse")
-if (!require("rio")) pak::pak("rio")
-if (!require("here")) pak::pak("here")
-
 # Load packages
 library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data from files
 library(here) # for easy file referencing
+library(readepi) # for importing data directly from RDBMS or HIS
 ```
 
 ::::::::::::::::::: checklist
@@ -164,14 +159,8 @@ Relational database management systems (RDBMS) also have the advantage that mult
 You can use the `readepi::login()` function to establish a connection to the database as shown below.
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
-# install readepi if not already installed
-pak::pak("epiverse-trace/readepi@readepi_no_his_spc_deps")
-
-# load readepi
-library(readepi)
-
 # establish the connection to a test MySQL database
-rdbms_login <- login(
+rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
   type = "MySQL",
   user_name = "rfamro",
