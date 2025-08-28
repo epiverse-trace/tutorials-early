@@ -36,6 +36,7 @@ Commençons par charger la librairie `{rio}` pour importer les données stockée
 library(tidyverse)
 library(rio)
 library(here)
+library(readepi)
 ```
 
 ::::::::::::::::::: checklist
@@ -153,12 +154,6 @@ Les systèmes de gestion de bases de données relationnelles (SGBDR) présentent
 Vous pouvez utiliser la fonction `readepi::login()` pour établir une connection avec la base de données comme illuster ci-dessous.
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
-# installer readepi si elle ne l'est pas encore
-pak::pak("epiverse-trace/readepi@readepi_no_his_spc_deps")
-
-# charger les librairies
-library(readepi)
-
 # etablir la connection avec la base de donnees
 rdbms_login <- login(
   from = "mysql-rfam-public.ebi.ac.uk",

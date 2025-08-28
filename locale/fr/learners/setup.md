@@ -104,14 +104,15 @@ Ouvrez RStudio et **copiez et collez** le morceau de code suivant dans la fenêt
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
-  "cleanepi",
+  "epiverse-trace/readepi@readepi_no_his_spc_deps",
+  "cleanepi@1.1.0",
   "rio",
   "here",
   "DBI",
   "RSQLite",
   "dbplyr",
   "linelist",
-  "epiverse-trace/simulist",
+  "simulist",
   "incidence2",
   "epiverse-trace/tracetheme",
   "tidyverse"
