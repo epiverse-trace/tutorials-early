@@ -256,11 +256,11 @@ You can also review the `{dbplyr}` R package. But for a step-by-step tutorial ab
 
 ```{r}
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
-author <- login %>%
+author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::select(author_id, name)
 
-family_author <- login %>%
+family_author <- rdbms_login %>%
   dplyr::tbl(from = "family_author") %>%
   dplyr::select(author_id, rfam_acc)
 

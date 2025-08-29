@@ -158,7 +158,7 @@ Vous pouvez utiliser la fonction `readepi::login()` pour établir une connection
 
 ```{r warning=FALSE, message=FALSE, eval=FALSE}
 # etablir la connection avec la base de donnees
-rdbms_login <- login(
+rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
   type = "MySQL",
   user_name = "rfamro",
@@ -252,11 +252,11 @@ Vous pouvez également consulter le package `{dbplyr}` en R. Pour un tutoriel pa
 
 ```{r}
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
-author <- login %>%
+author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::select(author_id, name)
 
-family_author <- login %>%
+family_author <- rdbms_login %>%
   dplyr::tbl(from = "family_author") %>%
   dplyr::select(author_id, rfam_acc)
 
