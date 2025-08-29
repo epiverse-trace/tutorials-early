@@ -111,7 +111,7 @@ if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
   "epiverse-trace/readepi@readepi_no_his_spc_deps",
-  "cleanepi",
+  "cleanepi@1.1.0",
   "reactable",
   "rio",
   "here",
