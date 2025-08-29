@@ -214,9 +214,9 @@ Alternativelly, we can read the data from the `author` table using `dplyr::tbl()
 
 ```{r}
 # import data from the 'author' table using an SQL query
-dat <- rdbms_login %>% 
-  dplyr::tbl(from = "author") %>% 
-  dplyr::filter(stringr::str_detect(name,"^A")) %>% 
+dat <- rdbms_login %>%
+  dplyr::tbl(from = "author") %>%
+  dplyr::filter(stringr::str_detect(name, "^A")) %>%
   dplyr::arrange(desc(author_id))
 
 dat
