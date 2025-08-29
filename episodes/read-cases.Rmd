@@ -244,7 +244,7 @@ dat %>%
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of out R session.
 
-:::::::::::::::::::::: discussion
+:::::::::::::::::::::: challenge
 
 ### Run SQL queries in R using dbplyr
 
