@@ -156,7 +156,7 @@ Les systèmes de gestion de bases de données relationnelles (SGBDR) présentent
 
 Vous pouvez utiliser la fonction `readepi::login()` pour établir une connection avec la base de données comme illuster ci-dessous.
 
-```{r warning=FALSE, message=FALSE, eval=FALSE}
+```{r}
 # etablir la connection avec la base de donnees
 rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
