@@ -212,7 +212,7 @@ Alternativement, nous pouvons lire les données de la table `author` en utilisan
 # lire les donnees de la table 'author' en utilisant une requete SQL
 dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
-  dplyr::filter(stringr::str_detect(name, "^A")) %>%
+  dplyr::filter(initials == "A") %>%
   dplyr::arrange(desc(author_id))
 
 dat
