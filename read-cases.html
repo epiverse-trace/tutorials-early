@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2025-08-28 |
+        <p>Last updated on 2025-08-29 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -338,7 +338,8 @@
 <h3 class="card-title">Questions</h3>
 <ul><li>Where do you usually store your outbreak data?</li>
 <li>How many different data formats can you use for analysis?</li>
-<li>Can you import data from databases and health APIs?</li>
+<li>Can you import data from servers and health information
+systems?</li>
 </ul></div>
 </div>
 </div>
@@ -360,8 +361,8 @@
 <div id="prerequisites" class="callout-inner">
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
-<p>This episode requires you to be familiar with:</p>
-<p><strong>Data science</strong> : Basic tasks with R.</p>
+<p>This episode requires you to be familiar with: <strong>Data
+science</strong> : Basic tasks with R.</p>
 </div>
 </div>
 </div>
@@ -375,24 +376,26 @@ database management systems (RDBMS), or health information systems
 <a href="https://dhis2.org/" class="external-link">DHIS2</a>, which provide application
 program interfaces (APIs) to the database systems so verified users can
 easily add and access data entries. The latter option is particularly
-well-suited for collecting and storing large-scal institutional health
+well-suited for collecting and storing large-scale institutional health
 data. This episode will elucidate the process of reading cases from
 these sources.</p>
 <p>Let’s start by loading the package <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data
 and the package <a href="https://here.r-lib.org/" class="external-link">here</a> to easily find a file path within
-your RStudio project. We’ll use the pipe <code>%&gt;%</code> to easily
-connect some of their functions, including functions from the data
-formatting package <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>. We’ll therefore call the
-tidyverse package, which includes both the pipe and
-<a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>:</p>
+your RStudio project. We’ll use the pipe operator (<code>%&gt;%</code>)
+from the <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> package to easily connect some of their
+functions, including functions from the data formatting package
+<a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>. We’ll therefore call the tidyverse package, which
+includes both <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> and <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>:</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load packages</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span> <span class="co"># for {dplyr} functions and the pipe %&gt;%</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">rio</span><span class="op">)</span> <span class="co"># for importing data</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">here</span><span class="op">)</span> <span class="co"># for easy file referencing</span></span></code></pre>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">rio</span><span class="op">)</span> <span class="co"># for importing data from files</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">here</span><span class="op">)</span> <span class="co"># for easy file referencing</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">readepi</span><span class="op">)</span> <span class="co"># for importing data directly from RDBMS or HIS</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">dbplyr</span><span class="op">)</span> <span class="co"># for a database backend for {dplyr}</span></span></code></pre>
 </div>
 <div id="the-double-colon" class="callout checklist">
 <div class="callout-square">
@@ -431,16 +434,17 @@ CSV files.</li>
 </div>
 </section><section><h2 class="section-heading" id="reading-from-files">Reading from files<a class="anchor" aria-label="anchor" href="#reading-from-files"></a></h2>
 <hr class="half-width"><p>Several packages are available for importing outbreak data stored in
-individual files into <code>R</code>. These include <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://readr.tidyverse.org/" class="external-link">readr</a> from the
-<code>tidyverse</code>, <a href="https://bitbucket.org/djhshih/io/src/master/" class="external-link">io</a>, <a href="https://cran.r-project.org/web/packages/ImportExport/index.html" class="external-link">ImportExport</a>,
-and <a href="https://rdatatable.gitlab.io/data.table/" class="external-link">data.table</a>.
+individual files into <code>R</code>. These include <a href="https://gesistsa.github.io/rio/" class="external-link">{rio}</a>, <a href="https://readr.tidyverse.org/" class="external-link">{readr}</a> from the
+<a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a>, <a href="https://bitbucket.org/djhshih/io/src/master/" class="external-link">{io}</a>, <a href="https://cran.r-project.org/web/packages/ImportExport/index.html" class="external-link">{ImportExport}</a>,
+and <a href="https://rdatatable.gitlab.io/data.table/" class="external-link">{data.table}</a>.
 Together, these packages offer methods to read single or multiple files
 in a wide range of formats.</p>
 <p>The below example shows how to import a <code>csv</code> file into
-<code>R</code> environment using <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package. We use the
-<a href="https://here.r-lib.org/" class="external-link">here</a> package to tell R to look for the file in the
-<code>data/</code> folder of your project, and <code>as_tibble()</code>
-to convert into a tidier format for subsequent analysis in R.</p>
+<code>R</code> environment using the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package. We use
+the <a href="https://here.r-lib.org/" class="external-link">here</a> package to tell R to look for the file in the
+<code>data/</code> folder of your project, and
+<code>dplyr::as_tibble()</code> to convert into a tidier format for
+subsequent analysis in R.</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -492,13 +496,13 @@ without needing to adjust file paths.</p>
 as the separator between folder names:
 <code>"data\raw-data\file.csv"</code>
 </li>
-<li>On Unix based operating system such as macOS or Linux the forward
+<li>On Unix based operating systems such as macOS or Linux the forward
 slash ( <code>/</code> ) is used as the path separator:
 <code>"data/raw-data/file.csv"</code>
 </li>
-</ul><p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is ideal for adding one more layer of
-reproducibility to your work. If you are interested in reproducibility,
-we invite you to <a href="https://epiverse-trace.github.io/research-compendium/" class="external-link">read this
+</ul><p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package reinforces the reproducibility of
+your work across multiple operating systems. If you are interested in
+reproducibility, we invite you to <a href="https://epiverse-trace.github.io/research-compendium/" class="external-link">read this
 tutorial to increase the openess, sustainability, and reproducibility of
 your epidemic analysis with R</a></p>
 </div>
@@ -511,8 +515,8 @@ your epidemic analysis with R</a></p>
 <div id="reading-compressed-data" class="callout-inner">
 <h3 class="callout-title">Reading compressed data</h3>
 <div class="callout-content">
-<p>Take 1 minute: Can you read data from a compressed file in
-<code>R</code>? Download this <a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="external-link">zip
+<p>Can you read data from a compressed file in <code>R</code>?</p>
+<p>Download this <a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="external-link">zip
 file</a> containing data for Marburg outbreak and then import it to your
 working environment.</p>
 </div>
@@ -527,16 +531,14 @@ working environment.</p>
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
-package website. To expand {rio} to the full range of support for import
-and export formats run:</p>
+package website. To expand {rio} to the full range of supported formats
+run:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">rio</span><span class="fu">::</span><span class="fu">install_formats</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
-<p>You can use this template to read the file:</p>
-<p><code>rio::import(here::here("some", "where", "downto", "path", "file_name.zip"))</code></p>
 </div>
 </div>
 </div>
@@ -559,10 +561,13 @@ and export formats run:</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="reading-from-databases">Reading from databases<a class="anchor" aria-label="anchor" href="#reading-from-databases"></a></h2>
-<hr class="half-width"><p>The <a href="https://dbi.r-dbi.org/" class="external-link">DBI</a> package serves as a
-versatile interface for interacting with database management systems
-(DBMS) across different back-ends or servers. It offers a uniform method
-for accessing and retrieving data from various database systems.</p>
+<hr class="half-width"><p>The <code>{readepi}</code> library contains functions that allow you
+to import data directly from RDBMS or HIS (through their APIs). The
+<code>readepi::read_rdbms()</code> function allows you to import data
+from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It is
+primarily based on the <a href="https://dbi.r-dbi.org/" class="external-link">{DBI}</a>
+library, which serves as a general-purpose interface for interacting
+with relational database management systems (RDBMS).</p>
 <div id="when-to-read-directly-from-a-database" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -570,14 +575,14 @@ for accessing and retrieving data from various database systems.</p>
 <div id="when-to-read-directly-from-a-database" class="callout-inner">
 <h3 class="callout-title">When to read directly from a database?</h3>
 <div class="callout-content">
-<p>We can use database interface packages to optimize memory usage. If
-we process the database with “queries” (e.g., select, filter, summarise)
-before extraction, we can reduce the memory load in our RStudio session.
-Conversely, conducting all data manipulation outside the database
-management system by loading the full dataset into R can use up much
-more computer memory (i.e. RAM) than is feasible on a local machine,
-which can lead RStudio to slow down or even freeze.</p>
-<p>External relational database management systems (RDBMS) also have the
+<p>Importing data directly from a database optimizes the memory usage in
+the R session. If we process the database with “queries” (e.g., select,
+filter, summarise) before extraction, we can reduce the memory load in
+our RStudio session. Conversely, conducting all data manipulation
+outside the database management system by loading the full dataset into
+R can use up much more computer memory (i.e. RAM) than is feasible on a
+local machine, which can lead RStudio to slow down or even freeze.</p>
+<p>Relational database management systems (RDBMS) also have the
 advantage that multiple users can access, store and analyse parts of the
 dataset simultaneously, without having to transfer individual files,
 which would make it very difficult to track which version is
@@ -585,27 +590,44 @@ up-to-date.</p>
 </div>
 </div>
 </div>
-<p>The following code chunk demonstrates in four steps how to create a
-temporary SQLite database in memory, store the
-<code>ebola_confirmed</code> as a table on it, and subsequently read
-it:</p>
 <div class="section level3">
 <h3 id="connect-with-a-database">1. Connect with a database<a class="anchor" aria-label="anchor" href="#connect-with-a-database"></a></h3>
-<p>First, we establish a connection to an SQLite database created on our
-machine and stored in its local memory with
-<code>DBI::dbConnect()</code>.</p>
+<p>You can use the <code>readepi::login()</code> function to establish a
+connection to the database as shown below.</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw">library</span><span class="op">(</span><span class="va">DBI</span><span class="op">)</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">RSQLite</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Create a temporary SQLite database in memory</span></span>
-<span><span class="va">db_connection</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span></span>
-<span>  drv <span class="op">=</span> <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  dbname <span class="op">=</span> <span class="st">":memory:"</span></span>
+<code class="sourceCode R"><span><span class="co"># establish the connection to a test MySQL database</span></span>
+<span><span class="va">rdbms_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"mysql-rfam-public.ebi.ac.uk"</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"MySQL"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"rfamro"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  driver_name <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  db_name <span class="op">=</span> <span class="st">"Rfam"</span>,</span>
+<span>  port <span class="op">=</span> <span class="fl">4497</span></span>
 <span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>✔ Logged in successfully!</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rdbms_login</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>&lt;Pool&gt; of MySQLConnection objects
+  Objects checked out: 0
+  Available in pool: 1
+  Max size: Inf
+  Valid: TRUE</code></pre>
 </div>
 <div id="callout1" class="callout">
 <div class="callout-square">
@@ -614,40 +636,24 @@ machine and stored in its local memory with
 <div class="callout-inner">
 <h3 class="callout-title">Callout</h3>
 <div class="callout-content">
-<p>A real-life connection to an external SQLite database would look like
-this:</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># in real-life</span></span>
-<span><span class="va">db_connection</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbConnect</span><span class="op">(</span></span>
-<span>  <span class="fu">RSQLite</span><span class="fu">::</span><span class="fu">SQLite</span><span class="op">(</span><span class="op">)</span>, </span>
-<span>  host <span class="op">=</span> <span class="st">"database.epiversetrace.com"</span>,</span>
-<span>  user <span class="op">=</span> <span class="st">"juanito"</span>,</span>
-<span>  password <span class="op">=</span> <span class="fu">epiversetrace</span><span class="fu">::</span><span class="fu">askForPassword</span><span class="op">(</span><span class="st">"Database password"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span></code></pre>
-</div>
+<p>For this example, access may be limited by organizational network
+restrictions, but it should work normally on home networks.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="section level3">
-<h3 id="write-a-local-data-frame-as-a-table-in-a-database">2. Write a local data frame as a table in a database<a class="anchor" aria-label="anchor" href="#write-a-local-data-frame-as-a-table-in-a-database"></a></h3>
-<p>Then, we can write the <code>ebola_confirmed</code> into a table
-named <code>cases</code> within the database using the
-<code>DBI::dbWriteTable()</code> function.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<h3 id="access-the-list-of-tables-from-the-database">2. Access the list of tables from the database<a class="anchor" aria-label="anchor" href="#access-the-list-of-tables-from-the-database"></a></h3>
+<p>The <code>readepi::show_tables()</code> function can be used to
+access the full list of table names from a database.</p>
+<div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Store the 'ebola_confirmed' dataframe as a table named 'cases'</span></span>
-<span><span class="co"># in the SQLite database</span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbWriteTable</span><span class="op">(</span></span>
-<span>  conn <span class="op">=</span> <span class="va">db_connection</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"cases"</span>,</span>
-<span>  value <span class="op">=</span> <span class="va">ebola_confirmed</span></span>
-<span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># get the table names</span></span>
+<span><span class="va">tables</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">show_tables</span><span class="op">(</span>login <span class="op">=</span> <span class="va">rdbms_login</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tables</span></span></code></pre>
 </div>
 <p>In a database framework, you can have more than one table. Each table
 can belong to a specific <code>entity</code> (e.g., patients, care
@@ -656,81 +662,106 @@ units, jobs). All tables will be related by a common ID or
 </div>
 <div class="section level3">
 <h3 id="read-data-from-a-table-in-a-database">3. Read data from a table in a database<a class="anchor" aria-label="anchor" href="#read-data-from-a-table-in-a-database"></a></h3>
-<!-- Subsequently, we reads the data from the `cases` table using `DBI::dbReadTable()`. -->
-<!-- ```{r,warning=FALSE,message=FALSE} -->
-<!-- # Read data from the 'cases' table -->
-<!-- extracted_data <- DBI::dbReadTable( -->
-<!--   conn = db_connection, -->
-<!--   name = "cases" -->
-<!-- ) -->
-<!-- ``` -->
-<p>Subsequently, we reads the data from the <code>cases</code> table
-using <code>dplyr::tbl()</code>.</p>
-<div class="codewrapper sourceCode" id="cb9">
+<p>Use the <code>readepi::read_rdbms()</code> function to import data
+from a table in a database. It can take an SQL query or a list of query
+parameters as demonstrated in the code chuk below.</p>
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Read one table from the database</span></span>
-<span><span class="va">mytable_db</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">tbl</span><span class="op">(</span>src <span class="op">=</span> <span class="va">db_connection</span>, <span class="st">"cases"</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># import data from the 'author' table using an SQL query</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_rdbms</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">rdbms_login</span>,</span>
+<span>  query <span class="op">=</span> <span class="st">"select * from author"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import data from the 'author' table using a list of parameters</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_rdbms</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">rdbms_login</span>,</span>
+<span>  query <span class="op">=</span> <span class="fu">list</span><span class="op">(</span>table <span class="op">=</span> <span class="st">"author"</span>, fields <span class="op">=</span> <span class="cn">NULL</span>, filter <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre>
+</div>
+<p>Alternativelly, we can read the data from the <code>author</code>
+table using <code>dplyr::tbl()</code>.</p>
+<div class="codewrapper sourceCode" id="cb12">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import data from the 'author' table using an SQL query</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">rdbms_login</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">tbl</span><span class="op">(</span>from <span class="op">=</span> <span class="st">"author"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">initials</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">author_id</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">dat</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># Source:     SQL [?? x 6]
+# Database:   mysql 5.6.36-log [@mysql-rfam-public.ebi.ac.uk:/Rfam]
+# Ordered by: desc(author_id)
+  author_id name           last_name    initials orcid                 synonyms
+      &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;
+1        46 Roth A         Roth         A        ""                    ""
+2        42 Nahvi A        Nahvi        A        ""                    ""
+3        32 Machado Lima A Machado Lima A        ""                    ""
+4        31 Levy A         Levy         A        ""                    ""
+5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""
+6        13 Chen A         Chen         A        ""                    ""
+7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      </code></pre>
 </div>
 <p>If we apply <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> verbs to this database SQLite table,
 these verbs will be translated to SQL queries.</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show the SQL queries translated</span></span>
-<span><span class="va">mytable_db</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">confirm</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">confirm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">dat</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">show_query</span><span class="op">(</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>&lt;SQL&gt;
-SELECT `cases`.*
-FROM `cases`
-WHERE (`confirm` &gt; 50.0)
-ORDER BY `confirm` DESC</code></pre>
+SELECT `author`.*
+FROM `author`
+WHERE (`initials` = 'A')
+ORDER BY `author_id` DESC</code></pre>
 </div>
 </div>
 <div class="section level3">
 <h3 id="extract-data-from-the-database">4. Extract data from the database<a class="anchor" aria-label="anchor" href="#extract-data-from-the-database"></a></h3>
 <p>Use <code>dplyr::collect()</code> to force computation of a database
 query and extract the output to your local computer.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pull all data down to a local tibble</span></span>
-<span><span class="va">extracted_data</span> <span class="op">&lt;-</span> <span class="va">mytable_db</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">confirm</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">arrange</span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">confirm</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span><span class="va">dat</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
-</div>
-<p>The <code>extracted_data</code> object represents the extracted,
-ideally after specifying queries that reduces its size.</p>
-<div class="codewrapper sourceCode" id="cb13">
-<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># View the extracted_data</span></span>
-<span><span class="va">extracted_data</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 3 × 4
-   year month   day confirm
-  &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
-1  2014     9    16      84
-2  2014     9    15      68
-3  2014     9    17      56</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 7 × 6
+  author_id name           last_name    initials orcid                 synonyms
+      &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;
+1        46 Roth A         Roth         A        ""                    ""
+2        42 Nahvi A        Nahvi        A        ""                    ""
+3        32 Machado Lima A Machado Lima A        ""                    ""
+4        31 Levy A         Levy         A        ""                    ""
+5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""
+6        13 Chen A         Chen         A        ""                    ""
+7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      </code></pre>
 </div>
-<div id="run-sql-queries-in-r-using-dbplyr" class="callout">
+<p>Ideally, after specifying a set of queries, we can reduce the size of
+the input dataset to use in the environment of out R session.</p>
+<div id="run-sql-queries-in-r-using-dbplyr" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
 <div id="run-sql-queries-in-r-using-dbplyr" class="callout-inner">
 <h3 class="callout-title">Run SQL queries in R using dbplyr</h3>
@@ -746,26 +777,287 @@ management with SQL for Ecologist</a>. You will find close to
 </div>
 </div>
 </div>
-</div>
-<div class="section level3">
-<h3 id="close-the-database-connection">5. Close the database connection<a class="anchor" aria-label="anchor" href="#close-the-database-connection"></a></h3>
-<p>Finally, we can close the database connection with
-<code>dbDisconnect()</code>.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Close the database connection</span></span>
-<span><span class="fu">DBI</span><span class="fu">::</span><span class="fu">dbDisconnect</span><span class="op">(</span>conn <span class="op">=</span> <span class="va">db_connection</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE</span></span>
+<span><span class="va">author</span> <span class="op">&lt;-</span> <span class="va">rdbms_login</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">tbl</span><span class="op">(</span>from <span class="op">=</span> <span class="st">"author"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">author_id</span>, <span class="va">name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">family_author</span> <span class="op">&lt;-</span> <span class="va">rdbms_login</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">tbl</span><span class="op">(</span>from <span class="op">=</span> <span class="st">"family_author"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">select</span><span class="op">(</span><span class="va">author_id</span>, <span class="va">rfam_acc</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">left_join</span><span class="op">(</span><span class="va">author</span>, <span class="va">family_author</span>, keep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">show_query</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Joining with `by = join_by(author_id)`</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>&lt;SQL&gt;
+SELECT
+  `author`.`author_id` AS `author_id.x`,
+  `name`,
+  `family_author`.`author_id` AS `author_id.y`,
+  `rfam_acc`
+FROM `author`
+LEFT JOIN `family_author`
+  ON (`author`.`author_id` = `family_author`.`author_id`)</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb21">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu">left_join</span><span class="op">(</span><span class="va">author</span>, <span class="va">family_author</span>, keep <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">collect</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Joining with `by = join_by(author_id)`</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 4,874 × 4
+   author_id.x name         author_id.y rfam_acc
+         &lt;int&gt; &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;
+ 1          44 Osuch I               44 RF01571
+ 2           2 Argasinska J           2 RF02588
+ 3           2 Argasinska J           2 RF02587
+ 4           2 Argasinska J           2 RF02586
+ 5           2 Argasinska J           2 RF02585
+ 6           2 Argasinska J           2 RF02549
+ 7           8 Boursnell C            8 RF02002
+ 8          56 Weinberg Z            56 RF01741
+ 9          39 Moxon SJ              39 RF00496
+10          39 Moxon SJ              39 RF00469
+# ℹ 4,864 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="reading-from-his-apis">Reading from HIS APIs<a class="anchor" aria-label="anchor" href="#reading-from-his-apis"></a></h2>
-<hr class="half-width"><p>Health related data are also increasingly stored in specialized HIS
-APIs like <strong>Fingertips</strong>, <strong>GoData</strong>,
-<strong>REDCap</strong>, and <strong>DHIS2</strong>. In such case one
-can resort to <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> package,
-which enables reading data from HIS-APIs.<br>
--[TBC]</p>
+<hr class="half-width"><p>Health data is increasingly stored in specialized HIS such as
+<strong>Fingertips</strong>, <strong>GoData</strong>,
+<strong>REDCap</strong>, <strong>DHIS2</strong>,
+<strong>SORMAS</strong>, etc. The current version of the
+<code>{readepi}</code> library allows importing data from
+<strong>DHIS2</strong> and <strong>SORMAS</strong>.</p>
+<div class="section level3">
+<h3 id="importing-data-from-dhis2">Importing data from DHIS2<a class="anchor" aria-label="anchor" href="#importing-data-from-dhis2"></a></h3>
+<p>The District Health Information System <a href="https://dhis2.org/about/" class="external-link">DHIS2</a> is an open-source software
+that has revolutionized global health information management. The
+<code>readepi::read_dhis2()</code> function allows you to import data
+from the DHIS2 <a href="https://dhis2.org/tracker-in-action/" class="external-link">Tracker</a> system via their
+API.</p>
+<p>To successfully import the data from DHIS2, you will need to connect
+to the system using the <code>readepi::login()</code> function, then
+provide the <strong>name</strong> or <strong>ID</strong> of the target
+program and organisation unit.</p>
+<p>For a given system, you can access the IDs and names of the programs
+and organisation units using the <code>get_programs()</code> and
+<code>get_organisation_units()</code> functions, respectively.</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># establish the connection to the system</span></span>
+<span><span class="va">dhis2_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"https://smc.moh.gm/dhis"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"test"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"Gambia@123"</span></span>
+<span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>✔ Logged in successfully!</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb26">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the names and IDs of the programs</span></span>
+<span><span class="va">programs</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_programs</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get the names and IDs of the organisation units</span></span>
+<span><span class="va">org_units</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_organisation_units</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb27">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import data from DHIS2 using IDs</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
+<span>  org_unit <span class="op">=</span> <span class="st">"GcLhRNAFppR"</span>,</span>
+<span>  program <span class="op">=</span> <span class="st">"E5IUQuHg3Mg"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># import data from DHIS2 using names</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
+<span>  org_unit <span class="op">=</span> <span class="st">"Keneba"</span>,</span>
+<span>  program <span class="op">=</span> <span class="st">"Child Registration &amp; Treatment "</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1,116 × 69
+   event   tracked_entity org_unit ` SMC-CR Scan QR Code` SMC-CR Did the child…¹
+   &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;                  &lt;chr&gt;
+ 1 bgSDQb… yv7MOkGD23q    Keneba   SMC23-0510989          1
+ 2 y4MKmP… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 3 yK7VG3… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 4 EmNflz… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 5 UF96ms… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 6 guQTwc… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 7 jbkRkL… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 8 AEeype… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 9 R30SPs… E5oAWGcdFT4    Keneba   koika-smc-22897        1
+10 nr03Qy… E5oAWGcdFT4    Keneba   koika-smc-22897        1
+# ℹ 1,106 more rows
+# ℹ abbreviated name: ¹​`SMC-CR Did the child  previously received a card?`
+# ℹ 64 more variables: `SMC-CR Child First Name1` &lt;chr&gt;,
+#   `SMC-CR Child Last Name` &lt;chr&gt;, `SMC-CR Date of Birth` &lt;chr&gt;,
+#   `SMC-CR Select Age Category  ` &lt;chr&gt;, `SMC-CR Child gender1` &lt;chr&gt;,
+#   `SMC-CR Mother/Person responsible full name` &lt;chr&gt;,
+#   `SMC-CR Mother/Person responsible phone number1` &lt;chr&gt;, …</code></pre>
+</div>
+<p>It is important to know that not all organisation units are
+registered for a specific program. To find out which organisation units
+are running a particular program, use the
+<code>get_program_org_units()</code> function as shown in the example
+below.</p>
+<div class="codewrapper sourceCode" id="cb29">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the list of organisation units that run the program "E5IUQuHg3Mg"</span></span>
+<span><span class="va">target_org_units</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_program_org_units</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
+<span>  program <span class="op">=</span> <span class="st">"E5IUQuHg3Mg"</span>,</span>
+<span>  org_units <span class="op">=</span> <span class="va">org_units</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">target_org_units</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 26 × 3
+   org_unit_ids levels            org_unit_names
+   &lt;chr&gt;        &lt;chr&gt;             &lt;chr&gt;
+ 1 UrLrbEiWk3J  Town/Village_name Sare Sibo
+ 2 wlVsFVeHSTx  Town/Village_name Jawo Kunda
+ 3 kp0ZYUEqJE8  Town/Village_name Chewal
+ 4 Wr3htgGxhBv  Town/Village_name Madinayel
+ 5 psyHoqeN2Tw  Town/Village_name Bolibanna
+ 6 MGBYonFM4y3  Town/Village_name Sare Mala
+ 7 GcLhRNAFppR  Town/Village_name Keneba
+ 8 y1Z3KuvQyhI  Town/Village_name Brikama
+ 9 W3vH9yBUSei  Town/Village_name Gidda
+10 ISbNWYieHY8  Town/Village_name Song Kunda
+# ℹ 16 more rows</code></pre>
+</div>
+</div>
+<div class="section level3">
+<h3 id="importing-data-from-sormas">Importing data from SORMAS<a class="anchor" aria-label="anchor" href="#importing-data-from-sormas"></a></h3>
+<p>The Surveillance Outbreak Response Management and Analysis System <a href="https://sormas.org/" class="external-link">SORMAS</a> is an open-source e-health system
+that optimizes infectious disease surveillance and outbreak response
+processes. The <code>readepi::read_sormas()</code> function allows you
+to import data from SORMAS via its API.</p>
+<p>In the current version of the <code>readepi</code> package, the
+<code>read_sormas()</code> function returns data for the following
+columns: <strong>case_id, person_id, sex, date_of_birth, case_origin,
+country, city, lat, long, case_status, date_onset, date_admission,
+date_last_contact, date_first_contact, outcome, date_outcome,
+Ct_values</strong>.</p>
+<p>One of the fundamental arguments is the name of the disease for which
+the user wants to get data. To ensure the correct syntax to use when
+calling the function, you can get the list of disease names through the
+<code>sormas_get_diseases()</code> function.</p>
+<div class="codewrapper sourceCode" id="cb31">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the list of all disease names</span></span>
+<span><span class="va">disease_names</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">sormas_get_diseases</span><span class="op">(</span></span>
+<span>  base_url <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"SurvSup"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"Lk5R7JXeZSEc"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">disease_names</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 65 × 2
+   disease            active
+   &lt;chr&gt;              &lt;chr&gt;
+ 1 AFP                TRUE
+ 2 CHOLERA            TRUE
+ 3 CONGENITAL_RUBELLA TRUE
+ 4 CSM                TRUE
+ 5 DENGUE             TRUE
+ 6 EVD                TRUE
+ 7 GUINEA_WORM        TRUE
+ 8 LASSA              TRUE
+ 9 MEASLES            TRUE
+10 MONKEYPOX          TRUE
+# ℹ 55 more rows</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb33">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import COVID-19 cases from SORMAS</span></span>
+<span><span class="va">covid_cases</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_sormas</span><span class="op">(</span></span>
+<span>  base_url <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"SurvSup"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"Lk5R7JXeZSEc"</span>,</span>
+<span>  disease <span class="op">=</span> <span class="st">"coronavirus"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">covid_cases</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 6 × 16
+  case_id    person_id date_onset date_admission case_origin case_status outcome
+  &lt;chr&gt;      &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;
+1 QFC5QI-GC… XNQZBX-W… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+2 UOZL3G-4M… UGBWTB-B… 2025-05-27 NA             IN_COUNTRY  SUSPECT     NO_OUT…
+3 SRO72L-LY… UOAAIQ-Z… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+4 XV7RQ3-ZY… XP2SJX-W… 2025-07-03 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+5 SMUIMI-ZI… TMWNQS-O… NA         NA             IN_COUNTRY  CONFIRMED   NO_OUT…
+6 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+# ℹ 9 more variables: sex &lt;chr&gt;, date_of_birth &lt;chr&gt;, country &lt;chr&gt;,
+#   city &lt;chr&gt;, latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
+#   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -773,7 +1065,7 @@ which enables reading data from HIS-APIs.<br>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>Use <code>{rio}, {io}, {readr}</code> and
+<ul><li>Use <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://bitbucket.org/djhshih/io" class="external-link">io</a>, <a href="https://readr.tidyverse.org" class="external-link">readr</a> and
 <code>{ImportExport}</code> to read data from individual files.</li>
 <li>Use <code>{readepi}</code> to read data form HIS APIs and
 RDBMS.</li>
@@ -784,6 +1076,7 @@ RDBMS.</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
@@ -841,9 +1134,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/read-cases.html",
-  "dateCreated": "2025-08-28",
-  "dateModified": "2025-08-28",
-  "datePublished": "2025-08-28"
+  "dateCreated": "2025-08-29",
+  "dateModified": "2025-08-29",
+  "datePublished": "2025-08-29"
 }
 
   </script><script>
