@@ -240,7 +240,7 @@ dat %>%
 
 Idéalement, après avoir spécifié un ensemble de requêtes, nous pouvons réduire la taille du jeu de données d’entrée à utiliser dans l’environnement de notre session R.
 
-:::::::::::::::::::::: discussion
+:::::::::::::::::::::: challenge
 
 ### Exécutez des requêtes SQL dans R à l'aide de dbplyr
 
