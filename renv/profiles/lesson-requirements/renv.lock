@@ -4478,7 +4478,7 @@
       "RemoteUsername": "epiverse-trace",
       "RemotePkgRef": "epiverse-trace/readepi@readepi_no_his_spc_deps",
       "RemoteRef": "readepi_no_his_spc_deps",
-      "RemoteSha": "40a694364c2908d2910ab43cc0c0fc86d52473ac",
+      "RemoteSha": "94d0ce872361a231a5c7867c6bccbeaebcd55038",
       "NeedsCompilation": "no",
       "Author": "Karim Mané [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-9892-2999>), Emmanuel Kabuga [ctb] (ORCID: <https://orcid.org/0009-0006-2291-709X>), Bubacarr Bah [ctb] (ORCID: <https://orcid.org/0000-0003-3318-6668>), Bankolé Ahadzie [ctb], Nuredin Mohammed [ctb], Abdoelnaser Degoot [ctb], Hugo Gruson [rev] (ORCID: <https://orcid.org/0000-0002-4094-1476>), Pratik Gupte [rev] (ORCID: <https://orcid.org/0000-0001-5294-7819>), Andree Valle-Campos [rev] (ORCID: <https://orcid.org/0000-0002-7779-481X>), London School of Hygiene and Tropical Medicine, LSHTM [cph], data.org [fnd]",
       "Maintainer": "Karim Mané <karim.mane@lshtm.ac.uk>"
