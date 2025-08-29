@@ -38,6 +38,7 @@ library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data from files
 library(here) # for easy file referencing
 library(readepi) # for importing data directly from RDBMS or HIS
+library(dbplyr) # for a database backend for {dplyr}
 ```
 
 ::::::::::::::::::: checklist
