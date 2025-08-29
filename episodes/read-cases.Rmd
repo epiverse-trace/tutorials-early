@@ -154,23 +154,31 @@ Importing data directly from a database optimizes the memory usage in the R sess
 Relational database management systems (RDBMS) also have the advantage that multiple users can access, store and analyse parts of the dataset simultaneously, without having to transfer individual files, which would make it very difficult to track which version is up-to-date.
 
 :::::::::::::
-<!--
+
 ### 1. Connect with a database
 
 You can use the `readepi::login()` function to establish a connection to the database as shown below.
 
-```{r warning=FALSE, message=FALSE, eval=FALSE}
+```{r}
 # establish the connection to a test MySQL database
 rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
   type = "MySQL",
   user_name = "rfamro",
-  password = NULL,
+  password = "",
   driver_name = "",
   db_name = "Rfam",
-  port = 3306
+  port = 4497
 )
+
+rdbms_login
 ```
+
+:::::::::::::::: callout
+
+For this example, access may be limited by organizational network restrictions, but it should work normally on home networks.
+
+::::::::::::::::
 
 ### 2. Access the list of tables from the database
 
@@ -181,6 +189,8 @@ The `readepi::show_tables()` function can be used to access the full list of tab
 tables <- show_tables(login = rdbms_login)
 tables
 ```
+
+In a database framework, you can have more than one table. Each table can belong to a specific `entity` (e.g., patients, care units, jobs). All tables will be related by a common ID or `primary key`.
 
 ### 3. Read data from a table in a database
 
@@ -199,83 +209,24 @@ dat <- read_rdbms(
   query = list(table = "author", fields = NULL, filter = NULL)
 )
 ```
--->
 
-The following code chunk demonstrates in four steps how to create a temporary SQLite database in memory, store the `ebola_confirmed` as a table on it, and subsequently read it:
-
-### 1. Connect with a database
-
-First, we establish a connection to an SQLite database created on our machine and stored in its local memory with `DBI::dbConnect()`. 
-
-```{r,warning=FALSE,message=FALSE}
-library(DBI)
-library(RSQLite)
-
-# Create a temporary SQLite database in memory
-db_connection <- DBI::dbConnect(
-  drv = RSQLite::SQLite(),
-  dbname = ":memory:"
-)
-```
-
-::::::::::::::::: callout
-
-A real-life connection to an external SQLite database would look like this:
-
-```r
-# in real-life
-db_connection <- DBI::dbConnect(
-  RSQLite::SQLite(), 
-  host = "database.epiversetrace.com",
-  user = "juanito",
-  password = epiversetrace::askForPassword("Database password")
-)
-```
-
-:::::::::::::::::
-
-### 2. Write a local data frame as a table in a database
-
-Then, we can write the `ebola_confirmed` into a table named `cases` within the database using the `DBI::dbWriteTable()` function.
-
-```{r,warning=FALSE,message=FALSE}
-# Store the 'ebola_confirmed' dataframe as a table named 'cases'
-# in the SQLite database
-DBI::dbWriteTable(
-  conn = db_connection,
-  name = "cases",
-  value = ebola_confirmed
-)
-```
-
-In a database framework, you can have more than one table. Each table can belong to a specific `entity` (e.g., patients, care units, jobs). All tables will be related by a common ID or `primary key`.
-
-### 3. Read data from a table in a database
-
-<!-- Subsequently, we reads the data from the `cases` table using `DBI::dbReadTable()`. -->
-
-<!-- ```{r,warning=FALSE,message=FALSE} -->
-<!-- # Read data from the 'cases' table -->
-<!-- extracted_data <- DBI::dbReadTable( -->
-<!--   conn = db_connection, -->
-<!--   name = "cases" -->
-<!-- ) -->
-<!-- ``` -->
-
-Subsequently, we reads the data from the `cases` table using `dplyr::tbl()`.
+Alternativelly, we can read the data from the `author` table using `dplyr::tbl()`.
 
 ```{r}
-# Read one table from the database
-mytable_db <- dplyr::tbl(src = db_connection, "cases")
+# import data from the 'author' table using an SQL query
+dat <- rdbms_login %>% 
+  dplyr::tbl(from = "author") %>% 
+  dplyr::filter(stringr::str_detect(name,"^A")) %>% 
+  dplyr::arrange(desc(author_id))
+
+dat
 ```
 
 If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be translated to SQL queries.
 
 ```{r}
 # Show the SQL queries translated
-mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+dat %>%
   dplyr::show_query()
 ```
 
@@ -285,20 +236,13 @@ Use `dplyr::collect()` to force computation of a database query and extract the 
 
 ```{r}
 # Pull all data down to a local tibble
-extracted_data <- mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+dat %>%
   dplyr::collect()
 ```
 
-The `extracted_data` object represents the extracted, ideally after specifying queries that reduces its size.
+Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of out R session.
 
-```{r,warning=FALSE,message=FALSE}
-# View the extracted_data
-extracted_data
-```
-
-:::::::::::::::::::::: callout
+:::::::::::::::::::::: discussion
 
 ### Run SQL queries in R using dbplyr
 
@@ -306,17 +250,31 @@ Practice how to make relational database SQL queries using multiple `{dplyr}` ve
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/). You will find close to `{dplyr}`!
 
+::::::::::::::: hint
+
+```{r}
+# SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
+author <- login %>%
+  dplyr::tbl(from = "author") %>%
+  dplyr::select(author_id, name)
+
+family_author <- login %>%
+  dplyr::tbl(from = "family_author") %>%
+  dplyr::select(author_id, rfam_acc)
+
+dplyr::left_join(author, family_author, keep = TRUE) %>%
+  dplyr::show_query()
+
+dplyr::left_join(author, family_author, keep = TRUE) %>%
+  dplyr::collect()
+```
+
+
+:::::::::::::::
+
 ::::::::::::::::::::::
 
 
-### 5. Close the database connection
-
-Finally, we can close the database connection with `dbDisconnect()`.
-
-```{r,warning=FALSE,message=FALSE}
-# Close the database connection
-DBI::dbDisconnect(conn = db_connection)
-```
 
 ## Reading from HIS APIs
 
@@ -330,7 +288,7 @@ To successfully import the data from DHIS2, you will need to connect to the syst
 
 For a given system, you can access the IDs and names of the programs and organisation units using the `get_programs()` and `get_organisation_units()` functions, respectively.
 
-```{r, eval=FALSE}
+```{r}
 # establish the connection to the system
 dhis2_login <- readepi::login(
   from = "https://smc.moh.gm/dhis",
@@ -350,28 +308,29 @@ data <- readepi::read_dhis2(
   org_unit = "GcLhRNAFppR",
   program = "E5IUQuHg3Mg"
 )
+
+# import data from DHIS2 using names
+data <- readepi::read_dhis2(
+  login = dhis2_login,
+  org_unit = "Keneba",
+  program = "Child Registration & Treatment "
+)
+
+tibble::as_tibble(data)
 ```
 
-<!--
-<!--` ` ` r
-<!--# import data from DHIS2 using names
-<!--data <- readepi::read_dhis2(
-<!--  login = dhis2_login,
-<!--  org_unit = "Keneba",
-<!--  program = "Child Registration & Treatment "
-<!--)
-<!--` ` `
--->
 
 It is important to know that not all organisation units are registered for a specific program. To find out which organisation units are running a particular program, use the `get_program_org_units()` function as shown in the example below.
 
-```{r, eval=FALSE}
+```{r}
 # get the list of organisation units that run the program "E5IUQuHg3Mg"
 target_org_units <- readepi::get_program_org_units(
   login = dhis2_login,
   program = "E5IUQuHg3Mg",
   org_units = org_units
 )
+
+tibble::as_tibble(target_org_units)
 ```
 
 ### Importing data from SORMAS
@@ -382,13 +341,15 @@ In the current version of the `readepi` package, the `read_sormas()` function re
 
 One of the fundamental arguments is the name of the disease for which the user wants to get data. To ensure the correct syntax to use when calling the function, you can get the list of disease names through the `sormas_get_diseases()` function.
 
-```{r eval=FALSE}
+```{r}
 # get the list of all disease names
 disease_names <- readepi::sormas_get_diseases(
   base_url = "https://demo.sormas.org/sormas-rest",
   user_name = "SurvSup",
   password = "Lk5R7JXeZSEc"
 )
+
+tibble::as_tibble(disease_names)
 
 # import COVID-19 cases from SORMAS
 covid_cases <- readepi::read_sormas(
@@ -397,6 +358,8 @@ covid_cases <- readepi::read_sormas(
   password = "Lk5R7JXeZSEc",
   disease = "coronavirus"
 )
+
+tibble::as_tibble(covid_cases)
 ```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
