@@ -180,7 +180,8 @@ Vous pouvez accéder à la liste des noms de tables qui existent dans une base d
 
 ```{r eval=FALSE}
 # obtenir la liste des tables dans la base de donnees
-tables <- show_tables(login = rdbms_login)
+tables <- readepi::show_tables(login = rdbms_login)
+
 tables
 ```
 
@@ -200,7 +201,7 @@ dat <- readepi::read_rdbms(
 )
 
 # lire les donnees de la table 'author' en utilisant une liste de parametres
-dat <- read_rdbms(
+dat <- readepi::read_rdbms(
   login = rdbms_login,
   query = list(table = "author", fields = NULL, filter = NULL)
 )
@@ -295,7 +296,9 @@ programs <- readepi::get_programs(login = dhis2_login)
 
 # obtenir les noms et identifiants des unites organisationnelles
 org_units <- get_organisation_units(login = dhis2_login)
+```
 
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # importer les donnees a partir de DHIS2 en utilisant les identifiants
 data <- readepi::read_dhis2(
   login = dhis2_login,
@@ -335,7 +338,7 @@ Dans la version actuelle de la librairie `{readepi}`, la fonction `read_sormas()
 
 Un des arguments fondamentals est le nom de la maladie pour laquelle l'utilisateur souhaite obtenir des données. Pour vous assurez de la vraie synthaxe à utiliser lors de l'appel à la fonction, vous pouvez obtenir la liste des noms de maladies à travers la fonction `sormas_get_diseases()`.
 
-```{r}
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # obtenir la liste des noms de maladies
 disease_names <- readepi::sormas_get_diseases(
   base_url = "https://demo.sormas.org/sormas-rest",
