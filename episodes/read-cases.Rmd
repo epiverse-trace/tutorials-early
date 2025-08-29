@@ -186,7 +186,8 @@ The `readepi::show_tables()` function can be used to access the full list of tab
 
 ```{r eval=FALSE}
 # get the table names
-tables <- show_tables(login = rdbms_login)
+tables <- readepi::show_tables(login = rdbms_login)
+
 tables
 ```
 
@@ -204,7 +205,7 @@ dat <- readepi::read_rdbms(
 )
 
 # import data from the 'author' table using a list of parameters
-dat <- read_rdbms(
+dat <- readepi::read_rdbms(
   login = rdbms_login,
   query = list(table = "author", fields = NULL, filter = NULL)
 )
@@ -301,7 +302,9 @@ programs <- readepi::get_programs(login = dhis2_login)
 
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+```
 
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # import data from DHIS2 using IDs
 data <- readepi::read_dhis2(
   login = dhis2_login,
@@ -318,7 +321,6 @@ data <- readepi::read_dhis2(
 
 tibble::as_tibble(data)
 ```
-
 
 It is important to know that not all organisation units are registered for a specific program. To find out which organisation units are running a particular program, use the `get_program_org_units()` function as shown in the example below.
 
@@ -341,7 +343,7 @@ In the current version of the `readepi` package, the `read_sormas()` function re
 
 One of the fundamental arguments is the name of the disease for which the user wants to get data. To ensure the correct syntax to use when calling the function, you can get the list of disease names through the `sormas_get_diseases()` function.
 
-```{r}
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # get the list of all disease names
 disease_names <- readepi::sormas_get_diseases(
   base_url = "https://demo.sormas.org/sormas-rest",
