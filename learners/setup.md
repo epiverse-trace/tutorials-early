@@ -145,7 +145,71 @@ RStudio et de tous les packages que vous utilisez régulièrement.
 
 :::::::::::::::::::::::::::::
 
-### 2. Installez les librairies R requises
+### 2. Vérifier et installer les outils de compilation
+
+Certains paquets nécessitent un ensemble d'outils complémentaires pour être compilés.
+Ouvrez RStudio et **copiez-collez** le bloc de code suivant dans la 
+[fenêtre de console](https://docs.posit.co/ide/user/ide/guide/code/console.html),
+puis appuyez sur <kbd>Entrée</kbd> (Windows et Linux) ou <kbd>Retour</kbd> (MacOS) pour exécuter la commande :
+
+```r
+if(!require(« pkgbuild »)) install.packages(« pkgbuild »)
+pkgbuild::check_build_tools(debug = TRUE)
+```
+
+Nous attendons un message similaire à celui ci-dessous :
+
+```output
+Your system is ready to build packages!
+```
+
+Si les outils de compilation ne sont pas disponibles, cela déclenchera une installation automatique.
+
+1. Exécutez la commande dans la console.
+2. Ne l'interrompez pas, attendez que R affiche le message de confirmation.
+3. Une fois cela fait, redémarrez votre session R (ou redémarrez simplement RStudio) pour vous assurer que les modifications prennent effet.
+
+Si l'installation automatique **ne fonctionne pas**, vous pouvez les installer manuellement en fonction de votre système d'exploitation.
+
+::::::::::::::::::::::::::::: onglet
+
+### Windows
+
+Les utilisateurs Windows auront besoin d'une installation fonctionnelle de `Rtools` afin de compiler le paquet à partir du code source.  
+`Rtools` n'est pas un paquet R, mais un logiciel que vous devez télécharger et installer.
+Nous vous suggérons de suivre les étapes suivantes :
+
+- **Installez `Rtools`**. Téléchargez le programme d'installation de `Rtools` à partir de <https://cran.r-project.org/bin/windows/Rtools/>. Installez-le en conservant les sélections par défaut.
+- Fermez et rouvrez RStudio afin qu'il puisse reconnaître la nouvelle installation.
+
+### Mac
+
+Les utilisateurs Mac doivent suivre deux étapes supplémentaires, comme indiqué dans ce [guide de configuration de la chaîne d'outils C pour Mac](https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Mac) :
+
+- Installez et utilisez [`macrtools`](https://mac.thecoatlessprofessor.com/macrtools/) pour configurer la chaîne d'outils C++
+- Activez certaines optimisations du compilateur.
+
+### Linux
+
+Les utilisateurs Linux doivent suivre des instructions spécifiques à leur distribution. Vous les trouverez dans ce [guide de configuration de la chaîne d'outils C pour Linux](https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux).
+
+:::::::::::::::::::::::::::::
+
+::::::::::::: callout
+
+### Vérification de l'environnement
+
+Cette étape nécessite des privilèges d'administrateur pour installer le logiciel.
+
+Si vous ne disposez pas des droits d'administrateur dans votre environnement actuel :  
+
+- Essayez d'exécuter le tutoriel sur votre **ordinateur personnel** auquel vous avez un accès complet.  
+- Utilisez un **environnement de développement préconfiguré** (par exemple, [Posit Cloud](https://posit.cloud/)).  
+- Demandez à votre **administrateur système** d'installer les logiciels requis pour vous.  
+
+:::::::::::::
+
+### 3. Installez les librairies R requises
 
 Ouvrez RStudio et **copiez et collez** le morceau de code suivant dans la
 [fenêtre de la console](https://docs.posit.co/ide/user/ide/guide/code/console.html)
@@ -275,7 +339,7 @@ library(tidyverse)
 Si vous ne voyez PAS d'erreur comme `there is no package called '...'` vous êtes
 prêt à commencer ! Si c'est le cas, [contactez-nous](#your-questions)!
 
-### 3. Créez un projet et un dossier RStudio
+### 4. Créez un projet et un dossier RStudio
 
 Nous vous suggérons d'utiliser les projets RStudio.
 
@@ -304,7 +368,7 @@ et moins sujet aux erreurs.
 
 :::::::::::::::::::::::::::::::::
 
-### 4. Créez un compte GitHub
+### 5. Créez un compte GitHub
 
 Nous pouvons utiliser [GitHub](https://github.com) comme plateforme de
 collaboration pour communiquer sur les problèmes liés aux librairies et
