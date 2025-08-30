@@ -67,7 +67,7 @@ spécialisés à un pipeline traditionnel d'analyse de données. Ces librairies
 devraient combler les lacunes notées dans ces pipelines d'analyse
 épidémiologiques qui sont conçus en vue d'apporter des réponses aux épidémies.
 
-![L'unité fondamentale de partage de code dans **R** est le **package**. Un package regroupe du code, des données, de la documentation et des tests et est facile à partager avec d'autres ([Wickham et Bryan, 2023](https://r-pkgs.org/introduction.html))](../../../episodes/fig/pkgs-hexlogos-2.png)
+![L'unité fondamentale de partage de code dans **R** est le **package**. Un package regroupe du code, des données, de la documentation et des tests et est facile à partager avec d'autres ([Wickham et Bryan, 2023](https://r-pkgs.org/introduction.html))](episodes/fig/pkgs-hexlogos-2.png)
 
 :::::::::::::::::::::::::::: prereq
 
