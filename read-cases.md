@@ -309,7 +309,7 @@ dat %>%
 7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
 ```
 
-Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of out R session.
+Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
 
 :::::::::::::::::::::: challenge
 
