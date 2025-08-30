@@ -148,10 +148,10 @@ RStudio et de tous les packages que vous utilisez régulièrement.
 Certains paquets nécessitent un ensemble d'outils complémentaires pour être compilés.
 Ouvrez RStudio et **copiez-collez** le bloc de code suivant dans la 
 [fenêtre de console](https://docs.posit.co/ide/user/ide/guide/code/console.html),
-puis appuyez sur <kbd>Entrée</kbd> (Windows et Linux) ou <kbd>Retour</kbd> (MacOS) pour exécuter la commande :
+puis appuyez sur <kbd>Enter</kbd> (Windows et Linux) ou <kbd>Return</kbd> (MacOS) pour exécuter la commande :
 
 ```r
-if(!require(« pkgbuild »)) install.packages(« pkgbuild »)
+if(!require("pkgbuild")) install.packages("pkgbuild")
 pkgbuild::check_build_tools(debug = TRUE)
 ```
 
@@ -169,7 +169,7 @@ Si les outils de compilation ne sont pas disponibles, cela déclenchera une inst
 
 Si l'installation automatique **ne fonctionne pas**, vous pouvez les installer manuellement en fonction de votre système d'exploitation.
 
-::::::::::::::::::::::::::::: onglet
+::::::::::::::::::::::::::::: tab
 
 ### Windows
 
@@ -184,7 +184,7 @@ Nous vous suggérons de suivre les étapes suivantes :
 
 Les utilisateurs Mac doivent suivre deux étapes supplémentaires, comme indiqué dans ce [guide de configuration de la chaîne d'outils C pour Mac](https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Mac) :
 
-- Installez et utilisez [`macrtools`](https://mac.thecoatlessprofessor.com/macrtools/) pour configurer la chaîne d'outils C++
+- Installez et utilisez [macrtools](https://mac.thecoatlessprofessor.com/macrtools/) pour configurer la chaîne d'outils C++
 - Activez certaines optimisations du compilateur.
 
 ### Linux
