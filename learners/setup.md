@@ -184,7 +184,7 @@ Nous vous suggérons de suivre les étapes suivantes :
 
 Les utilisateurs Mac doivent suivre deux étapes supplémentaires, comme indiqué dans ce [guide de configuration de la chaîne d'outils C pour Mac](https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Mac) :
 
-- Installez et utilisez [macrtools](https://mac.thecoatlessprofessor.com/macrtools/) pour configurer la chaîne d'outils C++
+- Installez et utilisez [`macrtools`](https://mac.thecoatlessprofessor.com/macrtools/) pour configurer la chaîne d'outils C++
 - Activez certaines optimisations du compilateur.
 
 ### Linux
