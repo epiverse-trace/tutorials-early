@@ -96,7 +96,71 @@ While this may sound scary, it is **far more common** to run into issues due to 
 
 :::::::::::::::::::::::::::::
 
-### 2. Install the required R packages
+### 2. Check and Install Build Tools
+
+Some packages require a complementary set of tools to build them.
+Open RStudio and **copy and paste** the following code chunk into the 
+[console window](https://docs.posit.co/ide/user/ide/guide/code/console.html),
+then press the <kbd>Enter</kbd> (Windows and Linux) or <kbd>Return</kbd> (MacOS) to execute the command:
+
+```r
+if(!require("pkgbuild")) install.packages("pkgbuild")
+pkgbuild::check_build_tools(debug = TRUE)
+```
+
+We expect a message like the one below:
+
+```output
+Your system is ready to build packages!
+```
+
+If the build tools are not available, this will trigger an automated install.
+
+1. Run the command in the console.
+2. Don't interrupt it—wait until R prints the confirmation message.
+3. Once that's done, restart your R session (or just restart RStudio) to ensure the changes take effect.
+
+If the automatic installation **does not** work, you can manually install them according to your operating system.
+
+::::::::::::::::::::::::::::: tab
+
+### Windows
+
+Windows users will need a working installation of `Rtools` in order to build the package from source.  
+`Rtools` is not an R package, but a software you need to download and install.
+We suggest you to follow:
+
+- **Install `Rtools`**. Download the `Rtools` installer from <https://cran.r-project.org/bin/windows/Rtools/>. Install with default selections.
+- Close and reopen RStudio so it can recognize the new installation.
+
+### Mac
+
+Mac users require two additional steps as detailed in this [guide to Configuring C Toolchain for Mac](https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Mac):
+
+- Install and use [`macrtools`](https://mac.thecoatlessprofessor.com/macrtools/) to setup the C++ toolchain
+- Enable some compiler optimizations.
+
+### Linux
+
+Linux users require specific details per distribution. Find them in this [guide to Configuring C Toolchain for Linux](https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux).
+
+:::::::::::::::::::::::::::::
+
+::::::::::::: callout
+
+### Environment Check
+
+This step requires administrator privileges to install software.
+
+If you do not have admin rights in your current environment:  
+
+- Try running the tutorial on your **personal machine** where you have full access.  
+- Use a **preconfigured development environment** (e.g. [Posit Cloud](https://posit.cloud/)).  
+- Ask your **system administrator** to install the required software for you.  
+
+:::::::::::::
+
+### 3. Install the required R packages
 
 <!--
 During the tutorial, we will need a number of R packages. Packages contain useful R code written by other people. We will use packages from the [Epiverse-TRACE](https://epiverse-trace.github.io/).
@@ -221,7 +285,7 @@ library(tidyverse)
 
 If you do NOT see an error like `there is no package called ‘...’` you are good to go! If you do, [contact us](#your-questions)!
 
-### 3. Setup an RStudio project and folder
+### 4. Setup an RStudio project and folder
 
 We suggest to use RStudio Projects.
 
@@ -247,7 +311,7 @@ like `"C:/Users/MyName/WeirdPath/training/data/file.csv"`.
 
 :::::::::::::::::::::::::::::::::
 
-### 4. Create a GitHub Account
+### 5. Create a GitHub Account
 
 We can use [GitHub](https://github.com) as a collaboration platform to communicate package issues and engage in [community discussions](https://github.com/orgs/epiverse-trace/discussions).
 
