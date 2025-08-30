@@ -13,6 +13,6 @@
 "learners/epikinetics-descriptive.md" "50400941620956b3366fd99d51ed465b" "site/built/epikinetics-descriptive.md" "2025-08-29"
 "learners/epikinetics-statistics.md" "26868caf5a6b4a948ecb8f95c40694ab" "site/built/epikinetics-statistics.md" "2025-08-29"
 "learners/reference.md" "f081702f1c557d1ce455b7d38306737b" "site/built/reference.md" "2025-08-29"
-"learners/setup.md" "4597dbd28a9b1a3ee57ebb6f916e8585" "site/built/setup.md" "2025-08-29"
+"learners/setup.md" "65457a0cdd39d17bd46c96e356c74261" "site/built/setup.md" "2025-08-30"
 "profiles/learner-profiles.md" "31b503c4b5bd1f0960ada730eca4a25e" "site/built/learner-profiles.md" "2025-08-29"
 "renv/profiles/lesson-requirements/renv.lock" "b55907ce8eab9e55b723a9adc3b677d7" "site/built/renv.lock" "2025-08-29"
