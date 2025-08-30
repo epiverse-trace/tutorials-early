@@ -123,12 +123,10 @@ Vous pouvez également exécuter `sessionInfo()`.
 - **Pour mettre à jour R** téléchargez et installez la dernière version à partir
 du [site web du projet R](https://cran.rstudio.com/) pour votre système
 d'exploitation.
+
+  - Après l'installation d'une nouvelle version, vous devrez réinstaller tous vos librairies avec la nouvelle version.
   
-- Après l'installation d'une nouvelle version, vous devrez réinstaller tous vos
-librairies avec la nouvelle version.
-  
-- Pour Windows, la librairie `{installr}` permet de mettre à jour votre version
-de R et migrer votre bibliothèque de librairies.
+  - Pour Windows, la librairie `{installr}` permet de mettre à jour votre version de R et migrer votre bibliothèque de librairies.
 
 - **Pour mettre à jour RStudio** ouvrez RStudio et cliquez sur
 `Help > Check for Updates`. Si une nouvelle version est disponible, suivez les
