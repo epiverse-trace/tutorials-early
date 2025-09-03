@@ -10,7 +10,7 @@ exercises: 2
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectifs
+::::::::::::::::::::::::::::::::::::: objectives
 
 - Démontrez comment convertir les données portant sur les cas épidémiques en objet de type `linelist`
 - Démontrer comment étiqueter et valider les données pour rendre l'analyse plus fiable
@@ -38,9 +38,9 @@ Cet épisode est consacré à l'étiquettage et la validation des données épid
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 # charger packages
-library(tidyverse) # pour acceder aux fonctions de la librairie {dplyr} et à l'opérateur pipe %>% du package {magrittr}
-library(rio) # pour importer les donnees
-library(here) # pour faciliter le referencement des fichiers
+library(tidyverse)
+library(rio)
+library(here)
 library(linelist) # pour etiquetter et valider les donnees
 ```
 
@@ -62,7 +62,8 @@ Il s'agit d'importer les données dans l'environnement de travail et de visualis
 
 ```{r, eval=FALSE}
 # lecture des données
-# supposons que le chemin d'acces au fichier est: data/simulated_ebola_2.csv, alors:
+# supposons que le chemin d'acces au fichier
+# est: data/simulated_ebola_2.csv, alors:
 cleaned_data <- rio::import(
   here::here("data", "cleaned_data.csv")
 ) %>%
@@ -95,7 +96,7 @@ Comment pouvez-vous détecter si les données saisies sont **toujours valides** 
 
 ::::::::::::::::::::::::
 
-:::::::::::::::::::::::: instructeur
+:::::::::::::::::::::::: instructor
 
 Si les apprenants n'ont pas d'expérience à partager à ce sujet, nous, en tant qu'instructeurs, pouvons en partager une.
 
@@ -122,7 +123,7 @@ linelist_data
 
 La librairie `{linelist}` fournit des étiquettes aux variables épidémiologiques courantes et leurs associe un ensemble de types de données appropriés. Vous pouvez consulter la liste des étiquettes disponibles à partir du nom de la variable et les types de données acceptables pour chacune d'entre elles en utilisant la fonction `linelist::tags_types()`.
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 Etiquettons d'autres variables. Dans certains jeu de données, il est possible de trouver des noms de variables qui sont différents des noms des étiquettes disponibles. Dans ces cas là, nous pouvons les associer en fonction de la façon dont les variables ont été définies durant la collecte des données.
 
@@ -132,7 +133,7 @@ Maintenant:
 - **Trouver** quelles autres variables de ce jeu de données peuvent être associées à l'une des étiquettes disponibles.
 - **Étiquetter** ces variables comme on l'a montré ci-dessus en utilisant la fonction `linelist::make_linelist()`.
 
-:::::::::::::::::::: indice
+:::::::::::::::::::: hint
 
 Vous pouvez accéder à la liste des noms des étiquettes disponibles dans la librairie {linelist} en utilisant :
 
@@ -174,7 +175,7 @@ linelist::validate_linelist(linelist_data)
 
 <!-- Si votre jeu de données nécessite une nouvelle étiquette, définissez l'argument `allow_extra = TRUE` lors de la création de l'objet linelist.-->
 
-::::::::::::::::::::::::: défi
+::::::::::::::::::::::::: challenge
 
 Imaginons le scénario suivant lors d'une épidémie en cours. Vous remarquez à un moment donné que la source de données sur laquelle vous vous appuyiez comporte un ensemble de nouvelles entrées (c'est-à-dire des lignes ou des observations) et que le type de données d'une variable a changé.
 
@@ -188,7 +189,7 @@ Pour simuler cette situation :
 
 Décrivez comment `linelist::validate_linelist()` réagit lorsque le type de données d'une variable a été modifié.
 
-:::::::::::::::::::::::::: indice
+:::::::::::::::::::::::::: hint
 
 Nous pouvons utiliser `dplyr::mutate()` pour modifier le type de la variable avant de l'étiqueter pour la validation.
 
@@ -204,7 +205,7 @@ cleaned_data %>%
 
 ::::::::::::::::::::::::::
 
-:::::::::::::::::::::::::: indice
+:::::::::::::::::::::::::: hint
 
 > Veuillez exécuter le code ligne par ligne, en vous concentrant uniquement sur les parties situées avant l'opérateur pipe (`%>%`). Après chaque étape, observez la sortie avant de passer à la ligne suivante.
 
@@ -271,7 +272,7 @@ Le message `d'Erreur` nous informe que pour **valider** notre objet linelist, no
 
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::: défi
+::::::::::::::::::::::::: challenge
 
 En dehors de l'étiquetage et de la validation de l'ojet linelist, de quelle autre étape avons-nous besoin lors de la construction de l'objet ?
 
@@ -305,7 +306,7 @@ new_df <- linelist_data %>%
 
 Ce message d'avertissement qui s'affiche est l'option par défaut lorsque nous perdons des étiquetes dans un objet de la classe linelist. Cependant, il peut être remplacé par un message `d'Erreur` en utilisant la fonction `linelist::lost_tags_action()`.
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 Testons les implications de la variation de la configuration de **protection** d'un objet linelist de `Avertissement` à `Erreur`.
 
@@ -373,7 +374,7 @@ Consultez la section de la vignette "Get started" à propos de
 
 :::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: points clés
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Utiliser la librairie `{linelist}` pour étiqueter, valider et protéger les données épidémiologiques pour l'analyse en aval.
 
