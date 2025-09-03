@@ -12,7 +12,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: objectifs
+::::::::::::::::::::::::::::::::::::: objectives
 
 - Simuler des données synthétiques sur les épidémies
 - Convertir un tableau de données des cas individuels (linelist) en tableau d'incidence des cas au cours du temps
@@ -32,9 +32,9 @@ Commençons par charger la librairie `{simulist}` pour simuler des données épi
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 # Charger les librairies
 library(incidence2) # Pour aggréger et visualiser les données
-library(simulist) # Pour simuler les données
-library(tracetheme) # Pour le formattage des graphes
-library(tidyverse) # Pour les fonctions des librairies {dplyr},  {ggplot2} et {magrittr} (pour l'opérateur %>%)
+library(simulist)
+library(tracetheme)
+library(tidyverse)
 ```
 
 ::::::::::::::::::: checklist
@@ -61,7 +61,8 @@ Pour rappelle, vous pouvez désormais utiliser la librairie {readepi} pour impor
 # initialiser le générateur de nombres aléatoires pour la reproducibilité
 set.seed(1)
 
-# simuler un tableau de données pour une épidémie de la taille de 1000 à 1500 cas
+# simuler un tableau de données
+# pour une épidémie de la taille de 1000 à 1500 cas
 sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
   dplyr::as_tibble()
 
@@ -89,7 +90,9 @@ et/ou d'autres caractéristiques.
 Le morceau de code fourni ci-dessous montre la procédure de création d'un objet de la classe `incidence2` qui contiendra le nombre agrégé de cas à partir de la date d'apparition de leurs symptômes en utilisant le tableau de données d'Ebola simulé.
 
 ```{r}
-# creer un objet de classe incidence en agregeant le nombre de cas en fonction de la date d'apparition des symptomes
+# creer un objet de classe incidence
+# en agregeant le nombre de cas
+# en fonction de la date d'apparition des symptomes
 daily_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
@@ -103,12 +106,13 @@ daily_incidence
 La librairie `{incidence2}` vous permet de varier l'intervalle de temps à utiliser lorsque vous agrégez vos données (par exemple, les données peuvent être agrégées de façon journalière, hebdomadaire, mensuelle, etc). Elle permet également de classer les cas selon un ou plusieurs facteurs. L'exemple ci-dessous est un extrait de code calculant le nombre hebdomadaire de cas  regroupés selon la date d'apparition des symptômes, le sexe et le type de cas.
 
 ```{r}
-# calculer l'incidence hebdomadaire des cas regroupés selon le sexe et le type de cas
+# calculer l'incidence hebdomadaire
+# des cas regroupés selon le sexe et le type de cas
 weekly_incidence <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   interval = "week", # obtenir le nombre hebdomadaire de cas
-  groups = c("sex", "case_type") # regrouper le nombre hebdomadaire de cas en fonction du sexe et du type de cas
+  groups = c("sex", "case_type") # regrouper par sexe et type de cas
 )
 
 # voir un aperçu de l'incidence hebdomadaire des cas
@@ -123,13 +127,15 @@ Lorsque les cas sont regroupés en fonction de différents facteurs, il est poss
 Cette fonctionnalité peut également être activées durant l'appel à la fonction `incidence2::incidence()` en donnant la valeur `TRUE` à l'argument `complete_dates`.
 
 ```{r}
-# creer un objet de la classe incidence contenant l'incidence journalière du nombre de cas, groupé par sexe
+# creer un objet de la classe incidence
+# contenant l'incidence journalière du
+# nombre de cas, groupé par sexe
 daily_incidence_2 <- incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
   interval = "day", # Agreger par interval journalier
-  complete_dates = TRUE # Completer les dates manquantes dans l'objet de la classe incidence
+  complete_dates = TRUE # Compléter les dates manquantes
 )
 
 # voir un aperçu de l'incidence journaliere des cas
@@ -140,15 +146,15 @@ daily_incidence_2
 weekly_incidence_complete <- incidence2::complete_dates(
   x = weekly_incidence,
   expand = TRUE, # etendre l'objet pour tenir compte des dates manquantes
-  fill = 0L,     # representer le nombre de cas par 0 dans les lignes contenant les dates qui ont ete ajoutees
-  # by = 1L,       # calculer l'incidence journaliere
+  fill = 0L, # Représenter avec 0 cas aux dates ajoutées
+  # by = 1L, # calculer l'incidence journaliere
   allow_POSIXct = FALSE # s'assurer que les dates n'aient pas le format POSIXct
 )
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Défi 1 : Pouvez-vous le faire ?
 
@@ -195,7 +201,7 @@ Vous y trouverez entre autre argument: `show_cases = TRUE`, `angle = 45` et `n_b
 
 ::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Défi 2 : Pouvez-vous le faire ?
 
@@ -222,7 +228,7 @@ base::plot(cum_df) +
 
 Notez que cette fonction préserve le regroupement, c'est-à-dire que si l'objet de la classe`incidence2` contient des groupes, elle accumulera les cas en conséquence.
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Défi 3 : Pouvez-vous le faire ?
 
@@ -242,7 +248,7 @@ peak <- incidence2::estimate_peak(
   n = 100,         # nombre de simulations à utiliser pour trouver le pic
   alpha = 0.05,    # niveau de significativite pour l'interval de confiance
   first_only = TRUE, # retourner la valeur du premier pic trouvé
-  progress = FALSE  # deactiver les messages montrant les progres durant le calcul
+  progress = FALSE  # Désactiver les messages de progression
 )
 
 # voir un aperçu du pic estime
@@ -251,7 +257,7 @@ print(peak)
 
 Cet exemple montre comment estimer la date du pic de l'épidémie (date à laquelle le nombre de cas le plus élevé a été répertorié) à l'aide de la fonction `incidence2::estimate_peak()` avec un interval de confiance de $95%$ et en ré-échantillonnant 100 fois.
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Défi 4 : Pouvez-vous le faire ?
 
@@ -293,18 +299,18 @@ ggplot2::ggplot(data = daily_incidence) +
     plot.caption = element_text(face = "italic",
                                 hjust = 0), # mettre la legende en italique
     axis.title = element_text(face = "bold"), # mettre les noms des axes en gras
-    axis.text.x = element_text(angle = 45, vjust = 0.5) # tourner le titre des axes de 45 degres
+    axis.text.x = element_text(angle = 45, vjust = 0.5) # tourner des 45 degrés
   ) +
   labs(
     x = "Date", # definir le nom de l'axe des x
     y = "Number of cases", # definir le nom de l'axe des y
     title = "Daily Outbreak Cases", # definir le titre du graphe
-    subtitle = "Epidemiological Data for the Outbreak", # definir le sous-titre du graphe
+    subtitle = "Epidemiological Data for the Outbreak",
     caption = "Data Source: Simulated Data" # definir la legende du graphe
   ) +
   scale_x_date(
     breaks = breaks, # definir les limites personnalisee pour l'axe des x
-    labels = scales::label_date_short() # ecourter les noms des limites dans l'axe des x
+    labels = scales::label_date_short() # Raccourcir les noms sur l'axe x
   )
 ```
 
@@ -343,10 +349,10 @@ ggplot2::ggplot(data = daily_incidence_2) +
     labels = scales::label_date_short()
   ) +
   scale_fill_manual(values = c("lightblue",
-                               "lightpink")) # couleur personnalisees pour variable sexe
+                               "lightpink")) # couleur personnalisees
 ```
 
-::::::::::::::::::::::::::::::::::::: défi
+::::::::::::::::::::::::::::::::::::: challenge
 
 ## Défi 5 : Pouvez-vous le faire ?
 
@@ -354,7 +360,7 @@ ggplot2::ggplot(data = daily_incidence_2) +
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: points clés
+::::::::::::::::::::::::::::::::::::: keypoints
 
 - Utiliser `{simulist}` pour générer des données épidémiologiques synthétiques
 - Utilisez `{incidence2}` pour agréger les données épidémiologiques en fonction d'événements datés et d'autres variables pour produire des épi-courbes.
