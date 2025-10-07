@@ -398,7 +398,7 @@ ggplot2::ggplot(data = daily_incidence) +
 
 ``` warning
 Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count), :
-Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
+Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
 <img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
@@ -446,7 +446,7 @@ ggplot2::ggplot(data = daily_incidence_2) +
 
 ``` warning
 Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count, :
-Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
+Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
 <img src="fig/describe-cases-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />

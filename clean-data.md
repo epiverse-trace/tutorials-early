@@ -142,11 +142,11 @@ cleanepi::scan_data(raw_ebola_data)
 
 ``` output
   Field_names missing numeric   date character logical
-1         age  0.0646  0.8348 0.0000    0.1006       0
-2      gender  0.1578  0.0472 0.0000    0.7950       0
-3      status  0.0535  0.0000 0.0000    0.9465       0
-4  date onset  0.0001  0.0000 0.9159    0.0840       0
-5 date sample  0.0001  0.0000 0.9999    0.0000       0
+1         age  0.0690  0.8925 0.0000    0.1075       0
+2      gender  0.1874  0.0560 0.0000    0.9440       0
+3      status  0.0565  0.0000 0.0000    1.0000       0
+4  date onset  0.0001  0.0000 0.9159    0.0841       0
+5 date sample  0.0001  0.0000 1.0000    0.0000       0
 6      region  0.0000  0.0000 0.0000    1.0000       0
 ```
 
@@ -218,7 +218,7 @@ sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 
 ``` output
 ! Found 5 duplicated rows in the dataset.
-ℹ Use `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat" is
+ℹ Use `print_report(dat, "found_duplicates")` to access them, where "dat" is
   the object used to store the output from this operation.
 ```
 
@@ -289,9 +289,8 @@ df %>%
 
 ``` output
 ! Constant data was removed after 2 iterations.
-ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
-  "dat" represents the object used to store the output from
-  `remove_constants()`.
+ℹ Enter `print_report(dat, "constant_data")` for more information, where "dat"
+  represents the object used to store the output from `remove_constants()`.
 ```
 
 ``` output
@@ -310,9 +309,8 @@ df %>%
 
 ``` output
 ! Constant data was removed after 2 iterations.
-ℹ Enter `attr(dat, "report")[["constant_data"]]` for more information, where
-  "dat" represents the object used to store the output from
-  `remove_constants()`.
+ℹ Enter `print_report(dat, "constant_data")` for more information, where "dat"
+  represents the object used to store the output from `remove_constants()`.
 ```
 
 ``` output
@@ -343,19 +341,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 8
-      v1 case_id age         gender status    date_onset date_sample row_id
-   <int>   <int> <chr>       <chr>  <chr>     <chr>      <chr>        <int>
- 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015       1
- 2     2   13043 twenty-five 2      <NA>      Sep /11/13 03/01/2014       2
- 3     3   14364 54          f      <NA>      09/02/2014 03/03/2015       3
- 4     4   14675 ninety      <NA>   <NA>      10/19/2014 31/ 12 /14       4
- 5     5   12648 74          F      <NA>      08/06/2014 10/10/2016       5
- 6     6   14274 seventy-six female <NA>      Apr /05/15 01/23/2016       7
- 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015       8
- 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016       9
- 9     9   13435 26          1      <NA>      09/07/2014 20/ 09 /14      10
-10    10   14816 thirty      f      <NA>      06/29/2015 06/02/2015      11
+# A tibble: 15,000 × 7
+      v1 case_id age         gender status    date_onset date_sample
+   <int>   <int> <chr>       <chr>  <chr>     <chr>      <chr>      
+ 1     1   14905 90          1      confirmed 03/15/2015 06/04/2015 
+ 2     2   13043 twenty-five 2      <NA>      Sep /11/13 03/01/2014 
+ 3     3   14364 54          f      <NA>      09/02/2014 03/03/2015 
+ 4     4   14675 ninety      <NA>   <NA>      10/19/2014 31/ 12 /14 
+ 5     5   12648 74          F      <NA>      08/06/2014 10/10/2016 
+ 6     6   14274 seventy-six female <NA>      Apr /05/15 01/23/2016 
+ 7     7   14132 sixteen     male   confirmed Dec /29/Y  05/10/2015 
+ 8     8   14715 44          f      confirmed Apr /06/Y  04/24/2016 
+ 9     9   13435 26          1      <NA>      09/07/2014 20/ 09 /14 
+10    10   14816 thirty      f      <NA>      06/29/2015 06/02/2015 
 # ℹ 14,990 more rows
 ```
 
@@ -380,11 +378,10 @@ sim_ebola_data <-
   )
 ```
 
-``` output
-! Found 1957 duplicated values in the subject Ids.
-ℹ Enter `attr(dat, "report")[["duplicated_rows"]]` to access them, where "dat"
-  is the object used to store the output from this operation.
-ℹ No incorrect subject id was detected.
+``` error
+Error in "lapply(text, glue_cmd, .envir = .envir)": ! Could not evaluate cli `{}` expression: `cli::no({nrow(repor…`.
+Caused by error in `cli::no({ …` at inline.R:309:7:
+! length(expr) == 1 is not TRUE
 ```
 
 Note that our simulated  dataset does contain duplicated subject IDS.
@@ -417,24 +414,33 @@ sim_ebola_data <- cleanepi::standardize_dates(
     "date_sample"
   )
 )
+```
 
+``` output
+! Detected 1142 values that comply with multiple formats and no values that are
+  outside of the specified time frame.
+ℹ Enter `print_report(data = dat, "date_standardization")` to access them,
+  where "dat" is the object used to store the output from this operation.
+```
+
+``` r
 sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 8
-      v1 case_id age         gender status    date_onset date_sample row_id
-   <int> <chr>   <chr>       <chr>  <chr>     <date>     <date>       <int>
- 1     1 14905   90          1      confirmed 2015-03-15 2015-06-04       1
- 2     2 13043   twenty-five 2      <NA>      2013-09-11 2014-03-01       2
- 3     3 14364   54          f      <NA>      2014-09-02 2015-03-03       3
- 4     4 14675   ninety      <NA>   <NA>      2014-10-19 2031-12-14       4
- 5     5 12648   74          F      <NA>      2014-08-06 2016-10-10       5
- 6     6 14274   seventy-six female <NA>      2015-04-05 2016-01-23       7
- 7     7 14132   sixteen     male   confirmed NA         2015-05-10       8
- 8     8 14715   44          f      confirmed NA         2016-04-24       9
- 9     9 13435   26          1      <NA>      2014-09-07 2020-09-14      10
-10    10 14816   thirty      f      <NA>      2015-06-29 2015-06-02      11
+# A tibble: 15,000 × 7
+      v1 case_id age         gender status    date_onset date_sample
+   <int>   <int> <chr>       <chr>  <chr>     <date>     <date>     
+ 1     1   14905 90          1      confirmed 2015-03-15 2015-04-06 
+ 2     2   13043 twenty-five 2      <NA>      2013-09-11 2014-01-03 
+ 3     3   14364 54          f      <NA>      2014-02-09 2015-03-03 
+ 4     4   14675 ninety      <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5   12648 74          F      <NA>      2014-06-08 2016-10-10 
+ 6     6   14274 seventy-six female <NA>      2015-04-05 2016-01-23 
+ 7     7   14132 sixteen     male   confirmed NA         2015-10-05 
+ 8     8   14715 44          f      confirmed NA         2016-04-24 
+ 9     9   13435 26          1      <NA>      2014-07-09 2014-09-20 
+10    10   14816 thirty      f      <NA>      2015-06-29 2015-02-06 
 # ℹ 14,990 more rows
 ```
 
@@ -466,19 +472,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 8
-      v1 case_id   age gender status    date_onset date_sample row_id
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
- 1     1 14905      90 1      confirmed 2015-03-15 2015-06-04       1
- 2     2 13043      25 2      <NA>      2013-09-11 2014-03-01       2
- 3     3 14364      54 f      <NA>      2014-09-02 2015-03-03       3
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2031-12-14       4
- 5     5 12648      74 F      <NA>      2014-08-06 2016-10-10       5
- 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
- 7     7 14132      16 male   confirmed NA         2015-05-10       8
- 8     8 14715      44 f      confirmed NA         2016-04-24       9
- 9     9 13435      26 1      <NA>      2014-09-07 2020-09-14      10
-10    10 14816      30 f      <NA>      2015-06-29 2015-06-02      11
+# A tibble: 15,000 × 7
+      v1 case_id   age gender status    date_onset date_sample
+   <int>   <int> <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1   14905    90 1      confirmed 2015-03-15 2015-04-06 
+ 2     2   13043    25 2      <NA>      2013-09-11 2014-01-03 
+ 3     3   14364    54 f      <NA>      2014-02-09 2015-03-03 
+ 4     4   14675    90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5   12648    74 F      <NA>      2014-06-08 2016-10-10 
+ 6     6   14274    76 female <NA>      2015-04-05 2016-01-23 
+ 7     7   14132    16 male   confirmed NA         2015-10-05 
+ 8     8   14715    44 f      confirmed NA         2016-04-24 
+ 9     9   13435    26 1      <NA>      2014-07-09 2014-09-20 
+10    10   14816    30 f      <NA>      2015-06-29 2015-02-06 
 # ℹ 14,990 more rows
 ```
 
@@ -514,9 +520,13 @@ cleanepi::check_date_sequence(
 ```
 
 ``` output
-! Detected 16 incorrect date sequences at lines: "10, 20, 22, 26, 29, 44, 46,
-  54, 60, 63, 70, 71, 73, 80, 81, 90".
-ℹ Enter `attr(dat, "report")[["incorrect_date_sequence"]]` to access them,
+ℹ Cannot check the sequence of date events across 37 rows due to missing data.
+```
+
+``` output
+! Detected 24 incorrect date sequences at lines: "8, 15, 18, 20, 21, 23, 26,
+  28, 29, 32, 34, 35, 37, 38, 40, 43, 46, 49, 52, 54, 56, 58, 60, 63".
+ℹ Enter `print_report(data = dat, "incorrect_date_sequence")` to access them,
   where "dat" is the object used to store the output from this operation.
 ```
 
@@ -571,19 +581,19 @@ sim_ebola_data
 ```
 
 ``` output
-# A tibble: 15,000 × 8
-      v1 case_id   age gender status    date_onset date_sample row_id
-   <int> <chr>   <dbl> <chr>  <chr>     <date>     <date>       <int>
- 1     1 14905      90 male   confirmed 2015-03-15 2015-06-04       1
- 2     2 13043      25 female <NA>      2013-09-11 2014-03-01       2
- 3     3 14364      54 female <NA>      2014-09-02 2015-03-03       3
- 4     4 14675      90 <NA>   <NA>      2014-10-19 2031-12-14       4
- 5     5 12648      74 female <NA>      2014-08-06 2016-10-10       5
- 6     6 14274      76 female <NA>      2015-04-05 2016-01-23       7
- 7     7 14132      16 male   confirmed NA         2015-05-10       8
- 8     8 14715      44 female confirmed NA         2016-04-24       9
- 9     9 13435      26 male   <NA>      2014-09-07 2020-09-14      10
-10    10 14816      30 female <NA>      2015-06-29 2015-06-02      11
+# A tibble: 15,000 × 7
+      v1 case_id   age gender status    date_onset date_sample
+   <int>   <int> <dbl> <chr>  <chr>     <date>     <date>     
+ 1     1   14905    90 male   confirmed 2015-03-15 2015-04-06 
+ 2     2   13043    25 female <NA>      2013-09-11 2014-01-03 
+ 3     3   14364    54 female <NA>      2014-02-09 2015-03-03 
+ 4     4   14675    90 <NA>   <NA>      2014-10-19 2014-12-31 
+ 5     5   12648    74 female <NA>      2014-06-08 2016-10-10 
+ 6     6   14274    76 female <NA>      2015-04-05 2016-01-23 
+ 7     7   14132    16 male   confirmed NA         2015-10-05 
+ 8     8   14715    44 female confirmed NA         2016-04-24 
+ 9     9   13435    26 male   <NA>      2014-07-09 2014-09-20 
+10    10   14816    30 female <NA>      2015-06-29 2015-02-06 
 # ℹ 14,990 more rows
 ```
 
@@ -664,17 +674,17 @@ sim_ebola_data %>%
 ``` output
 # A tibble: 15,000 × 4
    case_id date_sample years_since_collection remainder_months
-   <chr>   <date>                       <dbl>            <dbl>
- 1 14905   2015-06-04                       9                7
- 2 13043   2014-03-01                      10               10
- 3 14364   2015-03-03                       9               10
- 4 14675   2031-12-14                      -6              -11
- 5 12648   2016-10-10                       8                2
- 6 14274   2016-01-23                       8               11
- 7 14132   2015-05-10                       9                7
- 8 14715   2016-04-24                       8                8
- 9 13435   2020-09-14                       4                3
-10 14816   2015-06-02                       9                7
+     <int> <date>                       <dbl>            <dbl>
+ 1   14905 2015-04-06                       9                8
+ 2   13043 2014-01-03                      11                0
+ 3   14364 2015-03-03                       9               10
+ 4   14675 2014-12-31                      10                0
+ 5   12648 2016-10-10                       8                2
+ 6   14274 2016-01-23                       8               11
+ 7   14132 2015-10-05                       9                2
+ 8   14715 2016-04-24                       8                8
+ 9   13435 2014-09-20                      10                3
+10   14816 2015-02-06                       9               10
 # ℹ 14,990 more rows
 ```
 
@@ -736,6 +746,10 @@ dat_clean <- dat %>%
 ```
 
 ``` output
+! Detected 4 values that comply with multiple formats and no values that are
+  outside of the specified time frame.
+ℹ Enter `print_report(data = dat, "date_standardization")` to access them,
+  where "dat" is the object used to store the output from this operation.
 ! Found <numeric> values that could also be of type <Date> in column:
   date_of_birth.
 ℹ It is possible to convert them into <Date> using: `lubridate::as_date(x,
@@ -778,16 +792,16 @@ dat_clean %>%
 # A tibble: 10 × 6
    study_id   sex date_first_pcr_posit…¹ date_of_birth age_in_years age_category
    <chr>    <int> <date>                 <date>               <dbl> <fct>       
- 1 PS001P2      1 2020-12-01             1972-06-01              52 [35,60)     
+ 1 PS001P2      1 2020-12-01             1972-01-06              53 [35,60)     
  2 PS002P2      1 2021-01-01             1952-02-20              73 [60,Inf]    
  3 PS004P2…    NA 2021-02-11             1961-06-15              63 [60,Inf]    
  4 PS003P2      1 2021-02-01             1947-11-11              77 [60,Inf]    
  5 P0005P2      2 2021-02-16             2000-09-26              24 [20,35)     
  6 PS006P2      2 2021-05-02             NA                      NA <NA>        
- 7 PB500P2      1 2021-02-19             1989-11-03              35 [35,60)     
- 8 PS008P2      2 2021-09-20             1976-10-05              48 [35,60)     
+ 7 PB500P2      1 2021-02-19             1989-03-11              35 [35,60)     
+ 8 PS008P2      2 2021-09-20             1976-05-10              48 [35,60)     
  9 PS010P2      1 2021-02-26             1991-09-23              33 [20,35)     
-10 PS011P2      2 2021-03-03             1991-02-08              34 [20,35)     
+10 PS011P2      2 2021-03-03             1991-08-02              33 [20,35)     
 # ℹ abbreviated name: ¹​date_first_pcr_positive_test
 ```
 
@@ -841,7 +855,16 @@ cleaned_data <- raw_ebola_data %>%
   )
 ```
 
+``` error
+Error in "lapply(text, glue_cmd, .envir = .envir)": ! Could not evaluate cli `{}` expression: `cli::no({nrow(repor…`.
+Caused by error in `cli::no({ …` at inline.R:309:7:
+! length(expr) == 1 is not TRUE
+```
 
+
+``` error
+Error: object 'cleaned_data' not found
+```
 
 :::::::::::::: challenge
 
