@@ -663,7 +663,12 @@ corresponds to a specific data cleansing operation, and clicking on each section
 that particular operation. This interactive approach enables users to efficiently review and analyze the outcomes of 
 individual cleansing steps within the broader data cleansing process.
 
-You can view the report using the function `cleanepi::print_report(cleaned_data)`. 
+You can view the report using: 
+
+```r
+cleanepi::print_report(data = cleaned_data)
+```
+
 <p><figure>
     <img src="fig/report_demo.png"
          alt="Data cleaning report" 
