@@ -739,8 +739,15 @@ IDS.</p>
 <code>cleanepi::print_report(sim_ebola_data)</code>. Focus on the
 “Unexpected subject ids” tab to identify what IDs require an extra
 treatment.</p>
+<p>In the console, you can print:</p>
+<div class="codewrapper sourceCode" id="cb24">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">print_report</span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_ebola_data</span>, <span class="st">"incorrect_subject_id"</span><span class="op">)</span></span></code></pre>
+</div>
 <p>After finishing this tutorial, we invite you to explore the package
-reference guide of <a href="https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html" class="external-link"><code>cleanepi::check_subject_ids()</code></a>
+reference guide of <a href="https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html" class="external-link">cleanepi::check_subject_ids()</a>
 to find the function that can fix this situation.</p>
 </div>
 </div>
@@ -757,7 +764,7 @@ like-with-like. The <a href="https://epiverse-trace.github.io/cleanepi/" class="
 functionality for converting date columns of epidemic datasets into ISO
 format, ensuring consistency across the different date columns. Here’s
 how you can use it on our simulated dataset:</p>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -804,6 +811,9 @@ automatically figure out the date columns within the dataset (if
 possible inside <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> by reading the Details section
 of the <a href="https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details" class="external-link">Standardize
 date variables reference manual</a>!</p>
+<p>Also, check how to use the <code>orders</code> argument if you want
+to target US format character strings. You can explore <a href="https://github.com/epiverse-trace/cleanepi/discussions/262" class="external-link">this
+reproducible example</a>.</p>
 </div>
 </div>
 </div>
@@ -818,7 +828,7 @@ simulated data set, in the age column some entries are written in words.
 In <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> the function
 <code>convert_to_numeric()</code> does such conversion as illustrated in
 the below code chunk.</p>
-<div class="codewrapper sourceCode" id="cb26">
+<div class="codewrapper sourceCode" id="cb27">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -877,7 +887,7 @@ this purpose.</p>
 <p>Here’s an example of a code chunk demonstrating the usage of the
 function <code>check_date_sequence()</code> in the first 100 records of
 our simulated Ebola dataset</p>
-<div class="codewrapper sourceCode" id="cb28">
+<div class="codewrapper sourceCode" id="cb29">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -913,7 +923,7 @@ This approach ensures consistency and accuracy in data cleaning.</p>
 <p>Moreover, <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> provides a built-in dictionary
 specifically tailored for epidemiological data. The example dictionary
 below includes mappings for the “gender” column.</p>
-<div class="codewrapper sourceCode" id="cb30">
+<div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -940,7 +950,7 @@ below includes mappings for the “gender” column.</p>
 <p>Now, we can use this dictionary to standardize values of the the
 “gender” column according to predefined categories. Below is an example
 code chunk demonstrating how to utilize this functionality:</p>
-<div class="codewrapper sourceCode" id="cb32">
+<div class="codewrapper sourceCode" id="cb33">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -985,7 +995,7 @@ not in the dictionary, the function
 <p>You can start a custom dictionary with a data frame inside or outside
 R. You can use the function <code>cleanepi::add_to_dictionary()</code>
 to include new elements in the dictionary. For example:</p>
-<div class="codewrapper sourceCode" id="cb34">
+<div class="codewrapper sourceCode" id="cb35">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1037,7 +1047,7 @@ scales. For example, the below code snippet utilizes the function
 <code>cleanepi::timespan()</code> to compute the time elapsed since the
 date of sample for the case identified until the 3rd of January 2025
 (<code>"2025-01-03"</code>).</p>
-<div class="codewrapper sourceCode" id="cb36">
+<div class="codewrapper sourceCode" id="cb37">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1088,7 +1098,7 @@ years, and the remaining time measured in months.</p>
 to generate stratified estimates.</p>
 <p>Read the <code>test_df.RDS</code> data frame within the
 <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package:</p>
-<div class="codewrapper sourceCode" id="cb38">
+<div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1128,7 +1138,7 @@ Clean and standardize the required elements to get this done.</p>
 <p>In the solution we add <code>date_first_pcr_positive_test</code>
 given that it will provide the temporal scale for descriptive and
 statistical downstream analysis of the disease outbreak.</p>
-<div class="codewrapper sourceCode" id="cb39">
+<div class="codewrapper sourceCode" id="cb40">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1178,7 +1188,7 @@ statistical downstream analysis of the disease outbreak.</p>
 also use <code>dplyr::case_when()</code> however, this requires more
 lines of code and is more appropriate for custom categorizations. Here
 we provide one solution using <code>base::cut()</code>:</p>
-<div class="codewrapper sourceCode" id="cb41">
+<div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1241,7 +1251,7 @@ chunk illustrating how to use <code>clean_data()</code> on a raw
 simulated Ebola dataset:</p>
 <p>Further more, you can combine multiple data cleaning tasks via the
 pipe operator in “%&gt;%”, as shown in the below code snippet.</p>
-<div class="codewrapper sourceCode" id="cb43">
+<div class="codewrapper sourceCode" id="cb44">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
