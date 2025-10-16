@@ -460,6 +460,8 @@ the dataset (if `target_columns = NULL`) and convert them into the **Ymd**  form
 We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the Details section of the 
 [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
+Also, check how to use the `orders` argument if you want to target US format character strings. You can explore [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
+
 :::::::::::::::::::
 
 ### Converting to numeric values
@@ -468,6 +470,7 @@ In the raw dataset, some columns can come with mixture of character and numerica
 character values for numbers explicitly into numeric values (e.g. `"seven"` to `7`). For example, in our simulated data set, in the age column some entries are 
 written in words. In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below 
 code chunk.
+
 
 ``` r
 sim_ebola_data <- cleanepi::convert_to_numeric(sim_ebola_data,
@@ -883,7 +886,12 @@ corresponds to a specific data cleansing operation, and clicking on each section
 that particular operation. This interactive approach enables users to efficiently review and analyze the outcomes of 
 individual cleansing steps within the broader data cleansing process.
 
-You can view the report using the function `cleanepi::print_report(cleaned_data)`. 
+You can view the report using: 
+
+```r
+cleanepi::print_report(data = cleaned_data)
+```
+
 <p><figure>
     <img src="fig/report_demo.png"
          alt="Data cleaning report" 
