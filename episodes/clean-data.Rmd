@@ -21,7 +21,7 @@ exercises: 10
 This episode requires you to:
 
 - Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
-- Save it in the `data/` folder.
+- Save it in the `data/` folder. Follow instructions in Setup to [configure an RStudio Project and folder](../learners/setup.md#setup-an-rstudio-project-and-folder)
 
 :::::::::::::::::::::
 
