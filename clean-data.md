@@ -231,10 +231,15 @@ sim_ebola_data <- cleanepi::remove_duplicates(sim_ebola_data)
 You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, 
 wait for the report to open in your browser, and find the "Duplicates" tab.
 
+To use this information within R, you can print data frames with specific sections of the report in the console using the argument `what`.
+
 
 ``` r
-# Print a report
-cleanepi::print_report(sim_ebola_data)
+# Print a report of found duplicates
+cleanepi::print_report(data = sim_ebola_data, what = "found_duplicates")
+
+# Print a report of removed duplicates
+cleanepi::print_report(data = sim_ebola_data, what = "removed_duplicates")
 ```
 
 :::::::::::::::::::::
