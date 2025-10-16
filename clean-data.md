@@ -399,9 +399,16 @@ Note that our simulated  dataset does contain duplicated subject IDS.
 #### How to correct the subject IDs?
 
 Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" 
-tab to identify what IDs require an extra treatment. 
+tab to identify what IDs require an extra treatment.
 
-After finishing this tutorial, we invite you to explore the package reference guide of [`cleanepi::check_subject_ids()`](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the 
+In the console, you can print:
+
+
+``` r
+print_report(data = sim_ebola_data, "incorrect_subject_id")
+```
+
+After finishing this tutorial, we invite you to explore the package reference guide of [cleanepi::check_subject_ids()](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the 
 function that can fix this situation.
 
 :::::::::::::::::::::::::
