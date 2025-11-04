@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2025-08-30 |
+        <p>Last updated on 2025-11-04 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -701,7 +701,7 @@ table using <code>dplyr::tbl()</code>.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># Source:     SQL [?? x 6]
-# Database:   mysql 5.6.36-log [@mysql-rfam-public.ebi.ac.uk:/Rfam]
+# Database:   mysql 8.0.32-24 [@mysql-rfam-public.ebi.ac.uk:/Rfam]
 # Ordered by: desc(author_id)
   author_id name           last_name    initials orcid                 synonyms
       &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;    &lt;chr&gt;                 &lt;chr&gt;
@@ -838,16 +838,16 @@ LEFT JOIN `family_author`
 <pre class="output" tabindex="0"><code># A tibble: 4,874 × 4
    author_id.x name         author_id.y rfam_acc
          &lt;int&gt; &lt;chr&gt;              &lt;int&gt; &lt;chr&gt;
- 1          44 Osuch I               44 RF01571
- 2           2 Argasinska J           2 RF02588
- 3           2 Argasinska J           2 RF02587
- 4           2 Argasinska J           2 RF02586
- 5           2 Argasinska J           2 RF02585
- 6           2 Argasinska J           2 RF02549
- 7           8 Boursnell C            8 RF02002
- 8          56 Weinberg Z            56 RF01741
- 9          39 Moxon SJ              39 RF00496
-10          39 Moxon SJ              39 RF00469
+ 1           1 Ames T                 1 RF01831
+ 2           2 Argasinska J           2 RF02554
+ 3           2 Argasinska J           2 RF02555
+ 4           2 Argasinska J           2 RF02722
+ 5           2 Argasinska J           2 RF02720
+ 6           2 Argasinska J           2 RF02719
+ 7           2 Argasinska J           2 RF02721
+ 8           2 Argasinska J           2 RF02670
+ 9           2 Argasinska J           2 RF02718
+10           2 Argasinska J           2 RF02668
 # ℹ 4,864 more rows</code></pre>
 </div>
 </div>
@@ -1047,15 +1047,13 @@ calling the function, you can get the list of disease names through the
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 6 × 16
+<pre class="output" tabindex="0"><code># A tibble: 4 × 16
   case_id    person_id date_onset date_admission case_origin case_status outcome
   &lt;chr&gt;      &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;
-1 QFC5QI-GC… XNQZBX-W… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-2 UOZL3G-4M… UGBWTB-B… 2025-05-27 NA             IN_COUNTRY  SUSPECT     NO_OUT…
-3 SRO72L-LY… UOAAIQ-Z… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-4 XV7RQ3-ZY… XP2SJX-W… 2025-07-03 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-5 SMUIMI-ZI… TMWNQS-O… NA         NA             IN_COUNTRY  CONFIRMED   NO_OUT…
-6 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+1 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+2 W5C6VE-OH… SBWO4N-3… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+3 XBXV3A-TI… QXQ5VA-2… 2025-09-14 2025-09-14     IN_COUNTRY  CONFIRMED   NO_OUT…
+4 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
 # ℹ 9 more variables: sex &lt;chr&gt;, date_of_birth &lt;chr&gt;, country &lt;chr&gt;,
 #   city &lt;chr&gt;, latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
 #   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
@@ -1137,8 +1135,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "dateCreated": "2025-10-16",
-  "dateModified": "2025-08-30",
-  "datePublished": "2025-10-28"
+  "dateModified": "2025-11-04",
+  "datePublished": "2025-11-04"
 }
 
   </script><script>
