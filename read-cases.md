@@ -255,7 +255,7 @@ dat
 
 ``` output
 # Source:     SQL [?? x 6]
-# Database:   mysql 5.6.36-log [@mysql-rfam-public.ebi.ac.uk:/Rfam]
+# Database:   mysql 8.0.32-24 [@mysql-rfam-public.ebi.ac.uk:/Rfam]
 # Ordered by: desc(author_id)
   author_id name           last_name    initials orcid                 synonyms
       <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
@@ -365,16 +365,16 @@ Joining with `by = join_by(author_id)`
 # A tibble: 4,874 × 4
    author_id.x name         author_id.y rfam_acc
          <int> <chr>              <int> <chr>   
- 1          44 Osuch I               44 RF01571 
- 2           2 Argasinska J           2 RF02588 
- 3           2 Argasinska J           2 RF02587 
- 4           2 Argasinska J           2 RF02586 
- 5           2 Argasinska J           2 RF02585 
- 6           2 Argasinska J           2 RF02549 
- 7           8 Boursnell C            8 RF02002 
- 8          56 Weinberg Z            56 RF01741 
- 9          39 Moxon SJ              39 RF00496 
-10          39 Moxon SJ              39 RF00469 
+ 1           1 Ames T                 1 RF01831 
+ 2           2 Argasinska J           2 RF02554 
+ 3           2 Argasinska J           2 RF02555 
+ 4           2 Argasinska J           2 RF02722 
+ 5           2 Argasinska J           2 RF02720 
+ 6           2 Argasinska J           2 RF02719 
+ 7           2 Argasinska J           2 RF02721 
+ 8           2 Argasinska J           2 RF02670 
+ 9           2 Argasinska J           2 RF02718 
+10           2 Argasinska J           2 RF02668 
 # ℹ 4,864 more rows
 ```
 
@@ -542,15 +542,13 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 6 × 16
+# A tibble: 4 × 16
   case_id    person_id date_onset date_admission case_origin case_status outcome
   <chr>      <chr>     <date>     <date>         <chr>       <chr>       <chr>  
-1 QFC5QI-GC… XNQZBX-W… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-2 UOZL3G-4M… UGBWTB-B… 2025-05-27 NA             IN_COUNTRY  SUSPECT     NO_OUT…
-3 SRO72L-LY… UOAAIQ-Z… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-4 XV7RQ3-ZY… XP2SJX-W… 2025-07-03 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-5 SMUIMI-ZI… TMWNQS-O… NA         NA             IN_COUNTRY  CONFIRMED   NO_OUT…
-6 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+1 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+2 W5C6VE-OH… SBWO4N-3… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+3 XBXV3A-TI… QXQ5VA-2… 2025-09-14 2025-09-14     IN_COUNTRY  CONFIRMED   NO_OUT…
+4 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
 # ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
 #   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
