@@ -237,7 +237,7 @@ base::plot(daily_incidence) +
   tracetheme::theme_trace() # Apply the custom trace theme
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 
 
@@ -251,7 +251,7 @@ base::plot(weekly_incidence) +
   tracetheme::theme_trace() # Apply the custom trace theme
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::: callout
 
@@ -264,7 +264,7 @@ We invite you to skim the `{incidence2}` package ["Get started" vignette](https:
 base::plot(weekly_incidence, fill = "sex")
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-9-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
 
 Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`. Feel free to give them a try.
 
@@ -295,7 +295,7 @@ base::plot(cum_df) +
   tracetheme::theme_trace() # Apply the custom trace theme
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" />
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
 
@@ -398,10 +398,10 @@ ggplot2::ggplot(data = daily_incidence) +
 
 ``` warning
 Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count), :
-Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
+Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" />
 
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
@@ -446,10 +446,10 @@ ggplot2::ggplot(data = daily_incidence_2) +
 
 ``` warning
 Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count, :
-Ignoring unknown parameters: `binwidth`, `bins`, and `pad`
+Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-13-1.png" style="display: block; margin: auto;" />
+<img src="fig/describe-cases-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 

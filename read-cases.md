@@ -362,7 +362,7 @@ Joining with `by = join_by(author_id)`
 ```
 
 ``` output
-# A tibble: 4,874 × 4
+# A tibble: 5,029 × 4
    author_id.x name         author_id.y rfam_acc
          <int> <chr>              <int> <chr>   
  1           1 Ames T                 1 RF01831 
@@ -375,7 +375,7 @@ Joining with `by = join_by(author_id)`
  8           2 Argasinska J           2 RF02670 
  9           2 Argasinska J           2 RF02718 
 10           2 Argasinska J           2 RF02668 
-# ℹ 4,864 more rows
+# ℹ 5,019 more rows
 ```
 
 
@@ -513,7 +513,7 @@ tibble::as_tibble(disease_names)
 ```
 
 ``` output
-# A tibble: 65 × 2
+# A tibble: 67 × 2
    disease            active
    <chr>              <chr> 
  1 AFP                TRUE  
@@ -526,7 +526,7 @@ tibble::as_tibble(disease_names)
  8 LASSA              TRUE  
  9 MEASLES            TRUE  
 10 MONKEYPOX          TRUE  
-# ℹ 55 more rows
+# ℹ 57 more rows
 ```
 
 ``` r
@@ -545,11 +545,11 @@ tibble::as_tibble(covid_cases)
 # A tibble: 5 × 16
   case_id    person_id date_onset date_admission case_origin case_status outcome
   <chr>      <chr>     <date>     <date>         <chr>       <chr>       <chr>  
-1 SZ3GHH-RJ… V2XMXK-K… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-2 W5C6VE-OH… SBWO4N-3… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-3 XBXV3A-TI… QXQ5VA-2… 2025-09-14 2025-09-14     IN_COUNTRY  CONFIRMED   NO_OUT…
-4 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
-5 T6ZLGJ-MU… WON54L-6… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+1 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
+2 T6ZLGJ-MU… WON54L-6… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+3 TWRMOD-5M… XC44EN-Q… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+4 WJHHRV-A2… RYBAQX-A… 2025-11-11 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
+5 VPMCMM-YU… U2BJQK-M… 2025-11-01 NA             IN_COUNTRY  SUSPECT     DECEAS…
 # ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
 #   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
