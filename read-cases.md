@@ -537,22 +537,21 @@ covid_cases <- readepi::read_sormas(
   password = "Lk5R7JXeZSEc",
   disease = "coronavirus"
 )
+```
 
+``` error
+Error in `data[, target_columns]` at readepi/R/read_sormas-helpers.R:223:3:
+! Can't subset columns that don't exist.
+✖ Column `date_admission` doesn't exist.
+```
+
+``` r
 tibble::as_tibble(covid_cases)
 ```
 
-``` output
-# A tibble: 5 × 16
-  case_id    person_id date_onset date_admission case_origin case_status outcome
-  <chr>      <chr>     <date>     <date>         <chr>       <chr>       <chr>  
-1 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
-2 T6ZLGJ-MU… WON54L-6… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-3 TWRMOD-5M… XC44EN-Q… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-4 WJHHRV-A2… RYBAQX-A… 2025-11-11 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-5 VPMCMM-YU… U2BJQK-M… 2025-11-01 NA             IN_COUNTRY  SUSPECT     DECEAS…
-# ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
-#   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, Ct_values <chr>
+``` error
+Error:
+! object 'covid_cases' not found
 ```
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
