@@ -293,19 +293,23 @@ dplyr::left_join(author, family_author, keep = TRUE) %>%
 
 ## Reading from HIS APIs
 
-Health data is increasingly stored in specialized HIS such as **Fingertips**, **GoData**, **REDCap**, **DHIS2**, **SORMAS**, etc. The current version of the `{readepi}` library allows importing data from **DHIS2** and **SORMAS**.
+Health data is increasingly stored in specialized HIS such as **Fingertips**, **GoData**, **REDCap**, **DHIS2**, **SORMAS**, etc. The current version of the `{readepi}` library allows importing data from **DHIS2** and **SORMAS**. The subsections below demonstrate how to import data from these two systems.
 
 ### Importing data from DHIS2
 
-The District Health Information System [DHIS2](https://dhis2.org/about/) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function allows you to import data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via their API.
+[DHIS2](https://dhis2.org/about/) (District Health Information System ) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
 
-To successfully import the data from DHIS2, you will need to connect to the system using the `readepi::login()` function, then provide the **name** or **ID** of the target program and organisation unit.
+To successfully import data from DHIS2, you need to:
 
-For a given system, you can access the IDs and names of the programs and organisation units using the `get_programs()` and `get_organisation_units()` functions, respectively.
+1. Connect to the system using the `readepi::login()` function
+2. Provide the name or ID of the target program and organization unit
+
+You can retrieve the IDs and names of available programs and organization units using the `get_programs()` and `get_organisation_units()` functions, respectively.
 
 ```{r}
 # establish the connection to the system
 dhis2_login <- readepi::login(
+  type = "dhis2",
   from = "https://smc.moh.gm/dhis",
   user_name = "test",
   password = "Gambia@123"
@@ -336,7 +340,7 @@ data <- readepi::read_dhis2(
 tibble::as_tibble(data)
 ```
 
-It is important to know that not all organisation units are registered for a specific program. To find out which organisation units are running a particular program, use the `get_program_org_units()` function as shown in the example below.
+Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
 
 ```{r}
 # get the list of organisation units that run the program "E5IUQuHg3Mg"
@@ -348,6 +352,12 @@ target_org_units <- readepi::get_program_org_units(
 
 tibble::as_tibble(target_org_units)
 ```
+
+:::::::::::::::: callout
+
+Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
+
+::::::::::::::::
 
 ### Importing data from SORMAS
 
