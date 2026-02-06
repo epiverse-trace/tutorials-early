@@ -48,11 +48,9 @@ library(dbplyr) # for a database backend for {dplyr}
 
 ### The double-colon
 
-The double-colon `::` in R lets you call a specific function from a package without loading the entire package into the current environment. 
+The double-colon `::` in `R` lets you call a specific function from a package without loading the entire package. For example, `dplyr::filter(data, condition)` uses the `filter()` function from the `{dplyr}` package, without requiring `library(dplyr)`.
 
-For example, `dplyr::filter(data, condition)` uses `filter()` from the `{dplyr}` package, without having to use `library(dplyr)` at the start of a script.
-
-This help us remember package functions and avoid namespace conflicts (i.e. when two different packages include functions with the same name, so R does not know which to use).
+This notation serves two purposes: it makes code more readable by explicitly showing which package each function comes from, and it prevents namespace conflicts that occur when multiple packages contain functions with the same name.
 
 :::::::::::::::::::
 
