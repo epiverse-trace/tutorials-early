@@ -15,8 +15,8 @@ editor_options:
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Identify common sources of outbreak data 
-- Import outbreak data from multiple formats into  `R` environment
+- Identify common sources of outbreak data. 
+- Import outbreak data from multiple formats into  `R` environment.
 - Access and retrieve data from remote servers and health information systems using APIs.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -24,14 +24,16 @@ editor_options:
 
 ## Prerequisites
 
-This episode requires you to be familiar with: **Data science** : Basic tasks with R.
+This episode requires you to be familiar with **Data science**: Basic tasks with R.
 :::::::::::::::::::::::::::::::::
 
 ## Introduction
 
-The initial step in outbreak analysis typically involves importing the target dataset into the `R` environment from either a local source (like a file on your computer) or external source (like a database). Outbreak data can be stored in diverse formats, relational database management systems (RDBMS), or health information systems (HIS), such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/), which provide application program interfaces (APIs) to the database systems so verified users can easily add and access data entries. The latter option is particularly well-suited for collecting and storing large-scale institutional health data. This episode will elucidate the process of reading cases from these sources.
+The first step in outbreak analysis is importing the your dataset into the `R` environment. Data can come from local sources (like files on your computer) or external sources (databases and health information systems (HIS)). 
 
-Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe operator (`%>%`) from the `{magrittr}` package to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both `{magrittr}` and `{dplyr}`:
+Outbreak data takes many forms. It may be sorted as flat file in various formats, housed in relational database management systems (RDBMS), or managed through specialized HIS like  [SORMAS](https://sormas.org/) and [DHIS2](https://dhis2.org/). These HISs offer application programming interfaces (APIs) that allow authorized users to modify and retrieve data entries efficiently--making them particularly valuable for large-scale institutional health data collection and storage.
+
+This episode demonstrates how to read case data from each of these sources. Let's begin by loading the packages we'll need. We will use `{rio}` to read data stored in files and `{readepi}` to access data from RDBMS and HIS. We will also load `{here}` to locate file paths within your project directory, and `{tidyverse}`, which includes `{magrittr}` (providing the pipe operator `%>%`) and `{dplyr}` (for data manipulation). The pipe operator allows us to chain functions together seamlessly.
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
