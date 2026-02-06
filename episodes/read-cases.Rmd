@@ -361,34 +361,46 @@ Note: This example uses a DHIS2 system provided by the Ministry of Health of The
 
 ### Importing data from SORMAS
 
-The Surveillance Outbreak Response Management and Analysis System [SORMAS](https://sormas.org/) is an open-source e-health system that optimizes infectious disease surveillance and outbreak response processes. The `readepi::read_sormas()` function allows you to import data from SORMAS via its API.
+The [SORMAS](https://sormas.org/) (Surveillance Outbreak Response Management and Analysis System) is an open-source e-health system that optimizes infectious disease surveillance and outbreak response processes. The `readepi::read_sormas()` function allows you to import data from SORMAS via its API.
 
-In the current version of the `readepi` package, the `read_sormas()` function returns data for the following columns: **case_id, person_id, sex, date_of_birth, case_origin, country, city, lat, long, case_status, date_onset, date_admission, date_last_contact, date_first_contact, outcome, date_outcome, Ct_values**.
+In the current version of the `{readepi}` package, the `read_sormas()` function returns data for the following columns: **case_id, person_id, sex, date_of_birth, case_origin, country, city, lat, long, case_status, date_onset, date_admission, date_last_contact, date_first_contact, outcome, date_outcome**, and **Ct_values**.
 
-One of the fundamental arguments is the name of the disease for which the user wants to get data. To ensure the correct syntax to use when calling the function, you can get the list of disease names through the `sormas_get_diseases()` function.
+The code chunk below demonstrates how to import data from a demo SORMAS system:
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
-# get the list of all disease names
-disease_names <- readepi::sormas_get_diseases(
-  base_url = "https://demo.sormas.org/sormas-rest",
+```{r}
+# CONNECT TO THE SORMAS SYSTEM
+sormas_login <- readepi::login(
+  type = "sormas",
+  from = "https://demo.sormas.org/sormas-rest",
   user_name = "SurvSup",
   password = "Lk5R7JXeZSEc"
 )
 
-tibble::as_tibble(disease_names)
-
-# import COVID-19 cases from SORMAS
+# FETCH ALL COVID (Corona virus) CASES FROM THE TEST SORMAS INSTANCE
 covid_cases <- readepi::read_sormas(
-  base_url = "https://demo.sormas.org/sormas-rest",
-  user_name = "SurvSup",
-  password = "Lk5R7JXeZSEc",
-  disease = "coronavirus"
+  login = sormas_login,
+  disease = "coronavirus",
 )
-
 tibble::as_tibble(covid_cases)
 ```
 
+A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
+
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# get the list of all disease names
+disease_names <- readepi::sormas_get_diseases(
+  login = sormas_login
+)
+
+tibble::as_tibble(disease_names)
+```
+
 ::::::::::::::::::::::::::::::::::::: keypoints 
-- Use `{rio}`, `{io}`, `{readr}` and `{ImportExport}` to read data from individual files.
-- Use `{readepi}` to read data form HIS APIs and RDBMS.
+
+- Use `{rio}`, `{io}`, `{readr}` or `{ImportExport}` to read data from individual files.
+- Use `{readepi}` to read data from RDBMS and HIS.
+- The {rio} package supports a wide range of file formats including `CSV`, `TSV`, `XLSX`, and compressed files.
+- Use `readepi::login()` to establish connections to RDBMS, DHIS2, or SORMAS systems.
+-The `{readepi}` package currently supports importing data from DHIS2 and SORMAS health information systems.
+
 ::::::::::::::::::::::::::::::::::::::::::::::::
