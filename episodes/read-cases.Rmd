@@ -8,15 +8,16 @@ editor_options:
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- Where do you usually store your outbreak data?
-- How many different data formats can you use for analysis? 
-- Can you import data from servers and health information systems? 
+- Where do you usually store outbreak data?
+- what data formats do you commonly use for analysis? 
+- Can you import data directly from servers and health information systems? 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to import outbreak data from different sources into `R` 
-environment.
+- Identify common sources of outbreak data 
+- Import outbreak data from multiple formats into  `R` environment
+- Access and retrieve data from remote servers and health information systems using APIs.
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: prereq
