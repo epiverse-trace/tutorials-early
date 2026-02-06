@@ -29,7 +29,7 @@ This episode requires you to be familiar with **Data science**: [Basic tasks wit
 
 ## Introduction
 
-The first step in outbreak analysis is importing the your dataset into the `R` environment. Data can come from local sources (like files on your computer) or external sources (databases and health information systems (HIS)). 
+The first step in outbreak analysis is importing the your dataset into the `R` environment. Data can come from local sources; like files on your computer, or external sources, like databases and health information systems (HIS). 
 
 Outbreak data takes many forms. It may be sorted as flat file in various formats, housed in relational database management systems (RDBMS), or managed through specialized HIS like  [SORMAS](https://sormas.org/) and [DHIS2](https://dhis2.org/). These HISs offer application programming interfaces (APIs) that allow authorized users to modify and retrieve data entries efficiently--making them particularly valuable for large-scale institutional health data collection and storage.
 
@@ -61,7 +61,7 @@ This notation serves two purposes: it makes code more readable by explicitly sho
 
 - Create an RStudio project. If needed, follow this [how-to guide on "Hello RStudio Projects"](https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects) to create one.
 - Inside the RStudio project, create a `data/` folder.
-- Inside the `data/` folder, save the [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) CSV files.
+-  Download [ebola_cases_2.csv](https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv) and [marburg.zip](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) CSV files, and save them inside the `data/` folder.
 
 ::::::::::
 
@@ -95,20 +95,20 @@ ebola_confirmed <- rio::import(
 ebola_confirmed
 ```
 
-Similarly, you can import files of other formats such as `tsv`, `xlsx`, ... etc.
+You can use the same approach to import other file formats such as `tsv`, `xlsx`, and more.
 
 :::::::::::::::::::: checklist
 
 ### Why should we use the {here} package?
 
-The `{here}` package is designed to simplify file referencing in R projects by providing a reliable way to construct file paths relative to the project root. The main reason to use it is **Cross-Environment Compatibility**.
+The `{here}` package is designed to simplify file referencing in R projects by providing a reliable way to construct file paths relative to the project root. The main reason to use is for **cross-environment compatibility**.
 
 It works across different operating systems (Windows, Mac, Linux) without needing to adjust file paths. 
 
-- On Windows, paths are written using backslashes ( `\` ) as the separator between folder names: `"data\raw-data\file.csv"` 
-- On Unix based operating systems such as macOS or Linux the forward slash ( `/` ) is used as the path separator: `"data/raw-data/file.csv"`
+- On Windows, paths are written using backslashes ( `\` ) as the separator between folder names: `"data\raw-data\file.csv"` .
+- On Unix based operating systems such as macOS or Linux the forward slash ( `/` ) is used as the path separator: `"data/raw-data/file.csv"`.
 
-The `{here}` package reinforces the reproducibility of your work across multiple operating systems. If you are interested in reproducibility, we invite you to [read this tutorial to increase the openess, sustainability, and reproducibility of your epidemic analysis with R](https://epiverse-trace.github.io/research-compendium/)
+The `{here}` package reinforces the reproducibility of your work across multiple operating systems. If you are interested in reproducibility, we invite you to read this tutorial to increase the [openess, sustainability, and reproducibility of your epidemic analysis with R](https://epiverse-trace.github.io/research-compendium/)
 
 ::::::::::::::::::::
 
@@ -118,12 +118,12 @@ The `{here}` package reinforces the reproducibility of your work across multiple
 
 Can you read data from a compressed file in `R`?
 
-Download this [zip file](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) containing data for Marburg outbreak and then import it to your working environment.
+Download this [zip file](https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip) containing Marburg outbreak data and then import it to your `R` environment.
 
 ::::::::::::::::: hint
 
 You can check the [full list of supported file formats](https://gesistsa.github.io/rio/#supported-file-formats) 
-in the `{rio}` package on the package website. To expand {rio} to the full range of supported formats run:
+in the `{rio}` package on the package website. To see the list of supported formats in `{rio}`, run:
 
 
 ```{r eval=FALSE}
