@@ -52,13 +52,15 @@ library(outbreaks)
 # obtenir les données à partir de la librairie {outbreaks}
 covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
 
-# extraire les données des trois premiers mois à partir de l'objet covid19_eng_case_data
+# extraire les données des trois premiers mois à partir de l'objet
+# covid19_eng_case_data
 df <- base::subset(
   covid19_eng_case_data,
   covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90
 )
 
-# utiliser la fonction incidence() de la librairie {incidence2} pour générer les données d'incidence
+# utiliser la fonction incidence() de la librairie {incidence2} pour générer
+# les données d'incidence
 df_incid <- incidence2::incidence(
   df,
   date_index = "date",
@@ -66,7 +68,9 @@ df_incid <- incidence2::incidence(
 ) %>%
   filter(sex != "unknown")
 
-# Adapter une courbe aux données d'incidence. Le modèle choisi est une distribution binomiale négative avec un seuil de significativité (alpha) de 0.05
+# Adapter une courbe aux données d'incidence. Le modèle choisi est une
+# distribution binomiale négative avec un seuil de significativité (alpha)
+# de 0.05
 fitted_curve_nb <-
   df_incid %>%
   nest(.key = "data") %>%
