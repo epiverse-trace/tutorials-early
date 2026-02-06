@@ -401,6 +401,6 @@ tibble::as_tibble(disease_names)
 - Use `{readepi}` to read data from RDBMS and HIS.
 - The {rio} package supports a wide range of file formats including `CSV`, `TSV`, `XLSX`, and compressed files.
 - Use `readepi::login()` to establish connections to RDBMS, DHIS2, or SORMAS systems.
--The `{readepi}` package currently supports importing data from DHIS2 and SORMAS health information systems.
+- The `{readepi}` package currently supports importing data from DHIS2 and SORMAS health information systems.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
