@@ -144,22 +144,22 @@ rio::import(here::here("data", "Marburg.zip"))
 
 ## Reading from databases
 
-The `{readepi}` library contains functions that allow you to import data directly from RDBMS or HIS (through their APIs). 
-The `readepi::read_rdbms()` function allows you to import data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It is primarily based on the [{DBI}](https://dbi.r-dbi.org/) library, which serves as a general-purpose interface for interacting with relational database management systems (RDBMS).
+The `{readepi}` library contains functions that allow you to import data directly from RDBMS.
+The `readepi::read_rdbms()` function supports importing data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build on the [{DBI}](https://dbi.r-dbi.org/) package, which provides a general interface for interacting RDBMS.
 
 ::::::::::::: discussion
 
 ### When to read directly from a database?
 
-Importing data directly from a database optimizes the memory usage in the R session. If we process the database with "queries" (e.g., select, filter, summarise) before extraction, we can reduce the memory load in our RStudio session. Conversely, conducting all data manipulation outside the database management system by loading the full dataset into R can use up much more computer memory (i.e. RAM) than is feasible on a local machine, which can lead RStudio to slow down or even freeze.
+Importing data directly from a database optimizes the memory usage in the R session. By process the database with "queries" (e.g., SELECT, FILTER, GROUP BY) before extraction, you reduce the memory load in our RStudio session. In contrast, loading an entire dataset into R for manipulation can consume more RAM than your local machine can handle, potentially causing RStudio to slow down or freeze.
 
-Relational database management systems (RDBMS) also have the advantage that multiple users can access, store and analyse parts of the dataset simultaneously, without having to transfer individual files, which would make it very difficult to track which version is up-to-date.
+RDBMS also enable multiple users to access, store, and analyze parts of the dataset simultaneously without transferring individual files. This eliminates the version control problems that arise when multiple file copies circulate among users.
 
 :::::::::::::
 
 ### 1. Connect with a database
 
-You can use the `readepi::login()` function to establish a connection to the database as shown below.
+You can use the `readepi::login()` function to establish a connection to the database, as shown below:
 
 ```{r}
 # establish the connection to a test MySQL database
@@ -176,15 +176,27 @@ rdbms_login <- readepi::login(
 rdbms_login
 ```
 
+The function parameters are:
+
+- `from`: The database server address (`mysql-rfam-public.ebi.ac.uk`)
+- `type`: The type of database system ("MySQL")
+- `user_name`: The username for authentication ("rfamro")
+- `password`: The password (empty string "" indicates no password required for this public test database)
+- `driver_name`: The database driver (empty string uses the default driver)
+- `db_name`: The specific database to connect to ("Rfam")
+- `port`: The port number for the connection (4497)
+
+The function returns a connection object stored in variable `rdbms_login`, which can then be used to query and retrieve data from the database.
+
 :::::::::::::::: callout
 
-For this example, access may be limited by organizational network restrictions, but it should work normally on home networks.
+Note: This example uses a public test database from the European Bioinformatics Institute, which is why no password is required.  Access to it may be limited by organizational network restrictions, but it should work normally on home networks.
 
 ::::::::::::::::
 
 ### 2. Access the list of tables from the database
 
-The `readepi::show_tables()` function can be used to access the full list of table names from a database.
+The `readepi::show_tables()` function retrieves the full list of table names from a database:
 
 ```{r eval=FALSE}
 # get the table names
@@ -193,11 +205,11 @@ tables <- readepi::show_tables(login = rdbms_login)
 tables
 ```
 
-In a database framework, you can have more than one table. Each table can belong to a specific `entity` (e.g., patients, care units, jobs). All tables will be related by a common ID or `primary key`.
+In a relational database, you typically have multiple tables. Each table represents a specific entity (e.g., patients, care units, treatments). Tables are linked through common identifiers called primary keys or foreign keys.
 
 ### 3. Read data from a table in a database
 
-Use the `readepi::read_rdbms()` function to import data from a table in a database. It can take an SQL query or a list of query parameters as demonstrated in the code chuk below.
+Use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters, as demonstrated in the code chunk below.
 
 ```{r eval=FALSE}
 # import data from the 'author' table using an SQL query
@@ -213,7 +225,7 @@ dat <- readepi::read_rdbms(
 )
 ```
 
-Alternativelly, we can read the data from the `author` table using `dplyr::tbl()`.
+Alternatively, you can read the data from the `author` table using `dplyr::tbl()`.
 
 ```{r}
 # import data from the 'author' table using an SQL query
@@ -225,7 +237,7 @@ dat <- rdbms_login %>%
 dat
 ```
 
-If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be translated to SQL queries.
+When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
 
 ```{r}
 # Show the SQL queries translated
