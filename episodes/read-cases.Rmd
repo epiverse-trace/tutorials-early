@@ -317,24 +317,34 @@ dhis2_login <- readepi::login(
 
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
+tibble::as_tibble(programs)
+```
 
+
+
+```{r}
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+tibble::as_tibble(org_units)
+```
+
+After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
+
+```{r}
+data <- readepi::read_dhis2(
+  login = dhis2_login,
+  org_unit = "Keneba",
+  program = "Child Registration & Treatment "
+)
 ```
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# import data from DHIS2 using names
 # import data from DHIS2 using IDs
 data <- readepi::read_dhis2(
   login = dhis2_login,
   org_unit = "GcLhRNAFppR",
   program = "E5IUQuHg3Mg"
-)
-
-# import data from DHIS2 using names
-data <- readepi::read_dhis2(
-  login = dhis2_login,
-  org_unit = "Keneba",
-  program = "Child Registration & Treatment "
 )
 
 tibble::as_tibble(data)
@@ -358,6 +368,9 @@ tibble::as_tibble(target_org_units)
 Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
 ::::::::::::::::
+
+
+
 
 ### Importing data from SORMAS
 
