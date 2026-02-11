@@ -161,7 +161,7 @@ RDBMS also enable multiple users to access, store, and analyze parts of the data
 
 You can use the `readepi::login()` function to establish a connection to the database, as shown below:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 # establish the connection to a test MySQL database
 rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
@@ -306,7 +306,7 @@ To successfully import data from DHIS2, you need to:
 
 You can retrieve the IDs and names of available programs and organization units using the `get_programs()` and `get_organisation_units()` functions, respectively.
 
-```{r}
+```{r, message=FALSE,warning=FALSE}
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
@@ -330,12 +330,14 @@ tibble::as_tibble(org_units)
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 data <- readepi::read_dhis2(
   login = dhis2_login,
   org_unit = "Keneba",
   program = "Child Registration & Treatment "
 )
+
+tibble::as_tibble(data)
 ```
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
@@ -380,7 +382,7 @@ In the current version of the `{readepi}` package, the `read_sormas()` function 
 
 The code chunk below demonstrates how to import data from a demo SORMAS system:
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 # CONNECT TO THE SORMAS SYSTEM
 sormas_login <- readepi::login(
   type = "sormas",
