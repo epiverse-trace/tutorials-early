@@ -372,6 +372,40 @@ Note: This example uses a DHIS2 system provided by the Ministry of Health of The
 ::::::::::::::::
 
 
+:::::::::::::::::::::: challenge
+
+### Reading from Demo DHIS2 sever
+
+The DHIS2 organization provides demo servers for development and testing. One of
+these is called **stable-242-4**, availaible at the link
+("https://play.im.dhis2.org/stable-2-42-4"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
+
+::::::::::::::: hint
+
+```{r, message=FALSE,warning=FALSE}
+# establish the connection to the system
+demo_login <- readepi::login(
+  type = "dhis2",
+  from = "https://play.im.dhis2.org/stable-2-42-4",
+  user_name = "admin",
+  password = "district"
+)
+
+# get the names and IDs of the programs
+demo_programs <- readepi::get_programs(login = demo_login)
+tibble::as_tibble(demo_programs)
+
+```
+
+```{r}
+# get the names and IDs of the organisation units
+demo_units <- readepi::get_organisation_units(login = demo_login)
+tibble::as_tibble(demo_units)
+```
+
+:::::::::::::::
+
+::::::::::::::::::::::
 
 
 ### Importing data from SORMAS
