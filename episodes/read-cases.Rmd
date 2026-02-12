@@ -35,7 +35,7 @@ Outbreak data takes many forms. It may be sorted as flat file in various formats
 
 This episode demonstrates how to read case data from each of these sources. Let's begin by loading the packages we'll need. We will use `{rio}` to read data stored in files and `{readepi}` to access data from RDBMS and HIS. We will also load `{here}` to locate file paths within your project directory, and `{tidyverse}`, which includes `{magrittr}` (providing the pipe operator `%>%`) and `{dplyr}` (for data manipulation). The pipe operator allows us to chain functions together seamlessly.
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r,eval=TRUE,message=FALSE}
 # Load packages
 library(tidyverse) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data from files
@@ -84,7 +84,7 @@ ebola_confirmed
 ```
 
 
-```{r eval=TRUE, echo=FALSE, message=FALSE}
+```{r eval=TRUE, message=FALSE}
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
@@ -161,7 +161,7 @@ RDBMS also enable multiple users to access, store, and analyze parts of the data
 
 You can use the `readepi::login()` function to establish a connection to the database, as shown below:
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE}
 # establish the connection to a test MySQL database
 rdbms_login <- readepi::login(
   from = "mysql-rfam-public.ebi.ac.uk",
@@ -306,7 +306,7 @@ To successfully import data from DHIS2, you need to:
 
 You can retrieve the IDs and names of available programs and organization units using the `get_programs()` and `get_organisation_units()` functions, respectively.
 
-```{r, message=FALSE,warning=FALSE}
+```{r, message=FALSE}
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
@@ -330,7 +330,7 @@ tibble::as_tibble(org_units)
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE}
 data <- readepi::read_dhis2(
   login = dhis2_login,
   org_unit = "Keneba",
@@ -340,7 +340,7 @@ data <- readepi::read_dhis2(
 tibble::as_tibble(data)
 ```
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r,eval=TRUE,message=FALSE}
 # import data from DHIS2 using names
 # import data from DHIS2 using IDs
 data <- readepi::read_dhis2(
@@ -382,7 +382,7 @@ these is called **stable-242-4**, available at the link
 
 ::::::::::::::: hint
 
-```{r, message=FALSE,warning=FALSE}
+```{r, message=FALSE}
 # establish the connection to the system
 demo_login <- readepi::login(
   type = "dhis2",
@@ -416,7 +416,7 @@ In the current version of the `{readepi}` package, the `read_sormas()` function 
 
 The code chunk below demonstrates how to import data from a demo SORMAS system:
 
-```{r,message=FALSE,warning=FALSE}
+```{r,message=FALSE}
 # CONNECT TO THE SORMAS SYSTEM
 sormas_login <- readepi::login(
   type = "sormas",
@@ -435,7 +435,7 @@ tibble::as_tibble(covid_cases)
 
 A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r,eval=TRUE,message=FALSE}
 # get the list of all disease names
 disease_names <- readepi::sormas_get_diseases(
   login = sormas_login
@@ -454,7 +454,7 @@ these is called **clinical surveillance**, available at the link
 
 ::::::::::::::: hint
 
-```{r, message=FALSE,warning=FALSE}
+```{r, message=FALSE}
 # establish the connection to the system
 sormas_demo <- readepi::login(
   type = "sormas",
@@ -469,7 +469,7 @@ tibble::as_tibble(demo_diseases)
 
 ```
 
-```{r,eval=TRUE,message=FALSE,warning=FALSE}
+```{r,eval=TRUE,message=FALSE}
 # get the list of all disease names
 mpox_cases <- readepi::read_sormas(
   login = sormas_demo,
