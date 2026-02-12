@@ -377,7 +377,7 @@ Note: This example uses a DHIS2 system provided by the Ministry of Health of The
 ### Reading from Demo DHIS2 sever
 
 The DHIS2 organization provides demo servers for development and testing. One of
-these is called **stable-242-4**, availaible at the link
+these is called **stable-242-4**, available at the link
 ("https://play.im.dhis2.org/stable-2-42-4"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
 
 ::::::::::::::: hint
@@ -443,6 +443,45 @@ disease_names <- readepi::sormas_get_diseases(
 
 tibble::as_tibble(disease_names)
 ```
+
+
+:::::::::::::::::::::: challenge
+### Reading from Demo SORMAS sever
+
+The SORMAS organization also provides demo servers for development and testing. One of
+these is called **clinical surveillance**, available at the link
+("https://demo.sormas.org/sormas-rest"), and accessible with username "CaseSup" and password "SJgFKffPDmr7". Log into this server, list all available diseases, and import cases related to the monkeypox (mpox) disease.
+
+::::::::::::::: hint
+
+```{r, message=FALSE,warning=FALSE}
+# establish the connection to the system
+sormas_demo <- readepi::login(
+  type = "sormas",
+  from = "https://demo.sormas.org/sormas-rest",
+  user_name = "CaseSup",
+  password = "SJgFKffPDmr7"
+)
+
+# List the names of all disease
+demo_diseases <- readepi::sormas_get_diseases(login = sormas_demo)
+tibble::as_tibble(demo_diseases)
+
+```
+
+```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# get the list of all disease names
+mpox_cases <- readepi::read_sormas(
+  login = sormas_demo,
+  disease = "monkeypox",
+)
+tibble::as_tibble(mpox_cases)
+```
+
+:::::::::::::::
+
+::::::::::::::::::::::
+
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
