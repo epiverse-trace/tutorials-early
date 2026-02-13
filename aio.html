@@ -354,7 +354,7 @@
         
 <section id="aio-read-cases"><p>Content from <a href="read-cases.html">Read case data</a></p>
 <hr>
-<p>Last updated on 2026-01-09 |
+<p>Last updated on 2026-02-13 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -368,9 +368,9 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>Where do you usually store your outbreak data?</li>
-<li>How many different data formats can you use for analysis?</li>
-<li>Can you import data from servers and health information
+<li>Where do you usually store outbreak data?</li>
+<li>What data formats do you commonly use for analysis?</li>
+<li>Can you import data directly from servers and health information
 systems?</li>
 </ul>
 </div>
@@ -381,8 +381,11 @@ systems?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Explain how to import outbreak data from different sources into
-<code>R</code> environment.</li>
+<li>Identify common sources of outbreak data.</li>
+<li>Import outbreak data from multiple formats into <code>R</code>
+environment.</li>
+<li>Access and retrieve data from remote servers and health information
+systems using APIs.</li>
 </ul>
 </div>
 </div>
@@ -396,33 +399,34 @@ systems?</li>
 <div id="prerequisites" class="callout-inner">
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
-<p>This episode requires you to be familiar with: <strong>Data
-science</strong> : Basic tasks with R.</p>
+<p>This episode requires you to be familiar with <strong>Data
+science</strong>: <a href="https://www.epirhandbook.com/en/new_pages/basics.html" class="external-link">Basic tasks
+with R</a>.</p>
 </div>
 </div>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <hr class="half-width">
-<p>The initial step in outbreak analysis typically involves importing
-the target dataset into the <code>R</code> environment from either a
-local source (like a file on your computer) or external source (like a
-database). Outbreak data can be stored in diverse formats, relational
-database management systems (RDBMS), or health information systems
-(HIS), such as <a href="https://www.project-redcap.org/" class="external-link">REDCap</a> and
-<a href="https://dhis2.org/" class="external-link">DHIS2</a>, which provide application
-program interfaces (APIs) to the database systems so verified users can
-easily add and access data entries. The latter option is particularly
-well-suited for collecting and storing large-scale institutional health
-data. This episode will elucidate the process of reading cases from
-these sources.</p>
-<p>Let’s start by loading the package <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data
-and the package <a href="https://here.r-lib.org/" class="external-link">here</a> to easily find a file path within
-your RStudio project. We’ll use the pipe operator (<code>%&gt;%</code>)
-from the <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> package to easily connect some of their
-functions, including functions from the data formatting package
-<a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>. We’ll therefore call the tidyverse package, which
-includes both <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> and <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>:</p>
+<p>The first step in outbreak analysis is importing your dataset into
+the <code>R</code> environment. Data can come from local sources, like
+files on your computer, or external sources, like databases and health
+information systems (HIS).</p>
+<p>Outbreak data takes many forms. It may be sorted as a flat file in
+various formats, housed in relational database management systems
+(RDBMS), or managed through specialized HIS like <a href="https://sormas.org/" class="external-link">SORMAS</a> and <a href="https://dhis2.org/" class="external-link">DHIS2</a>. These HISs offer application
+programming interfaces (APIs) that allow authorized users to modify and
+retrieve data entries efficiently, making them particularly valuable for
+large-scale institutional health data collection and storage.</p>
+<p>This episode demonstrates how to read case data from each of these
+sources. Let’s begin by loading the packages we’ll need. We will use
+<a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> to read data stored in files and
+<a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> to access data from RDBMS and HIS. We will also
+load <a href="https://here.r-lib.org/" class="external-link">here</a> to locate file paths within your project
+directory, and <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a>, which includes
+<a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> (providing the pipe operator
+<code>%&gt;%</code>) and <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> (for data manipulation).
+The pipe operator allows us to chain functions together seamlessly.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -441,15 +445,15 @@ includes both <a href="https://magrittr.tidyverse.org" class="external-link">mag
 <div id="the-double-colon" class="callout-inner">
 <h3 class="callout-title">The double-colon</h3>
 <div class="callout-content">
-<p>The double-colon <code>::</code> in R lets you call a specific
-function from a package without loading the entire package into the
-current environment.</p>
-<p>For example, <code>dplyr::filter(data, condition)</code> uses
-<code>filter()</code> from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> package, without
-having to use <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code> at the start of a script.</p>
-<p>This help us remember package functions and avoid namespace conflicts
-(i.e. when two different packages include functions with the same name,
-so R does not know which to use).</p>
+<p>The double-colon <code>::</code> in <code>R</code> lets you call a
+specific function from a package without loading the entire package. For
+example, <code>dplyr::filter(data, condition)</code> uses the
+<code>filter()</code> function from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> package,
+without requiring <code><a href="https://dplyr.tidyverse.org" class="external-link">library(dplyr)</a></code>.</p>
+<p>This notation serves two purposes: it makes code more readable by
+explicitly showing which package each function comes from, and it
+prevents namespace conflicts that occur when multiple packages contain
+functions with the same name.</p>
 </div>
 </div>
 </div>
@@ -464,9 +468,9 @@ so R does not know which to use).</p>
 <li>Create an RStudio project. If needed, follow this <a href="https://docs.posit.co/ide/user/ide/get-started/#hello-rstudio-projects" class="external-link">how-to
 guide on “Hello RStudio Projects”</a> to create one.</li>
 <li>Inside the RStudio project, create a <code>data/</code> folder.</li>
-<li>Inside the <code>data/</code> folder, save the <a href="https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv" class="external-link">ebola_cases_2.csv</a>
+<li>Download <a href="https://epiverse-trace.github.io/tutorials-early/data/ebola_cases_2.csv" class="external-link">ebola_cases_2.csv</a>
 and <a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="external-link">marburg.zip</a>
-CSV files.</li>
+CSV files, and save them inside the <code>data/</code> folder.</li>
 </ul>
 </div>
 </div>
@@ -518,8 +522,8 @@ subsequent analysis in R.</p>
 10  2014     5    29      12
 # ℹ 110 more rows</code></pre>
 </div>
-<p>Similarly, you can import files of other formats such as
-<code>tsv</code>, <code>xlsx</code>, … etc.</p>
+<p>You can use the same approach to import other file formats such as
+<code>tsv</code>, <code>xlsx</code>, and more.</p>
 <div id="why-should-we-use-the-here-package" class="callout checklist">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
@@ -529,25 +533,23 @@ subsequent analysis in R.</p>
 <div class="callout-content">
 <p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package is designed to simplify file
 referencing in R projects by providing a reliable way to construct file
-paths relative to the project root. The main reason to use it is
-<strong>Cross-Environment Compatibility</strong>.</p>
+paths relative to the project root. The main reason to use is for
+<strong>cross-environment compatibility</strong>.</p>
 <p>It works across different operating systems (Windows, Mac, Linux)
 without needing to adjust file paths.</p>
 <ul>
 <li>On Windows, paths are written using backslashes ( <code>\</code> )
 as the separator between folder names:
-<code>"data\raw-data\file.csv"</code>
-</li>
+<code>"data\raw-data\file.csv"</code> .</li>
 <li>On Unix based operating systems such as macOS or Linux the forward
 slash ( <code>/</code> ) is used as the path separator:
-<code>"data/raw-data/file.csv"</code>
-</li>
+<code>"data/raw-data/file.csv"</code>.</li>
 </ul>
 <p>The <a href="https://here.r-lib.org/" class="external-link">here</a> package reinforces the reproducibility of
 your work across multiple operating systems. If you are interested in
-reproducibility, we invite you to <a href="https://epiverse-trace.github.io/research-compendium/" class="external-link">read this
-tutorial to increase the openess, sustainability, and reproducibility of
-your epidemic analysis with R</a></p>
+reproducibility, we invite you to read this tutorial to increase the <a href="https://epiverse-trace.github.io/research-compendium/" class="external-link">openess,
+sustainability, and reproducibility of your epidemic analysis with
+R</a></p>
 </div>
 </div>
 </div>
@@ -560,8 +562,8 @@ your epidemic analysis with R</a></p>
 <div class="callout-content">
 <p>Can you read data from a compressed file in <code>R</code>?</p>
 <p>Download this <a href="https://epiverse-trace.github.io/tutorials-early/data/Marburg.zip" class="external-link">zip
-file</a> containing data for Marburg outbreak and then import it to your
-working environment.</p>
+file</a> containing Marburg outbreak data and then import it to your
+<code>R</code> environment.</p>
 </div>
 </div>
 </div>
@@ -570,12 +572,12 @@ working environment.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
-package website. To expand {rio} to the full range of supported formats
-run:</p>
+package website. To see the list of supported formats in
+<a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, run:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -591,7 +593,7 @@ run:</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -607,12 +609,11 @@ run:</p>
 </h2>
 <hr class="half-width">
 <p>The <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> library contains functions that allow you
-to import data directly from RDBMS or HIS (through their APIs). The
-<code>readepi::read_rdbms()</code> function allows you to import data
-from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It is
-primarily based on the <a href="https://dbi.r-dbi.org/" class="external-link">{DBI}</a>
-library, which serves as a general-purpose interface for interacting
-with relational database management systems (RDBMS).</p>
+to import data directly from RDBMS. The
+<code>readepi::read_rdbms()</code> function supports importing data from
+servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build
+on the <a href="https://dbi.r-dbi.org/" class="external-link">{DBI}</a> package, which
+provides a general interface for interacting RDBMS.</p>
 <div id="when-to-read-directly-from-a-database" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
@@ -621,17 +622,15 @@ with relational database management systems (RDBMS).</p>
 <h3 class="callout-title">When to read directly from a database?</h3>
 <div class="callout-content">
 <p>Importing data directly from a database optimizes the memory usage in
-the R session. If we process the database with “queries” (e.g., select,
-filter, summarise) before extraction, we can reduce the memory load in
-our RStudio session. Conversely, conducting all data manipulation
-outside the database management system by loading the full dataset into
-R can use up much more computer memory (i.e. RAM) than is feasible on a
-local machine, which can lead RStudio to slow down or even freeze.</p>
-<p>Relational database management systems (RDBMS) also have the
-advantage that multiple users can access, store and analyse parts of the
-dataset simultaneously, without having to transfer individual files,
-which would make it very difficult to track which version is
-up-to-date.</p>
+the R session. By processing the database with “queries” (e.g., SELECT,
+FILTER, GROUP BY) before extraction, you reduce the memory load in our
+RStudio session. In contrast, loading an entire dataset into R for
+manipulation can consume more RAM than your local machine can handle,
+potentially causing RStudio to slow down or freeze.</p>
+<p>RDBMS also enable multiple users to access, store, and analyze parts
+of the dataset simultaneously without transferring individual files.
+This eliminates the version control problems that arise when multiple
+file copies circulate among users.</p>
 </div>
 </div>
 </div>
@@ -639,7 +638,7 @@ up-to-date.</p>
 <h3 id="connect-with-a-database">1. Connect with a database<a class="anchor" aria-label="anchor" href="#connect-with-a-database"></a>
 </h3>
 <p>You can use the <code>readepi::login()</code> function to establish a
-connection to the database as shown below.</p>
+connection to the database, as shown below:</p>
 <div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -675,6 +674,31 @@ connection to the database as shown below.</p>
   Max size: Inf
   Valid: TRUE</code></pre>
 </div>
+<p>The function parameters are:</p>
+<ul>
+<li>
+<code>from</code>: The database server address
+(<code>mysql-rfam-public.ebi.ac.uk</code>)</li>
+<li>
+<code>type</code>: The type of database system (“MySQL”)</li>
+<li>
+<code>user_name</code>: The username for authentication
+(“rfamro”)</li>
+<li>
+<code>password</code>: The password (empty string “” indicates no
+password required for this public test database)</li>
+<li>
+<code>driver_name</code>: The database driver (empty string uses the
+default driver)</li>
+<li>
+<code>db_name</code>: The specific database to connect to
+(“Rfam”)</li>
+<li>
+<code>port</code>: The port number for the connection (4497)</li>
+</ul>
+<p>The function returns a connection object stored in variable
+<code>rdbms_login</code>, which can then be used to query and retrieve
+data from the database.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -682,8 +706,10 @@ connection to the database as shown below.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Callout</h3>
 <div class="callout-content">
-<p>For this example, access may be limited by organizational network
-restrictions, but it should work normally on home networks.</p>
+<p>Note: This example uses a public test database from the European
+Bioinformatics Institute, which is why no password is required. Access
+to it may be limited by organizational network restrictions, but it
+should work normally on home networks.</p>
 </div>
 </div>
 </div>
@@ -691,8 +717,8 @@ restrictions, but it should work normally on home networks.</p>
 <div class="section level3">
 <h3 id="access-the-list-of-tables-from-the-database">2. Access the list of tables from the database<a class="anchor" aria-label="anchor" href="#access-the-list-of-tables-from-the-database"></a>
 </h3>
-<p>The <code>readepi::show_tables()</code> function can be used to
-access the full list of table names from a database.</p>
+<p>The <code>readepi::show_tables()</code> function retrieves the full
+list of table names from a database:</p>
 <div class="codewrapper sourceCode" id="cb10">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -702,17 +728,17 @@ access the full list of table names from a database.</p>
 <span></span>
 <span><span class="va">tables</span></span></code></pre>
 </div>
-<p>In a database framework, you can have more than one table. Each table
-can belong to a specific <code>entity</code> (e.g., patients, care
-units, jobs). All tables will be related by a common ID or
-<code>primary key</code>.</p>
+<p>In a relational database, you typically have multiple tables. Each
+table represents a specific entity (e.g., patients, care units,
+treatments). Tables are linked through common identifiers called primary
+keys or foreign keys.</p>
 </div>
 <div class="section level3">
 <h3 id="read-data-from-a-table-in-a-database">3. Read data from a table in a database<a class="anchor" aria-label="anchor" href="#read-data-from-a-table-in-a-database"></a>
 </h3>
 <p>Use the <code>readepi::read_rdbms()</code> function to import data
-from a table in a database. It can take an SQL query or a list of query
-parameters as demonstrated in the code chuk below.</p>
+from a database table. It accepts either an SQL query or a list of query
+parameters, as demonstrated in the code chunk below.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -729,7 +755,7 @@ parameters as demonstrated in the code chuk below.</p>
 <span>  query <span class="op">=</span> <span class="fu">list</span><span class="op">(</span>table <span class="op">=</span> <span class="st">"author"</span>, fields <span class="op">=</span> <span class="cn">NULL</span>, filter <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
-<p>Alternativelly, we can read the data from the <code>author</code>
+<p>Alternatively, you can read the data from the <code>author</code>
 table using <code>dplyr::tbl()</code>.</p>
 <div class="codewrapper sourceCode" id="cb12">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -759,8 +785,8 @@ table using <code>dplyr::tbl()</code>.</p>
 6        13 Chen A         Chen         A        ""                    ""
 7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      </code></pre>
 </div>
-<p>If we apply <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> verbs to this database SQLite table,
-these verbs will be translated to SQL queries.</p>
+<p>When you apply <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a> verbs to this database table,
+they are automatically translated into SQL queries:</p>
 <div class="codewrapper sourceCode" id="cb14">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -831,7 +857,7 @@ management with SQL for Ecologist</a>. You will find close to
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -910,21 +936,26 @@ LEFT JOIN `family_author`
 <strong>REDCap</strong>, <strong>DHIS2</strong>,
 <strong>SORMAS</strong>, etc. The current version of the
 <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> library allows importing data from
-<strong>DHIS2</strong> and <strong>SORMAS</strong>.</p>
+<strong>DHIS2</strong> and <strong>SORMAS</strong>. The subsections
+below demonstrate how to import data from these two systems.</p>
 <div class="section level3">
 <h3 id="importing-data-from-dhis2">Importing data from DHIS2<a class="anchor" aria-label="anchor" href="#importing-data-from-dhis2"></a>
 </h3>
-<p>The District Health Information System <a href="https://dhis2.org/about/" class="external-link">DHIS2</a> is an open-source software
-that has revolutionized global health information management. The
-<code>readepi::read_dhis2()</code> function allows you to import data
-from the DHIS2 <a href="https://dhis2.org/tracker-in-action/" class="external-link">Tracker</a> system via their
-API.</p>
-<p>To successfully import the data from DHIS2, you will need to connect
-to the system using the <code>readepi::login()</code> function, then
-provide the <strong>name</strong> or <strong>ID</strong> of the target
-program and organisation unit.</p>
-<p>For a given system, you can access the IDs and names of the programs
-and organisation units using the <code>get_programs()</code> and
+<p><a href="https://dhis2.org/about/" class="external-link">DHIS2</a> (District Health
+Information System) is an open-source software that has revolutionized
+global health information management. The
+<code>readepi::read_dhis2()</code> function imports data from the DHIS2
+<a href="https://dhis2.org/tracker-in-action/" class="external-link">Tracker</a> system via
+its API.</p>
+<p>To successfully import data from DHIS2, you need to:</p>
+<ol style="list-style-type: decimal">
+<li>Connect to the system using the <code>readepi::login()</code>
+function</li>
+<li>Provide the name or ID of the target program and organization
+unit</li>
+</ol>
+<p>You can retrieve the IDs and names of available programs and
+organization units using the <code>get_programs()</code> and
 <code>get_organisation_units()</code> functions, respectively.</p>
 <div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -932,39 +963,62 @@ and organisation units using the <code>get_programs()</code> and
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># establish the connection to the system</span></span>
 <span><span class="va">dhis2_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="st">"dhis2"</span>,</span>
 <span>  from <span class="op">=</span> <span class="st">"https://smc.moh.gm/dhis"</span>,</span>
 <span>  user_name <span class="op">=</span> <span class="st">"test"</span>,</span>
 <span>  password <span class="op">=</span> <span class="st">"Gambia@123"</span></span>
-<span><span class="op">)</span></span></code></pre>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get the names and IDs of the programs</span></span>
+<span><span class="va">programs</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_programs</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">programs</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code>✔ Logged in successfully!</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 2 × 3
+  displayName                       id          type
+  &lt;chr&gt;                             &lt;chr&gt;       &lt;chr&gt;
+1 "Child Registration &amp; Treatment " E5IUQuHg3Mg tracker
+2 "Daily Drug Reconciliations"      I3bZrR6fLt8 aggregate</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># get the names and IDs of the programs</span></span>
-<span><span class="va">programs</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_programs</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># get the names and IDs of the organisation units</span></span>
-<span><span class="va">org_units</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_organisation_units</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="co"># get the names and IDs of the organisation units</span></span>
+<span><span class="va">org_units</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_organisation_units</span><span class="op">(</span>login <span class="op">=</span> <span class="va">dhis2_login</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">org_units</span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb27">
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 872 × 10
+   National_name National_id Regional_name Regional_id District_name District_id
+   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
+ 1 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Upper fulla… srjR5LWAoBD
+ 2 Gambia        jvQPTsCLwPh Western Regi… D18zNdCbRfO "Foni Jarrol… kAxFyJFfYV8
+ 3 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Sandu"       iZQOFwckdXL
+ 4 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Upper fulla… srjR5LWAoBD
+ 5 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Basse (Full… Ug7sj97icMt
+ 6 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Basse (Full… Ug7sj97icMt
+ 7 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Sami"        ZZNUH1LhS7k
+ 8 Gambia        jvQPTsCLwPh Western Regi… D18zNdCbRfO "Foni Jarrol… kAxFyJFfYV8
+ 9 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Niamina Dan… T55lst07vTj
+10 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Tumana"      xGYsUdiJb4L
+# ℹ 862 more rows
+# ℹ 4 more variables: `Operational Zone_name` &lt;chr&gt;,
+#   `Operational Zone_id` &lt;chr&gt;, `Town/Village_name` &lt;chr&gt;,
+#   `Town/Village_id` &lt;chr&gt;</code></pre>
+</div>
+<p>After retrieving organization units and program names from the DHIS2
+database, we can import data using either names or coded IDs, as
+demonstrated in the code chunk below</p>
+<div class="codewrapper sourceCode" id="cb28">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># import data from DHIS2 using IDs</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
-<span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
-<span>  org_unit <span class="op">=</span> <span class="st">"GcLhRNAFppR"</span>,</span>
-<span>  program <span class="op">=</span> <span class="st">"E5IUQuHg3Mg"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># import data from DHIS2 using names</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
 <span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
 <span>  org_unit <span class="op">=</span> <span class="st">"Keneba"</span>,</span>
 <span>  program <span class="op">=</span> <span class="st">"Child Registration &amp; Treatment "</span></span>
@@ -996,12 +1050,49 @@ and organisation units using the <code>get_programs()</code> and
 #   `SMC-CR Mother/Person responsible full name` &lt;chr&gt;,
 #   `SMC-CR Mother/Person responsible phone number1` &lt;chr&gt;, …</code></pre>
 </div>
-<p>It is important to know that not all organisation units are
-registered for a specific program. To find out which organisation units
-are running a particular program, use the
-<code>get_program_org_units()</code> function as shown in the example
-below.</p>
-<div class="codewrapper sourceCode" id="cb29">
+<div class="codewrapper sourceCode" id="cb30">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># import data from DHIS2 using names</span></span>
+<span><span class="co"># import data from DHIS2 using IDs</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_dhis2</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">dhis2_login</span>,</span>
+<span>  org_unit <span class="op">=</span> <span class="st">"GcLhRNAFppR"</span>,</span>
+<span>  program <span class="op">=</span> <span class="st">"E5IUQuHg3Mg"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1,116 × 69
+   event   tracked_entity org_unit ` SMC-CR Scan QR Code` SMC-CR Did the child…¹
+   &lt;chr&gt;   &lt;chr&gt;          &lt;chr&gt;    &lt;chr&gt;                  &lt;chr&gt;
+ 1 bgSDQb… yv7MOkGD23q    Keneba   SMC23-0510989          1
+ 2 y4MKmP… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 3 yK7VG3… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 4 EmNflz… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 5 UF96ms… nibnZ8h0Nse    Keneba   SMC2021-018089         1
+ 6 guQTwc… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 7 jbkRkL… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 8 AEeype… FomREQ2it4n    Keneba   SMC23-0510012          1
+ 9 R30SPs… E5oAWGcdFT4    Keneba   koika-smc-22897        1
+10 nr03Qy… E5oAWGcdFT4    Keneba   koika-smc-22897        1
+# ℹ 1,106 more rows
+# ℹ abbreviated name: ¹​`SMC-CR Did the child  previously received a card?`
+# ℹ 64 more variables: `SMC-CR Child First Name1` &lt;chr&gt;,
+#   `SMC-CR Child Last Name` &lt;chr&gt;, `SMC-CR Date of Birth` &lt;chr&gt;,
+#   `SMC-CR Select Age Category  ` &lt;chr&gt;, `SMC-CR Child gender1` &lt;chr&gt;,
+#   `SMC-CR Mother/Person responsible full name` &lt;chr&gt;,
+#   `SMC-CR Mother/Person responsible phone number1` &lt;chr&gt;, …</code></pre>
+</div>
+<p>Note that not all organization units are registered for a specific
+program. To find which organization units are running a particular
+program, use the <code>get_program_org_units()</code> function as shown
+below:</p>
+<div class="codewrapper sourceCode" id="cb32">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1032,33 +1123,180 @@ below.</p>
 10 ISbNWYieHY8  Town/Village_name Song Kunda
 # ℹ 16 more rows</code></pre>
 </div>
+<div id="callout2" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>Note: This example uses a DHIS2 system provided by the Ministry of
+Health of The Gambia for testing and development purposes. In practice,
+you should customize the parameters for your own DHIS2 instance.</p>
+</div>
+</div>
+</div>
+<div id="reading-from-demo-dhis2-sever" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="reading-from-demo-dhis2-sever" class="callout-inner">
+<h3 class="callout-title">Reading from Demo DHIS2 sever</h3>
+<div class="callout-content">
+<p>The DHIS2 organization provides demo servers for development and
+testing. One of these is called <strong>stable-242-4</strong>, available
+at the link (“<a href="https://play.im.dhis2.org/stable-2-42-4" class="external-link uri">https://play.im.dhis2.org/stable-2-42-4</a>”), and
+accessible with username “admin” and password “district”. Log into this
+server, list all available programs and organization units, and read
+data from one of these programs.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb34">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># establish the connection to the system</span></span>
+<span><span class="va">demo_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="st">"dhis2"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"https://play.im.dhis2.org/stable-2-42-4"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"admin"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"district"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># get the names and IDs of the programs</span></span>
+<span><span class="va">demo_programs</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_programs</span><span class="op">(</span>login <span class="op">=</span> <span class="va">demo_login</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">demo_programs</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 14 × 3
+   displayName                                         id          type
+   &lt;chr&gt;                                               &lt;chr&gt;       &lt;chr&gt;
+ 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 2 Child Programme                                     IpHINAT79UW tracker
+ 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 4 Information Campaign                                q04UBOqq3rp aggregate
+ 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker
+ 7 Malaria case registration                           VBqh0ynB2wv aggregate
+ 8 Malaria focus investigation                         M3xtLkYBlKI tracker
+ 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker
+11 Provider Follow-up and Support Tool                 fDd25txQckK tracker
+12 TB program                                          ur1Edk5Oe2n tracker
+13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker
+14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb36">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the names and IDs of the organisation units</span></span>
+<span><span class="va">demo_units</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">get_organisation_units</span><span class="op">(</span>login <span class="op">=</span> <span class="va">demo_login</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">demo_units</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1,167 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
+ 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
+# ℹ 1,157 more rows
+# ℹ 2 more variables: Facility_name &lt;chr&gt;, Facility_id &lt;chr&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="section level3">
 <h3 id="importing-data-from-sormas">Importing data from SORMAS<a class="anchor" aria-label="anchor" href="#importing-data-from-sormas"></a>
 </h3>
-<p>The Surveillance Outbreak Response Management and Analysis System <a href="https://sormas.org/" class="external-link">SORMAS</a> is an open-source e-health system
-that optimizes infectious disease surveillance and outbreak response
-processes. The <code>readepi::read_sormas()</code> function allows you
-to import data from SORMAS via its API.</p>
-<p>In the current version of the <code>readepi</code> package, the
+<p>The <a href="https://sormas.org/" class="external-link">SORMAS</a> (Surveillance Outbreak
+Response Management and Analysis System) is an open-source e-health
+system that optimizes infectious disease surveillance and outbreak
+response processes. The <code>readepi::read_sormas()</code> function
+allows you to import data from SORMAS via its API.</p>
+<p>In the current version of the <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> package, the
 <code>read_sormas()</code> function returns data for the following
 columns: <strong>case_id, person_id, sex, date_of_birth, case_origin,
 country, city, lat, long, case_status, date_onset, date_admission,
-date_last_contact, date_first_contact, outcome, date_outcome,
-Ct_values</strong>.</p>
-<p>One of the fundamental arguments is the name of the disease for which
-the user wants to get data. To ensure the correct syntax to use when
-calling the function, you can get the list of disease names through the
+date_last_contact, date_first_contact, outcome, date_outcome</strong>,
+and <strong>Ct_values</strong>.</p>
+<p>The code chunk below demonstrates how to import data from a demo
+SORMAS system:</p>
+<div class="codewrapper sourceCode" id="cb38">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># CONNECT TO THE SORMAS SYSTEM</span></span>
+<span><span class="va">sormas_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="st">"sormas"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"SurvSup"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"Lk5R7JXeZSEc"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># FETCH ALL COVID (Corona virus) CASES FROM THE TEST SORMAS INSTANCE</span></span>
+<span><span class="va">covid_cases</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_sormas</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">sormas_login</span>,</span>
+<span>  disease <span class="op">=</span> <span class="st">"coronavirus"</span>,</span>
+<span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
+coercion</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb40">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">covid_cases</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 3 × 15
+  case_id             person_id date_onset case_origin case_status outcome sex
+  &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
+1 TWRMOD-5MX5IA-3XWJ… XC44EN-Q… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
+2 WJHHRV-A2UPKG-R37W… RYBAQX-A… 2025-11-11 IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
+3 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  SUSPECT     DECEAS… &lt;NA&gt;
+# ℹ 8 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
+#   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
+#   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
+</div>
+<p>A key parameter is the disease name. To ensure correct syntax, you
+can retrieve the list of available disease names using the
 <code>sormas_get_diseases()</code> function.</p>
-<div class="codewrapper sourceCode" id="cb31">
+<div class="codewrapper sourceCode" id="cb42">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># get the list of all disease names</span></span>
 <span><span class="va">disease_names</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">sormas_get_diseases</span><span class="op">(</span></span>
-<span>  base_url <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
-<span>  user_name <span class="op">=</span> <span class="st">"SurvSup"</span>,</span>
-<span>  password <span class="op">=</span> <span class="st">"Lk5R7JXeZSEc"</span></span>
+<span>  login <span class="op">=</span> <span class="va">sormas_login</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">disease_names</span><span class="op">)</span></span></code></pre>
@@ -1072,43 +1310,108 @@ calling the function, you can get the list of disease names through the
  1 AFP                TRUE
  2 CHOLERA            TRUE
  3 CONGENITAL_RUBELLA TRUE
- 4 CSM                TRUE
- 5 DENGUE             TRUE
- 6 EVD                TRUE
- 7 GUINEA_WORM        TRUE
- 8 LASSA              TRUE
- 9 MEASLES            TRUE
-10 MONKEYPOX          TRUE
+ 4 DENGUE             TRUE
+ 5 EVD                TRUE
+ 6 GUINEA_WORM        TRUE
+ 7 LASSA              TRUE
+ 8 MEASLES            TRUE
+ 9 MONKEYPOX          TRUE
+10 NEW_INFLUENZA      TRUE
 # ℹ 57 more rows</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb33">
+<div id="reading-from-demo-sormas-sever" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="reading-from-demo-sormas-sever" class="callout-inner">
+<h3 class="callout-title">Reading from Demo SORMAS sever</h3>
+<div class="callout-content">
+<p>The SORMAS organization also provides demo servers for development
+and testing. One of these is called <strong>clinical
+surveillance</strong>, available at the link (“<a href="https://demo.sormas.org/sormas-rest" class="external-link uri">https://demo.sormas.org/sormas-rest</a>”), and accessible
+with username “CaseSup” and password “SJgFKffPDmr7”. Log into this
+server, list all available diseases, and import cases related to the
+monkeypox (mpox) disease.</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb44">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># import COVID-19 cases from SORMAS</span></span>
-<span><span class="va">covid_cases</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_sormas</span><span class="op">(</span></span>
-<span>  base_url <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
-<span>  user_name <span class="op">=</span> <span class="st">"SurvSup"</span>,</span>
-<span>  password <span class="op">=</span> <span class="st">"Lk5R7JXeZSEc"</span>,</span>
-<span>  disease <span class="op">=</span> <span class="st">"coronavirus"</span></span>
+<code class="sourceCode R"><span><span class="co"># establish the connection to the system</span></span>
+<span><span class="va">sormas_demo</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="st">"sormas"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"https://demo.sormas.org/sormas-rest"</span>,</span>
+<span>  user_name <span class="op">=</span> <span class="st">"CaseSup"</span>,</span>
+<span>  password <span class="op">=</span> <span class="st">"SJgFKffPDmr7"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">covid_cases</span><span class="op">)</span></span></code></pre>
+<span><span class="co"># List the names of all disease</span></span>
+<span><span class="va">demo_diseases</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">sormas_get_diseases</span><span class="op">(</span>login <span class="op">=</span> <span class="va">sormas_demo</span><span class="op">)</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">demo_diseases</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 5 × 16
-  case_id    person_id date_onset date_admission case_origin case_status outcome
-  &lt;chr&gt;      &lt;chr&gt;     &lt;date&gt;     &lt;date&gt;         &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;
-1 SSTIVB-VS… ROTW6C-D… 2025-10-14 NA             IN_COUNTRY  NO_CASE     NO_OUT…
-2 T6ZLGJ-MU… WON54L-6… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-3 TWRMOD-5M… XC44EN-Q… NA         NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-4 WJHHRV-A2… RYBAQX-A… 2025-11-11 NA             IN_COUNTRY  NOT_CLASSI… NO_OUT…
-5 VPMCMM-YU… U2BJQK-M… 2025-11-01 NA             IN_COUNTRY  SUSPECT     DECEAS…
-# ℹ 9 more variables: sex &lt;chr&gt;, date_of_birth &lt;chr&gt;, country &lt;chr&gt;,
-#   city &lt;chr&gt;, latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
+<pre class="output" tabindex="0"><code># A tibble: 67 × 2
+   disease            active
+   &lt;chr&gt;              &lt;chr&gt;
+ 1 AFP                TRUE
+ 2 CHOLERA            TRUE
+ 3 CONGENITAL_RUBELLA TRUE
+ 4 DENGUE             TRUE
+ 5 EVD                TRUE
+ 6 GUINEA_WORM        TRUE
+ 7 LASSA              TRUE
+ 8 MEASLES            TRUE
+ 9 MONKEYPOX          TRUE
+10 NEW_INFLUENZA      TRUE
+# ℹ 57 more rows</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb46">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get the list of all disease names</span></span>
+<span><span class="va">mpox_cases</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">read_sormas</span><span class="op">(</span></span>
+<span>  login <span class="op">=</span> <span class="va">sormas_demo</span>,</span>
+<span>  disease <span class="op">=</span> <span class="st">"monkeypox"</span>,</span>
+<span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="warning" tabindex="0"><code>Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
+coercion</code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb48">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">mpox_cases</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 15
+  case_id             person_id date_onset case_origin case_status outcome sex
+  &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
+1 WQLS6O-ZEZ562-MAGM… WVADAF-S… NA         IN_COUNTRY  PROBABLE    NO_OUT… &lt;NA&gt;
+# ℹ 8 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
+#   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
 #   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -1118,10 +1421,16 @@ calling the function, you can get the list of disease names through the
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Use <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://bitbucket.org/djhshih/io" class="external-link">io</a>, <a href="https://readr.tidyverse.org" class="external-link">readr</a> and
+<li>Use <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://bitbucket.org/djhshih/io" class="external-link">io</a>, <a href="https://readr.tidyverse.org" class="external-link">readr</a> or
 <code>{ImportExport}</code> to read data from individual files.</li>
-<li>Use <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> to read data form HIS APIs and
-RDBMS.</li>
+<li>Use <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> to read data from RDBMS and HIS.</li>
+<li>The {rio} package supports a wide range of file formats including
+<code>CSV</code>, <code>TSV</code>, <code>XLSX</code>, and compressed
+files.</li>
+<li>Use <code>readepi::login()</code> to establish connections to RDBMS,
+DHIS2, or SORMAS systems.</li>
+<li>The <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> package currently supports importing data
+from DHIS2 and SORMAS health information systems.</li>
 </ul>
 </div>
 </div>
@@ -1133,7 +1442,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-clean-data"><p>Content from <a href="clean-data.html">Clean case data</a></p>
 <hr>
-<p>Last updated on 2026-01-09 |
+<p>Last updated on 2026-02-13 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2220,7 +2529,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-validate"><p>Content from <a href="validate.html">Validate case data</a></p>
 <hr>
-<p>Last updated on 2026-01-09 |
+<p>Last updated on 2026-02-13 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/validate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2894,7 +3203,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-describe-cases"><p>Content from <a href="describe-cases.html">Aggregate and visualize</a></p>
 <hr>
-<p>Last updated on 2026-01-09 |
+<p>Last updated on 2026-02-13 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3012,18 +3321,18 @@ Returning data early with 1546 cases and 3059 total contacts (including cases).<
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code># A tibble: 1,546 × 13
-      id case_name           case_type sex     age date_onset date_reporting
-   &lt;int&gt; &lt;chr&gt;               &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;
- 1     1 Zahra al-Masri      probable  f        37 2023-01-01 2023-01-01
- 2     3 Waleeda al-Muhammad probable  f        12 2023-01-11 2023-01-11
- 3     6 Rhett Jackson       confirmed m        53 2023-01-18 2023-01-18
- 4     8 Sunnique Sims       confirmed f        36 2023-01-23 2023-01-23
- 5    11 Danielle Griggs     probable  f        77 2023-01-30 2023-01-30
- 6    14 Mohamed Parker      probable  m        37 2023-01-24 2023-01-24
- 7    15 Melissa Eriacho     probable  f        67 2023-01-31 2023-01-31
- 8    16 Maria Laughlin      probable  f        80 2023-01-30 2023-01-30
- 9    20 Phillip Park        confirmed m        70 2023-01-27 2023-01-27
-10    21 Dewarren Newton     probable  m        87 2023-02-09 2023-02-09
+      id case_name         case_type sex     age date_onset date_reporting
+   &lt;int&gt; &lt;chr&gt;             &lt;chr&gt;     &lt;chr&gt; &lt;int&gt; &lt;date&gt;     &lt;date&gt;
+ 1     1 Travis Kurek      confirmed m        37 2023-01-01 2023-01-01
+ 2     3 Courtney Mccoy    probable  f        12 2023-01-11 2023-01-11
+ 3     6 Andrea Alarid     confirmed f        53 2023-01-18 2023-01-18
+ 4     8 Salwa el-Sharifi  suspected f        36 2023-01-23 2023-01-23
+ 5    11 Azza al-Noorani   suspected f        77 2023-01-30 2023-01-30
+ 6    14 Olivya Pinto      probable  f        37 2023-01-24 2023-01-24
+ 7    15 Acineth Briones   suspected f        67 2023-01-31 2023-01-31
+ 8    16 Mahuroos el-Javed confirmed m        80 2023-01-30 2023-01-30
+ 9    20 Awad el-Idris     probable  m        70 2023-01-27 2023-01-27
+10    21 Matthew Friend    confirmed m        87 2023-02-09 2023-02-09
 # ℹ 1,536 more rows
 # ℹ 6 more variables: date_admission &lt;date&gt;, outcome &lt;chr&gt;,
 #   date_outcome &lt;date&gt;, date_first_contact &lt;date&gt;, date_last_contact &lt;date&gt;,
@@ -3039,7 +3348,7 @@ events during the outbreak.</p>
   Additional Resources on Outbreak Data
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>The above is the default configuration of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a>, so
 includes a number of assumptions about the transmissibility and severity
@@ -3120,22 +3429,22 @@ the date of onset, sex, and type of case.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># incidence:  201 x 5
+<pre class="output" tabindex="0"><code># incidence:  199 x 5
 # count vars: date_onset
 # groups:     sex, case_type
    date_index sex   case_type count_variable count
    &lt;isowk&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;          &lt;int&gt;
- 1 2022-W52   f     probable  date_onset         1
+ 1 2022-W52   m     confirmed date_onset         1
  2 2023-W02   f     probable  date_onset         1
- 3 2023-W03   m     confirmed date_onset         1
- 4 2023-W04   f     confirmed date_onset         2
- 5 2023-W04   f     probable  date_onset         1
+ 3 2023-W03   f     confirmed date_onset         1
+ 4 2023-W04   f     probable  date_onset         1
+ 5 2023-W04   f     suspected date_onset         1
  6 2023-W04   m     confirmed date_onset         1
- 7 2023-W04   m     probable  date_onset         1
- 8 2023-W05   f     confirmed date_onset         3
- 9 2023-W05   f     probable  date_onset         4
-10 2023-W05   f     suspected date_onset         1
-# ℹ 191 more rows</code></pre>
+ 7 2023-W04   m     probable  date_onset         2
+ 8 2023-W05   f     confirmed date_onset         5
+ 9 2023-W05   f     probable  date_onset         2
+10 2023-W05   f     suspected date_onset         2
+# ℹ 189 more rows</code></pre>
 </div>
 <div id="dates-completion" class="callout">
 <div class="callout-square">
@@ -3546,9 +3855,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/aio.html",
-  "dateCreated": "2026-01-09",
-  "dateModified": "2026-02-10",
-  "datePublished": "2026-02-10"
+  "dateCreated": "2026-02-13",
+  "dateModified": "2026-02-13",
+  "datePublished": "2026-02-13"
 }
 
   </script><script>
