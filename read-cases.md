@@ -603,7 +603,7 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 14 × 3
+# A tibble: 15 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
@@ -620,6 +620,7 @@ tibble::as_tibble(demo_programs)
 12 TB program                                          ur1Edk5Oe2n tracker  
 13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
 14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+15 ZZZ probe 1771289717                                GjcFTFN9fbT tracker  
 ```
 
 
@@ -630,7 +631,7 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1,167 × 8
+# A tibble: 1,166 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
  1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
@@ -643,7 +644,7 @@ tibble::as_tibble(demo_units)
  8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
 10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,157 more rows
+# ℹ 1,156 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
@@ -675,24 +676,15 @@ covid_cases <- readepi::read_sormas(
   login = sormas_login,
   disease = "coronavirus",
 )
-```
-
-``` warning
-Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
-coercion
-```
-
-``` r
 tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 3 × 15
+# A tibble: 2 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 TWRMOD-5MX5IA-3XWJ… XC44EN-Q… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-2 WJHHRV-A2UPKG-R37W… RYBAQX-A… 2025-11-11 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-3 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  SUSPECT     DECEAS… <NA> 
+1 WJHHRV-A2UPKG-R37W… RYBAQX-A… 2025-11-11 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+2 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  SUSPECT     DECEAS… <NA> 
 # ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
