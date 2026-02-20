@@ -1,0 +1,129 @@
+Package: sandpaper
+Title: Create and Curate Carpentries Lessons
+Version: 0.16.13.9000
+Authors@R: c(
+    person(given = "Robert",
+           family = "Davey",
+           role = c("aut", "cre"),
+           email = "robertdavey@carpentries.org",
+           comment = c(ORCID = "0000-0002-5589-7754")),
+    person(given = "Erin",
+           family = "Becker",
+           role = c("aut"),
+           email = "erinbecker@carpentries.org",
+           comment = c(ORCID = "0000-0002-6832-0233")),
+    person(given = "Zhian N.",
+           family = "Kamvar",
+           role = c("aut"),
+           email = "zkamvar@carpentries.org",
+           comment = c(ORCID = "0000-0003-1458-7108")),
+    person(given = "Julien",
+           family = "Colomb",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0002-3127-5520")),
+    person(given = "Ben",
+           family = "Companjen",
+           role = c("ctb"),
+           comment = c(ORCID = "0000-0002-7023-9047")),
+    person(given = "Toby",
+           family = "Hodges",
+           role = c("ctb"),
+           email = "tobyhodges@carpentries.org"),
+    person(given = "François",
+           family = "Michonneau",
+           role = c("ctb"),
+           email = "francois@carpentries.org"),
+    person(given = "Kelly",
+           family = "Barnes",
+           role = c("ctb"),
+           email = "kbarnes@carpentries.org"),
+    person(given = "Hugo",
+           family = "Gruson",
+           role = c("ctb"),
+           email = "hugo.gruson+R@normalesup.org"),
+    person(given = "Milan",
+           family = "Malfait",
+           role = c("ctb"),
+           email = "milan.malfait94@gmail.com",
+           comment = c(ORCID = "0000-0001-9144-3701")),
+    person(given = "Joel H.",
+           family = "Nitta",
+           role = c("aut", "trl"),
+           email = "joelnitta@gmail.com",
+           comment = c(ORCID = "0000-0003-4719-7472")),
+    person(given = "Yanina",
+           family = "Bellini Saibene",
+           role = c("ctb", "trl"),
+           comment = c(ORCID = "0000-0002-4522-7466")),
+    person(given = "Martin",
+           family = "Raden",
+           role = c("ctb", "trl"),
+           comment = c(ORCID = "0000-0002-7926-5911")),
+    person(given = "Matthew",
+           family = "Armstrong",
+           role = c("ctb"),
+           email = "cs.matthewarmstrong@gmail.com"),
+    person(given = "Phil",
+           family = "Reed",
+           role = c("ctb"),
+           email = "phil.reed@manchester.ac.uk",
+           comment = c(ORCID = "0000-0002-4479-715X")),
+    person())
+Description: We provide tools to build a Carpentries-themed lesson repository
+  into an accessible standalone static website. These include local tools and
+  those designed to be used in a continuous integration context so that all the
+  lesson author needs to focus on is writing the content of the actual lesson.
+License: MIT + file LICENSE
+Imports: pkgdown (>= 1.6.0), pegboard (>= 0.7.0), cli (>= 3.4.0),
+        commonmark, fs (>= 1.5.0), gh, gert (>= 1.0.1), rstudioapi,
+        rlang (>= 0.4.3), glue, assertthat, yaml, desc, knitr (>=
+        1.33), rmarkdown (>= 2.4), renv (>= 0.14.0), rprojroot, usethis
+        (>= 2.0.0), withr, whisker, callr, servr, utils, tools, R.utils
+Suggests: testthat (>= 3.0.0), covr, markdown, brio, xml2, xslt,
+        jsonlite, sessioninfo, mockr, varnish (>= 0.3.0)
+Additional_repositories: https://carpentries.r-universe.dev/
+Remotes: carpentries/pegboard, carpentries/varnish
+SystemRequirements: pandoc (>= 2.11.4) - https://pandoc.org
+Encoding: UTF-8
+Config/testthat/edition: 3
+Config/testthat/parallel: false
+Config/Needs/check: rstudio/renv
+Config/potools/style: explicit
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+URL: https://carpentries.github.io/sandpaper/,
+        https://github.com/carpentries/sandpaper/,
+        https://carpentries.github.io/workbench/
+BugReports: https://github.com/carpentries/sandpaper/issues/
+VignetteBuilder: knitr
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: sandpaper
+RemoteUsername: epiverse-trace
+RemotePkgRef: epiverse-trace/sandpaper@patch-renv-github-bug
+RemoteRef: patch-renv-github-bug
+RemoteSha: c6642d0ba4ea7bb7f8530695452c007c8f0fbc8c
+GithubRepo: sandpaper
+GithubUsername: epiverse-trace
+GithubRef: patch-renv-github-bug
+GithubSHA1: c6642d0ba4ea7bb7f8530695452c007c8f0fbc8c
+NeedsCompilation: no
+Packaged: 2026-02-06 23:56:18 UTC; r
+Author: Robert Davey [aut, cre] (<https://orcid.org/0000-0002-5589-7754>),
+  Erin Becker [aut] (<https://orcid.org/0000-0002-6832-0233>),
+  Zhian N. Kamvar [aut] (<https://orcid.org/0000-0003-1458-7108>),
+  Julien Colomb [ctb] (<https://orcid.org/0000-0002-3127-5520>),
+  Ben Companjen [ctb] (<https://orcid.org/0000-0002-7023-9047>),
+  Toby Hodges [ctb],
+  François Michonneau [ctb],
+  Kelly Barnes [ctb],
+  Hugo Gruson [ctb],
+  Milan Malfait [ctb] (<https://orcid.org/0000-0001-9144-3701>),
+  Joel H. Nitta [aut, trl] (<https://orcid.org/0000-0003-4719-7472>),
+  Yanina Bellini Saibene [ctb, trl]
+    (<https://orcid.org/0000-0002-4522-7466>),
+  Martin Raden [ctb, trl] (<https://orcid.org/0000-0002-7926-5911>),
+  Matthew Armstrong [ctb],
+  Phil Reed [ctb] (<https://orcid.org/0000-0002-4479-715X>)
+Maintainer: Robert Davey <robertdavey@carpentries.org>
+Built: R 4.3.3; ; 2026-02-06 23:56:18 UTC; unix

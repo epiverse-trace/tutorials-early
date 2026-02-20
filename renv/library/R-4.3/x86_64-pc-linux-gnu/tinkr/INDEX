@@ -1,0 +1,15 @@
+find_between            Find between a pattern
+get_protected           Get protected nodes
+md_ns                   Aliased namespace prefix for commonmark
+protect_curly           Protect curly elements for further processing
+protect_fences          Protect fences of Pandoc fences divs for
+                        further processing
+protect_math            Protect math elements from commonmark's
+                        character escape
+show_list               Display a node or nodelist as markdown
+stylesheet              The tinkr stylesheet
+to_md                   Write front-matter (YAML, TOML or JSON) and XML
+                        back to disk as (R)Markdown
+to_xml                  Transform file to XML
+yarn                    R6 class containing XML representation of
+                        Markdown
