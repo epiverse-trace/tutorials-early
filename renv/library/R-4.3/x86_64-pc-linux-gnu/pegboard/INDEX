@@ -1,0 +1,34 @@
+Episode                 Class representing XML source of a Carpentries
+                        episode
+Lesson                  Class to contain a single Lesson by the
+                        Carpentries
+collect_labels          Collect and append validation messages
+fix_liquid_relative_link
+                        Remove spaces in relative links with liquid
+                        variables
+fix_sandpaper_links     Fix relative and jekyll links to be compatible
+                        with sandpaper
+get_blocks              Gather blocks from the XML body of a
+                        carpentries lesson
+get_challenges          Gather challenges from the XML body of a
+                        carpentries lesson
+get_code                Get code blocks from xml document
+get_headings            Get all headings in the XML document
+get_lesson              Get a carpentries lesson in XML format
+get_solutions           Gather solutions from the XML body of a
+                        carpentries lesson
+isolate_elements        Isolate elements in an XML document by source
+                        position
+issue_warning           Issue a warning via CLI if it exists or send a
+                        message
+lesson_fragment         Example Lesson Fragments
+liquid_to_commonmark    Convert liquid code blocks to commonmark code
+                        blocks
+make_div_table          Create a table of divs in an episode
+make_pandoc_alt         Add alt text to images when transforming from
+                        jekyll to sandpaper
+set_alt_attr            Set the alt text for a nodeset of images
+throw_heading_warnings
+                        Throw a validation report as a single message
+trim_fence              Trim div fences from output
+validate_divs           Validate Callout Blocks for sandpaper episodes
