@@ -1,0 +1,70 @@
+Package: pegboard
+Title: Explore and Manipulate Markdown Curricula from the Carpentries
+Version: 0.7.9
+Authors@R: c(
+    person(given = "Robert",
+           family = "Davey",
+           role = c("aut", "cre"),
+           email = "robertdavey@carpentries.org",
+           comment = c(ORCID = "0000-0002-5589-7754")),
+    person(given = "Erin",
+           family = "Becker",
+           role = c("aut", "ctb"),
+           email = "erinbecker@carpentries.org",
+           comment = c(ORCID = "0000-0002-6832-0233")),
+    person(given = "Zhian N.",
+           family = "Kamvar",
+           role = c("aut"),
+           email = "zkamvar@carpentries.org",
+           comment = c(ORCID = "0000-0003-1458-7108")),
+    person(given = "Toby",
+           family = "Hodges",
+           role = c("ctb"),
+           email = "tobyhodges@carpentries.org"),
+    person(given = "Kelly",
+           family = "Barnes",
+           role = c("ctb"),
+           email = "kbarnes@carpentries.org"),
+    person())
+Description: The Carpentries (<https://carpentries.org>) curricula is made
+    of of lessons that are hosted as websites. Each lesson represents
+    between a half day to two days of instruction and contains several
+    episodes, which are written as 'kramdown'-flavored 'markdown'
+    documents and converted to HTML using the 'Jekyll' static website
+    generator. This package builds on top of the 'tinkr' package; reads in
+    these markdown documents to 'XML' and stores them in R6 classes for
+    convenient exploration and manipulation of sections within episodes.
+License: MIT + file LICENSE
+URL: https://carpentries.github.io/pegboard
+BugReports: https://github.com/carpentries/pegboard/issues
+Imports: commonmark, fs (>= 1.5.0), glue, purrr, R6, tinkr (>= 0.2.0),
+        xml2, xslt, yaml
+Suggests: cli (>= 0.3.4), covr, crayon, dplyr, gert (>= 1.0.0), here,
+        knitr, magrittr, rlang, rmarkdown, testthat, withr
+VignetteBuilder: knitr
+Remotes: ropensci/tinkr
+Additional_repositories: https://carpentries.r-universe.dev/
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+RemoteType: github
+RemoteHost: api.github.com
+RemoteRepo: pegboard
+RemoteUsername: carpentries
+RemotePkgRef: carpentries/pegboard
+RemoteRef: HEAD
+RemoteSha: 7dc6acfdd6233c0d124a0ecf288325edc40dd96d
+GithubRepo: pegboard
+GithubUsername: carpentries
+GithubRef: HEAD
+GithubSHA1: 7dc6acfdd6233c0d124a0ecf288325edc40dd96d
+NeedsCompilation: no
+Packaged: 2026-02-06 23:53:15 UTC; r
+Author: Robert Davey [aut, cre] (<https://orcid.org/0000-0002-5589-7754>),
+  Erin Becker [aut, ctb] (<https://orcid.org/0000-0002-6832-0233>),
+  Zhian N. Kamvar [aut] (<https://orcid.org/0000-0003-1458-7108>),
+  Toby Hodges [ctb],
+  Kelly Barnes [ctb]
+Maintainer: Robert Davey <robertdavey@carpentries.org>
+Built: R 4.3.3; ; 2026-02-06 23:53:16 UTC; unix
