@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 <!-- badges: end -->
 
-Tutorials on read and clean case data, and make line list for outbreak analytics with R developed by the Epiverse-TRACE initiative. These tutorials are visible at: <https://epiverse-trace.github.io/tutorials-early/>. 
+Tutorials on reading and cleaning case data, and make line list for outbreak analytics with R developed by the Epiverse-TRACE initiative. These tutorials are visible at: <https://epiverse-trace.github.io/tutorials-early/>. 
 
 More information about Epiverse-TRACE learning material is available at: <https://epiverse-trace.github.io/learn.html>
 
@@ -42,6 +42,7 @@ Lesson content is published with a [CC-BY license](LICENSE.md).
 Current maintainers of these tutorials are:
 
 - [Andree Valle-Campos](https://github.com/avallecam/) (Content)
+- [Abdoelnaser Degoot](https://github.com/Degoot-AM/) (Content)
 - [Hugo Gruson](https://github.com/Bisaloo/) (Infrastructure)
 
 <!--
