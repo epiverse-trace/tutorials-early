@@ -603,7 +603,7 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 15 × 3
+# A tibble: 14 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
@@ -620,7 +620,6 @@ tibble::as_tibble(demo_programs)
 12 TB program                                          ur1Edk5Oe2n tracker  
 13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
 14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
-15 ZZZ probe 1771289717                                GjcFTFN9fbT tracker  
 ```
 
 
