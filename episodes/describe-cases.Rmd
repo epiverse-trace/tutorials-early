@@ -45,7 +45,7 @@ To illustrate the process of conducting EDA on outbreak data, we will generate a
 ```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
 set.seed(1) # Set seed for reproducibility
-sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # Display the simulated dataset
@@ -151,7 +151,6 @@ base::plot(daily_incidence) +
     y = "Dialy cases" # y-axis label
   ) +
   theme_bw()
-  # tracetheme::theme_trace() # Apply the custom trace theme
 ``` 
 
 
@@ -163,7 +162,6 @@ base::plot(weekly_incidence) +
     y = "weekly cases" # y-axis label
   ) +
   theme_bw()
-  # tracetheme::theme_trace() # Apply the custom trace theme
 ``` 
 
 :::::::::::::::::::::::: callout
@@ -203,7 +201,6 @@ base::plot(cum_df) +
     y = "weekly cases" # y-axis label
   ) +
   theme_bw()
-  # tracetheme::theme_trace() # Apply the custom trace theme
 ```
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
@@ -297,7 +294,7 @@ ggplot2::ggplot(data = daily_incidence) +
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
 ```{r}
-# Plot daily incidence faceted by sex  
+# Plot daily incidence faceted by sex
 ggplot2::ggplot(data = daily_incidence_2) +
   geom_histogram(
     mapping = aes(

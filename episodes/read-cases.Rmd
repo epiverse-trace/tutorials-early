@@ -32,11 +32,11 @@ This episode requires you to be familiar with:
 
 The initial step in outbreak analysis typically involves importing the target dataset into the `R` environment from either a local source (like a file on your computer) or external source (like a database). Outbreak data can be stored in diverse formats, relational database management systems (RDBMS), or health information systems (HIS), such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/), which provide application program interfaces (APIs) to the system's database  so verified users can easily add and fetch data entries. The latter option is particularly well-suited for collecting and storing large-scale institutional health data. This episode will elucidate the process of reading cases from these sources.
 
-Let's start by loading the `{rio}` package to read data and the `{here}` package to easily find a file path within your RStudio project. We'll use the pipe `%>%` operator from the `{magrittr}` package to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the `{tidyverse}` package, which includes both `{magrittr}` and `{dplyr}`.
+Let's start by loading the `{rio}` package to read data and the `{here}` package to easily find a file path within your RStudio project. We'll use the pipe `|>` operator from the `{magrittr}` package to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the `{tidyverse}` package, which includes both `{magrittr}` and `{dplyr}`.
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(tidyverse) # for {dplyr} functions and the pipe |>
 library(rio) # for importing data
 library(here) # for easy file referencing
 ```
@@ -79,7 +79,7 @@ The below example shows how to import a `csv` file into `R` environment using `{
 # e.g., if the path to our file is "data/raw-data/ebola_cases_2.csv" then:
 ebola_confirmed <- rio::import(
   here::here("data", "raw-data", "ebola_cases_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
@@ -91,7 +91,7 @@ ebola_confirmed
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
@@ -187,7 +187,7 @@ A real-life connection to an external SQLite database would look like this:
 ```{r, eval=FALSE}
 # in real-life
 db_connection <- DBI::dbConnect(
-  RSQLite::SQLite(), 
+  RSQLite::SQLite(),
   host = "database.epiversetrace.com",
   user = "juanito",
   password = epiversetrace::askForPassword("Database password")
@@ -234,10 +234,10 @@ mytable_db <- dplyr::tbl(src = db_connection, "cases")
 If we apply `{dplyr}` verbs to this table of a SQLite database, these verbs will be translated to an SQL queries.
 
 ```{r}
-# Show the translated SQL queries 
-mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+# Show the translated SQL queries
+mytable_db |>
+  dplyr::filter(confirm > 50) |>
+  dplyr::arrange(desc(confirm)) |>
   dplyr::show_query()
 ```
 
@@ -247,9 +247,9 @@ Use `dplyr::collect()` to force computation of a database query and extract the 
 
 ```{r}
 # Pull all data down to a local tibble
-extracted_data <- mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+extracted_data <- mytable_db |>
+  dplyr::filter(confirm > 50) |>
+  dplyr::arrange(desc(confirm)) |>
   dplyr::collect()
 ```
 
