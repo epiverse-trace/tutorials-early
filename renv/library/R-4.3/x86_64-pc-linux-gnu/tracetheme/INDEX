@@ -1,6 +1,0 @@
-slide_dim               Epiverse-TRACE default plotting dimensions for
-                        slides
-theme_trace             A custom 'ggplot2' theme for Epiverse-TRACE
-                        packages and projects
-vignette_dim            Epiverse-TRACE default plotting dimensions for
-                        vignettes
