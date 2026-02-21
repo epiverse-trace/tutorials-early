@@ -20,8 +20,8 @@ exercises: 10
 
 In this episode, we will use a simulated Ebola dataset that can be:
 
-- Downloaded from [here](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
-- And saved into the `data/` folder.
+- Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
+- Save it in the `data/` folder. Follow instructions in Setup to [configure an RStudio Project and folder](../learners/setup.md#setup-an-rstudio-project-and-folder)
 
 :::::::::::::::::::::
 
@@ -213,9 +213,14 @@ columns.  -->
 You can get the number and location of the duplicated rows that where found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and
 find the "Duplicates" tab.
 
+To use this information within R, you can print data frames with specific sections of the report in the console using the argument `what`.
+
 ```{r,eval=FALSE,echo=TRUE}
-# Print a report
-cleanepi::print_report(sim_ebola_data)
+# Print a report of found duplicates
+cleanepi::print_report(data = sim_ebola_data, what = "found_duplicates")
+
+# Print a report of removed duplicates
+cleanepi::print_report(data = sim_ebola_data, what = "removed_duplicates")
 ```
 
 :::::::::::::::::::::
@@ -310,9 +315,17 @@ Note that our simulated dataset contains duplicated subject IDs.
 
 #### How to correct the subject IDs?
 
-Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" tab to identify what IDs that require an extra treatment. 
+Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`. Focus on the "Unexpected subject ids" 
+tab to identify what IDs require an extra treatment.
 
-After finishing this tutorial, we invite you to explore the package reference guide of [`cleanepi::check_subject_ids()`](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the function that can fix this situation.
+In the console, you can print:
+
+```{r, eval=FALSE}
+print_report(data = sim_ebola_data, "incorrect_subject_id")
+```
+
+After finishing this tutorial, we invite you to explore the package reference guide of [cleanepi::check_subject_ids()](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the 
+function that can fix this situation.
 
 :::::::::::::::::::::::::
 
@@ -338,11 +351,16 @@ This function converts the values in the target columns into the **YYYY-mm-dd** 
 We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the “Details” section of the 
 [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
+Also, check how to use the `orders` argument if you want to target US format character strings. You can explore [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
+
 :::::::::::::::::::
 
 ### Converting to numeric values
 
-In the raw dataset, some columns can come with a mixture of character and numerical values, and you will often want to convert character values explicitly into numeric values (e.g. `"seven"` to `7`). For example, in our simulated data set, some entries in the age column are written in words. In `{cleanepi}`, the function `convert_to_numeric()` does such conversion as illustrated in the below code chunk.
+In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert 
+character values for numbers explicitly into numeric values (e.g. `"seven"` to `7`). For example, in our simulated data set, in the age column some entries are 
+written in words. In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below 
+code chunk.
 
 ```{r}
 sim_ebola_data <- cleanepi::convert_to_numeric(
@@ -622,7 +640,12 @@ Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleanin
 
 The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing operations conducted during the analysis. This report is presented as a HTML file that automatically opens in your browser with. Each section corresponds to a specific data cleansing operation, and clicking on each section allows you to access the results of that particular operation. This interactive approach enables users to efficiently review and analyze the effects of individual cleansing steps within the broader data cleansing process.
 
-You can view the report using the function `cleanepi::print_report(cleaned_data)`. 
+You can view the report using: 
+
+```r
+cleanepi::print_report(data = cleaned_data)
+```
+
 <p><figure>
     <img src="fig/report_demo.png"
          alt="Data cleaning report" 
