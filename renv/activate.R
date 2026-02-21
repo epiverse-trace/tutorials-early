@@ -2,8 +2,8 @@
 local({
 
   # the requested version of renv
-  version <- "1.0.11"
-  attr(version, "md5") <- NULL
+  version <- "1.1.7"
+  attr(version, "md5") <- "dd5d60f155dadff4c88c2fc6680504b4"
   attr(version, "sha") <- NULL
 
   # the project directory
