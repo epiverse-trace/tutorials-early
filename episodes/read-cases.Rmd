@@ -90,7 +90,7 @@ ebola_confirmed
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
-) |>
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
