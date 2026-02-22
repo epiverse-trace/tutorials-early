@@ -26,8 +26,9 @@ All these operations can be efficiently performed in a few lines as demonstrated
 in the following pipeline:
 
 ```{r echo=TRUE, eval=FALSE}
-cleaned_data <- data.table::fread(
-  "https://mpox-2024.s3.eu-central-1.amazonaws.com/latest.csv") |>
+cleaned_data <-
+  data.table::fread(
+    "https://mpox-2024.s3.eu-central-1.amazonaws.com/latest.csv") |>
   cleanepi::replace_missing_values(na_strings = "") |>
   cleanepi::remove_constants() |>
   cleanepi::standardize_dates(error_tolerance = 1) |>
@@ -52,11 +53,14 @@ The below code chunk installs these packages (if not already installed).
 
 ```{r setup, include=TRUE, warning=FALSE, message=FALSE}
 # install the packages if not already done
+# nolint start
+
 if (!require("wakefield")) pak::pak("wakefield")
 if (!require("cleanepi")) pak::pak("cleanepi")
 if (!require("kableExtra")) pak::pak("kableExtra")
 if (!require("data.table")) pak::pak("data.table")
 
+# nolint end
 # load the libraries
 library(wakefield)
 library(cleanepi)
@@ -113,7 +117,7 @@ After replacing the empty characters with `NA`, the dataset is now composed of
 values. The new distribution of missing values is shown in the below figure.
 
 ```{r echo=TRUE, cache=TRUE}
-# Visualise the new distribution of the different data types as well as missing 
+# Visualise the new distribution of the different data types as well as missing
 # data across the dataset
 wakefield::table_heat(data_in, palette = "Set3", flip = TRUE, print = TRUE)
 ```
@@ -136,13 +140,14 @@ multiple data types found by the `scan_data()` function.
 ```{r echo=TRUE, cache=TRUE}
 # detect rows with multiple data types
 df <- scan_result |>
-  dplyr::mutate(highlight = ((numeric > 0) & (date > 0)) |
-           ((numeric > 0) & (character > 0)) |
-           ((numeric > 0) & (logical > 0)) |
-           ((date > 0) & (character > 0)) |
-           ((date > 0) & (logical > 0)) |
-           ((character > 0) & (logical > 0))
-         )
+  dplyr::mutate(
+    highlight = ((numeric > 0) & (date > 0)) |
+      ((numeric > 0) & (character > 0)) |
+      ((numeric > 0) & (logical > 0)) |
+      ((date > 0) & (character > 0)) |
+      ((date > 0) & (logical > 0)) |
+      ((character > 0) & (logical > 0))
+  )
 highlight_rows <- which(df$highlight)
 
 scan_result |>
@@ -152,7 +157,8 @@ scan_result |>
                          box_css = "border: 1px solid #ddd; padding: 5px;",
                          extra_css = NULL,
                          fixed_thead = TRUE) |>
-  kableExtra::row_spec(highlight_rows, bold = TRUE, background = "red", color = "white")
+  kableExtra::row_spec(highlight_rows, bold = TRUE,
+                       background = "red", color = "white")
 ```
 
 In the table above, each row represents a column from the original dataset,
@@ -182,7 +188,7 @@ columns — while no empty rows were removed, as shown in the table below.
 constant_data <- cleanepi::print_report(data_in, "constant_data")
 constant_data |>
   kableExtra::kbl() |>
-  kableExtra::kable_paper("striped", font_size = 14, full_width = TRUE) %>%
+  kableExtra::kable_paper("striped", font_size = 14, full_width = TRUE) |>
   kableExtra::scroll_box(height = "200px", width = "100%",
                          box_css = "border: 1px solid #ddd; padding: 5px; ",
                          extra_css = NULL,
@@ -241,7 +247,7 @@ For example, the below code chunk could be used to exclude columns where more
 than **90%** of the values are `NA`.
 
 ```{r echo=TRUE, cache=TRUE, eval=FALSE}
-df <- data_in |> 
+df <- data_in |>
   cleanepi::remove_constants(cutoff = 0.9)
 
 # Visualise the new distribution of missing data across the dataset

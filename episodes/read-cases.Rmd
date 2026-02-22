@@ -32,11 +32,11 @@ This episode requires you to be familiar with:
 
 The initial step in outbreak analysis typically involves importing the target dataset into the `R` environment from either a local source (like a file on your computer) or external source (like a database). Outbreak data can be stored in diverse formats, relational database management systems (RDBMS), or health information systems (HIS), such as [REDCap](https://www.project-redcap.org/) and [DHIS2](https://dhis2.org/), which provide application program interfaces (APIs) to the database systems so verified users can easily add and access data entries. The latter option is particularly well-suited for collecting and storing large-scal institutional health data. This episode will elucidate the process of reading cases from these sources.
 
-Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `%>%` to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both the pipe and `{dplyr}`:
+Let's start by loading the package `{rio}` to read data and the package `{here}` to easily find a file path within your RStudio project. We'll use the pipe `|>` to easily connect some of their functions, including functions from the data formatting package `{dplyr}`. We'll therefore call the tidyverse package, which includes both the pipe and `{dplyr}`:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(tidyverse) # for {dplyr} functions and the pipe |>
 library(rio) # for importing data
 library(here) # for easy file referencing
 ```
@@ -75,7 +75,7 @@ The below example shows how to import a `csv` file into `R` environment using `{
 # e.g., the path to our file is data/raw-data/ebola_cases_2.csv then:
 ebola_confirmed <- rio::import(
   here::here("data", "ebola_cases_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
@@ -88,7 +88,7 @@ ebola_confirmed
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
@@ -231,9 +231,9 @@ If we apply `{dplyr}` verbs to this database SQLite table, these verbs will be t
 
 ```{r}
 # Show the SQL queries translated
-mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+mytable_db |>
+  dplyr::filter(confirm > 50) |>
+  dplyr::arrange(desc(confirm)) |>
   dplyr::show_query()
 ```
 
@@ -243,9 +243,9 @@ Use `dplyr::collect()` to force computation of a database query and extract the 
 
 ```{r}
 # Pull all data down to a local tibble
-extracted_data <- mytable_db %>%
-  dplyr::filter(confirm > 50) %>%
-  dplyr::arrange(desc(confirm)) %>%
+extracted_data <- mytable_db |>
+  dplyr::filter(confirm > 50) |>
+  dplyr::arrange(desc(confirm)) |>
   dplyr::collect()
 ```
 

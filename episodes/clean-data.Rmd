@@ -32,12 +32,12 @@ In the process of analyzing outbreak data, it's essential to ensure that the dat
    For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
-to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
+to clean it. We'll use the pipe `|>` to connect some of their functions, including others from 
 the package `{dplyr}`, so let's also call to the tidyverse package:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(tidyverse) # for {dplyr} functions and the pipe |>
 library(rio) # for importing data
 library(here) # for easy file referencing
 library(cleanepi)
@@ -66,7 +66,7 @@ outlined in the [Read case data](../episodes/read-cases.Rmd) episode. This invol
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 ```
 
@@ -74,7 +74,7 @@ raw_ebola_data <- rio::import(
 # Read data
 raw_ebola_data <- rio::import(
   file.path("data", "simulated_ebola_2.csv")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 ```
 
@@ -210,13 +210,13 @@ library(tidyverse)
 df <- tibble(
   col1 = c(1, 2),
   col2 = c(1, 3)
-) %>%
-  mutate(col3 = rep("a", nrow(.))) %>%
-  mutate(col4 = rep("b", nrow(.))) %>%
-  mutate(col5 = rep(NA_Date_, nrow(.))) %>%
-  add_row(col1 = NA_integer_, col3 = "a") %>%
-  add_row(col1 = NA_integer_, col3 = "a") %>%
-  add_row(col1 = NA_integer_, col3 = "a") %>%
+) |>
+  mutate(col3 = rep("a", nrow(.))) |>
+  mutate(col4 = rep("b", nrow(.))) |>
+  mutate(col5 = rep(NA_Date_, nrow(.))) |>
+  add_row(col1 = NA_integer_, col3 = "a") |>
+  add_row(col1 = NA_integer_, col3 = "a") |>
+  add_row(col1 = NA_integer_, col3 = "a") |>
   add_row(col1 = NA_integer_)
 
 df
@@ -248,11 +248,11 @@ or columns.
 Point out to learners that the user can create new constant columns or rows after removing some initial ones.
 
 ```{r}
-df %>%
+df |>
   cleanepi::remove_constants()
 
-df %>%
-  cleanepi::remove_constants() %>%
+df |>
+  cleanepi::remove_constants() |>
   cleanepi::remove_constants()
 ```
 
@@ -401,7 +401,7 @@ dictionary below includes mappings for the “gender” column.
 ```{r}
 test_dict <- base::readRDS(
   system.file("extdata", "test_dict.RDS", package = "cleanepi")
-) %>%
+) |>
   dplyr::as_tibble() # for a simple data frame output
 
 test_dict
@@ -439,7 +439,7 @@ new_dictionary <- tibble::tibble(
   values = "female",
   grp = "sex",
   orders = 1L
-) %>%
+) |>
   cleanepi::add_to_dictionary(
     option = "1",
     value = "male",
@@ -479,7 +479,7 @@ sim_ebola_data <- cleanepi::timespan(
   span_remainder_unit = "months"
 )
 
-sim_ebola_data %>%
+sim_ebola_data |>
   dplyr::select(case_id, date_sample, years_since_collection, remainder_months)
 ```
 
@@ -496,7 +496,7 @@ Read the `test_df.RDS` data frame within the `{cleanepi}` package:
 ```{r}
 dat <- readRDS(
   file = system.file("extdata", "test_df.RDS", package = "cleanepi")
-) %>%
+) |>
   dplyr::as_tibble()
 ```
 
@@ -517,17 +517,17 @@ Before calculating the age, you may need to:
 In the solution we add `date_first_pcr_positive_test` given that it will provide the temporal scale for descriptive and statistical downstream analysis of the disease outbreak.
 
 ```{r}
-dat_clean <- dat %>%
+dat_clean <- dat |>
   # standardize column names and dates
-  cleanepi::standardize_column_names() %>%
+  cleanepi::standardize_column_names() |>
   cleanepi::standardize_dates(
     target_columns = c("date_of_birth", "date_first_pcr_positive_test")
-  ) %>%
+  ) |>
   # replace from strings to a valid missing entry
   cleanepi::replace_missing_values(
     target_columns = "sex",
     na_strings = "-99"
-  ) %>%
+  ) |>
   # calculate the age in 'years' and return the remainder in 'months'
   cleanepi::timespan(
     target_column = "date_of_birth",
@@ -547,7 +547,7 @@ Now, How would you categorize a numerical variable?
 The simplest alternative is using `Hmisc::cut2()`. You can also use `dplyr::case_when()` however, this requires more lines of code and is more appropriate for custom categorizations. Here we provide one solution using `base::cut()`:
 
 ```{r}
-dat_clean %>%
+dat_clean |>
   # select to conveniently view timespan output
   dplyr::select(
     study_id,
@@ -555,7 +555,7 @@ dat_clean %>%
     date_first_pcr_positive_test,
     date_of_birth,
     age_in_years
-  ) %>%
+  ) |>
   # categorize the age numerical variable [add as a challenge hint]
   dplyr::mutate(
     age_category = base::cut(
@@ -585,28 +585,28 @@ The `clean_data()` function applies a series of predefined data cleaning operati
 example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
 
 
-Further more, you can combine multiple data cleaning tasks via the pipe operator in "%>%", as shown in the below code 
+Further more, you can combine multiple data cleaning tasks via the pipe operator in "|>", as shown in the below code 
 snippet. 
 
 ```{r,warning = FALSE, message = FALSE}
-# Perfom the cleaning operations using the pipe (%>%) operator
-cleaned_data <- raw_ebola_data %>%
-  cleanepi::standardize_column_names() %>%
-  cleanepi::remove_constants() %>%
-  cleanepi::remove_duplicates() %>%
-  cleanepi::replace_missing_values(na_strings = "") %>%
+# Perfom the cleaning operations using the pipe (|>) operator
+cleaned_data <- raw_ebola_data |>
+  cleanepi::standardize_column_names() |>
+  cleanepi::remove_constants() |>
+  cleanepi::remove_duplicates() |>
+  cleanepi::replace_missing_values(na_strings = "") |>
   cleanepi::check_subject_ids(
     target_columns = "case_id",
     range = c(1, 15000)
-  ) %>%
+  ) |>
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample")
-  ) %>%
-  cleanepi::convert_to_numeric(target_columns = "age") %>%
+  ) |>
+  cleanepi::convert_to_numeric(target_columns = "age") |>
   cleanepi::check_date_sequence(
     target_columns = c("date_onset", "date_sample")
-  ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
+  ) |>
+  cleanepi::clean_using_dictionary(dictionary = test_dict) |>
   cleanepi::timespan(
     target_column = "date_sample",
     end_date = lubridate::ymd("2025-01-03"),
@@ -617,7 +617,7 @@ cleaned_data <- raw_ebola_data %>%
 ```
 
 ```{r,echo=FALSE,eval=TRUE}
-cleaned_data %>%
+cleaned_data |>
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
 

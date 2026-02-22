@@ -29,7 +29,7 @@ A key aspect of EDA in epidemic analysis is 'person, place and time'. It is usef
 
 Let's start by loading the package `{incidence2}` to aggregate linelist data according to specific characteristics, and visualize the resulting epidemic curves (epicurves) that plot the number of new events (i.e. incidence) over time.
  We'll use `{simulist}` to simulate some outbreak data to analyse,  and `{tracetheme}` for figure formatting.
- We'll use the pipe `%>%` to connect some of their functions, including others from the packages `{dplyr}` and 
+ We'll use the pipe `|>` to connect some of their functions, including others from the packages `{dplyr}` and 
  `{ggplot2}`, so let's also call to the tidyverse package:
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
@@ -37,7 +37,7 @@ Let's start by loading the package `{incidence2}` to aggregate linelist data acc
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
 library(tracetheme) # For formatting figures
-library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe %>%
+library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe |>
 ```
 
 ::::::::::::::::::: checklist
@@ -61,7 +61,7 @@ Its minimal configuration can generate a linelist, as shown in the below code ch
 ```{r}
 # Simulate linelist data for an outbreak with size between 1000 and 1500
 set.seed(1) # Set seed for reproducibility
-sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
+sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) |>
   dplyr::as_tibble() # for a simple data frame output
 
 # Display the simulated dataset
