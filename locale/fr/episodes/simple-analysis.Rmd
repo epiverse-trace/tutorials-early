@@ -1,0 +1,246 @@
+---
+title: Une Analyse Simple
+teaching: 20
+exercises: 10
+---
+
+:::::::::::::::::::::::::::::::::::::: questions
+
+- Quel est le taux de croissance d'une épidémie ?
+- Comment identifier le pic d'une épidémie ?
+- Comment calculer la moyenne mobile des cas ?
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: objectifs
+
+- Effectuer une analyse préliminaire des données épidémiologiques
+- Identifier les tendances, les dates ou périodes de pic, doublage du nombre de cas
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Introduction
+
+Il est essentiel de comprendre les tendances à partir des données de surveillance pour appréhender les moteurs et la dynamique des épidémies. Elles permettent de prévoir la morbidité, de planifier les futures interventions de santé publique et d'évaluer l'efficacité des mesures de contrôle antérieures. En analysant les tendances, les décideurs politiques et les experts en santé publique peuvent prendre des décisions éclairées pour limiter la propagation des maladies et préserver la santé publique. Cet épisode se concentre sur la manière d'effectuer une simple analyse préliminaire des données d'incidence. Il utilise le même ensemble de données **sur les cas de Covid-19 en Angleterre** qui a été utilisé dans l'épisode [Agréger et visualiser](../episodes/describe-cases.Rmd).
+
+::::::::::::::::::: checklist
+
+### L'opérateur double deux-points (`::`)
+
+L'opérateur `::` de R permet d'accéder aux fonctions ou aux objets d'un package spécifique sans attacher l'intégralité du package (sans faire appel à la function`libray()`). Il offre plusieurs avantages, notamment :
+
+* Indiquer explicitement le package d'origine d'une fonction, réduisant ainsi les ambiguïtés et les conflits potentiels lorsque plusieurs packages possèdent des fonctions portant le même nom.
+* Permettre d'appeler une fonction depuis un package sans charger l'intégralité du package avec `library()`.
+
+Par exemple, la commande `dplyr::filter(data, condition)` signifie que nous appelons la fonction `filter()` depuis la librairie `{dplyr}`.
+
+:::::::::::::::::::
+
+## Modèle simple
+
+Les données épidémiologiques agrégées sur une échelle de temps spécifiques (c'est-à-dire les données d'incidence) représentent généralement le nombre de cas survennus au cours de cette période. Nous pouvons considérer ces cas comme des observations bruitées générées par le processus épidémique sous-jacent (que nous ne pouvons pas observer directement). Pour tenir compte du caractère aléatoire des observations, nous pouvons supposer que les cas observés suivent soit une `distribution de Poisson` (si les cas sont rapportés à un taux moyen constant au cours du temps) ou une `distribution binomiale négative (NB)` (s'il existe une variabilité potentielle dans la répertoriage des cas au fil du temps). Lors de l'analyse de ce type de données, une approche courante consiste à examiner la tendance au cours du temps en calculant le taux de changement, qui peut indiquer s'il y a une croissance ou une décroissance exponentielle du nombre de cas. Une croissance exponentielle implique que le nombre de cas augmente à un rythme accéléré au fil du temps, tandis qu'une décroissance exponentielle suggère que le nombre de cas diminue à un rythme décéléré.
+
+La library `{i2extras}` fournit des méthodes pour modéliser la tendance dans les des données épidémiologiques, calculer le nombre moyen de cas dans un interval de temps dèfini (moyenne mobile) et le taux de croissance ou de décroissance exponentielle. Le morceau de code ci-dessous évalue la tendance de la Covid-19 au Royaume-Uni au cours des trois premiers mois en utilisant une distribution binomiale négative.
+
+```{r, warning=FALSE, message=FALSE}
+# charger les librairies offrant les functions la modélisation
+library(incidence2)
+library(outbreaks)
+```
+
+```{r}
+# obtenir les données à partir de la librairie {outbreaks}
+covid19_eng_case_data <- outbreaks::covid19_england_nhscalls_2020
+
+# extraire les données des trois premiers mois à partir de l'objet
+# covid19_eng_case_data
+df <- base::subset(
+  covid19_eng_case_data,
+  covid19_eng_case_data$date <= min(covid19_eng_case_data$date) + 90
+)
+
+# utiliser la fonction incidence() de la librairie {incidence2} pour générer
+# les données d'incidence
+df_incid <- incidence2::incidence(
+  df,
+  date_index = "date",
+  groups = "sex"
+) %>%
+  filter(sex != "unknown")
+
+# Adapter une courbe aux données d'incidence. Le modèle choisi est une
+# distribution binomiale négative avec un seuil de significativité (alpha)
+# de 0.05
+fitted_curve_nb <-
+  df_incid %>%
+  nest(.key = "data") %>%
+  mutate(model = lapply(
+    X = data,
+    FUN = function(x)
+      MASS::glm.nb(count ~ date_index, data = x)
+  ))
+
+intervals <-
+  fitted_curve_nb %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
+
+# tracer la courbe adaptée
+plot(df_incid, angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: défi
+
+## Défi 1 : Distribution de Poisson
+
+Répétez l'analyse ci-dessus en utilisant la distribution de Poisson.
+
+:::::::::::::::::::::::: solution
+
+```{r, warning=FALSE, message=FALSE}
+fitted_curve_poisson <-
+  df_incid %>%
+  nest(.key = "data") %>%
+  mutate(model = lapply(data, function(x)
+    glm(
+      count ~ date_index, data = x, family = poisson
+    )))
+
+intervals <-
+  fitted_curve_poisson %>%
+  mutate(result = Map(function(data, model) {
+    data %>%
+      ciTools::add_ci(model,
+                      alpha = 0.05,
+                      names = c("lower_ci", "upper_ci")) %>%
+      as_tibble()
+  }, data, model)) %>%
+  select(sex, result) %>%
+  unnest()
+
+plot(df_incid, angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(date_index, y = pred),
+                     data = intervals,
+                     inherit.aes = FALSE) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.2,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#BBB67E"
+  ) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Taux de croissance ou de décroissance exponentiel
+
+Le taux de croissance ou de décroissance exponentielle, noté $r$ sert d'indicateur pour déterminer si le nombre de cas augmente (croissance) ou diminuent (décroissance) sur une échelle exponentielle. Ce taux est calculé à l'aide de la méthode dite **équation de renouvellement** [(Wallinga et al. 2006)](https://royalsocietypublishing.org/doi/10.1098/rspb.2006.3754) qui relie mécaniquement le nombre de reproduction $R$ de nouveaux cas (c'est-à-dire le nombre moyen de personnes infectées par un cas) à l'intervalle de génération de la maladie (c'est-à-dire le délai moyen entre une infection et la suivante dans une chaîne de transmission). Cette méthode de calcul est implémentée dans la library `{i2extras}`.
+
+Vous trouverez ci-dessous un extrait de code démontrant comment obtenir le taux de croissance/décroissance à partir de la courbe générée en utilisant la distribution binomiale négative à l'aide de la fonction `growth_rate()`.
+
+```{r, message=FALSE, warning=FALSE}
+growth_rates <-
+  fitted_curve_nb %>%
+  mutate(
+    growth = bind_rows(lapply(
+      model,
+      function(m) {
+        ci <- confint(m, 2L, level = 0.95)
+        tibble(lower = ci[1L], estimate = coef(m)[2L], upper = ci[2L])
+      }
+    ))
+  ) %>%
+  unpack(growth)
+
+growth_rates
+```
+
+::::::::::::::::::::::::::::::::::::: défi
+
+## Défi 2 : Obtenir le taux de croissance à partir d'une **distribution de Poisson** ajustée aux données
+
+Extraire les taux de croissance à partir d'une **distribution de Poisson** ajustée aux données obtenues dans **Défi 1**.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+## La période du pic de l'épidémie
+
+La période du pic de l'épidémie **date du pic** correspond à la période à laquelle le plus grand nombre de cas est observé dans les données agrégées. Elle peut être estimée à l'aide de la fonction `i2extras::estimate_peak()` comme le montre le morceau de code ci-dessous, qui identifie la date du pic à partir d'un object de la classe `incidenc2`: `df_incid`.
+
+```{r, message=FALSE, warning=FALSE}
+peaks_nb <- incidence2::estimate_peak(df_incid, progress = FALSE) %>%
+  subset(select = -c(count_variable, bootstrap_peaks))
+
+base::print(peaks_nb)
+```
+
+## Moyenne mobile
+
+Une moyenne mobile ou glissante correspond au nombre moyen de cas sur une période déterminée. Elle peut être calculée à l'aide de la fonction `add_rolling_average()` de la librairie `{i2extras}` sur un objet de class `incidence2`. Le morceau de code suivant illustre le calcul de la moyenne hebdomadaire du nombre de cas à partir de l'objet `df_incid` de la classe `incidence2`, suivi d'une visualisation.
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+
+df_incid %>%
+  mutate(
+    rolling_average = data.table::frollmean(count, n = 7L, align = "right")
+  ) %>%
+  plot(border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+::::::::::::::::::::::::::::::::::::: défi
+
+## Défi 3 : Moyenne mobile mensuelle
+
+Calculez et visualisez la moyenne mobile mensuelle des cas sur l'objet `df_incid`.
+
+:::::::::::::::::::::::: solution
+
+```{r, warning=FALSE, message=FALSE}
+df_incid %>%
+  mutate(
+    rolling_average = data.table::frollmean(count, n = 30L, align = "right")
+  ) %>%
+  plot(border_colour = "white", angle = 45) +
+  ggplot2::geom_line(ggplot2::aes(x = date_index, y = rolling_average)) +
+  ggplot2::labs(x = "Date", y = "Cases")
+```
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::: points clés
+
+- Utilisez `{i2extras}` pour :
+  - ajuster l'épi-courbe en utilisant soit **Poisson** ou **binomiale négative**
+  négative,
+  - calculer la croissance ou la décroissance exponentielle des cas,
+  - trouver la date du pic de l'épidémie, et
+  - calculer la moyenne mobile des cas dans un interval de temps spécifié.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
+
+
