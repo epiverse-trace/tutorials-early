@@ -11,7 +11,7 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to clean, curate, and standardize case data using `{cleanepi}` package
+- Explain how to clean, curate, and standardize case data using `{cleanepi}` package.
 - Perform essential data-cleaning operations on a real case dataset.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -32,13 +32,37 @@ In the process of analyzing outbreak data, as in other disciplines of data scien
  [`{cleanepi}`](https://epiverse-trace.github.io/cleanepi/) package.
    For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
-Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
-to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
-the package `{dplyr}`, so let's also call to the tidyverse package:
+### Set Up
+
+In addition to the `{cleanepi}` package, we will use the following R packages in
+this data cleaning workflow:
+
+* `{here}` for easy file referencing,
+* `{rio}` to import the data into R,
+* `{dplyr}` to perform some data processing operations,
+* `{magrittr}` to use its **pipe operator (`%>%`)**.
+
+We encourage users with recent versions of R (version > 4.4.1) to use the base R
+pipe operator (`|>`) instead of `%>%`.
+
+We also encourage using the `{pak}` package when installing R packages as shown
+below. You can refer to the [{pak} reference document](https://pak.r-lib.org/reference/features.html) for more details about
+the advantages of using this.
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
+# Check if a package is already installed and install it if not
+
+# nolint start
+if (!require("pak")) install.packages("pak")
+if (!require("here")) pak::pak("here")
+if (!require("rio")) pak::pak("rio")
+if (!require("dplyr")) pak::pak("dplyr")
+if (!require("magrittr")) pak::pak("magrittr")
+if (!require("cleanepi")) pak::pak("cleanepi")
+# nolint end
+
 # Load packages
-library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(dplyr) # for {dplyr} functions and the pipe %>%
 library(rio) # for importing data
 library(here) # for easy file referencing
 library(cleanepi)
