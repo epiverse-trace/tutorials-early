@@ -1,6 +1,6 @@
 ---
 title: 'Clean case data'
-teaching: 20
+teaching: 30
 exercises: 10
 ---
 
@@ -26,42 +26,21 @@ In this episode, we will use a simulated Ebola dataset that can be:
 :::::::::::::::::::::
 
 ## Introduction
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
+ This episode focuses on cleaning epidemics and outbreaks data using the 
+ [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
+   For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will increase the accuracy (i.e. you are analysing what you think you are analysing) and reproducibility (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results) of the
-downstream analyses. This episode focuses on cleaning epidemics and outbreaks data using the [{cleanepi}](https://epiverse-trace.github.io/cleanepi/) package.
-To demonstrate the functionalities of this package, we'll apply them on a simulated dataset of Ebola cases.
-
-### Set up
-
-In addition to the {cleanepi} package, we will use the following R packages in
-this data cleaning workflow:
-
-* `{here}` for easy file referencing,
-* `{rio}` to import the data into R,
-* `{dplyr}` to perform some data processing operations,
-* `{magrittr}` to use its **pipe operator (`%>%`)**.
-
-We encourage users with recent versions of R (version > 4.4.1) to use the base R
-pipe operator (`%>%`) instead of `%>%`.
-
-We also encourage using the `{pak}` package when installing R packages as shown
-below. You can refer to the [{pak} reference document](https://pak.r-lib.org/reference/features.html) for more details about
-the advantages of using this.
+Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
+to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
+the package `{dplyr}`, so let's also call to the tidyverse package:
 
 
 ``` r
-# Check if a package is already installed and install it if not
-if (!require("pak")) install.packages("pak") # nolint
-if (!require("here")) pak::pak("here") # nolint
-if (!require("rio")) pak::pak("rio") # nolint
-if (!require("dplyr")) pak::pak("dplyr") # nolint
-if (!require("magrittr")) pak::pak("magrittr") # nolint
-if (!require("cleanepi")) pak::pak("cleanepi") # nolint
-# load the packages
-library(here)
-library(rio)
-library(dplyr)
-library(magrittr)
+# Load packages
+library(tidyverse) # for {dplyr} functions and the pipe %>%
+library(rio) # for importing data
+library(here) # for easy file referencing
 library(cleanepi)
 ```
 
@@ -269,20 +248,6 @@ cleanepi::print_report(data = sim_ebola_data, what = "removed_duplicates")
 
 In the following data frame:
 
-
-``` output
-── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ forcats   1.0.1     ✔ readr     2.1.6
-✔ ggplot2   4.0.2     ✔ stringr   1.6.0
-✔ lubridate 1.9.5     ✔ tibble    3.3.1
-✔ purrr     1.2.1     ✔ tidyr     1.3.2
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ tidyr::extract()   masks magrittr::extract()
-✖ dplyr::filter()    masks stats::filter()
-✖ dplyr::lag()       masks stats::lag()
-✖ purrr::set_names() masks magrittr::set_names()
-ℹ Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
-```
 
 ``` output
 # A tibble: 6 × 5
