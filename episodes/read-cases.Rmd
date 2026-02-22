@@ -78,7 +78,7 @@ The below example shows how to import a `csv` file into `R` environment using th
 # e.g., if the path to our file is "data/raw-data/ebola_cases_2.csv" then:
 ebola_confirmed <- rio::import(
   here::here("data", "raw-data", "ebola_cases_2.csv")
-) |>
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data
@@ -90,7 +90,7 @@ ebola_confirmed
 # read data
 ebola_confirmed <- rio::import(
   file.path("data", "ebola_cases_2.csv")
-) |>
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 
 # preview data

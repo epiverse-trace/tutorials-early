@@ -38,12 +38,12 @@ your dataset, a process commonly referred to as **tagging**;
 
 
 This episode focuses on tagging and validating outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package. Let's start by loading the package `{rio}` to read data and the `{linelist}` package
-to create a linelist object. We'll use the pipe operator (`|>`) to connect some of their functions, including others from the package `{dplyr}`. For this reason, we will also load the {tidyverse} package.
+to create a linelist object. We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the package `{dplyr}`. For this reason, we will also load the {tidyverse} package.
 
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(tidyverse) # to access {dplyr} functions and the pipe |> operator
+library(tidyverse) # to access {dplyr} functions and the pipe %>% operator
 # from {magrittr}
 library(rio) # for importing data
 library(here) # for easy file referencing
@@ -73,7 +73,7 @@ Import the dataset following the guidelines outlined in the [Read case data](../
 # e.g.: if path to file is data/simulated_ebola_2.csv then:
 cleaned_data <- rio::import(
   here::here("data", "cleaned_data.csv")
-) |>
+) %>%
   dplyr::as_tibble() # for a simple data frame output
 ```
 
@@ -81,7 +81,7 @@ cleaned_data <- rio::import(
 # Import cleaned data without printing code
 cleaned_data <- rio::import(
   file.path("data", "cleaned_data.csv")
-) |>
+) %>%
   dplyr::as_tibble() # Convert to tibble for better data display
 
 # Display the first five rows of the dataset
@@ -154,13 +154,13 @@ linelist::tags_names()
 
 ```{r, eval = FALSE}
 linelist::make_linelist(
-x = cleaned_data,
-id = "case_id",
-date_onset = "date_onset",
-gender = "gender",
-age = "age",
-# same name in default list and dataset
-date_reporting = "date_sample" # different names but related
+  x = cleaned_data,
+  id = "case_id",
+  date_onset = "date_onset",
+  gender = "gender",
+  age = "age",
+  # same name in default list and dataset
+  date_reporting = "date_sample" # different names but related
 )
 ```
 
@@ -209,25 +209,29 @@ Describe how `linelist::validate_linelist()` reacts when there is a change in th
 
 We can use `dplyr::mutate()` to change the variable type before tagging for validation. For example:
 ```{r, eval = FALSE}
-cleaned_data |>
-# simulate a change of data type in one variable
-dplyr::mutate(age = as.character(age)) |>
-# tag one variable
-linelist::.... |>
-# validate the linelist
-linelist::...
+# nolint start
+
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::.... %>%
+  # validate the linelist
+  linelist::...
+
+# nolint end
 ```
 
-Please run the code line by line, focusing only on the parts before the pipe (`|>`). After each step, observe the output before moving to the next line.
+Please run the code line by line, focusing only on the parts before the pipe (`%>%`). After each step, observe the output before moving to the next line.
 
 ```{r}
-cleaned_data |>
-# simulate a change of data type in one variable
-dplyr::mutate(age = as.character(age)) |>
-# tag one variable
-linelist::make_linelist(age = "age") |>
-# validate the linelist
-linelist::validate_linelist()
+cleaned_data %>%
+  # simulate a change of data type in one variable
+  dplyr::mutate(age = as.character(age)) %>%
+  # tag one variable
+  linelist::make_linelist(age = "age") %>%
+  # validate the linelist
+  linelist::validate_linelist()
 ```
 
 ::::::::::::::::::::::::::
@@ -251,27 +255,27 @@ Then tag them into a linelist for validation. Does the `Error` message suggest a
 ```{r, eval = FALSE}
 # Change 2
 # Run this code line by line to identify changes
-cleaned_data |>
-# simulate a change of data type
-dplyr::mutate(date_onset = as.character(date_onset)) |>
-# tag
-linelist::make_linelist(date_onset = "date_onset") |>
-# validate
-linelist::validate_linelist()
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(date_onset = as.character(date_onset)) %>%
+  # tag
+  linelist::make_linelist(date_onset = "date_onset") %>%
+  # validate
+  linelist::validate_linelist()
 ```
 
 
 ```{r, eval = FALSE}
 # Change 3
 # Run this code line by line to identify changes
-cleaned_data |>
-# simulate a change of data type
-dplyr::mutate(gender = as.factor(gender)) |>
-dplyr::mutate(gender = as.integer(gender)) |>
-# tag
-linelist::make_linelist(gender = "gender") |>
-# validate
-linelist::validate_linelist()
+cleaned_data %>%
+  # simulate a change of data type
+  dplyr::mutate(gender = as.factor(gender)) %>%
+  dplyr::mutate(gender = as.integer(gender)) %>%
+  # tag
+  linelist::make_linelist(gender = "gender") %>%
+  # validate
+  linelist::validate_linelist()
 ```
 
 We get `Error` messages because the default type of these variable in  `linelist::tags_types()` is different from the one we set them at.
@@ -288,9 +292,9 @@ Beyond tagging and validating the linelist object, what extra step do we needed 
 Let's simulate a scenario about losing a variable :
 
 ```{r}
-cleaned_data |>
+cleaned_data %>%
   # remove the variable 'age'
-  select(-age) |>
+  select(-age) %>%
   # tag variable 'age' that no longer exist
   linelist::make_linelist(
     age = "age"
@@ -309,7 +313,7 @@ cleaned_data |>
 Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
-new_df <- linelist_data |>
+new_df <- linelist_data %>%
   dplyr::select(case_id, gender)
 ```
 
@@ -322,9 +326,9 @@ Let's test the implications of changing the **safeguarding** configuration from 
 
 - First, run this code to count the frequency of each category within a categorical variable:
 ```{r, eval = FALSE}
-linelist_data |>
-dplyr::select(case_id, gender) |>
-dplyr::count(gender)
+linelist_data %>%
+  dplyr::select(case_id, gender) %>%
+  dplyr::count(gender)
 ```
 
 - Set the behavior for lost tags in a `linelist` to "error" as follows:
