@@ -34,7 +34,7 @@ We'll use the `{simulist}` package to simulate the outbreak data to analyse,  an
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
 library(tracetheme) # For formatting figures
-library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe %>%
+library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe |>
 ```
 
  
