@@ -21,14 +21,15 @@ exercises: 10
 In this episode, we will use a simulated Ebola dataset that can be:
 
 - Download the [simulated_ebola_2.csv](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
-- Save it in the `data/` folder. Follow instructions in Setup to [configure an RStudio Project and folder](../learners/setup.md#setup-an-rstudio-project-and-folder)
+- Save it in the `data/` folder. 
+- Follow instructions in Setup to [configure an RStudio Project and folder](../learners/setup.md#setup-an-rstudio-project-and-folder)
 
 :::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
+In the process of analyzing outbreak data, as in other disciplines of data science, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
  This episode focuses on cleaning epidemics and outbreaks data using the 
- [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
+ [`{cleanepi}`](https://epiverse-trace.github.io/cleanepi/) package.
    For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
