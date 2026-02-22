@@ -48,7 +48,7 @@ library(cleanepi)
 
 ### The double-colon (`::`) operator
 
-The `::` in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
+The`::`in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
 advantages including the followings:
 
 * Telling explicitly which package a function comes from, reducing ambiguity and potential conflicts when several packages have functions with the same name.
@@ -127,7 +127,7 @@ potential data issues before diving into any analysis tasks. The `{cleanepi}`
 package simplifies this process with the `scan_data()` function. Let's take a look at how you can use it:
 
 ```{r}
-cleanepi::scan_data(raw_ebola_data)
+cleanepi::scan_data(raw_ebola_data, format = "percentage")
 ```
 
 
