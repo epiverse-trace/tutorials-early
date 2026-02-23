@@ -464,16 +464,36 @@ You can have more details in the section about "Dictionary-based data substituti
 
 ### Calculating time span between different date events
 
-In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date). The most common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
+In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date). A common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
 
-The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
-time elapsed since the date of sampling of the identified cases until the $3^{rd}$ of January 2025 (`"2025-01-03"`).
+The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute **reporting delay** between the date of symptom onset (`date_onset`) and date of case confirmation (`date_sample`)
+
+```{r}
+sim_ebola_data <- cleanepi::timespan(
+  data = sim_ebola_data,
+  target_column = "date_onset",
+  end_date = "date_sample",
+  span_unit = "days",
+  span_column_name = "reporting_delay")
+
+sim_ebola_data %>%
+  dplyr::select(case_id, date_sample, reporting_delay)
+```
+
+After executing the function `cleanepi::timespan()`, two new columns named `reporting_delay` and `remainder_months` are added to the **sim_ebola_data** dataset. For each case, these columns respectively represent the calculated time elapsed since the date of sample collection measured in years, and the remaining time measured in months.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::: challenge
+
+
+1- Calculate the time elapsed since the date of sampling of the identified cases until the $3^{rd}$ of January 2025 (`"2025-01-03"`).
  
+:::::::::::::::::::::::::: solution
 ```{r}
 sim_ebola_data <- cleanepi::timespan(
   data = sim_ebola_data,
   target_column = "date_sample",
-  end_date = as.Date("2025-01-03"),
+  end_date = lubridate::ymd("2025-01-03"),
   span_unit = "years",
   span_column_name = "years_since_collection",
   span_remainder_unit = "months"
@@ -482,10 +502,11 @@ sim_ebola_data <- cleanepi::timespan(
 sim_ebola_data %>%
   dplyr::select(case_id, date_sample, years_since_collection, remainder_months)
 ```
+:::::::::::::::::::::::::: 
 
-After executing the function `cleanepi::timespan()`, two new columns named `years_since_collection` and `remainder_months` are added to the **sim_ebola_data** dataset. For each case, these columns respectively represent the calculated time elapsed since the date of sample collection measured in years, and the remaining time measured in months.
+::::::::::::::::::::::::::::::::::::::::::::::: 
 
-::::::::::::::::::::::::::::::::::::::::::::::: challenge
+::::::::::::::::::::::::::::::::::::::::::::::: discussion
 
 Age data is useful in many downstream analysis. You can categorize it to generate stratified estimates.
 
