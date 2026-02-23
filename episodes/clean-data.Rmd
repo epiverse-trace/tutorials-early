@@ -469,13 +469,11 @@ In epidemiological data analysis, it is also useful to track and analyze time-de
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute **reporting delay** between the date of symptom onset (`date_onset`) and date of case confirmation (`date_sample`)
 
 ```{r}
-sim_ebola_data <- cleanepi::timespan(
-  data = sim_ebola_data,
-  target_column = "date_onset",
-  end_date = "date_sample",
-  span_unit = "days",
-  span_column_name = "reporting_delay")
-
+sim_ebola_data <- cleanepi::timespan(data = sim_ebola_data,
+                                     target_column = "date_onset",
+                                     end_date = "date_sample",
+                                     span_unit = "days",
+                                     span_column_name = "reporting_delay")
 sim_ebola_data %>%
   dplyr::select(case_id, date_sample, reporting_delay)
 ```
