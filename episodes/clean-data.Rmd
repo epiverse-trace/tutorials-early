@@ -306,6 +306,26 @@ sim_ebola_data <- cleanepi::replace_missing_values(
 sim_ebola_data
 ```
 
+::: callout
+ 
+By default, `{cleanepi}` supports wide range of missing value formats, as listed by the below code chunk:
+
+```{r}
+cleanepi::common_na_strings
+
+tibble::tribble(
+  ~case_id,  ~outcome, ~gender,            ~hospital,
+  "d1fafd",      "NA",     "f",  "Military Hospital",
+  "53371b",      "nan",     "m", "Connaught Hospital",
+  "f5c3d8", "Recover",     "f",              "other",
+  "6c286a",   "Death",     "null",                 "na",
+  "0f58c4", "Recover",     "f",              "other"
+) %>%
+  cleanepi::replace_missing_values()
+
+```
+:::
+
 ### Validating subject IDs
 
 Each entry in the dataset represents a subject (e.
@@ -423,8 +443,8 @@ This functionality is crucial for ensuring data integrity and accuracy in epidem
 
 #### How to remove inconsistent observations?
 
-Note that the `{cleanepi}` package does not remove inconsistent observations found, it is only diagnose and report their indices.
-To remove them, we can do the following code. 
+The `{cleanepi}` package does not automatically remove inconsistent observations; it only identifies them and reports their indices.
+To remove them, use the code below: 
 
 ```{r, eval=TRUE, echo=TRUE}
 # get the indices of incorrect row from the output of the above code chunk
