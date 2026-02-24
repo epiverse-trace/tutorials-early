@@ -419,6 +419,26 @@ cleanepi::check_date_sequence(
 
 This functionality is crucial for ensuring data integrity and accuracy in epidemiological analyses, as it helps identify any inconsistencies or errors in the chronological order of events, allowing you to address them appropriately.
 
+::::::::::::::::::::: spoiler
+
+#### How to remove inconsistent observations?
+
+Note that the `{cleanepi}` package does not remove inconsistent observations found, it is only diagnose and report their indices.
+To remove them, we can do the following code. 
+
+```{r, eval=TRUE, echo=TRUE}
+# get the indices of incorrect row from the output of the above code chunk
+obs_incorrect <- c(8, 15, 18, 20, 21, 23, 26, 28, 29, 32, 34, 35, 37, 38,
+                   40, 43, 46, 49, 52, 54, 56, 58, 60, 63)
+
+# drop inconsistent observations
+dat <- sim_ebola_data[1:100, ] %>%
+  slice(-obs_incorrect)
+dat
+```
+
+:::::::::::::::::::::
+
 ### Dictionary-based substitution
 
 In the realm of data pre-processing, it's common to encounter scenarios where certain columns in a dataset, such as the "gender" column in our simulated Ebola dataset, are expected to have specific values or factors.
