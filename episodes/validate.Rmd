@@ -124,17 +124,15 @@ linelist_data <- linelist::make_linelist(
 linelist_data
 ```
 
-The `{linelist}` package supplies tags for common epidemiological variables
-and a set of appropriate data types for each. You can view the list of available tags by the variable name and their acceptable data types using the `linelist::tags_types()` function.
+The `{linelist}` package provides predefined tags for common epidemiological variables, along with the appropriate data types for each. You can view all available tags and their corresponding acceptable data types using the `linelist::tags_types()` function.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-Let's **tag** more variables. In some datasets, it is possible to encounter variable names that are different from the available tag names. In such cases, we can associate them based on how variables were defined for data collection.
+Let's now **tag** additional variables. In some datasets, variable names may not exactly match the predefined tag names. In these cases, you can map them based on how the variables were defined during data collection. You need to:
 
-Now:
--**Explore** the available tag names in `{linelist}`.
--**Find** what other variables in the input dataset can be associated with any of these available tags.
--**Tag** those variables as shown above using the `linelist::make_linelist()`
+- **Explore** the available tag names in `{linelist}`.
+- **Find** what other variables in the input dataset can be associated with any of these available tags.
+- **Tag** those variables as shown above using the `linelist::make_linelist()`
 function.
 
 :::::::::::::::::::: hint
@@ -164,9 +162,9 @@ linelist::make_linelist(
 ```
 
 
-Are these additional tags visible in the output?
+Are the additional tags visible in the output?
 
-< !--Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).- ->
+Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).
 
 :::::::::::::::::::::
 
