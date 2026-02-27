@@ -173,7 +173,7 @@ Do you want to see a display of available and tagged variables? You can explore 
 
 ## Validation
 
-To ensure that all tagged variables are standardized and have the correct data
+To validate that all tagged variables are standardized and have the correct data
 types, use the `linelist::validate_linelist()` function, as shown in the example below:
 
 ```{r}
@@ -187,6 +187,7 @@ corresponding datatype using the `linelist::make_linelist()` function.
 
 ::::::::::::::::::::::::: challenge
 
+## Changes in Variable Types During Linelist Validation
 Let's assume the following scenario during an ongoing outbreak. You notice at some point that the data stream you have been relying on has a set of new entries (i.e., rows or observations), and the data type of one variable has changed.
 
 Let's consider the example where the type `age` variable has changed from a double (`<dbl>`) to character (`<chr>`).
@@ -307,17 +308,19 @@ cleaned_data %>%
 
 ## Safeguarding
 
-Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged columns, you will receive an error or warning message, as shown in the example below.
+Safeguarding is implicitly built into the linelist objects. If you try to delete or modify any of the tagged columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
 new_df <- linelist_data %>%
   dplyr::select(case_id, gender)
 ```
 
-This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using the `linelist::lost_tags_action()` function.
+This `Warning`  is the default option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using the `linelist::lost_tags_action()` function.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge
+
+## Exploring Safeguarding Behavior for Lost Tags
 
 Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
 
@@ -385,6 +388,8 @@ Data analysis during an outbreak response or mass - gathering surveillance deman
 - Use the `{linelist}` package to tag,
 validate,
 and prepare case data for downstream analysis.
+- Explore and map dataset variables to predefined tags for standardization.
+- Understand how warnings vs. errors affect the data processing workflow.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
