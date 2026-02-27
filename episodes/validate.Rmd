@@ -1,20 +1,20 @@
 ---
 title: 'Validate case data'
-teaching: 10
-exercises: 2
+teaching: 20
+exercises: 10
 ---
 
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to convert a raw dataset into a `linelist` object?
+- How can a raw case data be converted into a `linelist` object?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Demonstrate how to covert case data into `linelist` data
-- Demonstrate how to tag and validate data to make analysis more reliable
+- Demonstrate how to covert case data into `linelist` object
+- Demonstrate how to tag and validate data to improve the reliability of downstream analysis
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -30,14 +30,13 @@ This episode requires you to:
 
 ## Introduction
 
-In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data, it's essential to establish an additional fundamental layer to ensure the integrity and reliability of subsequent analyses. Otherwise you might encounter issues during the analysis process due to creation or removal of specific variables, changes in their underlying data types (like `<date>` or `<chr>`), etc. Specifically, this additional step involves:
+In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data, it's essential to establish an additional fundamental layer to ensure the integrity and reliability of subsequent analyses. Without this step, you may encounter issues later, for example, variables may be be unintentionally modified or removed, or their data types (e.g., `<date>`, `<chr>`), may change during processing. This additional layer typically involves two key steps:
 
-1. Verifying the presence and correct data type of certain columns within
-your dataset, a process commonly referred to as **tagging**;
-2. Implementing measures to make sure that these tagged columns are not inadvertently deleted during further data processing steps, known as **validation**.
+1. **tagging**: Verifying that required columns are present in the dataset and confirming that they have the correct data types.
+2. **validation**: Implementing safeguards to ensure that tagged columns are not accidentally deleted or altered during subsequent data manipulation steps.
 
 
-This episode focuses on tagging and validating outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package. Let's start by loading the package `{rio}` to read data and the `{linelist}` package
+This episode focuses on creating linelist object using the [linelist](https://epiverse-trace.github.io/linelist/) package, which natively supports tagging and validating outbreak data o ensure data integrity throughout the analysis workflow. Let's start by loading the package `{rio}` to read data and the `{linelist}` package
 to create a linelist object. We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the package `{dplyr}`. For this reason, we will also load the {tidyverse} package.
 
 
@@ -54,7 +53,7 @@ library(linelist) # for tagging and validating
 
 ### The double-colon (`::`) operator
 
-The`::`in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
+The`::` in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
 advantages including the followings:
 
 * Telling explicitly which package a function comes from, reducing ambiguity and potential conflicts when several packages have functions with the same name.
@@ -110,7 +109,7 @@ A scenario like this usually happens when the institution doing the analysis is 
 
 ## Creating a linelist and tagging columns
 
-Once the data is loaded and cleaned, we can convert the cleaned case data into a `linelist` object using `{linelist}` package, as in the below code chunk.
+Once the data is loaded and cleaned, it can be converted  into a `linelist` object using `{linelist}` package, as illustrated in the code chunk below.
 
 ```{r}
 # Create a linelist object from cleaned data
