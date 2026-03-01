@@ -29,14 +29,13 @@ This episode focuses on EDA of outbreak data using R packages.
 A key aspects of EDA in epidemic analysis are **person, place and time**. It is useful to identify how observed events--such as confirmed cases, hospitalizations, deaths, and recoveries--change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
 
 Let's start by loading the `{incidence2}` package to aggregate the linelist data according to specific characteristics, and visualize the resulting epidemic curves (epicurves) that plot the number of new events (i.e. case incidence over time).
-We'll use the `{simulist}` package to simulate the outbreak data to analyse,  and `{tracetheme}` for figure formatting.
+We'll use the `{simulist}` package to simulate the outbreak data to analyse.
 We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the `{dplyr}` and `{ggplot2}` packages, so let's also call to the {tidyverse} package.
 
 ```{r, eval=TRUE, message=FALSE, warning=FALSE}
 # Load packages
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
-library(tracetheme) # For formatting figures
 library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe |>
 ```
 
