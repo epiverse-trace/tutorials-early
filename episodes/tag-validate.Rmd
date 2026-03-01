@@ -1,20 +1,20 @@
 ---
 title: 'Validate case data'
-teaching: 10
-exercises: 2
+teaching: 20
+exercises: 10
 ---
 
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How to convert a raw dataset into a `linelist` object?
+- How can a raw case data be converted into a `linelist` object?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Demonstrate how to covert case data into `linelist` data
-- Demonstrate how to tag and validate data to make analysis more reliable
+- Demonstrate how to covert case data into `linelist` object
+- Demonstrate how to tag and validate data to improve the reliability of downstream analysis
 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -30,14 +30,13 @@ This episode requires you to:
 
 ## Introduction
 
-In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data, it's essential to establish an additional fundamental layer to ensure the integrity and reliability of subsequent analyses. Otherwise you might encounter issues during the analysis process due to creation or removal of specific variables, changes in their underlying data types (like `<date>` or `<chr>`), etc. Specifically, this additional step involves:
+In outbreak analysis, once you have completed the initial steps of reading and cleaning the case data, it's essential to establish an additional fundamental layer to ensure the integrity and reliability of subsequent analyses. Without this step, you may encounter issues later, for example, variables may be be unintentionally modified or removed, or their data types (e.g., `<date>`, `<chr>`), may change during processing. This additional layer typically involves two key steps:
 
-1. Verifying the presence and correct data type of certain columns within
-your dataset, a process commonly referred to as **tagging**;
-2. Implementing measures to make sure that these tagged columns are not inadvertently deleted during further data processing steps, known as **validation**.
+1. **tagging**: Verifying that required columns are present in the dataset and confirming that they have the correct data types.
+2. **validation**: Implementing safeguards to ensure that tagged columns are not accidentally deleted or altered during subsequent data manipulation steps.
 
 
-This episode focuses on tagging and validating outbreak data using the [linelist](https://epiverse-trace.github.io/linelist/) package. Let's start by loading the package `{rio}` to read data and the `{linelist}` package
+This episode focuses on creating linelist object using the [linelist](https://epiverse-trace.github.io/linelist/) package, which natively supports tagging and validating outbreak data o ensure data integrity throughout the analysis workflow. Let's start by loading the package `{rio}` to read data and the `{linelist}` package
 to create a linelist object. We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the package `{dplyr}`. For this reason, we will also load the {tidyverse} package.
 
 
@@ -54,7 +53,7 @@ library(linelist) # for tagging and validating
 
 ### The double-colon (`::`) operator
 
-The`::`in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
+The`::` in R lets you access functions or objects from a specific package without attaching the entire package to the search path. It offers several important
 advantages including the followings:
 
 * Telling explicitly which package a function comes from, reducing ambiguity and potential conflicts when several packages have functions with the same name.
@@ -110,7 +109,7 @@ A scenario like this usually happens when the institution doing the analysis is 
 
 ## Creating a linelist and tagging columns
 
-Once the data is loaded and cleaned, we can convert the cleaned case data into a `linelist` object using `{linelist}` package, as in the below code chunk.
+Once the data is loaded and cleaned, it can be converted  into a `linelist` object using `{linelist}` package, as illustrated in the code chunk below.
 
 ```{r}
 # Create a linelist object from cleaned data
@@ -125,17 +124,15 @@ linelist_data <- linelist::make_linelist(
 linelist_data
 ```
 
-The `{linelist}` package supplies tags for common epidemiological variables
-and a set of appropriate data types for each. You can view the list of available tags by the variable name and their acceptable data types using the `linelist::tags_types()` function.
+The `{linelist}` package provides predefined tags for common epidemiological variables, along with the appropriate data types for each. You can view all available tags and their corresponding acceptable data types using the `linelist::tags_types()` function.
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-Let's **tag** more variables. In some datasets, it is possible to encounter variable names that are different from the available tag names. In such cases, we can associate them based on how variables were defined for data collection.
+Let's now **tag** additional variables. In some datasets, variable names may not exactly match the predefined tag names. In these cases, you can map them based on how the variables were defined during data collection. You need to:
 
-Now:
--**Explore** the available tag names in `{linelist}`.
--**Find** what other variables in the input dataset can be associated with any of these available tags.
--**Tag** those variables as shown above using the `linelist::make_linelist()`
+- **Explore** the available tag names in `{linelist}`.
+- **Find** what other variables in the input dataset can be associated with any of these available tags.
+- **Tag** those variables as shown above using the `linelist::make_linelist()`
 function.
 
 :::::::::::::::::::: hint
@@ -165,9 +162,9 @@ linelist::make_linelist(
 ```
 
 
-Are these additional tags visible in the output?
+Are the additional tags visible in the output?
 
-< !--Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).- ->
+Do you want to see a display of available and tagged variables? You can explore the function `linelist::tags()` and read its [reference documentation](https://epiverse-trace.github.io/linelist/reference/tags.html).
 
 :::::::::::::::::::::
 
@@ -176,7 +173,7 @@ Are these additional tags visible in the output?
 
 ## Validation
 
-To ensure that all tagged variables are standardized and have the correct data
+To validate that all tagged variables are standardized and have the correct data
 types, use the `linelist::validate_linelist()` function, as shown in the example below:
 
 ```{r}
@@ -190,6 +187,7 @@ corresponding datatype using the `linelist::make_linelist()` function.
 
 ::::::::::::::::::::::::: challenge
 
+## Changes in Variable Types During Linelist Validation
 Let's assume the following scenario during an ongoing outbreak. You notice at some point that the data stream you have been relying on has a set of new entries (i.e., rows or observations), and the data type of one variable has changed.
 
 Let's consider the example where the type `age` variable has changed from a double (`<dbl>`) to character (`<chr>`).
@@ -310,17 +308,19 @@ cleaned_data %>%
 
 ## Safeguarding
 
-Safeguarding is implicitly built into the linelist objects. If you try to drop any of the tagged columns, you will receive an error or warning message, as shown in the example below.
+Safeguarding is implicitly built into the linelist objects. If you try to delete or modify any of the tagged columns, you will receive an error or warning message, as shown in the example below.
 
 ```{r, warning=TRUE}
 new_df <- linelist_data %>%
   dplyr::select(case_id, gender)
 ```
 
-This `Warning` message above is the default output option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using the `linelist::lost_tags_action()` function.
+This `Warning`  is the default option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using the `linelist::lost_tags_action()` function.
 
 
 ::::::::::::::::::::::::::::::::::::: challenge
+
+## Exploring Safeguarding Behavior for Lost Tags
 
 Let's test the implications of changing the **safeguarding** configuration from a `Warning` to an `Error` message.
 
@@ -388,6 +388,8 @@ Data analysis during an outbreak response or mass - gathering surveillance deman
 - Use the `{linelist}` package to tag,
 validate,
 and prepare case data for downstream analysis.
+- Explore and map dataset variables to predefined tags for standardization.
+- Understand how warnings vs. errors affect the data processing workflow.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
