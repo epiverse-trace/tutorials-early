@@ -24,7 +24,7 @@ exercises: 10
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps determine relationships between variables and summarize their main characteristics, often by means of data visualization. 
 
 This episode focuses on EDA of outbreak data using R packages. 
-A key aspect of EDA in epidemic analysis is 'person, place and time'. It is useful to identify how observed events - such as confirmed cases, hospitalizations, deaths, and recoveries - change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
+A key aspects of EDA in epidemic analysis are **person, place and time**. It is useful to identify how observed events--such as confirmed cases, hospitalizations, deaths, and recoveries--change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
 
 Let's start by loading the `{incidence2}` package to aggregate the linelist data according to specific characteristics, and visualize the resulting epidemic curves (epicurves) that plot the number of new events (i.e. case incidence over time). 
 We'll use the `{simulist}` package to simulate the outbreak data to analyse,  and `{tracetheme}` for figure formatting. We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the `{dplyr}` and `{ggplot2}` packages, so let's also call to the {tidyverse} package.
@@ -95,9 +95,9 @@ You can also find data sets from past real outbreaks within the [`{outbreaks}`](
 
 
 
-## Aggregating the data
+## Aggregating  linelist 
 
-Often we want to analyse and visualise the number of events that occur on a particular day or week, rather than focusing on individual cases. This requires grouping the linelist data into incidence data. The [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers a useful function called `incidence2::incidence()` for grouping case data, usually based around dated events and/or other characteristics. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the simulated  Ebola `linelist` data based on the date of onset.
+Often we want to analyse and visualise the number of events that occur on a particular day or week, rather than focusing on individual cases. This requires converting the linelist data into incidence data. The [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers a useful function called `incidence2::incidence()` for aggregating case data, usually based around dated events and/or other characteristics. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the simulated  Ebola `linelist` data based on the date of onset.
 
 
 ``` r
@@ -130,7 +130,7 @@ daily_incidence
 # ℹ 222 more rows
 ```
 
-With the `{incidence2}` package, you can specify the desired interval (e.g. day, week) and categorize cases by one or more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset, sex, and type of case.
+With the `{incidence2}` package, you can specify the desired interval (e.g., day, week) and categorize cases by one or more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset, sex, and type of case.
 
 
 ``` r
@@ -212,10 +212,10 @@ base::plot(daily_incidence) +
     x = "Time (in days)", # x-axis label
     y = "Dialy cases" # y-axis label
   ) +
-  theme_bw()
+  tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" />
 
 
 
@@ -226,10 +226,10 @@ base::plot(weekly_incidence) +
     x = "Time (in weeks)", # x-axis label
     y = "weekly cases" # y-axis label
   ) +
-  theme_bw()
+  tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" />
 
 :::::::::::::::::::::::: callout
 
@@ -242,7 +242,7 @@ We invite you to take a look at the `{incidence2}` [package vignette](https://ww
 base::plot(weekly_incidence, fill = "sex")
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" />
 
 Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`. Try them and see how they impact on the resulting plot.
 
@@ -271,10 +271,10 @@ base::plot(cum_df) +
     x = "Time (in days)", # x-axis label
     y = "weekly cases" # y-axis label
   ) +
-  theme_bw()
+  tracetheme::theme_trace()
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" />
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
 
@@ -379,7 +379,7 @@ Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count), :
 Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" />
 
 Use the `group` option in the mapping function to visualize an epicurve with different groups. If there is more than one grouping factor, use the `facet_wrap()` option, as demonstrated in the example below:
 
@@ -427,7 +427,7 @@ Warning in geom_histogram(mapping = aes(x = as.Date(date_index), y = count, :
 Ignoring unknown parameters: `binwidth` and `bins`
 ```
 
-<img src="fig/describe-cases-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" />
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-13-1.png" alt="" style="display: block; margin: auto;" />
 
 
 ::::::::::::::::::::::::::::::::::::: challenge 
