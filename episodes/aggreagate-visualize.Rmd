@@ -24,7 +24,7 @@ exercises: 10
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modelling. EDA helps determine relationships between variables and summarize their main characteristics, often by means of data visualization. 
 
 This episode focuses on EDA of outbreak data using R packages. 
-A key aspect of EDA in epidemic analysis is 'person, place and time'. It is useful to identify how observed events - such as confirmed cases, hospitalizations, deaths, and recoveries - change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
+A key aspects of EDA in epidemic analysis are **person, place and time**. It is useful to identify how observed events--such as confirmed cases, hospitalizations, deaths, and recoveries--change over time, and how these vary across different locations and demographic factors, including gender, age, and more.
 
 Let's start by loading the `{incidence2}` package to aggregate the linelist data according to specific characteristics, and visualize the resulting epidemic curves (epicurves) that plot the number of new events (i.e. case incidence over time). 
 We'll use the `{simulist}` package to simulate the outbreak data to analyse,  and `{tracetheme}` for figure formatting. We'll use the pipe operator (`%>%`) to connect some of their functions, including others from the `{dplyr}` and `{ggplot2}` packages, so let's also call to the {tidyverse} package.
@@ -66,9 +66,9 @@ You can also find data sets from past real outbreaks within the [`{outbreaks}`](
 
 
 
-## Aggregating the data
+## Aggregating  linelist 
 
-Often we want to analyse and visualise the number of events that occur on a particular day or week, rather than focusing on individual cases. This requires grouping the linelist data into incidence data. The [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers a useful function called `incidence2::incidence()` for grouping case data, usually based around dated events and/or other characteristics. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the simulated  Ebola `linelist` data based on the date of onset.
+Often we want to analyse and visualise the number of events that occur on a particular day or week, rather than focusing on individual cases. This requires converting the linelist data into incidence data. The [{incidence2}]((https://www.reconverse.org/incidence2/articles/incidence2.html){.external target="_blank"}) package offers a useful function called `incidence2::incidence()` for aggregating case data, usually based around dated events and/or other characteristics. The code chunk provided below demonstrates the creation of an `<incidence2>` class object from the simulated  Ebola `linelist` data based on the date of onset.
 
 ```{r}
 # Create an incidence object by aggregating case data based on the date of onset
@@ -82,7 +82,7 @@ daily_incidence <- incidence2::incidence(
 daily_incidence
 ```
 
-With the `{incidence2}` package, you can specify the desired interval (e.g. day, week) and categorize cases by one or more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset, sex, and type of case.
+With the `{incidence2}` package, you can specify the desired interval (e.g., day, week) and categorize cases by one or more factors. Below is a code snippet demonstrating weekly cases grouped by the date of onset, sex, and type of case.
 
 ```{r}
 # Group incidence data by week, accounting for sex and case type
