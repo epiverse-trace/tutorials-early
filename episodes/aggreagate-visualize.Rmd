@@ -161,7 +161,7 @@ base::plot(weekly_incidence) +
     x = "Time (in weeks)", # x-axis label
     y = "weekly cases" # y-axis label
   ) +
-   tracetheme::theme_trace()
+  tracetheme::theme_trace()
 ``` 
 
 :::::::::::::::::::::::: callout
@@ -200,7 +200,7 @@ base::plot(cum_df) +
     x = "Time (in days)", # x-axis label
     y = "weekly cases" # y-axis label
   ) +
-   tracetheme::theme_trace()
+  tracetheme::theme_trace()
 ```
 
 Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
