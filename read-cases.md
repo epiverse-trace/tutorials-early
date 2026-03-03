@@ -603,7 +603,7 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 14 × 3
+# A tibble: 15 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
@@ -611,15 +611,16 @@ tibble::as_tibble(demo_programs)
  3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
  4 Information Campaign                                q04UBOqq3rp aggregate
  5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-12 TB program                                          ur1Edk5Oe2n tracker  
-13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+ 6 Into the Realm of Yuggoth                           YEqwML0PmmJ tracker  
+ 7 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 8 Malaria case registration                           VBqh0ynB2wv aggregate
+ 9 Malaria focus investigation                         M3xtLkYBlKI tracker  
+10 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+11 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+12 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+13 TB program                                          ur1Edk5Oe2n tracker  
+14 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+15 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -679,11 +680,10 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 2 × 15
+# A tibble: 1 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 WJHHRV-A2UPKG-R37W… RYBAQX-A… 2025-11-11 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-2 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  SUSPECT     DECEAS… <NA> 
+1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  SUSPECT     DECEAS… <NA> 
 # ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
