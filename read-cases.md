@@ -779,10 +779,11 @@ tibble::as_tibble(mpox_cases)
 ```
 
 ``` output
-# A tibble: 1 × 15
+# A tibble: 2 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
 1 WQLS6O-ZEZ562-MAGM… WVADAF-S… NA         IN_COUNTRY  PROBABLE    NO_OUT… <NA> 
+2 RR4HJN-Y663OW-PV5C… QZGXOJ-I… NA         IN_COUNTRY  CONFIRMED   NO_OUT… <NA> 
 # ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
