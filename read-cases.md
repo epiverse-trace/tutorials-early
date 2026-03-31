@@ -603,7 +603,7 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 14 × 3
+# A tibble: 16 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
@@ -616,10 +616,12 @@ tibble::as_tibble(demo_programs)
  8 Malaria focus investigation                         M3xtLkYBlKI tracker  
  9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
 10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-12 TB program                                          ur1Edk5Oe2n tracker  
-13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+11 Patient Tracker                                     Xna2EbJYWEd tracker  
+12 Planning Budgeting Management Information System    xCNGWMnbyIc tracker  
+13 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+14 TB program                                          ur1Edk5Oe2n tracker  
+15 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+16 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -630,7 +632,7 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1,166 × 8
+# A tibble: 1,167 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
  1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
@@ -643,7 +645,7 @@ tibble::as_tibble(demo_units)
  8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
 10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,156 more rows
+# ℹ 1,157 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
