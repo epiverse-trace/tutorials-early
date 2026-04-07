@@ -424,18 +424,30 @@ dhis2_login <- readepi::login(
   user_name = "test",
   password = "Gambia@123"
 )
+```
 
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
+! HTTP 500 Internal Server Error.
+```
+
+``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
+```
+
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 tibble::as_tibble(programs)
 ```
 
-``` output
-# A tibble: 2 × 3
-  displayName                       id          type     
-  <chr>                             <chr>       <chr>    
-1 "Child Registration & Treatment " E5IUQuHg3Mg tracker  
-2 "Daily Drug Reconciliations"      I3bZrR6fLt8 aggregate
+``` error
+Error:
+! object 'programs' not found
 ```
 
 
@@ -444,27 +456,20 @@ tibble::as_tibble(programs)
 ``` r
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+```
+
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 tibble::as_tibble(org_units)
 ```
 
-``` output
-# A tibble: 872 × 10
-   National_name National_id Regional_name Regional_id District_name District_id
-   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Upper fulla… srjR5LWAoBD
- 2 Gambia        jvQPTsCLwPh Western Regi… D18zNdCbRfO "Foni Jarrol… kAxFyJFfYV8
- 3 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Sandu"       iZQOFwckdXL
- 4 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Upper fulla… srjR5LWAoBD
- 5 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Basse (Full… Ug7sj97icMt
- 6 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Basse (Full… Ug7sj97icMt
- 7 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Sami"        ZZNUH1LhS7k
- 8 Gambia        jvQPTsCLwPh Western Regi… D18zNdCbRfO "Foni Jarrol… kAxFyJFfYV8
- 9 Gambia        jvQPTsCLwPh Central Rive… gsMpbz5DQsM "Niamina Dan… T55lst07vTj
-10 Gambia        jvQPTsCLwPh Upper River … SHRxQEqOPJa "Tumana"      xGYsUdiJb4L
-# ℹ 862 more rows
-# ℹ 4 more variables: `Operational Zone_name` <chr>,
-#   `Operational Zone_id` <chr>, `Town/Village_name` <chr>,
-#   `Town/Village_id` <chr>
+``` error
+Error:
+! object 'org_units' not found
 ```
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
@@ -476,31 +481,20 @@ data <- readepi::read_dhis2(
   org_unit = "Keneba",
   program = "Child Registration & Treatment "
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 tibble::as_tibble(data)
 ```
 
-``` output
-# A tibble: 1,116 × 69
-   event   tracked_entity org_unit ` SMC-CR Scan QR Code` SMC-CR Did the child…¹
-   <chr>   <chr>          <chr>    <chr>                  <chr>                 
- 1 bgSDQb… yv7MOkGD23q    Keneba   SMC23-0510989          1                     
- 2 y4MKmP… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 3 yK7VG3… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 4 EmNflz… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 5 UF96ms… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 6 guQTwc… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 7 jbkRkL… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 8 AEeype… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 9 R30SPs… E5oAWGcdFT4    Keneba   koika-smc-22897        1                     
-10 nr03Qy… E5oAWGcdFT4    Keneba   koika-smc-22897        1                     
-# ℹ 1,106 more rows
-# ℹ abbreviated name: ¹​`SMC-CR Did the child  previously received a card?`
-# ℹ 64 more variables: `SMC-CR Child First Name1` <chr>,
-#   `SMC-CR Child Last Name` <chr>, `SMC-CR Date of Birth` <chr>,
-#   `SMC-CR Select Age Category  ` <chr>, `SMC-CR Child gender1` <chr>,
-#   `SMC-CR Mother/Person responsible full name` <chr>,
-#   `SMC-CR Mother/Person responsible phone number1` <chr>, …
+``` error
+Error in `as.data.frame.default()`:
+! cannot coerce class '"function"' to a data.frame
 ```
 
 
@@ -512,31 +506,20 @@ data <- readepi::read_dhis2(
   org_unit = "GcLhRNAFppR",
   program = "E5IUQuHg3Mg"
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 tibble::as_tibble(data)
 ```
 
-``` output
-# A tibble: 1,116 × 69
-   event   tracked_entity org_unit ` SMC-CR Scan QR Code` SMC-CR Did the child…¹
-   <chr>   <chr>          <chr>    <chr>                  <chr>                 
- 1 bgSDQb… yv7MOkGD23q    Keneba   SMC23-0510989          1                     
- 2 y4MKmP… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 3 yK7VG3… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 4 EmNflz… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 5 UF96ms… nibnZ8h0Nse    Keneba   SMC2021-018089         1                     
- 6 guQTwc… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 7 jbkRkL… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 8 AEeype… FomREQ2it4n    Keneba   SMC23-0510012          1                     
- 9 R30SPs… E5oAWGcdFT4    Keneba   koika-smc-22897        1                     
-10 nr03Qy… E5oAWGcdFT4    Keneba   koika-smc-22897        1                     
-# ℹ 1,106 more rows
-# ℹ abbreviated name: ¹​`SMC-CR Did the child  previously received a card?`
-# ℹ 64 more variables: `SMC-CR Child First Name1` <chr>,
-#   `SMC-CR Child Last Name` <chr>, `SMC-CR Date of Birth` <chr>,
-#   `SMC-CR Select Age Category  ` <chr>, `SMC-CR Child gender1` <chr>,
-#   `SMC-CR Mother/Person responsible full name` <chr>,
-#   `SMC-CR Mother/Person responsible phone number1` <chr>, …
+``` error
+Error in `as.data.frame.default()`:
+! cannot coerce class '"function"' to a data.frame
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
@@ -549,25 +532,20 @@ target_org_units <- readepi::get_program_org_units(
   program = "E5IUQuHg3Mg",
   org_units = org_units
 )
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 tibble::as_tibble(target_org_units)
 ```
 
-``` output
-# A tibble: 26 × 3
-   org_unit_ids levels            org_unit_names
-   <chr>        <chr>             <chr>         
- 1 UrLrbEiWk3J  Town/Village_name Sare Sibo     
- 2 wlVsFVeHSTx  Town/Village_name Jawo Kunda    
- 3 kp0ZYUEqJE8  Town/Village_name Chewal        
- 4 Wr3htgGxhBv  Town/Village_name Madinayel     
- 5 psyHoqeN2Tw  Town/Village_name Bolibanna     
- 6 MGBYonFM4y3  Town/Village_name Sare Mala     
- 7 GcLhRNAFppR  Town/Village_name Keneba        
- 8 y1Z3KuvQyhI  Town/Village_name Brikama       
- 9 W3vH9yBUSei  Town/Village_name Gidda         
-10 ISbNWYieHY8  Town/Village_name Song Kunda    
-# ℹ 16 more rows
+``` error
+Error:
+! object 'target_org_units' not found
 ```
 
 :::::::::::::::: callout
@@ -603,25 +581,20 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 16 × 3
+# A tibble: 24 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Programme                                     IpHINAT79UW tracker  
- 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 4 Information Campaign                                q04UBOqq3rp aggregate
- 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Patient Tracker                                     Xna2EbJYWEd tracker  
-12 Planning Budgeting Management Information System    xCNGWMnbyIc tracker  
-13 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-14 TB program                                          ur1Edk5Oe2n tracker  
-15 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-16 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+ 2 Child Program                                       IpHINAT79UW tracker  
+ 3 Community Diarrhoea Screening                       RuynHNeEXHj aggregate
+ 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 5 Days between incident date testing                  CtFhJTxCD8Q tracker  
+ 6 Information Campaign                                q04UBOqq3rp aggregate
+ 7 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 8 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 9 Malaria case registration                           VBqh0ynB2wv aggregate
+10 Malaria focus investigation                         M3xtLkYBlKI tracker  
+# ℹ 14 more rows
 ```
 
 
@@ -681,11 +654,12 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 2 × 15
+# A tibble: 3 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
 1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  CONFIRMED   DECEAS… <NA> 
 2 T4Y6UI-DXJMR3-MBVF… X7U4QL-Z… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+3 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… <NA> 
 # ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, Ct_values <chr>
