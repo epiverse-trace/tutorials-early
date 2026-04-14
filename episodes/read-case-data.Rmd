@@ -299,7 +299,7 @@ Health data is increasingly stored in specialized HIS such as **Fingertips**, **
 
 ### Importing data from DHIS2
 
-[DHIS2](https://dhis2.org/about/) (District Health Information System) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
+[DHIS2](https://dhis2.org/about/) (District Health Information System 2) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
 
 To successfully import data from DHIS2, you need to:
 
@@ -351,7 +351,7 @@ org_units <- readepi::get_organisation_units(login = dhis2_login)
 tibble::as_tibble(org_units)
 ```
 
-After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
+After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
 
 ```{r,message=FALSE}
 # import data from DHIS2 using names
@@ -390,7 +390,7 @@ tibble::as_tibble(target_org_units)
 
 <!-- :::::::::::::::: callout
 
-Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
+Note: This example uses a demo system provided by DHIS2 [organization](https://test.e2e.dhis2.org/) for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
 :::::::::::::::: -->
 
