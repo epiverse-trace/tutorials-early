@@ -581,20 +581,20 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 24 × 3
-   displayName                                         id          type     
-   <chr>                                               <chr>       <chr>    
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Program                                       IpHINAT79UW tracker  
- 3 Community Diarrhoea Screening                       RuynHNeEXHj aggregate
- 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 5 Days between incident date testing                  CtFhJTxCD8Q tracker  
- 6 Information Campaign                                q04UBOqq3rp aggregate
- 7 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 8 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 9 Malaria case registration                           VBqh0ynB2wv aggregate
-10 Malaria focus investigation                         M3xtLkYBlKI tracker  
-# ℹ 14 more rows
+# A tibble: 33 × 3
+   displayName                              id          type     
+   <chr>                                    <chr>       <chr>    
+ 1 "2332822 COVID Patient Tracker"          UX0UtpBaHDX tracker  
+ 2 " 2332822 COVID Screening Event Program" LqUtsxvm60C aggregate
+ 3 "2332938 COVID Patient Tracker"          EKAlV3v8Tzd tracker  
+ 4 "2332938 COVID Screening Event Program " O1JnbenyjHI aggregate
+ 5 "2333013_COVID Patient Tracker "         naZafkD8SBH tracker  
+ 6 "2333013_COVID Screening Event Program"  BRDdzwqBG20 aggregate
+ 7 "Antenatal care visit"                   lxAQ7Zs9VYR aggregate
+ 8 "Child Program"                          IpHINAT79UW tracker  
+ 9 "Community Diarrhoea Screening"          RuynHNeEXHj aggregate
+10 "Contraceptives Voucher Program"         kla3mAPgvCH aggregate
+# ℹ 23 more rows
 ```
 
 
@@ -605,21 +605,13 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1,167 × 8
-   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
- 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,157 more rows
-# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
+# A tibble: 1 × 12
+  National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+  <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
+1 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK RAMP-PROJECT  Znezixula6j
+# ℹ 6 more variables: Facility_name <chr>, Facility_id <chr>,
+#   `Level 5_name` <chr>, `Level 5_id` <chr>, `Level 6_name` <chr>,
+#   `Level 6_id` <chr>
 ```
 
 :::::::::::::::
@@ -654,15 +646,15 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 3 × 15
+# A tibble: 3 × 16
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
 1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  CONFIRMED   DECEAS… <NA> 
 2 T4Y6UI-DXJMR3-MBVF… X7U4QL-Z… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
 3 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… <NA> 
-# ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
+# ℹ 9 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, Ct_values <chr>
+#   date_last_contact <date>, date_first_contact <date>, Ct_values <chr>
 ```
 
 A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
