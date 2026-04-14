@@ -4560,7 +4560,7 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.1.7",
+      "Version": "1.2.1",
       "OS_type": null,
       "NeedsCompilation": "no",
       "Repository": "CRAN",

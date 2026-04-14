@@ -299,7 +299,7 @@ Health data is increasingly stored in specialized HIS such as **Fingertips**, **
 
 ### Importing data from DHIS2
 
-[DHIS2](https://dhis2.org/about/) (District Health Information System) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
+[DHIS2](https://dhis2.org/about/) (District Health Information System 2) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
 
 To successfully import data from DHIS2, you need to:
 
@@ -312,9 +312,9 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://smc.moh.gm/dhis",
-  user_name = "test",
-  password = "Gambia@123"
+  from = "https://play.im.dhis2.org/stable-2-41-8",
+  user_name = "admin",
+  password = "district"
 )
 
 # get the names and IDs of the programs
@@ -330,25 +330,25 @@ org_units <- readepi::get_organisation_units(login = dhis2_login)
 tibble::as_tibble(org_units)
 ```
 
-After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
+After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
 
 ```{r,message=FALSE}
+# import data from DHIS2 using names
 data <- readepi::read_dhis2(
   login = dhis2_login,
-  org_unit = "Keneba",
-  program = "Child Registration & Treatment "
+  org_unit = "Magbaft MCHP", 
+  program = "Child Programme"
 )
 
 tibble::as_tibble(data)
 ```
 
 ```{r,eval=TRUE,message=FALSE}
-# import data from DHIS2 using names
 # import data from DHIS2 using IDs
 data <- readepi::read_dhis2(
   login = dhis2_login,
-  org_unit = "GcLhRNAFppR",
-  program = "E5IUQuHg3Mg"
+  org_unit = "XjpmsLNjyrz",
+  program = "IpHINAT79UW"
 )
 
 tibble::as_tibble(data)
@@ -357,10 +357,10 @@ tibble::as_tibble(data)
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
 
 ```{r}
-# get the list of organisation units that run the program "E5IUQuHg3Mg"
+# get the list of organisation units that run the program "MzhqB3DL12f"
 target_org_units <- readepi::get_program_org_units(
   login = dhis2_login,
-  program = "E5IUQuHg3Mg",
+  program = "MzhqB3DL12f",
   org_units = org_units
 )
 
@@ -369,17 +369,17 @@ tibble::as_tibble(target_org_units)
 
 :::::::::::::::: callout
 
-Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
+Note: This example uses a demo system provided by DHIS2 [organization](https://test.e2e.dhis2.org/) for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
 ::::::::::::::::
 
 
 :::::::::::::::::::::: challenge
 
-### Reading from Demo DHIS2 sever
+### Reading from another version of DHIS2 sever
 
-The DHIS2 organization provides demo servers for development and testing. One of
-these is called **stable-242-4**, available at the link
+The DHIS2 organization provides other demo servers for development and testing. One of
+these is called **stable-2-42-4**, available at the link
 ("https://play.im.dhis2.org/stable-2-42-4"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
 
 ::::::::::::::: solution
@@ -399,7 +399,7 @@ tibble::as_tibble(demo_programs)
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 # get the names and IDs of the organisation units
 demo_units <- readepi::get_organisation_units(login = demo_login)
 tibble::as_tibble(demo_units)
