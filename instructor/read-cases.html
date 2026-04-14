@@ -317,7 +317,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2026-04-07 |
+        <p>Last updated on 2026-04-14 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -532,7 +532,7 @@ file</a> containing Marburg outbreak data and then import it to your
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
@@ -553,7 +553,7 @@ package website. To see the list of supported formats in
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -808,7 +808,7 @@ management with SQL for Ecologist</a>.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1099,7 +1099,7 @@ data from one of these programs.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1120,20 +1120,20 @@ data from one of these programs.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 24 × 3
-   displayName                                         id          type
-   &lt;chr&gt;                                               &lt;chr&gt;       &lt;chr&gt;
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Program                                       IpHINAT79UW tracker
- 3 Community Diarrhoea Screening                       RuynHNeEXHj aggregate
- 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 5 Days between incident date testing                  CtFhJTxCD8Q tracker
- 6 Information Campaign                                q04UBOqq3rp aggregate
- 7 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 8 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker
- 9 Malaria case registration                           VBqh0ynB2wv aggregate
-10 Malaria focus investigation                         M3xtLkYBlKI tracker
-# ℹ 14 more rows</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 33 × 3
+   displayName                              id          type
+   &lt;chr&gt;                                    &lt;chr&gt;       &lt;chr&gt;
+ 1 "2332822 COVID Patient Tracker"          UX0UtpBaHDX tracker
+ 2 " 2332822 COVID Screening Event Program" LqUtsxvm60C aggregate
+ 3 "2332938 COVID Patient Tracker"          EKAlV3v8Tzd tracker
+ 4 "2332938 COVID Screening Event Program " O1JnbenyjHI aggregate
+ 5 "2333013_COVID Patient Tracker "         naZafkD8SBH tracker
+ 6 "2333013_COVID Screening Event Program"  BRDdzwqBG20 aggregate
+ 7 "Antenatal care visit"                   lxAQ7Zs9VYR aggregate
+ 8 "Child Program"                          IpHINAT79UW tracker
+ 9 "Community Diarrhoea Screening"          RuynHNeEXHj aggregate
+10 "Contraceptives Voucher Program"         kla3mAPgvCH aggregate
+# ℹ 23 more rows</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1146,21 +1146,13 @@ data from one of these programs.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 1,167 × 8
-   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
- 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
- 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,157 more rows
-# ℹ 2 more variables: Facility_name &lt;chr&gt;, Facility_id &lt;chr&gt;</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 1 × 12
+  National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+  &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
+1 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK RAMP-PROJECT  Znezixula6j
+# ℹ 6 more variables: Facility_name &lt;chr&gt;, Facility_id &lt;chr&gt;,
+#   `Level 5_name` &lt;chr&gt;, `Level 5_id` &lt;chr&gt;, `Level 6_name` &lt;chr&gt;,
+#   `Level 6_id` &lt;chr&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1204,15 +1196,15 @@ SORMAS system:</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 3 × 15
+<pre class="output" tabindex="0"><code># A tibble: 3 × 16
   case_id             person_id date_onset case_origin case_status outcome sex
   &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
 1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  CONFIRMED   DECEAS… &lt;NA&gt;
 2 T4Y6UI-DXJMR3-MBVF… X7U4QL-Z… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
 3 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… &lt;NA&gt;
-# ℹ 8 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
+# ℹ 9 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
 #   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
-#   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
+#   date_last_contact &lt;date&gt;, date_first_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
 </div>
 <p>A key parameter is the disease name. To ensure correct syntax, you
 can retrieve the list of available disease names using the
@@ -1267,7 +1259,7 @@ monkeypox (mpox) disease.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb54">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1424,8 +1416,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html",
   "dateCreated": "2026-03-20",
-  "dateModified": "2026-04-07",
-  "datePublished": "2026-04-07"
+  "dateModified": "2026-04-14",
+  "datePublished": "2026-04-14"
 }
 
   </script><script>
