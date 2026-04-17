@@ -26,10 +26,8 @@ In this episode, we will use a simulated Ebola dataset that can be:
 :::::::::::::::::::::
 
 ## Introduction
-In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analysing what you think you are analysing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
- This episode focuses on cleaning epidemics and outbreaks data using the 
- [cleanepi](https://epiverse-trace.github.io/cleanepi/) package,
-   For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
+In the process of analyzing outbreak data, it's essential to ensure that the dataset is clean, curated, standardized, and validated. This will ensure that analysis is accurate (i.e. you are analyzing what you think you are analyzing) and reproducible (i.e. if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results).
+This episode focuses on cleaning epidemic and outbreak data using the [cleanepi](https://epiverse-trace.github.io/cleanepi/) package. For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 Let's start by loading the package `{rio}` to read data and the package `{cleanepi}` 
 to clean it. We'll use the pipe `%>%` to connect some of their functions, including others from 
@@ -60,8 +58,8 @@ the `filter()` function from the `{dplyr}` package.
 :::::::::::::::::::
 
 
-The first step is to import the dataset into working environment. This can be
-done by following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. It involves loading the dataset into
+The first step is to import the dataset into the working environment. This can be
+done by following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode. It involves loading the dataset into the
 `R` environment and view its structure and content.
 
 ```{r,eval=FALSE,echo=TRUE,message=FALSE}
@@ -327,7 +325,7 @@ This function converts the values in the target columns into the **YYYY-mm-dd** 
 
 #### How is this possible?
 
-We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the “Details” section of the 
+We invite you to find the key package that makes this standardization possible inside `{cleanepi}` by reading the “Details” section of the 
 [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
 Also, check how to use the `orders` argument if you want to target US format character strings. You can explore [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
@@ -443,7 +441,7 @@ In epidemiological data analysis, it is also useful to track and analyze time-de
 
 The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sampling of the identified cases until the $3^{rd}$ of January 2025 (`"2025-01-03"`).
- 
+
 ```{r}
 sim_ebola_data <- cleanepi::timespan(
   data = sim_ebola_data,
@@ -487,7 +485,7 @@ Before calculating the age, you may need to:
 
 :::::::::::::::::::::::::: solution
 
-In the solution we added `date_first_pcr_positive_test` as part of the Date columns to be standardised given that it often used in disease outbreak analysis.
+In the solution we added `date_first_pcr_positive_test` as part of the Date columns to be standardized given that it often used in disease outbreak analysis.
 
 ```{r}
 dat_clean <- dat %>%
