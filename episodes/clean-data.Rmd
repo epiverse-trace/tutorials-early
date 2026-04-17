@@ -170,14 +170,11 @@ Additionally, some columns contain more than one data type, and there are missin
 
 ## Common operations
 
-This section  demonstrate how to perform some common data cleaning operations using the `{cleanepi}` package.
+This section demonstrates how to perform some common data cleaning operations using the `{cleanepi}` package.
 
 ### Standardizing column names
 
-For this example dataset, standardizing column names typically involves removing with spaces and connecting different words with "`_`".
-This practice helps maintain consistency and readability in the dataset.
-However, the function used for standardizing column names offers more options.
-Type `?cleanepi::standardize_column_names` in the console for more details.
+For this example dataset, standardizing column names typically involves removing white spaces and connecting different words with "`_`". This practice helps maintain consistency and readability in the dataset. However, the function used for standardizing column names offers more options. Type `?cleanepi::standardize_column_names` in the console for more details.
 
 ```{r}
 sim_ebola_data <- cleanepi::standardize_column_names(raw_ebola_data)
