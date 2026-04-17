@@ -87,13 +87,13 @@ For example, the command `dplyr::filter(data, condition)` means we are calling t
 
 ### Load data
 
-The first step is to import the dataset into working environment.
+The first step is to import the dataset into the working environment.
 This can be done by following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
-It involves loading the dataset into `R` environment and view its structure and content.
+It involves loading the dataset into the `R` environment and viewing its structure and content.
 
 ```{r, eval=FALSE, echo=TRUE, message=FALSE}
 # Read data
-# e.g.: if path to file is data/simulated_ebola_2.csv then:
+# e.g., if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
 ) %>%
@@ -390,7 +390,7 @@ This function converts the values in the target columns into the **YYYY-mm-dd** 
 
 #### How is this possible?
 
-We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the "Details" section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
+We invite you to find the key package that makes this standardization possible inside `{cleanepi}` by reading the “Details” section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details).
 
 Also, check how to use the `orders` argument if you want to target United States (U.S.) format character strings.
 Join the discussion about [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
@@ -447,10 +447,10 @@ dat_without_missings_dates %>%
 
 ### Calculating time span between different date events
 
-In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date).
+In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the time since the start of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date).
 A common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
 
-The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales.
+The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events.
 For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute **reporting delay** between the date of symptom onset (`date_onset`) and date of case confirmation (`date_sample`)
 
 ```{r}
