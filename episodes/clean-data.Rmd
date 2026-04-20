@@ -557,7 +557,7 @@ cleaned_data <- cleanepi::clean_data(raw_ebola_data)
 ```
 
 
-Furthermore, you can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code 
+Furthermore, you can combine multiple data cleaning tasks via the base R pipe (`|>`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code 
 snippet. 
 
 ```{r,warning = FALSE, message = FALSE}
