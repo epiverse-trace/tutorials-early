@@ -581,20 +581,27 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 33 × 3
-   displayName                              id          type     
-   <chr>                                    <chr>       <chr>    
- 1 "2332822 COVID Patient Tracker"          UX0UtpBaHDX tracker  
- 2 " 2332822 COVID Screening Event Program" LqUtsxvm60C aggregate
- 3 "2332938 COVID Patient Tracker"          EKAlV3v8Tzd tracker  
- 4 "2332938 COVID Screening Event Program " O1JnbenyjHI aggregate
- 5 "2333013_COVID Patient Tracker "         naZafkD8SBH tracker  
- 6 "2333013_COVID Screening Event Program"  BRDdzwqBG20 aggregate
- 7 "Antenatal care visit"                   lxAQ7Zs9VYR aggregate
- 8 "Child Program"                          IpHINAT79UW tracker  
- 9 "Community Diarrhoea Screening"          RuynHNeEXHj aggregate
-10 "Contraceptives Voucher Program"         kla3mAPgvCH aggregate
-# ℹ 23 more rows
+# A tibble: 18 × 3
+   displayName                                           id          type     
+   <chr>                                                 <chr>       <chr>    
+ 1 "1212 "                                               gj61SQIEG3y tracker  
+ 2 "2334155 COVID-19 Screening Event Program"            O1lhGBLDaz9 aggregate
+ 3 "2334155 COVID Patient Tracker"                       ESAt790l3r0 tracker  
+ 4 "2334155 COVID Screening Event Program"               KiJl9qTmS8A aggregate
+ 5 "Antenatal care visit"                                lxAQ7Zs9VYR aggregate
+ 6 "Child Programme"                                     IpHINAT79UW tracker  
+ 7 "Contraceptives Voucher Program"                      kla3mAPgvCH aggregate
+ 8 "Information Campaign"                                q04UBOqq3rp aggregate
+ 9 "Inpatient morbidity and mortality"                   eBAyeGv0exc aggregate
+10 "Malaria case diagnosis, treatment and investigation" qDkgAbB5Jlk tracker  
+11 "Malaria case registration"                           VBqh0ynB2wv aggregate
+12 "Malaria focus investigation"                         M3xtLkYBlKI tracker  
+13 "Malaria testing and surveillance"                    bMcwwoVnbSR aggregate
+14 "MNCH / PNC (Adult Woman)"                            uy2gU8kT1jF tracker  
+15 "Provider Follow-up and Support Tool"                 fDd25txQckK tracker  
+16 "TB program"                                          ur1Edk5Oe2n tracker  
+17 "WHO RMNCH Tracker"                                   WSGAb5XwJ3Y tracker  
+18 "XX MAL RDT - Case Registration"                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -605,13 +612,21 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1 × 12
-  National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-  <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
-1 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK RAMP-PROJECT  Znezixula6j
-# ℹ 6 more variables: Facility_name <chr>, Facility_id <chr>,
-#   `Level 5_name` <chr>, `Level 5_id` <chr>, `Level 6_name` <chr>,
-#   `Level 6_id` <chr>
+# A tibble: 1,174 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
+ 1 Sierra Leone  ImspTQPwCqd 2231056 Regi… wJ5T7yz6zjO "2231056 Dis… w8qY44KikJY
+ 2 Sierra Leone  ImspTQPwCqd 2332506 REGI… nwHY5mQBEWx "2332506 Dis… ZjvrvcJGKem
+ 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu "2332571 REG… zEwu6U8LXOz
+ 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu "2332571 REG… zEwu6U8LXOz
+ 5 Sierra Leone  ImspTQPwCqd 2332697 REGI… Nw1DTMLABYN "2332697 DIS… jc3zHo5h3J2
+ 6 Sierra Leone  ImspTQPwCqd 2332938 Regi… YbGsim3EkHX "2332938 Dis… c84Tv2eWrxV
+ 7 Sierra Leone  ImspTQPwCqd 2334155 Regi… K6EWNDtMB1S "2334155 Dis… QFAaYKJ42Sd
+ 8 Sierra Leone  ImspTQPwCqd 2334540 Regi… uXctq7OlvlQ "2334540 Dis… cpSkUpYUUXK
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo "Rural Weste… qtr8GGlm4gg
+10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo "Rural Weste… qtr8GGlm4gg
+# ℹ 1,164 more rows
+# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
 :::::::::::::::
