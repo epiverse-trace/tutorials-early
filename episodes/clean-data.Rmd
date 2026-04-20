@@ -636,7 +636,7 @@ cleanepi::print_report(data = cleaned_data)
 
 ::::::::::::::::::::::::::::::::::::: keypoints 
 
-- Use `{cleanepi}` package to clean and standardize epidemiological-related data
+- Use the `{cleanepi}` package to clean and standardize epidemiological-related data
 - Understand how to use `{cleanepi}` to perform common data cleansing tasks
 - View the data cleaning report in a browser, consult it and make decisions. 
 
