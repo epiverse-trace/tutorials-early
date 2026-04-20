@@ -509,7 +509,7 @@ dat_clean <- dat %>%
   )
 ```
 
-Now, How would you categorize a numerical variable?
+Now, how would you categorize a numerical variable?
 
 ::::::::::::::::::::::::::
 
