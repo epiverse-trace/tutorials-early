@@ -633,7 +633,8 @@ new_dictionary <- tibble::tibble(
 new_dictionary
 ```
 
-You can have more details in the section about "Dictionary-based data substituting" in the package [vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
+There are more details in the section about "Dictionary-based data substituting" in the package 
+[vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
 
 ::::::::::::::::::::::::::
 
