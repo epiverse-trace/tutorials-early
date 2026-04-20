@@ -439,7 +439,7 @@ There are more details in the section about "Dictionary-based data substituting"
 
 In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date). The most common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
 
-The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
+The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events. For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute the 
 time elapsed since the date of sampling of the identified cases until the $3^{rd}$ of January 2025 (`"2025-01-03"`).
 
 ```{r}
