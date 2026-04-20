@@ -669,7 +669,7 @@ Thanks to the `{numberize}` package, we can convert numbers written in English, 
 
 ## Multiple operations at once
 
-You can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
+You can combine multiple data cleaning tasks via the base R pipe (`|>`) or the {magrittr} pipe (`%>%`) operator, as shown in the code snippet below.
 
 ```{r, warning=FALSE, message=FALSE}
 # Perform the cleaning operations using the pipe (%>%) operator
