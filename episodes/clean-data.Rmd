@@ -448,7 +448,7 @@ In epidemiological data analysis, it is also useful to track and analyze time-de
 
 - One example is the [reporting delay](reference.md#reportingdelay) (i.e., the time elapsed from the date of case symptom onset to the date of case report). In the next set of tutorials, we will learn how to acccount for this in the real-time analysis of outbreaks.
 
-- Another example is the time delay from the date of sample collection from a suspected case to the date of sample already tested (i.e., with known result). It can inform the assessment of the laboratory testing capacity of the region responding to the outbreak.
+- Another example is the time delay from the date of sample collection from a suspected case to the date of sample already tested (i.e., with known result), contributing to the total reporting delay ([Marinović et al., 2015](https://wwwnc.cdc.gov/eid/article/21/2/13-0504_article)). It can inform the assessment of the laboratory testing capacity of the region responding to the outbreak.
 
 - The most common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
 
