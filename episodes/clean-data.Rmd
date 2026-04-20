@@ -391,7 +391,7 @@ test_dict <- base::readRDS(
 test_dict
 ```
 
-Now, we can use this dictionary to standardize values of the the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to perform this using the `clean_using_dictionary()` function from the {cleanepi} package.
+Now, we can use this dictionary to standardize values of the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to perform this using the `clean_using_dictionary()` function from the {cleanepi} package.
 
 ```{r}
 sim_ebola_data <- cleanepi::clean_using_dictionary(
