@@ -581,20 +581,23 @@ tibble::as_tibble(demo_programs)
 ```
 
 ``` output
-# A tibble: 33 × 3
-   displayName                              id          type     
-   <chr>                                    <chr>       <chr>    
- 1 "2332822 COVID Patient Tracker"          UX0UtpBaHDX tracker  
- 2 " 2332822 COVID Screening Event Program" LqUtsxvm60C aggregate
- 3 "2332938 COVID Patient Tracker"          EKAlV3v8Tzd tracker  
- 4 "2332938 COVID Screening Event Program " O1JnbenyjHI aggregate
- 5 "2333013_COVID Patient Tracker "         naZafkD8SBH tracker  
- 6 "2333013_COVID Screening Event Program"  BRDdzwqBG20 aggregate
- 7 "Antenatal care visit"                   lxAQ7Zs9VYR aggregate
- 8 "Child Program"                          IpHINAT79UW tracker  
- 9 "Community Diarrhoea Screening"          RuynHNeEXHj aggregate
-10 "Contraceptives Voucher Program"         kla3mAPgvCH aggregate
-# ℹ 23 more rows
+# A tibble: 14 × 3
+   displayName                                         id          type     
+   <chr>                                               <chr>       <chr>    
+ 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 2 Child Programme                                     IpHINAT79UW tracker  
+ 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 4 Information Campaign                                q04UBOqq3rp aggregate
+ 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 7 Malaria case registration                           VBqh0ynB2wv aggregate
+ 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
+ 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+12 TB program                                          ur1Edk5Oe2n tracker  
+13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -605,13 +608,21 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1 × 12
-  National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-  <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
-1 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK RAMP-PROJECT  Znezixula6j
-# ℹ 6 more variables: Facility_name <chr>, Facility_id <chr>,
-#   `Level 5_name` <chr>, `Level 5_id` <chr>, `Level 6_name` <chr>,
-#   `Level 6_id` <chr>
+# A tibble: 1,167 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
+ 1 Sierra Leone  ImspTQPwCqd 2332621 Regi… Vg2M99Ro04S 2332621 Dist… bchpwNWzEN8
+ 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+# ℹ 1,157 more rows
+# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
 :::::::::::::::
