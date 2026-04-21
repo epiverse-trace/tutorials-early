@@ -358,7 +358,7 @@
         
 <section id="aio-read-cases"><p>Content from <a href="read-cases.html">Read case data</a></p>
 <hr>
-<p>Last updated on 2026-04-14 |
+<p>Last updated on 2026-04-21 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -1178,20 +1178,23 @@ data from one of these programs.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 33 × 3
-   displayName                              id          type
-   &lt;chr&gt;                                    &lt;chr&gt;       &lt;chr&gt;
- 1 "2332822 COVID Patient Tracker"          UX0UtpBaHDX tracker
- 2 " 2332822 COVID Screening Event Program" LqUtsxvm60C aggregate
- 3 "2332938 COVID Patient Tracker"          EKAlV3v8Tzd tracker
- 4 "2332938 COVID Screening Event Program " O1JnbenyjHI aggregate
- 5 "2333013_COVID Patient Tracker "         naZafkD8SBH tracker
- 6 "2333013_COVID Screening Event Program"  BRDdzwqBG20 aggregate
- 7 "Antenatal care visit"                   lxAQ7Zs9VYR aggregate
- 8 "Child Program"                          IpHINAT79UW tracker
- 9 "Community Diarrhoea Screening"          RuynHNeEXHj aggregate
-10 "Contraceptives Voucher Program"         kla3mAPgvCH aggregate
-# ℹ 23 more rows</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 14 × 3
+   displayName                                         id          type
+   &lt;chr&gt;                                               &lt;chr&gt;       &lt;chr&gt;
+ 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 2 Child Programme                                     IpHINAT79UW tracker
+ 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 4 Information Campaign                                q04UBOqq3rp aggregate
+ 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker
+ 7 Malaria case registration                           VBqh0ynB2wv aggregate
+ 8 Malaria focus investigation                         M3xtLkYBlKI tracker
+ 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker
+11 Provider Follow-up and Support Tool                 fDd25txQckK tracker
+12 TB program                                          ur1Edk5Oe2n tracker
+13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker
+14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb48">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1204,13 +1207,21 @@ data from one of these programs.</p>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 1 × 12
-  National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-  &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
-1 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK RAMP-PROJECT  Znezixula6j
-# ℹ 6 more variables: Facility_name &lt;chr&gt;, Facility_id &lt;chr&gt;,
-#   `Level 5_name` &lt;chr&gt;, `Level 5_id` &lt;chr&gt;, `Level 6_name` &lt;chr&gt;,
-#   `Level 6_id` &lt;chr&gt;</code></pre>
+<pre class="output" tabindex="0"><code># A tibble: 1,167 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;
+ 1 Sierra Leone  ImspTQPwCqd 2332621 Regi… Vg2M99Ro04S 2332621 Dist… bchpwNWzEN8
+ 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+# ℹ 1,157 more rows
+# ℹ 2 more variables: Facility_name &lt;chr&gt;, Facility_id &lt;chr&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -1421,7 +1432,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-clean-data"><p>Content from <a href="clean-data.html">Clean case data</a></p>
 <hr>
-<p>Last updated on 2026-04-14 |
+<p>Last updated on 2026-04-21 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2532,7 +2543,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-validate"><p>Content from <a href="validate.html">Validate case data</a></p>
 <hr>
-<p>Last updated on 2026-04-14 |
+<p>Last updated on 2026-04-21 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/validate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -2776,7 +2787,7 @@ the input dataset can be associated with any of these available tags.
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in
 <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> using:</p>
@@ -2799,7 +2810,7 @@ the input dataset can be associated with any of these available tags.
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2877,7 +2888,7 @@ data.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -2956,7 +2967,7 @@ character (<code>&lt;chr&gt;</code>), -<code>gender</code> character
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3026,7 +3037,7 @@ we needed when building the object?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Let’s simulate a scenario about losing a variable :</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -3129,7 +3140,7 @@ analysis pipeline during an outbreak response?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -3231,7 +3242,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-describe-cases"><p>Content from <a href="describe-cases.html">Aggregate and visualize</a></p>
 <hr>
-<p>Last updated on 2026-04-14 |
+<p>Last updated on 2026-04-21 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -3362,7 +3373,7 @@ events during an outbreak.</p>
   Additional Resources on Outbreak Data
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>The above is the default configuration of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a>. It
 includes a number of assumptions about the transmissibility and severity
@@ -3874,8 +3885,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "dateCreated": "2026-03-20",
-  "dateModified": "2026-04-14",
-  "datePublished": "2026-04-14"
+  "dateModified": "2026-04-21",
+  "datePublished": "2026-04-21"
 }
 
   </script><script>
