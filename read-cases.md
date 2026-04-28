@@ -608,20 +608,20 @@ tibble::as_tibble(demo_units)
 ```
 
 ``` output
-# A tibble: 1,167 × 8
+# A tibble: 1,166 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd 2332621 Regi… Vg2M99Ro04S 2332621 Dist… bchpwNWzEN8
+ 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
  2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-# ℹ 1,157 more rows
+10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
+# ℹ 1,156 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
@@ -653,6 +653,14 @@ covid_cases <- readepi::read_sormas(
   login = sormas_login,
   disease = "coronavirus",
 )
+```
+
+``` warning
+Warning in as.POSIXct(as.numeric(date_last_contact), origin = "1970-01-01"):
+NAs introduced by coercion
+```
+
+``` r
 tibble::as_tibble(covid_cases)
 ```
 
@@ -751,6 +759,11 @@ mpox_cases <- readepi::read_sormas(
 ``` warning
 Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
 coercion
+```
+
+``` warning
+Warning in as.POSIXct(as.numeric(date_last_contact), origin = "1970-01-01"):
+NAs introduced by coercion
 ```
 
 ``` r
