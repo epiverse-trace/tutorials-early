@@ -574,55 +574,50 @@ demo_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+```
 
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
+! HTTP 404 Not Found.
+```
+
+``` r
 # get the names and IDs of the programs
 demo_programs <- readepi::get_programs(login = demo_login)
+```
+
+``` error
+Error:
+! object 'demo_login' not found
+```
+
+``` r
 tibble::as_tibble(demo_programs)
 ```
 
-``` output
-# A tibble: 14 × 3
-   displayName                                         id          type     
-   <chr>                                               <chr>       <chr>    
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Programme                                     IpHINAT79UW tracker  
- 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 4 Information Campaign                                q04UBOqq3rp aggregate
- 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-12 TB program                                          ur1Edk5Oe2n tracker  
-13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+``` error
+Error:
+! object 'demo_programs' not found
 ```
 
 
 ``` r
 # get the names and IDs of the organisation units
 demo_units <- readepi::get_organisation_units(login = demo_login)
+```
+
+``` error
+Error:
+! object 'demo_login' not found
+```
+
+``` r
 tibble::as_tibble(demo_units)
 ```
 
-``` output
-# A tibble: 1,166 × 8
-   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
- 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,156 more rows
-# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
+``` error
+Error:
+! object 'demo_units' not found
 ```
 
 :::::::::::::::
