@@ -12,7 +12,7 @@ always_allow_html: true
 In this document, we use the [{cleanepi}](https://epiverse-trace.github.io/cleanepi/) 
 package to clean and standardize a messy mpox (formerly known as Monkeypox)
 dataset obtained from the [global.health](https://global.health/) platform.
-The dataset is  in a `csv` format available on this [link](https://mpox-2024.s3.eu-central-1.amazonaws.com/latest.csv). 
+The dataset is  in a `csv` format available on this [link](https://ivcjkmyexc.execute-api.eu-central-1.amazonaws.com/web/url?folder=&file_name=latest.csv). 
 
 We begin by importing the data into R and then utilize {cleanepi} 
 functionalities to perform the following operations in a streamlined manner:
@@ -28,7 +28,7 @@ in the following pipeline:
 ```{r echo=TRUE, eval=FALSE}
 cleaned_data <-
   data.table::fread(
-    "https://mpox-2024.s3.eu-central-1.amazonaws.com/latest.csv") |>
+    "https://ivcjkmyexc.execute-api.eu-central-1.amazonaws.com/web/url?folder=&file_name=latest.csv") |>
   cleanepi::replace_missing_values(na_strings = "") |>
   cleanepi::remove_constants() |>
   cleanepi::standardize_dates(error_tolerance = 1) |>
@@ -85,7 +85,7 @@ distribution of missing values within the dataset.
 ```{r echo=TRUE, cache=TRUE, eval=TRUE}
 # import the data
 data_in <- data.table::fread(
-  "https://mpox-2024.s3.eu-central-1.amazonaws.com/latest.csv"
+  "https://ivcjkmyexc.execute-api.eu-central-1.amazonaws.com/web/url?folder=&file_name=latest.csv"
 )
 
 # Visualise the distribution of the different types as well as missing data
