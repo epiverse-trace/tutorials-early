@@ -5731,7 +5731,7 @@
       "RoxygenNote": "7.3.1",
       "Encoding": "UTF-8",
       "NeedsCompilation": "yes",
-      "Repository": "CRAN"
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "systemfonts": {
       "Package": "systemfonts",
@@ -6171,8 +6171,7 @@
       "LazyData": "true",
       "URL": "https://github.com/epiverse-trace/tracetheme",
       "BugReports": "https://github.com/epiverse-trace/tracetheme/issues",
-      "NeedsCompilation": "no",
-      "Author": "Hugo Gruson [aut, cre] (<https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
+      "Author": "Hugo Gruson [aut, cre] (ORCID: <https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
       "Maintainer": "Hugo Gruson <hugo@data.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
