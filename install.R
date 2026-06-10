@@ -1,0 +1,11 @@
+pak::pak("knitr")
+pak::pak("xml2")
+pak::pak("lintr")
+library(knitr)
+opts_chunk$set(comment = "")
+library(xml2)
+x <- read_xml("<foo> <bar> text <baz/> </bar> </foo>")
+x
+xml_name(x)
+library(lintr)
+available_tags(packages = "lintr")

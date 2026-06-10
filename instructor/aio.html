@@ -360,7 +360,7 @@
         
 <section id="aio-read-cases"><p>Content from <a href="read-cases.html">Read case data</a></p>
 <hr>
-<p>Last updated on 2026-05-12 |
+<p>Last updated on 2026-06-10 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -980,7 +980,10 @@ organization units using the <code>get_programs()</code> and
 <h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="error" tabindex="0"><code>Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
-! HTTP 500 Internal Server Error.</code></pre>
+! Failed to perform HTTP request.
+Caused by error in `curl::curl_fetch_memory()` at httr2/R/req-perform.R:220:5:
+! Timeout was reached [smc.moh.gm]:
+Connection timeout after 10000 ms</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb26">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1287,9 +1290,9 @@ NAs introduced by coercion</code></pre>
 <pre class="output" tabindex="0"><code># A tibble: 3 × 16
   case_id             person_id date_onset case_origin case_status outcome sex
   &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
-1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  CONFIRMED   DECEAS… &lt;NA&gt;
-2 T4Y6UI-DXJMR3-MBVF… X7U4QL-Z… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
-3 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… &lt;NA&gt;
+1 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… &lt;NA&gt;
+2 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
+3 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
 # ℹ 9 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
 #   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
 #   date_last_contact &lt;date&gt;, date_first_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
@@ -1455,7 +1458,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-clean-data"><p>Content from <a href="clean-data.html">Clean case data</a></p>
 <hr>
-<p>Last updated on 2026-05-12 |
+<p>Last updated on 2026-06-10 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -2653,7 +2656,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-validate"><p>Content from <a href="validate.html">Validate case data</a></p>
 <hr>
-<p>Last updated on 2026-05-12 |
+<p>Last updated on 2026-06-10 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/validate.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -2829,7 +2832,7 @@ to replicate the analysis code you wrote the day before?</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>If learners do not have an experience to share, we as instructors can
 share one.</p>
@@ -2915,7 +2918,7 @@ the input dataset can be associated with any of these available tags.
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Your can get access to the list of available tag names in
 <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> using:</p>
@@ -2938,7 +2941,7 @@ the input dataset can be associated with any of these available tags.
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3016,7 +3019,7 @@ data.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <p>We can use <code>dplyr::mutate()</code> to change the variable type
 before tagging for validation. For example:</p>
@@ -3095,7 +3098,7 @@ character (<code>&lt;chr&gt;</code>), -<code>gender</code> character
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -3165,7 +3168,7 @@ we needed when building the object?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Let’s simulate a scenario about losing a variable :</p>
 <div class="codewrapper sourceCode" id="cb15">
@@ -3268,7 +3271,7 @@ analysis pipeline during an outbreak response?</p></li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
   <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
 </button>
-<div id="collapseSolution4" class="accordion-collapse collapse" data-bs-parent="#accordionSolution4" aria-labelledby="headingSolution4">
+<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
 <div class="accordion-body">
 <p>Deciding between <code>Warning</code> or <code>Error</code> message
 will depend on the level of attention or flexibility you need when
@@ -3370,7 +3373,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-describe-cases"><p>Content from <a href="describe-cases.html">Aggregate and visualize</a></p>
 <hr>
-<p>Last updated on 2026-05-12 |
+<p>Last updated on 2026-06-10 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/describe-cases.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -4013,9 +4016,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/aio.html",
-  "dateCreated": "2026-03-20",
-  "dateModified": "2026-05-12",
-  "datePublished": "2026-05-12"
+  "dateCreated": "2026-06-10",
+  "dateModified": "2026-06-10",
+  "datePublished": "2026-06-10"
 }
 
   </script><script>
