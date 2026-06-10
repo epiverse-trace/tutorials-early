@@ -9,3 +9,5 @@ x
 xml_name(x)
 library(lintr)
 available_tags(packages = "lintr")
+library(reactable)
+reactable::reactable(iris)
