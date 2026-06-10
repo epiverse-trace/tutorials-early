@@ -428,7 +428,10 @@ dhis2_login <- readepi::login(
 
 ``` error
 Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
-! HTTP 500 Internal Server Error.
+! Failed to perform HTTP request.
+Caused by error in `curl::curl_fetch_memory()` at httr2/R/req-perform.R:220:5:
+! Timeout was reached [smc.moh.gm]:
+Connection timeout after 10000 ms
 ```
 
 ``` r
@@ -663,9 +666,9 @@ tibble::as_tibble(covid_cases)
 # A tibble: 3 × 16
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 VPMCMM-YUZENC-P3JN… U2BJQK-M… 2025-11-01 IN_COUNTRY  CONFIRMED   DECEAS… <NA> 
-2 T4Y6UI-DXJMR3-MBVF… X7U4QL-Z… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-3 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… <NA> 
+1 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… <NA> 
+2 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+3 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
 # ℹ 9 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, date_first_contact <date>, Ct_values <chr>
