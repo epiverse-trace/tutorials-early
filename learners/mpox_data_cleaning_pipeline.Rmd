@@ -82,7 +82,7 @@ We load the dataset using the `data.table::fread()` function and visualize it
 with both `View()` and `wakefield::table_heat()` functions to understand the
 distribution of missing values within the dataset.
 
-```{r echo=TRUE, cache=TRUE, eval=TRUE}
+```{r echo=TRUE, eval=TRUE}
 # import the data
 data_in <- data.table::fread(
   "https://ivcjkmyexc.execute-api.eu-central-1.amazonaws.com/web/url?folder=&file_name=latest.csv"
