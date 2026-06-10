@@ -116,7 +116,7 @@ After replacing the empty characters with `NA`, the dataset is now composed of
 `r round(sum(is.na(data_in)) / prod(dim(data_in)) * 100, digits = 2)`% missing
 values. The new distribution of missing values is shown in the below figure.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # Visualise the new distribution of the different data types as well as missing
 # data across the dataset
 wakefield::table_heat(data_in, palette = "Set3", flip = TRUE, print = TRUE)
@@ -129,7 +129,7 @@ dataset, we can examine all the content of the character columns by assessing
 the proportion of the various data types. This can be accomplished using the
 `scan_data()` function from the `{cleanepi}` package.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # Scan with cleanepi
 scan_result <- cleanepi::scan_data(data_in)
 ```
@@ -137,7 +137,7 @@ scan_result <- cleanepi::scan_data(data_in)
 In the below code chunk, we make sure to color in red any row where there are
 multiple data types found by the `scan_data()` function.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # detect rows with multiple data types
 df <- scan_result |>
   dplyr::mutate(
@@ -174,7 +174,7 @@ values).
 To remove these non-informative rows and columns, we use the
 `remove_constants()` function from the `{cleanepi}` package.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # Remove constant columns, empty rows and columns
 data_in <- data_in |>
   cleanepi::remove_constants()
@@ -183,7 +183,7 @@ data_in <- data_in |>
 This resulted in the removal of 11 columns — 5 empty columns and 6 constant
 columns — while no empty rows were removed, as shown in the table below.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # display the set of constant data
 constant_data <- cleanepi::print_report(data_in, "constant_data")
 constant_data |>
@@ -202,7 +202,7 @@ We can detect and remove duplicates using the `remove_duplicates()` function
 from the `{cleanepi}` package. In this case, we do not specify any target
 column, i.e., we look for duplicates across all columns.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 data_in <- data_in |>
   cleanepi::remove_duplicates()
 ```
@@ -217,7 +217,7 @@ Some character columns seem to contain actual Date values. We will apply the `st
 columns are in ISO8601 format. First, we'll identify the potential Date columns
 from the results of the `scan_data()` function, and then use those columns for standardization.
 
-```{r echo=TRUE, cache=TRUE}
+```{r echo=TRUE}
 # Identify potential Date columns from the scanning results. Columns with
 # %date > 0 are likely to be of type Date
 potential_dates <- scan_result |>
@@ -246,7 +246,7 @@ the `cutoff` parameter to an appropriate value.
 For example, the below code chunk could be used to exclude columns where more
 than **90%** of the values are `NA`.
 
-```{r echo=TRUE, cache=TRUE, eval=FALSE}
+```{r echo=TRUE, eval=FALSE}
 df <- data_in |>
   cleanepi::remove_constants(cutoff = 0.9)
 
