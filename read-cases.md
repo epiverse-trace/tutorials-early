@@ -427,11 +427,11 @@ dhis2_login <- readepi::login(
 ```
 
 ``` error
-Error in `httr2::req_perform()`:
+Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
 ! Failed to perform HTTP request.
-Caused by error in `curl::curl_fetch_memory()`:
+Caused by error in `curl::curl_fetch_memory()` at httr2/R/req-perform.R:220:5:
 ! Timeout was reached [smc.moh.gm]:
-Failed to connect to smc.moh.gm port 443 after 10002 ms: Timeout was reached
+Connection timeout after 10000 ms
 ```
 
 ``` r
@@ -580,7 +580,7 @@ demo_login <- readepi::login(
 ```
 
 ``` error
-Error in `httr2::req_perform()`:
+Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
 ! HTTP 404 Not Found.
 ```
 
