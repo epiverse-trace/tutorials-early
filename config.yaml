@@ -80,4 +80,3 @@ profiles:
 
 
 varnish: epiverse-trace/varnish@epiversetheme
-sandpaper: epiverse-trace/sandpaper@patch-renv-github-bug
