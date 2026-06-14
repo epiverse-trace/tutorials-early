@@ -12,21 +12,27 @@
       gtag('js', new Date());
 
       gtag('config', 'G-XZ471458FQ');
-    </script><!-- mathjax --><script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      config: ["MMLorHTML.js"],
-      jax: ["input/TeX","input/MathML","output/HTML-CSS","output/NativeMML", "output/PreviewHTML"],
-      extensions: ["tex2jax.js","mml2jax.js","MathMenu.js","MathZoom.js", "fast-preview.js", "AssistiveMML.js", "a11y/accessibility-menu.js"],
-      TeX: {
-        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-      },
-      tex2jax: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
-        processEscapes: true
-      }
-    });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><!-- Responsive Favicon for The Carpentries --><link rel="apple-touch-icon" sizes="180x180" href="favicons/epiverse-trace/apple-touch-icon.png">
+    </script><!-- mathjax --><!-- NOTE: https://docs.mathjax.org/en/latest/output/mathml.html#mathml-support --><!-- Changes from V2 to V4: https://mathjax.github.io/MathJax-demos-web/convert-configuration/convert-configuration.html
+        Jax output/NativeMML is not yet implemented
+        Jax output/PreviewHTML is not yet implemented
+        Extension fast-preview is not yet implemented (but may be in a future release)
+    --><script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['\\(', '\\)']],
+            displayMath: [ ['$$','$$'], ['\\[', '\\]'] ],
+            processEscapes: true,
+            packages: ['base', 'ams', 'noerrors', 'noundefined']
+        },
+        options: {
+            ignoreHtmlClass: 'tex2jax_ignore',
+            processHtmlClass: 'tex2jax_process'
+        },
+        loader: {
+            load: ['a11y/assistive-mml', '[tex]/noerrors']
+        }
+    };
+    </script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script><!-- Responsive Favicon for The Carpentries --><link rel="apple-touch-icon" sizes="180x180" href="favicons/epiverse-trace/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicons/epiverse-trace/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicons/epiverse-trace/favicon-16x16.png">
 <link rel="manifest" href="favicons/epiverse-trace/site.webmanifest">
@@ -53,8 +59,8 @@
       </div>
     </div>
     <div class="selector-container">
-      <div id="theme-selector">
-        <li class="nav-item dropdown" id="theme-button-list">
+      <menu class="theme-selector" id="theme-selector-menu">
+<li class="nav-item dropdown theme-button-list" id="theme-button-list-menu">
           <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
             <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg><i data-feather="chevron-down"></i>
           </button>
@@ -79,9 +85,8 @@
             </li>
           </ul>
 </li>
-      </div>
-
-      <div class="dropdown" id="instructor-dropdown">
+    </menu>
+<div class="dropdown" id="instructor-dropdown">
         <button class="btn btn-secondary dropdown-toggle bordered-button" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-expanded="false">
           <i aria-hidden="true" class="icon" data-feather="eye"></i> Learner View <i data-feather="chevron-down"></i>
         </button>
@@ -91,7 +96,7 @@
 </div>
     </div>
   </div>
-  <hr></header><nav class="navbar navbar-expand-xl bottom-nav epiverse-trace" aria-label="Main Navigation"><div class="container-fluid nav-container">
+</header><nav class="navbar navbar-expand-xl bottom-nav epiverse-trace" aria-label="Main Navigation"><div class="container-fluid nav-container">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
       <span class="navbar-toggler-icon"></span>
       <span class="menu-title">Menu</span>
@@ -149,29 +154,18 @@
     <a id="search-button" class="btn btn-primary" href="aio.html" role="button" aria-label="Search the All In One page">Search the All In One page</a>
   </div>
 <!--/div.container-fluid -->
-</nav><div class="col-md-12 mobile-title">
-  Read and clean case data, and make linelist for outbreak analytics with R
-</div>
-
-<aside class="col-md-12 lesson-progress"><div style="width: %" class="percentage">
-    %
-  </div>
-  <div class="progress epiverse-trace">
-    <div class="progress-bar epiverse-trace" role="progressbar" style="width: %" aria-valuenow="" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
-    </div>
-  </div>
-</aside><div class="container">
+</nav><div class="container">
       <div class="row">
         <!-- START: inst/pkgdown/templates/navbar.html -->
 <div id="sidebar-col" class="col-lg-4">
   <div id="sidebar" class="sidebar">
-      <nav aria-labelledby="flush-headingEleven"><button role="button" aria-label="close menu" alt="close menu" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse " data-episodes="Episodes ">
+      <nav aria-labelledby="flush-collapse-chapters-toggle"><button role="button" aria-label="Collapse" alt="Collapse" aria-expanded="true" aria-controls="sidebar" class="collapse-toggle" data-collapse="Collapse " data-episodes="Episodes ">
           <i class="search-icon" data-feather="x" role="img"></i>
         </button>
         <div class="sidebar-inner">
           <div class="row mobile-row" id="theme-row-mobile">
-            <div class="col" id="theme-selector">
-              <li class="nav-item dropdown" id="theme-button-list">
+            <menu class="col theme-selector" id="theme-selector-sidebar">
+<li class="nav-item dropdown theme-button-list" id="theme-button-list-sidebar">
                 <button class="btn btn-link nav-link px-0 px-lg-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme (auto)">
                   <svg class="bi my-1 theme-icon-active"><use href="#circle-half"></use></svg><span class="d-lg-none ms-1" id="bd-theme-text">Toggle Theme</span>
                 </button>
@@ -196,19 +190,19 @@
                   </li>
                 </ul>
 </li>
-            </div>
-          </div>
+            </menu>
+</div>
           <div class="row mobile-row">
             <div class="col">
               <div class="sidenav-view-selector">
-                <div class="accordion accordion-flush" id="accordionFlush9">
+                <div class="accordion accordion-flush" id="accordion-instructor-toggle">
                   <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingNine">
-                      <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseNine" aria-expanded="false" aria-controls="flush-collapseNine">
+                    <h2 class="accordion-header" id="flush-heading-instructor-toggle">
+                      <button class="accordion-button collapsed" id="instructor" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-instructor-toggle" aria-expanded="false" aria-controls="flush-collapse-instructor-toggle">
                         <i id="eye" aria-hidden="true" class="icon" data-feather="eye"></i> Learner View
                       </button>
                     </h2>
-                    <div id="flush-collapseNine" class="accordion-collapse collapse" aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlush2">
+                    <div id="flush-collapse-instructor-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-instructor-toggle">
                       <div class="accordion-body">
                         <a href="instructor/aio.html">Instructor View</a>
                       </div>
@@ -222,19 +216,18 @@
             </div>
 <!--/div.col -->
 
-            <hr>
-</div>
+          </div>
 <!--/div.mobile-row -->
 
-          <div class="accordion accordion-flush" id="accordionFlush11">
+          <div class="accordion accordion-flush" id="accordion-chapters-toggle">
             <div class="accordion-item">
 
-              <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseEleven" aria-expanded="false" aria-controls="flush-collapseEleven">
-                <h2 class="accordion-header chapters" id="flush-headingEleven">
+              <button id="chapters" class="accordion-button show" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-chapters-toggle" aria-expanded="false" aria-controls="flush-collapse-chapters-toggle">
+                <h2 class="accordion-header chapters" id="flush-heading-chapters-toggle">
                   EPISODES
                 </h2>
               </button>
-              <div id="flush-collapseEleven" class="accordion-collapse show collapse" aria-labelledby="flush-headingEleven" data-bs-parent="#accordionFlush11">
+              <div id="flush-collapse-chapters-toggle" class="accordion-collapse show collapse" data-bs-parent="#accordion-chapters-toggle">
 
                 <div class="accordion-body">
                   <div class="accordion accordion-flush" id="accordionFlush1">
@@ -302,14 +295,14 @@
             </div>
 
             <hr class="half-width">
-<div class="accordion accordion-flush lesson-resources" id="accordionFlush12">
+<div class="accordion accordion-flush lesson-resources" id="accordion-resources-toggle">
               <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwelve">
-                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwelve" aria-expanded="false" aria-controls="flush-collapseTwelve">
+                <h2 class="accordion-header" id="flush-heading-resources-toggle">
+                  <button class="accordion-button collapsed" id="lesson-resources" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-resources-toggle" aria-expanded="false" aria-controls="flush-collapse-resources-toggle">
                     RESOURCES
                   </button>
                 </h2>
-                <div id="flush-collapseTwelve" class="accordion-collapse collapse" aria-labelledby="flush-headingTwelve" data-bs-parent="#accordionFlush12">
+                <div id="flush-collapse-resources-toggle" class="accordion-collapse collapse" data-bs-parent="#accordion-resources-toggle">
                   <div class="accordion-body">
                     <ul>
 <li>
@@ -352,7 +345,7 @@
         <!-- START: inst/pkgdown/templates/content-extra.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <main id="main-content" class="main-content"><div class="container lesson-content">
-        
+        <h1>All in One View</h1>
         
 <section id="aio-read-cases"><p>Content from <a href="read-cases.html">Read case data</a></p>
 <hr>
@@ -398,6 +391,7 @@ systems using APIs.</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
+<span class="callout-header">Prerequisite</span>
 <div id="prerequisites" class="callout-inner">
 <h3 class="callout-title">Prerequisites</h3>
 <div class="callout-content">
@@ -444,6 +438,7 @@ The pipe operator allows us to chain functions together seamlessly.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="the-double-colon-operator" class="callout-inner">
 <h3 class="callout-title">The double-colon (<code>::</code>)
 operator</h3>
@@ -464,6 +459,7 @@ functions with the same name.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
+<span class="callout-header">Prerequisite</span>
 <div id="setup-a-project-and-folder" class="callout-inner">
 <h3 class="callout-title">Setup a project and folder</h3>
 <div class="callout-content">
@@ -531,6 +527,7 @@ subsequent analysis in R.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="why-should-we-use-the-here-package" class="callout-inner">
 <h3 class="callout-title">Why should we use the {here} package?</h3>
 <div class="callout-content">
@@ -560,6 +557,7 @@ R</a></p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="reading-compressed-data" class="callout-inner">
 <h3 class="callout-title">Reading compressed data</h3>
 <div class="callout-content">
@@ -575,7 +573,7 @@ file</a> containing Marburg outbreak data and then import it to your
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>You can check the <a href="https://gesistsa.github.io/rio/#supported-file-formats" class="external-link">full list
 of supported file formats</a> in the <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a> package on the
@@ -596,7 +594,7 @@ package website. To see the list of supported formats in
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -621,8 +619,10 @@ provides a general interface for interacting RDBMS.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="advantages-of-reading-data-directly-from-a-database" class="callout-inner">
-<h3 class="callout-title">Advantages of reading data directly from a database?</h3>
+<h3 class="callout-title">Advantages of reading data directly from a
+database?</h3>
 <div class="callout-content">
 <p>Importing data directly from a database optimizes the memory usage in
 the R session. By processing the database with “queries” (e.g., SELECT,
@@ -706,8 +706,8 @@ data from the database.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>Note: This example uses a public test database from the European
 Bioinformatics Institute, which is why no password is required. Access
@@ -841,6 +841,7 @@ the input dataset to use in the environment of our R session.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="run-sql-queries-in-r-using-dbplyr" class="callout-inner">
 <h3 class="callout-title">Run SQL queries in R using {dbplyr}</h3>
 <div class="callout-content">
@@ -859,7 +860,7 @@ management with SQL for Ecologist</a>.</p>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
   <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
 </button>
-<div id="collapseHint2" class="accordion-collapse collapse" data-bs-parent="#accordionHint2" aria-labelledby="headingHint2">
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1128,8 +1129,8 @@ below:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
 <div class="callout-content">
 <p>Note: This example uses a DHIS2 system provided by the Ministry of
 Health of The Gambia for testing and development purposes. In practice,
@@ -1141,6 +1142,7 @@ you should customize the parameters for your own DHIS2 instance.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="reading-from-demo-dhis2-sever" class="callout-inner">
 <h3 class="callout-title">Reading from Demo DHIS2 sever</h3>
 <div class="callout-content">
@@ -1158,7 +1160,7 @@ data from one of these programs.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb46">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1328,6 +1330,7 @@ can retrieve the list of available disease names using the
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div id="reading-from-demo-sormas-sever" class="callout-inner">
 <h3 class="callout-title">Reading from Demo SORMAS sever</h3>
 <div class="callout-content">
@@ -1345,7 +1348,7 @@ monkeypox (mpox) disease.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb62">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1428,8 +1431,8 @@ NAs introduced by coercion</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Use <a href="https://gesistsa.github.io/rio/" class="external-link">rio</a>, <a href="https://bitbucket.org/djhshih/io" class="external-link">io</a>, <a href="https://readr.tidyverse.org" class="external-link">readr</a> or
@@ -1491,8 +1494,8 @@ dataset.</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
+<span class="callout-header">Prerequisite</span>
 <div class="callout-inner">
-<h3 class="callout-title">Prerequisite</h3>
 <div class="callout-content">
 <p>In this episode, we will use a simulated Ebola dataset that can
 be:</p>
@@ -1538,6 +1541,7 @@ tidyverse package:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="the-double-colon-operator" class="callout-inner">
 <h3 class="callout-title">The double-colon (<code>::</code>)
 operator</h3>
@@ -1603,8 +1607,8 @@ content.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div class="callout-inner">
-<h3 class="callout-title">Discussion</h3>
 <div class="callout-content">
 <p>Let’s first <strong>diagnose</strong> the data frame. List all the
 characteristics in the data frame above that are problematic for data
@@ -1683,6 +1687,7 @@ a vector of column names that are intended to be kept unchanged.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -1774,6 +1779,7 @@ specific sections of the report in the console using the argument
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -1972,6 +1978,7 @@ on our simulated dataset:</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="how-is-this-possible" class="callout-inner">
 <h3 class="callout-title">How is this possible?</h3>
 <div class="callout-content">
@@ -2030,6 +2037,7 @@ the below code chunk.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="multiple-language-support" class="callout-inner">
 <h3 class="callout-title">Multiple language support</h3>
 <div class="callout-content">
@@ -2274,6 +2282,7 @@ months.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -2488,6 +2497,7 @@ base R pipe (<code>%&gt;%</code>) or the {magrittr} pipe
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -2544,8 +2554,8 @@ Example of data cleaning report generated by <a href="https://epiverse-trace.git
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Use <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package to clean and standardize
@@ -2603,8 +2613,8 @@ reliable</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
 </div>
+<span class="callout-header">Prerequisite</span>
 <div class="callout-inner">
-<h3 class="callout-title">Prerequisite</h3>
 <div class="callout-content">
 <p>This episode requires you to:</p>
 <ul>
@@ -2657,6 +2667,7 @@ package.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="the-double-colon-operator" class="callout-inner">
 <h3 class="callout-title">The double-colon (<code>::</code>)
 operator</h3>
@@ -2715,8 +2726,8 @@ content.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div class="callout-inner">
-<h3 class="callout-title">Discussion</h3>
 <div class="callout-content">
 <!-- Have you ever experienced an unexpected change in the input data set when running an analysis during an outbreak? How do you safeguard your analysis from this inconvenience? -->
 <div class="section level3">
@@ -2788,6 +2799,7 @@ function.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -2881,6 +2893,7 @@ the <code>linelist::make_linelist()</code> function.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -2959,6 +2972,7 @@ before moving to the next line.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge<em> (continued)</em>
 </h3>
@@ -3034,6 +3048,7 @@ this by adding one cleaning step into the pipeline.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge<em> (continued)</em>
 </h3>
@@ -3042,6 +3057,7 @@ this by adding one cleaning step into the pipeline.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -3113,6 +3129,7 @@ changed to an <code>Error</code> message using the
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
@@ -3226,6 +3243,7 @@ analysis, which will be useful for the next episode!</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="check-square"></i>
 </div>
+<span class="callout-header">Checklist</span>
 <div id="when-should-i-use-linelist" class="callout-inner">
 <h3 class="callout-title">When should I use
 <code>{linelist}</code>?</h3>
@@ -3247,8 +3265,8 @@ information.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Use the <a href="https://epiverse-trace.github.io/linelist/" class="external-link">linelist</a> package to tag, validate, and
@@ -3497,6 +3515,7 @@ the date of onset, sex, and type of case.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="dates-completion" class="callout-inner">
 <h3 class="callout-title">Dates Completion</h3>
 <div class="callout-content">
@@ -3530,6 +3549,7 @@ the <code>complete_dates</code> to <code>TRUE</code>.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="challenge-1-can-you-do-it" class="callout-inner">
 <h3 class="callout-title">Challenge 1: Can you do it?</h3>
 <div class="callout-content">
@@ -3580,6 +3600,7 @@ objects mentioned above.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
+<span class="callout-header">Callout</span>
 <div id="easy-aesthetics" class="callout-inner">
 <h3 class="callout-title">Easy aesthetics</h3>
 <div class="callout-content">
@@ -3603,6 +3624,7 @@ how they impact on the resulting plot.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="challenge-2-can-you-do-it" class="callout-inner">
 <h3 class="callout-title">Challenge 2: Can you do it?</h3>
 <div class="callout-content">
@@ -3643,6 +3665,7 @@ cases accordingly.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="challenge-3-can-you-do-it" class="callout-inner">
 <h3 class="callout-title">Challenge 3: Can you do it?</h3>
 <div class="callout-content">
@@ -3695,6 +3718,7 @@ bootstrap samples.</p>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="challenge-4-can-you-do-it" class="callout-inner">
 <h3 class="callout-title">Challenge 4: Can you do it?</h3>
 <div class="callout-content">
@@ -3824,6 +3848,7 @@ Ignoring unknown parameters: `binwidth` and `bins`</code></pre>
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
+<span class="callout-header">Discussion</span>
 <div id="challenge-5-can-you-do-it" class="callout-inner">
 <h3 class="callout-title">Challenge 5: Can you do it?</h3>
 <div class="callout-content">
@@ -3840,8 +3865,8 @@ package.</li>
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
+<span class="callout-header">Key Points</span>
 <div class="callout-inner">
-<h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
 <li>Use <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> package to generate synthetic outbreak
@@ -3876,15 +3901,17 @@ any links that you are not going to use.
 	
         | <a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CONTRIBUTING.md" class="external-link">Contributing</a>
         | <a href="https://github.com/epiverse-trace/tutorials-early/" class="external-link">Source</a></p>
-				<p><a href="https://github.com/epiverse-trace/tutorials-early/blob/main/CITATION.cff" class="external-link">Cite</a> | <a href="mailto:andree.valle-campos@lshtm.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
-			</div>
-			<div class="col-md-6">
+        <p>
+        <a href="citation.html">Cite</a>
+        | <a href="mailto:andree.valle-campos@lshtm.ac.uk">Contact</a> | <a href="https://carpentries.org/about/" class="external-link">About</a></p>
+		</div>
+		<div class="col-md-6">
 
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.16.13.9000)</a>, <a href="https://github.com/carpentries/pegboard/tree/7dc6acfdd6233c0d124a0ecf288325edc40dd96d" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.0.7.9000)</a></p>
-			</div>
+        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/7dc6acfdd6233c0d124a0ecf288325edc40dd96d" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.1.1)</a></p>
+		</div>
 		</footer>
 </div> <!-- / div.container -->
 	<div id="to-top">
@@ -3905,9 +3932,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/aio.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/aio.html",
-  "dateCreated": "2026-06-10",
-  "dateModified": "2026-06-10",
-  "datePublished": "2026-06-10"
+  "dateCreated": "2026-06-14",
+  "dateModified": "2026-06-14",
+  "datePublished": "2026-06-14"
 }
 
   </script><script>
