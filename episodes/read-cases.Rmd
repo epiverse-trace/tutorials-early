@@ -388,20 +388,23 @@ these is called **stable-242-4**, available at the link
 # establish the connection to the system
 demo_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-4",
+  from = "https://play.im.dhis2.org/stable-2-41-8-1",
   user_name = "admin",
   password = "district"
 )
 
 # get the names and IDs of the programs
 demo_programs <- readepi::get_programs(login = demo_login)
-tibble::as_tibble(demo_programs)
 
+# print tables
+tibble::as_tibble(demo_programs)
 ```
 
 ```{r}
 # get the names and IDs of the organisation units
 demo_units <- readepi::get_organisation_units(login = demo_login)
+
+# print tables
 tibble::as_tibble(demo_units)
 ```
 
