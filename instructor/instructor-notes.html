@@ -370,14 +370,14 @@ characteristics</strong>:</p>
 <ul>
 <li>
 <em>Codification</em>, like the codification of values in columns
-like ‘gender’ and ‘age’ using numbers, letters, and words. Also the
-presence of multiple dates formats (“dd/mm/yyyy”, “yyyy/mm/dd”, etc) in
-the same column like in ‘date_onset’. Less visible, but also the column
-names.</li>
+like <code>gender</code> and <code>age</code> using numbers, letters,
+and words. Also the presence of multiple dates formats (“dd/mm/yyyy”,
+“yyyy/mm/dd”, etc) in the same column like in <code>date_onset</code>.
+Less visible, but also the column names.</li>
 <li>
-<em>Missing</em>, how to interpret an entry like “” in the ‘status’
-column or “-99” in other circumstances? Do we have a data dictionary
-from the data collection process?</li>
+<em>Missing</em>, how to interpret an entry like “” in the
+<code>status</code> column or “-99” in other circumstances? Do we have a
+data dictionary from the data collection process?</li>
 <li>
 <em>Inconsistencies</em>, like having a date of sample before the
 date of onset.</li>
@@ -409,14 +409,27 @@ second iteration)</li>
 <li>empty cols: “col5”</li>
 <li>constant cols: “col3”, and “col4”</li>
 </ul>
-<p>Point out to learners that they create a different set of constant
-data after removing by varying the value of the <code>cutoff</code>
-argument.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_constants</span><span class="op">(</span>cutoff <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu">cleanepi</span><span class="fu">::</span><span class="fu">remove_constants</span><span class="op">(</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>! Constant data was removed after 2 iterations.
+ℹ Enter `print_report(dat, "constant_data")` for more information, where "dat"
+  represents the object used to store the output from `remove_constants()`.</code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code># A tibble: 2 × 2
+   col1  col2
+  &lt;dbl&gt; &lt;dbl&gt;
+1     1     1
+2     2     3</code></pre>
 </div>
 <hr>
 <br><h3 id="clean-data-headingInstructor3">
@@ -469,7 +482,7 @@ results.</p>
         <p>Materials licensed under <a href="LICENSE.html">CC-BY 4.0</a> by the authors</p>
 
         <p>Template licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="external-link">CC-BY 4.0</a> by <a href="https://carpentries.org/" class="external-link">The Carpentries</a></p>
-        <p>Built with <a href="https://github.com/epiverse-trace/sandpaper/tree/patch-renv-github-bug" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/7dc6acfdd6233c0d124a0ecf288325edc40dd96d" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.1.1)</a></p>
+        <p>Built with <a href="https://github.com/carpentries/sandpaper/tree/" class="external-link">sandpaper (0.20.2)</a>, <a href="https://github.com/carpentries/pegboard/tree/" class="external-link">pegboard (0.7.9)</a>, and <a href="https://github.com/epiverse-trace/varnish/tree/epiversetheme" class="external-link">varnish (1.1.1)</a></p>
 		</div>
 		</footer>
 </div> <!-- / div.container -->
@@ -491,9 +504,9 @@ results.</p>
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/instructor-notes.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/instructor-notes.html",
-  "dateCreated": "2026-06-14",
-  "dateModified": "2026-06-14",
-  "datePublished": "2026-06-14"
+  "dateCreated": "2026-06-15",
+  "dateModified": "2026-06-15",
+  "datePublished": "2026-06-15"
 }
 
   </script><script>
