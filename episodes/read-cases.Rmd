@@ -312,13 +312,15 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://smc.moh.gm/dhis",
-  user_name = "test",
-  password = "Gambia@123"
+  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  user_name = "admin",
+  password = "district"
 )
 
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
+
+# print tables
 tibble::as_tibble(programs)
 ```
 
@@ -327,6 +329,8 @@ tibble::as_tibble(programs)
 ```{r}
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+
+# print tables
 tibble::as_tibble(org_units)
 ```
 
@@ -376,39 +380,15 @@ Note: This example uses a DHIS2 system provided by the Ministry of Health of The
 
 :::::::::::::::::::::: challenge
 
-### Reading from Demo DHIS2 sever
+### Reading from your DHIS2 sever
 
+If you have your credentials, try accessing to a DHIS2 server.
+
+<!--
 The DHIS2 organization provides demo servers for development and testing. One of
 these is called **stable-242-4**, available at the link
-("https://play.im.dhis2.org/stable-2-42-4"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
-
-::::::::::::::: solution
-
-```{r, message=FALSE}
-# establish the connection to the system
-demo_login <- readepi::login(
-  type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-41-8-1",
-  user_name = "admin",
-  password = "district"
-)
-
-# get the names and IDs of the programs
-demo_programs <- readepi::get_programs(login = demo_login)
-
-# print tables
-tibble::as_tibble(demo_programs)
-```
-
-```{r}
-# get the names and IDs of the organisation units
-demo_units <- readepi::get_organisation_units(login = demo_login)
-
-# print tables
-tibble::as_tibble(demo_units)
-```
-
-:::::::::::::::
+("https://play.im.dhis2.org/stable-2-41-8-1"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
+-->
 
 ::::::::::::::::::::::
 
