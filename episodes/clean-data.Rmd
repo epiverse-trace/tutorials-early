@@ -49,7 +49,7 @@ go to the [main setup page](../learners/setup.md#software-setup).
 In the process of analyzing outbreak data, as in other disciplines of data science, it's essential to ensure that the dataset is clean, curated, standardized, and validated.
 This will facilitate accurate (i.e., you are analysing what you think you are analysing) and reproducible (i.e., if someone wants to go back and repeat your analysis steps with your code, you can be confident they will get the same results) analysis.
 
-This episode focuses on cleaning epidemics and outbreaks data using the [`{cleanepi}`](https://epiverse-trace.github.io/cleanepi/) package.
+This episode focuses on cleaning epidemics and outbreaks data using the `{cleanepi}` package.
 For demonstration purposes, we'll work with a simulated dataset of Ebola cases.
 
 ### Set Up
@@ -216,11 +216,7 @@ Functions from `{cleanepi}` like `remove_duplicates()` and `remove_constants()` 
 sim_ebola_data <- cleanepi::remove_constants(sim_ebola_data)
 ```
 
-Now, print the output to identify what constant column you removed!
-
-```r
-sim_ebola_data
-```
+Print the output to identify what constant column you removed before removing duplicates.
 
 ```{r}
 # Remove duplicates
@@ -306,6 +302,14 @@ df %>% cleanepi::remove_constants()
 
 :::::::::::::::
 
+::::::::::::::::: spoiler
+
+We can also assess for replicates using subject IDs. The `{cleanepi}` package offers the function `check_subject_ids()` designed precisely for this task as shown in the below code chunk.
+
+This function checks whether the IDs are unique and meet the required criteria specified by the user. You can check further in the reference manual on [Check whether the subject IDs comply with the expected format. When incorrect IDs are found, the function sends a warning and the user can call the `correct_subject_ids` function to correct them.](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html)
+
+:::::::::::::::::::::::::
+
 ### Replacing missing values
 
 In addition to the irregularities, raw data may contain missing values, and these may be encoded by different strings (e.g. `"NA"`, `""`, `character(0)`).
@@ -331,12 +335,12 @@ By default, `{cleanepi}` supports wide range of missing value formats, as listed
 cleanepi::common_na_strings
 
 missing_out <- tibble::tribble(
-  ~case_id , ~outcome  , ~gender , ~hospital            ,
-  "d1fafd" , "NA"      , "f"     , "Military Hospital"  ,
-  "53371b" , "nan"     , "m"     , "Connaught Hospital" ,
-  "f5c3d8" , "Recover" , "f"     , "other"              ,
-  "6c286a" , "Death"   , "null"  , "na"                 ,
-  "0f58c4" , "Recover" , "f"     , "other"
+  ~case_id  , ~outcome  , ~gender , ~hospital            ,
+  "d1fafd"  , "NA"      , "f"     , "Military Hospital"  ,
+  "53371b"  , "nan"     , "na"    , "Connaught Hospital" ,
+  "missing" , "Recover" , "f"     , "other"              ,
+  "6c286a"  , "Death"   , "null"  , "na"                 ,
+  "NAN"     , "Recover" , "f"     , "N/A"
 )
 
 missing_out %>%
@@ -344,71 +348,20 @@ missing_out %>%
 ```
 :::
 
-### Validating subject IDs
+::::::::::::::::: checkpoint
 
-Each entry in the dataset represents a subject (e.g. a disease case or study participant) and should be distinguishable by a specific ID formatted in a particular way.
-These IDs can contain numbers falling within a specific range, a prefix and/or suffix, and might be written such that they contain a specific number of characters.
-The `{cleanepi}` package offers the function `check_subject_ids()` designed precisely for this task as shown in the below code chunk.
-This function checks whether the IDs are unique and meet the required criteria specified by the user.
+At this point, we removed a number of columns and rows. Compare the dimensions of `raw_ebola_data` and `sim_ebola_data`.
 
-```{r}
-# check if the subject IDs in the 'case_id' column contains numbers ranging
-# from 0 to 15000
-sim_ebola_data <- cleanepi::check_subject_ids(
-  data = sim_ebola_data,
-  target_columns = "case_id",
-  range = c(0, 15000)
-)
-```
-
-Note that our simulated dataset contains duplicated subject IDs.
-
-::::::::::::::::: spoiler
-
-#### How to fix duplicated subject IDs?
-
-Let's print a preliminary report with `cleanepi::print_report(sim_ebola_data)`.
-Focus on the "Unexpected subject ids" tab to identify what IDs require an extra treatment.
-
-In the console, you can print:
-
-```{r, eval=FALSE}
-print_report(data = sim_ebola_data, "incorrect_subject_id")
-```
-
-After finishing this tutorial, we invite you to explore the package reference guide of [`cleanepi::check_subject_ids()`](https://epiverse-trace.github.io/cleanepi/reference/check_subject_ids.html) to find the function that can fix this situation.
-
-:::::::::::::::::::::::::
-
-### Converting to numeric values
-
-In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert character values for numbers explicitly into numeric values (e.
-g.
-`"seven"` to `7`).
-For example, in our simulated data set, in the age column some entries are written in words.
-In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below code chunk.
-
-```{r}
-sim_ebola_data <- cleanepi::convert_to_numeric(
-  data = sim_ebola_data,
-  target_columns = "age"
-)
-
-sim_ebola_data
-```
-
-::::::::::::::::: callout
-
-### Multiple language support
-
-Thanks to the `{numberize}` package, we can convert numbers written in English, French or Spanish into positive integer values.
-
-:::::::::::::::::::::::::
+:::::::::::::::::
 
 ## Epidemiology related operations
 
 In addition to common data cleansing tasks, such as those discussed in the above section, the `{cleanepi}` package offers additional functionalities tailored specifically for processing and analyzing outbreak and epidemic data.
-This section covers some of these specialized tasks.
+This section covers some of these specialized tasks, mainly focused on:
+
+- date columns (format, sequence, and time span between two or more),
+- data dictionaries for categorical variables, and
+- converting numbers written in characters to numeric values.
 
 ### Standardizing dates
 
@@ -434,8 +387,8 @@ This function converts the values in the target columns into the **YYYY-mm-dd** 
 
 We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the "Details" section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
 
-Also, check how to use the `orders` argument if you want to target US format character strings.
-You can explore [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
+Also, check how to use the `orders` argument if you want to target United States (U.S.) format character strings.
+Join the discussion about [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
 
 :::::::::::::::::::
 
@@ -448,8 +401,12 @@ The `{cleanepi}` package provides a helpful function called `check_date_sequence
 Here's an example of a code chunk demonstrating the usage of the function `check_date_sequence()` in the first 100 records of our simulated Ebola dataset.
 
 ```{r, warning=FALSE, results="hide"}
+# check for the first 100 rows
+sim_ebola_100 <- sim_ebola_data %>% dplyr::slice_head(n = 100)
+
+# check for date sequence
 cleanepi::check_date_sequence(
-  data = sim_ebola_data[1:100, ],
+  data = sim_ebola_100,
   target_columns = c("date_onset", "date_sample")
 )
 ```
@@ -469,7 +426,7 @@ obs_incorrect <- c(8, 15, 18, 20, 21, 23, 26, 28, 29, 32, 34, 35, 37, 38,
                    40, 43, 46, 49, 52, 54, 56, 58, 60, 63)
 
 # 2. Drop observations with missings on dates tested
-dat_without_missings_dates <- sim_ebola_data[1:100, ] %>%
+dat_without_missings_dates <- sim_ebola_100 %>%
   dplyr::filter(!(is.na(date_onset)|is.na(date_sample)))
 
 # 3. Drop inconsistent observations
@@ -477,7 +434,7 @@ dat_without_missings_dates %>%
   dplyr::slice(-obs_incorrect)
 ```
 
-> Note that we check for a subset of 100 rows using `sim_ebola_data[1:100, ]`. The whole data frame contains more than 600 incorrect date sequences. Try it out yourself!
+> Note that we check for a subset of 100 rows. The whole data frame contains more than 600 incorrect date sequences. Try it out yourself!
 
 :::::::::::::::::::::
 
@@ -499,31 +456,34 @@ sim_ebola_data <- cleanepi::timespan(
 )
 
 sim_ebola_data %>%
-  dplyr::select(case_id, date_sample, reporting_delay) %>% 
-  dplyr::slice(-obs_incorrect)
+  dplyr::select(case_id, date_sample, reporting_delay)
 ```
 
 After executing the function `cleanepi::timespan()`, one new column named `reporting_delay` is added to the **`sim_ebola_data`** dataset.
 This column represent the calculated time elapsed since the date of symptom onset to the date of sample collection measured in days.
 
-We can describe this delay using visualizations:
+We can describe this delay using a visualization:
 
 ```{r}
 # before plotting:
-# * keep unique IDs, 
+# * keep unique IDs,
 # * drop for missings in sequential dates, and
-# * keep consistent observations
+# * keep plausible a subset consistent observations (from 0 to 50 days)
 sim_ebola_delay <- sim_ebola_data %>%
-  dplyr::distinct(case_id, .keep_all = TRUE) %>% 
-  dplyr::filter(!(is.na(date_onset)|is.na(date_sample))) %>% 
+  dplyr::distinct(case_id, .keep_all = TRUE) %>%
+  dplyr::filter(!(is.na(date_onset) | is.na(date_sample))) %>%
   dplyr::filter(reporting_delay >= 0, reporting_delay < 50)
 
-sim_ebola_delay %>% 
+sim_ebola_delay %>%
   ggplot(aes(x = reporting_delay)) +
   geom_histogram(binwidth = 1)
 ```
 
-We can also use **summary statistics** or **probability distribution** parameters to describe different delays. You can review these concepts with [two episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/):
+::::::::::::::::: callout
+
+We can also use **summary statistics** or **probability distribution** parameters to describe different delays. We will use them in the upcoming tutorials. For a refresher, you can review introductory concepts with [two episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/):
+
+:::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -565,7 +525,13 @@ dat_clean <- dat %>%
     span_column_name = "days_to_admission"
   )
 
-dat_clean
+dat_clean %>%
+  dplyr::select(
+    study_id,
+    date_first_pcr_positive_test,
+    date_of_admission,
+    days_to_admission
+  )
 ```
 
 ::::::::::::::::::::::::::
@@ -576,7 +542,7 @@ dat_clean
 
 Age data is useful in many downstream analysis.
 
-Calculate the age in years **until today's date** of the subjects from their date of birth, and the remainder time in months.
+Calculate the age in years of each subject until the $3^{rd}$ of January 2025 (`"2025-01-03"`) from their date of birth, and the remainder time in months.
 
 ```{r}
 dat_age <- dat_clean %>%
@@ -587,13 +553,18 @@ dat_age <- dat_clean %>%
   # calculate the age in 'years' and return the remainder in 'months'
   cleanepi::timespan(
     target_column = "date_of_birth",
-    end_date = Sys.Date(),
+    end_date = lubridate::ymd("2025-01-03"),
     span_unit = "years",
     span_column_name = "age_in_years",
     span_remainder_unit = "months"
   )
 
-dat_age
+dat_age %>%
+  dplyr::select(
+    study_id,
+    date_of_birth,
+    age_in_years
+  )
 ```
 
 The columns of `age_in_years` and `remainder_months` are added to the **`dat_age`** dataset, and the remaining time measured in `months`.
@@ -664,6 +635,31 @@ You can have more details in the section about "Dictionary-based data substituti
 
 ::::::::::::::::::::::::::
 
+### Converting to numeric values
+
+In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert character values for numbers explicitly into numeric values (e.
+g.
+`"seven"` to `7`).
+For example, in our simulated data set, in the age column some entries are written in words.
+In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below code chunk.
+
+```{r}
+sim_ebola_data <- cleanepi::convert_to_numeric(
+  data = sim_ebola_data,
+  target_columns = "age"
+)
+
+sim_ebola_data
+```
+
+::::::::::::::::: callout
+
+### Multiple language support
+
+Thanks to the `{numberize}` package, we can convert numbers written in English, French or Spanish into positive integer values.
+
+:::::::::::::::::::::::::
+
 ## Multiple operations at once
 
 Performing data cleaning operations individually can be time-consuming and error-prone.
@@ -681,7 +677,7 @@ Further more, you can combine multiple data cleaning tasks via the base R pipe (
 ```{r, warning=FALSE, message=FALSE}
 # Perform the cleaning operations using the pipe (%>%) operator
 cleaned_data <- raw_ebola_data %>%
-  # common operations
+  # common operations ---------------------------------------
   cleanepi::standardize_column_names() %>%
   cleanepi::remove_constants() %>%
   cleanepi::remove_duplicates() %>%
@@ -691,7 +687,7 @@ cleaned_data <- raw_ebola_data %>%
     range = c(1, 15000)
   ) %>%
   cleanepi::convert_to_numeric(target_columns = "age") %>%
-  # epidemiological operations (with dates and data dictionary)
+  # epidemiological operations ------------------------------
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample")
   ) %>%
@@ -728,9 +724,7 @@ To identify both groups:
 
 :::::::::::::: instructor
 
-Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status (e.
-g.
-, `check_subject_ids()` and `check_date_sequence()` in the chunk above) and another set to **perform** a cleaning action (the complementary functions from the chunk above).
+Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleaning status (e.g., `check_subject_ids()` and `check_date_sequence()` in the chunk above) and another set to **perform** a cleaning action (the complementary functions from the chunk above).
 
 ::::::::::::::
 
