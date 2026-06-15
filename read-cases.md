@@ -420,37 +420,36 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://smc.moh.gm/dhis",
-  user_name = "test",
-  password = "Gambia@123"
+  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  user_name = "admin",
+  password = "district"
 )
-```
 
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
-! Failed to perform HTTP request.
-Caused by error in `curl::curl_fetch_memory()` at httr2/R/req-perform.R:220:5:
-! Timeout was reached [smc.moh.gm]:
-Connection timeout after 10000 ms
-```
-
-``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
-```
 
-``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
-```
-
-``` r
+# print tables
 tibble::as_tibble(programs)
 ```
 
-``` error
-Error:
-! object 'programs' not found
+``` output
+# A tibble: 14 × 3
+   displayName                                         id          type     
+   <chr>                                               <chr>       <chr>    
+ 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 2 Child Programme                                     IpHINAT79UW tracker  
+ 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 4 Information Campaign                                q04UBOqq3rp aggregate
+ 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 7 Malaria case registration                           VBqh0ynB2wv aggregate
+ 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
+ 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+12 TB program                                          ur1Edk5Oe2n tracker  
+13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -459,20 +458,27 @@ Error:
 ``` r
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
-```
 
-``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
-```
-
-``` r
+# print tables
 tibble::as_tibble(org_units)
 ```
 
-``` error
-Error:
-! object 'org_units' not found
+``` output
+# A tibble: 1,166 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
+ 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
+# ℹ 1,156 more rows
+# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
@@ -487,8 +493,10 @@ data <- readepi::read_dhis2(
 ```
 
 ``` error
-Error in `readepi::read_dhis2()`:
-! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+Error in `check_org_unit()`:
+✖ You provided an incorrect organisation unit ID or name.
+ℹ Use the `get_organisation_units()` function to get the list of all available
+  organisation units.
 ```
 
 ``` r
@@ -512,8 +520,10 @@ data <- readepi::read_dhis2(
 ```
 
 ``` error
-Error in `readepi::read_dhis2()`:
-! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+Error in `check_org_unit()`:
+✖ You provided an incorrect organisation unit ID or name.
+ℹ Use the `get_organisation_units()` function to get the list of all available
+  organisation units.
 ```
 
 ``` r
@@ -538,8 +548,8 @@ target_org_units <- readepi::get_program_org_units(
 ```
 
 ``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
+Error in `httr2::req_perform()`:
+! HTTP 409 Conflict.
 ```
 
 ``` r
@@ -560,70 +570,15 @@ Note: This example uses a DHIS2 system provided by the Ministry of Health of The
 
 :::::::::::::::::::::: challenge
 
-### Reading from Demo DHIS2 sever
+### Reading from your DHIS2 sever
 
+If you have your credentials, try accessing to a DHIS2 server.
+
+<!--
 The DHIS2 organization provides demo servers for development and testing. One of
 these is called **stable-242-4**, available at the link
-("https://play.im.dhis2.org/stable-2-42-4"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
-
-::::::::::::::: solution
-
-
-``` r
-# establish the connection to the system
-demo_login <- readepi::login(
-  type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-4",
-  user_name = "admin",
-  password = "district"
-)
-```
-
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
-! HTTP 404 Not Found.
-```
-
-``` r
-# get the names and IDs of the programs
-demo_programs <- readepi::get_programs(login = demo_login)
-```
-
-``` error
-Error:
-! object 'demo_login' not found
-```
-
-``` r
-tibble::as_tibble(demo_programs)
-```
-
-``` error
-Error:
-! object 'demo_programs' not found
-```
-
-
-``` r
-# get the names and IDs of the organisation units
-demo_units <- readepi::get_organisation_units(login = demo_login)
-```
-
-``` error
-Error:
-! object 'demo_login' not found
-```
-
-``` r
-tibble::as_tibble(demo_units)
-```
-
-``` error
-Error:
-! object 'demo_units' not found
-```
-
-:::::::::::::::
+("https://play.im.dhis2.org/stable-2-41-8-1"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
+-->
 
 ::::::::::::::::::::::
 
