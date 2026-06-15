@@ -327,26 +327,31 @@ sim_ebola_data
 
 Find more examples in the spoiler below:
 
-::: spoiler
+::::::::: spoiler
  
 By default, `{cleanepi}` supports wide range of missing value formats, as listed by the below code chunk:
 
 ```{r}
 cleanepi::common_na_strings
 
-missing_out <- tibble::tribble(
-  ~case_id  , ~outcome  , ~gender , ~hospital            ,
-  "d1fafd"  , "NA"      , "f"     , "Military Hospital"  ,
-  "53371b"  , "nan"     , "na"    , "Connaught Hospital" ,
-  "missing" , "Recover" , "f"     , "other"              ,
-  "6c286a"  , "Death"   , "null"  , "na"                 ,
-  "NAN"     , "Recover" , "f"     , "N/A"
+missing_dat <- tibble::tribble(
+  ~case_id, ~outcome, ~gender, ~hospital,
+  "d1fafd", "NA", "f", "Military Hospital",
+  "53371b", "nan", "na", "Connaught Hospital",
+  "missing", "Recover", "f", "other",
+  "6c286a", "Death", "null", "na",
+  "NAN", "Recover", "f", "N/A"
 )
 
-missing_out %>%
+# print
+missing_dat
+
+# clean
+missing_dat %>%
   cleanepi::replace_missing_values()
 ```
-:::
+
+:::::::::
 
 ::::::::::::::::: checkpoint
 
@@ -422,15 +427,17 @@ To remove them, use the code below:
 
 ```{r, eval=TRUE, echo=TRUE}
 # 1. Get the indices of incorrect row from the output of the above code chunk
-obs_incorrect <- c(8, 15, 18, 20, 21, 23, 26, 28, 29, 32, 34, 35, 37, 38,
-                   40, 43, 46, 49, 52, 54, 56, 58, 60, 63)
+obs_incorrect <- c(
+  8, 15, 18, 20, 21, 23, 26, 28, 29, 32, 34, 35,
+  37, 38, 40, 43, 46, 49, 52, 54, 56, 58, 60, 63
+)
 
 # 2. Drop observations with missings on dates tested
 dat_without_missings_dates <- sim_ebola_100 %>%
-  dplyr::filter(!(is.na(date_onset)|is.na(date_sample)))
+  dplyr::filter(!(is.na(date_onset) | is.na(date_sample)))
 
 # 3. Drop inconsistent observations
-dat_without_missings_dates %>% 
+dat_without_missings_dates %>%
   dplyr::slice(-obs_incorrect)
 ```
 
