@@ -194,6 +194,8 @@ pak::pkg_install(new_packages)
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
 
+You can refer to the [{pak} reference document](https://pak.r-lib.org/reference/features.html) for more details about the advantages of using this.
+
 ::::::::::::::::::::::::::::: spoiler
 
 ### do you get an error with epiverse-trace packages?
