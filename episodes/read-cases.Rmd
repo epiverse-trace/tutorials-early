@@ -316,15 +316,32 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+```
 
+::::::: caution
+
+Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
+
+```{r, eval = FALSE}
+dhis2_login <- readepi::login(
+  type = "dhis2",
+  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  user_name = rstudioapi::askForPassword("Database username"),
+  password = rstudioapi::askForPassword("Database password")
+)
+```
+
+Your can read further from this blogpost on [How to Avoid Publishing Credentials in Your Code](https://rviews.rstudio.com/2019/03/21/how-to-avoid-publishing-credentials-in-your-code/)
+
+:::::::
+
+```{r}
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
 
 # print tables
 tibble::as_tibble(programs)
 ```
-
-
 
 ```{r}
 # get the names and IDs of the organisation units
@@ -337,58 +354,68 @@ tibble::as_tibble(org_units)
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
 
 ```{r,message=FALSE}
-data <- readepi::read_dhis2(
+# import data from DHIS2 using names
+data_name <- readepi::read_dhis2(
   login = dhis2_login,
-  org_unit = "Keneba",
-  program = "Child Registration & Treatment "
+  org_unit = "Bucksal Clinic",
+  program = "Child Programme"
 )
 
-tibble::as_tibble(data)
+tibble::as_tibble(data_name)
 ```
 
 ```{r,eval=TRUE,message=FALSE}
-# import data from DHIS2 using names
 # import data from DHIS2 using IDs
-data <- readepi::read_dhis2(
+data_id <- readepi::read_dhis2(
   login = dhis2_login,
-  org_unit = "GcLhRNAFppR",
-  program = "E5IUQuHg3Mg"
+  org_unit = "vRC0stJ5y9Q",
+  program = "IpHINAT79UW"
 )
 
-tibble::as_tibble(data)
+identical(data_id, data_name)
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
 
 ```{r}
-# get the list of organisation units that run the program "E5IUQuHg3Mg"
+# get the list of organisation units that run the program "IpHINAT79UW"
 target_org_units <- readepi::get_program_org_units(
   login = dhis2_login,
-  program = "E5IUQuHg3Mg",
+  program = "IpHINAT79UW",
   org_units = org_units
 )
 
 tibble::as_tibble(target_org_units)
 ```
 
-:::::::::::::::: callout
+<!-- :::::::::::::::: callout
 
 Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
-::::::::::::::::
-
+:::::::::::::::: -->
 
 :::::::::::::::::::::: challenge
 
-### Reading from your DHIS2 sever
+### Reading from a DHIS2 sever
 
-If you have your credentials, try accessing to a DHIS2 server.
+<!-- The DHIS2 organization provides demo servers for development and testing. One of these is called **stable-2-41-8-1**, from many other available in a list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), and accessible with username `"admin"` and password `"district"`.  -->
 
-<!--
-The DHIS2 organization provides demo servers for development and testing. One of
-these is called **stable-242-4**, available at the link
-("https://play.im.dhis2.org/stable-2-41-8-1"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
--->
+Test `{readepi}` by accessing to a DHIS2 server with your credentials.
+
+Do the following:
+
+- Log into a different server,
+- List all available programs and organization units, 
+- Read data from one of these programs,
+- Optional: Reproduce one descriptive figure.
+
+::::::::: hint
+
+Try using `rstudioapi::askForPassword()` for `user_name` and `password`.
+
+If you get errors, please fill an issue in the [`readepi` GitHub repository](https://github.com/epiverse-trace/readepi/issues/).
+
+:::::::::
 
 ::::::::::::::::::::::
 
