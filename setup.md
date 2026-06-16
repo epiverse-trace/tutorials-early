@@ -174,8 +174,8 @@ Open RStudio and **copy and paste** the following code chunk into the [console w
 if(!require("pak")) install.packages("pak")
 
 new_packages <- c(
-  "epiverse-trace/readepi@readepi_no_his_spc_deps",
-  "cleanepi@1.1.0",
+  "readepi",
+  "cleanepi",
   "reactable",
   "rio",
   "here",
@@ -193,6 +193,8 @@ pak::pkg_install(new_packages)
 ```
 
 These installation steps could ask you `? Do you want to continue (Y/n)` write `Y` and press <kbd>Enter</kbd>.
+
+You can refer to the [{pak} reference document](https://pak.r-lib.org/reference/features.html) for more details about the advantages of using this.
 
 ::::::::::::::::::::::::::::: spoiler
 

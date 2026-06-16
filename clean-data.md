@@ -793,24 +793,25 @@ dat_age %>%
   dplyr::select(
     study_id,
     date_of_birth,
-    age_in_years
+    age_in_years,
+    remainder_months
   )
 ```
 
 ``` output
-# A tibble: 10 × 3
-   study_id  date_of_birth age_in_years
-   <chr>     <date>               <dbl>
- 1 PS001P2   1972-01-06              52
- 2 PS002P2   1952-02-20              72
- 3 PS004P2-1 1961-06-15              63
- 4 PS003P2   1947-11-11              77
- 5 P0005P2   2000-09-26              24
- 6 PS006P2   NA                      NA
- 7 PB500P2   1989-03-11              35
- 8 PS008P2   1976-05-10              48
- 9 PS010P2   1991-09-23              33
-10 PS011P2   1991-08-02              33
+# A tibble: 10 × 4
+   study_id  date_of_birth age_in_years remainder_months
+   <chr>     <date>               <dbl>            <dbl>
+ 1 PS001P2   1972-01-06              52               11
+ 2 PS002P2   1952-02-20              72               10
+ 3 PS004P2-1 1961-06-15              63                6
+ 4 PS003P2   1947-11-11              77                1
+ 5 P0005P2   2000-09-26              24                3
+ 6 PS006P2   NA                      NA               NA
+ 7 PB500P2   1989-03-11              35                9
+ 8 PS008P2   1976-05-10              48                7
+ 9 PS010P2   1991-09-23              33                3
+10 PS011P2   1991-08-02              33                5
 ```
 
 The columns of `age_in_years` and `remainder_months` are added to the **`dat_age`** dataset, and the remaining time measured in `months`.
@@ -1010,7 +1011,6 @@ cleaned_data <- raw_ebola_data %>%
     target_columns = "case_id",
     range = c(1, 15000)
   ) %>%
-  cleanepi::convert_to_numeric(target_columns = "age") %>%
   # epidemiological operations ------------------------------
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample")
@@ -1024,7 +1024,8 @@ cleaned_data <- raw_ebola_data %>%
     span_unit = "days",
     span_column_name = "reporting_delay"
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict)
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
+  cleanepi::convert_to_numeric(target_columns = "age")
 ```
 
 

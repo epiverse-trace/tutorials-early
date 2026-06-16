@@ -424,7 +424,28 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+```
 
+::::::: caution
+
+Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
+
+
+``` r
+dhis2_login <- readepi::login(
+  type = "dhis2",
+  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  user_name = rstudioapi::askForPassword("Database username"),
+  password = rstudioapi::askForPassword("Database password")
+)
+```
+
+Your can read further from this blogpost on [How to Avoid Publishing Credentials in Your Code](https://rviews.rstudio.com/2019/03/21/how-to-avoid-publishing-credentials-in-your-code/)
+
+:::::::
+
+
+``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
 
@@ -451,8 +472,6 @@ tibble::as_tibble(programs)
 13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
 14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
-
-
 
 
 ``` r
@@ -485,100 +504,114 @@ After retrieving organization units and program names from the DHIS2 database, w
 
 
 ``` r
-data <- readepi::read_dhis2(
-  login = dhis2_login,
-  org_unit = "Keneba",
-  program = "Child Registration & Treatment "
-)
-```
-
-``` error
-Error in `check_org_unit()`:
-✖ You provided an incorrect organisation unit ID or name.
-ℹ Use the `get_organisation_units()` function to get the list of all available
-  organisation units.
-```
-
-``` r
-tibble::as_tibble(data)
-```
-
-``` error
-Error in `as.data.frame.default()`:
-! cannot coerce class '"function"' to a data.frame
-```
-
-
-``` r
 # import data from DHIS2 using names
-# import data from DHIS2 using IDs
-data <- readepi::read_dhis2(
+data_name <- readepi::read_dhis2(
   login = dhis2_login,
-  org_unit = "GcLhRNAFppR",
-  program = "E5IUQuHg3Mg"
+  org_unit = "Bucksal Clinic",
+  program = "Child Programme"
 )
+
+tibble::as_tibble(data_name)
 ```
 
-``` error
-Error in `check_org_unit()`:
-✖ You provided an incorrect organisation unit ID or name.
-ℹ Use the `get_organisation_units()` function to get the list of all available
-  organisation units.
+``` output
+# A tibble: 30 × 26
+   event      tracked_entity org_unit Gender `First name` `Last name` enrollment
+   <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
+ 1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
+ 2 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 3 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
+ 5 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 6 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 7 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 8 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 9 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+10 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+# ℹ 20 more rows
+# ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
+#   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
+#   `MCH ARV at birth` <chr>, `MCH Apgar Score` <chr>, `MCH Weight (g)` <chr>,
+#   `MCH Infant Weight  (g)` <chr>, `MCH Vit A` <chr>,
+#   `MCH Infant HIV Test Result` <chr>, `MCH HIV Test Type` <chr>,
+#   `MCH IPT dose` <chr>, `MCH DPT dose` <chr>, `MCH Child ARVs` <chr>, …
 ```
+
 
 ``` r
-tibble::as_tibble(data)
+# import data from DHIS2 using IDs
+data_id <- readepi::read_dhis2(
+  login = dhis2_login,
+  org_unit = "vRC0stJ5y9Q",
+  program = "IpHINAT79UW"
+)
+
+identical(data_id, data_name)
 ```
 
-``` error
-Error in `as.data.frame.default()`:
-! cannot coerce class '"function"' to a data.frame
+``` output
+[1] TRUE
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
 
 
 ``` r
-# get the list of organisation units that run the program "E5IUQuHg3Mg"
+# get the list of organisation units that run the program "IpHINAT79UW"
 target_org_units <- readepi::get_program_org_units(
   login = dhis2_login,
-  program = "E5IUQuHg3Mg",
+  program = "IpHINAT79UW",
   org_units = org_units
 )
-```
 
-``` error
-Error in `httr2::req_perform()`:
-! HTTP 409 Conflict.
-```
-
-``` r
 tibble::as_tibble(target_org_units)
 ```
 
-``` error
-Error:
-! object 'target_org_units' not found
+``` output
+# A tibble: 1,166 × 3
+   org_unit_ids levels        org_unit_names              
+   <chr>        <chr>         <chr>                       
+ 1 vRC0stJ5y9Q  Facility_name Bucksal Clinic              
+ 2 simyC07XwnS  Facility_name Maforay MCHP                
+ 3 E9oBVjyEaCe  Facility_name Gbanja Town MCHP            
+ 4 ZpE2POxvl9P  Facility_name Faabu CHP                   
+ 5 yTMrs5kClCv  Facility_name Condama MCHP                
+ 6 FO1Tq8vUa62  Facility_name EPI Headquarter             
+ 7 jGYT5U5qJP6  Facility_name Gbaiima CHC                 
+ 8 LaxJ6CD2DHq  Facility_name EM&BEE Maternity Home Clinic
+ 9 WerHl8SDtRU  Facility_name Mandema CHP                 
+10 CTnuuI55SOj  Facility_name Manewa MCHP                 
+# ℹ 1,156 more rows
 ```
 
-:::::::::::::::: callout
+<!-- :::::::::::::::: callout
 
 Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
-::::::::::::::::
-
+:::::::::::::::: -->
 
 :::::::::::::::::::::: challenge
 
-### Reading from your DHIS2 sever
+### Reading from a DHIS2 sever
 
-If you have your credentials, try accessing to a DHIS2 server.
+<!-- The DHIS2 organization provides demo servers for development and testing. One of these is called **stable-2-41-8-1**, from many other available in a list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), and accessible with username `"admin"` and password `"district"`.  -->
 
-<!--
-The DHIS2 organization provides demo servers for development and testing. One of
-these is called **stable-242-4**, available at the link
-("https://play.im.dhis2.org/stable-2-41-8-1"), and accessible with username "admin" and password "district". Log into this server, list all available programs and organization units, and read data from one of these programs.
--->
+Test `{readepi}` by accessing to a DHIS2 server with your credentials.
+
+Do the following:
+
+- Log into a different server,
+- List all available programs and organization units, 
+- Read data from one of these programs,
+- Optional: Reproduce one descriptive figure.
+
+::::::::: hint
+
+Try using `rstudioapi::askForPassword()` for `user_name` and `password`.
+
+If you get errors, please fill an issue in the [`readepi` GitHub repository](https://github.com/epiverse-trace/readepi/issues/).
+
+:::::::::
 
 ::::::::::::::::::::::
 
