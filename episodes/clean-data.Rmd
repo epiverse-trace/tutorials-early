@@ -707,7 +707,7 @@ cleaned_data <- raw_ebola_data %>%
     span_unit = "days",
     span_column_name = "reporting_delay"
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict) %>% 
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>%
   cleanepi::convert_to_numeric(target_columns = "age")
 ```
 
