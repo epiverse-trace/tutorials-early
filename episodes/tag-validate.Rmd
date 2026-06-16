@@ -300,7 +300,7 @@ In a data analysis script, we can do this by adding one cleaning step into the p
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-:::::::::::::::::::::::: checkpoint
+:::::::::::::::::::::::: checklist
 
 Until now, a typical workflow can look like this:
 
