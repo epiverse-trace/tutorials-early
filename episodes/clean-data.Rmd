@@ -670,17 +670,7 @@ Thanks to the `{numberize}` package, we can convert numbers written in English, 
 
 ## Multiple operations at once
 
-Performing data cleaning operations individually can be time-consuming and error-prone.
-The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
-
-When no cleaning operation is specified, the `clean_data()` function automatically applies a series of data cleaning operations to the input dataset.
-Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
-
-```{r}
-cleaned_data <- cleanepi::clean_data(raw_ebola_data)
-```
-
-Further more, you can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
+You can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
 
 ```{r, warning=FALSE, message=FALSE}
 # Perform the cleaning operations using the pipe (%>%) operator
@@ -715,6 +705,20 @@ cleaned_data <- raw_ebola_data %>%
 cleaned_data %>%
   write_csv(file = file.path("data", "cleaned_data.csv"))
 ```
+
+:::::::::::::::::::::::::::::::::::::::: spoiler
+
+Performing data cleaning operations individually can be time-consuming and error-prone.
+The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
+
+When no cleaning operation is specified, the `clean_data()` function automatically applies a series of data cleaning operations to the input dataset.
+Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
+
+```{r}
+one_step_clean_data <- cleanepi::clean_data(raw_ebola_data)
+```
+
+::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::: challenge
 
