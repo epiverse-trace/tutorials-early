@@ -39,8 +39,7 @@ to create a linelist object. We'll use the pipe operator (`%>%`) to connect some
 
 ```{r,eval=TRUE,message=FALSE,warning=FALSE}
 # Load packages
-library(tidyverse) # to access {dplyr} functions and the pipe %>% operator
-# from {magrittr}
+library(tidyverse) # fo {dplyr} functions and the pipe %>% operator
 library(rio) # for importing data
 library(here) # for easy file referencing
 library(linelist) # for tagging and validating
@@ -84,6 +83,15 @@ cleaned_data <- rio::import(
 cleaned_data
 ```
 
+```{r, eval=FALSE,echo=FALSE}
+# for Positron
+# e.g.: if path to file is data/simulated_ebola_2.csv then:
+cleaned_data <- rio::import(
+  here::here("episodes", "data", "cleaned_data.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+```
+
 :::::::::::::::::::::::: discussion
 
 <!-- Have you ever experienced an unexpected change in the input data set when running an analysis during an outbreak? How do you safeguard your analysis from this inconvenience? -->
@@ -115,10 +123,10 @@ Once the data is loaded and cleaned, it can be converted  into a `linelist` obje
 ```{r}
 # Create a linelist object from cleaned data
 linelist_data <- linelist::make_linelist(
-  x = cleaned_data,         # Input data
-  id = "case_id",            # Column for unique case identifiers
+  x = cleaned_data, # Input data
+  id = "case_id", # Column for unique case identifiers
   date_onset = "date_onset", # Column for date of symptom onset
-  gender = "gender"          # Column for gender
+  gender = "gender" # Column for gender
 )
 
 # Display the resulting linelist object
@@ -148,7 +156,7 @@ linelist::tags_types()
 linelist::tags_names()
 ```
 
-:::::::::::::::::::
+::::::::::::::::::::
 
 ::::::::::::::::::::: solution
 
@@ -184,9 +192,10 @@ linelist::validate_linelist(linelist_data)
 
 If your dataset requires a new tag other than those defined in the `{linelist}` package, use `allow_extra = TRUE` when creating the linelist object with its corresponding datatype using the `linelist::make_linelist()` function.
 
-::::::::::::::::::::::::: challenge
+:::::::::::::::::::::::::::::::::::::::::::::::::: challenge
 
 ## Changes in Variable Types During Linelist Validation
+
 Let's assume the following scenario during an ongoing outbreak. You notice at some point that the data stream you have been relying on has a set of new entries (i.e., rows or observations), and the data type of one variable has changed.
 
 Let's consider the example where the type `age` variable has changed from a double (`<dbl>`) to character (`<chr>`).
@@ -220,8 +229,14 @@ cleaned_data %>%
 # nolint end
 ```
 
-Please run the code line by line, focusing only on the parts before the pipe (`%>%`).
+::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::: hint
+
+> Please run the code line by line, focusing only on the parts before the pipe (`%>%`).
 After each step, observe the output before moving to the next line.
+
+If the `age` variable changes from double (`<dbl>`) to character (`<chr>`) we get the following:
 
 ```{r}
 cleaned_data %>%
@@ -233,25 +248,21 @@ cleaned_data %>%
   linelist::validate_linelist()
 ```
 
+Why are we getting an `Error` message?
+
+<!-- Should we have a `Warning` message instead?
+Explain why. -->
+
+Explore other situations to understand this behavior by converting:
+
+- `date_onset` from `<date>` to character (`<chr>`),
+- `gender` character (`<chr>`) to integer (`<int>`).
+
+Then tag them into a linelist for validation.
+
+Does the `Error` message suggest a fix to the issue?
+
 ::::::::::::::::::::::::::
-
-Why are we getting an `Error` message?
-
-Should we have a `Warning` message instead?
-Explain why.
-
-Explore other situations to understand this behavior by converting:-`date_onset` from `<date>` to character (`<chr>`), -`gender` character (`<chr>`) to integer (`<int>`).
-
-Then tag them into a linelist for validation.
-Does the `Error` message suggest a fix to the issue?
-
-Why are we getting an `Error` message?
-Should we have a `Warning` message instead?
-Explain why?
-Explore other situations to understand this behavior by converting:-`date_onset` from `<date>` to character (`<chr>`), -`gender` character (`<chr>`) to integer (`<int>`).
-
-Then tag them into a linelist for validation.
-Does the `Error` message suggest a fix to the issue?
 
 ::::::::::::::::::::::::: solution
 
@@ -284,29 +295,28 @@ We get `Error` messages because the default type of these variable in  `linelist
 
 The `Error` message inform us that in order to **validate** our linelist, we must fix the input variable type to fit the expected tag type.
 In a data analysis script, we can do this by adding one cleaning step into the pipeline.
+
 :::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::: challenge
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Beyond tagging and validating the linelist object, what extra step do we needed when building the object?
+:::::::::::::::::::::::: checkpoint
 
-:::::::::::::::::::::::::: solution
-
-Let's simulate a scenario about losing a variable :
+Until now, a typical workflow can look like this:
 
 ```{r}
+# use cleaned data
 cleaned_data %>%
-  # remove the variable 'age'
-  select(-age) %>%
-  # tag variable 'age' that no longer exist
+  # tag as many variables as possible
+  # creates the <linelist> class object
   linelist::make_linelist(
-    age = "age"
-  )
+    id = "case_id",
+    date_onset = "date_onset",
+    gender = "gender"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist()
 ```
-
-::::::::::::::::::::::::::
-
-:::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::
 
@@ -320,7 +330,6 @@ new_df <- linelist_data %>%
 ```
 
 This `Warning`  is the default option when we lose tags in a `linelist` object. However, it can be changed to an `Error` message using the `linelist::lost_tags_action()` function.
-
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
@@ -381,6 +390,27 @@ linelist::tags_df(linelist_data)
 ```
 
 This allows for the use of tagged variables only in downstream analysis, which will be useful for the next episode!
+
+:::::::::::::::::::::::: spoiler
+
+You can do all these steps connected in a single pipe:
+
+```{r}
+# use cleaned data
+cleaned_data %>%
+  # tag as many variables as possible
+  # creates the <linelist> class object
+  linelist::make_linelist(
+    id = "case_id",
+    date_onset = "date_onset",
+    gender = "gender"
+  ) %>%
+  # validate the linelist
+  linelist::validate_linelist() %>% 
+  linelist::tags_df()
+```
+
+::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::: checklist
 
