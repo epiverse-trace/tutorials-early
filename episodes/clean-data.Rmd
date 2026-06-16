@@ -570,7 +570,8 @@ dat_age %>%
   dplyr::select(
     study_id,
     date_of_birth,
-    age_in_years
+    age_in_years,
+    remainder_months
   )
 ```
 
@@ -693,7 +694,6 @@ cleaned_data <- raw_ebola_data %>%
     target_columns = "case_id",
     range = c(1, 15000)
   ) %>%
-  cleanepi::convert_to_numeric(target_columns = "age") %>%
   # epidemiological operations ------------------------------
   cleanepi::standardize_dates(
     target_columns = c("date_onset", "date_sample")
@@ -707,7 +707,8 @@ cleaned_data <- raw_ebola_data %>%
     span_unit = "days",
     span_column_name = "reporting_delay"
   ) %>%
-  cleanepi::clean_using_dictionary(dictionary = test_dict)
+  cleanepi::clean_using_dictionary(dictionary = test_dict) %>% 
+  cleanepi::convert_to_numeric(target_columns = "age")
 ```
 
 ```{r, echo=FALSE, eval=TRUE}
