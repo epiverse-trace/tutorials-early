@@ -207,7 +207,7 @@ We invite you to take a look at the [reference manual of the funcion `plot()`](h
 Find how you can use the arguments within the `plot()` function to provide aesthetics to your incidence2 class objects.
 
 ```{r}
-weekly_group_incidence %>% 
+weekly_group_incidence %>%
   plot(fill = "sex")
 ```
 
