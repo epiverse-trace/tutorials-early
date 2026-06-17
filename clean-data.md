@@ -652,11 +652,9 @@ We can describe this delay using a visualization:
 ``` r
 # before plotting:
 # * keep unique IDs,
-# * drop for missings in sequential dates, and
 # * keep plausible a subset consistent observations (from 0 to 50 days)
 sim_ebola_delay <- sim_ebola_data %>%
   dplyr::distinct(case_id, .keep_all = TRUE) %>%
-  dplyr::filter(!(is.na(date_onset) | is.na(date_sample))) %>%
   dplyr::filter(reporting_delay >= 0, reporting_delay < 50)
 
 sim_ebola_delay %>%
@@ -668,7 +666,7 @@ sim_ebola_delay %>%
 
 ::::::::::::::::: callout
 
-We can also use **summary statistics** or **probability distribution** parameters to describe different delays. We will use them in the upcoming tutorials. For a refresher, you can review introductory concepts with [two episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/):
+We can also use **summary statistics** or **probability distribution** parameters to describe different delays. We will use them in the upcoming tutorials. For a refresher, you can review introductory concepts with [some episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/).
 
 :::::::::::::::::
 
@@ -967,36 +965,7 @@ Thanks to the `{numberize}` package, we can convert numbers written in English, 
 
 ## Multiple operations at once
 
-Performing data cleaning operations individually can be time-consuming and error-prone.
-The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
-
-When no cleaning operation is specified, the `clean_data()` function automatically applies a series of data cleaning operations to the input dataset.
-Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
-
-
-``` r
-cleaned_data <- cleanepi::clean_data(raw_ebola_data)
-```
-
-``` output
-ℹ Cleaning column names
-```
-
-``` output
-ℹ Removing constant columns and empty rows
-```
-
-``` output
-ℹ Removing duplicated rows
-```
-
-``` output
-! Found 5 duplicated rows in the dataset.
-ℹ Use `print_report(dat, "found_duplicates")` to access them, where "dat" is
-  the object used to store the output from this operation.
-```
-
-Further more, you can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
+You can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
 
 
 ``` r
@@ -1029,6 +998,39 @@ cleaned_data <- raw_ebola_data %>%
 ```
 
 
+
+:::::::::::::::::::::::::::::::::::::::: spoiler
+
+Performing data cleaning operations individually can be time-consuming and error-prone.
+The `{cleanepi}` package simplifies this process by offering a convenient wrapper function called `clean_data()`, which allows you to perform multiple operations at once.
+
+When no cleaning operation is specified, the `clean_data()` function automatically applies a series of data cleaning operations to the input dataset.
+Here's an example code chunk illustrating how to use `clean_data()` on a raw simulated Ebola dataset:
+
+
+``` r
+one_step_clean_data <- cleanepi::clean_data(raw_ebola_data)
+```
+
+``` output
+ℹ Cleaning column names
+```
+
+``` output
+ℹ Removing constant columns and empty rows
+```
+
+``` output
+ℹ Removing duplicated rows
+```
+
+``` output
+! Found 5 duplicated rows in the dataset.
+ℹ Use `print_report(dat, "found_duplicates")` to access them, where "dat" is
+  the object used to store the output from this operation.
+```
+
+::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::: challenge
 

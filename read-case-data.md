@@ -188,20 +188,18 @@ rdbms_login <- readepi::login(
 )
 ```
 
-``` output
-✔ Logged in successfully!
+``` error
+Error in `.local()`:
+! Failed to connect to database: Error: Too many connections
 ```
 
 ``` r
 rdbms_login
 ```
 
-``` output
-<Pool> of MySQLConnection objects
-  Objects checked out: 0
-  Available in pool: 1
-  Max size: Inf
-  Valid: TRUE
+``` error
+Error:
+! object 'rdbms_login' not found
 ```
 
 The function parameters are:
@@ -264,23 +262,20 @@ dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::filter(initials == "A") %>%
   dplyr::arrange(desc(author_id))
+```
 
+``` error
+Error:
+! object 'rdbms_login' not found
+```
+
+``` r
 dat
 ```
 
-``` output
-# Source:     SQL [?? x 6]
-# Database:   mysql 8.0.32-24 [@mysql-rfam-public.ebi.ac.uk:/Rfam]
-# Ordered by: desc(author_id)
-  author_id name           last_name    initials orcid                 synonyms
-      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
-1        46 Roth A         Roth         A        ""                    ""      
-2        42 Nahvi A        Nahvi        A        ""                    ""      
-3        32 Machado Lima A Machado Lima A        ""                    ""      
-4        31 Levy A         Levy         A        ""                    ""      
-5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
-6        13 Chen A         Chen         A        ""                    ""      
-7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
+``` error
+Error:
+! object 'dat' not found
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -292,12 +287,9 @@ dat %>%
   dplyr::show_query()
 ```
 
-``` output
-<SQL>
-SELECT `author`.*
-FROM `author`
-WHERE (`initials` = 'A')
-ORDER BY `author_id` DESC
+``` error
+Error:
+! object 'dat' not found
 ```
 
 ### 4. Extract data from the database
@@ -311,17 +303,9 @@ dat %>%
   dplyr::collect()
 ```
 
-``` output
-# A tibble: 7 × 6
-  author_id name           last_name    initials orcid                 synonyms
-      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
-1        46 Roth A         Roth         A        ""                    ""      
-2        42 Nahvi A        Nahvi        A        ""                    ""      
-3        32 Machado Lima A Machado Lima A        ""                    ""      
-4        31 Levy A         Levy         A        ""                    ""      
-5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
-6        13 Chen A         Chen         A        ""                    ""      
-7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
+``` error
+Error:
+! object 'dat' not found
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -342,29 +326,32 @@ You can also review the `{dbplyr}` R package. But for a step-by-step tutorial ab
 author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::select(author_id, name)
+```
 
+``` error
+Error:
+! object 'rdbms_login' not found
+```
+
+``` r
 family_author <- rdbms_login %>%
   dplyr::tbl(from = "family_author") %>%
   dplyr::select(author_id, rfam_acc)
+```
 
+``` error
+Error:
+! object 'rdbms_login' not found
+```
+
+``` r
 dplyr::left_join(author, family_author, keep = TRUE) %>%
   dplyr::show_query()
 ```
 
-``` output
-Joining with `by = join_by(author_id)`
-```
-
-``` output
-<SQL>
-SELECT
-  `author`.`author_id` AS `author_id.x`,
-  `name`,
-  `family_author`.`author_id` AS `author_id.y`,
-  `rfam_acc`
-FROM `author`
-LEFT JOIN `family_author`
-  ON (`author`.`author_id` = `family_author`.`author_id`)
+``` error
+Error:
+! object 'author' not found
 ```
 
 ``` r
@@ -372,25 +359,9 @@ dplyr::left_join(author, family_author, keep = TRUE) %>%
   dplyr::collect()
 ```
 
-``` output
-Joining with `by = join_by(author_id)`
-```
-
-``` output
-# A tibble: 5,029 × 4
-   author_id.x name         author_id.y rfam_acc
-         <int> <chr>              <int> <chr>   
- 1           1 Ames T                 1 RF01831 
- 2           2 Argasinska J           2 RF02554 
- 3           2 Argasinska J           2 RF02555 
- 4           2 Argasinska J           2 RF02722 
- 5           2 Argasinska J           2 RF02720 
- 6           2 Argasinska J           2 RF02719 
- 7           2 Argasinska J           2 RF02721 
- 8           2 Argasinska J           2 RF02670 
- 9           2 Argasinska J           2 RF02718 
-10           2 Argasinska J           2 RF02668 
-# ℹ 5,019 more rows
+``` error
+Error:
+! object 'author' not found
 ```
 
 
@@ -406,7 +377,7 @@ Health data is increasingly stored in specialized HIS such as **Fingertips**, **
 
 ### Importing data from DHIS2
 
-[DHIS2](https://dhis2.org/about/) (District Health Information System) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
+[DHIS2](https://dhis2.org/about/) (District Health Information System 2) is an open-source software that has revolutionized global health information management. The `readepi::read_dhis2()` function imports data from the DHIS2 [Tracker](https://dhis2.org/tracker-in-action/) system via its API.
 
 To successfully import data from DHIS2, you need to:
 
@@ -500,7 +471,7 @@ tibble::as_tibble(org_units)
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
-After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunk below
+After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
 
 
 ``` r
@@ -586,7 +557,7 @@ tibble::as_tibble(target_org_units)
 
 <!-- :::::::::::::::: callout
 
-Note: This example uses a DHIS2 system provided by the Ministry of Health of The Gambia for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
+Note: This example uses a demo system provided by DHIS2 [organization](https://test.e2e.dhis2.org/) for testing and development purposes. In practice, you should customize the parameters for your own DHIS2 instance. 
 
 :::::::::::::::: -->
 
