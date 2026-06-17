@@ -10,6 +10,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/aggreagate-visualize.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/aio.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/aggreagate-visualize.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/aio.html</loc>
@@ -103,6 +109,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/quantify-transmissibility.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/read-case-data.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/read-cases.html</loc>
   </url>
   <url>
@@ -113,6 +122,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/simple-analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/instructor/tag-validate.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/instructor/validate.html</loc>
@@ -136,6 +148,9 @@
     <loc>https://epiverse-trace.github.io/tutorials-early/quantify-transmissibility.html</loc>
   </url>
   <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/read-case-data.html</loc>
+  </url>
+  <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/read-cases.html</loc>
   </url>
   <url>
@@ -146,6 +161,9 @@
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/simple-analysis.html</loc>
+  </url>
+  <url>
+    <loc>https://epiverse-trace.github.io/tutorials-early/tag-validate.html</loc>
   </url>
   <url>
     <loc>https://epiverse-trace.github.io/tutorials-early/validate.html</loc>

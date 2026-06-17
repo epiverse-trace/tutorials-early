@@ -206,7 +206,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="read-cases.html">1. Read case data</a>
+        <a href="read-case-data.html">1. Read case data</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -224,7 +224,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="validate.html">3. Validate case data</a>
+        <a href="tag-validate.html">3. Validate case data</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -233,7 +233,7 @@
 <div class="accordion accordion-flush" id="accordionFlush5">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading5">
-        <a href="describe-cases.html">4. Aggregate and visualize</a>
+        <a href="aggreagate-visualize.html">4. Aggregate and visualize</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -281,11 +281,11 @@
         <!-- START: inst/pkgdown/templates/content-syllabus.html -->
   <div class="col-xl-8 col-lg-12 primary-content">
     <nav class="lesson-content mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link float-end" href="../instructor/read-cases.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/read-case-data.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="../instructor/read-cases.html" rel="next">Next: Read case data... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/read-case-data.html" rel="next">Next: Read case data... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
     </nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
@@ -304,7 +304,7 @@ any links that you are not going to use.
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
 <td>
- 1. <a href="read-cases.html">Read case data</a>
+ 1. <a href="read-case-data.html">Read case data</a>
 </td>
 <td>
 Where do you usually store outbreak data?<br>What data formats do you
@@ -325,16 +325,17 @@ How to clean and standardize case data?
 <span class="visually-hidden">Duration: </span>01h 30m
 </td>
 <td>
- 3. <a href="validate.html">Validate case data</a>
+ 3. <a href="tag-validate.html">Validate case data</a>
 </td>
 <td>
-How to convert a raw dataset into a <code>linelist</code> object?
+How can a raw case data be converted into a <code>linelist</code>
+object?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>01h 42m
+<span class="visually-hidden">Duration: </span>02h 00m
 </td>
 <td>
- 4. <a href="describe-cases.html">Aggregate and visualize</a>
+ 4. <a href="aggreagate-visualize.html">Aggregate and visualize</a>
 </td>
 <td>
 How to aggregate and summarise case data?<br>How to visualize
@@ -342,7 +343,7 @@ aggregated data?<br>What is distribution of cases across time, space,
 gender, and age?
 </td>
 </tr><tr><td>
-<span class="visually-hidden">Duration: </span>02h 12m
+<span class="visually-hidden">Duration: </span>02h 30m
 </td>
 <td>
 Finish
@@ -555,7 +556,7 @@ manually install them according to your operating system.</p>
 </button>
 </div>
 </nav><div id="nav-tabContent-1" class="tab-content">
-<div id="nav-tabpanel-1-1" class="tab-pane show active" role="tabpanel" aria-labelledby="nav-tab-1-1">
+<div id="nav-tabpanel-1-1" class="tab-pane show active" aria-labelledby="nav-tab-1-1" role="tabpanel">
 <p>Windows users will need a working installation of <code>Rtools</code>
 in order to build the package from source.<br><code>Rtools</code> is not an R package, but a software you need to
 download and install. We suggest you to follow:</p>
@@ -566,14 +567,14 @@ with default selections.</li>
 <li>Close and reopen RStudio so it can recognize the new
 installation.</li>
 </ul></div>
-<div id="nav-tabpanel-1-2" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-2">
+<div id="nav-tabpanel-1-2" class="tab-pane" aria-labelledby="nav-tab-1-2" role="tabpanel">
 <p>Mac users require two additional steps as detailed in this <a href="https://github.com/stan-dev/rstan/wiki/Configuring-C---Toolchain-for-Mac" class="external-link">guide
 to Configuring C Toolchain for Mac</a>:</p>
 <ul><li>Install and use <a href="https://mac.thecoatlessprofessor.com/macrtools/" class="external-link"><code>macrtools</code></a>
 to setup the C++ toolchain</li>
 <li>Enable some compiler optimizations.</li>
 </ul></div>
-<div id="nav-tabpanel-1-3" class="tab-pane" role="tabpanel" aria-labelledby="nav-tab-1-3">
+<div id="nav-tabpanel-1-3" class="tab-pane" aria-labelledby="nav-tab-1-3" role="tabpanel">
 <p>Linux users require specific details per distribution. Find them in
 this <a href="https://github.com/stan-dev/rstan/wiki/Configuring-C-Toolchain-for-Linux" class="external-link">guide
 to Configuring C Toolchain for Linux</a>.</p>
@@ -648,7 +649,7 @@ document</a> for more details about the advantages of using this.</p>
   do you get an error with epiverse-trace packages?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>If you get an error message when installing
 <code>{tracetheme}</code>, try this alternative code:</p>
@@ -671,7 +672,7 @@ document</a> for more details about the advantages of using this.</p>
   do you get an error with other package?
   </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Try using the classical code function to install one package, for
 example:</p>
@@ -693,7 +694,7 @@ example:</p>
   What to do if an error persists?
   </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
 <div class="accordion-body">
 <p>If the error message keyword include an string like
 <code>Personal access token (PAT)</code>, you may need to <a href="https://epiverse-trace.github.io/git-rstudio-basics/02-setup.html#set-up-your-github-token" class="external-link">set
@@ -846,11 +847,11 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
-        <a class="chapter-link float-end" href="../instructor/read-cases.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/read-case-data.html" rel="next">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="../instructor/read-cases.html" rel="next">Next: Read case data... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="../instructor/read-case-data.html" rel="next">Next: Read case data... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
     </nav></div>
 <!-- END  : inst/pkgdown/templates/content-syllabus.html -->
@@ -895,9 +896,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/index.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/index.html",
-  "dateCreated": "2026-06-16",
-  "dateModified": "2026-06-16",
-  "datePublished": "2026-06-16"
+  "dateCreated": "2026-06-17",
+  "dateModified": "2026-06-17",
+  "datePublished": "2026-06-17"
 }
 
   </script><script>

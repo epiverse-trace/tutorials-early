@@ -59,10 +59,10 @@ contact: 'andree.valle-campos@lshtm.ac.uk'
 
 # Order of episodes in your lesson
 episodes:
-- read-cases.Rmd
+- read-case-data.Rmd
 - clean-data.Rmd
-- validate.Rmd
-- describe-cases.Rmd
+- tag-validate.Rmd
+- aggreagate-visualize.Rmd
 
 # Information for Learners
 learners:
