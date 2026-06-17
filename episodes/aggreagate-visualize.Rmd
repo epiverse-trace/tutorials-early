@@ -87,7 +87,7 @@ daily_incidence <- incidence2::incidence(
 daily_incidence
 ```
 
-You can use numeric values or text string such `day`, `daily`, `week(s)`, `weekly`, `months(s)`, `monthly` as to setup the aggregating interval:
+You can use numeric values, as number of days to group, or text string such `day`, `week`, `epiweek`, `months`, and more to setup the aggregating interval:
 
 ```{r}
 # Create an incidence object by aggregating case data based on the date of onset
@@ -128,7 +128,7 @@ incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = "day", # Aggregate by daily intervals
+  interval = "day",
   complete_dates = FALSE # Default
 )
 ```
@@ -144,8 +144,8 @@ incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = "day", # Aggregate by daily intervals
-  complete_dates = TRUE # Complete missing dates
+  interval = "day",
+  complete_dates = TRUE # Complete dates and missing counts
 )
 ```
 
@@ -153,9 +153,13 @@ incidence2::incidence(
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Challenge 1: Can you do it?
-
 - **Task**: Calculate the incidence of cases **every 2 weeks** from the `sim_data` linelist based on their admission date and  outcome. Save the result in an object called `biweekly_incidence`.
+
+::::::::::::::::::: hint
+
+Review the reference manual of the function `incidence2::incidence()` either offline using `?incidence2::incidence()` or [online](https://www.reconverse.org/incidence2/manual.html#sec:man-incidence).
+
+:::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -223,9 +227,7 @@ weekly_group_incidence %>%
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Challenge 2: Can you do it?
-
-Visualize the `biweekly_incidence` object.
+- **Task**: Visualize the `biweekly_incidence` object.
 
 Reply to this question:
 
@@ -253,8 +255,6 @@ Note that this function preserves grouping, i.e., if the `incidence2` object con
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-## Challenge 3: Can you do it?
-
 - **Task**: Visulaize the cumulative cases from the `biweekly_incidence` object.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -281,8 +281,6 @@ print(peak)
 This example demonstrates how to estimate the peak time using the `incidence2::estimate_peak()` function at $95%$ confidence interval and using 100 bootstrap samples.
 
 ::::::::::::::::::::::::::::::::::::: challenge
-
-## Challenge 4: Can you do it?
 
 - **Task**: Estimate the peak time from the `biweekly_incidence` object.
 
@@ -397,8 +395,6 @@ ggplot2::ggplot(data = daily_incidence_2) +
 ::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
-
-## Challenge 5: Can you do it?
 
 - **Task**: Produce an annotated figure for the `biweekly_incidence` object using the `{ggplot2}` package.
 
