@@ -172,7 +172,7 @@ Review the reference manual of the function `incidence2::incidence()` either off
 - To analyze data by person, place, and time:
 
     - Track how events (cases, hospitalizations, deaths, recoveries) change over time (by day or week).
-    - Compare patterns across locations and demographic groups (e.g., age, sex).
+    - Compare patterns across locations and demographic groups (e.g., age, sex, location).
 
 - Also describe and prepare data before modelling. (More on this in the next set of tutorials!)
 
@@ -236,7 +236,7 @@ Try them and see how they impact on the resulting plot.
 
 ```{r}
 weekly_group_incidence %>%
-  plot(fill = "case_type", angle = 45)
+  plot(fill = "sex", angle = 45)
 ```
 
 We invite you to take a look at the [reference manual of the funcion `plot()`](https://www.reconverse.org/incidence2/manual.html#sec:man-plot.incidence2).
@@ -246,6 +246,7 @@ We invite you to take a look at the [reference manual of the funcion `plot()`](h
 ::::::::::::::::::::::::::::::::::::: challenge
 
 - **Task**: Visualize the `biweekly_incidence` object.
+- Identify what combination of arguments in `plot()` work best.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -264,17 +265,17 @@ We invite you to take a look at the [reference manual of the funcion `plot()`](h
 
 ## How to describe an epidemic curve?
 
-We can describe epicurves by comparing the trend of new cases in time between demographic groups. We can compare features like:
+We can describe epicurves by comparing the trend of new cases over time between demographic groups. Some features we can compare are:
 
 - Size of peak or plateau,
 - Time to peak (if any),
 - Growth rate.
 
-For example, in the figure below, we have two epidemic curves for the same outbreak stratified by sex. In the population, most of cases were observed in females.
+For example, in the figure below, we have two epidemic curves for the same outbreak stratified by sex. In the population, most cases were observed in females.
 
-- The size of peak in females was of ~70 incident cases; in males this was of about ~22 incidence cases.
-- The time to peak in females happened around epiweek 15; in males this was around epiweek 20.
-- The growth rate in females may be higher than males.
+- The size of the peak in females was ~70 incident cases; in males this was ~22 incident cases.
+- The peak in females occurred around epiweek 15; in males this was around epiweek 20.
+- The growth rate in females may be higher than in males.
 
 ```{r, echo = FALSE, warning=FALSE}
 set.seed(1)
@@ -347,7 +348,7 @@ plot(out, angle = 45, alpha = 0.3) +
   )
 ```
 
-You can estimate the peak -- the time with the highest number of recorded cases -- using the `incidence2::estimate_peak()` function from the {incidence2} package.
+You can estimate the peak -- the time with the highest number of recorded cases -- using `incidence2::estimate_peak()`.
 This function uses a bootstrapping method to determine the peak time (i.e. by resampling dates with replacement, resulting in a distribution of estimated peak times).
 Find one example on the [incidence2 vignette section about "Bootstrapping and estimating peaks"](https://www.reconverse.org/incidence2/vignette.html#sec:bootstrapping-and-estimating-peaks)
 
@@ -589,7 +590,7 @@ Write some sentences describing your learnings.
 
 Lastly, `{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs.
 However, using the `{ggplot2}` package, you can generate more sophisticated epicurves, with more flexibility in annotation.
-`{ggplot2}` is a comprehensive package with many functionalities. 
+Find alternatives about how to improve your epicurves in the spoiler below:
 
 :::::::::::::::::::::: spoiler
 
