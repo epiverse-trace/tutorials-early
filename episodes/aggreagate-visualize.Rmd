@@ -36,7 +36,7 @@ We'll use the pipe operator (`%>%`) to connect some of their functions, includin
 # Load packages
 library(incidence2) # For aggregating and visualising
 library(simulist) # For simulating linelist data
-library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe |>
+library(tidyverse) # For {dplyr} and {ggplot2} functions and the pipe %>%
 ```
 
 ## Synthetic outbreak data
@@ -297,8 +297,8 @@ dat <- keep_first(out, 15L)
 
 # fit a poisson model to the grouped data
 fitted <-
-  dat |>
-  nest(.key = "data") |>
+  dat %>%
+  nest(.key = "data") %>%
   mutate(
     model = lapply(
       data,
@@ -308,23 +308,23 @@ fitted <-
 
 # Add confidence intervals to the result
 intervals <-
-  fitted |>
+  fitted %>%
   mutate(
     result = Map(
       function(data, model) {
-        data |>
+        data %>%
           ciTools::add_ci(
             model,
             alpha = 0.05,
             names = c("lower_ci", "upper_ci")
-          ) |>
+          ) %>%
           as_tibble()
       },
       data,
       model
     )
-  ) |>
-  select(sex, result) |>
+  ) %>%
+  select(sex, result) %>%
   unnest(result)
 
 # plot
@@ -416,7 +416,7 @@ epiparameter::epiparameter_db(
   disease = "measles",
   epi_name = "incubation period",
   single_epiparameter = TRUE
-) %>% 
+) %>%
   plot()
 ```
 
@@ -434,9 +434,10 @@ exposure_end <- 2
 min_incubation <- 3
 max_incubation <- 7
 
-# Cases appear between exposure_start + min_incubation and exposure_end + max_incubation
-first_case <- exposure_start + min_incubation  # day 3
-last_case <- exposure_end + max_incubation     # day 9
+# Cases appear between
+# exposure_start + min_incubation and exposure_end + max_incubation
+first_case <- exposure_start + min_incubation # day 3
+last_case <- exposure_end + max_incubation # day 9
 
 cases <- data.frame(
   day = c(3, 4, 5, 6, 7, 8, 9),
@@ -444,44 +445,115 @@ cases <- data.frame(
 )
 
 ggplot(cases, aes(x = day, y = count)) +
-  geom_bar(stat = "identity", fill = "steelblue", color = "white", width = 0.8) +
+  geom_bar(
+    stat = "identity",
+    fill = "steelblue",
+    color = "white",
+    width = 0.8
+  ) +
 
   # Exposure window
-  annotate("rect", xmin = exposure_start, xmax = exposure_end,
-           ymin = 0, ymax = Inf, alpha = 0.15, fill = "red") +
-  annotate("text", x = (exposure_start + exposure_end) / 2, y = 4.8,
-           label = "Exposure\nWindow", color = "red", size = 3.5, fontface = "bold") +
+  annotate(
+    "rect",
+    xmin = exposure_start,
+    xmax = exposure_end,
+    ymin = 0,
+    ymax = Inf,
+    alpha = 0.15,
+    fill = "red"
+  ) +
+  annotate(
+    "text",
+    x = (exposure_start + exposure_end) / 2,
+    y = 4.8,
+    label = "Exposure\nWindow",
+    color = "red",
+    size = 3.5,
+    fontface = "bold"
+  ) +
 
   # First case line and label
-  geom_vline(xintercept = first_case, linetype = "dashed", color = "darkgreen", linewidth = 0.8) +
-  annotate("text", x = first_case + 0.15, y = 5.5,
-           label = "First case", color = "darkgreen", size = 3.2, hjust = 0) +
+  geom_vline(
+    xintercept = first_case,
+    linetype = "dashed",
+    color = "darkgreen",
+    linewidth = 0.8
+  ) +
+  annotate(
+    "text",
+    x = first_case + 0.15,
+    y = 5.5,
+    label = "First case",
+    color = "darkgreen",
+    size = 3.2,
+    hjust = 0
+  ) +
 
   # Last case line and label
-  geom_vline(xintercept = last_case, linetype = "dashed", color = "purple", linewidth = 0.8) +
-  annotate("text", x = last_case - 0.15, y = 5.5,
-           label = "Last case", color = "purple", size = 3.2, hjust = 1) +
+  geom_vline(
+    xintercept = last_case,
+    linetype = "dashed",
+    color = "purple",
+    linewidth = 0.8
+  ) +
+  annotate(
+    "text",
+    x = last_case - 0.15,
+    y = 5.5,
+    label = "Last case",
+    color = "purple",
+    size = 3.2,
+    hjust = 1
+  ) +
 
   # Min incubation bracket (above bars)
-  annotate("segment", x = exposure_start, xend = first_case,
-           y = 6.8, yend = 6.8, color = "darkgreen",
-           arrow = arrow(ends = "both", length = unit(0.2, "cm"))) +
-  annotate("text", x = (exposure_start + first_case) / 2, y = 7.1,
-           label = "Min incubation period", color = "darkgreen", size = 3) +
+  annotate(
+    "segment",
+    x = exposure_start,
+    xend = first_case,
+    y = 6.8,
+    yend = 6.8,
+    color = "darkgreen",
+    arrow = arrow(ends = "both", length = unit(0.2, "cm"))
+  ) +
+  annotate(
+    "text",
+    x = (exposure_start + first_case) / 2,
+    y = 7.1,
+    label = "Min incubation period",
+    color = "darkgreen",
+    size = 3
+  ) +
 
   # Max incubation bracket (above bars)
-  annotate("segment", x = exposure_end, xend = last_case,
-           y = 7.5, yend = 7.5, color = "purple",
-           arrow = arrow(ends = "both", length = unit(0.2, "cm"))) +
-  annotate("text", x = (exposure_end + last_case) / 2, y = 7.8,
-           label = "Max incubation period", color = "purple", size = 3) +
+  annotate(
+    "segment",
+    x = exposure_end,
+    xend = last_case,
+    y = 7.5,
+    yend = 7.5,
+    color = "purple",
+    arrow = arrow(ends = "both", length = unit(0.2, "cm"))
+  ) +
+  annotate(
+    "text",
+    x = (exposure_end + last_case) / 2,
+    y = 7.8,
+    label = "Max incubation period",
+    color = "purple",
+    size = 3
+  ) +
 
   scale_x_continuous(breaks = 0:10, name = "Day") +
-  scale_y_continuous(name = "Number of Cases", limits = c(0, 8.2),
-                     breaks = scales::breaks_pretty()) +
+  scale_y_continuous(
+    name = "Number of Cases",
+    limits = c(0, 8.2),
+    breaks = scales::breaks_pretty()
+  ) +
   labs(
     title = "Epidemic Curve: Estimating Exposure from Incubation Period",
-    subtitle = "Working backwards from first and last cases to identify the exposure window"
+    subtitle =
+      "Working backwards from first and last cases to find the exposure window"
   ) +
   theme_classic() +
   theme(
