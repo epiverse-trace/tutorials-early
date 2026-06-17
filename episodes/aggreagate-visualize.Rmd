@@ -45,9 +45,11 @@ To illustrate the process of conducting EDA on outbreak data, we will generate a
 `{simulist}` generates simulated data for outbreak according to a given configuration.
 Its minimal configuration can generate a linelist, as shown in the below code chunk:
 
-```{r}
+```{r, warning=FALSE}
+# Set seed for reproducibility
+set.seed(1)
+
 # Simulate linelist data for an outbreak with size between 1000 and 1500
-set.seed(1) # Set seed for reproducibility
 sim_data <- simulist::sim_linelist(outbreak_size = c(1000, 1500)) %>%
   dplyr::as_tibble() # for a simple data frame output
 
@@ -134,7 +136,7 @@ incidence2::incidence(
 ```
 
 The `{incidence2}` package provides a function called `incidence2::complete_dates()` to ensure that an incidence object has the same range of dates for each group.
-By default, missing counts for a particular group will be filled with 0 for that date.
+By default, missing counts for a particular group will be filled with `0` for that date.
 
 This functionality is also available within the `incidence2::incidence()` function by setting the value of the `complete_dates` to `TRUE`.
 
@@ -222,12 +224,11 @@ plot(weekly_group_incidence) +
 
 #### Easy aesthetics
 
-We invite you to take a look at the [reference manual of the funcion `plot()`](https://www.reconverse.org/incidence2/manual.html#sec:man-plot.incidence2).
 Find how you can use the arguments within the `plot()` function to provide aesthetics to your incidence2 class objects.
 
 ```{r}
 weekly_group_incidence %>%
-  plot(fill = "sex")
+  plot(fill = "case_type")
 ```
 
 Some of them include `show_cases = TRUE`, `angle = 45`, and `n_breaks = 5`.
@@ -235,18 +236,16 @@ Try them and see how they impact on the resulting plot.
 
 ```{r}
 weekly_group_incidence %>%
-  plot(fill = "sex", angle = 45)
+  plot(fill = "case_type", angle = 45)
 ```
+
+We invite you to take a look at the [reference manual of the funcion `plot()`](https://www.reconverse.org/incidence2/manual.html#sec:man-plot.incidence2).
 
 ::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
 - **Task**: Visualize the `biweekly_incidence` object.
-
-Reply to this question:
-
-- Which combination of time unit and case categories best captures the outbreak pattern and why?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -262,6 +261,113 @@ Reply to this question:
 - Get a *complete time series* to have the same range of dates for each grouping.
 
 :::::::::::::::::::::::::::::
+
+## How to describe an epidemic curve?
+
+We can describe epicurves by comparing the trend of new cases in time between demographic groups. We can compare features like:
+
+- Size of peak or plateau,
+- Time to peak (if any),
+- Growth rate.
+
+For example, in the figure below, we have two epidemic curves for the same outbreak stratified by sex. In the population, most of cases were observed in females.
+
+- The size of peak in females was of ~70 incident cases; in males this was of about ~22 incidence cases.
+- The time to peak in females happened around epiweek 15; in males this was around epiweek 20.
+- The growth rate in females may be higher than males.
+
+```{r, echo = FALSE, warning=FALSE}
+set.seed(1)
+
+sim_curve <- simulist::sim_linelist(
+  outbreak_size = c(1000, 1500),
+  config = simulist::create_config(prob_male = 0.2)
+) %>%
+  dplyr::as_tibble() %>%
+  dplyr::mutate(sex = case_when(sex == "f" ~ "Female", sex == "m" ~ "Male"))
+
+out <- sim_curve %>%
+  incidence2::incidence(
+    date_index = "date_onset",
+    interval = "week",
+    groups = "sex",
+  )
+
+dat <- keep_first(out, 15L)
+
+# fit a poisson model to the grouped data
+fitted <-
+  dat |>
+  nest(.key = "data") |>
+  mutate(
+    model = lapply(
+      data,
+      function(x) glm(count ~ date_index, data = x, family = poisson)
+    )
+  )
+
+# Add confidence intervals to the result
+intervals <-
+  fitted |>
+  mutate(
+    result = Map(
+      function(data, model) {
+        data |>
+          ciTools::add_ci(
+            model,
+            alpha = 0.05,
+            names = c("lower_ci", "upper_ci")
+          ) |>
+          as_tibble()
+      },
+      data,
+      model
+    )
+  ) |>
+  select(sex, result) |>
+  unnest(result)
+
+# plot
+plot(out, angle = 45, alpha = 0.3) +
+  ggplot2::geom_ribbon(
+    ggplot2::aes(date_index, ymin = lower_ci, ymax = upper_ci),
+    alpha = 0.5,
+    data = intervals,
+    inherit.aes = FALSE,
+    fill = "#f1de07"
+  ) +
+  ggplot2::geom_line(
+    ggplot2::aes(date_index, y = pred),
+    data = intervals,
+    inherit.aes = FALSE
+  ) +
+  ggplot2::labs(
+    x = "Time (in weeks)",
+    y = "Number of new cases"
+  )
+```
+
+You can estimate the peak -- the time with the highest number of recorded cases -- using the `incidence2::estimate_peak()` function from the {incidence2} package.
+This function uses a bootstrapping method to determine the peak time (i.e. by resampling dates with replacement, resulting in a distribution of estimated peak times).
+Find one example on the [incidence2 vignette section about "Bootstrapping and estimating peaks"](https://www.reconverse.org/incidence2/vignette.html#sec:bootstrapping-and-estimating-peaks)
+
+
+<!--
+
+Possible challenge
+
+Using the simulated linelist stored in `sim_data`, complement the description of the outbreak:
+
+- Calculate the reporting delay using `{cleanepi}`.
+- Plot a histogram of the reporting delay using `{ggplot2}`.
+- Describe the reporting delay distribution using tradicional summary statistics.
+
+hint
+
+- The reporting delay is the time span from the `date_onset` to the `date_reporting`.
+- Use `cleanepi::timespan()` as introduced in the episode on **Clean case data**
+
+-->
 
 ::::::::::::: discussion
 
@@ -279,7 +385,7 @@ It also can help us to determine the pattern of spread (like point source, propa
 
 ### Identify type of epidemic or mode of transmission
 
-We recommend you read the section on ["Analysing and epi curve"](https://outbreaktools.ca/background/epidemic-curves/). It describes some patterns of spread.
+We recommend you read the section on ["Analysing and epi curve"](https://outbreaktools.ca/background/epidemic-curves/). It describes some patterns of spread we summarize here:
 
 | Type | Description | Shape of Epidemic Curve | Example |
 |------|-------------|------------------------|---------|
@@ -305,7 +411,7 @@ The *incubation period* is defined as the average time from infection to first c
 
 For example, measles has an incubation period with a range of 7-20 days (minimum/maximum), and a median of 12.5 days.
 
-```{r, eval = TRUE, echo = FALSE}
+```{r, echo = FALSE}
 epiparameter::epiparameter_db(
   disease = "measles",
   epi_name = "incubation period",
@@ -387,61 +493,29 @@ ggplot(cases, aes(x = day, y = count)) +
 
 ::::::
 
+:::::::::::::::::::::::: checklist
 
+An outbreak can be described using:
 
+- Incidence plots or epidemic curves from linelist (using `{incidence2}`)
+- Contact networks from contact data (using `{epicontacts}`).
+- Delays between dated events from linelist (using `{cleanepi}` or `{tidyverse}`)
 
-## Curve of cumulative cases
+In the next set of tutorials we will learn how to inform an outbreak assessment based on estimated parameters of transmission (growth rate and reproduction number), severity (case fatality risk) using more comprenhensive models and statistical distributions.
 
-The cumulative number of cases can be calculated using the `incidence2::cumulate()` function on an `incidence2` object and visualized it, as in the example below.
+For a refresher on delays and probability distributions, you can review introductory concepts with [some episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/).
 
-```{r}
-# Calculate cumulative incidence
-cum_df <- incidence2::cumulate(daily_incidence)
-
-# Plot cumulative incidence data using ggplot2
-plot(cum_df) +
-  ggplot2::labs(
-    x = "Time (in days)", # x-axis label
-    y = "weekly cases" # y-axis label
-  )
-```
-
-Note that this function preserves grouping, i.e., if the `incidence2` object contains groups, it will accumulate the cases accordingly.
+::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-- **Task**: Visulaize the cumulative cases from the `biweekly_incidence` object.
+Which combination of time unit, case categories, and arguments in `plot()` best captures the outbreak pattern of `sim_data` and why?
+
+Write some sentences describing your learnings.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Peak time estimation
-
-You can estimate the peak -- the time with the highest number of recorded cases -- using the `incidence2::estimate_peak()` function from the {incidence2} package.
-This function uses a bootstrapping method to determine the peak time (i.e. by resampling dates with replacement, resulting in a distribution of estimated peak times).
-
-```{r}
-# Estimate the peak of the daily incidence data
-peak <- incidence2::estimate_peak(
-  daily_incidence,
-  n = 100, # Number of simulations for the peak estimation
-  alpha = 0.05, # Significance level for the confidence interval
-  first_only = TRUE, # Return only the first peak found
-  progress = FALSE # Disable progress messages
-)
-
-# Display the estimated peak
-print(peak)
-```
-
-This example demonstrates how to estimate the peak time using the `incidence2::estimate_peak()` function at $95%$ confidence interval and using 100 bootstrap samples.
-
-::::::::::::::::::::::::::::::::::::: challenge
-
-- **Task**: Estimate the peak time from the `biweekly_incidence` object.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-`{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs.
+Lastly, `{incidence2}` produces basic plots for epicurves, but additional work is required to create well-annotated graphs.
 However, using the `{ggplot2}` package, you can generate more sophisticated epicurves, with more flexibility in annotation.
 `{ggplot2}` is a comprehensive package with many functionalities. 
 
@@ -484,7 +558,7 @@ ggplot2::ggplot(data = daily_incidence) +
   ) +
   labs(
     x = "Date", # x-axis label
-    y = "Number of cases", # y-axis label
+    y = "Number of new cases", # y-axis label
     title = "Daily Outbreak Cases", # plot title
     subtitle = "Epidemiological Data for the Outbreak", # plot subtitle
     caption = "Data Source: Simulated Data" # plot caption
@@ -549,11 +623,6 @@ ggplot2::ggplot(data = daily_incidence_2) +
 
 ::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::: challenge
-
-- **Task**: Produce an annotated figure for the `biweekly_incidence` object using the `{ggplot2}` package.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
