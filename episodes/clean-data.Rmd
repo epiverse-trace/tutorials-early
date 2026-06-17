@@ -474,11 +474,9 @@ We can describe this delay using a visualization:
 ```{r}
 # before plotting:
 # * keep unique IDs,
-# * drop for missings in sequential dates, and
 # * keep plausible a subset consistent observations (from 0 to 50 days)
 sim_ebola_delay <- sim_ebola_data %>%
   dplyr::distinct(case_id, .keep_all = TRUE) %>%
-  dplyr::filter(!(is.na(date_onset) | is.na(date_sample))) %>%
   dplyr::filter(reporting_delay >= 0, reporting_delay < 50)
 
 sim_ebola_delay %>%
@@ -488,7 +486,7 @@ sim_ebola_delay %>%
 
 ::::::::::::::::: callout
 
-We can also use **summary statistics** or **probability distribution** parameters to describe different delays. We will use them in the upcoming tutorials. For a refresher, you can review introductory concepts with [two episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/):
+We can also use **summary statistics** or **probability distribution** parameters to describe different delays. We will use them in the upcoming tutorials. For a refresher, you can review introductory concepts with [some episodes introducing delays for outbreak data](https://epiverse-trace.github.io/tutorials/).
 
 :::::::::::::::::
 
