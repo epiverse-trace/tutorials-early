@@ -128,7 +128,7 @@ incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = "day",
+  interval = "week",
   complete_dates = FALSE # Default
 )
 ```
@@ -144,7 +144,7 @@ incidence2::incidence(
   sim_data,
   date_index = "date_onset",
   groups = "sex",
-  interval = "day",
+  interval = "week",
   complete_dates = TRUE # Complete dates and missing counts
 )
 ```
@@ -163,11 +163,24 @@ Review the reference manual of the function `incidence2::incidence()` either off
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::: checklist
+
+**Why to convert linelist to incidence?**
+
+- To analyze data by person, place, and time:
+
+    - Track how events (cases, hospitalizations, deaths, recoveries) change over time (by day or week).
+    - Compare patterns across locations and demographic groups (e.g., age, sex).
+
+- Also describe and prepare data before modelling. (More on this in the next set of tutorials!)
+
+:::::::::::::::::::::::::::::::
+
 ## Visualization
 
 The `incidence2` objects can be visualized using the `plot()` function from the base R package.
-The resulting graph is referred to as an epidemic curve, or epi-curve for short.
-The following code snippets generate epi-curves for the `daily_incidence` and `weekly_group_incidence` incidence objects mentioned above.
+The resulting graph is referred to as an epidemic curve, or epicurve for short.
+The following code snippets generate epicurves for the `daily_incidence` and `weekly_group_incidence` incidence objects mentioned above.
 
 ```{r}
 # Plot daily incidence data
@@ -188,7 +201,9 @@ You can add layers using the grammar of graphics from `{ggplot2}`:
 plot(weekly_incidence) +
   ggplot2::labs(
     x = "Time (in weeks)", # x-axis label
-    y = "Weekly cases" # y-axis label
+    y = "Number of cases", # y-axis label
+    title = "Epidemic curve, simulated outbreak",
+    subtitle = "Weekly case incidence by date of onset"
   )
 ```
 
@@ -234,6 +249,146 @@ Reply to this question:
 - Which combination of time unit and case categories best captures the outbreak pattern and why?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::: checklist
+
+**What are common challenges when aggregating linelist to incidence?**
+
+- Aggregate by *one or more variables* jointly:
+
+    - By date (e.g., date of report and date of death) for outbreak severity analysis.
+    - By groups (e.g., age, sex, or location) for stratified analyses of transmission or severity.
+
+- Get a *complete time series* to have the same range of dates for each grouping.
+
+:::::::::::::::::::::::::::::
+
+::::::::::::: discussion
+
+**Why we use epidemic curves?**
+
+Generally, to describe the *size* and *time trend* of outbreak, and differences between *groups* (e.g., demographics).
+It could provide evidence to give an answer to a question like:
+Should we consider targeted over mass interventions?
+
+It also can help us to determine the pattern of spread (like point source, propagated source, or others), and investigate an outbreak based on disease parameters (like determine the exposure time based on the incubation period).
+
+:::::::::::::
+
+:::::: solution
+
+### Identify type of epidemic or mode of transmission
+
+We recommend you read the section on ["Analysing and epi curve"](https://outbreaktools.ca/background/epidemic-curves/). It describes some patterns of spread.
+
+| Type | Description | Shape of Epidemic Curve | Example |
+|------|-------------|------------------------|---------|
+| Point Source | Single shared exposure over a brief period | Sharp rise → peak → sharp fall (reflects incubation period) | Food poisoning from a single meal |
+| Continuous Source | Prolonged exposure to the same source | Gradual rise, no clear peak, extended duration | Contaminated water supply over several days |
+| Propagated Source | Person-to-person transmission | Successive waves or multiple peaks | Measles, COVID-19 |
+| Intermittent Source | Repeated but irregular exposure to the same source | Multiple peaks at irregular intervals and varying sizes | A restaurant periodically serving contaminated food |
+
+You can also complete this [Quick-Learn Lesson on "Using an Epi Curve to Determine Mode of Spread"](https://www.cdc.gov/training/quicklearns/epimode/) to train on how to determine the outbreak's likely mode of spread by analyzing an epidemic curve.
+
+::::::
+
+:::::: solution
+
+### Investigate outbreaks
+
+From an epicurve of incident cases by date on symptom onset, we can determine:
+
+- The incubation period, if the exposure time is known; or
+- The exposure time, if the incubation period is known.
+
+The *incubation period* is defined as the average time from infection to first clinical symptoms ([Figure 2 at On Kwok, et al.](https://www.sciencedirect.com/science/article/pii/S2001037018301703#f0010)). This varies from individual to individual for the same disease. 
+
+For example, measles has an incubation period with a range of 7-20 days (minimum/maximum), and a median of 12.5 days.
+
+```{r, eval = TRUE, echo = FALSE}
+epiparameter::epiparameter_db(
+  disease = "measles",
+  epi_name = "incubation period",
+  single_epiparameter = TRUE
+) %>% 
+  plot()
+```
+
+Knowing the incubation period of the pathogen allows us to estimate when exposure occurred by working backwards from symptom onset on the epidemic curve:
+
+- The start of exposure can be estimated by subtracting the *minimum* incubation period from the date of the first case.
+- The end of exposure can be estimated by subtracting the *maximum* incubation period from the date of the last case.
+
+```{r, echo = FALSE}
+# Simulate epidemic curve data (point source)
+set.seed(42)
+exposure_start <- 0
+exposure_end <- 2
+
+min_incubation <- 3
+max_incubation <- 7
+
+# Cases appear between exposure_start + min_incubation and exposure_end + max_incubation
+first_case <- exposure_start + min_incubation  # day 3
+last_case <- exposure_end + max_incubation     # day 9
+
+cases <- data.frame(
+  day = c(3, 4, 5, 6, 7, 8, 9),
+  count = c(1, 3, 6, 5, 3, 2, 1)
+)
+
+ggplot(cases, aes(x = day, y = count)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "white", width = 0.8) +
+
+  # Exposure window
+  annotate("rect", xmin = exposure_start, xmax = exposure_end,
+           ymin = 0, ymax = Inf, alpha = 0.15, fill = "red") +
+  annotate("text", x = (exposure_start + exposure_end) / 2, y = 4.8,
+           label = "Exposure\nWindow", color = "red", size = 3.5, fontface = "bold") +
+
+  # First case line and label
+  geom_vline(xintercept = first_case, linetype = "dashed", color = "darkgreen", linewidth = 0.8) +
+  annotate("text", x = first_case + 0.15, y = 5.5,
+           label = "First case", color = "darkgreen", size = 3.2, hjust = 0) +
+
+  # Last case line and label
+  geom_vline(xintercept = last_case, linetype = "dashed", color = "purple", linewidth = 0.8) +
+  annotate("text", x = last_case - 0.15, y = 5.5,
+           label = "Last case", color = "purple", size = 3.2, hjust = 1) +
+
+  # Min incubation bracket (above bars)
+  annotate("segment", x = exposure_start, xend = first_case,
+           y = 6.8, yend = 6.8, color = "darkgreen",
+           arrow = arrow(ends = "both", length = unit(0.2, "cm"))) +
+  annotate("text", x = (exposure_start + first_case) / 2, y = 7.1,
+           label = "Min incubation period", color = "darkgreen", size = 3) +
+
+  # Max incubation bracket (above bars)
+  annotate("segment", x = exposure_end, xend = last_case,
+           y = 7.5, yend = 7.5, color = "purple",
+           arrow = arrow(ends = "both", length = unit(0.2, "cm"))) +
+  annotate("text", x = (exposure_end + last_case) / 2, y = 7.8,
+           label = "Max incubation period", color = "purple", size = 3) +
+
+  scale_x_continuous(breaks = 0:10, name = "Day") +
+  scale_y_continuous(name = "Number of Cases", limits = c(0, 8.2),
+                     breaks = scales::breaks_pretty()) +
+  labs(
+    title = "Epidemic Curve: Estimating Exposure from Incubation Period",
+    subtitle = "Working backwards from first and last cases to identify the exposure window"
+  ) +
+  theme_classic() +
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(size = 10, color = "gray40"),
+    axis.title = element_text(size = 11)
+  )
+```
+
+::::::
+
+
+
 
 ## Curve of cumulative cases
 
