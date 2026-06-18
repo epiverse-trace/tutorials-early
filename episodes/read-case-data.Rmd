@@ -85,7 +85,6 @@ ebola_confirmed <- rio::import(
 ebola_confirmed
 ```
 
-
 ```{r eval=TRUE, echo=FALSE, message=FALSE}
 # read data
 ebola_confirmed <- rio::import(
@@ -96,6 +95,18 @@ ebola_confirmed <- rio::import(
 # preview data
 ebola_confirmed
 ```
+
+```{r eval=FALSE, echo=FALSE}
+# for positron
+ebola_confirmed <- rio::import(
+  here::here("episodes", "data", "ebola_cases_2.csv")
+) %>%
+  dplyr::as_tibble() # for a simple data frame output
+
+# preview data
+ebola_confirmed
+```
+
 
 You can use the same approach to import other file formats such as `tsv`, `xlsx`, and more.
 
@@ -200,34 +211,18 @@ Note: This example uses a public test database from the European Bioinformatics 
 
 The `readepi::show_tables()` function retrieves the full list of table names from a database:
 
-```{r eval=FALSE}
+```{r}
 # get the table names
 tables <- readepi::show_tables(login = rdbms_login)
 
-tables
+tables[1:5]
 ```
 
 In a relational database, you typically have multiple tables. Each table represents a specific entity (e.g., patients, care units, treatments). Tables are linked through common identifiers called primary keys or foreign keys.
 
 ### 3. Read data from a table in a database
 
-Use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters, as demonstrated in the code chunk below.
-
-```{r eval=FALSE}
-# import data from the 'author' table using an SQL query
-dat <- readepi::read_rdbms(
-  login = rdbms_login,
-  query = "select * from author"
-)
-
-# import data from the 'author' table using a list of parameters
-dat <- readepi::read_rdbms(
-  login = rdbms_login,
-  query = list(table = "author", fields = NULL, filter = NULL)
-)
-```
-
-Alternatively, you can read the data from the `author` table using `dplyr::tbl()`.
+You can read the data from the `author` table using `dplyr::tbl()`.
 
 ```{r}
 # import data from the 'author' table using an SQL query
@@ -247,6 +242,8 @@ dat %>%
   dplyr::show_query()
 ```
 
+Alternatively, you can use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters.
+
 ### 4. Extract data from the database
 
 Use `dplyr::collect()` to force computation of a database query and extract the output to your local computer.
@@ -263,11 +260,31 @@ Ideally, after specifying a set of queries, we can reduce the size of the input 
 
 ### Run SQL queries in R using {dbplyr}
 
-Practice how to make relational database SQL queries using multiple `{dplyr}` verbs like `dplyr::left_join()` among tables before pulling out data to your local session with `dplyr::collect()`! 
+Create one table containing:
 
-You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
+- the column `name` from table `author`,
+- the column `rfam_acc` from table `family_author`, and
+- using `author_id` as primary key or common identifier.
+
+Following these steps:
+
+- Use `{dplyr}` verbs to select column and join tables,
+- Print the relational database SQL queries, and
+- Pull out data to your local session.
 
 ::::::::::::::: hint
+
+Join columns from two different tables:
+
+- From the table `author`, select `author_id` and `name`.
+- From the table `family_author`, select `author_id` and `rfam_acc`.
+- Join to the table `author` the table `family_author` using `dplyr::left_join()`.
+- Print the SQL query using `dplyr::show_query()`
+- collect the joined output using `dplyr::collect()`
+
+:::::::::::::::
+ 
+::::::::::::::: solution
 
 ```{r}
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
@@ -286,12 +303,29 @@ dplyr::left_join(author, family_author, keep = TRUE) %>%
   dplyr::collect()
 ```
 
+You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
 
 :::::::::::::::
 
 ::::::::::::::::::::::
 
+We can close the connection to the database with:
 
+```{r}
+pool::poolClose(rdbms_login)
+```
+
+:::::::::: spoiler
+
+You can confirm the connection closed running the created objects in console:
+
+```{r}
+rdbms_login
+
+dat
+```
+
+::::::::::
 
 ## Reading from HIS APIs
 
@@ -316,6 +350,8 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+
+dhis2_login
 ```
 
 ::::::: caution
