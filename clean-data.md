@@ -19,10 +19,12 @@ exercises: 15
 
 ::::::::::::::::::::: prereq
 
-In this episode, we will use a simulated Ebola dataset that can be:
+In this episode, we will use a simulated Ebola dataset. To access it:
 
 - Download the [`simulated_ebola_2.csv`](https://epiverse-trace.github.io/tutorials-early/data/simulated_ebola_2.csv)
 - Save it in the `data/` folder.
+
+You also need:
 
 **The latest R version:** Follow instructions in Setup to [configure an RStudio Project and folder](../learners/setup.md#setup-an-rstudio-project-and-folder)
 
@@ -77,10 +79,10 @@ If not installed, use the `prerequisite` and `spoiler` boxes above.
 ### The double-colon (`::`) operator
 
 The`::`in R lets you access functions or objects from a specific package without attaching the entire package to the search path.
-It offers several important advantages including the followings:
+It offers several important advantages, including the following:
 
 - Telling explicitly which package a function comes from, reducing ambiguity and potential conflicts when several packages have functions with the same name.
-- Allowing to call a function from a package without loading the whole package with library().
+- Allowing you to call a function from a package without loading the whole package with `library()`.
 
 For example, the command `dplyr::filter(data, condition)` means we are calling the `filter()` function from the `{dplyr}` package.
 
@@ -88,14 +90,14 @@ For example, the command `dplyr::filter(data, condition)` means we are calling t
 
 ### Load data
 
-The first step is to import the dataset into working environment.
+The first step is to import the dataset into the working environment.
 This can be done by following the guidelines outlined in the [Read case data](../episodes/read-cases.Rmd) episode.
-It involves loading the dataset into `R` environment and view its structure and content.
+It involves loading the dataset into the `R` environment and viewing its structure and content.
 
 
 ``` r
 # Read data
-# e.g.: if path to file is data/simulated_ebola_2.csv then:
+# e.g., if path to file is data/simulated_ebola_2.csv then:
 raw_ebola_data <- rio::import(
   here::here("data", "simulated_ebola_2.csv")
 ) %>%
@@ -131,7 +133,7 @@ raw_ebola_data
 
 ::::::::::::::::: discussion
 
-Let's first **diagnose** the data frame.
+Let's first **diagnose** for format issues the data frame.
 List all the characteristics in the data frame above that are problematic for data analysis.
 
 Are any of those characteristics familiar from any previous data analysis you have performed?
@@ -182,21 +184,18 @@ cleanepi::scan_data(raw_ebola_data, format = "percentage")
 6      region       0%       0%       0%      100%      0%
 ```
 
-The results provide an overview of the content of all character columns, including column names, and the percent of some data types within them.
+The results provide an overview of the content of all character columns, including column names, and the percentage of some data types within them.
 You can see that the column names in the dataset are descriptive but lack consistency.
 Some are composed of multiple words separated by white spaces.
-Additionally, some columns contain more than one data type, and there are missing values in the form of an empty string in others.
+Additionally, some columns such as `date_onset` contain more than one data type, which means that they can not be immediately recognized and transformed to `<Date>`. There are missing values in the form of an empty string `""` in some and `NA` in others.
 
 ## Common operations
 
-This section  demonstrate how to perform some common data cleaning operations using the `{cleanepi}` package.
+This section demonstrates how to perform some common data cleaning operations using the `{cleanepi}` package.
 
 ### Standardizing column names
 
-For this example dataset, standardizing column names typically involves removing with spaces and connecting different words with "`_`".
-This practice helps maintain consistency and readability in the dataset.
-However, the function used for standardizing column names offers more options.
-Type `?cleanepi::standardize_column_names` in the console for more details.
+For this example dataset, standardizing column names typically involves removing white spaces and connecting different words with "`_`". This practice helps maintain consistency and readability in the dataset. However, the function used for standardizing column names offers more options. Type `?cleanepi::standardize_column_names` in the console for more details.
 
 
 ``` r
@@ -216,7 +215,7 @@ This argument accepts a vector of column names that are intended to be kept unch
 
 - What differences can you observe in the column names?
 
-- Standardize the column names of the input dataset, but keep the first column names as it is.
+- Standardize the column names of the input dataset, but keep the first column name as it is
 
 ::::::::::::::::: hint
 
@@ -234,7 +233,7 @@ cleanepi::standardize_column_names(data = raw_ebola_data, keep = "V1")
 
 Raw data may contain fields that don't add any variability to the data such as **empty** rows and columns, or **constant** columns (where all entries have the same value).
 It can also contain **duplicated** rows.
-Functions from `{cleanepi}` like `remove_duplicates()` and `remove_constants()` remove such irregularities as demonstrated in the below code chunk.
+Functions from `{cleanepi}` like `remove_duplicates()` and `remove_constants()` remove such irregularities as demonstrated in the code chunk below.
 
 
 ``` r
@@ -261,10 +260,9 @@ columns.  -->
 
 ::::::::::::::::::::: spoiler
 
-#### How many rows you removed? What rows where removed?
+#### How many rows did you remove? Which rows were removed?
 
-You can get the number and location of the duplicated rows that where found.
-Run `cleanepi::print_report()`, wait for the report to open in your browser, and find the "Duplicates" tab.
+You can get the number and location of the duplicated rows that were found. Run `cleanepi::print_report()`, wait for the report to open in your browser, and find the "Duplicates" tab.
 
 To use this information within R, you can print data frames with specific sections of the report in the console using the argument `what`.
 
@@ -278,6 +276,12 @@ cleanepi::print_report(data = sim_ebola_data, what = "removed_duplicates")
 ```
 
 :::::::::::::::::::::
+
+:::::::: callout
+
+**Warning:** Having constants (and potentially sometimes duplicates) is not always an issue in the data. Do check these before accepting the changes.
+
+::::::::
 
 ::::::::::::::::::::: challenge
 
@@ -357,9 +361,7 @@ This function checks whether the IDs are unique and meet the required criteria s
 
 ### Replacing missing values
 
-In addition to the irregularities, raw data may contain missing values, and these may be encoded by different strings (e.g. `"NA"`, `""`, `character(0)`).
-To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the entire dataset.
-Below is a code snippet demonstrating how you can achieve this in `{cleanepi}` for missing entries represented by an empty string `""`:
+In addition to the irregularities, raw data may contain missing values, and these may be encoded by different strings (e.g., `"NA"`, `""`, `character(0)`). To ensure robust analysis, it is a good practice to replace all missing values by `NA` in the entire dataset. Below is a code snippet demonstrating how you can achieve this in `{cleanepi}` for missing entries represented by an empty string `""`:
 
 
 ``` r
@@ -472,10 +474,7 @@ This section covers some of these specialized tasks, mainly focused on:
 
 ### Standardizing dates
 
-An epidemic dataset typically contains date columns for different events, such as the date of infection, date of symptoms onset, etc.
-These dates can come in different date formats, and it is good practice to standardize them to benefit from the powerful R functionalities designed to handle date values in downstream analyses.
-The `{cleanepi}` package provides functionality for converting date columns of epidemic datasets into ISO8601 format, ensuring consistency across the different date columns.
-Here's how you can use it on our simulated dataset:
+An epidemic dataset typically contains `Date` columns for different events, such as the date of infection, date of symptoms onset, etc. These dates can come in different date formats, and it is good practice to standardize them to benefit from the powerful R functionalities designed to handle date values in downstream analyses. The `{cleanepi}` package provides functionality for converting date columns of epidemic datasets into ISO8601 format, ensuring consistency across the different date columns. Here's how you can use it on our simulated dataset:
 
 
 ``` r
@@ -519,7 +518,7 @@ This function converts the values in the target columns into the **YYYY-mm-dd** 
 
 #### How is this possible?
 
-We invite you to find the key package that makes this standardisation possible inside `{cleanepi}` by reading the "Details" section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details)!
+We invite you to find the key package that makes this standardization possible inside `{cleanepi}` by reading the “Details” section of the [Standardize date variables reference manual](https://epiverse-trace.github.io/cleanepi/reference/standardize_dates.html#details).
 
 Also, check how to use the `orders` argument if you want to target United States (U.S.) format character strings.
 Join the discussion about [this reproducible example](https://github.com/epiverse-trace/cleanepi/discussions/262).
@@ -606,10 +605,16 @@ dat_without_missings_dates %>%
 
 ### Calculating time span between different date events
 
-In epidemiological data analysis, it is also useful to track and analyze time-dependent events, such as the progression of a disease outbreak (i.e., the time elapsed between today and the date the first case was reported) or the duration between date of sample collection and analysis (i.e., the time difference between today and the sample collection date).
-A common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
+In epidemiological data analysis, it is also useful to track and analyze time-dependent events from linelist. 
 
-The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events at different time scales.
+- One example is the [reporting delay](reference.md#reportingdelay) (i.e., the time elapsed from the date of case symptom onset to the date of case report). In the next set of tutorials, we will learn how to acccount for this in the real-time analysis of outbreaks.
+
+- Another example is the time delay from the date of sample collection from a suspected case to the date of sample already tested (i.e., with known result), contributing to the total reporting delay ([Marinović et al., 2015](https://wwwnc.cdc.gov/eid/article/21/2/13-0504_article)). It can inform the assessment of the laboratory testing capacity of the region responding to the outbreak.
+
+- The most common example is to calculate the age of all the subjects given their dates of birth (i.e., the time difference between today and their date of birth).
+
+The `{cleanepi}` package offers a convenient function for calculating the time elapsed between two dated events.
+
 For example, the below code snippet utilizes the function `cleanepi::timespan()` to compute **reporting delay** between the date of symptom onset (`date_onset`) and date of case confirmation (`date_sample`)
 
 
@@ -750,9 +755,9 @@ dat_clean %>%
 
 :::::::::::::::::::::::::::::::::::::::::::::::
 
-::::::::::::::::::::::::::::::::::::::::::::::: spoiler
+What differentiates `cleanepi::timespan()` from `dplyr::mutate()` is in how easily you can calculate time differences in different time units (using the argument `span_unit`) and how you can retrieve remainer time in a different column and different time unit (using `span_remainder_unit`). Check the spoiler below for an example:
 
-Age data is useful in many downstream analysis.
+::::::::::::::::::::::::::::::::::::::::::::::: spoiler
 
 Calculate the age in years of each subject until the $3^{rd}$ of January 2025 (`"2025-01-03"`) from their date of birth, and the remainder time in months.
 
@@ -850,8 +855,7 @@ test_dict
 6 f       female gender      6
 ```
 
-Now, we can use this dictionary to standardize values of the the "gender" column according to predefined categories.
-Below is an example code chunk demonstrating how to perform this using the `clean_using_dictionary()` function from the {cleanepi} package.
+Now, we can use this dictionary to standardize values of the “gender” column according to predefined categories. Below is an example code chunk demonstrating how to perform this using the `clean_using_dictionary()` function from the `{cleanepi}` package.
 
 
 ``` r
@@ -886,9 +890,8 @@ This approach simplifies the data cleaning process, ensuring that categorical va
 
 #### How to create your own data dictionary?
 
-Note that, when a column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error.
-You can start a custom dictionary with a data frame inside or outside R and use the function `cleanepi::add_to_dictionary()` to include new elements in the dictionary.
-For example:
+Note that when a column in the dataset contains values that are not in the dictionary, the function `cleanepi::clean_using_dictionary()` will raise an error. 
+You can start a custom dictionary with a data frame inside or outside R and use the function `cleanepi::add_to_dictionary()` to include new elements in the dictionary. For example:
 
 
 ``` r
@@ -916,15 +919,14 @@ new_dictionary
 2 1       male   sex        2
 ```
 
-You can have more details in the section about "Dictionary-based data substituting" in the package [vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
+There are more details in the section about "Dictionary-based data substituting" in the package 
+[vignette](https://epiverse-trace.github.io/cleanepi/articles/cleanepi.html#dictionary-based-data-substituting).
 
 ::::::::::::::::::::::::::
 
 ### Converting to numeric values
 
-In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert character values for numbers explicitly into numeric values (e.
-g.
-`"seven"` to `7`).
+In the raw dataset, some columns can come with mixture of character and numerical values, and you will often want to convert character values for numbers explicitly into numeric values (e.g., `"seven"` to `7`).
 For example, in our simulated data set, in the age column some entries are written in words.
 In `{cleanepi}` the function `convert_to_numeric()` does such conversion as illustrated in the below code chunk.
 
@@ -965,7 +967,7 @@ Thanks to the `{numberize}` package, we can convert numbers written in English, 
 
 ## Multiple operations at once
 
-You can combine multiple data cleaning tasks via the base R pipe (`%>%`) or the {magrittr} pipe (`%>%`) operator, as shown in the below code snippet.
+You can combine multiple data cleaning tasks via the base R pipe (`|>`) or the `{magrittr}` pipe (`%>%`) operator, as shown in the code snippet below.
 
 
 ``` r
@@ -1054,10 +1056,11 @@ Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleanin
 
 ## Cleaning report
 
-The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing operations conducted during the analysis.
-This report is presented as a HTML file that automatically opens in your browser with.
-Each section corresponds to a specific data cleansing operation, and clicking on each section allows you to access the results of that particular operation.
-This interactive approach enables users to efficiently review and analyze the effects of individual cleansing steps within the broader data cleansing process.
+The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing operations conducted during the analysis. 
+
+This report is presented as a `HTML` file. If it does not opens automatically, access to the temporary folder. Copy the path printed in the R console, go to to your local file explorer, paste the path in the finder bar, you will find there the `HTML` file.
+
+Each section corresponds to a specific data cleansing operation, and clicking on each section allows you to access the results of that particular operation. This interactive approach enables users to efficiently review and analyze the effects of individual cleansing steps within the broader data cleansing process.
 
 You can view the report using:
 
@@ -1065,18 +1068,16 @@ You can view the report using:
 cleanepi::print_report(data = cleaned_data)
 ```
 
-<p><figure>
+<figure>
     <img src="fig/report_demo.png"
-         alt="Data cleaning report" 
-         width="600"/> 
-    <figcaption>
-            <p>Example of data cleaning report generated by `{cleanepi}`</p>
-    </figcaption>
+         alt="Data cleaning report"
+         width="600"/>
+    <figcaption>Example of data cleaning report generated by <code>{cleanepi}</code></figcaption>
 </figure>
 
 ::::::::::::::::::::::::::::::::::::: keypoints
 
-- Use `{cleanepi}` package to clean and standardize epidemiological-related data
+- Use the `{cleanepi}` package to clean and standardize epidemiological-related data
 - Understand how to use `{cleanepi}` to perform common data cleansing tasks
 - View the data cleaning report in a browser, consult it and make decisions.
 
