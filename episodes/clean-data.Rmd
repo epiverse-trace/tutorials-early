@@ -736,7 +736,11 @@ Notice that `{cleanepi}` contains a set of functions to **diagnose** the cleanin
 
 ## Cleaning report
 
-The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing operations conducted during the analysis. This report is presented as a HTML file that automatically opens in your browser. Each section corresponds to a specific data cleansing operation, and clicking on each section allows you to access the results of that particular operation. This interactive approach enables users to efficiently review and analyze the effects of individual cleansing steps within the broader data cleansing process.
+The `{cleanepi}` package generates a comprehensive report detailing the findings and actions of all data cleansing operations conducted during the analysis. 
+
+This report is presented as a `HTML` file. If it does not opens automatically, access to the temporary folder. Copy the path printed in the R console, go to to your local file explorer, paste the path in the finder bar, you will find there the `HTML` file.
+
+Each section corresponds to a specific data cleansing operation, and clicking on each section allows you to access the results of that particular operation. This interactive approach enables users to efficiently review and analyze the effects of individual cleansing steps within the broader data cleansing process.
 
 You can view the report using:
 
