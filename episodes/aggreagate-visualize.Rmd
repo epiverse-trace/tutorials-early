@@ -624,9 +624,9 @@ ggplot2::ggplot(data = daily_incidence) +
   ) +
   theme_minimal() + # apply a minimal theme for clean visuals
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5), # center and bold title
+    plot.title = element_text(face = "bold", hjust = 0.5), # title center + bold
     plot.subtitle = element_text(hjust = 0.5), # center subtitle
-    plot.caption = element_text(face = "italic", hjust = 0), # italicized caption
+    plot.caption = element_text(face = "italic", hjust = 0), # italic caption
     axis.title = element_text(face = "bold"), # bold axis titles
     axis.text.x = element_text(angle = 45, vjust = 0.5) # rotated x-axis text
   ) +
@@ -671,11 +671,11 @@ ggplot2::ggplot(data = daily_incidence_2) +
   ) +
   theme_minimal() + # apply minimal theme
   theme(
-    plot.title = element_text(face = "bold", hjust = 0.5), # bold and center the title
+    plot.title = element_text(face = "bold", hjust = 0.5), # title bold + center
     plot.subtitle = element_text(hjust = 0.5), # center the subtitle
     plot.caption = element_text(face = "italic", hjust = 0), # italic caption
     axis.title = element_text(face = "bold"), # bold axis labels
-    axis.text.x = element_text(angle = 45, vjust = 0.5) # rotate x-axis text for readability
+    axis.text.x = element_text(angle = 45, vjust = 0.5) # rotate x-axis text
   ) +
   labs(
     x = "Date", # x-axis label
@@ -689,7 +689,7 @@ ggplot2::ggplot(data = daily_incidence_2) +
     breaks = breaks, # set custom date breaks
     labels = scales::label_date_short() # short date format for x-axis labels
   ) +
-  scale_fill_manual(values = c("lightblue", "lightpink")) # custom fill colors for sex
+  scale_fill_manual(values = c("lightblue", "lightpink")) # custom fill colors
 ```
 
 ::::::::::::::::::::::
