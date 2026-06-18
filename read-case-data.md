@@ -88,7 +88,6 @@ ebola_confirmed
 ```
 
 
-
 ``` output
 # A tibble: 120 × 4
     year month   day confirm
@@ -105,6 +104,9 @@ ebola_confirmed
 10  2014     5    29      12
 # ℹ 110 more rows
 ```
+
+
+
 
 You can use the same approach to import other file formats such as `tsv`, `xlsx`, and more.
 
@@ -188,18 +190,20 @@ rdbms_login <- readepi::login(
 )
 ```
 
-``` error
-Error in `.local()`:
-! Failed to connect to database: Error: Too many connections
+``` output
+✔ Logged in successfully!
 ```
 
 ``` r
 rdbms_login
 ```
 
-``` error
-Error:
-! object 'rdbms_login' not found
+``` output
+<Pool> of MySQLConnection objects
+  Objects checked out: 0
+  Available in pool: 1
+  Max size: Inf
+  Valid: TRUE
 ```
 
 The function parameters are:
@@ -229,31 +233,19 @@ The `readepi::show_tables()` function retrieves the full list of table names fro
 # get the table names
 tables <- readepi::show_tables(login = rdbms_login)
 
-tables
+tables[1:5]
+```
+
+``` output
+[1] "_annotated_file" "_family_file"    "_genome_data"    "_lock"          
+[5] "_overlap"       
 ```
 
 In a relational database, you typically have multiple tables. Each table represents a specific entity (e.g., patients, care units, treatments). Tables are linked through common identifiers called primary keys or foreign keys.
 
 ### 3. Read data from a table in a database
 
-Use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters, as demonstrated in the code chunk below.
-
-
-``` r
-# import data from the 'author' table using an SQL query
-dat <- readepi::read_rdbms(
-  login = rdbms_login,
-  query = "select * from author"
-)
-
-# import data from the 'author' table using a list of parameters
-dat <- readepi::read_rdbms(
-  login = rdbms_login,
-  query = list(table = "author", fields = NULL, filter = NULL)
-)
-```
-
-Alternatively, you can read the data from the `author` table using `dplyr::tbl()`.
+You can read the data from the `author` table using `dplyr::tbl()`.
 
 
 ``` r
@@ -262,20 +254,23 @@ dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::filter(initials == "A") %>%
   dplyr::arrange(desc(author_id))
-```
 
-``` error
-Error:
-! object 'rdbms_login' not found
-```
-
-``` r
 dat
 ```
 
-``` error
-Error:
-! object 'dat' not found
+``` output
+# Source:     SQL [?? x 6]
+# Database:   mysql 8.0.32-24 [@mysql-rfam-public.ebi.ac.uk:/Rfam]
+# Ordered by: desc(author_id)
+  author_id name           last_name    initials orcid                 synonyms
+      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
+1        46 Roth A         Roth         A        ""                    ""      
+2        42 Nahvi A        Nahvi        A        ""                    ""      
+3        32 Machado Lima A Machado Lima A        ""                    ""      
+4        31 Levy A         Levy         A        ""                    ""      
+5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
+6        13 Chen A         Chen         A        ""                    ""      
+7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -287,10 +282,15 @@ dat %>%
   dplyr::show_query()
 ```
 
-``` error
-Error:
-! object 'dat' not found
+``` output
+<SQL>
+SELECT `author`.*
+FROM `author`
+WHERE (`initials` = 'A')
+ORDER BY `author_id` DESC
 ```
+
+Alternatively, you can use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters.
 
 ### 4. Extract data from the database
 
@@ -303,9 +303,17 @@ dat %>%
   dplyr::collect()
 ```
 
-``` error
-Error:
-! object 'dat' not found
+``` output
+# A tibble: 7 × 6
+  author_id name           last_name    initials orcid                 synonyms
+      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
+1        46 Roth A         Roth         A        ""                    ""      
+2        42 Nahvi A        Nahvi        A        ""                    ""      
+3        32 Machado Lima A Machado Lima A        ""                    ""      
+4        31 Levy A         Levy         A        ""                    ""      
+5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
+6        13 Chen A         Chen         A        ""                    ""      
+7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -314,11 +322,31 @@ Ideally, after specifying a set of queries, we can reduce the size of the input 
 
 ### Run SQL queries in R using {dbplyr}
 
-Practice how to make relational database SQL queries using multiple `{dplyr}` verbs like `dplyr::left_join()` among tables before pulling out data to your local session with `dplyr::collect()`! 
+Create one table containing:
 
-You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
+- the column `name` from table `author`,
+- the column `rfam_acc` from table `family_author`, and
+- using `author_id` as primary key or common identifier.
+
+Following these steps:
+
+- Use `{dplyr}` verbs to select column and join tables,
+- Print the relational database SQL queries, and
+- Pull out data to your local session.
 
 ::::::::::::::: hint
+
+Join columns from two different tables:
+
+- From the table `author`, select `author_id` and `name`.
+- From the table `family_author`, select `author_id` and `rfam_acc`.
+- Join to the table `author` the table `family_author` using `dplyr::left_join()`.
+- Print the SQL query using `dplyr::show_query()`
+- collect the joined output using `dplyr::collect()`
+
+:::::::::::::::
+ 
+::::::::::::::: solution
 
 
 ``` r
@@ -326,32 +354,29 @@ You can also review the `{dbplyr}` R package. But for a step-by-step tutorial ab
 author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::select(author_id, name)
-```
 
-``` error
-Error:
-! object 'rdbms_login' not found
-```
-
-``` r
 family_author <- rdbms_login %>%
   dplyr::tbl(from = "family_author") %>%
   dplyr::select(author_id, rfam_acc)
-```
 
-``` error
-Error:
-! object 'rdbms_login' not found
-```
-
-``` r
 dplyr::left_join(author, family_author, keep = TRUE) %>%
   dplyr::show_query()
 ```
 
-``` error
-Error:
-! object 'author' not found
+``` output
+Joining with `by = join_by(author_id)`
+```
+
+``` output
+<SQL>
+SELECT
+  `author`.`author_id` AS `author_id.x`,
+  `name`,
+  `family_author`.`author_id` AS `author_id.y`,
+  `rfam_acc`
+FROM `author`
+LEFT JOIN `family_author`
+  ON (`author`.`author_id` = `family_author`.`author_id`)
 ```
 
 ``` r
@@ -359,17 +384,67 @@ dplyr::left_join(author, family_author, keep = TRUE) %>%
   dplyr::collect()
 ```
 
-``` error
-Error:
-! object 'author' not found
+``` output
+Joining with `by = join_by(author_id)`
 ```
 
+``` output
+# A tibble: 5,029 × 4
+   author_id.x name         author_id.y rfam_acc
+         <int> <chr>              <int> <chr>   
+ 1           1 Ames T                 1 RF01831 
+ 2           2 Argasinska J           2 RF02554 
+ 3           2 Argasinska J           2 RF02555 
+ 4           2 Argasinska J           2 RF02722 
+ 5           2 Argasinska J           2 RF02720 
+ 6           2 Argasinska J           2 RF02719 
+ 7           2 Argasinska J           2 RF02721 
+ 8           2 Argasinska J           2 RF02670 
+ 9           2 Argasinska J           2 RF02718 
+10           2 Argasinska J           2 RF02668 
+# ℹ 5,019 more rows
+```
+
+You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
 
 :::::::::::::::
 
 ::::::::::::::::::::::
 
+We can close the connection to the database with:
 
+
+``` r
+pool::poolClose(rdbms_login)
+```
+
+:::::::::: spoiler
+
+You can confirm the connection closed running the created objects in console:
+
+
+``` r
+rdbms_login
+```
+
+``` output
+<Pool> of MySQLConnection objects
+  Objects checked out: 0
+  Available in pool: 0
+  Max size: Inf
+  Valid: FALSE
+```
+
+``` r
+dat
+```
+
+``` error
+Error in `poolCheckout()`:
+! The pool has been closed.
+```
+
+::::::::::
 
 ## Reading from HIS APIs
 
@@ -395,6 +470,16 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+
+dhis2_login
+```
+
+``` output
+<httr2_response>
+GET https://play.im.dhis2.org/stable-2-41-8-1/api/me
+Status: 200 OK
+Content-Type: application/json
+Body: In memory (13312 bytes)
 ```
 
 ::::::: caution
