@@ -54,3 +54,6 @@ renv/sandbox/
 
 # others
 .DS_Store
+.claude/
+README.html
+README_files/
