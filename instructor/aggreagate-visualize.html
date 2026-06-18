@@ -311,7 +311,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2026-06-17 |
+        <p>Last updated on 2026-06-18 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/aggreagate-visualize.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -332,9 +332,9 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How to aggregate and summarise case data?</li>
+<ul><li>How to aggregate and summarize case data?</li>
 <li>How to visualize aggregated data?</li>
-<li>What is distribution of cases across time, space, gender, and
+<li>What is the distribution of cases across time, space, gender, and
 age?</li>
 </ul></div>
 </div>
@@ -353,11 +353,11 @@ age?</li>
 </div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>In an analytic pipeline, exploratory data analysis (EDA) is an
-important step before formal modelling. EDA helps determine
-relationships between variables and summarize their main
-characteristics, often by means of data visualization.</p>
+important step before formal modeling. EDA helps determine relationships
+between variables and summarize their main characteristics, often by
+means of data visualization.</p>
 <p>This episode focuses on EDA of outbreak data using R packages. A key
-aspects of EDA in epidemic analysis are <strong>person, place and
+aspects of EDA in epidemic analysis are <strong>person, place, and
 time</strong>. It is useful to identify how observed events–such as
 confirmed cases, hospitalizations, deaths, and recoveries–change over
 time, and how these vary across different locations and demographic
@@ -367,16 +367,16 @@ aggregate the linelist data according to specific characteristics, and
 visualize the resulting epidemic curves (epicurves) that plot the number
 of new events (i.e. case incidence over time). We’ll use the
 <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> package to simulate the outbreak data to
-analyse. We’ll use the pipe operator (<code>%&gt;%</code>) to connect
+analyze. We’ll use the pipe operator (<code>%&gt;%</code>) to connect
 some of their functions, including others from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>
-and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> packages, so let’s also call to the
-{tidyverse} package.</p>
+and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> packages, so let’s also load the {tidyverse}
+package.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load packages</span></span>
-<span><span class="kw">library</span><span class="op">(</span><span class="va">incidence2</span><span class="op">)</span> <span class="co"># For aggregating and visualising</span></span>
+<span><span class="kw">library</span><span class="op">(</span><span class="va">incidence2</span><span class="op">)</span> <span class="co"># For aggregating and visualizing</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">simulist</span><span class="op">)</span> <span class="co"># For simulating linelist data</span></span>
 <span><span class="kw">library</span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span> <span class="co"># For {dplyr} and {ggplot2} functions and the pipe %&gt;%</span></span></code></pre>
 </div>
@@ -384,9 +384,9 @@ and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> pa
 <hr class="half-width"><p>To illustrate the process of conducting EDA on outbreak data, we will
 generate a line list for a hypothetical disease outbreak utilizing the
 <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> package. <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> generates
-simulated data for outbreak according to a given configuration. Its
-minimal configuration can generate a linelist, as shown in the below
-code chunk:</p>
+simulated data for an outbreak according to a given configuration. Its
+minimal configuration can generate a linelist, as shown in the code
+chunk below:</p>
 <div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -422,36 +422,36 @@ code chunk:</p>
 #   date_outcome &lt;date&gt;, date_first_contact &lt;date&gt;, date_last_contact &lt;date&gt;,
 #   ct_value &lt;dbl&gt;</code></pre>
 </div>
-<p>This linelist dataset has simulated entries on individual-level
+<p>This linelist dataset contains simulated individual-level records of
 events during an outbreak.</p>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Additional Resources on Outbreak Data </h3>
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Additional resources on outbreak data </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>The above is the default configuration of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a>. It
 includes a number of assumptions about the transmissibility and severity
 of the pathogen. If you want to know more about the
-<code>simulist::sim_linelist()</code> function and other functionalities
-check the <a href="https://epiverse-trace.github.io/simulist/" class="external-link">documentation
+<code>simulist::sim_linelist()</code> function and other
+functionalities, check the <a href="https://epiverse-trace.github.io/simulist/" class="external-link">documentation
 website</a>.</p>
-<p>You can also find data sets from past real outbreaks within the <a href="https://www.reconverse.org/outbreaks/" class="external-link"><code>{outbreaks}</code></a>
-R package.</p>
+<p>You can also find datasets from past real outbreaks within the <a href="https://www.reconverse.org/outbreaks/" class="external-link">outbreaks</a> R
+package.</p>
 </div>
 </div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="aggregating-linelist">Aggregating linelist<a class="anchor" aria-label="anchor" href="#aggregating-linelist"></a></h2>
-<hr class="half-width"><p>Often we want to analyse and visualise the number of events that
+<hr class="half-width"><p>Often we want to analyze and visualize the number of events that
 occur on a particular day or week, rather than focusing on individual
 cases. This requires converting the linelist data into incidence data.
 The <a href="https://www.reconverse.org/incidence2/articles/incidence2.html" class="external-link">{incidence2}</a>
 package offers a useful function called
-<code>incidence2::incidence()</code> for aggregating case data, usually
-based around dated events and/or other characteristics. The code chunk
-provided below demonstrates the creation of an
+<code>incidence2::incidence()</code> for aggregating case data around
+dated events. It can also aggregate data on other characteristics (e.g.,
+sex). The code chunk provided below demonstrates the creation of an
 <code>&lt;incidence2&gt;</code> class object from the simulated Ebola
 <code>linelist</code> data based on the date of onset.</p>
 <div class="codewrapper sourceCode" id="cb4">
@@ -524,9 +524,9 @@ string such <code>day</code>, <code>week</code>, <code>epiweek</code>,
 # ℹ 28 more rows</code></pre>
 </div>
 <p>With the <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> package, you can specify the
-desired interval (e.g., day, week) and categorize cases by one or more
-factors. Below is a code snippet demonstrating weekly cases grouped by
-the date of onset, sex, and type of case.</p>
+desired time interval (e.g., day, week, etc.) and categorize cases by
+one or more factors. Below is a code snippet demonstrating weekly cases
+grouped by the date of onset, sex, and type of case.</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -568,7 +568,7 @@ the date of onset, sex, and type of case.</p>
 </div>
 <span class="callout-header">Callout</span>
 <div id="dates-completion" class="callout-inner">
-<h3 class="callout-title">Dates Completion</h3>
+<h3 class="callout-title">Dates completion</h3>
 <div class="callout-content">
 <p>When cases are grouped by different factors, it’s possible that the
 events involving these groups may have different date ranges in the
@@ -658,11 +658,12 @@ the <code>complete_dates</code> to <code>TRUE</code>.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<ul><li>
-<strong>Task</strong>: Calculate the incidence of cases
-<strong>every 2 weeks</strong> from the <code>sim_data</code> linelist
-based on their admission date and outcome. Save the result in an object
-called <code>biweekly_incidence</code>.</li>
+<p><strong>Task</strong>:</p>
+<ul><li>Calculate the incidence of cases <strong>every 2 weeks</strong> from
+the <code>sim_data</code> linelist based on their admission date and
+outcome.</li>
+<li>Save the result in an object called
+<code>biweekly_incidence</code>.</li>
 </ul></div>
 </div>
 </div>
@@ -671,7 +672,7 @@ called <code>biweekly_incidence</code>.</li>
 <button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint1" aria-expanded="false" aria-controls="collapseHint1">
   <h4 class="accordion-header" id="headingHint1"> Give me a hint </h4>
 </button>
-<div id="collapseHint1" class="accordion-collapse collapse" data-bs-parent="#accordionHint1" aria-labelledby="headingHint1">
+<div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
 <p>Review the reference manual of the function
 <code>incidence2::incidence()</code> either offline using
@@ -723,8 +724,9 @@ describe the spread or transmission pattern.</p>
 <code class="sourceCode R"><span><span class="co"># Plot weekly incidence data</span></span>
 <span><span class="fu">plot</span><span class="op">(</span><span class="va">weekly_incidence</span><span class="op">)</span></span></code></pre>
 </div>
-<figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>You can add layers using the grammar of graphics from
-<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a>:</p>
+<figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Plotting an <code>&lt;incidence2&gt;</code> object relies on the
+<a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package, so <a href="https://ggplot2-book.org/layers.html" class="external-link"><code>ggplot</code>
+layers</a> can be added to the plot as shown below.</p>
 <div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -759,8 +761,9 @@ transmission patterns across different demographic groups.</p>
 <div id="easy-aesthetics" class="callout-inner">
 <h3 class="callout-title">Easy aesthetics</h3>
 <div class="callout-content">
-<p>Find how you can use the arguments within the <code>plot()</code>
-function to provide aesthetics to your incidence2 class objects.</p>
+<p>Find out how you can use the arguments within the <code>plot()</code>
+function to provide aesthetics to your <code>&lt;incidence2&gt;</code>
+objects.</p>
 <div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -791,9 +794,8 @@ manual of the funcion <code>plot()</code></a>.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<ul><li>
-<strong>Task</strong>: Visualize the <code>biweekly_incidence</code>
-object.</li>
+<p><strong>Task</strong>:</p>
+<ul><li>Visualize the <code>biweekly_incidence</code> object.</li>
 <li>Identify what combination of arguments in <code>plot()</code> work
 best.</li>
 </ul></div>
@@ -833,12 +835,14 @@ observed in females.</p>
 this was ~22 incident cases.</li>
 <li>The peak in females occurred around epiweek 15; in males this was
 around epiweek 20.</li>
-<li>The growth rate in females may be higher than in males.</li>
+<li>The growth rate in females may be higher than in males. In a same
+period of time (about 15 weeks), cases in females were more than 3 times
+the cases in males.</li>
 </ul><figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-14-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>You can estimate the peak – the time with the highest number of
-recorded cases – using <code>incidence2::estimate_peak()</code>. This
-function uses a bootstrapping method to determine the peak time (i.e. by
-resampling dates with replacement, resulting in a distribution of
-estimated peak times). Find one example on the <a href="https://www.reconverse.org/incidence2/vignette.html#sec:bootstrapping-and-estimating-peaks" class="external-link">incidence2
+recorded cases – using <code>incidence2::estimate_peak()</code>. Also
+you can convert the count of new or incident cases to cumulative using
+<code>incidence2::cumulate()</code> if needed for your downstream
+analysis. Find examples about them on the <a href="https://www.reconverse.org/incidence2/vignette.html#sec:bootstrapping-and-estimating-peaks" class="external-link">incidence2
 vignette section about “Bootstrapping and estimating peaks”</a></p>
 <!--
 
@@ -880,7 +884,7 @@ incubation period).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Identify type of epidemic or mode of transmission </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>We recommend you read the section on <a href="https://outbreaktools.ca/background/epidemic-curves/" class="external-link">“Analysing
 and epi curve”</a>. It describes some patterns of spread we summarize
@@ -918,7 +922,7 @@ epidemic curve.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Investigate outbreaks </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>From an epicurve of incident cases by date on symptom onset, we can
 determine:</p>
@@ -1001,7 +1005,7 @@ below:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Visualization with ggplot2 </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>We will focus on three key elements for producing epicurves:
 histogram plots, scaling date axes and their labels, and general plot
@@ -1032,11 +1036,9 @@ three elements for a simple <a href="https://www.reconverse.org/incidence2/" cla
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># apply a minimal theme for clean visuals</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span></span>
-<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>,</span>
-<span>                              hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># center and bold title</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># title center + bold</span></span>
 <span>    plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># center subtitle</span></span>
-<span>    plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>,</span>
-<span>                                hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, <span class="co"># italicized caption</span></span>
+<span>    plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, <span class="co"># italic caption</span></span>
 <span>    axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>, <span class="co"># bold axis titles</span></span>
 <span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># rotated x-axis text</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
@@ -1092,13 +1094,11 @@ demonstrated in the example below:</p>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="co"># apply minimal theme</span></span>
 <span>  <span class="fu">theme</span><span class="op">(</span></span>
-<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>,</span>
-<span>                              hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># bold and center the title</span></span>
+<span>    plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span>, hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># title bold + center</span></span>
 <span>    plot.subtitle <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>hjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span>, <span class="co"># center the subtitle</span></span>
 <span>    plot.caption <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"italic"</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>, <span class="co"># italic caption</span></span>
 <span>    axis.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span>, <span class="co"># bold axis labels</span></span>
-<span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>,</span>
-<span>                               vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># rotate x-axis text for readability</span></span>
+<span>    axis.text.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>angle <span class="op">=</span> <span class="fl">45</span>, vjust <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="co"># rotate x-axis text</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">labs</span><span class="op">(</span></span>
 <span>    x <span class="op">=</span> <span class="st">"Date"</span>, <span class="co"># x-axis label</span></span>
@@ -1112,8 +1112,7 @@ demonstrated in the example below:</p>
 <span>    breaks <span class="op">=</span> <span class="va">breaks</span>, <span class="co"># set custom date breaks</span></span>
 <span>    labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu">label_date_short</span><span class="op">(</span><span class="op">)</span> <span class="co"># short date format for x-axis labels</span></span>
 <span>  <span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"lightblue"</span>,</span>
-<span>                               <span class="st">"lightpink"</span><span class="op">)</span><span class="op">)</span> <span class="co"># custom fill colors for sex</span></span></code></pre>
+<span>  <span class="fu">scale_fill_manual</span><span class="op">(</span>values <span class="op">=</span> <span class="fu">c</span><span class="op">(</span><span class="st">"lightblue"</span>, <span class="st">"lightpink"</span><span class="op">)</span><span class="op">)</span> <span class="co"># custom fill colors</span></span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1132,11 +1131,12 @@ Ignoring unknown parameters: `binwidth` and `bins`</code></pre>
 <span class="callout-header">Key Points</span>
 <div class="callout-inner">
 <div class="callout-content">
-<ul><li>Use <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> package to generate synthetic outbreak
-data</li>
-<li>Use <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> package to aggregate case data based
-on a date event, and other variables to produce epidemic curves.</li>
-<li>Use <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package to produce better annotated
+<ul><li>Use the <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a> package to generate synthetic
+outbreak data</li>
+<li>Use the <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> package to aggregate case data
+based on a date event, and other variables to produce epidemic
+curves.</li>
+<li>Use the <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package to produce better annotated
 epicurves.</li>
 </ul></div>
 </div>
@@ -1205,7 +1205,7 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/aggreagate-visualize.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/aggreagate-visualize.html",
   "dateCreated": "2026-06-18",
-  "dateModified": "2026-06-17",
+  "dateModified": "2026-06-18",
   "datePublished": "2026-06-18"
 }
 
