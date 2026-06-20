@@ -466,7 +466,7 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  from = "https://play.im.dhis2.org/stable-2-41-8-2",
   user_name = "admin",
   password = "district"
 )
@@ -476,11 +476,13 @@ dhis2_login
 
 ``` output
 <httr2_response>
-GET https://play.im.dhis2.org/stable-2-41-8-1/api/me
+GET https://play.im.dhis2.org/stable-2-41-8-2/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (13312 bytes)
+Body: In memory (13271 bytes)
 ```
+
+If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-41-8-2` in the URL string.
 
 ::::::: caution
 
@@ -490,7 +492,7 @@ Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
 ``` r
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-41-8-1",
+  from = "https://play.im.dhis2.org/stable-2-41-8-2",
   user_name = rstudioapi::askForPassword("Database username"),
   password = rstudioapi::askForPassword("Database password")
 )
@@ -649,8 +651,6 @@ Note: This example uses a demo system provided by DHIS2 [organization](https://t
 :::::::::::::::::::::: challenge
 
 ### Reading from a DHIS2 sever
-
-<!-- The DHIS2 organization provides demo servers for development and testing. One of these is called **stable-2-41-8-1**, from many other available in a list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), and accessible with username `"admin"` and password `"district"`.  -->
 
 Test `{readepi}` by accessing to a DHIS2 server with your credentials.
 
