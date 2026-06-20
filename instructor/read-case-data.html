@@ -310,7 +310,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2026-06-18 |
+        <p>Last updated on 2026-06-20 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-case-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -977,7 +977,7 @@ organization units using the <code>get_programs()</code> and
 <code class="sourceCode R"><span><span class="co"># establish the connection to the system</span></span>
 <span><span class="va">dhis2_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"dhis2"</span>,</span>
-<span>  from <span class="op">=</span> <span class="st">"https://play.im.dhis2.org/stable-2-41-8-1"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"https://play.im.dhis2.org/stable-2-41-8-2"</span>,</span>
 <span>  user_name <span class="op">=</span> <span class="st">"admin"</span>,</span>
 <span>  password <span class="op">=</span> <span class="st">"district"</span></span>
 <span><span class="op">)</span></span>
@@ -988,11 +988,15 @@ organization units using the <code>get_programs()</code> and
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>&lt;httr2_response&gt;
-GET https://play.im.dhis2.org/stable-2-41-8-1/api/me
+GET https://play.im.dhis2.org/stable-2-41-8-2/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (13312 bytes)</code></pre>
+Body: In memory (13271 bytes)</code></pre>
 </div>
+<p>If the step above fails, check for others available in the list of <a href="https://im.dhis2.org/public/instances" class="external-link">DHIS2 Demo Instances</a>,
+all accessible with username <code>"admin"</code> and password
+<code>"district"</code>. Just replace <code>stable-2-41-8-2</code> in
+the URL string.</p>
 <div id="caution1" class="callout caution">
 <div class="callout-square">
 <i class="callout-icon" data-feather="alert-triangle"></i>
@@ -1008,7 +1012,7 @@ Body: In memory (13312 bytes)</code></pre>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dhis2_login</span> <span class="op">&lt;-</span> <span class="fu">readepi</span><span class="fu">::</span><span class="fu">login</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"dhis2"</span>,</span>
-<span>  from <span class="op">=</span> <span class="st">"https://play.im.dhis2.org/stable-2-41-8-1"</span>,</span>
+<span>  from <span class="op">=</span> <span class="st">"https://play.im.dhis2.org/stable-2-41-8-2"</span>,</span>
 <span>  user_name <span class="op">=</span> <span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu">askForPassword</span><span class="op">(</span><span class="st">"Database username"</span><span class="op">)</span>,</span>
 <span>  password <span class="op">=</span> <span class="fu">rstudioapi</span><span class="fu">::</span><span class="fu">askForPassword</span><span class="op">(</span><span class="st">"Database password"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre>
@@ -1184,7 +1188,6 @@ Note: This example uses a demo system provided by DHIS2 [organization](https://t
 <div id="reading-from-a-dhis2-sever" class="callout-inner">
 <h3 class="callout-title">Reading from a DHIS2 sever</h3>
 <div class="callout-content">
-<!-- The DHIS2 organization provides demo servers for development and testing. One of these is called **stable-2-41-8-1**, from many other available in a list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), and accessible with username `"admin"` and password `"district"`.  -->
 <p>Test <a href="https://epiverse-trace.github.io/readepi/" class="external-link">readepi</a> by accessing to a DHIS2 server with your
 credentials.</p>
 <p>Do the following:</p>
@@ -1486,9 +1489,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/read-case-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/read-case-data.html",
-  "dateCreated": "2026-06-18",
-  "dateModified": "2026-06-18",
-  "datePublished": "2026-06-18"
+  "dateCreated": "2026-06-20",
+  "dateModified": "2026-06-20",
+  "datePublished": "2026-06-20"
 }
 
   </script><script>

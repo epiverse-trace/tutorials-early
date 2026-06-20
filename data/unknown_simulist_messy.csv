@@ -1,0 +1,1702 @@
+id,case_name,case_type,sex,age,date_onset,date_reporting,date_admission,outcome,date_outcome,date_first_contact,date_last_contact,ct_value
+1,Caroline Fowler,confirmed,f,N/A,2023-01-01,2023-01-06,2023-01-12,died,2023-01-26,NA,NA,25.7
+2,Mato Ty oatch,confirmed,N A,13,11-01-2023,15-01-2023,NA,recovered,NA,29-12-2022,03-01-2023,26.1
+3,missing,confirmed,male,19,not a number,2023/01/24,2023/01/20,recovered,NA,2023/01/08,2023/01/13,24
+4,Daquan Konneh,confirmed,Mala,83,23 January 2023,not a number,NA,recovered,NA,09 January 2023,12 January 2023,25.4
+5,NOt available,suspected,male,thirty-five,30 Jan 2023,01 Feb 2023,NA,recovered,,NAN,20 Jan 2023, a / a
+6,Evan Macneill,confirmed,M,50,2023/01/24, a / a, na,dmed,2023/02/01,2023/01/21,2023/01/27,null
+7,Elias Arnold,na,M,83,\*,02-02-2023,NA,recovered,NA,N / A ,01-02-2023,not available
+8,Micah Le,n a,\?,72,2023/01/30,2023/01/31,2023/02/02,recovered,NA,2023/01/25, na,NA
+9, na,prodable,#N/A,fourteen,27 Jan 2023,29 Jan 2023,03 Feb 2023,recovered,NA,NA, N / A,NA
+10,NAN,suspected,Male,46,NULL,2023-02-13,NA,Eecovered,NA,2023-01-26,2023-02-04,NA
+11,Sanate Javaid,probable,Male,N/A,11-02-2023,14-02-2023,NA,recovered,NA,29-01-2023,03-02-2023,#N/A
+12, a / a,confirmed,Male,fifty-six,2023-02-01,2023-02-03,not avail,recovered,Not Avail,2023-01-27,2023-02-03,not avail
+13,Tracy Wilson,confirhed,M,7,not available,2023-02-06,Not Available,recovered,NA,2023-01-25,2023-02-01,21
+14,not available,confirmed,m, N / A, na,03 February 2023,NA,recovered,NA,24 January 2023,28 January 2023,22.5
+15,Eric Mcgwe,confirmed,M,twenty,27-01-2023,30-01-2023,na,#N/A,NA,23-01-2023,n/a,24.2
+16,NULL,confirmed,m,56,2023-01-29,2023-01-31,NA,recovered,NA,2023-01-23,2023-01-29,28.4
+17,N/A,suspected,f,28,15-02-2023,18-02-2023,NA,died,24-02-2023,07-02-2023,10-02-2023,NA
+18,Matthew Jones,probable,male,9,nan,NA,17/02/2023,died,02/03/2023,N / A ,11/02/2023,NA
+19,Isaiah Fergins,suspected,M,1,12 February 2023,14 February 2023,NA,recovered,NA,null,13 February 2023,NA
+20,Isaiah Fergins,suspected,M,1,12 February 2023,14 February 2023,NA,recovered,NA,null,13 February 2023,NA
+21,Jesse Fajardo,probable,M,71,04/02/2023,06/02/2023,NA,recovered,na ,24/01/2023,04/02/2023,NA
+22,Faison Mosley,confirmid,male,n /a,04 Feb 2023,missing,NA,N / A ,NA,31 Jan 2023,03 Feb 2023,26.7
+23,Joshua Buczynski,suspectev,m,77,05/02/2023,NOt available,NA,recovered,NA,30/01/2023,04/02/2023,NA
+24,Quiana Nguyen,probable,Female,fifty-two,05-02-2023,NA ,NA,NULL,null,25-01-2023,na,NA
+25,Typone Peele,confirmed,M,n a,02/02/2023,05/02/2023,NA,#N/A,NA,28/01/2023,04/02/2023,23.6
+26,Rajaa al-Sabet,suspected,Not Available,fifty-four,02 Feb 2023,n / a,n / a,died,18 Feb 2023, a / a,29 Jan 2023,NA
+27,n / a ,suspected,Male,fifty-eight,2023-02-14,2023-02-17,NA,recovered,NA,2023-02-09,2023-02-13,not avail
+28,n / a ,suspected,Male,fifty-eight,2023-02-14,2023-02-17,NA,recovered,NA,2023-02-09,2023-02-13,not avail
+29,Eric Santistevan,suspected,m,ninety,14/02/2023,22/02/2023,NA,recovered,NA,10/02/2023,14/02/2023,NA
+30,Brandyn Rowles,confirmed,m,twenty-six,14 February 2023,21 February 2023,NA,recovered,NA, a / a,13 February 2023,23.9
+31,NULL,n a,Male,72,2023/02/13,2023/02/15,n / a,recovered,NA,null,2023/02/19,Not Available
+32,David Peak,confirmed,M,59,14-02-2023,Not Available,NA,diyd,01-03-2023,02-02-2023,\*,20.6
+33,David Peak,confirmed,M,59,14-02-2023,Not Available,NA,diyd,01-03-2023,02-02-2023,\*,20.6
+34,Raafi el-Abdelnour,suspected,M,twenty-six,05 February 2023,09 February 2023, na,recovered,NA,04 February 2023,n /a,NA
+35,Raafi el-Abdelnour,suspected,M,twenty-six,05 February 2023,09 February 2023, na,recovered,NA,04 February 2023,n /a,NA
+36,Tabitha Talent,confirmed,F,twenty-three,02 February 2023,04 February 2023,07 February 2023,died,14 February 2023,null,nan,24.1
+37,Miqdaam al-Hariri,prxbable,m,nine,06-02-2023,09-02-2023,NA,recovered,NA,31-01-2023,05-02-2023,NA
+38,Chaz Wall,suspected,male,80,NA ,04 Feb 2023,NA,recovered,NA,01 Feb 2023,04 Feb 2023,NA
+39,Not Avail, NA,male,sixty-two,15 Feb 2023,17 Feb 2023,19 Feb 2023,died,25 Feb 2023,10 Feb 2023,16 Feb 2023,NA
+40,Not Avail, NA,male,sixty-two,15 Feb 2023,17 Feb 2023,19 Feb 2023,died,25 Feb 2023,10 Feb 2023,16 Feb 2023,NA
+41,Nicholas Reznik,confirmed,m,two,17/02/2023,19/02/2023,24/02/2023,died,n/a,12/02/2023,null,21.1
+42,Chuong Guerette,confirmed,M,64,15 February 2023,Not Avail,NA,recovered,Not Avail,09 February 2023,18 February 2023,25.6
+43,missing,confirmed,na,seventy,15-02-2023,N / A ,NA,recovered,\.,10-02-2023,15-02-2023,23
+44,Tristan Gifford,confirmed,M,thirty-three,17-02-2023,19-02-2023,NA,N A,NA,08-02-2023,13-02-2023,24.8
+45,na ,na,M,seventy,n a,2023/02/24,n / a,died,2023/03/09,2023/02/02,2023/02/08,NA
+46,Zachary Buels,Not Avail,M,14,14-02-2023,17-02-2023,NA,recovered,NA,02-02-2023,08-02-2023,25.1
+47,Farhaan el-Irani,\*,Male,68,03 Feb 2023,n a,10 Feb 2023,recovered,NA,29 Jan 2023,\?,NA
+48,Leroy Hall,Not Avail,male,33,2023/02/07,2023/02/09,NA,recovered,NA,2023/01/29,null,NA
+49,Isaiah Johnson,confirmed,m,twenty-eight,11/02/2023,12/02/2023,NA,recovered,NA,,07/02/2023,24.3
+50,Danielle Garcia,confirmed,Female,eighty-one,not available,2023/02/16, a / a,diej,2023/02/25,NA ,2023/02/07,25.9
+51,Kennia Ramirez Rosales,suspected,female,NAN,09/02/2023,13/02/2023,#N/A,recovered,NA,02/02/2023,06/02/2023,NA
+52,Imani Roaf,confirmed,female,53,2023-02-07,2023-02-10,NA,recovered,NA,2023-01-30,2023-02-07,24.6
+53,Jose Gilbert,suspected, a / a,67,2023-02-20,2023-02-23,NA,recovered,NA,2023-02-13,2023-02-18,NA
+54,MarinalHernandez De La O,Not Avail,F,seventy-two,2023/03/02,\.,NA,recovered,NA,2023/02/11,2023/02/23,NAN
+55,Yomenic Trinh,probable, N / A,37,24 February 2023,27 February 2023,NA,recovered,NA,10 February 2023,18 February 2023,NA
+56,Yomenic Trinh,probable, N / A,37,24 February 2023,27 February 2023,NA,recovered,NA,10 February 2023,18 February 2023,NA
+57,N /A,probable,M,sixty-nine,not avail,24 February 2023,NA,recovered,Not A Number,13 February 2023,NA ,NA
+58,Aleanna Germeroth,not available,F,Not A Number,18 Feb 2023,22 Feb 2023,NA,recovered,n/a,n/a,19 Feb 2023,26
+59,nan,suspected, na,twenty-five,19-02-2023,23-02-2023,NA,died,04-03-2023,14-02-2023,18-02-2023,NA
+60,nan,suspected, na,twenty-five,19-02-2023,23-02-2023,NA,died,04-03-2023,14-02-2023,18-02-2023,NA
+61,Nicholas Judkins,na ,Male,twenty-six,23 Feb 2023,27 Feb 2023,NA,Iecovered,Not Avail,17 Feb 2023,01 Mar 2023,NA
+62,Cory Jacobson,probable, NA,nine,null,2023/02/19,NA,recovered,NA,NA ,2023/02/16,NA
+63,Miranda Usry,confirmed,Not Avail,thirty-nine,NAN,19/02/2023,NA,rmcovered,NA,08/02/2023,14/02/2023,28
+64,Jeffrey Garcia,n/a,n a,30,not available,19-02-2023,not available,recovered,NA,05-02-2023,13-02-2023,NA
+65,Gene Gilliard,confirmed,male,87,NAN,15/02/2023,NA,recovered,NA,N / A ,12/02/2023,25.9
+66,NULL,probable,null,sixty-five,2023-02-23,2023-02-25,NA,\*, na,2023-02-18,2023-02-21,NA
+67,Reema al-Momin,n a,female, a / a,2023-02-27,nan,NA,recovered,NA,2023-02-21,2023-02-26,NA
+68,n a,confirmed,Female,sixty-six,2023/02/26,2023/02/28,NA,recovered,NA,2023/02/22,2023/02/28,26.6
+69,n a,confirmed,Female,sixty-six,2023/02/26,2023/02/28,NA,recovered,NA,2023/02/22,2023/02/28,26.6
+70,Malachi Session,probable,m,eighty-eight,not available,03/03/2023,NA,recovered,NA,#N/A,n / a,na 
+71,Malachi Session,probable,m,eighty-eight,not available,03/03/2023,NA,recovered,NA,#N/A,n / a,na 
+72,Michelle Rendon,suspected,NOt available,39,08/03/2023,10/03/2023,13/03/2023,died,N / A ,15/02/2023,nan,NA 
+73,n / a,confirmed,\.,sixty-two,18/02/2023,22/02/2023,NA,recovered,NA,na ,19/02/2023,25.2
+74,Taaha al-Guler,confirmed,m,sixty-eight,22 Feb 2023,25 Feb 2023,null,recovered,NA,\.,,27
+75,Taaha al-Guler,confirmed,m,sixty-eight,22 Feb 2023,25 Feb 2023,null,recovered,NA,\.,,27
+76,Abdul Khaliq el-Bilal,confirmed,M,fifty-one,24 February 2023,27 February 2023,NA,recovered,NA,19 February 2023,24 February 2023,22.4
+77,Abdul Khaliq el-Bilal,confirmed,M,fifty-one,24 February 2023,27 February 2023,NA,recovered,NA,19 February 2023,24 February 2023,22.4
+78,#N/A,probable, a / a,27,19 Feb 2023,04 Mar 2023,not avail, na,06 Mar 2023, NA,22 Feb 2023,NA
+79,Not Avail,confirmed,Male,null,20-02-2023,25-02-2023,NA,recovered,NA,14-02-2023,n /a,21.9
+80,Hannah Willhoit,confirmed,female,N /A,18/02/2023,20/02/2023,NA,recovered,#N/A,null,20/02/2023,23.3
+81,#N/A,confirmed,M,7,,null,NA,recovered,NA,18 Feb 2023,26 Feb 2023,23
+82,n /a,confirmed,f,NOt available,NA,04-03-2023,NA,recovered,NA,20-02-2023,02-03-2023,28
+83,Chinguun Patria,probable,malh,thirty-four,11 March 2023,na ,18 March 2023,recovered,NA,26 February 2023,03 March 2023,NA
+84,n/a,probable,M,76,2023-03-04,2023-03-07,NA,n/a,NA,not avail,2023-03-05,NA
+85,Maxwell Goyette,probable,m,N A,12-03-2023,14-03-2023,NA,recovernd,NA,05-03-2023,11-03-2023,NA
+86,Labteb el-Sharifi,confirmed,M,38,2023/02/24,2023/02/26,Not A Number,recovered,N/A,2023/02/20, na,24
+87,N/A,confirmed,M,sixteen,27/02/2023,28/02/2023,n / a ,recovered,NA,23/02/2023,27/02/2023,N / A 
+88,Syed Kaiwi,confirmed,M,fifty-six,2023/02/26,2023/03/01,NA,recovered, NA,not a number,2023/02/23, a / a
+89,Sfeven Mclin,suspected,M,Not Available,25-02-2023,28-02-2023,n/a, a / a,NA,14-02-2023,N/A,NA
+90,n/a,suspected,Male,thirty-six,21-02-2023, na,26-02-2023,recovered,NA,15-02-2023,21-02-2023,NA
+91,Kyleigh Diaz,suspected,F,31,2023-03-01, N / A,NA,recovered,NA,2023-02-15,not a number,NA
+92,Kyleigh Diaz,suspected,F,31,2023-03-01, N / A,NA,recovered,NA,2023-02-15,not a number,NA
+93,Justin Galvan,probable,male,twenty-four,2023-02-25,n /a,2023-03-02,recovered,NA,2023-02-20,2023-02-26,NA
+94,Audrey Rosenberg,confirmed,Female,56,2023-03-01,2023-03-03,#N/A,recovered,NA,Not A Number,2023-03-02,22.7
+95,Daniel Torrez,probable,Male,thirty-seven,12 March 2023,13 March 2023,N/A,na ,06 April 2023,05 March 2023,15 March 2023,NA
+96,Daniel Torrez,probable,Male,thirty-seven,12 March 2023,13 March 2023,N/A,na ,06 April 2023,05 March 2023,15 March 2023,NA
+97,Trenecy Herrera,confirmed,m,\.,16-03-2023,20-03-2023,20-03-2023,recovered,NA,not avail,16-03-2023,27
+98,Jala Leroy,confirmed,Not Avail,40,04 March 2023,07 March 2023,NA,recovered,na ,27 February 2023,04 March 2023,24.2
+99,Natjsha Allen,confirmed,Not Avail,eighty-two,04/03/2023,08/03/2023,06/03/2023,died,n / a,21/02/2023,04/03/2023,\?
+100,Diana Hickman,confirmed,NAN,54,05-03-2023,07-03-2023,Not A Number,recovebed,N/A,23-02-2023,27-02-2023,25.1
+101,Joshua Eisele,probable,Male,83,not available,08/03/2023,NA,recovered,NA,26/02/2023,04/03/2023,NA
+102,Ramalaan al-Yacoub,suspected,M,N / A ,2023-03-01,2023-03-05,NA,n / a,NA,N /A,2023-03-02,NA
+103,Ramalaan al-Yacoub,suspected,M,N / A ,2023-03-01,2023-03-05,NA,n / a,NA,N /A,2023-03-02,NA
+104,Jahsiel Esparla,confirmed,Not Available,eighty-eight,NULL,,NA,recovered,NA,18 February 2023,26 February 2023,na
+105,Skylar Yohe-Ironwing,confirmed,female,n a,2023/03/02,2023/03/04,N / A,Not A Number,\?,2023/02/26,2023/03/04,23.1
+106,Skylar Yohe-Ironwing,confirmed,female,n a,2023/03/02,2023/03/04,N / A,Not A Number,\?,2023/02/26,2023/03/04,23.1
+107,Kenneth xammans,confirmed,M,Not A Number,08 March 2023,11 March 2023,11 March 2023,djed,24 March 2023,24 February 2023,03 March 2023,25.8
+108,Mirza Ho,suspected,m,N /A,2023/03/09,2023/03/10,NA,recovered,NA,2023/02/20,N /A,NA
+109,Tyson Arguello,probable,N /A,81,03-03-2023,07-03-2023,NOt available,recovered,NA,28-02-2023,NULL,NA
+110,not avail,probable,f,twenty-five,not avail,2023/03/18,2023/03/19,died,2023/04/02,\?,2023/03/14,NA
+111,Valce Gonzalez,conxirmed,Not A Number,NOt available,14 Mar 2023,18 Mar 2023,NOt available,recovered,NA,NA ,14 Mar 2023,25.8
+112,Mia Johnson,NA,female,seventy-five,2023-03-24,not avail,NA,recovered,NA,not avail,2023-03-20,N / A 
+113,Michael Frazier, na,male,eighty-two,19-03-2023,21-03-2023,NA,recovered,NA,14-03-2023,20-03-2023,N / A
+114,Andrew Drury-Parlett,confirmed,Mape,39,2023-03-06,#N/A,NA,recovered,NA,2023-03-02,2023-03-06,23.1
+115,Kya Daniels,probable,male,na ,2023-03-07,missing,NA,recovered,NA,2023-03-01,2023-03-06,NA
+116,NA,confirmed,m,N /A,06/03/2023,08/03/2023,N /A,na ,NA,01/03/2023,03/03/2023,22.8
+117,Antonio qines,confirmed,male,90,02-03-2023,05-03-2023,NA,recovered,NA,25-02-2023,NA,25
+118,Ya'eesh al-Sahli,suspected,NOt available, na,na ,2023/03/03,NA,recovered,NA,2023/02/19,2023/02/27,NA
+119,Xai Shongolo,Not A Number,Male,\*,2023-03-07,2023-03-11,NA,recovered,NA,N / A ,2023-03-04,NA
+120,\*,probable,F,73,2023/03/09,2023/03/14,NA,recovered,NA,2023/03/06,2023/03/09,N / A
+121,Ghazaala el-Minhas,confirmed,missing,52,11 March 2023,16 March 2023,NA,\*,Not Avail,28 February 2023,08 March 2023,not avail
+122,Nathaniel Bell,suspected,male,46,2023/03/06,not avail,NA,recovered,NA,2023/03/02,2023/03/06,NA
+123,missing,confirmed, N / A,fifty-eight,n / a ,08 Mar 2023,NA,recovered,NA,02 Mar 2023,04 Mar 2023,29.9
+124,Frankie Natonabah,N/A,F,seventy-nine,19 Mar 2023,20 Mar 2023,Not Available,\.,NA,11 Mar 2023,18 Mar 2023,27.8
+125,Katherine Landry,confirmed,female,67,29/03/2023,01/04/2023,NA,NAN,NA,not a number,24/03/2023,27
+126,Katherine Landry,confirmed,female,67,29/03/2023,01/04/2023,NA,NAN,NA,not a number,24/03/2023,27
+127,N / A,confirmed,male,sixty-three,07/04/2023,09/04/2023,NA,Xecovered,NA,23/03/2023,27/03/2023,25.9
+128,N / A,confirmed,male,sixty-three,07/04/2023,09/04/2023,NA,Xecovered,NA,23/03/2023,27/03/2023,25.9
+129,Andrew Kim,confirmed,na,Not Available,29 March 2023,31 March 2023,NA,recovered,NA,22 March 2023,25 March 2023,22.7
+130,Lilyana Harris,NULL,f,twenty-six,11 March 2023,12 March 2023,NA,recovered,NA,04 March 2023,NOt available,NA
+131,D'Andre Zanders,confirmed,male,Not Available,n / a,na,NA,recovered,NA,2023-03-02,2023-03-08,25.1
+132,Diego Ramos Ruiz,suspected,na ,80,2023/03/07,2023/03/10,null,recovered,Not Avail,NA ,2023/03/09,NA
+133,Marie Aguilera,probable,Female,59,17 Mar 2023,24 Mar 2023,NA,not avail,NA,02 Mar 2023, na,NA
+134,\*,confirmed,M,forty-two,2023-03-17,2023-03-19,NA,n / a ,NA,2023-03-04,2023-03-09,22.4
+135,n a,probable,M,20,2023/03/08,NULL,NA,recovered,not available,n/a,NULL,NA
+136,NOt available,not avail,F,twenty-eight,2023-03-08,2023-03-12,NA,recovered,NA,2023-03-03,2023-03-09,\.
+137,Amos Thiessen,confirmed,Male,eight,2023/03/08,2023/03/10,not avail, na,NA,2023/03/02,2023/03/07,24.9
+138,Vinh Miller,probable,m,eighty-two,n /a,2023/03/12,NA,recovered,NA,NA ,2023/03/02,NA
+139,Richard Ayala,confirmed,M,forty-nine,2023/03/01,2023/03/03,NA,n /a,NA,2023/02/24,2023/03/02,N /A
+140,Ryan Lee,confirmed,M,41,N / A , a / a,NA,recovered,NA,06 Mar 2023,11 Mar 2023,24.5
+141,n / a ,confirmed,m,ten,2023/03/10,2023/03/12, NA,recovered,NA,2023/03/07,2023/03/10,26.2
+142, na,suspected,F,n / a,NOt available,11/03/2023,NA,,NA,05/03/2023,08/03/2023,null
+143,Eliakim Patterson,suspected,N /A,thirty-nine,06-03-2023,09-03-2023,NA,recovered,NA,01-03-2023,10-03-2023,NA
+144,Kane Davis,suspected,Male,69,12-03-2023,16-03-2023,NA,recovered,NA,06-03-2023,08-03-2023,Not Available
+145,Silmi al-Younis, na,maie,eighty-six, NA,24/03/2023,NA,recovered,NA,15/03/2023,23/03/2023,NA
+146,Jeremiah Miller,confirmed,Male,48,04 Apr 2023,07 Apr 2023,NA,reaovered,NA,26 Mar 2023,03 Apr 2023,24.1
+147,Michael Benge,suspected,M,37,07-04-2023,13-04-2023,NA,recovered,Not Avail, na,05-04-2023,NA
+148,Jordab Kim,confirmed,Not Available,66,01-04-2023,02-04-2023,NA,recovered,NA,27-03-2023,missing,26.5
+149,Christopher Lark,null,NAN,21,11 Mar 2023,13 Mar 2023,NA,recovered,NA,09 Mar 2023,17 Mar 2023,NA
+150,Cicely Naylor,suspected,female,fifty-three,18 Mar 2023,null,23 Mar 2023,died,08 Apr 2023,13 Mar 2023,18 Mar 2023, N / A
+151,Morris Miller,,male,sixty-one,13 March 2023,16 March 2023,NA,recovered,n a,02 March 2023,09 March 2023,\.
+152,Samuel Le,suspected,M,na,2023/03/09,n a,NA,recovered,NA,2023/03/03,2023/03/12,n / a
+153,Samuel Le,suspected,M,na,2023/03/09,n a,NA,recovered,NA,2023/03/03,2023/03/12,n / a
+154,Robyn Lynn,confirmed,female,46,21-03-2023,26-03-2023,NA,\.,NA,not avail,18-03-2023,N / A 
+155,Mitchell Campbell Lalone,na ,m,seventy-one,2023/03/18,2023/03/22,NA,recovered,NA, NA,NA,NA
+156,Isiah Edwards,Not A Number,N A,eighty-six,2023-03-12,N /A,NA,recovered,NA,2023-03-07,2023-03-11,N / A
+157,Musheer el-Khatib,suspected,n / a,forty,12 March 2023,15 March 2023,NA,recovered,NAN,07 March 2023,12 March 2023,NA
+158,Rasheeq el-Safar,confirmed,M,24,missing,15 March 2023,16 March 2023,recovered,NA,05 March 2023,09 March 2023,27.1
+159,Dean Johnson-Hodge,N / A ,M,not avail,13/03/2023,16/03/2023,NA,recovered,NA,\?,12/03/2023,NA
+160,Tomas Shaw,probable,na ,sixty,12 Mar 2023,14 Mar 2023,NA,recovered,NA , N / A,13 Mar 2023,NA
+161,Danielle Romero,confirmed,F,66,NAN,2023/03/04,NA,N A,NA,2023/02/25,2023/03/03,24.9
+162,N A,confirmed,m,51,08 Mar 2023,12 Mar 2023,NA,recovered,NA,27 Feb 2023,n /a,Not Avail
+163,Heather Adams,#N/A,female,75,08 Mar 2023,n a,NA,N /A,\?,05 Mar 2023,09 Mar 2023,NA
+164,Waseef ul-Ibrahim,confirmed,NULL,twenty-six,07 Mar 2023,12 Mar 2023,NA,recovered,NA,03 Mar 2023,12 Mar 2023,26.5
+165,Shukri al-Can,confirmed,m,sixty-four,n /a,05 April 2023,NA,rhcovered,NA,19 March 2023,23 March 2023,23.5
+166,Madyson Crispell,confirmed,female,4,07 Apr 2023,11 Apr 2023,16 Apr 2023,rucovered,NA,28 Mar 2023,04 Apr 2023,30.5
+167,Madyson Crispell,confirmed,female,4,07 Apr 2023,11 Apr 2023,16 Apr 2023,rucovered,NA,28 Mar 2023,04 Apr 2023,30.5
+168,Sarah Hyun,suspected,F,eighty-two,2023/04/03,2023/04/05,NA,recovered,NA,2023/03/30,2023/04/03,NA
+169,Tex Harrys,confirmed,\?, N / A,2023/03/12,N / A,NA,n / a,NA,2023/03/10,2023/03/13,25.9
+170,\?,suspected,#N/A,52,\.,14-03-2023,NA,n / a,NA,08-03-2023,17-03-2023,NA
+171,Jenna Esparza,n a,Not A Number,48,2023-03-12,2023-03-14,NA,recovered,n a,2023-03-08,2023-03-15,NA
+172,NA,confirmed,Male,eighty-eight,NOt available,2023-03-23,NA,Secovered,NA,2023-03-17,2023-03-21,n/a
+173,Marissa Ramos,\.,female,39,N / A,11 Mar 2023,NA,recovered,NA,08 Mar 2023,10 Mar 2023,26.1
+174,Alexandra Goyal,null,f,twenty-six,2023/03/10,2023/03/13,NA,recovered,NA,#N/A,2023/03/12,NA
+175, na,probable,M,N / A,NULL,28/03/2023,NA,recovered,N / A,20/03/2023,25/03/2023,NA
+176,Ellen Nguyen, NA,f,fifty-seven,04 April 2023,08 April 2023,11 April 2023,died,#N/A,N / A ,24 March 2023,NA
+177,Usman Lymbuwn,Not Available,M,sixty-four,24-03-2023,25-03-2023,NA,recovered,NA,,24-03-2023,28.7
+178,Grant Corby,probable,NA,forty-three,21 Mar 2023,24 Mar 2023,24 Mar 2023,Not Avail,NA,14 Mar 2023,19 Mar 2023,NA
+179,Grant Corby,probable,NA,forty-three,21 Mar 2023,24 Mar 2023,24 Mar 2023,Not Avail,NA,14 Mar 2023,19 Mar 2023,NA
+180, NA,confirmed,m,72,2023/03/26,2023/03/30,2023/04/04,\*,NA,2023/03/17,2023/03/20,29.1
+181,Not Avail,confirmed,Male,56,16 Mar 2023,21 Mar 2023,20 Mar 2023,died,24 Mar 2023,Not Available,18 Mar 2023,22.8
+182,Julio Castaneda-Amaya,confirmed,M,missing,12/03/2023,17/03/2023,,recovered,na ,07/03/2023,,23.5
+183,Masaki Lu,confirmed,Male,eighteen,19-03-2023,22-03-2023,NA,NOt available,n a,11-03-2023,18-03-2023,24.2
+184,Dexter Jones,probable,Male,65,17 March 2023,19 March 2023,NA,recovered,NA,10 March 2023,15 March 2023,NA
+185,Kaleb Hoke,\*,m,,16 March 2023,17 March 2023,n /a,recovered,NA,Not Available,16 March 2023,24.6
+186,#N/A,confirmed,nan,twenty,nan,2023-03-18,NA,recovzred,NA,2023-03-09,2023-03-15,24.1
+187,Eric Phillips,n / a ,Male,NA ,17 March 2023,n /a,NA,recovered,NA,10 March 2023,17 March 2023,22.8
+188,Anthony Do,probablq,male,n/a,2023/03/07,2023/03/10,NA,recovered,NA,2023/02/26,2023/03/04,N / A 
+189,\*,confirmed,Mhle,sixty-six,10/03/2023,12/03/2023,NA,null,na ,nan,12/03/2023,29.4
+190,Cordero Denny,not available,M,38,na ,12 March 2023,NOt available,recoverpd,NA,07 March 2023,NULL,NA
+191,Kanaan el-Ghazal,probable,male,one,11 March 2023,16 March 2023,N A,recovered,Not A Number,04 March 2023,11 March 2023,NA
+192,Markese Davis,,malz,29,2023/03/15,2023/03/19,2023/03/17,N A,null,2023/03/01,nan,n / a 
+193,Whittle Montalbano,suspected,N /A,78,2023/03/09,2023/03/12,2023/03/13,rmcovered,NA,2023/03/06,2023/03/08,NA
+194,Wisaam el-Mahdavi,confirmed,Male,50,2023-03-16,2023-03-20,NA, N / A,2023-03-24,2023-03-03,n / a ,24.3
+195,Frederick Taylor,confirmed,m,NA ,04 April 2023,08 April 2023,NA,recovered,NA,31 March 2023,04 April 2023,22.7
+196,Henry Stiens,NA,m,twenty-four,19/03/2023,22/03/2023,NA ,recoverei,NULL,09/03/2023,17/03/2023,24.2
+197,Jonathan Alcala, N / A,Male,fifty-six,17 Mar 2023,20 Mar 2023,NA,recovered,NA,\?,NA,NA
+198,n/a,confirmed,Maze,Not A Number,2023/03/18,not available,\*,n/a,2023/04/04,2023/03/09,2023/03/16,20
+199,Dylan Herndndez,confirmed,Male,81,2023-03-28,2023-03-31,\.,Not A Number,NA,2023-03-18,NA,23.9
+200,Timothy Walker,confirmed,Male,72,13/03/2023,20/03/2023,NA,recoverrd,NA,09/03/2023,12/03/2023,25.4
+201,Mitchell Baugh,suspected,m,3,07 Apr 2023,09 Apr 2023,21 Apr 2023,died,25 Apr 2023,01 Apr 2023,07 Apr 2023,NA
+202,Saif el-Molla,probable,male,89,NOt available,11 April 2023,Not Avail,recovered,n / a ,31 March 2023,05 April 2023,NA
+203,NA,suspecsed,Female,8,NAN,10-04-2023,14-04-2023,recovered,NA,02-04-2023,NULL,\.
+204,Jonathxn Andrada,confirmed,Male,one,23/03/2023,28/03/2023,NA,recovered,NA,19/03/2023,22/03/2023,\.
+205,Jonathxn Andrada,confirmed,Male,one,23/03/2023,28/03/2023,NA,recovered,NA,19/03/2023,22/03/2023,\.
+206,Musheer al-Rashed,probable,Male,missing,21 March 2023,22 March 2023,NA, na,NA,#N/A,23 March 2023,NA
+207,Kaitlyn Lejeune,suspected,Female,eighty,28 Mar 2023,01 Apr 2023,NA,recovered,NA,NOt available,27 Mar 2023,NA
+208,John Weiss,confirmed,Male,sixty-nine,23 Mar 2023,24 Mar 2023,NA,recovered,NA,19 Mar 2023,26 Mar 2023,24.3
+209,Damion Mattice,confirmed,Male,seventy-eight,30-03-2023,01-04-2023,NA,recovered,NA,24-03-2023,26-03-2023,25.6
+210,#N/A,confirmed,m,83,2023-03-22,Not A Number,NA,recovered, N / A,2023-03-12,2023-03-19,24.6
+211,\.,Not Available,M,36,21 March 2023,23 March 2023,null,recovered, NA,12 March 2023,19 March 2023,24.5
+212,N/A,confirmod,Uale,one,na ,24-03-2023,25-03-2023,recovered,NA,missing,20-03-2023,28.5
+213,N/A,confirmod,Uale,one,na ,24-03-2023,25-03-2023,recovered,NA,missing,20-03-2023,28.5
+214,Rueben Harris,suspected,m,seventy-nine,N / A,2023/03/21,NA,recovered,NA,2023/03/15,2023/03/20,nan
+215,Rueben Harris,suspected,m,seventy-nine,N / A,2023/03/21,NA,recovered,NA,2023/03/15,2023/03/20,nan
+216,Paul Fraser,not a number,m,n/a,18 Mar 2023,20 Mar 2023,23 Mar 2023,not available,NA,\*,20 Mar 2023,NA
+217,Kylie Yoshimura,confirmed,F,eighty-one,19 March 2023,not a number,NA,recovered,NA,15 March 2023,22 March 2023,26.1
+218,Kristel Leon-Macias,N /A,female,84,18/03/2023,20/03/2023,NA,recovered,null,15/03/2023,,Not A Number
+219,Kristel Leon-Macias,N /A,female,84,18/03/2023,20/03/2023,NA,recovered,null,15/03/2023,,Not A Number
+220, NA,N /A,male,66,22 March 2023,24 March 2023,NA,N / A,not a number,04 March 2023,10 March 2023,#N/A
+221,Aakif al-Wakim,confirmed,male,sixty-nine,24 March 2023,27 March 2023,NA,recovered,NA,05 March 2023,11 March 2023,24.9
+222,Phillip Fazio,\.,male,,2023-03-12,2023-03-16,na ,recovered,NA,2023-03-08,2023-03-15,26.7
+223,Dawa Ahluwalia,probable,M,84,11 Mar 2023,14 Mar 2023,,recovered, NA,06 Mar 2023,09 Mar 2023,NA
+224,n / a,probable,na ,eighty,2023-03-20,2023-03-22,NA,recovered,NA,2023-03-05,2023-03-13,NA
+225,Brenden Timken,confirmed,Mare,forty-three,13/03/2023,17/03/2023,na,recovered, N / A,n/a,12/03/2023,24.4
+226,Brenden Timken,confirmed,Mare,forty-three,13/03/2023,17/03/2023,na,recovered, N / A,n/a,12/03/2023,24.4
+227,n / a ,na,F,64,Not A Number,17/03/2023,19/03/2023,recovered,NAN,05/03/2023,11/03/2023,NA
+228,Caleb Dunbar,confirmsd,Male,one,21 March 2023,23 March 2023,NA,recsvered,NA,14 March 2023,21 March 2023,24.3
+229,Aaron Hintor,probable,M,eighty-seven,05 Apr 2023,07 Apr 2023,NA,recovered,NA,01 Apr 2023,05 Apr 2023,NA
+230,Eleazar Munoz Rivera,probable,male,69,2023-03-19,2023-03-28,NA,recovered,NULL,2023-03-17,2023-03-24,NA
+231,Markus Ross,suspected,n a,48,22/03/2023,26/03/2023,NA,n/a,NA,14/03/2023,21/03/2023,NA 
+232,Miguel Esparza,confirmed,male,52,2023/03/28,2023/03/31,Not Available,not avail,na ,,2023/03/18,22.5
+233,Niko York,probable,null,Not Avail,22/03/2023,26/03/2023,24/03/2023,recovered,NA,Not Avail,21/03/2023,NA
+234,Christian Bozonier,probable,Male,forty-seven,21 Mar 2023,25 Mar 2023,NA,recovered,NA,n /a,19 Mar 2023,NA
+235,Ayala Chavarria,probable,F,49,17 March 2023,20 March 2023,NA,recovered,NA, a / a,16 March 2023,NA
+236,Ayala Chavarria,probable,F,49,17 March 2023,20 March 2023,NA,recovered,NA, a / a,16 March 2023,NA
+237,Ardisia Walton,probable,f,78,2023/04/10,2023/04/11,NA,recovered,NA,null,2023/04/10,NA
+238,Christopher Ortivez,confirmed,Male,na,09 Apr 2023,14 Apr 2023,not a number,recovered, N / A,06 Apr 2023,N/A,29.7
+239,Abbey Gilpatrick,probable,F,thirteen,2023/04/20,2023/04/21,NA,recovered,NA,2023/04/03,2023/04/13,NA
+240,Abbey Gilpatrick,probable,F,thirteen,2023/04/20,2023/04/21,NA,recovered,NA,2023/04/03,2023/04/13,NA
+241,Ji Hoon Nguyen,confirmed,M,one,15 Apr 2023,17 Apr 2023,NA,recovered,NA,06 Apr 2023,Not Available,N / A 
+242,Zaahir al-Lone,confirmed,Male,sixty-one,18-04-2023,n/a,null,recovered,NA,05-04-2023,09-04-2023,27.9
+243,Wyatt Cunningham,shspected,M,thirty-four,23/03/2023,24/03/2023,NA,recovered,NA,16/03/2023,25/03/2023,NA
+244,Ubaida el-Samaan,N A,male,22,23-03-2023,25-03-2023,NA,N A,NA,13-03-2023,24-03-2023,NA
+245,Ashley Vazquez,confirmed,N / A,44,22 Mar 2023,29 Mar 2023,NA,recovered,n a,20 Mar 2023,24 Mar 2023,n a
+246,Ashley Vazquez,confirmed,N / A,44,22 Mar 2023,29 Mar 2023,NA,recovered,n a,20 Mar 2023,24 Mar 2023,n a
+247,na ,confirmed,female,nan,2023-03-26, na,n / a,na,NA,2023-03-19,nan,23.3
+248,Roland Aragon,protable,NA,seventeen,25 Mar 2023,27 Mar 2023,29 Mar 2023,rbcovered,NA,not a number,26 Mar 2023,Not A Number
+249,Carlos Miller,confirmed,Male,twelve,04 Apr 2023,N /A,NA,null,na,27 Mar 2023,02 Apr 2023,25.9
+250,Caroline Stahuljak,confirmed,F,54,2023/03/24,N/A,NA,recovered,NA,2023/03/19,2023/03/24,25.9
+251,StevengBaca,na,m,twenty-four,NA, na,NA,recovered,null,19 Mar 2023,23 Mar 2023,NA
+252,N / A,suspected,Female,Not Avail,2023/03/30,2023/04/02,NA,recovered,NA,2023/03/22,2023/03/24,NA
+253,Danielle Wilson,confirmed,F,forty,N/A,30/03/2023,06/04/2023,Not Available,11/04/2023,NA ,24/03/2023,24.6
+254,Ariel Manlove,confirmed,Female,six,26 Mar 2023,28 Mar 2023,NA,N/A,NA,not avail,24 Mar 2023,26.7
+255,\?,N /A,m,fourteen,26-03-2023,29-03-2023,NA,recovered,NULL,14-03-2023,23-03-2023,23.6
+256,Donovan Bellender,probable,male,32,25 Mar 2023,27 Mar 2023,NA,recovered,NA,15 Mar 2023,21 Mar 2023,not a number
+257,Timothy Miller,Vonfirmed,male,41,24 Mar 2023,n / a ,NA,recovered,NA,16 Mar 2023,18 Mar 2023,24.1
+258,John Rudolph Demessie,confirmed,N / A ,76,19 Mar 2023,23 Mar 2023,NA,recovered,\*,15 Mar 2023,n /a,N A
+259,Makenzie Ortiz,confirmed,F,7,2023-03-30,n / a ,NA,recovered,N/A,NA ,2023-03-21,25.7
+260,Malik Crutcher,\?,missing,Not Available,22 Mar 2023,25 Mar 2023,NA,recovered,NA,18 Mar 2023,21 Mar 2023,N/A
+261,Derek Rfams,suspected,Male,eighty-one,NAN,2023/03/21,not available,recovmred,NA,2023/03/17,2023/03/19,NA
+262,Hakam el-Mansur,confirmed,Male,NULL,31 March 2023,03 April 2023,NA,N / A ,NA,23 March 2023,28 March 2023,not available
+263,N / A,suspected,f,nan,#N/A,2023-03-24,#N/A,recovered,NA,2023-03-10,NA ,NA
+264,Daniel Trujillo,probable,male,9,25/03/2023,27/03/2023,NA, a / a,\*,18/03/2023,22/03/2023,NA
+265,Daniel Trujillo,probable,male,9,25/03/2023,27/03/2023,NA, a / a,\*,18/03/2023,22/03/2023,NA
+266,Joshua Muldoon,shspected,mace,,2023/03/28,2023/03/31,NA,recovered,not available,2023/03/17,2023/03/23,NA
+267,Masroora el-Khalili,suspected,F,n /a,na,2023-04-01,na ,died,2023-04-28,2023-03-17,2023-03-24,NA
+268,Masroora el-Khalili,suspected,F,n /a,na,2023-04-01,na ,died,2023-04-28,2023-03-17,2023-03-24,NA
+269,Trevor Mathys,confirmed,male,,2023/03/26,2023/03/29,NA,recovered,NA,n / a ,2023/03/20,23.6
+270,N /A,confirmed,n /a,78,Not A Number,2023/03/24,N/A,died,2023/03/26,2023/03/08,2023/03/15,24.4
+271,Diamond Campbell,confirmed,Not Available,\.,16-03-2023,25-03-2023,22-03-2023,recovered,NA,NA,16-03-2023,na
+272,Waail al-Naim,confirmed, na,56,25-03-2023,29-03-2023,NA,recovered,NA,\?,26-03-2023,27.9
+273,Tiare Lee,confirmed,f,forty-three,n / a ,09-04-2023,NA,recovered,NA,N / A ,08-04-2023, NA
+274,Joshua Wilson,suspected,n /a,74,05/04/2023,07/04/2023,NA,recoverkd,NA,03/04/2023,N / A ,NA
+275,Devan Sisneros, na,male,59,26 Mar 2023,29 Mar 2023,null,died,08 Apr 2023,17 Mar 2023,27 Mar 2023,25.1
+276,Blas Watts-Hight,NA,male,eighty-eight,30 March 2023,03 April 2023,NA,NOt available,NA,19 March 2023,25 March 2023,na 
+277,Kyle Allison,confirmed,M,thirty-seven,24 March 2023,25 March 2023,29 March 2023,recovered,NA,20 March 2023,26 March 2023,23.8
+278,Mary Lee,missing,female,62,2023-03-27,NAN,2023-04-01,NULL,2023-04-07,2023-03-18,2023-03-26,NA
+279,Zachary Fields,suspected,Male,74,26/03/2023,29/03/2023,n/a,recovered,NA,19/03/2023,23/03/2023,NA
+280,Zeth Kranwz,suspected,NA ,two,2023/03/23,2023/03/24,2023/03/28,recovered,NA,2023/03/17,2023/03/19,NA
+281,Saktina Lopez Medina,confirmpd,f,sixteen,2023/03/20,2023/03/22,NA,recovered,NA,2023/03/14,2023/03/18,21.5
+282,Samuel Bishop,probable,mgle,seventy-seven,23 April 2023,25 April 2023,NA,recovered,NA,18 April 2023,25 April 2023,NA
+283,Adnaan al-Salaam,confirmed,Wale,49,18-04-2023,21-04-2023,NA,N/A,NA,14-04-2023,not avail,26.2
+284,N / A ,NULL,Wale,n /a,2023-03-25, N / A,NA,recovered,NA,2023-03-20,NA ,NA
+285,Joshua Williams,confirmed,male,77,24/03/2023,27/03/2023,NA,died,06/04/2023,20/03/2023,29/03/2023,24.7
+286,Joshua Williams,confirmed,male,77,24/03/2023,27/03/2023,NA,died,06/04/2023,20/03/2023,29/03/2023,24.7
+287,Mallory Joly,probable,female,eighty-two,01 April 2023,03 April 2023,05 April 2023,died, na,23 March 2023,30 March 2023,NA
+288,Robert Ortiz,confirmed,male,thirty-two,NA,2023-04-09,NA,recovered,N A,2023-04-02,2023-04-05,NULL
+289,Alyssia Knight,probable,Female,missing,13-04-2023,20-04-2023,NA,not available,NA,31-03-2023,05-04-2023,NA
+290,Kevon Semp,confirmed,m,31,26/03/2023,28/03/2023,NA,recovered,NA,20/03/2023,25/03/2023,23.2
+291,#N/A,cpnfirmed,Male,fifty-three,01 Apr 2023,05 Apr 2023,NA,recovered,NA,27 Mar 2023,05 Apr 2023,25.9
+292,Justice Hope,suspected,Not Available,NA,29 Mar 2023,31 Mar 2023,NA,recovered,NA,24 Mar 2023,30 Mar 2023,NA
+293,Matiyassa Mathis,suspected,female,63,28 Mar 2023,NAN,NA,recovered,NA,22 Mar 2023,30 Mar 2023,NA
+294,not available,confirmcd,male,NA ,30 March 2023,02 April 2023,NA,recovered,NA,21 March 2023,01 April 2023,NAN
+295,Jonathan Xiong,nan,M,3,21/03/2023,NOt available,NA,recovered,NA,\*,20/03/2023,23.3
+296,Jonathan Xiong,nan,M,3,21/03/2023,NOt available,NA,recovered,NA,\*,20/03/2023,23.3
+297,Tokuryu Pham,probable,Male,ninety,21 Mar 2023,23 Mar 2023,NA,recovered,n a,19 Mar 2023,24 Mar 2023,NA
+298, a / a,probable,Male,Not Avail,20 March 2023,21 March 2023,NA,recovered,NA,n / a,21 March 2023,NA
+299,Sadie Cloud,n a,Female,43,26 Mar 2023,28 Mar 2023,NA,not a number,NA,16 Mar 2023,23 Mar 2023,23.5
+300,\?,not available,female,4,N A,na,NA,recovered,NA,15-03-2023,23-03-2023,NA
+301,Geraly Samano,confirmed,M,7,2023-03-23,2023-03-24,NA,died,\?,2023-03-12,2023-03-23,22.7
+302,Blake Kirby,confirmed,m,twenty-eight,N / A,06/04/2023, NA,recoxered,NA,NA,not a number,20.4
+303,Julia Ennis,confcrmed,female,55,28-03-2023,#N/A,NA,recovered,NA,16-03-2023,25-03-2023,30.1
+304, N / A,confirmed,nan,forty-five,Not A Number,02 Apr 2023,NA, na,NOt available,25 Mar 2023,02 Apr 2023,Not A Number
+305,N /A,N/A,male,62,31/03/2023,02/04/2023,NA,N /A,05/04/2023,23/03/2023,26/03/2023,25.1
+306,N /A,N/A,male,62,31/03/2023,02/04/2023,NA,N /A,05/04/2023,23/03/2023,26/03/2023,25.1
+307,Taylor Doderer,suspected,fomale,nan,28 Mar 2023,03 Apr 2023,NA,n a,NA,24 Mar 2023,Not Available,NA
+308,Duncan Rouillard,NA,Male,ninety,2023/03/23,missing,Not Avail,recovered,NA,2023/03/17,2023/03/20,NA
+309,N / A,confirmed,Not Avail,23,2023-03-26,2023-03-28,NA,recovered,NA,2023-03-15,2023-03-24,not a number
+310,Raymond Macoey,probable,m,Not Available,2023-03-28,2023-04-05,NA,recovered,NA,2023-03-23,2023-03-27,NA
+311,Jesus Salazar,suspected,Male,sixty-nine,2023-04-09,2023-04-12,2023-04-11,died,2023-04-20,2023-04-06,not avail,NA
+312,Megan Thompson,\*,f,eighty-three,not avail,2023-04-11,NA,recovered,NA,2023-04-05,2023-04-13,25.2
+313,Mateo Rutiaga,suspected,Male,7,2023-03-28,2023-04-03,NA,recovered,NA,2023-03-25,2023-03-26,NA
+314,Austin Buccieri,confirmed,m,twenty,28 Mar 2023,30 Mar 2023,NA,recovered,NA,25 Mar 2023,27 Mar 2023,24.3
+315,Munjid el-Shaer,suspected,male,31,07 Apr 2023,11 Apr 2023,na , NA,NA,N A,30 Mar 2023,Not Avail
+316,n / a ,confirmed,Female,twenty-two,Not Available,nan,NA,recovered,N/A,26 Mar 2023,01 Apr 2023,24.2
+317,Not Available,Not Avail,F,14,01 Apr 2023,05 Apr 2023,\*,died,19 Apr 2023,26 Mar 2023,01 Apr 2023,25.1
+318,Shuaib el-rashem,na,M,61,24 Mar 2023,26 Mar 2023,NA,#N/A,\.,21 Mar 2023,25 Mar 2023,NA
+319,N / A ,suspected,f,38,2023-03-27,2023-03-28,n a,recovered,NA ,NULL,N / A ,NA
+320,Mutee'a al-Anwar,NAN,Female,sixty-two,26-03-2023,28-03-2023,31-03-2023,recovered,NA,19-03-2023,24-03-2023,NA
+321,Marcus Neuroth,confirmed,Male, N / A,01 May 2023,03 May 2023,NA,recovered,NA,23 Apr 2023,26 Apr 2023,24.4
+322,Ethan Davidson, N / A,male,20,27 Mar 2023,30 Mar 2023,NA,recoqered,NA,22 Mar 2023,n / a,NA
+323,\.,,male,eighteen,,31 March 2023,NA,na,NA,22 March 2023,28 March 2023,NA
+324,Roger Billy,probable,male,8,2023/03/27,2023/03/30, na,recovered,NA,2023/03/25,2023/03/29,NA
+325,Mckaylin Crowley,Not Avail,F,thirty-five,2023/04/07,2023/04/11,NA,recovered,NA,N / A,\*,NA
+326,Mckaylin Crowley,Not Avail,F,thirty-five,2023/04/07,2023/04/11,NA,recovered,NA,N / A,\*,NA
+327,Jourdan Davis,confirmed,male,thirty-two,2023-04-01,2023-04-04,NA,recovered,NA,2023-03-27,2023-04-04,26.7
+328,Oscar Mooina,confirmed,male,N/A,not available,02-04-2023,NA,recovered,\*,27-03-2023,31-03-2023,23.5
+329,Brittany Callahan,confirmed,female,42,29 Mar 2023,01 Apr 2023,NA, N / A,n / a ,19 Mar 2023,22 Mar 2023,25.2
+330,Luke Hellmann-Jones,N A,male,56,N / A,26 March 2023,09 April 2023,died,10 April 2023,18 March 2023, na,NA
+331,Oscar Sanchez,confirmed,Not Available,71,n/a,30 March 2023,N / A ,recovered,NA,20 March 2023,22 March 2023,24.1
+332,Mikayla Owens,\?,F,\.,\*,2023-03-25,NA,recovered,NA,2023-03-16,2023-03-23,NA
+333,\*,confirmed,nan,seventeen,26 March 2023,28 March 2023,NA,recovered,NA,18 March 2023,23 March 2023,20.3
+334, NA,suspected,m,sixty-three,2023-03-21,2023-03-23,NA,not a number,NA,2023-03-19,2023-03-21, na
+335,Jordan Hill,probable,mals,22,2023-03-28,Not Available,#N/A,N / A ,NA,2023-03-24,2023-03-28,n a
+336,Ajun Tran,confirmed,Male,twenty-six,27 Mar 2023,28 Mar 2023,NA,recovered,NA,21 Mar 2023,n /a,23.2
+337,Yolanda Williams,probable,Female,32,not a number,Not A Number,22/04/2023,NA ,04/05/2023,30/03/2023,05/04/2023,NA
+338,Alexander Vasquez,confirmed, N / A,twenty-eight,03-04-2023,05-04-2023,NA,N / A ,NA,23-03-2023,29-03-2023,28.6
+339,David Story,,M,thirty-one, na,2023-04-08,2023-04-09,died,2023-04-16,2023-03-29, N / A,NA
+340,David Story,,M,thirty-one, na,2023-04-08,2023-04-09,died,2023-04-16,2023-03-29, N / A,NA
+341,Jennifer Blake-Villalovas,confirmed,female,44,03 April 2023,06 April 2023,missing,N A,18 April 2023,NULL,07 April 2023,24.5
+342,Breanne Williams,probable,f,31,2023/04/03,Not Available,nan,recovered,NA,2023/03/30,2023/04/03,NA
+343,Antonio Havlik,probable,Male,48,null,2023-04-03,2023-04-08,died,2023-04-14,2023-03-23,2023-03-29,NA
+344,Joseph Bryce,Probable,m,fifty,08-04-2023,12-04-2023,NA,NULL,NA,24-03-2023,30-03-2023,NA
+345,Enrico Kwon,confirmed,m,thirty-four,2023/04/05,2023/04/06,NA,recovered,NA,2023/03/25,na ,24.3
+346,Enrico Kwon,confirmed,m,thirty-four,2023/04/05,2023/04/06,NA,recovered,NA,2023/03/25,na ,24.3
+347,Maria Tofoya,nan,female,44,\?,24 Mar 2023,NA,died,29 Mar 2023,21 Mar 2023,29 Mar 2023,25.1
+348,Eunice fang,\.,f,sixteen,03-04-2023,08-04-2023,NA,recovered,NA,24-03-2023,28-03-2023,21.5
+349,#N/A,probable,Male,eighty-eight,2023/03/29,2023/04/06,NA,recovered,NA,2023/03/27,2023/03/28,NA
+350,Jason Sanchez,missing,m,17,11 April 2023, a / a,NA,recovered,NA,26 March 2023,NULL,25.7
+351,Philman Mbller,confirmed,n/a,7, N / A,01-04-2023,NA,recovered,NA,26-03-2023,02-04-2023,25.1
+352,not available,na,Female,missing,09 April 2023,10 April 2023,N A,recovered,NA,06 April 2023,not a number,NA
+353,not available,na,Female,missing,09 April 2023,10 April 2023,N A,recovered,NA,06 April 2023,not a number,NA
+354,Alfredo Alvarez Medrano,confirmed,m,forty,2023-04-04,2023-04-05,Not Avail,recovered,not avail,Not A Number,2023-04-06,26.4
+355,Waatiq al-Haq,confiamed,M,62,28 April 2023,\.,NA,recovered,NA,29 March 2023,05 April 2023,NAN
+356,Harmony Leyva-Castrejon,confirmed,N/A,5,2023-03-26,na,NA,recovered,NA,2023-03-19,2023-03-27,23.9
+357,Not Available,suspected,male,na ,29/03/2023, na,NA,N A,NA,22/03/2023,Not Avail,not available
+358,Rafael Reyes Gonzalez,confirmed,M,72,30/03/2023,01/04/2023,NA,\*,NA,23/03/2023,n / a,nan
+359,Nayari Perez,suspected,female,forty-nine,n / a,N/A,NA,recovered,NA,21 March 2023,\*,NA
+360,Rachel Banfield,confirmed,f,nineteen,31/03/2023,02/04/2023,03/04/2023,recovered,NA,25/03/2023,nan,27.3
+361,Adham al-pabbour,confirmed,Male,31,2023-05-01,2023-05-02,NA,recovered,NA,2023-04-30,Not A Number,27.6
+362,Emmanuel Brooks,confirmed,N /A,sixty-eight,28 March 2023, N / A,NA,recoverud,NA,26 March 2023,29 March 2023,21.5
+363,N/A,confirmed,M,21,2023-04-02,2023-04-07,NA,recoverec,NA,2023-03-23,2023-03-29,25
+364,Keona Slaughter,suspected,F,\?,NA ,n/a,13 April 2023,recovered,NA,25 March 2023,29 March 2023,NA
+365,Larissa Young,suspected,Female,fifty-five,10-04-2023,12-04-2023,Not Available,died,N / A,06-04-2023,11-04-2023,NA
+366,Monte Carlo Marrero,confirmed,null,51,2023/04/03,nan,NA,recovered,NA,nan,2023/04/06,25.8
+367,Darryl Mender,confirmed,Male,\.,03-04-2023,06-04-2023,NULL,recovered,NA,29-03-2023,03-04-2023,25.2
+368,Darryl Mender,confirmed,Male,\.,03-04-2023,06-04-2023,NULL,recovered,NA,29-03-2023,03-04-2023,25.2
+369,Marquise Garza,suspected,male,na,03 Apr 2023,06 Apr 2023,NA,recovered,NA,26 Mar 2023,01 Apr 2023,NOt available
+370,Sam nnider,confirmed,male,fifty-one,2023/03/26,2023/03/27,NA,recovered,NA,2023/03/19,2023/03/25,22.2
+371,Anthony Terrazas,probable,not a number,seventy-six,2023/03/27,NA ,n /a,NA ,NA,2023/03/23,2023/03/25,NA
+372,Keenan Baggett,probable,M,ten,25-03-2023,null,31-03-2023,recovered,NA,20-03-2023,22-03-2023,#N/A
+373,not avail,,Male,77,23 March 2023,25 March 2023,null,,NA,20 March 2023,26 March 2023,NA
+374,Haley Shaw,\.,female,42,24/03/2023,27/03/2023,NA,recovered,Not Avail,18/03/2023,25/03/2023,25.9
+375, na,cinfirmed,male,13,2023-03-31,2023-04-02,N /A,rmcovered,NA,2023-03-24,2023-04-01,23.6
+376,Sheniqua Watson,probable,f,86,04-04-2023,08-04-2023,09-04-2023,recovered,not avail,24-03-2023,31-03-2023,NOt available
+377,Makenzie Lovejoy,\?,F, na,27 Mar 2023,01 Apr 2023,NA,recovered,NA,null,31 Mar 2023,NA
+378,Ryan Nguyen,#N/A,Male,#N/A,16-04-2023,n / a ,NA,recovered,NA,n / a,not a number,20.1
+379,Colin Mizdue,,malb,seven,11 April 2023,14 April 2023,not avail,recovered,N/A,29 March 2023, na,26
+380,Colin Mizdue,,malb,seven,11 April 2023,14 April 2023,not avail,recovered,N/A,29 March 2023, na,26
+381,Alexander Purgic,probable,male,sixty-seven,21 Apr 2023,n a,NA,NA,NA,04 Apr 2023,NULL,\*
+382,Kamaal al-Aly,confirmed,male,fifty-seven,2023/04/08,2023/04/11,NA,died,N/A,2023/03/31,2023/04/09,25.3
+383,Jonathan Merritt,confirmed,M,Not A Number,14 April 2023,16 April 2023,17 April 2023,recovered,NA,01 April 2023,12 April 2023,22.1
+384,Jonathan Merritt,confirmed,M,Not A Number,14 April 2023,16 April 2023,17 April 2023,recovered,NA,01 April 2023,12 April 2023,22.1
+385,Mikkayla Green,confirmed,Female,fifty-seven, NA,09/04/2023,NA,recovered,NA,01/04/2023,03/04/2023,26
+386,Aaish al-Shams,N / A ,M,seventy-four,missing,12 Apr 2023,na ,recovered, na,26 Mar 2023,06 Apr 2023,NA
+387,Jasmine Mendez,confirmed,Female,twelve,10 Apr 2023,12 Apr 2023,NA,recovered,NA,04 Apr 2023,13 Apr 2023,23.8
+388,Jasmine Mendez,confirmed,Female,twelve,10 Apr 2023,12 Apr 2023,NA,recovered,NA,04 Apr 2023,13 Apr 2023,23.8
+389,Charlene Dines,confirmed,f,thirty-two,06-04-2023,07-04-2023,NA,recovered,NA,31-03-2023,06-04-2023,N / A 
+390,Brady Lutt,na,Male,six,06 April 2023,09 April 2023,NA,NA,NA,02 April 2023,07 April 2023,NOt available
+391,Shanice Lankhprdt,suspected,Fomale,fifty-five,10-04-2023,15-04-2023,13-04-2023,recovered,na ,07-04-2023,13-04-2023,NA
+392,n / a ,suspected,mabe,eighty-six,not a number,09 Apr 2023,NA,n / a ,NA,30 Mar 2023,Not A Number,NA
+393,Benjamin Ninomiya,probable,m,eighty-seven,03 April 2023,05 April 2023,NA,\*,NA,26 March 2023,01 April 2023,NA
+394,Mekeila Morgan,confirmed,f,46,2023-04-03,2023-04-06,NA,Not Avail,NA,2023-03-24,2023-04-01,23.9
+395,Mekeila Morgan,confirmed,f,46,2023-04-03,2023-04-06,NA,Not Avail,NA,2023-03-24,2023-04-01,23.9
+396,n/a,suspected,M,87,05/05/2023,07/05/2023,NA, NA,NA,\*,02/05/2023,NA 
+397,Tanya Salazar,not avail,null,fifty-four,09/05/2023,12/05/2023,NA,recovered,not available,n /a,03/05/2023,25
+398,Daovone Nguyen,probable,\?,fifteen,08 May 2023,10 May 2023,#N/A,died,23 May 2023,30 Apr 2023,04 May 2023,NA
+399,Mazeed el-Badie,not a number,male,seventy-eight,2023-04-02,2023-04-04,NA,recovered,NA,N /A, N / A,NA
+400,Dhrek Mark,probable,M,sixty-four,2023/04/14,2023/04/18,NA,recovered,nan,2023/03/29,2023/04/03,NA
+401,Pilliam Floyd,confirmed,male,30,10-04-2023,14-04-2023,\*,recovered,NA ,28-03-2023,08-04-2023,23.7
+402,Fao'hiyaa al-Kamal,confirmed,f,fifty-three,02/04/2023,04/04/2023,05/04/2023,recovered,NA,28/03/2023,\*,25
+403,Dion Ramirez-Carrillo,probable,male,fifty-seven,03/04/2023,05/04/2023,08/04/2023,n / a ,19/04/2023,30/03/2023,10/04/2023,NA
+404,Abyad al-Hasan,confirmed,M,36,02 Apr 2023,04 Apr 2023, a / a,recovered,NA,\?,29 Mar 2023,not a number
+405,na,suspected,na,n / a ,2023/04/02,2023/04/05,NA,not a number, N / A, a / a, na,NA
+406,William Fircher,confirmed,male,8,not available,2023-04-05,NA,recovered,Not Available,2023-03-23,Not Available,26
+407,Cash O Reilly,\.,N / A,twenty-one,02-04-2023,05-04-2023,missing,null,23-04-2023,23-03-2023,\?,NA
+408,Aleya Owens,probable,f,\*,02-04-2023,05-04-2023,NA,recovxred,NA,20-03-2023,29-03-2023,NA
+409,Yptaro Kim,Not A Number,Male,n a,2023/04/03,2023/04/06,NA,N A,NA,NA ,2023/03/28,NA
+410,Raphael Secundino,probable,male,fourteen,30 March 2023,n/a,03 April 2023,died,04 April 2023,24 March 2023,26 March 2023,NA
+411,Aaish el-Farman,probable,Not A Number,thirty-six,2023/03/23,2023/03/25,NA,recovered,not a number,null,2023/03/24,NA
+412,Alfonso Bobian,confirmed,malt,two,\.,14 April 2023,NA,NAN,NA,01 April 2023,06 April 2023,25.2
+413,\?,confirmed,m,4,2023/04/06,nan,missing,recovered,NA,2023/04/01,2023/04/05,22.8
+414,Aaron Storm,probmble,M,fifty-eight,2023/04/19,2023/04/21,2023/04/22,recovered,NA,2023/04/03,2023/04/13,NA
+415,NOt available,suspected,Male,89,16 Apr 2023,19 Apr 2023,NAN,Not A Number,n / a, na,null,NA
+416,Anthony Pena,probable,NA,seventy-nine,20 Apr 2023,27 Apr 2023,NA,recovered,NA,\.,20 Apr 2023,NA
+417,Andrew Hayes,missing,Male,82,19/04/2023,21/04/2023,NA,recovered,NA,11/04/2023,20/04/2023,NOt available
+418,Kelly Begay,confirmed,Not Available,na,2023/04/18,2023/04/19,NA,recovered,NA,2023/04/11,2023/04/18,27.6
+419,Abdul Maalik al-Moussa,confirmed,M,eighty-one,2023/04/17,2023/04/20,2023/04/23,died,2023/04/30,2023/04/02,2023/04/11,n/a
+420,NAN,probable,m,\.,2023/04/12,2023/04/17,NA,recovered,NA,2023/04/06,2023/04/12,NA
+421,Clayton Cloud,confirmed,M,fifty,14 April 2023,16 April 2023,NA,recovered, na,08 April 2023,17 April 2023,22.8
+422,Clayton Cloud,confirmed,M,fifty,14 April 2023,16 April 2023,NA,recovered, na,08 April 2023,17 April 2023,22.8
+423,Jay Patterson,probable,male,thirty-seven,2023-04-09,2023-04-13,\?,recovered,NA,2023-04-05,2023-04-11,NA
+424,Deangelo Hensinger II,probable,m,forty-eight,10/04/2023,not available,NA,recovered,NA,05/04/2023,18/04/2023,NA
+425,Praveen Nguyen,probable,Male,76,2023-04-10,2023-04-12,NA,recovered,NA,2023-04-05,2023-04-18,NA
+426,null,confirmed,Male,one,18/04/2023,21/04/2023,NA,n/a,N/A,03/04/2023,09/04/2023,21.4
+427,Abdul Haadi el-Salame,confirmed,male,fifty-three,na,20 April 2023,22 April 2023,died,24 April 2023,03 April 2023,08 April 2023,26.3
+428,Anthony Chea,confirmed,M,n /a,10-04-2023, na,NA,reaovered,NA,05-04-2023,07-04-2023,24.6
+429,Leroy Ojeda-Ortega,probable,male,eighty-three,13/04/2023,15/04/2023,NA,na,NA,n/a,11/04/2023,Not Available
+430,Isaiah Castaneda,probable,male,90,2023-04-11,2023-04-16,na,recovered,NA,2023-04-04,2023-04-14,NA
+431,Zuraara el-Mahdi,suspected,male,six,not available,#N/A,NA,recovered,NA,31 March 2023,03 April 2023,NA
+432,Not Available,suspected,not available,\?,2023/05/07,2023/05/09,NA,died,2023/05/20,2023/05/01,2023/05/09,NA
+433,Rylee Lyons,confirmed,ffmale,80,2023-05-13,2023-05-20, a / a,died,2023-05-19,2023-05-08,2023-05-11,24.7
+434,Myeong Se Morris,#N/A,Male,sixty-three,nan,2023-04-07,N A,recovered,NA,\*,missing,22.3
+435,Gilbert Brough,suspected,m,fifty-nine,16-04-2023,18-04-2023,NA,recovered,na,12-04-2023,19-04-2023,NA
+436,Andrew Mulder,na ,m,33,15/04/2023,18/04/2023,N/A,recovered,NA,10/04/2023,15/04/2023,NA
+437,Hope Droke,probable,Femalg,Not Avail,05 Apr 2023,Not A Number,NA,recovered,NA,01 Apr 2023,07 Apr 2023,NA
+438,N A,na,Female,fifty-one,not a number,2023-04-13,NA,recovered,,2023-03-29,2023-04-08,NA
+439,JaroncLeach,na ,m,thirty-nine,02/04/2023,n / a,N A,recovered,NA,na ,04/04/2023,23.6
+440,Josiah Tindle,confirmed,Male,NOt available,04-04-2023,10-04-2023,NA,recovered,NA,31-03-2023,05-04-2023,25.4
+441,Tyler Burnett,probable,Male,twenty-four,2023/04/06,2023/04/09,NA,recovered,NA,na,2023/04/04,NA
+442,Sharif Ajibade,probable,M,thirty-five,11/04/2023,12/04/2023,25/04/2023,died,NULL,31/03/2023,03/04/2023,NA
+443,Joshua Gallegps Zamarripa,confirmed,Maee,63,08 April 2023,11 April 2023,NA,recovered,NA, na,02 April 2023,23.4
+444,Cesar Santora,probable,m,60,03-04-2023,11-04-2023,NA,recovered,NA,29-03-2023,05-04-2023,not a number
+445,Logan Sepp,N / A ,male,NA ,2023/04/10,,Not Avail,recomered,NA,N /A,2023/04/03,NA
+446,Nathan Margen,probable,\*,forty-two,02 Apr 2023,NOt available,NA,null,\.,25 Mar 2023,Not Available,NA
+447,Darius Purvis,suspected,M,sixty-one,02 April 2023,04 April 2023,07 April 2023,recovered,NA,27 March 2023,01 April 2023,NA
+448,na ,confirmed,m,77,NA ,06-04-2023,NA,Not Available,NA,27-03-2023,01-04-2023,23.5
+449,MatthewyRudman,suspected,male,39,26/03/2023,29/03/2023,30/03/2023,reclvered,NA,22/03/2023,24/03/2023,NA
+450,Glenn Waits,confirmed,Male,N / A ,07 Apr 2023,09 Apr 2023,NA,recovered,NA,NULL,16 Apr 2023,26.1
+451,Brittani Luna,probable,Female,77,23 Apr 2023,25 Apr 2023,NA,recovered,NA,16 Apr 2023,22 Apr 2023,NA
+452,Ja'Gr Moore,suspected, a / a,missing,22 Apr 2023,23 Apr 2023,NA,recovered,NA,13 Apr 2023,22 Apr 2023,NA
+453,Ja'Gr Moore,suspected, a / a,missing,22 Apr 2023,23 Apr 2023,NA,recovered,NA,13 Apr 2023,22 Apr 2023,NA
+454,Hana Ahuna,probable,f,twenty-two,2023/04/25,2023/04/28,NA,recovered,na,2023/04/10,2023/04/16,NA
+455,Gabriel Leil,probable,N /A,nineteen,08/05/2023,10/05/2023,null,recovered,NA,18/04/2023,21/04/2023,NA
+456,Simon Phillips,na ,f,eighty-seven,20 April 2023,26 April 2023,NA,recovered,NA,18 April 2023,23 April 2023,25.7
+457,Marina Goodfellow,confirmed,Fedale,43,19-04-2023,22-04-2023,not a number,NULL,NA,n a,22-04-2023,n / a
+458,Noah Reyes,\?,malz,5,21-04-2023,22-04-2023,NA,recovered,NA,14-04-2023,n /a,23.1
+459,Albert Directo,confirmed,male,eleven,#N/A,NULL,NA,recovered,NA,16 April 2023,20 April 2023,24.1
+460,Tanner Gallagher,confilmed,M,fifty-eight,18 Apr 2023,21 Apr 2023,NA,recovered,NULL,11 Apr 2023,17 Apr 2023,23.9
+461,Tanner Gallagher,confilmed,M,fifty-eight,18 Apr 2023,21 Apr 2023,NA,recovered,NULL,11 Apr 2023,17 Apr 2023,23.9
+462,Denise Gregg,confirmed,Not A Number,10,15 April 2023,21 April 2023,NA,recovered,NA,13 April 2023,17 April 2023,24.7
+463,Wajdi al-Ahmed,confirmed,male,23,2023/04/10,2023/04/14,N / A,recovered,NA,2023/04/05,2023/04/12,25.6
+464,Emilee Mueller,probable,f,\*,2023-04-12,2023-04-16,NA,recovered,NA,2023-04-08,2023-04-12,NA
+465,Amado Gallegos,na ,n/a,63,22-04-2023,27-04-2023,NA,NOt available,NA,15-04-2023,19-04-2023,23
+466,Phillip Thomas,confirmed,NA ,53,18-04-2023,22-04-2023,N /A,recovered,n / a,\*,13-04-2023,23.2
+467,Oswaldo Roman-Cervantes,null,NULL,nine,2023-04-24,2023-04-28,NA,recovered,NA,2023-04-11,2023-04-14,NA
+468,Oswaldo Roman-Cervantes,null,NULL,nine,2023-04-24,2023-04-28,NA,recovered,NA,2023-04-11,2023-04-14,NA
+469,Brendan Debaca,confirmed,M,seventeen,2023-05-12,2023-05-14,NA,Tecovered,NA,2023-05-03,2023-05-09,23.8
+470,William fathews,probable,m,fifty,17-05-2023,20-05-2023,NA,N / A,NA,07-05-2023,16-05-2023,NA
+471,Luis Gallegos,confirmed,M,86,13-05-2023,16-05-2023,NA,died,28-05-2023,Not A Number,17-05-2023,24.6
+472,Devante Jackson,confirmed,M,#N/A,16/05/2023,22/05/2023,NA,recovered,NA,09/05/2023,16/05/2023,24.6
+473,Robert Linnear,probable,n / a,61,2023-05-14,2023-05-16,NA,died,2023-05-26,2023-05-12,2023-05-17,NA
+474,Kendle Mack,suspected,\?,44,18 April 2023,22 April 2023,NA,recovered,NA,08 April 2023,20 April 2023, NA
+475,Eaail al-Kabir,confirmed,,eighty,15/04/2023,18/04/2023,21/04/2023,recovered,NA,nan,nan,24.8
+476,Eaail al-Kabir,confirmed,,eighty,15/04/2023,18/04/2023,21/04/2023,recovered,NA,nan,nan,24.8
+477,Ashley Cordova,suspecued,F,15,14/04/2023,\.,NA,recovered,na ,29/03/2023,not available,NA
+478,NA ,probable,f,five,06 Apr 2023,n / a,NA,Not A Number,n/a,02 Apr 2023,not avail,NA
+479,NA ,probable,f,five,06 Apr 2023,n / a,NA,Not A Number,n/a,02 Apr 2023,not avail,NA
+480,Mario Tilley,probable,M,73,10-04-2023,16-04-2023,NA,recovered,NA,04-04-2023,Not Available,NA
+481,Grant Nicholson, N / A,m,21,07 Apr 2023,10 Apr 2023,NA,recovered,NA,03 Apr 2023,NA,nan
+482,N A,n a,male,seventy,2023-04-10,2023-04-15,NA,recovered,NA,2023-04-06,2023-04-10,NA
+483,NAN,confirmed,m,60,2023-04-04,2023-04-08,NULL,recovered,NOt available,2023-04-01,2023-04-05,25.9
+484,n a,N / A,male,twenty-one,04 April 2023,09 April 2023,NA,recovered,NA,01 April 2023,04 April 2023,NA
+485,David Mares,confirmed,m,not a number,2023-04-15,N /A,NA,recovered,n /a,2023-04-07,2023-04-12,24.9
+486,Christopher Barnes,confirmed,male,forty-two,02 April 2023,08 April 2023,NAN,recovered,NA,na, na,25.2
+487,JonathansHernandez,conjirmed,Mage,29,2023-04-05,null,\*,recovered,N A,2023-04-02,2023-04-06,27.4
+488,Kyle Montoya,probable,M,n /a,12-04-2023,15-04-2023,N/A,n /a,18-04-2023,03-04-2023,17-04-2023,NA
+489,Aaron Davis,n a,M,nineteen,2023/05/01,2023/05/05,NA,recovered,NA,2023/04/20,2023/04/25,22.4
+490,Brennan Flores,confirmed,N /A,nine,2023-04-24,2023-05-01,NA,recovered,NA,2023-04-23,N/A,26.4
+491,Briana Early-Harris,NA ,F,seventy-four,15 May 2023,n / a,N / A , a / a,NA,04 May 2023,12 May 2023,22.3
+492,Gillian Randolph,NULL,F, NA,not available,null, NA,n / a,NA,08/05/2023,12/05/2023,24.6
+493,NAN,confirmed,f,Not Available,2023/05/16,2023/05/17,not available,Mied,,2023/05/03,2023/05/09,26.1
+494,Debonair Sweeney Jr,confirmed,not avail,18,2023-04-23,2023-04-25,Not Avail,recovered,NA,2023-04-20,2023-04-24,\*
+495,Nhuquynh Phu,confirmed,Not A Number,11,2023-04-26,n / a ,NA,recovered,NA,2023-04-19, a / a,23.2
+496,#N/A,confirmed,Male,twenty-one,25-04-2023,27-04-2023,03-05-2023,recovered,NA,20-04-2023,23-04-2023,21.8
+497,Ruben Strange Owl,Not Available,Not Avail,47,null,30/04/2023,NA,recovered,NA,n/a,22/04/2023,24.9
+498,Alek Wagler,#N/A,male,thirty-one,25/04/2023,27/04/2023,28/04/2023,recovered,NA,17/04/2023,25/04/2023,null
+499,Matthew Watts,probable, na,16,2023/04/23,2023/04/27,NA,not a number,NA,2023/04/18,not avail,NA
+500,Kyle Martinez,confirmed,Male,NA ,2023/04/25,2023/04/28,NA,nan,NA,2023/04/16,2023/04/25,n/a
+501,Kyle Martinez,confirmed,Male,NA ,2023/04/25,2023/04/28,NA,nan,NA,2023/04/16,2023/04/25,n/a
+502,Keli Choi,N A,F,N /A,18 April 2023,21 April 2023,NA,recovered,NA,16 April 2023,23 April 2023,NA 
+503,Haashim el-Samara,confrrmed,male,17,16 April 2023,18 April 2023,19 April 2023, na,NA,13 April 2023,17 April 2023,24.7
+504,N / A,not avail,Male,7,18-04-2023,21-04-2023,NA,recovered,NA,11-04-2023,18-04-2023,N / A 
+505,Dafion Kler,confirmed, N / A,forty-three,17/04/2023,19/04/2023,NA,na,NA,12/04/2023,17/04/2023,25.9
+506,N /A, NA,\*,na,2023/04/16,missing,NA,recovered,NA, na,n/a,21.4
+507,n a,confirmed,M,22,n / a ,14-04-2023,NA,\.,NA,07-04-2023,15-04-2023,25.2
+508,Katheer el-Moustafa,n a,Male,sixty,Not Avail,NULL,Not Avail, a / a,NA,not available,13 April 2023,na 
+509,Spencer Medina, N / A,male,eighty-seven,2023/04/15,2023/04/22,NA,recovered,NA,2023/04/08,2023/04/14, N / A
+510,Sarah Espino,confirmed,Female,3,12 April 2023,13 April 2023,NA,recovered,NA,07 April 2023,12 April 2023,25.7
+511,David Madrid,suspected,M,forty-two,2023/04/26,2023/04/29,NA,recovnred,NA,2023/04/18,2023/04/27,NA
+512,David Madrid,suspected,M,forty-two,2023/04/26,2023/04/29,NA,recovnred,NA,2023/04/18,2023/04/27,NA
+513,Minnah el-Madani,confirfed,na,69,26-04-2023,Not Avail,NA,recovered,NA,18-04-2023,28-04-2023,26.5
+514, na,\.,male,thirty-nine,2023-05-15,2023-05-17,NA,recovered,NA,,2023-05-13,NA
+515,Sitey Hughes,confirmed,Femalc,26,12-05-2023,16-05-2023,N / A ,Not Avail,NA,Not A Number,17-05-2023,27.9
+516,Sitey Hughes,confirmed,Femalc,26,12-05-2023,16-05-2023,N / A ,Not Avail,NA,Not A Number,17-05-2023,27.9
+517,Joanna Her,confirmed,Female,35,19 May 2023,22 May 2023,NA,not avail,NA,07 May 2023,19 May 2023,24.5
+518,Christian Quarles,confirmed,m,5,n / a ,Not A Number,NA,recovered,N / A,12-04-2023,17-04-2023,25.1
+519,Chase Odnoralova,confirmed,na,N /A,21-04-2023,23-04-2023,NA,rtcovered,NA,13-04-2023,19-04-2023,25
+520,Chase Odnoralova,confirmed,na,N /A,21-04-2023,23-04-2023,NA,rtcovered,NA,13-04-2023,19-04-2023,25
+521,Charlie Wu,probabwe,Male,N / A,16 April 2023,n a,NA,recovered,NA,08 April 2023,na ,NA
+522,Kendal Sosa,confirmed,\?,88,07/04/2023,12/04/2023,NA,recovered,NA,05/04/2023,Not Available,N /A
+523,Aaron Perry,confirmed,m,eighty-seven,2023/04/09,2023/04/12,2023/04/20,NA ,2023/04/21,2023/04/04,2023/04/11,23.6
+524,Wadee'a al-Nazir,confirmed,Female,twenty-seven,2023/04/11,2023/04/17,NA,recovered,NA,n / a,2023/04/09,26.2
+525,not available,confirmed,M,67,2023-04-19,na ,NA,not avail,NA,2023-04-07,2023-04-14,25.6
+526,Scarlett Contreras,probable,F,seven,2023/04/18,N /A,NAN,recovered,\.,2023/04/05,2023/04/12,NA
+527,Alex Mahat,probable,maze,36,N/A,2023/04/17,NA,recovered,#N/A,,2023/04/14,NA
+528,Jawaad al-Akhter,Not Avail,M,fifty-three, N / A,10-04-2023,NA,Not Available,,31-03-2023,\?,29.6
+529,Kyle Griffitc,confirmed,m,53,14 April 2023,16 April 2023,NA,recovered,NA,Not Available,n / a ,24.4
+530,Aarif el-Ibrahim,null,male,77,18/04/2023,N/A,NA,recovered,NA,14/04/2023,15/04/2023,N /A
+531,Pichest Xiong,suspected,m,one,13 April 2023,14 April 2023,NA,recovered,NA,02 April 2023,09 April 2023,NA
+532,Saajid el-Assaf,suspected,\.,twenty-four,10 April 2023,null,13 April 2023,died,01 May 2023,01 April 2023,12 April 2023,NA
+533,n / a ,suspected,N/A,thirty-four,not available,not avail,NAN,recovered,NA,04/04/2023,06/04/2023,NA
+534,not available,probable,m,missing,05-04-2023,08-04-2023,NA,recovered,NA,02-04-2023,05-04-2023,NA
+535,\.,Not A Number,NA ,not available,N /A, na,22 Apr 2023,died,23 Apr 2023,N / A,12 Apr 2023,NA
+536,na ,probable,f,17,2023-04-12,2023-04-16,NA,died,2023-05-01,n / a ,2023-04-15,NA
+537,Devante Glenn,probable,Male,fifty-two,11 May 2023,13 May 2023,NA,recovered,NA,29 Apr 2023,02 May 2023,NA
+538,Carlos Lara,confirmed, N / A,null,na,23/05/2023,NA,recovered,NA,14/05/2023,16/05/2023,26.3
+539,null,suepected,#N/A,48,18/05/2023,22/05/2023,NA,recovered,NA,nan,22/05/2023,NA
+540,NA,confirmed,Male,43,18 May 2023,27 May 2023,n a,Not Avail,NA,NOt available,17 May 2023,25.6
+541,Derian Vigil,confirmed,F, na, N / A,26 May 2023,\*,recovered,NA,14 May 2023,16 May 2023,Not A Number
+542,Aayid el-Nazar,confirmed,m,30,2023/04/26,2023/04/30,NA,Lecovered,NA,nan,n / a ,26.3
+543,Neben Dumler,suspected,male,30,26/04/2023,01/05/2023,na,na,NA,23/04/2023,29/04/2023,NA
+544,Jaydon Chau,missing,male,sixty-seven,27-04-2023,04-05-2023,NA,recovered,NA,21-04-2023,28-04-2023,23.7
+545,Jaydon Chau,missing,male,sixty-seven,27-04-2023,04-05-2023,NA,recovered,NA,21-04-2023,28-04-2023,23.7
+546,N /A,confirmed,Male,sixty-six,2023/04/20,2023/04/23,n / a ,not avail,NA,Not Available,2023/04/20,25.1
+547,Martin Lord-Blegen,suspected,n / a, N / A,24 April 2023,29 April 2023,NULL,,NA,15 April 2023,21 April 2023,NA
+548,Not A Number,not available,Male,ninety,18 Apr 2023,25 Apr 2023,NA,died,01 May 2023,na ,22 Apr 2023,24.3
+549,Not A Number,not available,Male,ninety,18 Apr 2023,25 Apr 2023,NA,died,01 May 2023,na ,22 Apr 2023,24.3
+550,Jacob Diaz,confirmed,m,twenty-one,13 April 2023,n /a,NA,recovered,NA,08 April 2023,n/a,26.3
+551,nan,probable,male,58,Not A Number,N/A,NA,recovered,N / A,10-04-2023,18-04-2023, N / A
+552,Samantha Pena,suspected,F,Not Available,28 Apr 2023,30 Apr 2023,NA,recovered,not avail,24 Apr 2023,02 May 2023,NA
+553,Valentino Mendoza-Barron,na,Male,thirty,30/04/2023,04/05/2023,06/05/2023,recovered,n / a,22/04/2023,not avail,NA
+554,Amniyya al-Jafri,#N/A,F,fifty-two,2023/05/01,n / a ,NA,Not A Number,null,2023/04/20,2023/04/29,28.9
+555,NA,confirmed,mfle,16,03 May 2023,12 May 2023,NA,recovered,NA,21 Apr 2023,27 Apr 2023,26.6
+556,Alexander Chavez,confirmed,male,80,2023-05-18,2023-05-22,NA,recovered,missing,2023-05-08,2023-05-17,26.1
+557,Elena Vieyra Patino,confirmed,F,twenty-two,19 May 2023,N / A,NA,recuvered,NOt available,13 May 2023,20 May 2023,21.5
+558,Leopoldo Rose,confirmed,Malq,Not Avail,2023-05-15,2023-05-18,NA,recovered,NA,2023-05-08,n / a,NAN
+559,Connor Ortega,confirmed,male,\.,16-05-2023,18-05-2023,NA,recovered,NA,10-05-2023,12-05-2023,25
+560,Leilah Goodwater,probable,Female,18,23/05/2023, N / A,NA,recovered,NA,16/05/2023,22/05/2023,NA
+561,Rfan Thammavong,confirmed,Male,35,23/05/2023,25/05/2023,28/05/2023,died,05/06/2023,14/05/2023,not avail,23.2
+562,Husain el-Sader,probable,M,80,#N/A,2023-04-25,NA,recovered,n / a ,2023-04-18,2023-04-23, N / A
+563,Husain el-Sader,probable,M,80,#N/A,2023-04-25,NA,recovered,n / a ,2023-04-18,2023-04-23, N / A
+564,Lathan Hernandez,\*,M,7,01 May 2023,03 May 2023,NA,recovered,NA,19 Apr 2023,24 Apr 2023,NA
+565,NA ,confirmed,Male,80,21/04/2023,25/04/2023, na,recovered,not available,NULL,21/04/2023,25.7
+566,n /a,suspected,m,17,n a,01-05-2023,NA,recovered,NA,18-04-2023,24-04-2023,NA
+567,N /A,probable,m,76,not avail,30 Apr 2023,29 Apr 2023,recoverec,NA,20 Apr 2023,nan,not a number
+568,Sabrina Andrade Jr,confirmed,female,66,08 Apr 2023,11 Apr 2023,#N/A,recovered,NA,04 Apr 2023,08 Apr 2023,23.9
+569,Tronson Hedin,conrirmed,M,19,2023/04/10,2023/04/13,NA,recovered,NA,not avail,2023/04/14,28.4
+570,Saif al-Suleiman,confirmed,m,12,2023-04-11,2023-04-14,NA,N / A ,NA,n / a ,2023-04-10,null
+571,Dah'Som Meyerhofer,Not A Number,m,18,09/04/2023,not avail,NA,recovered,nan,05/04/2023,10/04/2023,NA
+572,Sarah Sandoval,probable,f,\.,2023-04-11,2023-04-14,NA,recovered,NA,2023-04-04,2023-04-09,NA
+573,Not A Number,confirmed,male,62,18-04-2023,21-04-2023,NA,recovered,NA,11-04-2023,15-04-2023,29
+574,Trey Moore,\.,m,thirty-five,n/a,2023-04-24,NA,recovered,NA,2023-04-15,2023-04-23,NA
+575,Jamaal el-Minhas,suspected,N A,one,2023-05-01,2023-05-02,NA,recovered,NA,2023-04-10,N A,NA
+576,Alake Lynn,confirmxd,male,fifty-two,2023-04-21,2023-04-22,NA,recovered,NA,2023-04-10,2023-04-15, a / a
+577,n a,,male,forty-one,2023-04-14,n / a,NA, NA,NA,2023-04-11,2023-04-16,NA
+578,nan,suspected,m,17,11/04/2023,\*,NA,recovered,NA,09/04/2023,15/04/2023,NA
+579,Ryan Garcia,confirmed,M,32,14 April 2023,16 April 2023,NA,recovered,NA,06 April 2023,11 April 2023,23.1
+580,Drew Duncan,confirmed,nan,twenty-six,18 April 2023,19 April 2023,NA,recovered,NA,N / A,08 April 2023,27.5
+581,Andrew Martinez,n a,n a,30,11/04/2023,N/A,NA,recovered,NA,01/04/2023,09/04/2023,23.3
+582,Aivre Beltran,NA,Male,thirty-seven,2023-04-18,2023-04-20,N A,died,2023-04-24,2023-03-30,not available,23.1
+583,Jacob Regnier,probable,M,33,23 Apr 2023,not available,NA,recovered,NA,14 Apr 2023,22 Apr 2023,NA
+584,Jacob Regnier,probable,M,33,23 Apr 2023,not available,NA,recovered,NA,14 Apr 2023,22 Apr 2023,NA
+585,,NOt available,M,\.,null,2023-04-17,2023-04-20,recovered,NA,2023-04-10,2023-04-16,NA
+586,Bryce Hartel,suspected,Maae,77,23 May 2023,25 May 2023,27 May 2023,died,05 Jun 2023,\.,26 May 2023,NA
+587,Daniel Gerardo,\.,Male,sixty-four,2023-05-22,2023-05-24,NA,Not A Number,,2023-05-16,2023-05-20,n a
+588,Alex Zheng,suspected,NOt available,eighty-seven,21/05/2023,25/05/2023,27/05/2023,died,10/06/2023,15/05/2023,19/05/2023,NA
+589,Jerry Arapahoe,suspected,male,fifty-six,01-05-2023,05-05-2023,NA,recovered,NA,24-04-2023,04-05-2023,NA
+590,Marceen Deer,confirmed,f,eleven,01 May 2023,05 May 2023,NA,recovered,NA,23 April 2023,01 May 2023,25.4
+591,Aaron Rundle,suspected,Male,70,01 May 2023,05 May 2023,NA,died,13 May 2023,24 Apr 2023,\*,NA
+592,David Sedillos,suspected,male,n / a ,2023/05/02,2023/05/04,2023/05/07,N A,NA,2023/04/19,2023/04/29,NA
+593,not a number,confirmed,Male,47,21 April 2023,22 April 2023,NA,recovered,NA,17 April 2023,\.,26.7
+594,Luis Hayutin,probable,male,null,21-04-2023,22-04-2023,NA,recovered,NA,15-04-2023,19-04-2023,NA
+595,not available,probable,f,fifty-eight,25-04-2023,28-04-2023,n/a,recovered,NA,14-04-2023,21-04-2023,NA
+596,Jose Quinonez,Not A Number,m,44,03 May 2023,07 May 2023,Not A Number,recovered,NA,24 April 2023,02 May 2023,25
+597,Not A Number,probable,male,n / a ,2023-05-05,NAN,NA,recovered,NA,N /A,2023-04-30,N / A
+598,Elijah Rhodes Franklin,probable,m,seventy-one,01 May 2023,\.,NA,missing,not avail,27 Apr 2023,07 May 2023,NA
+599, N / A,confirmed,female,forty-two,2023-05-13,Not A Number, a / a,recovered,NA,2023-04-27,2023-05-04,24.4
+600,Matthew Jain,N /A,male,ten,16 May 2023,19 May 2023,NA,na ,NA, NA,04 May 2023,NA
+601,Markuz Beckley,conpirmed,N /A,na,2023-05-05, a / a,2023-05-16,recovered,\.,2023-04-26,2023-05-03,26
+602,Kelsi Brown,confirmed,F,sixty-nine,13 May 2023,N / A,NA,recovered,NA,02 May 2023,09 May 2023,29.4
+603,Jose Morales,confirmed,n / a,59,22-05-2023,24-05-2023,NA,died,05-06-2023,17-05-2023,N / A,24.3
+604,Robert Cardona,probable,not avail,thirty-four,25/05/2023,28/05/2023,NA,recovered,NA,NOt available,22/05/2023,NA
+605,Robert Cardona,probable,not avail,thirty-four,25/05/2023,28/05/2023,NA,recovered,NA,NOt available,22/05/2023,NA
+606,Tristin Russell, a / a,n /a,Not Avail,not a number,23/05/2023,NA ,recovered,NA,10/05/2023,19/05/2023,#N/A
+607,Carlos Delmoral,sukpected,NAN,n / a,22-04-2023,n /a,NA,nan,NA, a / a,25-04-2023,null
+608,Carlos Mendez,suspected,M,51,22 Apr 2023, NA,NOt available,recovered,NA,17 Apr 2023,24 Apr 2023,NA
+609,Joseph Jones,confirmed,nan,eighty-six,2023-05-01,2023-05-06,2023-05-04,na ,NA,2023-04-28,n /a,NA 
+610,na,confirmed,Female,forty-four,02/05/2023,05/05/2023,NA,died,08/05/2023,27/04/2023,03/05/2023,22.5
+611,Avery Yen,suspented,F,3,2023/04/11,2023/04/17,NA,recovered,NA,N / A ,2023/04/10,NA
+612,Avery Yen,suspented,F,3,2023/04/11,2023/04/17,NA,recovered,NA,N / A ,2023/04/10,NA
+613,missing,N / A ,female,nine,11/04/2023,N/A,NA,recovered,NA,05/04/2023,N /A,NA
+614,Anthony Lopez Vergara,prgbable,nan,53,15 Apr 2023,18 Apr 2023,NA,recovered,NA,10 Apr 2023,15 Apr 2023,n /a
+615,Caitlin Reiher,coxfirmed,Female,eighty-one,NULL,2023-04-26,NA,recovered,NA,2023-04-17,NOt available,25.1
+616,Austin Hendricks,na , NA,Not Avail,N / A ,03 May 2023,05 May 2023,recovered,NA,16 Apr 2023,missing,24.9
+617,,N / A ,Male,eighty-five,13 April 2023,na ,null,died,30 April 2023,07 April 2023,13 April 2023,NA
+618,Franciszek Suina,confirmed,M,forty-two,14-04-2023,16-04-2023,NA,recovered,NA,n / a,13-04-2023,25.5
+619,Nathaniel Mutch,confirmed,m,eleven,N A,22 April 2023,N /A,recovered,N / A,11 April 2023,n/a,22.6
+620,Jorge Perez-Lopez,suspected,male,fifty-one,2023/04/21,not a number,NA,recovered,NA,not a number,2023/04/16,NA
+621,Kimber Vigil,probable,not a number,fifty-one,2023/04/18,2023/04/20,NA, N / A,NA,2023/04/17,2023/04/22,NA
+622,not a number,not avail,Male,47,18 April 2023,22 April 2023,Not A Number,recovered,NA,15 April 2023,\*,29.7
+623, na,NOt available,m,fifty-five,2023-04-27,2023-05-01,NA,recovered,NA,2023-04-08,\?,NA
+624,N / A ,confirmed,m,sixty-nine,2023/04/23,2023/04/26,2023/04/29,NULL,2023/04/30,2023/04/17,2023/04/21,28.5
+625,N / A ,confirmed,m,sixty-nine,2023/04/23,2023/04/26,2023/04/29,NULL,2023/04/30,2023/04/17,2023/04/21,28.5
+626,Gabriel Park,confirmed,Qale,N/A,21/04/2023,25/04/2023,NA,recovered,NA,14/04/2023,23/04/2023,NA
+627,N / A ,probable,M,73,N /A,25/04/2023,not a number,n/a,NA,21/04/2023,26/04/2023,NA
+628,,probable,\.,53,27 April 2023,01 May 2023,NA,died,08 May 2023,21 April 2023,25 April 2023,NA
+629,Brendan Chan,confirmed,m,not a number, na,N/A,NA,recovered,NA,15 Apr 2023,19 Apr 2023,22.2
+630,Sepehr Hasam,not a number,m,23,2023/04/19,2023/04/20,NA,Eecovered,NA,2023/04/14,2023/04/20,28.4
+631,Sepehr Hasam,not a number,m,23,2023/04/19,2023/04/20,NA,Eecovered,NA,2023/04/14,2023/04/20,28.4
+632,Hassan Rhodes Franklin,not avail,n/a,8,28 May 2023,03 Jun 2023,NA,recovered,Not A Number,19 May 2023,23 May 2023,NA
+633,Dylan Hammond,confirmed,not a number,8,25 May 2023,01 June 2023,NA,recovered,\?,20 May 2023,23 May 2023,24.9
+634,Munanal-Awan,suspected,F,13,04 May 2023,08 May 2023,07 May 2023,recovered,NA,27 April 2023,06 May 2023,NA
+635,Rgan Kiley,confirmed, N / A,N / A ,03/05/2023,07/05/2023,05/05/2023,recovered,NA,29/04/2023,05/05/2023,27.6
+636,Raafi al-Yousef,NULL,Male,n a,25-04-2023,NULL,28-04-2023,died,10-05-2023,17-04-2023,25-04-2023,21.7
+637,Dylan Rodriguez,probable,m,fifty-seven,2023-04-25,\*,2023-04-30,recovered,NA ,2023-04-18,Not Avail,NA
+638,Dylan Rodriguez,probable,m,fifty-seven,2023-04-25,\*,2023-04-30,recovered,NA ,2023-04-18,Not Avail,NA
+639,Drequez Brooks,probable,Male,sixty-two,26 Apr 2023,29 Apr 2023,NA,recovered,NA,21 Apr 2023,23 Apr 2023,NA
+640,Sean oielson,probable,m,31,2023/05/10,2023/05/12, NA,recovered,Not Avail,2023/04/30,NOt available,NA
+641,Kayla Stoian,not a number,Female,1, na,09 May 2023,NA,NA ,N A,26 April 2023,09 May 2023,n / a
+642,Alexis Valenzuela,confirmed,female,twenty-two,2023-05-14,2023-05-16,NA,recpvered,NA,2023-05-11,2023-05-19,23.7
+643,Vkrginia Lovo,confirmed,F,thirty-four,19 May 2023,23 May 2023,NA,recovered,NA,10 May 2023,n / a ,not available
+644,Zakariyya el-Saeed,probable,male,72,2023/05/20,2023/05/26,NA,recuvered,NA,2023/05/12,2023/05/21,NA
+645,Zakariyya el-Saeed,probable,male,72,2023/05/20,2023/05/26,NA,recuvered,NA,2023/05/12,2023/05/21,NA
+646,Cory Ryan,confirmed,Malb,53,2023/05/22,2023/05/23,not a number,recovered,NA,2023/05/13,na,23.6
+647,Melvna Lujan-Orona,NA ,female,sixty-six,17-05-2023,19-05-2023,NA,recovered,NA,14-05-2023,not available,NA
+648,Naadir el-Awan,confirmed,male,na,11 May 2023,12 May 2023,NA,recovered,NA,03 May 2023,06 May 2023,26.8
+649,Megan Vanry,probablz,Female,51,11-05-2023,12-05-2023,NA,recovered,NA,03-05-2023,07-05-2023,N / A
+650,na,probable,mmle,N / A , NA,n / a,n / a ,recovered,NA,20/05/2023,25/05/2023,NA
+651,Noah Cluster,NOt available,Male,24,29 May 2023,02 June 2023,NA,recovered,NA,20 May 2023,\*,NA
+652,na,probable,Not Available,22,31-05-2023,02-06-2023,NA,n/a,n/a,24-05-2023,29-05-2023,NA
+653,Devlin Smith,probable,M,ten,22 May 2023,24 May 2023,NA,recovered,NA,n a,26 May 2023,NA
+654,Amanda Schettley,confirmed,female,Not A Number,22-05-2023,24-05-2023,NA,recovered,not avail,16-05-2023,27-05-2023,25.6
+655,Rabi al-Farman,confirmed,Male,1,2023/04/27,2023/04/29,NA,recovered,nan,2023/04/22,2023/04/23,24.9
+656,Javier Mendez,not a number,M,fifty-one,06/05/2023,09/05/2023,NA,recovered,NA,17/04/2023,25/04/2023,NA
+657,Jacob Luna,N /A,m,eighteen,03 May 2023,nan,NA,recovered,NA,27 Apr 2023,04 May 2023,NA
+658,Huda el-Ghani,confirmed,Female,sixty-five,26 Apr 2023,n /a,n/a,recovered,NA,08 Apr 2023,12 Apr 2023,22.6
+659,Mark Butler,suspected,,one,2023-04-17,2023-04-20,NA,recovered,NA,2023-04-13,2023-04-17,NA
+660,Muhjar al-Yamin,confirmed,f,Not Avail,n/a,na ,2023/05/09,recovered,NA,2023/04/21,2023/04/29,22.9
+661,Abdul Jabbaar el-Javed,cxnfirmed,not available,seventy-six,2023-04-30,2023-05-05,NA,recovered,NA,2023-04-29,N/A,26.1
+662,Abdul Kareem el-Rayes,N/A,m,N / A ,18/04/2023,21/04/2023,25/04/2023,Not A Number,NA,08/04/2023,21/04/2023,24.8
+663,nan, NA,M,28,2023/04/22, na,NA,NA,NA,2023/04/21,2023/04/22,NA
+664,Atalisha Flores,NULL,\*,48,23 Apr 2023,27 Apr 2023,28 Apr 2023,recovered,NA,17 Apr 2023,21 Apr 2023,NA
+665,Ashlee Smith,suspected,Female,38,18/04/2023,22/04/2023,NA,recovered,NA,17/04/2023,21/04/2023,NA
+666,Patrick Charley,confirmed,M,seventy-nine,19 April 2023,21 April 2023,not avail,recovered,NA,15 April 2023,22 April 2023, a / a
+667,Nicwle Hirst,confirmed,f,\?,2023-05-02,2023-05-03,2023-05-04,died,Not Available,2023-04-24,N / A ,29.1
+668,Brandon Mucha,suspected,M,25,27 Apr 2023,N / A,nan,recovered,NA,21 Apr 2023, a / a,NA
+669,N / A,confirmed,male,60,27/04/2023,30/04/2023,NA,recovered,NA,22/04/2023,28/04/2023,25.4
+670,Brandon Yang,confirmed,m,sixty-eight,NA,2023/05/09,N /A,recovered,NA,2023/04/21,not available,26
+671,N A,probable,m,43,26/04/2023,28/04/2023,NA,Iied,n / a,22/04/2023,27/04/2023,NA 
+672,Macy Jones,suspected,M,35,nan,2023/04/28,NA,recovered,NA,2023/04/14,2023/04/25,NA
+673,Sanad al-Muhammed,suspected,Female,eleven,2023-04-22,NULL,2023-04-25,died,N A,2023-04-16,2023-04-24,NA
+674,Demetrius Perkins,nan,male,four,2023/04/23,2023/04/27,N / A ,recovered,Not Available,2023/04/18,2023/04/19,27.3
+675,\*,NA,Male,eighty-nine,20 Apr 2023,24 Apr 2023,NA,recovered,NA,18 Apr 2023,22 Apr 2023,21.2
+676,Daleel el-Hares,confirmed,m,twenty-three, NA,30/05/2023,NA,recovered,NA,25/05/2023,31/05/2023,25.1
+677,Daleel el-Hares,confirmed,m,twenty-three, NA,30/05/2023,NA,recovered,NA,25/05/2023,31/05/2023,25.1
+678,Alliance Ousley,probable,female, na,2023/05/31,2023/06/04,2023/06/04,recovered,NA, na,2023/05/29,NA
+679,Alliance Ousley,probable,female, na,2023/05/31,2023/06/04,2023/06/04,recovered,NA, na,2023/05/29,NA
+680,Not A Number,suspected,male,N / A ,02 Jun 2023,N A,NA,recovered,NA,na ,28 May 2023,NA
+681,Kailyn Jones,confirmed,n a,84,12 May 2023,16 May 2023,16 May 2023,recovered,missing,04 May 2023,07 May 2023,n / a
+682,Richard Lytle,confirmed,n /a,6,05/05/2023,09/05/2023,NA,recovered,NA,27/04/2023,07/05/2023, a / a
+683,Amar So,n /a,M,nan,06/05/2023,NAN,NA,recovered,NA,01/05/2023,#N/A, na
+684,Carlos Jimenez,confirmed,na ,N / A,07 May 2023,09 May 2023,NA,recovered,NA,30 April 2023,08 May 2023,25.9
+685,Carlos Jimenez,confirmed,na ,N / A,07 May 2023,09 May 2023,NA,recovered,NA,30 April 2023,08 May 2023,25.9
+686,Akash Bull,probable,m,thirty-two,26-04-2023,28-04-2023,NA,recovered,NA,24-04-2023,01-05-2023, a / a
+687,Billy Leamons,confirmed,M,18,2023/05/04,Not A Number,NA,recovered,NA ,2023/04/18,2023/04/25,n / a
+688,Karina Stewart,confirmed,F,thirty-three,N A,05 May 2023,06 May 2023,died,11 May 2023,\.,03 May 2023,not avail
+689,Ethan Huntington,probable,m,thirty-three,13/05/2023, na,NA,recovered,n / a,NA ,N / A ,NA
+690,Seiyoung Wu,suspected,Female,48,2023-05-25,\*,2023-05-30,N/A,2023-06-08,2023-05-16,not available,NA
+691,Daniel Ridings,suspected,M,53,16-05-2023,18-05-2023,NA,rdcovered,NA,06-05-2023,Not Avail,NA
+692,Anthony Brandenburger,probable,n /a,sixty-five,2023/05/28,not avail,NA, N / A,NA,2023/05/23,2023/05/25,NA
+693,Charles Kellison,probable,M,79,n a,2023-06-03,NA,recovered,NA,NULL,2023-06-01,NA
+694,Braden Paine,confirmed,m,10,NA ,missing,NA,recovered,NA,not avail,03 Jun 2023,23.1
+695,n / a, na,m,thirty-one,30 May 2023,02 June 2023,NA,N / A ,NA,24 May 2023,31 May 2023,not available
+696,Scott Yu,confirmed,male,twenty,N / A ,N / A,NA,recovered,NA,16/05/2023,Not Available,25.3
+697,Kevin Pallister,\.,M,41,10/05/2023,13/05/2023,NA,recovered,NA,05/05/2023,Not Avail,NA
+698,Mana Morgan,probable,F,79,30 Apr 2023,01 May 2023,NOt available,recovered,NA,22 Apr 2023,NAN,NA
+699,Abdul Ghani al-Azimi,null,m,21,22 Apr 2023,28 Apr 2023,NA,recovered, N / A,17 Apr 2023,21 Apr 2023,25.4
+700,Lekesha Young,suspected,female,NOt available,not a number,25-04-2023,NA,recovered,NA,21-04-2023,25-04-2023,NA
+701,Lekesha Young,suspected,female,NOt available,not a number,25-04-2023,NA,recovered,NA,21-04-2023,25-04-2023,NA
+702,Filipe Hritsick,suspected,M,73,null,30/04/2023,null,recovered,NA,17/04/2023,19/04/2023,NA
+703,nan,prwbable,female,forty-two, a / a,28 April 2023,06 May 2023,na ,n/a,16 April 2023,n /a,NA
+704,Dalaun Hall-Esparza,suspected,M, NA,28 Apr 2023,30 Apr 2023,NA,recovered,NA,14 Apr 2023,20 Apr 2023,NA
+705,Raaid el-Fayad,probable,m,30,missing,02-05-2023,NA,recovered,not a number,15-04-2023, NA,NA
+706,Dante Godley,confirmed,M,27,20 April 2023,n / a,NA,recovered,NA,15 April 2023,21 April 2023,21.5
+707,Ezra Shreck,not a number,N / A ,eighty-six,2023/05/02,2023/05/04,NA,recovered,NA,2023/04/25,2023/05/02,23.6
+708,Gilberto Santos,suspected,m,seventy-four,07 May 2023,10 May 2023,NA,recovered,NA,28 April 2023,04 May 2023,#N/A
+709,Shamuel Trang,confirmed, a / a,seventy-six,na ,01 May 2023,NA,recovered,NA,22 Apr 2023,27 Apr 2023,23.4
+710, N / A,cinfirmed,m,49,29 April 2023,01 May 2023,NA,NA ,NA,23 April 2023,02 May 2023,25.1
+711,Andrea Brown,,F,sixty-nine,N/A,2023-05-10,NA,recovered,NA,2023-05-02,2023-05-09,23.4
+712,Andrea Brown,,F,sixty-nine,N/A,2023-05-10,NA,recovered,NA,2023-05-02,2023-05-09,23.4
+713,Matihew Salazar, N / A,NA ,twenty-eight,Not Available,n/a,NA,recovered,NA,2023/05/04,2023/05/10,NA
+714,NOt available,confirmed,F,fifty-nine,30 Apr 2023,01 May 2023,NA,recovered,n / a,24 Apr 2023,28 Apr 2023,23.8
+715,NOt available,confirmed,F,fifty-nine,30 Apr 2023,01 May 2023,NA,recovered,n / a,24 Apr 2023,28 Apr 2023,23.8
+716,,confirmed,female,31,\.,28 Apr 2023,#N/A,recovered,NA,18 Apr 2023,22 Apr 2023,25.9
+717, na,probable,female,forty-three,N A,2023-04-23,N /A,recovered,NA,2023-04-18,2023-04-23,NA
+718,nan,confirmed,male,eighteen,2023/04/27,2023/05/01,NA ,null,NA,2023/04/16,2023/04/21,not avail
+719,Dezi Olivas,confihmed,Male,seventy-seven,2023/06/07,\?,NA,recovered,N/A,2023/05/29,2023/06/06,20.8
+720,Tavien Maxwell,confirmed,M,n a,Not Avail,n /a,NA,NOt available,NA,na,14/05/2023,24.1
+721,Mario Sanchez-Gonzales,confirmed,M,80,17 May 2023,19 May 2023,NA,recovered,NA,04 May 2023,09 May 2023,N / A
+722,Nicolas Tillotson,confirmed,m,57,2023-04-29,2023-05-01,NA,recovered,NA,2023-04-23,2023-04-28,24.4
+723,Rodney Lytle,confirued,m,84,04 May 2023,N / A ,NA,recovered,NA,29 Apr 2023,04 May 2023,29.5
+724,Kiera Coolidge,confirmed,female,16,12 May 2023,14 May 2023,na,recovered,N /A,30 Apr 2023,07 May 2023,25.8
+725,Nicholas Moore,n /a,Male,29,2023/05/15,2023/05/18,NA,recovered,NA,2023/05/11,\*,25
+726,Naadiya al-Reza,confirmed,not a number,79,16 May 2023,Not Available,\*,NOt available,N / A,12 May 2023,16 May 2023,25
+727,N / A,confirmed,f,thirty-five,2023/05/29,2023/05/30,NA,recovered,NA,2023/05/22,2023/05/28,29.1
+728,NOt available,confirmed,missing,31,28-05-2023,02-06-2023,NA,NA ,NA,24-05-2023,Not A Number,27.7
+729,NA ,confirmed,Male,3,17 May 2023,\?,NA,recovered,NA,12 May 2023,not avail,26.2
+730,NA ,confirmed,Male,3,17 May 2023,\?,NA,recovered,NA,12 May 2023,not avail,26.2
+731, NA,confirmed,Female,Not Avail,01-06-2023,04-06-2023,NA,recovered, NA,25-05-2023, N / A,25.4
+732,Not Avail,probable,F,thirty-one,\.,03/06/2023,NA,recovered,n / a ,27/05/2023,02/06/2023,NA
+733,Not Avail,probable,F,thirty-one,\.,03/06/2023,NA,recovered,n / a ,27/05/2023,02/06/2023,NA
+734,Not A Number,NA,M,sixty-eight,2023-06-01,n / a,NA,recovered,NA,2023-05-21,2023-06-02,NA 
+735,Jota Tran,suspected,N / A ,9,05 Jun 2023,06 Jun 2023,NA,recovered,NA,24 May 2023,n / a,NA
+736,Mahdhoodha al-Abdi,n / a ,Female,eighty-one,NAN,\*,n / a ,NA ,2023/06/14,2023/05/20,2023/06/01,NA
+737,Haneef al-Amir,probable,Male,forty-five,2023/05/01,2023/05/04,NA,recovered,NA,NOt available,2023/05/04,NA
+738,Karl Caffery,Crobable,m,na,24 Apr 2023,25 Apr 2023,n a,died,02 May 2023,not a number,27 Apr 2023,NA
+739,n / a ,confirmem,n / a ,na ,30/04/2023,02/05/2023,NULL,died,10/05/2023,22/04/2023,25/04/2023,23.7
+740,n / a ,confirmem,n / a ,na ,30/04/2023,02/05/2023,NULL,died,10/05/2023,22/04/2023,25/04/2023,23.7
+741,n / a,probable,, NA,2023-05-02,2023-05-02,N/A,recovered,NA,n a,2023-04-28,NA
+742,Andrew Carmona,probable,mame,40,28/04/2023,02/05/2023,na,recovered,NA,NA ,01/05/2023,NA
+743,Quinn Clajk,confirmed,maee,Not A Number,02 May 2023,07 May 2023,n a,recovered,NA,26 Apr 2023,01 May 2023,22.2
+744,Thomas Bille,probable,male,twenty-five,03-05-2023,08-05-2023,NA,recovered,N / A,26-04-2023,29-04-2023,NA
+745,Shaimaaa el-Rais,suspected,female,fifty-six,2023/04/22,2023/04/23,2023/04/26,recovered,NA,2023/04/18,2023/04/20,NA
+746,Miguel Payne,confirmed,n/a,sixty,Not A Number,2023-04-30,NA,recovered,NA,2023-04-17,2023-04-23,23.2
+747,Riley Baca,suspected,m,n/a,NA,na,NA,recovered,NA,2023/04/17,2023/04/22,NA
+748,Christopher Sandoval,pxobable,M,\?,2023/05/09,2023/05/13,NA,recovered,NA,2023/05/03,2023/05/10,NA
+749,Mina Nguyen,probable,Female,14,02 May 2023,05 May 2023,06 May 2023,recooered,NA,27 April 2023,n / a,NULL
+750,Mina Nguyen,probable,Female,14,02 May 2023,05 May 2023,06 May 2023,recooered,NA,27 April 2023,n / a,NULL
+751,Jericho Emert,confirmed,male,27,29 Apr 2023,01 May 2023,NA,recovered,NA,26 Apr 2023,30 Apr 2023,27.9
+752,Jonathan Saldivar,suspected,Male,89,N /A,2023/05/25,NA, na,\*,2023/05/04,2023/05/13,NA
+753, NA,n / a,F,\.,08 May 2023,11 May 2023,NA,recovered,NA,\?,10 May 2023,n/a
+754,Mayra Munib,confirmed,female,54,2023-05-08,NA,2023-05-12,died,2023-05-27,2023-05-03,2023-05-11, NA
+755,Kyle Weihrauch,probable,male,79,05 May 2023,08 May 2023,NA,recovered,NA,28 Apr 2023, N / A,NA
+756,Ashly Wong,confirmed,Female,41,05 May 2023,08 May 2023,,recovered,NA,n/a,25 Apr 2023,Not Available
+757,Luis Montoya,n / a,m,six,01-05-2023,02-05-2023,NA,recovered,NAN,n a,28-04-2023,24.3
+758,n a,suspected,m,67,2023-05-18,2023-05-21,NA,recovered,NA,not a number,2023-05-20,NA
+759,Daeun Ha,suspected,female,42,\*,07/05/2023,NA,recovered,NA,27/04/2023,01/05/2023,NA
+760,Jacob Avifa,probable,m,59,2023/05/05,#N/A,NA,NAN,2023/05/17,2023/04/28,2023/04/30, N / A
+761,Aaron Bhagria,confirmed,null,\*,2023-05-08,2023-05-11,NA,recovered,NA,2023-04-28,2023-05-06,28.2
+762,Andrew Lovelace,\?,male,seventeen,22-05-2023,n / a,NA,recovered,NA,15-05-2023,20-05-2023,missing
+763,Joshua loshi,not avail,M,seventy-three,2023/05/17,nan,NA,recovered,n a,2023/05/12,2023/05/21,\?
+764,Antwan Gilbert,confirmed,Male,18,01 Jun 2023,03 Jun 2023,NA,recovered,NA,24 May 2023,31 May 2023,26.4
+765,Keifer Garlick,suspdcted,m,,30/05/2023,01/06/2023,13/06/2023,recovered,NA,24/05/2023,31/05/2023,NA
+766,Izzat el-Shehadeh,prabable,m,54,05/06/2023,10/06/2023,na ,recovered,NA,,04/06/2023,NA
+767,Soyeun Nguyen,\*,female,nan,03-06-2023,not avail,N/A,recovered,NA,27-05-2023,08-06-2023,n/a
+768,Antonio Valenzuela,suspected,Male,5,,05/06/2023,NA,recovered,NA,30/05/2023, a / a,NA
+769,Naweed Lam,probable,m,four,2023-06-02,2023-06-03,NA,\.,NA,2023-05-30,2023-06-02,NA
+770,Heidi Goodenow,confirmed,female,19,n a,N / A ,not available,recovered,NA,28-04-2023,05-05-2023,24.7
+771,N /A,probable,f,44,02 May 2023,07 May 2023,NA,recovered,NA,30 April 2023,n /a,NA
+772,Haamid al-Yousef,confirmed,Male,72,2023-05-02,2023-05-05, NA,N / A ,NA,2023-04-30,2023-05-03, N / A
+773,Haamid al-Yousef,confirmed,Male,72,2023-05-02,2023-05-05, NA,N / A ,NA,2023-04-30,2023-05-03, N / A
+774,Milton Ortiz,missing,Male,77,2023/05/06,2023/05/11,NA,recovered,Not Available,2023/04/27, a / a,23.1
+775, N / A,probable,f,15,01/05/2023,06/05/2023,NA,recovered,NA,29/04/2023,06/05/2023,NA
+776, N / A,probable,f,15,01/05/2023,06/05/2023,NA,recovered,NA,29/04/2023,06/05/2023,NA
+777,Steven Alvarez-Villalba,confirmed,M,forty-six, a / a,2023/05/07,NA,recovered,NA,2023/04/26,2023/05/04,27.3
+778,Hazel Joy Lor,confirmed,not avail, a / a,03-05-2023,NOt available,NAN,recovered,not available,30-04-2023,03-05-2023,26.6
+779,Lakota Ortiz Barron,confirmed,missing,sixty-two,23/04/2023,27/04/2023,NA,N/A,\.,20/04/2023,25/04/2023,26.5
+780,Lakota Ortiz Barron,confirmed,missing,sixty-two,23/04/2023,27/04/2023,NA,N/A,\.,20/04/2023,25/04/2023,26.5
+781,Derrick Smith, a / a,male,eighty-two,24 Apr 2023,27 Apr 2023,N/A,recovered,NA,18 Apr 2023,N /A,Not A Number
+782,Derrick Smith, a / a,male,eighty-two,24 Apr 2023,27 Apr 2023,N/A,recovered,NA,18 Apr 2023,N /A,Not A Number
+783,Terrance Jackson,confirmed,male,77,2023-04-24,2023-04-26,NOt available,null,not available,2023-04-20,2023-04-23,N / A 
+784,Rico Herrera,probajle,male,62,2023/05/13,2023/05/18,null,#N/A,NA,2023/05/06,2023/05/11,NA
+785,Richard Stacy,probable,Male,,03-05-2023,05-05-2023,NA,recovered,n / a,Not Available,01-05-2023,NA
+786,Christopher Abeyta,\.,male,n a,03/05/2023,05/05/2023,NA,recovered,NA,26/04/2023,03/05/2023,20.4
+787,not avail,confirmed,Male,fifty-nine,18 May 2023,19 May 2023,NA,recovered,NA,15 May 2023,N / A ,23.4
+788,N / A ,na,f,nineteen,12-05-2023,16-05-2023,NA,recovered,NA,04-05-2023,13-05-2023, na
+789,Rigoberto Bueno,suspected, NA,66,07-05-2023,\.,08-05-2023,recovered,NA,04-05-2023,11-05-2023,NA
+790,Iffat al-Sinai,confirmed,f,forty-five,10-05-2023,11-05-2023,NA,recovered,NA,28-04-2023,07-05-2023,28.7
+791,Danijah Dunaway,suspected,f,28,2023-05-03,\*,NA,recovered,NA,2023-04-28,2023-05-06,NA
+792,Joseph Ouren,suppected,m,87,na,21-05-2023,NA,recovered,NA,n/a,21-05-2023,NA
+793,Komijen Chau,confirmed, na,forty-eight,2023-05-08,not avail,NA,recovered,NA,2023-05-05,2023-05-09,25.4
+794,Joshua Brock,probable,Male,forty-one,2023/05/22,2023/05/25,NA,not available,NA,2023/05/19,2023/05/26,NA 
+795,Joshua Brock,probable,Male,forty-one,2023/05/22,2023/05/25,NA,not available,NA,2023/05/19,2023/05/26,NA 
+796,Salmaan el-Ahmad,\*,\*,n / a,23 May 2023,27 May 2023,25 May 2023,recovered,NAN,14 May 2023,Not Avail,26
+797,Kaitlyn Torres,suspected,Female,null,2023-05-25,2023-05-26,NA,recovered,NA,2023-05-13,2023-05-18,n / a 
+798,,probable,F,48,07 Jun 2023,09 Jun 2023,NOt available,recovered,NA,28 May 2023,07 Jun 2023,NA
+799,Lakota Israel,probable,male,NOt available,2023-06-08,2023-06-10,NA,recovered,#N/A,2023-06-01,2023-06-05,NA
+800,Manuel Valadez-Cruz,suspected,m,fourteen,2023/06/06,2023/06/07,NA,recovered,NA,n/a,N/A,NA
+801,not a number,n / a ,Male,55,07 June 2023,nan,NA,not a number,NA,31 May 2023,N / A ,missing
+802,Jessica Lamvertson, NA,female,four,05 Jun 2023,08 Jun 2023,NA,recovered,NA,02 Jun 2023,05 Jun 2023,25.1
+803,missing,suspected,female,63,04/06/2023,08/06/2023,NA,recovered,NA,29/05/2023,07/06/2023,NA
+804,Shannon England,confirned,m,thirty-four,05/06/2023,07/06/2023,NA,recovered,NA,27/05/2023,n /a,27.3
+805,n / a, NA,N / A,sixty-nine,2023/06/07,2023/06/10,NA,n /a, NA,2023/06/01,NA ,23.3
+806,NA,probable,male,eighty-one,03 May 2023,06 May 2023,11 May 2023,recovered, N / A,01 May 2023,08 May 2023,NA
+807,n / a ,suspected,f,14,2023-05-06,2023-05-07,\.,recovered,NA,na ,2023-05-06,NA
+808,,suspected,male,eight,n /a,06 May 2023,NA,N / A ,NA,28 Apr 2023,04 May 2023,NA
+809,Han Mi Anglo,probable,Female,twenty-five,12 May 2023,14 May 2023,NA,\?,NA,29 Apr 2023,N/A, a / a
+810,Michael Rapp,suspected,M,six,04 May 2023,06 May 2023,NA,diad,18 May 2023,30 April 2023,05 May 2023,NA
+811,Freya Oconnell,suspected,female,NA,null,06-05-2023,NA,died,23-05-2023,28-04-2023,05-05-2023,NA
+812,Azza al-Abdqlla, NA,Not Avail,59,2023/05/09, a / a,NA,n / a ,na,N A,2023/05/07,25.4
+813,Rebecca Redfern,n / a,Female,n/a,N / A ,08 May 2023,NA,recovered,na,29 April 2023,05 May 2023,23.6
+814,Yeng Sa,confirmed,m,twenty,25 April 2023,\.,NA,recoveryd,NA,\*,27 April 2023,23.7
+815,Tera Hussainy,\?,Female,Not Available,24-04-2023,nan,NA,recovered,NA,n/a,25-04-2023,27.1
+816,Esteban Navarrete,confirmed,NA ,\*,2023/04/26,2023/04/28,NA,recovered,NA,2023/04/22,Not A Number,22.7
+817,Ramalaan el-Soliman,N /A,m,NAN,06 May 2023,08 May 2023,NA,recovered,NA,30 Apr 2023,05 May 2023,NA
+818,N / A,confirqed,M,50,14 May 2023, na,NA,rucovered,NAN,09 May 2023,14 May 2023,23.6
+819,Abdul Maalik al-Meskin,suspected,M,forty-four, na,15 May 2023,NA,recovered,NA,04 May 2023,12 May 2023,NA
+820,Craigan Richardson,confnrmed,male,five,N / A ,08 May 2023,NA,recovered,n a,29 April 2023,03 May 2023,N A
+821,,confirmed,Female,N / A,07 May 2023,11 May 2023,NA,recovered,NA,29 April 2023,04 May 2023,Not A Number
+822,Nerod Kim,confirmed,m,25,2023-05-27,2023-06-03,NA,recovered,not a number,2023-05-15,N / A ,23.8
+823,Raabiya al-Bahri,confirmed,F,90,28 May 2023,04 June 2023,NA,n/a,17 June 2023,16 May 2023,n / a ,25.8
+824,NAN,suspecced,male,5,2023-05-20,2023-05-23,NA,recovered,NA,2023-05-16,2023-05-23,NA
+825,NOt available,\.,Female,57,na ,12/05/2023,NA,recovered,NA,06/05/2023,nan,NA
+826,Eliezer Bermejo,confirmed,Male,eight,2023/05/26,2023/05/29,2023/05/28,Hied,2023/06/14,not a number,2023/05/27,22.6
+827,\?,confirmed,male,3,26-05-2023,29-05-2023,29-05-2023,died,09-06-2023,16-05-2023,25-05-2023,25.9
+828,Fahd al-Aly,confirmed,NULL,na,01 Jun 2023,03 Jun 2023,NA,missing,NA,20 May 2023,22 May 2023,19.9
+829,Consuello Rodriguez,confirmed,f,fifty,2023-05-26,2023-05-31,n / a ,recovered,n /a,2023-05-20,2023-05-27,25.5
+830,Harrison Yang,probable,m,23,N /A,15 June 2023,NA,recovered,NA,06 June 2023,10 June 2023,NA
+831,Wileen Felipe,confirmed,f,\.,09/06/2023,not available,NA,recovered,NA,03/06/2023,14/06/2023,27.1
+832,Daniel Billiamosa,confirmed, a / a,63,16 Jun 2023,20 Jun 2023,NA,nan,NA,03 Jun 2023,11 Jun 2023,\?
+833,Erica Sams,probable,Female,39,n / a,25-06-2023,n a,recovered,NA,06-06-2023,11-06-2023,NA
+834,Christopher Ortega,suspected,M,44,2023-06-07,2023-06-09,NA,died,N A,2023-06-07,2023-06-11,null
+835,Max Forbes,confirmed,m,48,10 Jun 2023,N A,NA,recovered,N A,not a number,,27.5
+836,Kaalim el-Daoud,probable,Male,NULL,04/06/2023,07/06/2023, NA, N / A,NA,04/06/2023,08/06/2023,NA
+837,\*,probable,F,n / a ,2023-05-04,2023-05-08,NA ,recovered,NA,2023-04-29,2023-05-06,NA
+838,Nicole Lor,probable,f,80,2023-05-06,na ,na ,removered, a / a,2023-05-04,2023-05-09,NA
+839,Jomo Boller,suspected, N / A,thirty-three,2023/05/09,2023/05/15,NA,recovered,NA,2023/05/04,2023/05/07,NA
+840,Scott Davidson,Not A Number,Male,47,09/05/2023,11/05/2023,14/05/2023,recovered,\?,03/05/2023,null,NA
+841,Mitchel Whitney,suspected,m,80, a / a,2023-05-08,NA,recovvred,NA,2023-05-01,2023-05-05,n / a
+842,Khyre Felton,nan,Male,fifty-four,21-05-2023,23-05-2023,26-05-2023,died,02-06-2023,08-05-2023,#N/A,NA
+843,Leshawn Ricks,confirmed,Male,na ,15 May 2023,18 May 2023,NA,recovered,NA,09 May 2023,13 May 2023,24.6
+844,\.,suspected,f,\?,22 May 2023,\*,NA,recovered,null,09 May 2023,NULL,NA
+845,Nizaar al-Salim,suspected,N/A,seventy-nine,21/05/2023, na,NA,n / a,NA,09/05/2023,\?,NA
+846,n/a,probable,Kale,eighty-seven,15 May 2023,18 May 2023,19 May 2023,nan,NA,08 May 2023,11 May 2023,NA
+847,Badraan el-Fares,N A,male,forty-two,n /a,10/05/2023,NOt available,recovered,NA,01/05/2023,N/A,NA
+848,Fikri al-Akram,confirmed,Male,\?,2023-04-26,2023-04-27,NA,n / a,NA,not a number, NA,22.5
+849,Edgar Valdez,suspected,m,ninety,2023-04-27,2023-04-29,NA,recovered,NA,2023-04-20,2023-04-28,NA
+850,Slul Estrada,confirmed,M,86,02-05-2023,04-05-2023,NA,recovered,NA,22-04-2023,28-04-2023,na 
+851,null,suspected,Male,9,missing,NA,NA,recovered,NA,19 Apr 2023,27 Apr 2023,NA
+852,Ernesto Martinez,confirmed,m,thirty-eight,01/05/2023,03/05/2023,NA,,NA,na ,01/05/2023,24.4
+853,Tanner Jones,confirmed,\*,ninety,29/04/2023,#N/A,NA,n /a,#N/A,24/04/2023,27/04/2023,22.1
+854,Dolores Madera,Not Avail,f,65,2023-05-01,\?,NA,#N/A,NAN,2023-04-25,2023-04-29,NA
+855,N / A,confirmed,mafe,fourteen,n / a ,15-05-2023,NA,null,null,02-05-2023,09-05-2023,20.6
+856,Ryan Grove,probable,M,6,30 May 2023,31 May 2023,NA,recovered,NA,27 May 2023,,NA
+857,Fakeeha al-Khatib,confirmed,f,seventy-seven,29 May 2023,\.,NA,N / A,NA,missing,30 May 2023,23.6
+858,Branjy Martinez,confirmed,nan,forty-nine,29/05/2023,na,NA,recovered,NA,22/05/2023,31/05/2023,22.5
+859,,sukpected,F,sixteen,not a number,02-06-2023,NA,recovered,n / a,22-05-2023,29-05-2023,NA
+860,n / a, a / a,f,seventy-two,26 May 2023,n a,NA,recovered,NA,22 May 2023,28 May 2023,25.4
+861,Krishawnda Martin,confirmed,not avail,NULL,26 May 2023,29 May 2023,NA,recovered,NA,20 May 2023,30 May 2023,25.9
+862,Anthaneisha Gabriel, N / A,Female,eighty-six,21 June 2023,\.,25 June 2023,dihd,05 July 2023,06 June 2023,13 June 2023,27
+863,n/a,probable,M,eighty-four,10 June 2023,18 June 2023,NA,N /A,20 June 2023,n /a,13 June 2023,NA
+864,Jafar al-Ally,probable,male,thirty,Not Available,na ,NA,Not Avail,NA,Not Available,13-06-2023,NA
+865,Joshua Oakes,suspected,male,4,13 Jun 2023,17 Jun 2023,NA,recovered,NA,06 Jun 2023,10 Jun 2023,NA
+866,Carlo Christy,confirmed,Not A Number,forty-two,nan,missing,Not Avail,recovered,NA,not a number,16-06-2023,26.7
+867,Taariq el-Shah,confirmed,N A,fifty-seven,not avail, a / a,NA,N A,NA,n/a,n / a,23.2
+868,Dakota Bullen,confirmed,m,na ,19-06-2023,20-06-2023,N/A,recovered,NA,14-06-2023,17-06-2023,NA 
+869,\.,confirmed,Male,81,24-06-2023,28-06-2023,NA,na ,NA,19-06-2023,25-06-2023,n / a 
+870,Aasim el-Bahri,confirmed,mals,NAN,28/06/2023,01/07/2023,NA,recovered,NA,16/06/2023,nan,25.7
+871,Claudia Lujan,NA ,n a, NA,2023/06/26,2023/06/28,NA,recovered,NA,2023/06/18,2023/06/23,24
+872,Grant West,confirmed,M,25,10 June 2023,,NA,na,\?,03 June 2023,Not Available,25.1
+873,Emma Nguyen,confirmed,Female,26,#N/A,09/06/2023,13/06/2023,n / a,Not Avail,30/05/2023,06/06/2023,22.7
+874,Vamshi Schlotfeldt-Perez,confirmod,Male,40,2023-06-10,2023-06-14,null,recovered,NA,2023-06-03,2023-06-10,N A
+875,Not Available,probable,Female,35,07-05-2023,09-05-2023,NA,N / A ,17-05-2023,02-05-2023,08-05-2023,NA
+876,David Manaois,confirmed,male,18,\.,N /A,NA,recovered,NA,not a number,05-05-2023,25.8
+877,Colin Parker,suspected,Male,#N/A,2023/05/26,2023/05/27,not avail, a / a,NA,2023/05/06,Not Available,NA
+878,Billy Abraham,probable,m,19,09/05/2023,11/05/2023,NA,recovered,NA,#N/A,11/05/2023,nan
+879,Cody Lam,suspected,Male,twenty-two,09/05/2023,11/05/2023,NA,recovered,NA,05/05/2023,Not Avail,NA
+880,Jacob Mangino,probable,Male,thirty-eight,2023/05/21,\?,NA,nan,NA,2023/05/20,2023/05/24,NA
+881,Jacob Mangino,probable,Male,thirty-eight,2023/05/21,\?,NA,nan,NA,2023/05/20,2023/05/24,NA
+882,Cinthia Flores,cojfirmed,Female,2,2023-05-27,2023-05-29,NA,recovered,NA,2023-05-14,2023-05-19,25
+883,Daejha Eldridge,confirmed,m,seventy-four,2023/05/26,2023/05/28,NA,recovered,NA,2023/05/13,\?,n a
+884,Miguel Rodriguez,confirmed,m,40,NA,2023-06-05,n / a ,died,2023-06-18,2023-05-17,2023-05-23,24.8
+885,Quyen Sundara,confirmed,NOt available,8,2023-05-29,not available,2023-06-02, na,2023-06-15,2023-05-16,2023-05-24,22
+886, a / a,confirmed,male,Not A Number,28 May 2023,01 Jun 2023,02 Jun 2023,recovered,NA,21 May 2023,24 May 2023,Not Avail
+887,Waynoka Perry,confirmed,F,three,19-05-2023,21-05-2023,NA,n / a,NA,09-05-2023,,24.6
+888,NA,n / a,M,thirty,2023-05-14,missing,NA,recovered,NA,2023-05-04,2023-05-13,nan
+889,NA,n / a,M,thirty,2023-05-14,missing,NA,recovered,NA,2023-05-04,2023-05-13,nan
+890,Dakota Bean,n a,Male,thirty-one,01/05/2023,\.,not available,recovered,NA,24/04/2023,29/04/2023,n a
+891, a / a,confirmed,M,55,2023-05-06,2023-05-09,2023-05-11,died,2023-05-19,2023-04-24,N /A,26.6
+892,Keith Thomas,confirmed,m,nine,03 May 2023,not avail,NA,recovered,NA,25 April 2023,01 May 2023,24.5
+893,Tristin Jefferson,Not Available,Female,37,01 May 2023,03 May 2023,NA ,n/a,NA,23 Apr 2023,not available,NA
+894,Andy Lor,confirmed,m,2,2023-05-06,2023-05-09,NA,recovered,NA,2023-04-29,2023-05-03,25.6
+895,Michael Nesmith,probable,male,37,2023/05/07,n / a ,NA,recovered,NA,2023/04/29,2023/05/05,NA
+896,Othell Billings, NA,NA,N A,missing,06 May 2023,NA,recovered,\?,30 April 2023,04 May 2023,\.
+897,Colin Jones,confirmed,Male,34,01-05-2023,02-05-2023,missing,nan,NA,23-04-2023,26-04-2023,26.7
+898,Nathaniel Kennon,probable,Male,not a number,Not Available,2023/05/01,NA,recovered,NA,2023/04/22,2023/04/30,
+899,DanebBaker,probable,M,\.,14-05-2023,N /A,Not Avail,recovered,NA,30-04-2023,03-05-2023,NA
+900,Jessica Keenan,confirmed,F,forty-one,N / A,NULL,nan,racovered,NA,2023/05/01,2023/05/04,25.8
+901,Jordan Poore,suspected,m,64,30 Apr 2023,02 May 2023,NA,recovered,NA,28 Apr 2023,01 May 2023,NA
+902,Shashwat Mcarthur,confirmed, a / a,nine,2023/05/02,2023/05/05,\*,recovered,NA,2023/04/29,2023/05/03,
+903,Luke Ulery,probable,NULL, NA,2023-06-07,2023-06-09,nan,N / A ,NA,Not A Number,2023-06-02,NA
+904,Qamraaa el-Hammoud,probable,F,74,02 June 2023,05 June 2023,NA, a / a,NA,24 May 2023, NA,NA
+905,Casey Green,suspected,female,na ,2023/05/29,2023/06/01,not available,recovered,n / a ,2023/05/26,2023/05/31,not available
+906,Casey Green,suspected,female,na ,2023/05/29,2023/06/01,not available,recovered,n / a ,2023/05/26,2023/05/31,not available
+907,\*,not a number,M,NOt available,2023-05-30,2023-06-01,2023-06-06,died,2023-06-07,2023-05-27,2023-05-31,NA
+908,n a,probable,male,eighteen,29 May 2023,n a,NA,recovered,NA,28 May 2023,30 May 2023,NA
+909,na,conqirmed,NOt available,sixty-nine,\*,\.,NA,recovered,NA,20/05/2023,31/05/2023,24.5
+910,Mystic Moonlight,probable,Female,18,NA ,2023/06/03,NA,#N/A,NA,null,2023/05/27,Not Avail
+911,Mystic Moonlight,probable,Female,18,NA ,2023/06/03,NA,#N/A,NA,null,2023/05/27,Not Avail
+912,William Ross,N A,NA ,sixteen,13 June 2023,14 June 2023,NA,recovered,\?,06 June 2023,,23.9
+913,Horacio Leija,confirmed,m,25, NA,\., NA,recovered, NA,06 Jun 2023,17 Jun 2023,25.5
+914,Horacio Leija,confirmed,m,25, NA,\., NA,recovered, NA,06 Jun 2023,17 Jun 2023,25.5
+915,Damacio Lasco,confirmed,NOt available,NA,2023-06-15,2023-06-17,not a number,recovwred,,2023-06-12,2023-06-15,not avail
+916,Dwayne Thompson,confirmed,Not Available,17,2023/06/25,2023/06/29,NA,recovered,NA,2023/06/20,2023/06/24,24.6
+917,Shanta Boisselle,probable,NA,11,29/06/2023,01/07/2023,NA,recovered,NA,17/06/2023,24/06/2023,NA 
+918,N /A,probable,M,15,Not A Number,02 Jul 2023,n / a,recovered,NA,18 Jun 2023,21 Jun 2023,NA
+919,Banning Romley, na,m,69,25 Jun 2023,27 Jun 2023,N/A,recovered,NA,23 Jun 2023,29 Jun 2023,24
+920,Not Avail,confirmed,Female,thirteen,2023/07/03,2023/07/06,NA,recovered,na ,2023/06/26,2023/07/02,24.8
+921,Farha el-Abdallah,confirmed,#N/A,Not Available,NAN,#N/A,NA,NA,18/07/2023,22/06/2023,28/06/2023,23.3
+922,Laura Ann Croshal,suspected,female,sixty-one,01-07-2023,03-07-2023,NA,recovered,not a number,23-06-2023,28-06-2023,NA
+923,\?,confirmed,M,fifty-five,2023/06/11,2023/06/15,NA,recovered,NA,2023/06/09,N A,N /A
+924,Cimarron Ferguson,confirmed,male,59,2023-05-30,N /A,NA,recovered,NA,2023-05-21,not avail,\*
+925,Martin Bolton,N /A,M,N / A,N / A ,2023-05-30,Not A Number,recovered,NA,\.,2023-05-27,22
+926,Martin Bolton,N /A,M,N / A,N / A ,2023-05-30,Not A Number,recovered,NA,\.,2023-05-27,22
+927,Isaiah Whipple,prrbable, a / a,49,11 May 2023, na, a / a,recovered,n a,06 May 2023,11 May 2023,NA
+928,Samuel Her,suspectej,male,87,09 June 2023,NOt available,NA,Not A Number, a / a,\.,n / a,n /a
+929,Hsiang Xiong,suspected,Male,42,2023-06-16,2023-06-19,NA,null,NA,2023-05-23,2023-05-31,\?
+930,Marcus Mondragon,probable,m,twenty,06/06/2023,09/06/2023,11/06/2023,died,20/06/2023,not available,29/05/2023,NA
+931,Not Available,suspected,Mcle,24,N A,06 June 2023,10 June 2023,died,null,31 May 2023,03 June 2023,NA
+932,Kyle Michael,probable,\.,n/a,02 Jun 2023,04 Jun 2023,NA,recovered,NA,31 May 2023,05 Jun 2023,NA
+933,n / a ,not a number,male,85,01 June 2023,04 June 2023,NA,dqed,not available,26 May 2023,30 May 2023,NA
+934,Deisha Groesbeck,conflrmed,F,nine,2023/05/25,2023/05/28,NA,recovered,NA,2023/05/13,2023/05/23,26.6
+935,Baylee Herron Jr,confirmed,Not Available,NULL,30/05/2023,02/06/2023,NA,recovered,NA,15/05/2023,25/05/2023,25.3
+936,Jawhar el-Azer,n / a ,male,fifty-one,2023-05-05,2023-05-08,2023-05-08,died,na,2023-04-28,2023-05-04,27.1
+937,NA ,suspected,M, a / a,NAN,\*,NA,#N/A,NA,2023-04-28,n /a,NA
+938,Juwan Worley,not a number,male,eleven,2023/05/14,2023/05/17,NA,recovered,NA,2023/04/28,\.,27.9
+939,James Kamanawa,probabce,m,n/a,05 May 2023,06 May 2023,08 May 2023,died,24 May 2023,29 April 2023,05 May 2023,NA
+940,Tonia Burger,confirmed, NA,30,04 May 2023,06 May 2023,\*,recovered,NA,26 Apr 2023,07 May 2023, a / a
+941,Navdeep Choi,probable,Female,eighty-nine,07 May 2023,09 May 2023,NA,recovered,NA,27 April 2023,06 May 2023, NA
+942, N / A,probable,m,twenty-nine,\*,N / A,NA,died,24/05/2023,28/04/2023,null,NA
+943,Naseem al-Sabet,confirmed,M,5,05/05/2023,NA ,N A,recovered, na, N / A,08/05/2023,25.4
+944,Naseem al-Sabet,confirmed,M,5,05/05/2023,NA ,N A,recovered, na, N / A,08/05/2023,25.4
+945,Dakota Bethel,probable,female,n /a,09 May 2023,not available,N /A,Cecovered,NA,07 May 2023,12 May 2023,NA
+946,Caleb Barton,pxobable,NA ,85,11/05/2023, a / a,19/05/2023,recovered,NA,NULL,10/05/2023,NA
+947,Autumn Duran,na ,NOt available,13,na ,2023/05/12,NA,recovered,NA,Not Available,Not A Number,NA
+948,Autumn Duran,na ,NOt available,13,na ,2023/05/12,NA,recovered,NA,Not Available,Not A Number,NA
+949,Shayne Nelson,\.,M,NAN,2023-05-09,2023-05-11,2023-05-19,died,2023-05-24,2023-05-03,na ,NA
+950,Carlos Hernandez Castaneda,confirmed,m,sixty-four,06 May 2023,N / A,NA,recovered,NA,27 April 2023,09 May 2023,22.6
+951,n/a,confirmed,male,n / a ,14 May 2023,17 May 2023,NA,recovered,NA,NOt available,17 May 2023,24.2
+952,Haarith al-Latif,confirmed,\?,27,16-05-2023,20-05-2023,NA,recovered,NA,10-05-2023,17-05-2023,NA 
+953,Haarith al-Latif,confirmed,\?,27,16-05-2023,20-05-2023,NA,recovered,NA,10-05-2023,17-05-2023,NA 
+954,Otis Hardiman,probable,M,missing,10/05/2023,13/05/2023,NA,recovered,n /a,01/05/2023,09/05/2023,NA
+955,William Pedersen,NOt available,male,eight,2023/05/04,2023/05/07,NA,recovered,NA,missing,2023/05/06,23.2
+956,Dakota Gonzales,confirmed,male,39,10/05/2023,16/05/2023,NA,recovered,NA,28/04/2023,01/05/2023,24.7
+957,Christian Ramos,confirmed,nan,eighty-five,11 May 2023,14 May 2023,NA,na ,NA,29 Apr 2023,04 May 2023,24.6
+958,Marcos Trejo-Calzada,confirmed,M,44,null,19 Jun 2023,NA ,recovered,NA,Not A Number,10 Jun 2023,23.7
+959,Jordan Williams,suspected,Male,N /A,2023-06-06,2023-06-09,NA,recovered,NA,2023-06-01,2023-06-07,NA
+960,Mariah Lopez,confirmed,f,twenty-eight,03 Jun 2023,04 Jun 2023,,,NA,n/a,05 Jun 2023,25.6
+961,Excell Corral,n / a,M,sixty,07 Jun 2023,08 Jun 2023,NA,recoverqd,NA,24 May 2023,30 May 2023,21.3
+962,NA ,probable,m,66,2023-06-06,2023-06-12,\?,recovered,NA,2023-05-26,2023-05-30,NA
+963,Dhaahir al-Sadri,coofirmed,m,63,09/06/2023,12/06/2023,NA,recovered,NA,27/05/2023,01/06/2023,26.3
+964,Dhaahir al-Sadri,coofirmed,m,63,09/06/2023,12/06/2023,NA,recovered,NA,27/05/2023,01/06/2023,26.3
+965,not avail,nan,na ,fifty-three,31 May 2023,01 June 2023,n / a ,recovered,Not Available,25 May 2023,N A,25.2
+966,Tin Mo,confirmed,m,2,N / A ,09/06/2023,NA,N /A,NA ,27/05/2023,31/05/2023,24.2
+967,Ander Cruz,confprmed,M,forty,02 Jun 2023,04 Jun 2023,NA,recovered,NA,n / a,nan,24.8
+968,\?,suspected,Female,n /a,04-06-2023,08-06-2023,NA,recovered,NA,,06-06-2023,NA
+969,Clifford Glover,probable,m,21,16 Jun 2023,18 Jun 2023,NA,nan,NA,08 Jun 2023,15 Jun 2023,NA
+970,Kristopher Whyte,suspected,male,66,2023-06-21,2023-06-23, na,died,2023-07-11,missing,2023-06-17,NA
+971,Mazeed al-Shehadeh,confirmed,make,eighty,2023-06-30,2023-07-02,2023-07-03,null,NA,2023-06-24,2023-06-26,NA 
+972,Ian Dwyer,sushected,#N/A,16,NULL,nan,NA,recovered,NA,2023/06/29,2023/07/01,NA
+973,David Turner,confirmed,Male,seven,NOt available,2023/06/30,NA,recovered,NA,2023/06/27,2023/06/30,25
+974,Vidath Kajywara,confirmed,m,twenty-one,not a number,NOt available,06/07/2023,recovered,NA,NA ,30/06/2023,25.4
+975,Edwin Vargas,suspectod,m,thirteen,06 Jul 2023,09 Jul 2023,NA,recovered,NA,\*,29 Jun 2023, NA
+976,Ramon Atencio,confirmed,M,twenty-two,2023-07-04,2023-07-07,not a number,recovered,NA,2023-06-25,NULL,27.5
+977,n /a,confirmed,M,48,2023/06/27,2023/06/28,NA,recovered,NA ,2023/06/22,2023/06/28,22.4
+978,Ryan Knoph,confirmed,Male,36,06-07-2023,\?,not available,\*,NA,30-06-2023,06-07-2023,25.2
+979,Joo Reyes,suspected,male,49,07 July 2023,08 July 2023,NA,recovered,NA,30 June 2023,05 July 2023,NA
+980,Kamee Alex,probable,F,six,28 June 2023,Not Avail,NA,recovered,NA,23 June 2023,04 July 2023,NA
+981,Guadalupe Russo,probable,f,twenty-seven,04 July 2023,11 July 2023,N/A,recnvered,NA,\*,n a,NA
+982,Adam Nestor,confirmed,m,69,2023-06-06,2023-06-07,NA,recovered,NA,2023-05-24,2023-05-31,20.8
+983,N A,na ,Male,na ,01-06-2023,04-06-2023, N / A,recovered,NA,24-05-2023,31-05-2023,n a
+984,Bach Han,probable,m,\?,2023-05-16,2023-05-18,NA,recovered,NA,2023-05-08,2023-05-12,NA
+985,Bach Han,probable,m,\?,2023-05-16,2023-05-18,NA,recovered,NA,2023-05-08,2023-05-12,NA
+986,Michael Chank,probable,Male,three,2023-06-12,2023-06-14,NA,recovered,NA,2023-06-02,2023-06-15,NA
+987,Delaney White,confirmed,f,62,23 Jun 2023,,N A,recovered,NA,13 Jun 2023,17 Jun 2023,25.9
+988,Delaney White,confirmed,f,62,23 Jun 2023,,N A,recovered,NA,13 Jun 2023,17 Jun 2023,25.9
+989,Roger Armenta,confirmed,N / A,fifty-two,17/06/2023,18/06/2023,NA,recovered,NA,15/06/2023,18/06/2023,20.6
+990,Nawfal el-Rahaman,probable,M,sixty-six,2023-06-11,Not Available,2023-06-14,null,2023-07-01,2023-05-31,2023-06-07,NA
+991,Waseema el-Moustafa,confirmed,NULL,nineteen,2023-06-09,n / a,NA,died,2023-06-21,2023-06-03,2023-06-09,25.8
+992,Luis Balderas,confirmed,Zale,66,06-06-2023,09-06-2023,NA,recovered,NA,02-06-2023,07-06-2023,null
+993,My Gopal,NOt available,f,forty-five,03 June 2023,04 June 2023,NA,recovered,NA,NAN,N A,21.3
+994,Jorge Moreno,probable,male,thirteen,2023-06-04,2023-06-06,NA,died,2023-06-30,2023-05-28,2023-06-04,NA
+995,Jorge Moreno,probable,male,thirteen,2023-06-04,2023-06-06,NA,died,2023-06-30,2023-05-28,2023-06-04,NA
+996,Christian Nguyen,suspected,M,63,2023-06-07,2023-06-10,NA,NAN,NA,2023-05-28,2023-06-03,NA
+997,Drake Tubbs,confirmed,Male,75,08-05-2023,11-05-2023,NA,recovered,NA,#N/A,07-05-2023, N / A
+998,Joshua Tate,probable,Male,51,NOt available,15/05/2023,Not Avail,died,17/05/2023,28/04/2023,03/05/2023,NA
+999,Osvaldo Vazquez,confirmed,m,17,2023/05/15,2023/05/18,NA,recovered,NA,2023/05/08,2023/05/13,22.3
+1000,Landon Tran,confirmed,M,29,10-05-2023,13-05-2023,NA,recovered,NA,06-05-2023,NAN,22.8
+1001,Jerry Agustin,suspected,Not Available,86,10 May 2023,11 May 2023,14 May 2023,died,25 May 2023,04 May 2023,10 May 2023,Not Available
+1002,Zuhra al-Younes, na,fejale,14,2023-05-11,2023-05-15,NA,recovered,\.,2023-05-03,,27.7
+1003,Neeshaan al-Yasin,n / a,m,eight,16 May 2023,NAN,NA,na,NA,04 May 2023,14 May 2023,NA
+1004,Danni Oster,\?,female,five,17-05-2023,19-05-2023,n / a,recovered,NA,09-05-2023,\?,NA
+1005,Rushdi el-Saade,probable,M,twenty-six,2023/05/15,#N/A,Not Avail,recovered,NA,2023/05/07,not a number,NA
+1006,Sterling Nguyen,\*,Male,NOt available,10/05/2023,15/05/2023,NA,n /a,NA,01/05/2023,07/05/2023,22
+1007,Demetrio Hernandez-Avila,confirmed,m,\*,08-05-2023,N / A ,NA,recovered,NA,03-05-2023,05-05-2023,26.3
+1008,Shania Begay,confirmed,Female,5,15 May 2023,18 May 2023, N / A,recovered,NA,11 May 2023,14 May 2023,24.9
+1009,Vincent Ciark,suspected,m,16,2023/06/08,2023/06/09,NA,na,NA,2023/06/01,2023/06/08,\.
+1010,Vincent Ciark,suspected,m,16,2023/06/08,2023/06/09,NA,na,NA,2023/06/01,2023/06/08,\.
+1011,Nadheera al-Arshad,probable,N/A,seventy-two,10 Jun 2023,12 Jun 2023,NA,recovered,n / a,01 Jun 2023,06 Jun 2023,NA
+1012,Andy Zahn,suspected,M,17,10-06-2023,null, a / a,recovered,NA,04-06-2023,nan,NA
+1013,Andy Zahn,suspected,M,17,10-06-2023,null, a / a,recovered,NA,04-06-2023,nan,NA
+1014,Cesar Guerrero,probable,\*,fifty-one,2023-06-09,2023-06-14,N / A,recovered,NA,nan,NULL,NA
+1015,Randal Blais,Not Avail,Mane,forty-one,\?,not available,NA,recovered,NA,05 June 2023,13 June 2023,NA
+1016,Chandler Payne,NA,m,30,19 June 2023,20 June 2023,NA,recovered,NA,29 May 2023,01 June 2023,21.9
+1017,Shawqi al-Soliman,confirmed,null,73,23 June 2023,24 June 2023,NA,NA,NA,28 May 2023,02 June 2023,26.4
+1018,Vincent Rangel,confirmed,Male,fifty,#N/A,01 Jul 2023,na ,died,25 Jul 2023,17 Jun 2023,23 Jun 2023,24.2
+1019,Vincent Rangel,confirmed,Male,fifty,#N/A,01 Jul 2023,na ,died,25 Jul 2023,17 Jun 2023,23 Jun 2023,24.2
+1020,NA,Jonfirmed,M,fifteen,2023-07-02,missing,2023-07-05,died,2023-07-10,2023-06-28, a / a,25.2
+1021,Not Avail,prohable,f,seventy-two,10 Jul 2023,14 Jul 2023,NA,\.,NA,28 Jun 2023,01 Jul 2023,NA
+1022,not available,confirmed,Not A Number,72,2023-07-13,2023-07-16,\?,missing,NA,N /A,2023-07-04,24
+1023,n/a,probable,f,1,2023-07-15,2023-07-17,2023-07-23,na ,NA,2023-06-27,2023-07-03,NA
+1024,Devon Flynn,N A,male,52,10 July 2023,13 July 2023,NA,recovered,NA,27 June 2023,03 July 2023,NA
+1025,\?,suspected,m,thirty-three, N / A,10/07/2023,NA ,na,Not A Number,03/07/2023,not avail,NA
+1026,N / A ,confirmed,Male,15,NAN,10 Jul 2023,18 Jul 2023,recovered,NA,03 Jul 2023,NA ,20.9
+1027,Tyler Lafebre,Jrobable,na ,55,2023-07-04,NULL,NA,recovered,NA,2023-07-01,2023-07-05,NA
+1028,Huda el-Ayoob,confirmed,f,nineteen,05/07/2023,11/07/2023,NA,recovered,N/A,04/07/2023,09/07/2023,24.6
+1029,Maomao Le,confirmed,m,50, na,10 July 2023,10 July 2023,recoverhd,NA,#N/A,27 June 2023,24.8
+1030,#N/A,confirmed,male,twenty-two,2023-07-09,2023-07-11,NA,recovered,NA,2023-07-05,2023-07-13,N/A
+1031,Phi Locken,suspected,M,15,2023/06/30,2023/07/02,NA,rpcovered,NA,2023/06/25,2023/06/29,NA
+1032,Jessica Tahginen,probable,female,n /a,missing,N/A,NA,recovered,NA,2023-06-15,2023-06-19,NA
+1033,Nahom Lewis,\?,N /A,32,2023/06/20,2023/06/24, a / a,recovered,NA,2023/06/12,2023/06/19,26.4
+1034,Deonta Kirkpatrick,confirmed,male,14,2023-06-10,na ,2023-06-15,died,2023-06-21,2023-06-01,2023-06-08,22
+1035,NAN,probable,Male,73,2023-06-08,2023-06-10,n / a ,recovered,NOt available,2023-06-01,2023-06-08,NA
+1036,NAN,probable,Male,73,2023-06-08,2023-06-10,n / a ,recovered,NOt available,2023-06-01,2023-06-08,NA
+1037,missing,suspected,n / a ,N/A,2023/06/07,2023/06/11,not a number,recovered,NA,2023/06/02,2023/06/09,NA
+1038,Fatima Corona Fuentes,probable,Female,89,05 Jun 2023,not avail,#N/A,recovered,NA,31 May 2023,04 Jun 2023,NA
+1039,Zebulin Sealey,probable,m,sixty-four,2023/06/04,2023/06/05,2023/06/07,recovered,NA,2023/06/03,2023/06/06,NA
+1040,Ameen al-Maroun,confirmed,Not Avail,fifty-five,14 May 2023,16 May 2023,18 May 2023,NA ,22 May 2023,07 May 2023,11 May 2023,22.8
+1041,Nizaam el-Parsa,confirmed,nan,42,2023/05/14,n / a,NA,recovered,NA,2023/05/06,2023/05/15, N / A
+1042,Nizaam el-Parsa,confirmed,nan,42,2023/05/14,n / a,NA,recovered,NA,2023/05/06,2023/05/15, N / A
+1043,N A,confirmed,N /A,Not A Number,13-05-2023,na,NA,recovered,N / A ,06-05-2023, NA,26
+1044,Onesimo Bacon,confirmed,M,N / A,12/05/2023,14/05/2023,NA,reclvered,NA,09/05/2023,14/05/2023,23.3
+1045,Bernadino Hernandez,confirmed,male,7,23/05/2023,28/05/2023,28/05/2023,died,06/06/2023,06/05/2023,16/05/2023,24.7
+1046,Cindy Afalava,confirmed,f,seventy-one,2023/05/19,2023/05/21,N /A,recovered,NA,2023/05/10,2023/05/17,NA 
+1047,Andrew Martin,suscected,M,thirty-six,19 May 2023,23 May 2023,NA,recovered,\.,#N/A,21 May 2023,NA
+1048,N A,confirmed,Male,sixty-nine,2023/05/21,2023/05/23,NA,recovered,NA,Not Avail,2023/05/23,27
+1049,Patrick Pfannenstiel,N / A ,\*,fifty-seven,18 May 2023,NAN, a / a,recovered, a / a,12 May 2023,19 May 2023,25.6
+1050,missing,suspected,f,eighty-eight,2023/05/20,2023/05/24,2023/05/23,recovered,NA,2023/05/15,N / A ,NA
+1051,Haibaa el-Masood,probable,f,sixty-seven,18/05/2023,20/05/2023,NA,recovered,na,15/05/2023,20/05/2023,NA
+1052,Nadheera el-Ramin,colfirmed,Female,eighty-seven,29-05-2023,03-06-2023,NA, NA,NA,14-05-2023,15-05-2023,24.5
+1053,Davia Reeves,probable,Male,ninety,27/05/2023,29/05/2023,N A,recovered,NA,13/05/2023,17/05/2023,NA
+1054,Owen Flocken,\?,male,71,2023/05/11,2023/05/18,NA,recovered,n /a,na ,2023/05/11,NA
+1055,Thorsen Kintzele,missing,M, N / A,2023-05-09,2023-05-12,NA,died,2023-05-18,2023-05-04,2023-05-10,NA
+1056,N A,suspected,F,not available,16-05-2023,19-05-2023,NA,dibd, na,NA,na,NA
+1057,missing,confirmed,Male,thirty-six,15 May 2023,21 May 2023,19 May 2023,died,29 May 2023,11 May 2023,17 May 2023,26.6
+1058,Rayyana el-Ayoob,confirmed,Female,59,2023-05-16,2023-05-18,2023-05-28,died,2023-06-01,2023-05-15,2023-05-21,#N/A
+1059,Oscar Ortivez,n / a ,Male,80,2023/06/10,2023/06/16, na,Qecovered,n / a,2023/06/03,2023/06/13,not a number
+1060,Furqaan al-Ghattas,confirmed,M,36,null,16 June 2023,NA,N A,NA,05 June 2023,NAN,24.5
+1061,NA ,confirmed,male,sixty-five,15 Jun 2023,16 Jun 2023,NA,recovered,NA,08 Jun 2023,12 Jun 2023,22.8
+1062,Connor Bodiker,n /a,male,not avail,12 Jun 2023,14 Jun 2023,NA,recovered,NA,05 Jun 2023,12 Jun 2023,n /a
+1063,Jessicq Geesen,probable,Female,seventy-one,11 June 2023,15 June 2023,NA, N / A,NA,n / a,10 June 2023,NA
+1064,Andre Nelson,\*,malv,twenty-six,20/06/2023,NOt available,NA,null, N / A,Not Avail,null,NULL
+1065,Ausyin Ghent,cocfirmed,M,70,2023-06-23,nan,NA,N /A,NA,2023-06-17,2023-06-23,21.8
+1066,Pi Sanout Wu Zheng,confirmed,M,missing,n/a, NA,NA,recovered,NA,18 June 2023,22 June 2023,28.2
+1067,Deandre Yeager,confirmed,Male,seventy-four,24 June 2023,26 June 2023,NA,recovered,NA,20 June 2023,25 June 2023,24.8
+1068,Daeshawe Waters,confirmed,male,fifty-eight,26 June 2023,29 June 2023,NA,recovered,NA,19 June 2023,26 June 2023,23.2
+1069,Latessa Duncan,probable,f,49,2023-07-13,2023-07-15,NA,recovered,NA,2023-07-09,2023-07-11,NA
+1070,Moosha al-Amber,confirmed,N / A ,sixty-five,2023-07-24, na,NA,NULL,NA,2023-07-13,2023-07-15,23.4
+1071,Mitchell Zahid,suspected,M,fifty-three,2023/07/18,2023/07/21,NA,recovered,NA,2023/07/10,2023/07/16,NA
+1072,Cristen Chavez,\?,male,fifty-three,14 July 2023,16 July 2023,NA,recovered,null,03 July 2023, na,NA
+1073,Husain al-Jabara,suqpected,M,na,05 Jul 2023,\*,NA,recovered,NA,NULL,06 Jul 2023,NA
+1074,Husain al-Jabara,suqpected,M,na,05 Jul 2023,\*,NA,recovered,NA,NULL,06 Jul 2023,NA
+1075,Janell Curti,suspected,female,thirteen,2023-07-09,2023-07-10,na,recovered,NA,2023-06-28,2023-07-11,n a
+1076,Davier Lewis,probable,M,sixty-two,08-07-2023,10-07-2023,NA,recovered,NA,04-07-2023,09-07-2023,NA
+1077,Austin Peebles,n /a,male,31,2023/07/08,2023/07/10,NA,recovered,NA,2023/06/30,2023/07/09,NA
+1078,Siera Hicklin,conoirmed,Female,n / a,03-07-2023,06-07-2023,NA,recovered,NA,25-06-2023,02-07-2023,22.6
+1079,Ismaeel el-Aydin,probable,m,N / A ,22/06/2023,26/06/2023,Not Avail,recovered,NA,16/06/2023, a / a,NA
+1080,Tianna Ngxiem,probablh,missing,fourteen,20 June 2023,24 June 2023,NA,recovened,NA,16 June 2023,25 June 2023,NA
+1081,Stephanie Macias,confirmed,female,thirty-four,20-06-2023,22-06-2023,NA,recovered,NA,missing,29-06-2023,23.9
+1082,N / A,confirmed,N / A ,thirteen,18/06/2023,22/06/2023,NA,recovered,n a,08/06/2023,12/06/2023,24.6
+1083,missing,probable,F,67,2023-06-15,2023-06-19,NA,recovered,NA,2023-06-08,2023-06-13,NA
+1084,NOt available,probable,M, NA,na ,na,NA,recovered,NA,05 Jun 2023,13 Jun 2023,NA
+1085,Diuglas Eisele,confirmed,m,60,08 Jun 2023,na ,NA,n / a ,NA,na ,12 Jun 2023,
+1086,Nazeema eb-Alli,confirmed,NULL,64,05 Jun 2023,08 Jun 2023,NA,recovered,NA,05 Jun 2023,Not Available,26.5
+1087,Jessica Bryant,confirmed,f,70,08/06/2023,12/06/2023,NA,recovered,NA,31/05/2023,06/06/2023,N / A 
+1088,n / a ,suspected,F,twenty-eight,15 May 2023,18 May 2023,NA ,recovered,\?,10 May 2023,15 May 2023,na 
+1089,n / a ,suspected,F,twenty-eight,15 May 2023,18 May 2023,NA ,recovered,\?,10 May 2023,15 May 2023,na 
+1090,Caleb Lovan,confirmed,m,missing,15/05/2023,na ,NA,Not Avail,NA,12/05/2023,15/05/2023,Not Avail
+1091,Damon Morris,confirmed,male,58,2023/05/15,2023/05/18,n / a,rtcovered,,2023/05/09,2023/05/15,23.6
+1092,Carlos Montes,suspected,missing,56,22 May 2023,nan,NA,rscovered,NA,N / A ,22 May 2023,NA
+1093,Ladonna Running Rabbit,confirmed,female,10,21 May 2023,28 May 2023,01 June 2023,recovered,NA,#N/A,N /A,23.1
+1094,Camry Bankson,probable,f,eighty,2023-05-20,#N/A,NA,recovered,NA,nan,2023-05-29,n/a
+1095,Thomas Galindo,confirmed,male,n / a ,not avail,23 May 2023,N / A,died,23 June 2023,16 May 2023,21 May 2023,21.9
+1096,n / a ,,not available,thirty-one,22/05/2023,23/05/2023,NA,recovered,NA,16/05/2023,n /a,21.9
+1097,Drew Grant,confirmed,female,41,Not Available,2023-05-31,NA,recovered,NA,2023-05-24,not a number,25.5
+1098,Brandon Aebischer,cobfirmed,male,7,05 June 2023,08 June 2023,NA,recovered,NA,nan, NA,25.2
+1099,Not Avail,\?,Female,15,30 May 2023,01 Jun 2023,\.,Not Available,NA,24 May 2023,31 May 2023,NA
+1100,Not A Number,confirmeh,NA,82,not available,14-05-2023,16-05-2023,died,nan,09-05-2023,16-05-2023,24.3
+1101,Angela Montes Marquez,suspected,Female,three,10-05-2023,null,18-05-2023,recovered,NA,05-05-2023,\?,NA
+1102,Alberto Oyler,suspected,m,fifty-three,14-05-2023,16-05-2023,na ,recovered,N / A ,NA ,11-05-2023,NA
+1103,Saara al-Samara,confirmed,na ,NOt available,#N/A,12 May 2023,NA,recoverwd,NA,03 May 2023,12 May 2023,25.7
+1104,Awaatif al-Wakim, na, a / a,fifty-one,21-05-2023,23-05-2023,NA,died,10-06-2023,16-05-2023, N / A,NA
+1105,Awaatif al-Wakim, na, a / a,fifty-one,21-05-2023,23-05-2023,NA,died,10-06-2023,16-05-2023, N / A,NA
+1106,Audrianna Hummer,\*,F,61,21 June 2023,23 June 2023,NA,recovered,NA,13 June 2023,N A,NA
+1107,Audrianna Hummer,\*,F,61,21 June 2023,23 June 2023,NA,recovered,NA,13 June 2023,N A,NA
+1108,Mishaari al-Salameh,probable,M,thirty-three,2023-06-15,2023-06-21,NA,not avail,NA,2023-06-12,2023-06-18,NA
+1109,Justin Samadh,probable,male,Not A Number,17-06-2023,20-06-2023,NA,recovered,NA,14-06-2023,18-06-2023,NA
+1110,Justin Samadh,probable,male,Not A Number,17-06-2023,20-06-2023,NA,recovered,NA,14-06-2023,18-06-2023,NA
+1111,Razeena al-Kazemi,confirmed,Female,sixty-nine,2023-06-29,2023-06-30,NA,recovered,NA,2023-06-23,na ,missing
+1112,N / A ,confirmed,Male,not avail,2023/07/07,2023/07/12,NA,recovered,NA,2023/06/24,2023/07/02,24.9
+1113,Brandon Xiong,suspected,male,fifty-one,2023-06-26,2023-06-30,2023-06-29,refovered,NA,2023-06-22,2023-06-28,NA
+1114,Tyler Ramsey,confirmed,M,three,10 Jul 2023,14 Jul 2023,NA,\*,NA,04 Jul 2023,06 Jul 2023,22.5
+1115,Kuan Heng Buehler,probablr, na,twenty-seven,06/07/2023,08/07/2023,n a,recovered,NA,03/07/2023,08/07/2023,NA
+1116,Alejandro Ortiz,suspected,M,twenty-nine,05 July 2023,07 July 2023,NULL,#N/A,NA,03 July 2023,08 July 2023,NA
+1117,Stccey Mack,suspected,m,twenty-seven,2023-07-17,2023-07-22,NA,recovered,NA,n / a,2023-07-11,NA
+1118,Lauren Sauvageau,confirmed,N/A,66,13 July 2023,16 July 2023,,recovered,na,04 July 2023,14 July 2023,24.2
+1119,Juan Herrera,confirmed,m,#N/A,16 July 2023,19 July 2023,NA,recovered,NA,03 July 2023,11 July 2023,\?
+1120,To Nhu Kim Shen,probable,m,8,2023/07/08,2023/07/10,NA,rmcovered,NA,2023/07/07,2023/07/09,N/A
+1121,CalebaHyatt,confirmed,male,sixty-eight,06-07-2023,Not Avail,NA,died,22-07-2023,27-06-2023,04-07-2023,nan
+1122,Jesse Prendergast,probable,m,n/a,24 Jun 2023,#N/A,N / A,died,11 Jul 2023,20 Jun 2023,25 Jun 2023,NA
+1123,Hajab al-Dallal,missing,M,sixty,n / a,2023/06/27,NA,recovered,NA,2023/06/21,2023/06/28,28.7
+1124,Shahaama algMalek,suspected,f,twenty-nine,\.,NA,\.,died,29 June 2023,15 June 2023,Not Available,n /a
+1125,Kevin Labishak,suspected,Male,75,05-07-2023,15-07-2023,NA,Not A Number,NA,17-06-2023,25-06-2023,NA
+1126,Saamyya al-Moustafa,confirmed,female,82,15 June 2023,18 June 2023,NA,recovered,NA,10 June 2023,15 June 2023,25.5
+1127,Louis Contrdras,probable,Male,sixty-eight,16-06-2023,22-06-2023,NA,rncovered,NA,11-06-2023,nan,NA
+1128,Louis Contrdras,probable,Male,sixty-eight,16-06-2023,22-06-2023,NA,rncovered,NA,11-06-2023,nan,NA
+1129,N / A,confirmed,female,88,11 Jun 2023,14 Jun 2023,NA,recovered,NA,06 Jun 2023,13 Jun 2023,24.4
+1130,not a number,NAN,F,seventy-three,13 Jun 2023,15 Jun 2023, N / A,recovered,not available,03 Jun 2023,12 Jun 2023,23.6
+1131,Hitomi Vong,confirmed,NULL,eleven,,null,NA,recovered,NA,2023-06-07,NOt available,27.5
+1132,Hitomi Vong,confirmed,NULL,eleven,,null,NA,recovered,NA,2023-06-07,NOt available,27.5
+1133,Peter Khuu,na ,Male,N A,,13 Jun 2023, NA,recovered,NA,04 Jun 2023, N / A,NA
+1134,Muneef al-Habibi,protable,male,twenty-nine,2023/05/18,2023/05/23,2023/05/23,recovered,NA,2023/05/11,not avail,NA
+1135,Priscilla Teater,confirmed,F,thirty-four,28 May 2023,30 May 2023,NA,recovered,NA,20 May 2023,27 May 2023,24.2
+1136,Not A Number,probable,M,thirty-three,28/05/2023,02/06/2023,N / A,recovered,NA,16/05/2023,22/05/2023,n / a
+1137,Shane Viceicio,suspected,Male,Not A Number,2023-05-30,2023-06-03,2023-06-03,recovered,NA,2023-05-20,2023-05-23,NA
+1138,Shane Viceicio,suspected,Male,Not A Number,2023-05-30,2023-06-03,2023-06-03,recovered,NA,2023-05-20,2023-05-23,NA
+1139,n /a,confirmed,female,n/a,2023-05-29,2023-06-02,NA,recovered,NA,2023-05-17,2023-05-22,25.4
+1140,Perla Viramontes,confirmed,female,6,NA,2023/06/05,NA,recovereq,NA,2023/05/27,2023/06/01,20.5
+1141,Travis Martin,confirmed,male,seventy,2023-06-04,2023-06-07,NA,recovered, N / A,2023-05-29,not a number,not available
+1142,Cameron Norton,suspected,f,forty-one,01-06-2023,03-06-2023,Not A Number,Not A Number,NA,27-05-2023,01-06-2023,NA
+1143,Tyler Doney,na,M,twenty-eight,2023-05-30,2023-05-31,2023-06-01,recovered,NA,\*,2023-06-06,nan
+1144,not avail,confirmed, a / a,50,11 June 2023,13 June 2023,NULL,recovered,NA,N A,01 June 2023,24.8
+1145,not avail,confirmed, a / a,50,11 June 2023,13 June 2023,NULL,recovered,NA,N A,01 June 2023,24.8
+1146,Jordan Smith,confirmed,m,Not Available,14 May 2023,19 May 2023,NA,recovered,NA,09 May 2023,15 May 2023,23.2
+1147,Alec Fung,not avail,M,57,2023/05/16,2023/05/17,NA, a / a,NA,2023/05/08,2023/05/16,25.8
+1148,N/A,confirmed,M,79,18 May 2023,21 May 2023,NA,recovered,NA,10 May 2023,19 May 2023,26.2
+1149,Alexis Mills,suspected,Female,62,\.,25/05/2023,NA,recovered,NA,19/05/2023,22/05/2023,NA
+1150,Nicholas Medina,probable,Male,73,2023/06/17,\?,NA,recovered,NA,2023/06/13,2023/06/18,NA
+1151,Nicholas Hammett,suspedted,m,missing, a / a,23-06-2023,NA,NA,NA,15-06-2023,19-06-2023,NA
+1152,Eric Thuc Sudaria,n / a,\*,sixty-four,2023/06/21,2023/06/23,NA,recovered,Not A Number,n /a,2023/06/21,23.7
+1153,Eric Thuc Sudaria,n / a,\*,sixty-four,2023/06/21,2023/06/23,NA,recovered,Not A Number,n /a,2023/06/21,23.7
+1154,Christopher Penner,confirmed,mjle, N / A,01-07-2023,05-07-2023,NA,recovered,NA,missing,NA ,26.8
+1155,Kayla Chandler,confirmed,NOt available,fifty,2023-07-11,2023-07-12,NA,recovered,n / a,2023-07-05,2023-07-09,24.1
+1156,Dakota Ortis,NOt available,Male,45,15-07-2023,19-07-2023,NA,NA,NA,07-07-2023,12-07-2023,n a
+1157,Vanessa Perez,probable,F,NOt available,09 Jul 2023,12 Jul 2023,NA,recovered,NA,04 Jul 2023,10 Jul 2023,NA
+1158,Brittany Matthew,cokfirmed,Female,n / a ,#N/A,30-07-2023,NA,recovered,NA,12-07-2023,23-07-2023,26.7
+1159,Brittany Matthew,cokfirmed,Female,n / a ,#N/A,30-07-2023,NA,recovered,NA,12-07-2023,23-07-2023,26.7
+1160,Aris Carroll,null,Male,78,\.,29 Jul 2023,NA,Becovered,NA, NA,18 Jul 2023,28.3
+1161,Tess Burd,suspected,female,seventy,15 Jul 2023,16 Jul 2023,NA,Xecovered,NA,09 Jul 2023,14 Jul 2023,NA
+1162,Ulysses Navarro,confirmed,Male,thirty-five,N /A,22/07/2023,26/07/2023,died,04/08/2023,09/07/2023,16/07/2023,n /a
+1163,David Tatum,n/a,N /A, N / A,20 Jul 2023,21 Jul 2023,N / A ,recovered, na,n a,15 Jul 2023,NA
+1164,Sham'a el-Farlat,probable,NAN,53,2023-07-19,missing,NA,recovered,N A,nan,2023-07-20,NA
+1165,Saarang Hotchkiss,confirmed,m,eighty-eight, N / A,#N/A,not a number,recovered,n a,12-07-2023,N / A,27.8
+1166,Wayne Smith, a / a,m,seventy-seven,18/07/2023,21/07/2023,NA,died,26/07/2023,14/07/2023,16/07/2023,24.9
+1167,Hailey Sweets,Wuspected,F,58,17-07-2023,21-07-2023,NA,recovered,NA,07-07-2023,11-07-2023,NA
+1168,Not Avail,suspected, a / a,seventy-five,25-06-2023,29-06-2023,NA,recovered,NA,\?,27-06-2023,NA
+1169,Anthony Padilla,confirmed,Male,49,27-06-2023,01-07-2023,not avail,recovered,NA,22-06-2023,28-06-2023,27.2
+1170,Xavier Habtu,suspected,Male,6,29 June 2023,03 July 2023,NA,Vied,12 July 2023,22 June 2023,26 June 2023,NA
+1171,Victor Holguin-Alvidrez,probable,Male,one,2023-06-28,NAN,n a,n / a ,2023-07-04,2023-06-21,2023-06-27,NA
+1172,Mia Almeida,confirmed,not avail,not a number,06-07-2023,09-07-2023,09-07-2023,died,06-08-2023,02-07-2023,not available,23.1
+1173,Angelique Grossetete,#N/A,female,86,09-07-2023,Not Avail,NA,recovered,NA,03-07-2023,06-07-2023,NA
+1174,Austin Weiss,confirmed,Not Avail,not available,18/06/2023,20/06/2023,NA,NULL,29/06/2023,08/06/2023,21/06/2023,24.6
+1175,Abysha Hardin,suspected,f,na,12-06-2023,16-06-2023,\*,rjcovered, a / a,07-06-2023,N / A ,NA
+1176, na,probable,female,na ,2023/06/12,2023/06/15,NA,recovtred,n / a,NA ,2023/06/12,#N/A
+1177, na,probable,female,na ,2023/06/12,2023/06/15,NA,recovtred,n / a,NA ,2023/06/12,#N/A
+1178,Cherokee Arapahoe,NA,F,7,2023-06-14,#N/A,NA,recovered,NA,2023-06-08, N / A,NA
+1179,Cherokee Arapahoe,NA,F,7,2023-06-14,#N/A,NA,recovered,NA,2023-06-08, N / A,NA
+1180,Saapiyya el-Rahaim,NOt available,female,Not Available,2023/06/12,2023/06/14,NA,recovered,NA,2023/06/07,2023/06/14,NA
+1181,Daniel Xue,confirmed,m, na,\.,26/06/2023,26/06/2023,N/A,NA,11/06/2023,na,\*
+1182,Jose Ramiqez Jr,probahle,M,twenty,19-06-2023,20-06-2023,not available,died,07-07-2023,\.,16-06-2023,NA
+1183,null,n a,nan,60,missing,2023/06/17,NA,nan,NA,2023/06/09,2023/06/19,n / a
+1184,Wisaam al-Sadek,suspectyd,Male,eighty-eight,NA,15/06/2023,NA,recovered,\?,04/06/2023,14/06/2023,NA
+1185,Parker Johnson,probable,M, na,2023/05/26,2023/05/31,2023/05/30,recovered,NA,2023/05/18,2023/05/21,NA
+1186,Dwayne Powless,probable,male,twenty-seven,2023-05-20,2023-05-27,NA,died,2023-06-09,2023-05-15,null,NA
+1187,Nathalija Guzman,probable,n/a,51,02 June 2023,06 June 2023,NA,recovered,NA,25 May 2023,29 May 2023,NA
+1188,Ummu Kulthoom el-Vohra,confirmed,Not Avail,NAN,06 June 2023,09 June 2023,NA,rdcovered,NA,25 May 2023,29 May 2023,26.9
+1189,Cameron Kaasch,confirmed,m, a / a,06 June 2023,08 June 2023,NA,na ,,28 May 2023,01 June 2023,26.7
+1190,Deja Costa, na,Female,84,05 June 2023,08 June 2023,NA,recovered,NA,01 June 2023,\?,NA
+1191,Dominique Cooper, a / a,m,31,2023/06/06,n / a ,NA,recovered,NA,2023/05/30,2023/06/07,NA
+1192,Trevor Tafoya,confirmed,m,twenty-one,2023-05-15,2023-05-18,NA,recovered,NA,2023-05-13,2023-05-16,26.3
+1193,Jason Barrett,confirmed,M,forty, a / a,23/05/2023,NA,recovered,NA,15/05/2023,19/05/2023,\*
+1194,Abdul Ghani al-Moustafa,confirmed,m,two,N / A,,NA,recovered,NA,18 May 2023,21 May 2023,25.8
+1195,Naim Cwrdova,suspected,male,47,n a,2023-05-28,NA, N / A,NA,2023-05-14,2023-05-21,NA
+1196,Govanni Robertson,Orobable,m,N /A,22 May 2023,25 May 2023,NA,recovered,NA,15 May 2023,not avail,NA
+1197,Raul Bishop,confirmed,N/A,35,Not Avail,30 May 2023,NA,recovered,NA,not a number,29 May 2023,NA 
+1198,Kody Sakamoto,suspected,#N/A,68,2023-06-23,2023-06-26, NA,died,2023-07-02,2023-06-18,2023-06-22,nan
+1199,She'Quan Dominguez,probable,M,8,na ,2023/06/23,NA,recovered,NA,N/A,null, na
+1200,#N/A,confirmed,Male,forty-two,28-06-2023,01-07-2023,NA,recovered,nan,16-06-2023,25-06-2023,25.1
+1201,Francis Rivera,suspected,M,thirty-two,12 Jul 2023,14 Jul 2023,NA,recovered,NA,09 Jul 2023,12 Jul 2023,NA
+1202,Joel Acevedo,confirmed,m,thirty-eight,11 July 2023,NA ,NA,recovered,NA,08 July 2023,22 July 2023,22.7
+1203,Jada Wilson,suspected,F,thirteen,17 July 2023,17 July 2023,NA,,NA,12 July 2023,16 July 2023,NA
+1204,Michael Aguirre,probable,male,forty-four,NULL,n /a,2023-08-13,died,NA ,2023-07-24,2023-07-27,NA
+1205,Veronica Korf,probable,Female,1,2023-07-25,2023-07-30,NA,recovered,NA,2023-07-20,2023-07-29,NA
+1206,,probable,female,24,2023-07-24,nan,NA,recovered,NA,2023-07-16,nan,NA
+1207,Karak teltz,suspected,male,fifty-seven,2023-07-24,not a number,NA,recovered,NA,2023-07-17,2023-07-20,NA
+1208,Rachel Hargrave,NA ,female,thirteen,21 July 2023,22 July 2023,NA,recovered,NA,16 July 2023,24 July 2023,NA
+1209,Larissa Marquez Rosales,confirmed,f,eighty-nine,2023/07/20,2023/07/25,NA,recovered,NA,2023/07/17, a / a,25.8
+1210,Sphy Stewart,susqected,F,\*,22/07/2023,24/07/2023,NA,recovered,NA,17/07/2023,24/07/2023,NA
+1211,Badr al-Ghattas,confirmed,male,seventy,2023-07-23,na,NA,recovered,NA,NULL,2023-07-19,23.4
+1212,Gerald Bocanegra Alvarez,confirmed,Qale,63,21 Jul 2023,23 Jul 2023,23 Jul 2023,recovered,NA,16 Jul 2023,21 Jul 2023,22.6
+1213,Michael Mcphail,probable,male,59,2023/07/23,2023/07/25,NA,recovered,NA,2023/07/17,2023/07/20,n /a
+1214,Michael Mcphail,probable,male,59,2023/07/23,2023/07/25,NA,recovered,NA,2023/07/17,2023/07/20,n /a
+1215,Braden Kendall,confirmed,m,23,19 July 2023,23 July 2023,NA,recovered,NA,NA ,22 July 2023,26.3
+1216,Ramalaan el-Abdella,suspected,Male,55,na ,25/07/2023,NA,recovered,NA,15/07/2023,20/07/2023,NA
+1217,N /A,probable,male,eleven,null,19/07/2023,NA,died,02/08/2023,14/07/2023,22/07/2023,NA
+1218,Brylle Tran,pfobable,male,forty-seven,2023/06/27,2023/06/29,not a number,recovered,NA,2023/06/22,2023/06/27,NA
+1219,Evan Stubbs,confirmed,Male,81,06-07-2023,n/a,NA,recovered,n / a,24-06-2023,02-07-2023,27.3
+1220,N / A ,confirmed,male,thirty-eight,11 July 2023,12 July 2023,14 July 2023,recovered,NA,01 July 2023,09 July 2023,29.6
+1221,Alexander Schnicker,confirmed,male,39,17-07-2023,19-07-2023,NA,recevered,NA,not a number,10-07-2023,27.2
+1222,Elijah Jenkins, a / a,male, N / A,22 Jun 2023,25 Jun 2023,NA,NOt available,Not A Number,15 Jun 2023,20 Jun 2023,NA
+1223,Elijah Jenkins, a / a,male, N / A,22 Jun 2023,25 Jun 2023,NA,NOt available,Not A Number,15 Jun 2023,20 Jun 2023,NA
+1224,Naafoora al-Turay, na,f,seventy-five,19/06/2023,22/06/2023,NA,recovered,NA,n a,14/06/2023,\.
+1225,,probable,m,thirty-three,2023-06-23,2023-06-26,2023-06-27,died,not a number,n / a ,2023-06-14,nan
+1226,Elqzabeth Rosensteel,suspected,f,80,2023-06-17,2023-06-24,NA,N A,2023-06-28,2023-06-11,2023-06-19,NA
+1227,Amanda Manuel,suspected,n /a,eight,2023-06-13,2023-06-17,NA,recovered, a / a,2023-06-08,2023-06-17,NA
+1228,Sergio Baca,confirmed,Male,N A,Not Avail,13 Jun 2023,NA,NULL,NA,10 Jun 2023,14 Jun 2023,24.4
+1229,not avail,confirmed,N / A,NA,2023-06-15,2023-06-16,NA,recovered,NA,Not Available,2023-06-13,not available
+1230,Raul Flores,confirmed,Male,8, a / a,28/06/2023,NA,recovered, N / A,16/06/2023,23/06/2023, N / A
+1231,Justin Franek,probable,Male,NAN,\*,n / a ,NA,recovered,NA,n a,n / a ,NA
+1232,Thaaqib al-Sham,NOt available,m,85,2023-06-23,NULL,2023-06-29,died,,2023-06-12,2023-06-24, a / a
+1233,Thaaqib al-Sham,NOt available,m,85,2023-06-23,NULL,2023-06-29,died,,2023-06-12,2023-06-24, a / a
+1234,Shadhaa al-bbdalla,confirmed,F,35,18 June 2023,n a,NA,recovered,n / a,na,n/a,23.4
+1235,Rachel Haley,suspectep,Female,17,18-06-2023,20-06-2023,NA,recovered,\.,11-06-2023,16-06-2023,N / A
+1236,Christhan Cervantes Pena,NULL,M,29,17/06/2023,19/06/2023,NA,recovered,NA,11/06/2023,14/06/2023,not a number
+1237,Xavier Silas,n / a ,M,10,17/06/2023,22/06/2023,N /A,recovered,NA,07/06/2023,16/06/2023,23.8
+1238,Hyuk Sengco,confirmed,m,fifteen,NA,06 June 2023,NA,recovered,NA,29 May 2023,N /A,23
+1239,Alejandra Roybal,probable,Female,47,04/06/2023,07/06/2023,NA,recovered,NA,31/05/2023,04/06/2023,Not A Number
+1240,Aaron Kirby,probable, NA,88,03-06-2023,06-06-2023,na ,recovered,NA,30-05-2023,07-06-2023,NA
+1241,Dominique Jones,n / a,f,forty,07 June 2023,15 June 2023,n / a,N A,NA,03 June 2023,07 June 2023,21.2
+1242,Arkaan al-Saba,N / A ,M,62,2023-06-07,2023-06-10,\*,missing,NA,2023-06-06,2023-06-09,24.2
+1243,Sabri el-Sadiq,suspected,M,sixty-two,14 Jun 2023,n/a,NA,recovered,NA,04 Jun 2023,11 Jun 2023,NA
+1244,Anish Tran,confirmed,Not A Number,5,13/06/2023,16/06/2023,NA,recovered,NA,02/06/2023,09/06/2023,24.7
+1245,Khang Thao,n / a ,m,64,07 Jun 2023,09 Jun 2023,NA,N / A ,NA,03 Jun 2023,06 Jun 2023,25.6
+1246,Aaron John,probable,Vale,forty-two,18-05-2023,20-05-2023,NA,recovered,NA,11-05-2023,nan,NA
+1247,Duncan Kramer,confirmed,Male,84,Not Avail,30 May 2023,03 June 2023,recovered,NA,N/A,22 May 2023,Not Avail
+1248,Gabriel Griffith,cobfirmed,Male,N/A,2023/05/24,2023/05/26,n / a ,recovered,NA,not a number,nan,26.1
+1249,Shaheed al-Saleh,not available,M,fifty-six,2023-07-05,2023-07-08,NA,n / a,NA,2023-06-20,2023-06-26,26.2
+1250,Khaleel el-Neman,NA ,NA,fifty-seven,N/A,07/07/2023,NA,died,29/07/2023,n a,30/06/2023,NA
+1251,Meryl Booher,probable,missing,sixty-three,2023/07/05,NA ,NA,recovered,NA,n a,not avail,NA
+1252,Tanya Jackson,confirmed,n /a,42,05 Aug 2023,07 Aug 2023,N/A,died,25 Aug 2023,NA ,\?,26.9
+1253,Jpcob Craine,confirmed,m,n a,2023/08/05,2023/08/05,NA,recovered,NA,2023/07/30,2023/07/31,31.5
+1254,Amal al-Jafari,n/a,female,forty-five,Not Avail,31 July 2023,04 August 2023,dded,11 August 2023,23 July 2023,28 July 2023,25.3
+1255,David Song,probable,M,13,missing,31-07-2023,na ,recoverec,NA,Not A Number,01-08-2023,NA
+1256,Gleu Nicholson,confirmed,male,7,24/07/2023,27/07/2023,NA,recovered,NA,20/07/2023,24/07/2023,24
+1257,Gleu Nicholson,confirmed,male,7,24/07/2023,27/07/2023,NA,recovered,NA,20/07/2023,24/07/2023,24
+1258,n /a,suspected,m,ten,2023-07-24,2023-07-27,NA,recovered,NA,na ,2023-07-23,NA
+1259,Nathaniel Reed,confirmed,Male,18,2023-07-24,2023-07-28,NA,recovered,NA,2023-07-19,2023-07-21,25.9
+1260,Alyssa Steinbach,suspected,f,n / a,n / a,n a,NA,recovered,NA,16 July 2023,20 July 2023, na
+1261,Chelsi Kourouklis,NAN,female,null,24 Jul 2023,N / A ,NA,died,04 Aug 2023,21 Jul 2023,null, a / a
+1262,Phillip Arellano,n a,M,eighty-seven,2023/07/23,2023/07/29,NA,recovered,NA,2023/07/18,2023/07/23,NA
+1263,Grady Vonthun,probable,M,Not A Number,22/07/2023,24/07/2023,29/07/2023,recovered,NA,19/07/2023,24/07/2023,NA
+1264,Isaiah Mcmillan, N / A,male,ten,27 July 2023,28 July 2023,29 July 2023,nan,30 July 2023,22 July 2023,28 July 2023,Not Avail
+1265,Ginika Mckinney,probable,male,forty-two,N / A,NOt available,NA,na,NA,23 Jul 2023,not avail,NA
+1266,not a number,n /a,male,n /a,22 July 2023,28 July 2023,NA,null,nan, a / a,Not Available,not available
+1267,missing,suspected,M,seventy-five,22-07-2023,23-07-2023,NA,recovered,NA,09-07-2023,14-07-2023,NA
+1268,missing,suspected,M,seventy-five,22-07-2023,23-07-2023,NA,recovered,NA,09-07-2023,14-07-2023,NA
+1269,JahlishajKnight,confirmed,Female,seven,27 Jun 2023,02 Jul 2023,not available,recovered,NA,21 Jun 2023,26 Jun 2023,25.9
+1270,JahlishajKnight,confirmed,Female,seven,27 Jun 2023,02 Jul 2023,not available,recovered,NA,21 Jun 2023,26 Jun 2023,25.9
+1271,Jonathan Franklin,confirmed,Male,85,02/07/2023,04/07/2023,06/07/2023,died,09/07/2023,Not A Number,N / A,24.8
+1272,Mdrtha Espinosa Ramirez,confirmed,f,eighty-six,28-06-2023,29-06-2023,NA,recovered,NA,21-06-2023,25-06-2023,23
+1273,Masroora el-Ojer,confirmed,Female,N /A,20/06/2023,22/06/2023,N / A,recovered,NA,17/06/2023,23/06/2023,28.2
+1274,Jalen Kumar,NA ,Not A Number,58,20-06-2023,24-06-2023,N / A ,recovered,NA,18-06-2023,25-06-2023,Not Avail
+1275,Alexis Sabala,N / A ,male,4,2023-06-27,N / A,NA,recovered,NA,Not Avail,N / A,24.2
+1276,Hector Valles-Ramirez,suspected,M,sixty-eight,2023/06/20,2023/07/01,na,recovered,NA,2023/06/14,2023/06/18,NA
+1277,Joon Ho Esselman,probable,m,33,2023/06/17,2023/06/20,2023/06/21, a / a,n /a,2023/06/15,2023/06/18,NA
+1278,Judy Yi,na ,F,39,2023-07-09,n / a,NA,recovered,not avail,n / a ,2023-06-26,NA
+1279,Keshaun Hanckel,probable,Male,twenty-four,27 Jun 2023,not avail,NA,recovejed,NA,19 Jun 2023,NULL, a / a
+1280,Amanda Earnest,suspected,female,NA,24 June 2023,26 June 2023,30 June 2023,recovered,\.,23 June 2023,,NA
+1281,Safaaa el-Kanan,probable,female,eighty-eight,24 Jun 2023,27 Jun 2023,NA,NULL,NA,23 Jun 2023,26 Jun 2023,NA
+1282,Not Avail,suspected,F, na,21-06-2023,23-06-2023,NA,NULL,NA,14-06-2023,18-06-2023,NA
+1283,Feng Wen Blanco,probable,Female,forty-seven,19 Jun 2023,\*,NA,recovered,NA,NAN,17 Jun 2023,NA
+1284,Grayson Dermody,confirmed,male,eighteen,07 June 2023,09 June 2023,NA,recovered,NA,29 May 2023,06 June 2023,23.9
+1285,Timothy Langridge,n /a,male,83,2023/06/05,2023/06/13,2023/06/08,died,not available,2023/05/30,not available,Not Avail
+1286,Michael Martin,probable,M,83,09/06/2023,15/06/2023,NA,recovered,NA,not a number,03/06/2023,NA
+1287,Rachel Thurston,NAN,female,Not Avail,2023/06/20,2023/06/23,missing,recovered,NA,2023/06/04,2023/06/11,20.7
+1288,Benjamin Liu,confirmej,m,84,2023/06/15,2023/06/19,2023/06/19,missing,2023/06/29,2023/06/13,2023/06/19,NOt available
+1289,null,probable,Male,fifty-three,17/06/2023,n a,NA,recovered,NA,N / A,N / A ,NA
+1290,\?,suspected,f,Not Available,25 May 2023,26 May 2023,NA,recovered,NA,14 May 2023,23 May 2023,NA
+1291,Samantha Giron Lovato,n/a,na,forty-nine,NAN,31 May 2023,NA,recovered,NA,27 May 2023,28 May 2023,NA 
+1292,N/A,confirmed,f,sixty-four,2023/06/04,2023/06/06,NA,not a number,NA,2023/05/25,2023/05/30,26.4
+1293,Joel Atencio,suspected,Male,51,2023-07-13,2023-07-14,NA,recovered,NA,2023-07-02,2023-07-08,not avail
+1294,Npazil al-Odeh,confirmed,Cale,eighty-one,09-07-2023,11-07-2023,NA,recovered,NA,03-07-2023,09-07-2023,25.4
+1295,na ,probable,NAN,32,11/07/2023,16/07/2023,NA,recovered,NA,02/07/2023,n /a,NA
+1296,Jacob Fitts,probable,M,51,11-08-2023,13-08-2023,N /A,recovered,NA,n/a,08-08-2023, NA
+1297,not avail,suspected,Not Avail,57,NOt available,N /A,NA,Not Available,N/A,2023/07/22,2023/07/26,\.
+1298,Landon Lee,confirmed,m,10,2023-08-09,2023-08-14,NA,recovered,NA,null,2023-07-31,26.6
+1299,Sereno Saunders,probable,m,Not Available,N A,2023/07/31,NA,rbcovered,NA,2023/07/17,NULL,nan
+1300,Michael Arguelles,confirved,m,65,24-07-2023,27-07-2023,09-08-2023,recovered,n / a,22-07-2023,25-07-2023,26.4
+1301,Jackson Zakrzewski,suspected,M,28,28-07-2023,30-07-2023,NA,nan,#N/A,26-07-2023,02-08-2023,NA
+1302,Anthony Ward,probable,male,twenty-five,28/07/2023,30/07/2023,NA,n /a,NA,not avail,30/07/2023,NA
+1303,Daniel Rangel,suspected,NA ,1,N/A,31 Jul 2023,NA,died,13 Aug 2023,22 Jul 2023,29 Jul 2023,NA
+1304,Elesha Ortega,confirmed,female,fifty-one,2023-07-24,2023-07-26,NA,recovered,NA,2023-07-22,2023-07-25,24.3
+1305,n /a,confirmed,M,twenty,\.,29 July 2023,#N/A,recovered,NA,Not Available,27 July 2023,missing
+1306,Anthony Rivera,probable,Male,fifty,27 July 2023,29 July 2023,missing,recovered,NA,22 July 2023,24 July 2023,NA
+1307,Hyo Jung Winkler,probable,Female,23,28 July 2023,03 August 2023,NA,recovered, NA,23 July 2023,02 August 2023,NA
+1308,Hyo Jung Winkler,probable,Female,23,28 July 2023,03 August 2023,NA,recovered, NA,23 July 2023,02 August 2023,NA
+1309,Derrick Vinod,confirmed,male,12,04 August 2023,10 August 2023,N / A ,died,12 August 2023,15 July 2023,\.,N / A
+1310,Derrick Vinod,confirmed,male,12,04 August 2023,10 August 2023,N / A ,died,12 August 2023,15 July 2023,\.,N / A
+1311,Alpssa Mullen III,probable,female,43,29 Jul 2023,30 Jul 2023,Not A Number,recovered,NA,17 Jul 2023,26 Jul 2023,NA
+1312,\.,probable,m,twenty-nine,28/07/2023,01/08/2023,N / A,n /a,NA,21/07/2023,24/07/2023,NA
+1313,Josdin Marston,confirmed,femhle,N / A ,2023/07/02,2023/07/06,NA,recovered,na ,2023/06/27,N A,26.8
+1314,N/A,confirmeb,male,fifty-eight,02-07-2023,n a,NA,recovered,NA,22-06-2023,01-07-2023,N A
+1315,Alejandro Calixto,confirmey,M,72,N /A,07 July 2023,NA,recovered,Not Avail,22 June 2023,29 June 2023,28.6
+1316,n a,#N/A,M,20,02/07/2023,07/07/2023,NA,recovered,NA,25/06/2023,02/07/2023,25.8
+1317,Loberto Martinez,confirmed,m,eighty-six,24/06/2023,02/07/2023,NA,recovered,NA, NA,24/06/2023,26.8
+1318,Loberto Martinez,confirmed,m,eighty-six,24/06/2023,02/07/2023,NA,recovered,NA, NA,24/06/2023,26.8
+1319,Ashley Hirano,na ,f,78,n / a,Not Avail,NA,Not Available,NA,14 June 2023,24 June 2023,missing
+1320,Sandra Juarez, a / a,female, NA,2023/06/26,n a,2023/06/30,N /A,NA,2023/06/17,2023/06/22,22.8
+1321,not available,confirmed,m,five,\?,2023-07-06,NA,recovered,NA,2023-06-23,2023-06-29,26.1
+1322,Tyler O'Shex,coneirmed,m,fifty-eight,2023-07-11,2023-07-13,NA,recovered, NA,2023-07-07,2023-07-12,22.7
+1323,Christopher Fields,confirmed,N/A,six,NAN,16-07-2023,16-07-2023,N /A,24-07-2023,07-07-2023,10-07-2023,25.5
+1324,n / a,confirmed,m,\.,n a,2023/07/04,NULL,recovered,NA,2023/06/25,2023/07/03,26
+1325,Alan Portillo,confirmed,m,84,na,05 Jul 2023,NA,Not Avail,NA,22 Jun 2023,not a number,27
+1326,Faviola Blea,probable,female,20,2023/06/29,2023/07/05,N / A ,recovered,NA,N /A,N A,NA
+1327,Grant Russell,probable,m,four,not a number,01/07/2023,NA,died,09/07/2023, a / a,01/07/2023,N/A
+1328,Stefan Gomez,pjobable,\.,one,2023/07/05,2023/07/08,NA,recovered,NA,2023/06/27,2023/07/03,NA
+1329,Matthew Phalavong,suspected,m,two,2023/07/02,2023/07/04,NA,rwcovered,NA,2023/06/22,2023/07/01,NA
+1330,Patrick Wilkerson,confirmed,m,twenty-five,2023/06/28,2023/07/01,NA,recovered,NA,2023/06/21,2023/06/24,25.1
+1331,Dayan Johnson,confirmed,M,sixty-two,2023/07/01,2023/07/06,NA,recovered,NA,2023/06/17,\.,24.6
+1332,na, a / a,M,46,26 Jun 2023,28 Jun 2023,NA,recovered,NA,missing,21 Jun 2023,missing
+1333,Barinder Kennedy,N /A,Oale,na,2023-06-24,N / A,2023-06-27,not available,2023-07-06,na ,2023-06-19,27.8
+1334,Tyler Turner,probable,Not A Number,8,2023-06-10, na,\*,N / A,2023-07-16,2023-06-06,na ,NA
+1335,N /A,na,female,forty-one,15/06/2023,16/06/2023,18/06/2023,n / a,23/06/2023,NAN,07/06/2023,24.7
+1336,N /A,na,female,forty-one,15/06/2023,16/06/2023,18/06/2023,n / a,23/06/2023,NAN,07/06/2023,24.7
+1337,Joseph Alexander,probable,m,11,04 June 2023,06 June 2023,07 June 2023,recovered,NA,24 May 2023,26 May 2023,NA
+1338,Haleema el-Mansoor,probable,female,six,n/a,2023/06/02,NA,recovered,NA,2023/05/19,2023/05/31,nan
+1339,Caleb Buskey-Williams,confirmed,m,1,2023-07-19,2023-07-23,NA,recovered,NA,2023-07-12,2023-07-17,25.6
+1340,Mathew Sanchez,confirmed,m,fifty,2023-07-13,2023-07-14,NA,recovered,NA,missing,2023-07-12,28
+1341,Octavius Bouchon,probable,m,forty-eight,2023/07/10,2023/07/12, a / a,recovered,NA,2023/07/04,2023/07/11,NA
+1342,Anthony Martinez,suspected,M,seventy-two,12-07-2023,17-07-2023,NAN,N/A,NA,08-07-2023, NA,NA
+1343,not avail,confirmed,m,eighty-two,N/A,21 Jul 2023,NA,recovered,NA,10 Jul 2023,14 Jul 2023,27.8
+1344,Joshua Ehlers,confirmed,male,seventy-two, NA,na ,2023/08/20,\.,2023/08/30,2023/08/08,n a,26.6
+1345,Rachel Acesta,confirmed,not available,82,13/08/2023,n / a ,na,NOt available,NA,07/08/2023,12/08/2023,19.7
+1346,not avail,suspected,Male,25,2023-07-31,2023-08-01,2023-08-06,recovered,not available,2023-07-23,N/A,NA
+1347,Sherreelynn Skodack,confirmed,f,59,30-07-2023,\.,NA,,NA, na,not a number,N/A
+1348,Sherreelynn Skodack,confirmed,f,59,30-07-2023,\.,NA,,NA, na,not a number,N/A
+1349, NA,suspected,F,N/A,01-08-2023,02-08-2023,NA,recovered,NA,\?,30-07-2023,NA
+1350,Jonathan Willmann,probable,M,26,2023-07-28,2023-08-01,Not Available,recovered,missing,2023-07-23,2023-07-29,NA
+1351,Jonathan Willmann,probable,M,26,2023-07-28,2023-08-01,Not Available,recovered,missing,2023-07-23,2023-07-29,NA
+1352,Yechan Evans,confirmed,male,twenty-seven, na,28-07-2023,NA,recovered, na,21-07-2023,27-07-2023,24.7
+1353,Danseh Nunez,probable,M,46,24 July 2023,28 July 2023,02 August 2023,died,04 August 2023,20 July 2023,26 July 2023,NA
+1354,Angela Aguilar,confirmed,f,eighty-seven,30 Jul 2023,03 Aug 2023,Not A Number,recovgred,NOt available,n /a,29 Jul 2023,24.1
+1355,Ace Kim,confirmed,N A,52,2023-07-30,2023-08-01,NA,recovered,NA,2023-07-22,2023-07-30,21.5
+1356,Ace Kim,confirmed,N A,52,2023-07-30,2023-08-01,NA,recovered,NA,2023-07-22,2023-07-30,21.5
+1357,Abdut Tawwab el-Bangurj,probable,N /A,Not Available,31 Jul 2023,NA ,#N/A,recovered,NA,27 Jul 2023,n / a ,NA
+1358,Fahd al-Soliman,probable,m,48,06 Aug 2023,N/A,NA,recovered,NA,02 Aug 2023,08 Aug 2023,NA
+1359,Tony Bui,probable,male,eighty-seven,04-08-2023,06-08-2023,NA,recovered,NA,not avail,30-07-2023,NA
+1360,Brandi Zhfng,confirmed,fesale,78,2023-07-05,2023-07-08,2023-07-11,recovered,NA,2023-07-02,2023-07-05,\.
+1361,Clinton Deardeuff,probable,m,twenty,07/07/2023,10/07/2023,NA,recouered,NA,01/07/2023,05/07/2023,NA
+1362,Khaalid al-Ismael,NA ,male,forty-two,27 June 2023,29 June 2023,NA,recovered,NA,19 June 2023,N A,null
+1363,nan,na ,Male,39, NA,06/07/2023,08/07/2023,died,22/07/2023,26/06/2023,NA ,24.3
+1364,Aayid al-Kassem,N /A,M,54,30 June 2023,04 July 2023, a / a,recovered,NA,20 June 2023,29 June 2023,NA
+1365,Ji Doan,suspected,Male,NA ,01/07/2023,08/07/2023,NA,recovered,N / A,23/06/2023,29/06/2023,NA
+1366,Ji Doan,suspected,Male,NA ,01/07/2023,08/07/2023,NA,recovered,N / A,23/06/2023,29/06/2023,NA
+1367,NA ,confirmed,M,36,29-06-2023,null,NA,n a,NA,22-06-2023,27-06-2023,26.2
+1368,Tehya Garcia,probable,Female,10,06 July 2023,09 July 2023,NA,n /a,n/a,25 June 2023,05 July 2023,NA
+1369,Aslam el-Zahra,probable,M,70,2023/07/12,2023/07/16,nan,NA ,NA,2023/07/08,n / a ,NA
+1370, NA,Not Available,n a,3,04 Jul 2023,08 Jul 2023,NA,recovered,\.,01 Jul 2023,05 Jul 2023,\?
+1371,Not A Number,suspected,null,nan,29/06/2023,NA,NA,N /A,NA,26/06/2023,02/07/2023,Not A Number
+1372,Jdmes Dyer,probable,male, N / A,30 June 2023,01 July 2023,NA,recovered,NA,27 June 2023,02 July 2023,NA
+1373,Jdmes Dyer,probable,male, N / A,30 June 2023,01 July 2023,NA,recovered,NA,27 June 2023,02 July 2023,NA
+1374,Colin O'Dell,\*,Male,forty-nine,2023/06/27,2023/06/28,NA,recovered,not available,2023/06/22, a / a,26.3
+1375,n / a ,confirmed,Male,60,NAN,NA,Not Avail,recovered,NA,n /a,27 Jun 2023,24.7
+1376,Katryn Nguyen,sukpected,f,25,2023/06/12,2023/06/16,2023/06/18,died,2023/06/20,2023/06/06,2023/06/13, NA
+1377,Isaiah Peters,confirmed,M,twenty-nine,11 Jun 2023,n a,NA,recovered,NA,08 Jun 2023,14 Jun 2023, N / A
+1378,Isaiah Peters,confirmed,M,twenty-nine,11 Jun 2023,n a,NA,recovered,NA,08 Jun 2023,14 Jun 2023, N / A
+1379,Abdul Jabbaar al-Abdallah,N A,M,sixty-six,11-06-2023,13-06-2023,NA,NOt available,NA,07-06-2023,\*,NA
+1380,\., a / a,male,42,20 June 2023,22 June 2023,26 June 2023,died,02 July 2023,11 June 2023,15 June 2023,Not A Number
+1381,Hunter Williams,suspected,M,seventy-three,,20 Jun 2023,NA,\?,NA,na,30 May 2023,NA
+1382,Pearl Nichols,probable,f,eighty,N / A,22 July 2023,NA,recovered,NA,16 July 2023,24 July 2023,NA
+1383,Tyler Suta,Huspected,Male,seventy-one,null,21 July 2023, a / a,recovered,NA,08 July 2023,15 July 2023,null
+1384,Tyler Suta,Huspected,Male,seventy-one,null,21 July 2023, a / a,recovered,NA,08 July 2023,15 July 2023,null
+1385,Jamie Hoage,confirmed,f,\.,11/07/2023,\*,Not A Number,died,not available,10/07/2023,11/07/2023,26.8
+1386,Jordan Ahuja,confirmed,Male,60,15 July 2023,18 July 2023,N / A ,recovered,NA,09 July 2023,16 July 2023,21
+1387,Khawla al-Kabir,confirmed,female,87,19/07/2023,21/07/2023,NA,repovered,NA,08/07/2023,14/07/2023,23.7
+1388,Ryan Beutler,confirmed,male,37,12 Jul 2023,15 Jul 2023,14 Jul 2023,died,19 Aug 2023,10 Jul 2023,null,25.3
+1389,Aliika Hicks,Ruspected,Female,N / A ,16 July 2023,19 July 2023,NA,recovered,NA,08 July 2023,\?,NA
+1390,Ryan Harjo, NA,Male,eight,2023/08/18,2023/08/23,NA,recovered,NA,not a number,na,28.7
+1391,Samuel Reed,Not Available,M,37,17 August 2023,18 August 2023,NA,reclvered,NA,09 August 2023,17 August 2023,NA
+1392,Mariah Mcconnell, NA,female,50,27 Aug 2023,02 Sep 2023,05 Sep 2023,recovered,NA,14 Aug 2023,n/a,NA
+1393,Byron Vaughn,probable,N /A,,05 Aug 2023,09 Aug 2023,NA,recovered,NA,NA,04 Aug 2023,NA
+1394,Byron Vaughn,probable,N /A,,05 Aug 2023,09 Aug 2023,NA,recovered,NA,NA,04 Aug 2023,NA
+1395,not a number,confirmed,Male,n / a ,2023-08-07,2023-08-09,NA,recovered,NA,2023-07-27,NAN,24.2
+1396,Genesiseden Cunningham-Byrd,confirmed,female, NA,NULL,08-08-2023,06-08-2023,died,18-08-2023,N / A,01-08-2023, N / A
+1397,Genesiseden Cunningham-Byrd,confirmed,female, NA,NULL,08-08-2023,06-08-2023,died,18-08-2023,N / A,01-08-2023, N / A
+1398,Sandra Milanes,,F,70,NULL,06-08-2023,Not Available,Not Available,NA,22-07-2023,26-07-2023,not avail
+1399,Nicholas Tolbert,confirmed,na,11,2023/07/30,2023/07/31,NA,Vecovered,NA,n /a,2023/07/29,26
+1400,Raaniya el-Begum,suspected,Female,NAN,02-08-2023,03-08-2023,NA,Not A Number,N/A,29-07-2023,02-08-2023,NA
+1401,Aaron Chev,confirmed,M,null,03 August 2023,05 August 2023,NA,recovered,NA,n /a,03 August 2023,27.1
+1402,Matthew Gasdner,suspected,male,eighty-one,14-08-2023,18-08-2023,,died,30-08-2023,03-08-2023,11-08-2023,n a
+1403,Sharisse Douglrs,probable,f,70,13 Aug 2023,16 Aug 2023,NA,recoverey,NA,31 Jul 2023,not available,NA
+1404,Sharisse Douglrs,probable,f,70,13 Aug 2023,16 Aug 2023,NA,recoverey,NA,31 Jul 2023,not available,NA
+1405,N /A,,male,36,10-08-2023,14-08-2023,NA,not a number,NA,01-08-2023,07-08-2023,NA
+1406,Segan Green,suspected,Female,thirty-seven,2023-08-09,2023-08-14,2023-08-15,recovered,NA,NA ,2023-08-09,NA
+1407,Lydia Lizeo,confirmed,f,1,14 Jul 2023,N / A,na,recovered,N/A,01 Jul 2023,14 Jul 2023,24.6
+1408,Landen Alarid,confirmed,M,twenty-two,08 July 2023, na,NA,died,\*,05 July 2023,10 July 2023,28.1
+1409,Jaime Holguin,\.,Male,six,\*,2023/07/17, N / A,recovered,null,2023/07/03,\.,NA
+1410,Kawthar al-Ghazal,probable,Female,Not Avail,08 July 2023,11 July 2023,NA,n / a,NA,29 June 2023,01 July 2023,NA
+1411,John Hartmann,probablr,Male,52,2023-06-30,2023-07-03,not a number,Secovered,NA,N /A,2023-07-02,NA
+1412,Cody Lacy,not a number,Mane,60,02-07-2023,03-07-2023,NA,recovered,NA,26-06-2023,Not A Number,NA
+1413,Cody Lacy,not a number,Mane,60,02-07-2023,03-07-2023,NA,recovered,NA,26-06-2023,Not A Number,NA
+1414,n a,N A,F,one,08 Jul 2023,10 Jul 2023,15 Jul 2023,n/a,N A,04 Jul 2023,#N/A,26.9
+1415,Ricardo Bautista-Muro, a / a,m,seventy-two,N / A,13 July 2023,NA,recovered,NA,02 July 2023,07 July 2023,NA
+1416,Jota Takayama,confirmed,M,thirteen,2023/07/04,2023/07/08,not avail,recovered,NA,\.,2023/07/02,25.8
+1417,not avail,confirmed,n / a,Not Available,n / a,03/07/2023,NA,recovered,NA,25/06/2023,06/07/2023,22.5
+1418,Kenneth Tsinnijinnie,probable,Male,twenty-one,2023-07-04,2023-07-10,2023-07-07,died,2023-07-13,2023-06-29,2023-07-04,NA
+1419,Jesse Cazares,probable,missing,seventy-one,03/07/2023,09/07/2023,NA,recovered,NA,26/06/2023,05/07/2023,NA
+1420,Taylor Scheid,probable,f,12,2023-06-12,n a,NA,recovered,NA,2023-06-10,2023-06-13,NA
+1421,Chase Hosp,confirmed,M,seventy-three,11/06/2023,14/06/2023,NA,recovered,NA,05/06/2023,12/06/2023, na
+1422,Chase Hosp,confirmed,M,seventy-three,11/06/2023,14/06/2023,NA,recovered,NA,05/06/2023,12/06/2023, na
+1423,Tique Kayanja,suspected,N / A ,forty-one,Not Avail,NAN,NA,recovered,NA,09-06-2023,12-06-2023,NA
+1424,Jojhua Perez,probable,M,60,22-06-2023,25-06-2023,NA,recovered,N A,17-06-2023,24-06-2023,NA
+1425,Monica Soriano,probable,F,55,N /A,24/06/2023,NULL,N/A,NA,N / A,23/06/2023,NA
+1426,Raashid el-Shaer,probable,Male,thirteen,2023-08-01,N/A,NA,recovered,NA,2023-07-16,2023-07-24,NA
+1427,Raashid el-Shaer,probable,Male,thirteen,2023-08-01,N/A,NA,recovered,NA,2023-07-16,2023-07-24,NA
+1428,Sndrew Clements,probable,na , N / A,24 Jul 2023,\.,\.,recovered,NA,n / a ,23 Jul 2023,NA
+1429,Shaheed el-Abdullah,probable,Male,38,22-07-2023,na ,NA,N/A,#N/A,11-07-2023,n a,NA
+1430,NAN,confirmed,not avail,eighty-seven,2023/07/17,2023/07/20,\.,recovered,NA,2023/07/14,2023/07/19,22.1
+1431,Nicole Terry,not avail,Female,fifty, na,NOt available,NA,recovered,NA,17 August 2023,24 August 2023,\.
+1432,Santeijga Russell,\?,F,eighty-two,18 August 2023,null,NA,recovered,NA,11 August 2023,21 August 2023,Not Avail
+1433,Melanie Denny,,F,83,21/08/2023,23/08/2023,NA,recovered,NA,16/08/2023,20/08/2023,not avail
+1434,Marcus Tall Bull,not a number,m,24,20 August 2023,23 August 2023,NA,not avail,NA,13 August 2023,22 August 2023,
+1435,Habeeba al-Parsa,probable,female,23,08 Aug 2023,not a number,NA,null,NA,04 Aug 2023,14 Aug 2023,n/a
+1436,Danzig Nguyen,probable,n a,sixty-three,not a number,06/08/2023,09/08/2023,died,n/a,01/08/2023,04/08/2023,NA 
+1437,Devon Martin,probable,M,six,19 August 2023,21 August 2023,NA,recovered,NA,10 August 2023,19 August 2023,nan
+1438,Angelina Cardona,suspected,f,50,16 August 2023,,NA,recovered,NA,10 August 2023,18 August 2023,NA
+1439,Noel Arreola-Santillano,confirmed,M,33,16-08-2023,19-08-2023,not available,recovered,NA,08-08-2023,NOt available,n a
+1440,Victor Martinez,confirmed,NOt available,seventy-seven,N/A,15 August 2023,NA,recovered,NA,08 August 2023,12 August 2023,24.1
+1441,Ayyoob al-Saidi,confirmed,null,69,2023/08/13,2023/08/17,NA,recovered,NA,2023/08/06,2023/08/13,Not A Number
+1442,Shajee'a el-Ammar,confirmed,F,50,N/A,18 Aug 2023,NA,recovered,NA,06 Aug 2023,15 Aug 2023,28.2
+1443,Casey Devlin,confirmed,M,fifty-seven,NULL,2023/07/20, a / a,\.,NA,2023/07/10,2023/07/16,24.3
+1444,Casey Devlin,confirmed,M,fifty-seven,NULL,2023/07/20, a / a,\.,NA,2023/07/10,2023/07/16,24.3
+1445,Garitt Brauher,N / A,male,sixty-six,2023-07-28,2023-08-02,NA,recovered,NA,2023-07-13,not a number,25.1
+1446,Gregory Milbry,confirmed,N / A ,48, NA,n / a,NA,recoveoed,n / a ,02 July 2023,not a number,25.7
+1447,Chanelle Casillas,confirmed,female,seventy-five,2023/07/17, N / A,NA,reuovered,NA,2023/07/10,2023/07/21, a / a
+1448,Kaleem al-Shams,N/A,m,10,14 July 2023,missing,Not Available,recovered,NA,12 July 2023,not a number,24.7
+1449,Skyler Matthewj,\?,NOt available,forty-six,not available,23 Jul 2023,NA,recovered,NA,14 Jul 2023,Not Avail,25.2
+1450,Sonny Kinlicheene,confirmed,m,n / a ,2023-07-17,2023-07-18,NA,recovered,NA,2023-07-13,2023-07-16,n /a
+1451,Christopher Bacon,suspected,missing,4,2023-07-02,2023-07-04,2023-07-04,Not Avail,NA,2023-06-29,not avail,NA
+1452,Orion Roubideaux,N/A,m,three,2023-07-11,2023-07-17,2023-07-13,recovered,NA, N / A,2023-07-05,NA
+1453,N/A,confirmed,m,fifty-seven,09 Jul 2023,13 Jul 2023,NA,recovered,NA,03 Jul 2023,09 Jul 2023,24.8
+1454,Ayyoob el-Kaiser,confihmed,m,35,n / a,2023-07-08,2023-07-13,recovered,NA,2023-07-02,2023-07-07,27.1
+1455,Kawthar el-Basa,confirmed,fexale,na,05 July 2023,09 July 2023,NA,recovered,NA,n / a , NA,25.1
+1456,Alyssa Sam,missing,female,77,03/07/2023,na ,NA, na,NA,30/06/2023,not available,NA
+1457,Paris hane,Not Available,F,N/A,14 Jul 2023,18 Jul 2023,18 Jul 2023,nan,NA,01 Jul 2023,05 Jul 2023,NA
+1458,Joleen Williams,confirmed,F,12,2023-07-04,NAN,2023-07-11,recovered,NA,2023-06-30,2023-07-05,26.3
+1459,Benjamin Tannyhill,probable,Male,N /A,15/06/2023,18/06/2023,NA,recovered,NA,10/06/2023,13/06/2023,NA
+1460, a / a,n/a,F,4,2023/06/27,2023/06/28,NA, NA,nan,\?,2023/06/27,27
+1461,Nathan Bassnett,probable,Male,52,2023/06/22,2023/06/24,NA,NAN,NA,na ,NULL,NOt available
+1462,Naadir el-Omer,confirmed,not a number,67,24 July 2023,26 July 2023, na,recovered,NA,21 July 2023,29 July 2023,24.2
+1463,Valeria Salazar,confirmxd,female, a / a,27 July 2023,29 July 2023,NA,died,09 August 2023,13 July 2023,20 July 2023,n / a
+1464,Valeria Salazar,confirmxd,female, a / a,27 July 2023,29 July 2023,NA,died,09 August 2023,13 July 2023,20 July 2023,n / a
+1465,Tyrell Guernsey,confirmed,m,14,24 Aug 2023,26 Aug 2023,NA,recovered,NA,17 Aug 2023,27 Aug 2023,25.3
+1466,Jacob Shumate,probable,N /A,57,26/08/2023,NA ,NA,recovered,NA,N/A,Not Avail,NA
+1467,Jacob Shumate,probable,N /A,57,26/08/2023,NA ,NA,recovered,NA,N/A,Not Avail,NA
+1468,Reginald Visee,suspected,\*,forty-one,26 August 2023,28 August 2023,n a,recovered,NA,19 August 2023,Not Avail,NA
+1469,\.,probable,M,72,2023/08/28,2023/08/30,NA,recovered,NA,2023/08/18,2023/08/26,Not Available
+1470,\.,probable,M,72,2023/08/28,2023/08/30,NA,recovered,NA,2023/08/18,2023/08/26,Not Available
+1471,Corey Sellers,proyable,M,NAN,23 August 2023,\.,NA,recovered,NA,17 August 2023,null,\.
+1472,N / A,confirmed,m,forty-eight,21/08/2023,23/08/2023,NA,recovered,NA,14/08/2023,missing,23.1
+1473,Alexander Arechiga,suspected,male,six,25/08/2023,30/08/2023,31/08/2023,recovered,NA,18/08/2023,\.,NA
+1474,not avail,na ,Male,90,23-08-2023,27-08-2023,NA,recovered,NA,20-08-2023,23-08-2023,22.7
+1475,n/a,N / A,male,forty-nine,10/08/2023,12/08/2023,NA,recovered,NA,04/08/2023,N /A,NA
+1476,na,confirmed,N / A,,\?,15/08/2023,NA,recovered,NA,05/08/2023,08/08/2023,25.7
+1477,Antonio Ramirez,probable,male,74,21-08-2023,23-08-2023,25-08-2023,,01-09-2023,16-08-2023,25-08-2023,NA
+1478,Zuhaira el-Azzam,Not Available,N / A,forty-five,n / a,2023/08/20,NA, N / A,2023/08/31,2023/08/10,2023/08/19,26.3
+1479,N / A ,suspected,m,22,13 August 2023,16 August 2023,NA,recovered,NA,missing,13 August 2023,NA
+1480,n / a ,conftrmed,Female,65,15/08/2023,19/08/2023,NA,recovered,NA,08/08/2023,17/08/2023,25
+1481,April Simoens,suspected,female,67,14 August 2023,15 August 2023,NA,recovered,NA,10 August 2023,n a,NA
+1482,Yihang Dinhvu,confirmld,\*,eighty-two,21 July 2023,22 July 2023,27 July 2023,died,02 August 2023,17 July 2023,20 July 2023,NAN
+1483,Yihang Dinhvu,confirmld,\*,eighty-two,21 July 2023,22 July 2023,27 July 2023,died,02 August 2023,17 July 2023,20 July 2023,NAN
+1484,Maria Contreras,N /A,Female,twenty-three,29/07/2023,02/08/2023,NA,recovered,NA,16/07/2023,27/07/2023,n/a
+1485,Mushtaaq el-Rafiq,probable,male,sixty-one,28 July 2023,30 July 2023, N / A,recovered,NA,18 July 2023,22 July 2023,NA
+1486,Oraivon Tran, N / A,male,missing,25-07-2023,27-07-2023,na ,died,18-08-2023, a / a,NULL,NA
+1487,Candace Olaiz,confirmed,Female,41,16/07/2023,17/07/2023,NA,recovered,NA,Not Avail,Not Avail,NAN
+1488,Benjamin Kelly,confirmed,Male,seventy-eight,\*,NULL,19-07-2023,not avail,NA,13-07-2023,16-07-2023,21.4
+1489,Mikala Gultom,probable,F,85,na ,25 July 2023,NA,recovered,NA,16 July 2023,not available,NA
+1490,Christhian Vega,missing,female,forty-eight,23 Jul 2023,26 Jul 2023,NA,n / a ,NA,13 Jul 2023,19 Jul 2023,N A
+1491, N / A,cpnfirmed,Male,N /A,n / a,2023/07/08,NA,recovered,NA,2023/06/29,N A,28.3
+1492,not avail,confirmed,not avail,27,\.,2023/07/13,NA,recovered,NA ,2023/06/30,not available,25.4
+1493,Simon Cardenas,confirmed,Male,eighty-nine,13-07-2023,15-07-2023,NA, N / A,NA,\.,,26.8
+1494,Zachary Thomas,probable,Male,82,not avail,2023/07/19,2023/07/24,died,2023/08/01,N/A,2023/07/15,NA
+1495,Zachary Thomas,probable,Male,82,not avail,2023/07/19,2023/07/24,died,2023/08/01,N/A,2023/07/15,NA
+1496,Cicely Lewis,confirmed,f,58,15/07/2023,18/07/2023,NA,recovered,NA,09/07/2023,11/07/2023,21.7
+1497,NAN,confirmed,m,51,10-07-2023,11-07-2023,NA,rkcovered,NA,02-07-2023,10-07-2023,26.6
+1498,Kaarim al-Masri,suspected,Male,90,07-07-2023,11-07-2023,NA,recovered,not a number,#N/A,06-07-2023,NA
+1499,Aaqil al-Saade,confirmed,m,seventy-two,09 July 2023,12 July 2023,NA,recovered,NA,29 June 2023,09 July 2023,23
+1500,Ghaamid al-Sheikh,suspected,M,41,04 Jul 2023,N/A,NA,recovered,NA,28 Jun 2023,#N/A,NA
+1501,na,probable,m,Not Avail,null,13/07/2023,16/07/2023,recovered,NA,01/07/2023,05/07/2023,NA
+1502,Carlos Gutierrez,probable,m,78,04-07-2023,06-07-2023,NA,removered,NA,03-07-2023,05-07-2023,NA
+1503,Najeema el-Mohammadi,confirmed,f,four,01 Jul 2023,N / A,NA,recovered,N A,Not Avail,29 Jun 2023,22.4
+1504,Emily Chukkapalli,confirmed,female,fifty-two,24 Jun 2023, NA,NA,recovered,NA,18 Jun 2023,24 Jun 2023,27.4
+1505,Joshua Roubideaux,confirmed,Male,N / A,2023/07/31,2023/08/04,2023/08/05,died,2023/08/10,2023/07/23,2023/07/26, NA
+1506,Jordan Morris,confirmed, na,n /a,26 Jul 2023,Not Avail,NULL,n /a,14 Aug 2023,20 Jul 2023,24 Jul 2023,21.5
+1507,Temuulen Ho,confirmed,\*,not avail,27/08/2023,29/08/2023,NA,recovered,Not Avail,21/08/2023,26/08/2023,27.5
+1508,NA,confirmed,null,eighty-nine,not a number,2023/08/26,2023/08/28,recovered,NA ,n a,2023/08/29, na
+1509,The Rasmussen,confirmed,male,39,06-09-2023,11-09-2023, N / A,recovered,Not Avail,23-08-2023,29-08-2023, NA
+1510,Marceleno Meraz,susaected,M,thirty-two,26/08/2023, NA,N / A,n / a,NA,n/a,27/08/2023,NA
+1511,N /A,confirmed,malu,#N/A,08/09/2023,10/09/2023,20/09/2023,recovered,N/A,24/08/2023,,27.7
+1512,Kyle Delgado,confirmed,m,thirty-three,2023-08-13,2023-08-14,2023-08-15,died,2023-09-24,2023-08-09,n / a,27.1
+1513,Kimberly Fabiano,suspected, NA,6,Not A Number,17 Aug 2023,NA,recovered,NA ,12 Aug 2023,14 Aug 2023,NA
+1514,Kimberly Fabiano,suspected, NA,6,Not A Number,17 Aug 2023,NA,recovered,NA ,12 Aug 2023,14 Aug 2023,NA
+1515,Cale Stypinski,n a,male,eight,14 August 2023,16 August 2023,NA,recovered,NA,#N/A,16 August 2023,NA
+1516,Cody Maher,na ,male,seventy-four,23 Jul 2023,30 Jul 2023,26 Jul 2023,recovered,NA,na,23 Jul 2023,24.6
+1517,Naseeba el-Rahim,cwnfirmed,female,na,30 July 2023,02 August 2023,NA,na ,NA,27 July 2023,31 July 2023,26.3
+1518,n / a,probable,female,25,2023-07-28,2023-08-01,2023-08-03,recovered,NA,n / a ,not available,NA
+1519,Alexandra Ortiz Vasquez,confirmed,f,30,2023/07/20,2023/07/22,NA,recovered,NA,2023/07/11,N /A,24.7
+1520,Austin Iese,confirmed,NA,N/A,27 July 2023,31 July 2023,NA,recovered,\?,22 July 2023,26 July 2023,22.5
+1521,Audrev Dixon,confirmed,Female,79,2023-07-28,2023-07-31,NA,recovered,NA,2023-07-20,2023-07-29,26.1
+1522,Nicolas Oliva,confirmed,m,\*,25-07-2023,26-07-2023,NA,recovered,NA,21-07-2023,26-07-2023,27.1
+1523,Umar al-Hares,suspected,n/a,Not A Number,Not Avail,2023/07/26,NA,recovered,NA,2023/07/22,2023/07/27,NA
+1524,Kayla Brooks,NAN,,19,13 July 2023,14 July 2023,NA,recovered,NA,05 July 2023,09 July 2023,21.6
+1525,Jordan Slade,probable,male,31,2023-07-09,2023-07-13,NA,recovered,n / a,2023-07-02,2023-07-08,N / A
+1526,Maurice urown, NA,M,na,2023/07/06,NULL,NA,recovered,NA,\.,2023/07/09,27.5
+1527,Richard Salazar,N/A,n / a ,twenty-four,19 Jul 2023,20 Jul 2023,Not Available,recovered,NA,04 Jul 2023,10 Jul 2023,NA
+1528,Claire Gereltuya,confipmed,Pemale,#N/A,14 Jul 2023,15 Jul 2023,NA,recovered,NA,12 Jul 2023,16 Jul 2023, N / A
+1529,Francisco Villela Talavera,confirmed,M,90,15 July 2023,18 July 2023,NA,\*,NA,10 July 2023,,24.7
+1530,Ian Comlins, na,M,seventy-nine,2023/07/16,N/A,NA,recovered,NA,Not A Number,2023/07/14,null
+1531,Shaddaad al-Salaam,probable,not a number,85,NA ,25-07-2023,30-07-2023,died,09-08-2023,11-07-2023,24-07-2023,NA
+1532,Marcus Torres,na,M,83,2023-07-18,2023-07-19,NA,recovered,NA,2023-07-14,2023-07-18,NA
+1533,Antonio Kratz,confirmed,m,eighty-seven,2023/07/15,2023/07/20,NA,N / A ,NA,2023/07/08,2023/07/16,23.6
+1534,Waseeflal-Salame,confirmed,not a number,Not Available,2023/07/13,2023/07/16,2023/07/19,N / A ,, N / A,2023/07/08,
+1535,Javier Mota,confirmed,male,43,09-07-2023,11-07-2023,missing,recovered,n / a ,05-07-2023,09-07-2023,24.4
+1536,Mutasim el-Khalaf,probable,male,null,19-07-2023,not a number,NA,N / A,NA,09-07-2023, N / A,NA
+1537,Sharin Little,suspected,f,23,2023-07-07,#N/A,NA,recovered, a / a,2023-06-30,2023-07-08,NA
+1538,Tommy Emliy,suspected,M,twenty-four, N / A,08 Jul 2023,08 Jul 2023,n / a,NA,26 Jun 2023,03 Jul 2023,NA
+1539,Caleb Ortiz,probable,Male,n/a,03 Jul 2023,06 Jul 2023,NA,recovered,NA,not a number,06 Jul 2023,NA
+1540,Shakeela el-Mostafa,suspected,Female,na ,06-07-2023,10-07-2023,11-07-2023,died,n /a, na,02-07-2023,NA
+1541,Francisco Zuniga,\?,Male,six,06-07-2023,Not Avail,NAN,recovered,NA,30-06-2023,08-07-2023,24.7
+1542,Jordan Domingo,confirmed,m,69,2023-07-05,2023-07-08,NA,recovered,not a number,2023-06-26,2023-07-03,\?
+1543,Joshua Beck,suspected,n / a,22,31 July 2023,\?,06 August 2023,died,10 August 2023,27 July 2023,06 August 2023,NA
+1544,Jeremiah Laborde,confirmed,M,twenty-six,31/08/2023,06/09/2023,NA,missing,NA,23/08/2023,28/08/2023,23.3
+1545,Hannah Nguyen,confirmzd,Female,33,09-09-2023,15-09-2023,NA,recoveryd,NA,21-08-2023,N /A,24.3
+1546,Fawwaaz al-Sawaya,suspected,Male,na,07 September 2023,10 September 2023,NA,recovered,NA,01 September 2023,08 September 2023,NA
+1547,Benjamin Simmons,confirmed,Male,33,03 September 2023,nan,NA,died,24 September 2023,22 August 2023,30 August 2023,NULL
+1548,,probable,m,#N/A,11 September 2023,17 September 2023,NA,recovered,NA,02 September 2023,11 September 2023, NA
+1549,Dana Caldera,confirmed,Female,forty-four,not avail,15 August 2023,NA,recovered,\.,Not Available,18 August 2023,25.6
+1550,Jacob Horton,probable,Male,fifty,14 Aug 2023,16 Aug 2023,NA,died,08 Sep 2023,11 Aug 2023,17 Aug 2023, NA
+1551,Joshua Makaiwi,confirmed,n /a,14,N / A,n a,NA, a / a,NA,11/08/2023,14/08/2023,23.7
+1552,Kevin Vue,confirmed,na ,69,17 Aug 2023,19 Aug 2023,NA,recovered,NA,11 Aug 2023,17 Aug 2023,23.5
+1553,Yoonus el-Nasr,confirmed,M,16,22/08/2023,n / a,NA,recovered,NA,08/08/2023,18/08/2023,\*
+1554, a / a,missing,Female,26,17-08-2023,20-08-2023,NA,recovered,NA,09-08-2023,16-08-2023,NA
+1555,Baahir al-Alli,suspected,M, na,23 August 2023,30 August 2023,n / a,not avail,NA,13 August 2023,18 August 2023,NA
+1556,Robert Pettinger,probable,M,55,2023/08/01,2023/08/05,NA,recovered,NA,2023/07/27,2023/08/03,NA
+1557,Robert Pettinger,probable,M,55,2023/08/01,2023/08/05,NA,recovered,NA,2023/07/27,2023/08/03,NA
+1558,Benhamin Kraiger,corfirmed,m,fifty-two,03-08-2023,05-08-2023,NA,recovered,NA,N A,31-07-2023,27.7
+1559,n a,suspected,M,nineteen,30 Jul 2023,01 Aug 2023,NA,recovered,NA,24 Jul 2023,29 Jul 2023,NA
+1560,n a,suspected,M,nineteen,30 Jul 2023,01 Aug 2023,NA,recovered,NA,24 Jul 2023,29 Jul 2023,NA
+1561,Hibaq Axalan, N / A,NOt available,39,NULL,2023/08/11,NA,recovered,NA,missing,2023/08/01,22.7
+1562,Gregory Ridgeway,confirmed,M,forty,28/07/2023,30/07/2023,NA,recovered,NA,15/07/2023,21/07/2023,24.4
+1563,Jessica Kathwein,confirmed,n / a,thirty-five,24/07/2023,31/07/2023,NA,n a,NA,16/07/2023,n / a ,n / a
+1564,Jessica Kathwein,confirmed,n / a,thirty-five,24/07/2023,31/07/2023,NA,n a,NA,16/07/2023,n / a ,n / a
+1565,Justin Thompson,confirmed,male,thirty-one,26-07-2023, NA,not available,died,07-08-2023,21-07-2023,26-07-2023, NA
+1566,Justin Thompson,confirmed,male,thirty-one,26-07-2023, NA,not available,died,07-08-2023,21-07-2023,26-07-2023, NA
+1567,Briseida Hernandez,confirmed,f,nan,26-07-2023,01-08-2023,NA,recovered,NA,24-07-2023,nan,N A
+1568,N /A,probable,male,45,28 July 2023,30 July 2023,NA,na ,NA,15 July 2023,19 July 2023,NA
+1569,Marc Ingels,n / a,M,three,18 Jul 2023,20 Jul 2023, N / A,recovered,NA,12 Jul 2023,n /a,21.7
+1570,Noah Hogan,not a number,n /a,86,26-07-2023,29-07-2023,NA,recoverwd,NA,16-07-2023,missing,NA
+1571,Andre Mccoy,N/A,Male,thirty-nine,N /A,2023-07-21,NA,recovered,NA,2023-07-11,2023-07-21,NA
+1572,Ali Helton,suspected,Male,Not Avail,2023-07-16,not avail,NA,recovered,NA,2023-07-13,2023-07-16,n a
+1573,Zawkab el-Hoda,probable,N / A,5,2023-07-21,2023-07-24,not available,N / A ,2023-08-06,2023-07-11,2023-07-18,NA
+1574,,probable,n a,17,25 Jul 2023,01 Aug 2023,NA,recovered,NA,10 Jul 2023,18 Jul 2023,NA
+1575,Steven Barron,confirmed,m,fifty-six,15 Jul 2023,N A,#N/A,n / a,NA,07 Jul 2023,13 Jul 2023,24.1
+1576,Thaddeus Linear,confirmed,male,seventy-three,19-07-2023,21-07-2023,Not Avail,Not Avail,03-08-2023,17-07-2023,23-07-2023,22.6
+1577, N / A,confirmed,male,84,25 Jul 2023,28 Jul 2023,N /A,recovered,NA,n / a ,25 Jul 2023,26.2
+1578,N / A ,suspected,Female,twenty-three,11 Jul 2023,14 Jul 2023,NA,recovered,NA,05 Jul 2023,nan,NA
+1579,Penly Hurlburt,suspected,n a,38,20 July 2023,22 July 2023,NA,recovered,NA,05 July 2023,10 July 2023,NA
+1580,Ruwaid el-Salloum,confirmed,Male,21,08-07-2023,Not Available,NA,NA ,NA,04-07-2023,07-07-2023,29.8
+1581,Ruwaid el-Salloum,confirmed,Male,21,08-07-2023,Not Available,NA,NA ,NA,04-07-2023,07-07-2023,29.8
+1582,Nicklos Weinstein,confirmed,male,forty-seven,18 Jul 2023,20 Jul 2023,NA,recovered,Not Avail,01 Jul 2023,09 Jul 2023,NULL
+1583,Richard hastle,\*,Male,17,2023/07/15,2023/07/20,2023/07/18,recovered,NA,2023/07/02,2023/07/11,24.6
+1584,Not A Number,smspected,Male,50,2023-07-12,2023-07-15,NA,recovered,NA,2023-07-04,2023-07-07,NA
+1585,Andrew Weeks,probable,M,sixty-five,2023-07-08,2023-07-12,n / a, NA,Not Available,2023-07-03,not available,\.
+1586,Ilyaas el-Rauf,confirmed,NA,60,05-07-2023,13-07-2023,NA,recovered,NAN,02-07-2023,07-07-2023,26.1
+1587,Ilyaas el-Rauf,confirmed,NA,60,05-07-2023,13-07-2023,NA,recovered,NAN,02-07-2023,07-07-2023,26.1
+1588,Samantha Ironwing,confirmed,n/a,twenty,01 September 2023,03 September 2023,07 September 2023,Kecovered,NA,26 August 2023,02 September 2023,Not Avail
+1589,Christopher Moore,not available, N / A,N / A ,01 Sep 2023,03 Sep 2023,05 Sep 2023,Wied,17 Sep 2023,29 Aug 2023,31 Aug 2023, na
+1590,Long Cottrell,confirmed,male,22,2023-09-08,2023-09-10,missing,recovrred,NA,2023-09-05,2023-09-10,27
+1591,Cody Johnson,Not A Number,M,thirty-one,n a,2023/09/11,NA,recovervd,NA, NA,2023/09/08,N/A
+1592,Joshua Cartwright,confirmed,M,2,11-09-2023,N A,NA, a / a,NA,02-09-2023,05-09-2023,22.7
+1593,Khulood al-Hamady,probable,f,fifty-seven,2023-09-12,2023-09-14,NA,recovered,NA,2023-08-27,2023-09-06,not a number
+1594,Annmarie Enriquez,suspected,F,N A,06 Sep 2023,10 Sep 2023,08 Sep 2023,n/a,N/A,02 Sep 2023,06 Sep 2023,NA
+1595,Annmarie Enriquez,suspected,F,N A,06 Sep 2023,10 Sep 2023,08 Sep 2023,n/a,N/A,02 Sep 2023,06 Sep 2023,NA
+1596,n / a,confirmed,Not Avail,fifty-seven,2023-09-24,2023-09-26,NA,recovered,NA,2023-09-07,2023-09-15,27.8
+1597,missing,confirmed,Male,12,2023/08/14,2023/08/17,not available,recovered,NA,\*,2023/08/17,25.5
+1598,missing,confirmed,Male,12,2023/08/14,2023/08/17,not available,recovered,NA,\*,2023/08/17,25.5
+1599,Christina Tan, N / A, NA,21,2023/08/18,2023/08/20,2023/08/20,died,2023/09/05,2023/08/12,2023/08/20,NA
+1600,Israel Valdez,probable,Male,46,14 Aug 2023,16 Aug 2023,NA,#N/A,NA,13 Aug 2023,Not Available,NA
+1601,John Pullen,suspected,m,twenty-one,18/08/2023,28/08/2023,NA,recovered,NA,10/08/2023,15/08/2023,NA
+1602,Not A Number,not avail,female,ninety,15-08-2023,18-08-2023,NA,recovered,NA,12-08-2023,17-08-2023,not avail
+1603,N / A ,probable,male,thirty-four,n / a,N/A,NA,recovered,NA,16 Aug 2023,19 Aug 2023,NA
+1604,n /a,confirmed,male,\*,NOt available,\*,NA,recovered,NA,2023/08/13,2023/08/20, NA
+1605,n /a,confirmed,male,\*,NOt available,\*,NA,recovered,NA,2023/08/13,2023/08/20, NA
+1606,null,confirmed,N / A,73,na ,2023-08-28,NA,rpcovered,NA,2023-08-15,2023-08-19,N / A
+1607,null,confirmed,N / A,73,na ,2023-08-28,NA,rpcovered,NA,2023-08-15,2023-08-19,N / A
+1608,Hanna Stinyr,NAN,female,21,23-08-2023,Not A Number,27-08-2023,recovered,NA,20-08-2023,n / a ,NA
+1609,Brandon Babcock, NA,male,60,24-08-2023,27-08-2023,Not A Number,recovered,NA,missing,26-08-2023,NA
+1610,Jubair el-Aly,confirmed,Male,80,21 Aug 2023,23 Aug 2023,25 Aug 2023,recovered,NA,15 Aug 2023,19 Aug 2023,26.7
+1611,Samuel Sutton,suspected,male,na ,,2023-08-23,NA,NULL,NA,2023-08-14,2023-08-17,NA
+1612,Samuel Cadayong,suspezted,Male,fifty-four,26 August 2023,29 August 2023,NA,recovered,NA,14 August 2023,N/A,N /A
+1613,Zhiwes Nguyen,probable,male,12,23 Aug 2023,28 Aug 2023,NA,Not Avail,NA,Not Available,20 Aug 2023,#N/A
+1614,Josefina Ontiveros,not available,n/a,n / a ,n / a ,n/a,NA,recovered,,2023-08-14,2023-08-21,NA
+1615,Jacob Medina,confirmed,male,27,01 Aug 2023,04 Aug 2023,04 Aug 2023,died,06 Aug 2023,31 Jul 2023,04 Aug 2023,25.1
+1616,N / A ,probable,f,#N/A,2023-08-03,2023-08-05,2023-08-08,died,2023-08-22,2023-07-31,2023-08-05,NA
+1617,Diana Aochi,suspected,female,51,2023/08/06,2023/08/08,NA,n /a,NA,2023/07/31,2023/08/07,not a number
+1618,Haafil el-Sani,suspected,Male,\?,n / a ,n / a ,NA,recovered,NA,n/a,null,NA
+1619,Kacy Rodvold,probable,m,sixty-seven,2023-08-10,N A,NA,recovered,NA,2023-08-09,2023-08-13,NA
+1620,Salaah el-Mansouri,suspected,NA ,85,12/08/2023,na,17/08/2023,died,NA ,05/08/2023,17/08/2023,NA
+1621,Alizae Dubose,n /a,not a number,na,01 Aug 2023,04 Aug 2023,NA,recovered,NA,21 Jul 2023,28 Jul 2023,NA
+1622,Iana Tillery,Not A Number,n / a, NA,2023/07/26,2023/08/02,NA,recovebed,NA,2023/07/16,2023/07/20,20.1
+1623,Zachary Hart,suspeczed,N A,fifty-six,na ,29 July 2023,NA,recoverei,NA,N / A ,27 July 2023,NA
+1624,,confirmed,Female,Not Avail,25/07/2023,27/07/2023,NA,recovered,NA,17/07/2023,23/07/2023,25
+1625,Suwailim el-Haidar,confirmed,N /A,24,30/07/2023,02/08/2023,NA,recovered, N / A,23/07/2023,29/07/2023,23.9
+1626,Nuzha el-Morad,probable,female,NULL,29 Jul 2023,04 Aug 2023,03 Aug 2023,n / a ,NA,18 Jul 2023,28 Jul 2023,NA
+1627,Jessica Cohen,probable,female,two,17-07-2023,21-07-2023,NA,recovered,NA,12-07-2023,Not Avail,NA
+1628,Damian Chavez,suspected,Male,seventy-four,15-07-2023,18-07-2023,NA,missing,NA,12-07-2023,18-07-2023,NA
+1629,Lisa Nowotczynski-Sharp,probable,NA,53,21 July 2023,25 July 2023,NA,recovered,NA,15 July 2023,21 July 2023,NA
+1630,Lisa Nowotczynski-Sharp,probable,NA,53,21 July 2023,25 July 2023,NA,recovered,NA,15 July 2023,21 July 2023,NA
+1631,Noah Mahan,probable,male,50,23 Jul 2023,27 Jul 2023,NA,Not A Number,NA,NAN,21 Jul 2023,NA
+1632,Noah Mahan,probable,male,50,23 Jul 2023,27 Jul 2023,NA,Not A Number,NA,NAN,21 Jul 2023,NA
+1633,na ,suspected,male,two,29 Jul 2023,02 Aug 2023,NA,repovered, a / a,22 Jul 2023,28 Jul 2023,NA
+1634,Not Available,suspected,M,23,24 July 2023,31 July 2023,NA,recovered,NA,17 July 2023,n a, N / A
+1635,Haleakala Phan,confirmed,f,seventy-two,09 July 2023,12 July 2023,NA,recovered,NA,06 July 2023,11 July 2023,25.6
+1636,Fareed eu-Harron,probabie,male,fifty-four,n / a,2023/07/21,NA,recovered,NOt available,2023/07/06,2023/07/13,n / a 
+1637,Fareed eu-Harron,probabie,male,fifty-four,n / a,2023/07/21,NA,recovered,NOt available,2023/07/06,2023/07/13,n / a 
+1638,Jordan Plewe,confirmed, na,eighty-four,2023/07/22,2023/07/31,NA,recovered,NA,2023/07/16,not avail,23.7
+1639,Jordan Plewe,confirmed, na,eighty-four,2023/07/22,2023/07/31,NA,recovered,NA,2023/07/16,not avail,23.7
+1640,Anthony Morris,N / A ,M,fifty-one,2023/07/25,2023/07/27,\.,died,not avail,2023/07/14,2023/07/23,\.
+1641,Leeum Beltran Monge,probable,Lale,fifteen,2023/07/19,2023/07/22,NA,recovered,NA,2023/07/12,2023/07/17,NA
+1642,Mikaela Pallen,confirmed, a / a,89,19/07/2023,25/07/2023,missing,recovered,NA,13/07/2023,16/07/2023,27.3
+1643,Suhail al-Elamin,probable,male,seven,2023/07/13,2023/07/16,2023/07/15,deed,2023/07/21,2023/06/28,2023/07/06,NA
+1644,Brandon Maldonado,probable,m,seventy-one,14 Jul 2023,17 Jul 2023,NA,recovered,NAN,27 Jun 2023,na,NA
+1645,ElisevAvila,prubable,Femase,73,03/09/2023,04/09/2023,NA,N / A,N A,NA,04/09/2023,NA
+1646,Katheer el-Hana,suspected,m,na ,Not Avail,07-09-2023,NULL,recovered,NA,31-08-2023,04-09-2023,NA
+1647,not available,nan,male,thirty-nine,02 Sep 2023,07 Sep 2023,NA,recovered,NA, a / a,04 Sep 2023,NA
+1648,Kody West,suspecthd,male,75,02 Sep 2023,03 Sep 2023,NA,\.,NA,NOt available,NOt available,n / a
+1649,Haibaa al-Madani,suspected,f,twenty-four,14/09/2023,17/09/2023,NA,recovered,NA,07/09/2023,09/09/2023,NA
+1650,Haibaa al-Madani,suspected,f,twenty-four,14/09/2023,17/09/2023,NA,recovered,NA,07/09/2023,09/09/2023,NA
+1651,Jeudihd Bautista Bello,confirmed,F,#N/A,15 Sep 2023,17 Sep 2023,NA,recovered,NA,05 Sep 2023,13 Sep 2023,20.8
+1652,Jose Miera,probable,M,twenty-seven,16/09/2023,19/09/2023,NA,recovered,NA,05/09/2023,12/09/2023,NA
+1653,#N/A,probable,Male,N A,09 Sep 2023,11 Sep 2023,10 Sep 2023,died,12 Oct 2023,05 Sep 2023,09 Sep 2023,NA
+1654,Nabeeh el-Saah,probable,m,ten,12/09/2023,not a number,NA,recovered,NA,10/09/2023,17/09/2023,N /A
+1655,Robert Mitzner,probable,Male, NA,2023/09/20,2023/09/24,NA,recovered,NA,2023/09/11,2023/09/14,NA
+1656,Gage Glasco,missing,m,n / a ,2023-09-13,2023-09-19,NA,recovered,NA,2023-09-09,2023-09-15,NA
+1657,NAN,suspected,male,not avail,14-09-2023,16-09-2023,NA,recovered,Not Avail,#N/A,#N/A,NA
+1658,Steffen Clark,probable,M,sixty-eight,17 August 2023,20 August 2023,N / A ,died,N A,09 August 2023,14 August 2023,NA
+1659,Orion Navajo,confirmed,M,null,20 Aug 2023,21 Aug 2023,null,recovered,NA,14 Aug 2023,N /A,24.9
+1660,N / A,suspected,male,2,2023-08-23,#N/A,2023-08-30,recovered,NA,2023-08-15,2023-08-22,NA
+1661,N / A,suspected,male,2,2023-08-23,#N/A,2023-08-30,recovered,NA,2023-08-15,2023-08-22,NA
+1662,Jamie Denny,probable,n / a , N / A,26 August 2023,27 August 2023,NA, N / A,NA,07 August 2023,20 August 2023,NA
+1663,Jonathan Rivera,confirmed,male,N / A ,17-08-2023,25-08-2023,NA,recovered, NA,11-08-2023,18-08-2023,\?
+1664,Taiseer el-Amin,confirmed,male,fourteen,,26 Aug 2023,NA,N/A,NA,17 Aug 2023,21 Aug 2023,25.7
+1665,Zakarias Cordova-Cisneros,suspected,male,seventy, N / A,28-08-2023,NA,\*,NA,14-08-2023,21-08-2023,NA
+1666,William Weirich,probable,na ,seventy-eight,17/08/2023,20/08/2023,NA,recovered,NA,08/08/2023,15/08/2023,NA
+1667,Joseph Stewart,confirmed,male, a / a,2023/08/25,2023/08/31,NA,recovered,NA,2023/08/21,NULL,n /a
+1668,DeondrevPerkins,confirmed,m,five,nan,25 Aug 2023,N / A ,\?,NA,22 Aug 2023,28 Aug 2023,27.2
+1669,na ,confirmed,M,1,24 August 2023, na,NA,recovered,NA,22 August 2023,24 August 2023,26.2
+1670,Bilal Mcknight,suspected,m,null,03/09/2023,07/09/2023,05/09/2023,recovered,NULL,17/08/2023,26/08/2023, na
+1671,not available,confirmed,F,44,30/08/2023,03/09/2023,NA,recovered,NA,21/08/2023,30/08/2023,not avail
+1672,Daniel May,confirmed,m,sixty-five,NA,null, NA,N A,NA,23 August 2023,28 August 2023,27.7
+1673,Hasan el-Shaheen,N /A,Malq,30,28-08-2023,01-09-2023,NA,recovered,NA,23-08-2023,30-08-2023,N / A
+1674,Galen Martinez,probable,male,31,Not A Number,03-09-2023,#N/A,\?,NA,23-08-2023,26-08-2023,nan
+1675,na ,suspected,Female,86,28/08/2023,30/08/2023,NA,recovered,n / a,19/08/2023,23/08/2023,NA
+1676,missing,confirmed,male,61,28/08/2023,N / A,na,died, na,17/08/2023,25/08/2023,25.8
+1677,Brenden Hamlin,confirmed,male,eighty-two,24 Aug 2023,26 Aug 2023,NA,recovered,NA,19 Aug 2023,25 Aug 2023,25.9
+1678,Julie Jedynak,confirmed,female,85,31/08/2023,02/09/2023,nan,recovered,NA,25/08/2023,01/09/2023,20
+1679,Matthew Sharkey,suspected,m,54,04 August 2023,05 August 2023,NA,n a,NA,\*,05 August 2023,NA
+1680,Jonathan Klein-Callea,probable,male,34,14 August 2023,15 August 2023,NA,recovered,NA,06 August 2023,11 August 2023,NA
+1681,Nicklas Woodrizg,confirmed,Malq,57,18 August 2023,21 August 2023,NA,recovered,NA,08 August 2023,14 August 2023,26.4
+1682,Austin Burnett,probable,m,n /a,02 August 2023,11 August 2023,NA,recovered,NA,26 July 2023,29 July 2023,NA
+1683,Joshua Kasparek,n /a,Male,null, N / A,01 August 2023,NA,recovered,NA,25 July 2023,30 July 2023,NA
+1684, NA,confirmed,male,70,n a,02-08-2023,NA,recovered,NA,28-07-2023,n /a,25.2
+1685,Alia Mei,confirmed,n/a,n /a,20 July 2023,N / A ,NA,recovered,NA,17 July 2023,not a number,24.2
+1686,Not Available,confirmed,male,seventy-nine,22/07/2023,26/07/2023,NA,recovered,NA,14/07/2023,23/07/2023,25.9
+1687,Ahkmahd Johnson,suspected,Male,eighteen,05/08/2023,07/08/2023,NA,recovered,NA,28/07/2023,01/08/2023,NA
+1688,Gawfeeq al-Rahmani,probable,male,sixty-two,13 August 2023,15 August 2023,NA,missing,NA,25 July 2023,31 July 2023,NA 
+1689,Sarah Lk,probable,Female,two,NAN,27 Jul 2023,NOt available,died,09 Aug 2023,21 Jul 2023,na ,NA
+1690,Eric Martinez,confirmed,na ,N/A,13 July 2023,21 July 2023,NA,recovered,NA,09 July 2023,N A,25.6
+1691,Hannah Rusciolelli,confirmtd,NA ,#N/A,NULL,nan, a / a,recovered,NA,17 Jul 2023,27 Jul 2023,25.6
+1692,Raaji al-Salah,confirmed,male,41,27-07-2023,03-08-2023,NA,recovered,NA,18-07-2023,25-07-2023,na 
+1693,N A,probable,m,25,29 Jul 2023,31 Jul 2023,NA,recoverek,NULL,18 Jul 2023,NAN,\?
+1694,Tyler Nguy,probable,m,n / a,28-07-2023,01-08-2023,31-07-2023,dijd,05-08-2023,21-07-2023,25-07-2023,NA
+1695,Kaishon Nelswn,suspected,m,eighty-two,25-07-2023,27-07-2023,NA,Tecovered,NA,25-07-2023,30-07-2023,NULL
+1696,Kaishon Nelswn,suspected,m,eighty-two,25-07-2023,27-07-2023,NA,Tecovered,NA,25-07-2023,30-07-2023,NULL
+1697,Stormy Cisneros,confirmed,Female,4,21 Jul 2023,,missing,recovered,NA,13 Jul 2023,na ,26.4
+1698,Naseem el-Hannan,n /a,M,6,28-07-2023,31-07-2023,NA,recovered,NA,16-07-2023,23-07-2023,n /a
+1699,Kathryn Sein-Ware,suspected,Female,forty-eight,21 Jul 2023,na ,NA,not a number,NA,15 Jul 2023,21 Jul 2023,NA
+1700,Tre John Mitchell,suspected,Male,forty-seven,n / a , N / A, NA,#N/A,NA,\?,Not A Number,NA
+1701,Azzaam al-Baluch,confirmed,male,ten,17 Jul 2023,19 Jul 2023,NA,recovered,NA,NA,17 Jul 2023,23.1
