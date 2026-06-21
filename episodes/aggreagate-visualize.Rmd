@@ -155,14 +155,16 @@ incidence2::incidence(
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-**Task**: 
+Use the `sim_data` linelist to:
 
-- Calculate the incidence of cases **every 2 weeks** from the `sim_data` linelist based on their admission date and outcome.
-- Save the result in an object called `biweekly_incidence`.
+- Calculate the incidence of cases **every 2 weeks** for **two different dates**, the date of symptom onset and the date of outcome.
+- Save the result in one `<incidence2>` object called `biweekly_incidence`.
 
 ::::::::::::::::::: hint
 
-Review the reference manual of the function `incidence2::incidence()` either offline using `?incidence2::incidence()` or [online](https://www.reconverse.org/incidence2/manual.html#sec:man-incidence).
+As mentioned above, to setup the aggregrating interval we can use numeric values or text strings. Or review the reference manual of the function `incidence2::incidence()` either offline using `?incidence2::incidence()` or [online](https://www.reconverse.org/incidence2/manual.html#sec:man-incidence).
+
+To aggregate by two or more date index, find one example in this how-to guide entry on [Simulate, Clean, Validate linelist, and plot Epidemic curves](https://epiverse-trace.github.io/howto/analyses/describe_cases/simulist-cleanepi-messy-data.html). There we count the incidence for three different dates in the same object.
 
 :::::::::::::::::::
 
@@ -248,10 +250,18 @@ We invite you to take a look at the [reference manual of the funcion `plot()`](h
 
 ::::::::::::::::::::::::::::::::::::: challenge
 
-**Task**:
+Use the `biweekly_incidence` created in the previous challenge to:
 
-- Visualize the `biweekly_incidence` object.
+- Visualize the incidence curve.
 - Identify what combination of arguments in `plot()` work best.
+
+::::::::::::::: hint
+
+Test if arguments like `fill`, `nrow`, `show_cases`, `angle`, or `n_breaks` improve the plot.
+
+Find one more example in this how-to guide entry on [Plot age-stratified incidence data by month from date of birth](https://epiverse-trace.github.io/howto/analyses/describe_cases/cleanepi-linelist-incidence2-stratified.html)
+
+:::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
