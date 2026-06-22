@@ -311,7 +311,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2026-06-18 |
+        <p>Last updated on 2026-06-22 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/aggreagate-visualize.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -656,11 +656,11 @@ the <code>complete_dates</code> to <code>TRUE</code>.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p><strong>Task</strong>:</p>
-<ul><li>Calculate the incidence of cases <strong>every 2 weeks</strong> from
-the <code>sim_data</code> linelist based on their admission date and
-outcome.</li>
-<li>Save the result in an object called
+<p>Use the <code>sim_data</code> linelist to:</p>
+<ul><li>Calculate the incidence of cases <strong>every 2 weeks</strong> for
+<strong>two different dates</strong>, the date of symptom onset and the
+date of outcome.</li>
+<li>Save the result in one <code>&lt;incidence2&gt;</code> object called
 <code>biweekly_incidence</code>.</li>
 </ul></div>
 </div>
@@ -672,9 +672,14 @@ outcome.</li>
 </button>
 <div id="collapseHint1" class="accordion-collapse collapse" aria-labelledby="headingHint1" data-bs-parent="#accordionHint1">
 <div class="accordion-body">
-<p>Review the reference manual of the function
-<code>incidence2::incidence()</code> either offline using
+<p>As mentioned above, to setup the aggregrating interval we can use
+numeric values or text strings. Or review the reference manual of the
+function <code>incidence2::incidence()</code> either offline using
 <code>?incidence2::incidence()</code> or <a href="https://www.reconverse.org/incidence2/manual.html#sec:man-incidence" class="external-link">online</a>.</p>
+<p>To aggregate by two or more date index, find one example in this
+how-to guide entry on <a href="https://epiverse-trace.github.io/howto/analyses/describe_cases/simulist-cleanepi-messy-data.html" class="external-link">Simulate,
+Clean, Validate linelist, and plot Epidemic curves</a>. There we count
+the incidence for three different dates in the same object.</p>
 </div>
 </div>
 </div>
@@ -784,19 +789,36 @@ manual of the funcion <code>plot()</code></a>.</p>
 </div>
 </div>
 </div>
-<div id="discussion1" class="callout discussion">
+<div id="challenge2" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<span class="callout-header">Discussion</span>
+<span class="callout-header">Challenge</span>
 <div class="callout-inner">
 <h3 class="callout-title">Challenge</h3>
 <div class="callout-content">
-<p><strong>Task</strong>:</p>
-<ul><li>Visualize the <code>biweekly_incidence</code> object.</li>
+<p>Use the <code>biweekly_incidence</code> created in the previous
+challenge to:</p>
+<ul><li>Visualize the incidence curve.</li>
 <li>Identify what combination of arguments in <code>plot()</code> work
 best.</li>
 </ul></div>
+</div>
+</div>
+<div id="accordionHint2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button hint-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHint2" aria-expanded="false" aria-controls="collapseHint2">
+  <h4 class="accordion-header" id="headingHint2"> Give me a hint </h4>
+</button>
+<div id="collapseHint2" class="accordion-collapse collapse" aria-labelledby="headingHint2" data-bs-parent="#accordionHint2">
+<div class="accordion-body">
+<p>Test if arguments like <code>fill</code>, <code>nrow</code>,
+<code>show_cases</code>, <code>angle</code>, or <code>n_breaks</code>
+improve the plot.</p>
+<p>Find one more example in this how-to guide entry on <a href="https://epiverse-trace.github.io/howto/analyses/describe_cases/cleanepi-linelist-incidence2-stratified.html" class="external-link">Plot
+age-stratified incidence data by month from date of birth</a></p>
+</div>
+</div>
 </div>
 </div>
 <div id="checklist2" class="callout checklist">
@@ -858,7 +880,7 @@ hint
 - Use `cleanepi::timespan()` as introduced in the episode on **Clean case data**
 
 -->
-<div id="discussion2" class="callout discussion">
+<div id="discussion1" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -977,7 +999,7 @@ introducing delays for outbreak data</a>.</p>
 </div>
 </div>
 </div>
-<div id="discussion3" class="callout discussion">
+<div id="discussion2" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
@@ -1202,9 +1224,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/aggreagate-visualize.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/aggreagate-visualize.html",
-  "dateCreated": "2026-06-20",
-  "dateModified": "2026-06-18",
-  "datePublished": "2026-06-20"
+  "dateCreated": "2026-06-22",
+  "dateModified": "2026-06-22",
+  "datePublished": "2026-06-22"
 }
 
   </script><script>
