@@ -310,7 +310,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Read case data</h1>
-        <p>Last updated on 2026-06-23 |
+        <p>Last updated on 2026-06-30 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/read-case-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1260,12 +1260,11 @@ NAs introduced by coercion</code></pre>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 3 × 16
+<pre class="output" tabindex="0"><code># A tibble: 2 × 16
   case_id             person_id date_onset case_origin case_status outcome sex
   &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
-1 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… &lt;NA&gt;
-2 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
-3 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
+1 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
+2 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… &lt;NA&gt;
 # ℹ 9 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
 #   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
 #   date_last_contact &lt;date&gt;, date_first_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
@@ -1371,33 +1370,24 @@ monkeypox (mpox) disease.</p>
 <span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="warning" tabindex="0"><code>Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
-coercion</code></pre>
+<pre class="error" tabindex="0"><code>Error in `sormas_get_cases_data()`:
+✖ No cases found for the supplied disease.
+ℹ Please run `sormas_get_diseases()` to check if you provided the correct
+  disease name.</code></pre>
 </div>
-<div class="codewrapper">
-<h3 class="code-label">WARNING<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="warning" tabindex="0"><code>Warning in as.POSIXct(as.numeric(date_last_contact), origin = "1970-01-01"):
-NAs introduced by coercion</code></pre>
-</div>
-<div class="codewrapper sourceCode" id="cb53">
+<div class="codewrapper sourceCode" id="cb52">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu">as_tibble</span><span class="op">(</span><span class="va">mpox_cases</span><span class="op">)</span></span></code></pre>
 </div>
 <div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+<h3 class="code-label">ERROR<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="output" tabindex="0"><code># A tibble: 1 × 15
-  case_id             person_id date_onset case_origin case_status outcome sex
-  &lt;chr&gt;               &lt;chr&gt;     &lt;date&gt;     &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;   &lt;chr&gt;
-1 RR4HJN-Y663OW-PV5C… QZGXOJ-I… NA         IN_COUNTRY  CONFIRMED   NO_OUT… &lt;NA&gt;
-# ℹ 8 more variables: date_of_birth &lt;chr&gt;, country &lt;chr&gt;, city &lt;chr&gt;,
-#   latitude &lt;chr&gt;, longitude &lt;chr&gt;, contact_id &lt;chr&gt;,
-#   date_last_contact &lt;date&gt;, Ct_values &lt;chr&gt;</code></pre>
+<pre class="error" tabindex="0"><code>Error:
+! object 'mpox_cases' not found</code></pre>
 </div>
 </div>
 </div>
@@ -1488,8 +1478,8 @@ any links that you are not going to use.
   "url": "https://epiverse-trace.github.io/tutorials-early/read-case-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/read-case-data.html",
   "dateCreated": "2026-06-22",
-  "dateModified": "2026-06-23",
-  "datePublished": "2026-06-23"
+  "dateModified": "2026-06-30",
+  "datePublished": "2026-06-30"
 }
 
   </script><script>
