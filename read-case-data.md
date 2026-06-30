@@ -707,12 +707,11 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 3 × 16
+# A tibble: 2 × 16
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 U2QLP2-4DXBFG-6QRA… WINV7F-C… 2026-03-27 POINT_OF_E… NOT_CLASSI… NO_OUT… <NA> 
-2 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-3 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+1 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+2 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
 # ℹ 9 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
 #   date_last_contact <date>, date_first_contact <date>, Ct_values <chr>
@@ -798,28 +797,20 @@ mpox_cases <- readepi::read_sormas(
 )
 ```
 
-``` warning
-Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
-coercion
-```
-
-``` warning
-Warning in as.POSIXct(as.numeric(date_last_contact), origin = "1970-01-01"):
-NAs introduced by coercion
+``` error
+Error in `sormas_get_cases_data()`:
+✖ No cases found for the supplied disease.
+ℹ Please run `sormas_get_diseases()` to check if you provided the correct
+  disease name.
 ```
 
 ``` r
 tibble::as_tibble(mpox_cases)
 ```
 
-``` output
-# A tibble: 1 × 15
-  case_id             person_id date_onset case_origin case_status outcome sex  
-  <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 RR4HJN-Y663OW-PV5C… QZGXOJ-I… NA         IN_COUNTRY  CONFIRMED   NO_OUT… <NA> 
-# ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
-#   latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, Ct_values <chr>
+``` error
+Error:
+! object 'mpox_cases' not found
 ```
 
 :::::::::::::::
