@@ -479,7 +479,7 @@ dhis2_login
 GET https://play.im.dhis2.org/stable-2-41-8-2/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (13271 bytes)
+Body: In memory (13311 bytes)
 ```
 
 If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-41-8-2` in the URL string.

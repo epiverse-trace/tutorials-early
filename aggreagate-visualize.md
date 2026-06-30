@@ -277,7 +277,7 @@ incidence2::incidence(
 
 Use the `sim_data` linelist to:
 
-- Calculate the incidence of cases **every 2 weeks** for **two different dates**, the date of symptom onset and the date of outcome.
+- Calculate the incidence of cases **every 2 weeks** for **two different dates**, the date of symptom onset and the date of outcome, and **two different categories**, sex and case type.
 - Save the result in one `<incidence2>` object called `biweekly_incidence`.
 
 ::::::::::::::::::: hint
