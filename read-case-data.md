@@ -470,16 +470,28 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+```
 
+``` error
+Error in `httr2::req_perform()`:
+! HTTP 404 Not Found.
+```
+
+``` r
 dhis2_login
 ```
 
 ``` output
-<httr2_response>
-GET https://play.im.dhis2.org/stable-2-41-8-2/api/me
-Status: 200 OK
-Content-Type: application/json
-Body: In memory (13271 bytes)
+function (base_url, user_name, password) 
+{
+    target_url <- file.path(base_url, "api", "me")
+    resp <- httr2::req_perform(httr2::req_auth_basic(httr2::request(target_url), 
+        user_name, password))
+    cli::cli_alert_success("Logged in successfully!")
+    return(invisible(resp))
+}
+<bytecode: 0x5608c6e565b8>
+<environment: namespace:readepi>
 ```
 
 If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-41-8-2` in the URL string.
@@ -506,56 +518,42 @@ Your can read further from this blogpost on [How to Avoid Publishing Credentials
 ``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 # print tables
 tibble::as_tibble(programs)
 ```
 
-``` output
-# A tibble: 14 × 3
-   displayName                                         id          type     
-   <chr>                                               <chr>       <chr>    
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Programme                                     IpHINAT79UW tracker  
- 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 4 Information Campaign                                q04UBOqq3rp aggregate
- 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-12 TB program                                          ur1Edk5Oe2n tracker  
-13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+``` error
+Error:
+! object 'programs' not found
 ```
 
 
 ``` r
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 # print tables
 tibble::as_tibble(org_units)
 ```
 
-``` output
-# A tibble: 1,166 × 8
-   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
- 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,156 more rows
-# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
+``` error
+Error:
+! object 'org_units' not found
 ```
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
@@ -568,31 +566,20 @@ data_name <- readepi::read_dhis2(
   org_unit = "Bucksal Clinic",
   program = "Child Programme"
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 tibble::as_tibble(data_name)
 ```
 
-``` output
-# A tibble: 30 × 26
-   event      tracked_entity org_unit Gender `First name` `Last name` enrollment
-   <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
- 1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
- 2 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
- 3 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
- 4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
- 5 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 6 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 7 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 8 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 9 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
-10 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
-# ℹ 20 more rows
-# ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
-#   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
-#   `MCH ARV at birth` <chr>, `MCH Apgar Score` <chr>, `MCH Weight (g)` <chr>,
-#   `MCH Infant Weight  (g)` <chr>, `MCH Vit A` <chr>,
-#   `MCH Infant HIV Test Result` <chr>, `MCH HIV Test Type` <chr>,
-#   `MCH IPT dose` <chr>, `MCH DPT dose` <chr>, `MCH Child ARVs` <chr>, …
+``` error
+Error:
+! object 'data_name' not found
 ```
 
 
@@ -603,12 +590,20 @@ data_id <- readepi::read_dhis2(
   org_unit = "vRC0stJ5y9Q",
   program = "IpHINAT79UW"
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 identical(data_id, data_name)
 ```
 
-``` output
-[1] TRUE
+``` error
+Error:
+! object 'data_id' not found
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
@@ -621,25 +616,20 @@ target_org_units <- readepi::get_program_org_units(
   program = "IpHINAT79UW",
   org_units = org_units
 )
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 tibble::as_tibble(target_org_units)
 ```
 
-``` output
-# A tibble: 1,166 × 3
-   org_unit_ids levels        org_unit_names              
-   <chr>        <chr>         <chr>                       
- 1 vRC0stJ5y9Q  Facility_name Bucksal Clinic              
- 2 simyC07XwnS  Facility_name Maforay MCHP                
- 3 E9oBVjyEaCe  Facility_name Gbanja Town MCHP            
- 4 ZpE2POxvl9P  Facility_name Faabu CHP                   
- 5 yTMrs5kClCv  Facility_name Condama MCHP                
- 6 FO1Tq8vUa62  Facility_name EPI Headquarter             
- 7 jGYT5U5qJP6  Facility_name Gbaiima CHC                 
- 8 LaxJ6CD2DHq  Facility_name EM&BEE Maternity Home Clinic
- 9 WerHl8SDtRU  Facility_name Mandema CHP                 
-10 CTnuuI55SOj  Facility_name Manewa MCHP                 
-# ℹ 1,156 more rows
+``` error
+Error:
+! object 'target_org_units' not found
 ```
 
 <!-- :::::::::::::::: callout

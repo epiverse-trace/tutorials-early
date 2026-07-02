@@ -20,6 +20,26 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
+::::::::::::::::::::: prereq
+
+**R packages installed:** `{incidence2}`, `{simulist}`, `{tidyverse}`.
+
+:::::::::::::::::::::
+
+:::::::::: spoiler
+
+Install these packages if they are not already installed
+
+```r
+if (!base::require("pak")) install.packages("pak")
+pak::pak(c("incidence2", "simulist", "tidyverse"))
+```
+
+If you have any error message,
+go to the [main setup page](../learners/setup.md#software-setup).
+
+::::::::::
+
 ## Introduction
 
 In an analytic pipeline, exploratory data analysis (EDA) is an important step before formal modeling.
