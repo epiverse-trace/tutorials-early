@@ -34,7 +34,7 @@ You also need:
 
 :::::::::: spoiler
 
-Install these packages if their are not already installed
+Install these packages if they are not already installed
 
 ```r
 if (!base::require("pak")) install.packages("pak")
