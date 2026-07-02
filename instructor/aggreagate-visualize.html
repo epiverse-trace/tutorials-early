@@ -311,7 +311,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Aggregate and visualize</h1>
-        <p>Last updated on 2026-07-01 |
+        <p>Last updated on 2026-07-02 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/aggreagate-visualize.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -351,6 +351,38 @@ age?</li>
 </div>
 </div>
 </div>
+<div id="prereq1" class="callout prereq">
+<div class="callout-square">
+<i class="callout-icon" data-feather="check"></i>
+</div>
+<span class="callout-header">Prerequisite</span>
+<div class="callout-inner">
+<div class="callout-content">
+<p><strong>R packages installed:</strong> <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a>,
+<a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a>, <a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a>.</p>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Install these packages if they are not already installed</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu">base</span><span class="fu">::</span><span class="kw">require</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span><span class="op">)</span> <span class="fu">install.packages</span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="fu">c</span><span class="op">(</span><span class="st">"incidence2"</span>, <span class="st">"simulist"</span>, <span class="st">"tidyverse"</span><span class="op">)</span><span class="op">)</span></span></code></pre>
+</div>
+<p>If you have any error message, go to the <a href="index.html#software-setup">main setup page</a>.</p>
+</div>
+</div>
+</div>
+</div>
 <section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
 <hr class="half-width"><p>In an analytic pipeline, exploratory data analysis (EDA) is an
 important step before formal modeling. EDA helps determine relationships
@@ -371,7 +403,7 @@ analyze. We’ll use the pipe operator (<code>%&gt;%</code>) to connect
 some of their functions, including others from the <a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a>
 and <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> packages, so let’s also load the {tidyverse}
 package.</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb2">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -387,7 +419,7 @@ generate a line list for a hypothetical disease outbreak utilizing the
 simulated data for an outbreak according to a given configuration. Its
 minimal configuration can generate a linelist, as shown in the code
 chunk below:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -424,12 +456,12 @@ chunk below:</p>
 </div>
 <p>This linelist dataset contains simulated individual-level records of
 events during an outbreak.</p>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Additional resources on outbreak data </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Additional resources on outbreak data </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>The above is the default configuration of <a href="https://github.com/epiverse-trace/simulist" class="external-link">simulist</a>. It
 includes a number of assumptions about the transmissibility and severity
@@ -454,7 +486,7 @@ dated events. It can also aggregate data on other characteristics (e.g.,
 sex). The code chunk provided below demonstrates the creation of an
 <code>&lt;incidence2&gt;</code> class object from the simulated Ebola
 <code>linelist</code> data based on the date of onset.</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -490,7 +522,7 @@ sex). The code chunk provided below demonstrates the creation of an
 <p>You can use numeric values, as number of days to group, or text
 string such <code>day</code>, <code>week</code>, <code>epiweek</code>,
 <code>months</code>, and more to setup the aggregating interval:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -527,7 +559,7 @@ string such <code>day</code>, <code>week</code>, <code>epiweek</code>,
 desired time interval (e.g., day, week, etc.) and categorize cases by
 one or more factors. Below is a code snippet demonstrating weekly cases
 grouped by the date of onset, sex, and type of case.</p>
-<div class="codewrapper sourceCode" id="cb8">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -573,7 +605,7 @@ grouped by the date of onset, sex, and type of case.</p>
 <p>When cases are grouped by different factors, it’s possible that the
 events involving these groups may have different date ranges in the
 resulting <code>incidence2</code> object. For example:</p>
-<div class="codewrapper sourceCode" id="cb10">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -614,7 +646,7 @@ that date.</p>
 <p>This functionality is also available within the
 <code>incidence2::incidence()</code> function by setting the value of
 the <code>complete_dates</code> to <code>TRUE</code>.</p>
-<div class="codewrapper sourceCode" id="cb12">
+<div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -714,7 +746,7 @@ graph is referred to as an epidemic curve, or epicurve for short. The
 following code snippets generate epicurves for the
 <code>daily_incidence</code> and <code>weekly_group_incidence</code>
 incidence objects mentioned above.</p>
-<div class="codewrapper sourceCode" id="cb14">
+<div class="codewrapper sourceCode" id="cb15">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -723,7 +755,7 @@ incidence objects mentioned above.</p>
 </div>
 <figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>You can opt for the most appropriate aggregation time unit that
 describe the spread or transmission pattern.</p>
-<div class="codewrapper sourceCode" id="cb15">
+<div class="codewrapper sourceCode" id="cb16">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -733,7 +765,7 @@ describe the spread or transmission pattern.</p>
 <figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Plotting an <code>&lt;incidence2&gt;</code> object relies on the
 <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> package, so <a href="https://ggplot2-book.org/layers.html" class="external-link"><code>ggplot</code>
 layers</a> can be added to the plot as shown below.</p>
-<div class="codewrapper sourceCode" id="cb16">
+<div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -748,7 +780,7 @@ layers</a> can be added to the plot as shown below.</p>
 </div>
 <figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Also, provide an stratified plot by categories to compare
 transmission patterns across different demographic groups.</p>
-<div class="codewrapper sourceCode" id="cb17">
+<div class="codewrapper sourceCode" id="cb18">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -770,7 +802,7 @@ transmission patterns across different demographic groups.</p>
 <p>Find out how you can use the arguments within the <code>plot()</code>
 function to provide aesthetics to your <code>&lt;incidence2&gt;</code>
 objects.</p>
-<div class="codewrapper sourceCode" id="cb18">
+<div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -780,7 +812,7 @@ objects.</p>
 <figure><img src="../fig/aggreagate-visualize-rendered-unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure><p>Some of them include <code>show_cases = TRUE</code>,
 <code>angle = 45</code>, and <code>n_breaks = 5</code>. Try them and see
 how they impact on the resulting plot.</p>
-<div class="codewrapper sourceCode" id="cb19">
+<div class="codewrapper sourceCode" id="cb20">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1023,18 +1055,18 @@ However, using the <a href="https://ggplot2.tidyverse.org" class="external-link"
 sophisticated epicurves, with more flexibility in annotation. Find
 alternatives about how to improve your epicurves in the spoiler
 below:</p>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Visualization with ggplot2 </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Visualization with ggplot2 </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>We will focus on three key elements for producing epicurves:
 histogram plots, scaling date axes and their labels, and general plot
 theme annotation. The example below demonstrates how to configure these
 three elements for a simple <a href="https://www.reconverse.org/incidence2/" class="external-link">incidence2</a> object.</p>
-<div class="codewrapper sourceCode" id="cb21">
+<div class="codewrapper sourceCode" id="cb22">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1087,7 +1119,7 @@ Ignoring unknown parameters: `binwidth` and `bins`</code></pre>
 visualize an epicurve with different groups. If there is more than one
 grouping factor, use the <code>facet_wrap()</code> option, as
 demonstrated in the example below:</p>
-<div class="codewrapper sourceCode" id="cb23">
+<div class="codewrapper sourceCode" id="cb24">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1100,7 +1132,7 @@ demonstrated in the example below:</p>
 <span>  complete_dates <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Complete missing dates</span></span>
 <span><span class="op">)</span></span></code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb24">
+<div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1227,9 +1259,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/aggreagate-visualize.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/aggreagate-visualize.html",
-  "dateCreated": "2026-06-30",
-  "dateModified": "2026-07-01",
-  "datePublished": "2026-07-01"
+  "dateCreated": "2026-07-02",
+  "dateModified": "2026-07-02",
+  "datePublished": "2026-07-02"
 }
 
   </script><script>
