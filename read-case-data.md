@@ -490,7 +490,7 @@ function (base_url, user_name, password)
     cli::cli_alert_success("Logged in successfully!")
     return(invisible(resp))
 }
-<bytecode: 0x5608c6e565b8>
+<bytecode: 0x556c0f589728>
 <environment: namespace:readepi>
 ```
 
