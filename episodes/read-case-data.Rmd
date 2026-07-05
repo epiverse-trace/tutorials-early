@@ -2,6 +2,7 @@
 title: 'Read case data'
 teaching: 20
 exercises: 10
+    # jarl-ignore string_boundary: <reason>
 editor_options: 
   chunk_output_type: inline
 ---
@@ -182,7 +183,7 @@ rdbms_login <- readepi::login(
   user_name = "genome",
   password = "",
   driver_name = "",
-  db_name = "hg38",
+  db_name = "hgFixed",
   port = 3306
 )
 
@@ -191,19 +192,19 @@ rdbms_login
 
 The function parameters are:
 
-- `from`: The database server address (`mysql-rfam-public.ebi.ac.uk`)
+- `from`: The database server address (`genome-mysql.soe.ucsc.edu`)
 - `type`: The type of database system ("MySQL")
-- `user_name`: The username for authentication ("rfamro")
+- `user_name`: The username for authentication ("genome")
 - `password`: The password (empty string "" indicates no password required for this public test database)
 - `driver_name`: The database driver (empty string uses the default driver)
-- `db_name`: The specific database to connect to ("Rfam")
-- `port`: The port number for the connection (4497)
+- `db_name`: The specific database to connect to ("hgFixed")
+- `port`: The port number for the connection (3306)
 
 The function returns a connection object stored in variable `rdbms_login`, which can then be used to query and retrieve data from the database.
 
 :::::::::::::::: callout
 
-Note: This example uses a public test database from the European Bioinformatics Institute, which is why no password is required.  Access to it may be limited by organizational network restrictions, but it should work normally on home networks.
+Note: This example uses a public test database from the University of California, Santa Cruz (UCSC) Genome Browser project, which is why no password is required. It uses the standard MySQL port (3306), so it is less likely to be blocked than test servers on non-standard ports, but access could still be limited by strict organizational network restrictions.
 
 ::::::::::::::::
 
@@ -222,14 +223,16 @@ In a relational database, you typically have multiple tables. Each table represe
 
 ### 3. Read data from a table in a database
 
-You can read the data from the `author` table using `dplyr::tbl()`.
+You can read the data from the `author` table using `dplyr::tbl()`. This table lists
+authors of GenBank sequence submissions, with each `name` stored as `"LastName,F.I."`.
 
 ```{r}
 # import data from the 'author' table using an SQL query
 dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
-  dplyr::filter(initials == "A") %>%
-  dplyr::arrange(desc(author_id))
+  dplyr::filter(stringr::str_sub(string = name, start = 1, end = 1) == "A") %>%
+  dplyr::arrange(desc(id)) %>%
+  dplyr::slice_sample(n = 20)
 
 dat
 ```
@@ -263,8 +266,8 @@ Ideally, after specifying a set of queries, we can reduce the size of the input 
 Create one table containing:
 
 - the column `name` from table `author`,
-- the column `rfam_acc` from table `family_author`, and
-- using `author_id` as primary key or common identifier.
+- the column `acc` from table `gbCdnaInfo`, and
+- using the author's `id` as primary key or common identifier.
 
 Following these steps:
 
@@ -276,30 +279,46 @@ Following these steps:
 
 Join columns from two different tables:
 
-- From the table `author`, select `author_id` and `name`.
-- From the table `family_author`, select `author_id` and `rfam_acc`.
-- Join to the table `author` the table `family_author` using `dplyr::left_join()`.
+- From the table `author`, select `id` and `name`, keeping only a handful of rows
+  (e.g. authors whose surname starts with `"A"`) — `gbCdnaInfo` covers every GenBank
+  submission ever made, so narrowing `author` down first keeps the join fast.
+- From the table `gbCdnaInfo`, select `author` (the foreign key to `author$id`) and `acc`.
+- Join to the table `author` the table `gbCdnaInfo` using `dplyr::left_join()`, matching
+  `author$id` to `gbCdnaInfo$author` — note the join columns have **different names**, so
+  you'll need `by = c("id" = "author")` rather than relying on a shared column name.
 - Print the SQL query using `dplyr::show_query()`
 - collect the joined output using `dplyr::collect()`
 
 :::::::::::::::
- 
+
 ::::::::::::::: solution
 
 ```{r}
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
 author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
-  dplyr::select(author_id, name)
+  dplyr::filter(stringr::str_sub(string = name, start = 1, end = 1) == "A") %>%
+  dplyr::slice_sample(n = 5) %>%
+  dplyr::select(id, name)
 
-family_author <- rdbms_login %>%
-  dplyr::tbl(from = "family_author") %>%
-  dplyr::select(author_id, rfam_acc)
+gb_cdna_info <- rdbms_login %>%
+  dplyr::tbl(from = "gbCdnaInfo") %>%
+  dplyr::select(author, acc)
 
-dplyr::left_join(author, family_author, keep = TRUE) %>%
+dplyr::left_join(
+  x = author,
+  y = gb_cdna_info,
+  by = c("id" = "author"),
+  keep = TRUE
+) %>%
   dplyr::show_query()
 
-dplyr::left_join(author, family_author, keep = TRUE) %>%
+dplyr::left_join(
+  x = author,
+  y = gb_cdna_info,
+  by = c("id" = "author"),
+  keep = TRUE
+) %>%
   dplyr::collect()
 ```
 
