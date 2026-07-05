@@ -2,6 +2,7 @@
 title: 'Read case data'
 teaching: 20
 exercises: 10
+    # jarl-ignore string_boundary: <reason>
 editor_options: 
   chunk_output_type: inline
 ---
@@ -180,13 +181,13 @@ You can use the `readepi::login()` function to establish a connection to the dat
 ``` r
 # establish the connection to a test MySQL database
 rdbms_login <- readepi::login(
-  from = "mysql-rfam-public.ebi.ac.uk",
+  from = "genome-mysql.soe.ucsc.edu",
   type = "MySQL",
-  user_name = "rfamro",
+  user_name = "genome",
   password = "",
   driver_name = "",
-  db_name = "Rfam",
-  port = 4497
+  db_name = "hgFixed",
+  port = 3306
 )
 ```
 
@@ -208,19 +209,19 @@ rdbms_login
 
 The function parameters are:
 
-- `from`: The database server address (`mysql-rfam-public.ebi.ac.uk`)
+- `from`: The database server address (`genome-mysql.soe.ucsc.edu`)
 - `type`: The type of database system ("MySQL")
-- `user_name`: The username for authentication ("rfamro")
+- `user_name`: The username for authentication ("genome")
 - `password`: The password (empty string "" indicates no password required for this public test database)
 - `driver_name`: The database driver (empty string uses the default driver)
-- `db_name`: The specific database to connect to ("Rfam")
-- `port`: The port number for the connection (4497)
+- `db_name`: The specific database to connect to ("hgFixed")
+- `port`: The port number for the connection (3306)
 
 The function returns a connection object stored in variable `rdbms_login`, which can then be used to query and retrieve data from the database.
 
 :::::::::::::::: callout
 
-Note: This example uses a public test database from the European Bioinformatics Institute, which is why no password is required.  Access to it may be limited by organizational network restrictions, but it should work normally on home networks.
+Note: This example uses a public test database from the University of California, Santa Cruz (UCSC) Genome Browser project, which is why no password is required. It uses the standard MySQL port (3306), so it is less likely to be blocked than test servers on non-standard ports, but access could still be limited by strict organizational network restrictions.
 
 ::::::::::::::::
 
@@ -237,40 +238,55 @@ tables[1:5]
 ```
 
 ``` output
-[1] "_annotated_file" "_family_file"    "_genome_data"    "_lock"          
-[5] "_overlap"       
+[1] "affy10KDetails"  "affy120KDetails" "affyExps"        "affyGenoDetails"
+[5] "arbFlyLifeAll"  
 ```
 
 In a relational database, you typically have multiple tables. Each table represents a specific entity (e.g., patients, care units, treatments). Tables are linked through common identifiers called primary keys or foreign keys.
 
 ### 3. Read data from a table in a database
 
-You can read the data from the `author` table using `dplyr::tbl()`.
+You can read the data from the `author` table using `dplyr::tbl()`. This table lists
+authors of GenBank sequence submissions, with each `name` stored as `"LastName,F.I."`.
 
 
 ``` r
 # import data from the 'author' table using an SQL query
 dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
-  dplyr::filter(initials == "A") %>%
-  dplyr::arrange(desc(author_id))
+  dplyr::filter(stringr::str_sub(string = name, start = 1, end = 1) == "A") %>%
+  dplyr::slice_sample(n = 20) %>% 
+  dplyr::arrange(desc(id))
 
 dat
 ```
 
 ``` output
-# Source:     SQL [?? x 6]
-# Database:   mysql 8.0.32-24 [@mysql-rfam-public.ebi.ac.uk:/Rfam]
-# Ordered by: desc(author_id)
-  author_id name           last_name    initials orcid                 synonyms
-      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
-1        46 Roth A         Roth         A        ""                    ""      
-2        42 Nahvi A        Nahvi        A        ""                    ""      
-3        32 Machado Lima A Machado Lima A        ""                    ""      
-4        31 Levy A         Levy         A        ""                    ""      
-5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
-6        13 Chen A         Chen         A        ""                    ""      
-7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
+# Source:     SQL [?? x 3]
+# Database:   mysql 5.5.5-10.11.8-MariaDB [@genome-mysql.soe.ucsc.edu:/hgFixed]
+# Ordered by: desc(id)
+       id name                                                               crc
+    <int> <chr>                                                            <dbl>
+ 1 353104 Ahn J, Suh Y and Lee K.                                         3.93e9
+ 2 266006 Averdam A, Kuhl H, Sontag M, Becker T, Hughes AL, Reinhardt R … 5.99e8
+ 3 251641 Auslander,J., Furman,M. and Mead,J.                             2.99e9
+ 4 224864 Ahn,S.J., Bak,H.J., Park,J.H., Kim,S.A., Kim,N.Y., Lee,J.Y., S… 6.87e8
+ 5 220917 Aegerter,S., Jalabert,B. and Bobe,J.                            1.04e8
+ 6 212073 Alexandersen,S., Wernery,U., Nagy,P., Frederiksen,T. and Norma… 2.40e9
+ 7 164658 Aarnink,A., Jacquelin,B., Dauba,A., Hebrard,S., Moureaux,E., M… 9.79e8
+ 8 160011 Asano,K., Hershey,J.W.B. and Hinnebusch,A.G.                    3.05e9
+ 9 159998 Alam,M.R., Caldwell,B.D., Johnson,R.C., Darlington,D.N., Mains… 9.82e8
+10 124685 Aldrich,T.L. and Morris,A.E.                                    9.92e8
+11 122404 Agrimi,G., Di Noia,M.A., Marobbio,C.M., Fiermonte,G., Lasorsa,… 9.91e8
+12 103980 Albani,M.C., Castaings,L., Wotzel,S., Mateos,J.L., Wunder,J., … 9.82e8
+13  76157 Albani,D., Hammond-Kosack,M.C., Smith,C., Conlan,S., Colot,V.,… 2.39e9
+14  58333 Altman,S., Bothwell,A. and Mamoum,C.                            5.99e8
+15  53048 Araki,H. and Inoue,M.                                           2.03e9
+16  38837 Adachi,N., Singh,D. and Shinohara,T.                            3.98e9
+17  35427 Averof,M. and Cohen,S.M.                                        2.39e9
+18  31262 Addison,W.R., Gillam,I.C., Hayashi,S. and Tener,G.M.            2.40e9
+19  24814 Autry,B., Cooling,G.T., Franke,M.C., Johnson,K.M., Leveille,A.… 1.67e9
+20   4346 Asada,A., Orii,H., Watanabe,K. and Tsubaki,M.                   2.40e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -284,10 +300,14 @@ dat %>%
 
 ``` output
 <SQL>
-SELECT `author`.*
-FROM `author`
-WHERE (`initials` = 'A')
-ORDER BY `author_id` DESC
+SELECT `id`, `name`, `crc`
+FROM (
+  SELECT `author`.*, ROW_NUMBER() OVER (ORDER BY RAND()) AS `col01`
+  FROM `author`
+  WHERE (SUBSTR(`name`, 1, 1) = 'A')
+) `q01`
+WHERE (`col01` <= 20)
+ORDER BY `id` DESC
 ```
 
 Alternatively, you can use the `readepi::read_rdbms()` function to import data from a database table. It accepts either an SQL query or a list of query parameters.
@@ -304,16 +324,29 @@ dat %>%
 ```
 
 ``` output
-# A tibble: 7 × 6
-  author_id name           last_name    initials orcid                 synonyms
-      <int> <chr>          <chr>        <chr>    <chr>                 <chr>   
-1        46 Roth A         Roth         A        ""                    ""      
-2        42 Nahvi A        Nahvi        A        ""                    ""      
-3        32 Machado Lima A Machado Lima A        ""                    ""      
-4        31 Levy A         Levy         A        ""                    ""      
-5        27 Gruber A       Gruber       A        "0000-0003-1219-4239" ""      
-6        13 Chen A         Chen         A        ""                    ""      
-7         6 Bateman A      Bateman      A        "0000-0002-6982-4660" ""      
+# A tibble: 20 × 3
+       id name                                                               crc
+    <int> <chr>                                                            <dbl>
+ 1 351082 Aiello FA, Palma A, Malacaria E, Zheng L, Campbell JL, Shen B,… 3.97e9
+ 2 341783 Amit M, Na'ara S, Fridman E, Vladovski E, Wasserman T, Milman … 1.07e9
+ 3 292017 Adachi W, Ulanovsky H, Li Y, Norman B, Davis J and Piatigorsky… 3.40e9
+ 4 291500 Aikins MJ, Schooley DA, Begum K, Detheux M, Beeman RW and Park… 7.92e8
+ 5 252133 Arden,N., Healey,M. and Mead,J.                                 1.92e9
+ 6 250439 Athwal,N., Peretz,S. and Mead,J.                                3.39e9
+ 7 248032 Aguilar,A.                                                      2.63e7
+ 8 246550 Armant,O., Collins,J.E., Hunt,P., Oliver,K., McLaren,S., Chalk… 2.40e9
+ 9 240070 Aberger,F., Schmidt,G. and Richter,K.                           2.40e9
+10 226862 Alvares,L.E., Winterbottom,F.L., Rodrigues Sobreira,D., Xavier… 9.80e8
+11 223927 Ahn,S.J., Sung,J.H., Kim,N.Y., Lee,A.R., Jeon,S.J., Lee,J.S., … 6.87e8
+12 220033 Andre,S., Guillet,F., Charlemagne,J. and Fellah,J.S.            9.82e8
+13 109548 Azzarina,A.B. and Mohamed,R.                                    2.40e9
+14  83848 Ashworth,V.E.T.M.                                               2.96e9
+15  83550 Amaya,I., Ratcliffe,O.J. and Bradley,D.J.                       3.92e9
+16  76665 Aguirre,P.J. and Smith,A.G.                                     2.40e9
+17  54503 ADAI,A.T., SZAFRANSKA-SCHWARZBACH,A.E., ANDRUSS,B.F., MAITRA,A… 3.82e9
+18  38755 Alonso,C., Miskin,J., Hernaez,B., Fernandez-Zapatero,P., Soto,… 2.84e9
+19  22685 Arler,L., Cazzamali,G. and Grimmelikhuijzen,C.J.P.              6.76e8
+20   5853 Anderson,T.D., Jin-Clark,Y., Begum,K., Starkey,S.R. and Zhu,K.… 2.57e9
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -325,8 +358,8 @@ Ideally, after specifying a set of queries, we can reduce the size of the input 
 Create one table containing:
 
 - the column `name` from table `author`,
-- the column `rfam_acc` from table `family_author`, and
-- using `author_id` as primary key or common identifier.
+- the column `acc` from table `gbCdnaInfo`, and
+- using the author's `id` as primary key or common identifier.
 
 Following these steps:
 
@@ -338,14 +371,18 @@ Following these steps:
 
 Join columns from two different tables:
 
-- From the table `author`, select `author_id` and `name`.
-- From the table `family_author`, select `author_id` and `rfam_acc`.
-- Join to the table `author` the table `family_author` using `dplyr::left_join()`.
+- From the table `author`, select `id` and `name`, keeping only a handful of rows
+  (e.g. authors whose surname starts with `"A"`) — `gbCdnaInfo` covers every GenBank
+  submission ever made, so narrowing `author` down first keeps the join fast.
+- From the table `gbCdnaInfo`, select `author` (the foreign key to `author$id`) and `acc`.
+- Join to the table `author` the table `gbCdnaInfo` using `dplyr::left_join()`, matching
+  `author$id` to `gbCdnaInfo$author` — note the join columns have **different names**, so
+  you'll need `by = c("id" = "author")` rather than relying on a shared column name.
 - Print the SQL query using `dplyr::show_query()`
 - collect the joined output using `dplyr::collect()`
 
 :::::::::::::::
- 
+
 ::::::::::::::: solution
 
 
@@ -353,56 +390,60 @@ Join columns from two different tables:
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
 author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
-  dplyr::select(author_id, name)
+  dplyr::filter(stringr::str_sub(string = name, start = 1, end = 1) == "A") %>%
+  dplyr::slice_sample(n = 5) %>%
+  dplyr::select(id, name)
 
-family_author <- rdbms_login %>%
-  dplyr::tbl(from = "family_author") %>%
-  dplyr::select(author_id, rfam_acc)
+gb_cdna_info <- rdbms_login %>%
+  dplyr::tbl(from = "gbCdnaInfo") %>%
+  dplyr::select(author, acc)
 
-dplyr::left_join(author, family_author, keep = TRUE) %>%
+dplyr::left_join(
+  x = author,
+  y = gb_cdna_info,
+  by = c("id" = "author"),
+  keep = TRUE
+) %>%
   dplyr::show_query()
 ```
 
 ``` output
-Joining with `by = join_by(author_id)`
-```
-
-``` output
 <SQL>
-SELECT
-  `author`.`author_id` AS `author_id.x`,
-  `name`,
-  `family_author`.`author_id` AS `author_id.y`,
-  `rfam_acc`
-FROM `author`
-LEFT JOIN `family_author`
-  ON (`author`.`author_id` = `family_author`.`author_id`)
+SELECT `LHS`.*, `author`, `acc`
+FROM (
+  SELECT `id`, `name`
+  FROM (
+    SELECT `author`.*, ROW_NUMBER() OVER (ORDER BY RAND()) AS `col01`
+    FROM `author`
+    WHERE (SUBSTR(`name`, 1, 1) = 'A')
+  ) `q01`
+  WHERE (`col01` <= 5)
+) `LHS`
+LEFT JOIN `gbCdnaInfo`
+  ON (`LHS`.`id` = `gbCdnaInfo`.`author`)
 ```
 
 ``` r
-dplyr::left_join(author, family_author, keep = TRUE) %>%
+dplyr::left_join(
+  x = author,
+  y = gb_cdna_info,
+  by = c("id" = "author"),
+  keep = TRUE
+) %>%
   dplyr::collect()
 ```
 
 ``` output
-Joining with `by = join_by(author_id)`
-```
-
-``` output
-# A tibble: 5,029 × 4
-   author_id.x name         author_id.y rfam_acc
-         <int> <chr>              <int> <chr>   
- 1           1 Ames T                 1 RF01831 
- 2           2 Argasinska J           2 RF02554 
- 3           2 Argasinska J           2 RF02555 
- 4           2 Argasinska J           2 RF02722 
- 5           2 Argasinska J           2 RF02720 
- 6           2 Argasinska J           2 RF02719 
- 7           2 Argasinska J           2 RF02721 
- 8           2 Argasinska J           2 RF02670 
- 9           2 Argasinska J           2 RF02718 
-10           2 Argasinska J           2 RF02668 
-# ℹ 5,019 more rows
+# A tibble: 7 × 4
+      id name                                                       author acc  
+   <int> <chr>                                                       <dbl> <chr>
+1 151619 Alabouch,S., Kurose,K., Tohkin,M., Bani,M.H., Fukuhara,M.… 151619 D869…
+2 128876 Akimzhanov,A.M., Wang,X., Sun,J. and Boehning,D.           128876 GU32…
+3 142519 Abedin,Z.R., Moser,A.J., Roslyn,J.J. and Abedin,M.Z.       142519 AF01…
+4 142519 Abedin,Z.R., Moser,A.J., Roslyn,J.J. and Abedin,M.Z.       142519 AF01…
+5 269865 Aghnatios,R., Cayrou,C., Garibal,M., Robert,C., Azza,S., … 269865 NR_1…
+6  16593 Abdelall,M.F.M., Khalil,S., Abdelkreem,A., Roe,M. and Sal…  16593 KC96…
+7  16593 Abdelall,M.F.M., Khalil,S., Abdelkreem,A., Roe,M. and Sal…  16593 KC96…
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -466,7 +507,7 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-43-0-1",
+  from = "https://play.im.dhis2.org/stable-2-42-5-1",
   user_name = "admin",
   password = "district"
 )
@@ -476,13 +517,13 @@ dhis2_login
 
 ``` output
 <httr2_response>
-GET https://play.im.dhis2.org/stable-2-43-0-1/api/me
+GET https://play.im.dhis2.org/stable-2-42-5-1/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (12719 bytes)
+Body: In memory (12502 bytes)
 ```
 
-If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-43-0-1` in the URL string.
+If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-5-1` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
 
 ::::::: caution
 
@@ -492,7 +533,7 @@ Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
 ``` r
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-43-0-1",
+  from = "https://play.im.dhis2.org/stable-2-42-5-1",
   user_name = rstudioapi::askForPassword("Database username"),
   password = rstudioapi::askForPassword("Database password")
 )
@@ -512,27 +553,24 @@ tibble::as_tibble(programs)
 ```
 
 ``` output
-# A tibble: 18 × 3
+# A tibble: 15 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Programme                                     IpHINAT79UW tracker  
- 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 4 Information Campaign                                q04UBOqq3rp aggregate
- 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Programa de Prueba                                  tqb7NUZ3ae8 tracker  
+ 1 ANC Registry (AI QA)                                nwRVCEXbrzR tracker  
+ 2 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 3 Child Programme                                     IpHINAT79UW tracker  
+ 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 5 Information Campaign                                q04UBOqq3rp aggregate
+ 6 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 7 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 8 Malaria case registration                           VBqh0ynB2wv aggregate
+ 9 Malaria focus investigation                         M3xtLkYBlKI tracker  
+10 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+11 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
 12 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-13 RW_Imboni z'Impinduka Youth Tracker                 TyknGatqeJl tracker  
-14 TB Case Surveillance (AI QA)                        T4oTdDl6EaI tracker  
-15 TB program                                          ur1Edk5Oe2n tracker  
-16 test                                                tttL3vdHqp9 aggregate
-17 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-18 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+13 TB program                                          ur1Edk5Oe2n tracker  
+14 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+15 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -545,7 +583,7 @@ tibble::as_tibble(org_units)
 ```
 
 ``` output
-# A tibble: 1,167 × 8
+# A tibble: 1,166 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
  1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
@@ -558,7 +596,7 @@ tibble::as_tibble(org_units)
  8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
 10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,157 more rows
+# ℹ 1,156 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
@@ -572,20 +610,31 @@ data_name <- readepi::read_dhis2(
   org_unit = "Bucksal Clinic",
   program = "Child Programme"
 )
-```
 
-``` error
-Error in `get_tracked_entities()`:
-! Assertion on 'api_version' failed: Element 1 is not <= 42.
-```
-
-``` r
 tibble::as_tibble(data_name)
 ```
 
-``` error
-Error:
-! object 'data_name' not found
+``` output
+# A tibble: 30 × 26
+   event      tracked_entity org_unit Gender `First name` `Last name` enrollment
+   <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
+ 1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
+ 2 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 3 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
+ 5 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 6 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 7 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 8 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 9 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+10 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+# ℹ 20 more rows
+# ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
+#   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
+#   `MCH ARV at birth` <chr>, `MCH Apgar Score` <chr>, `MCH Weight (g)` <chr>,
+#   `MCH Infant Weight  (g)` <chr>, `MCH Vit A` <chr>,
+#   `MCH Infant HIV Test Result` <chr>, `MCH HIV Test Type` <chr>,
+#   `MCH IPT dose` <chr>, `MCH DPT dose` <chr>, `MCH Child ARVs` <chr>, …
 ```
 
 
@@ -596,20 +645,12 @@ data_id <- readepi::read_dhis2(
   org_unit = "vRC0stJ5y9Q",
   program = "IpHINAT79UW"
 )
-```
 
-``` error
-Error in `get_tracked_entities()`:
-! Assertion on 'api_version' failed: Element 1 is not <= 42.
-```
-
-``` r
 identical(data_id, data_name)
 ```
 
-``` error
-Error:
-! object 'data_id' not found
+``` output
+[1] TRUE
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:

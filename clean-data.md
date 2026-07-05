@@ -681,6 +681,7 @@ Read the `test_df.RDS` data frame within the `{cleanepi}` package to:
 
 - Clean and standardize the required elements to get this done.
 - Calculate the time elapsed since the date of positive test until the date of admission.
+- Plot the calculated delay using `{ggplot2}` keeping the plausible values.
 
 
 ``` r
@@ -696,6 +697,8 @@ Before calculating the age, you may need to:
 
 - standardize column names
 - standardize dates columns
+
+You may need to drop the negative times to visualise plausible values.
 
 ::::::::::::::::::::::::::::
 
@@ -750,6 +753,15 @@ dat_clean %>%
  9 PS010P2   2021-02-26                   2021-03-02                        4
 10 PS011P2   2021-03-03                   2021-03-05                        2
 ```
+
+``` r
+dat_clean %>% 
+  dplyr::filter(days_to_admission >= 0) %>% 
+  ggplot(aes(x = days_to_admission)) +
+  geom_histogram(binwidth = 1)
+```
+
+<img src="fig/clean-data-rendered-unnamed-chunk-21-1.png" alt="" style="display: block; margin: auto;" />
 
 ::::::::::::::::::::::::::
 

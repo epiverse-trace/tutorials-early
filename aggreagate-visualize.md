@@ -450,10 +450,23 @@ For example, in the figure below, we have two epidemic curves for the same outbr
 - The peak in females occurred around epiweek 15; in males this was around epiweek 20.
 - The growth rate in females may be higher than in males. In a same period of time (about 15 weeks), cases in females were more than 3 times the cases in males.
 
-<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-14-1.png" alt="" style="display: block; margin: auto;" />
+<div class="figure" style="text-align: center">
+<img src="fig/aggreagate-visualize-rendered-unnamed-chunk-14-1.png" alt="Weekly incidence of simulated cases by sex, with fitted growth trajectories (Poisson regression, shaded ribbon = 95% CI) during the first 15 weeks of the outbreak (exponential growth phase)."  />
+<p class="caption">Weekly incidence of simulated cases by sex, with fitted growth trajectories (Poisson regression, shaded ribbon = 95% CI) during the first 15 weeks of the outbreak (exponential growth phase).</p>
+</div>
 
 You can estimate the peak -- the time with the highest number of recorded cases -- using `incidence2::estimate_peak()`. Also you can convert the count of new or incident cases to cumulative using `incidence2::cumulate()` if needed for your downstream analysis. Find examples about them on the [incidence2 vignette section about "Bootstrapping and estimating peaks"](https://www.reconverse.org/incidence2/vignette.html#sec:bootstrapping-and-estimating-peaks)
 
+
+::::::: caution
+
+#### Reporting delay
+
+Recent cases are likely undercounted. If there is a lag between an event occurring and it being recorded, the most recent time periods will appear artificially low simply because many cases have not been logged yet. This can make it look like there is a recent decline when it is really just a reporting delay (also known as a [right-censoring](../learners/reference.md#rightcensoring) effect).
+
+While not an issue for the resolved outbreak above, this is a key consideration for **ongoing or growing outbreaks**, where an apparent recent decline may simply reflect delayed reporting rather than a true slowdown.
+
+:::::::
 
 <!--
 
