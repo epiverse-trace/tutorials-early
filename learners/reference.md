@@ -28,11 +28,14 @@ dates of symptom onset, exposure, or outcomes. [Linelists are a fundamental data
 
 ## R
 
+[RDBMS]{#RDBMS}
+: Relational Databases Management System.
+
 [Reporting delay]{#reportingdelay}
 : Delay or lag between the time an event occurs (e.g. symptom onset) and the time it is reported ([Lawless, 1994](https://www.jstor.org/stable/3315820)). We can quantify it by comparing the [linelist](#linelist) with successive versions of it or up-to-date reported aggregated case counts ([Cori et al. 2017](https://royalsocietypublishing.org/doi/10.1098/rstb.2016.0371)).
 
-[RDBMS]{#RDBMS}
-: Relational Databases Management System.
+[Right-censoring]{#rightcensoring}
+: Right-censoring occurs when the true value or event for some observations isn't yet known at the time of analysis because the observation period ended before it could be fully captured, so those data points are only partially observed rather than missing entirely. You can read more about *Censoring* and *Truncation* in this introduction to [Biases in delay distributions](https://nfidd.github.io/nfidd/sessions/biases-in-delay-distributions.html), and implications for nowcasting by [Johnson K at al. 2026](https://wellcomeopenresearch.org/articles/10-614/v2).
 
 ## S
 
