@@ -312,7 +312,7 @@
       </div>
     </nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>Clean case data</h1>
-        <p>Last updated on 2026-07-03 |
+        <p>Last updated on 2026-07-05 |
 
         <a href="https://github.com/epiverse-trace/tutorials-early/edit/main/episodes/clean-data.Rmd" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -1251,6 +1251,8 @@ introducing delays for outbreak data</a>.</p>
 <ul><li>Clean and standardize the required elements to get this done.</li>
 <li>Calculate the time elapsed since the date of positive test until the
 date of admission.</li>
+<li>Plot the calculated delay using <a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a> keeping the
+plausible values.</li>
 </ul><div class="codewrapper sourceCode" id="cb39">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1273,7 +1275,9 @@ date of admission.</li>
 <p>Before calculating the age, you may need to:</p>
 <ul><li>standardize column names</li>
 <li>standardize dates columns</li>
-</ul></div>
+</ul><p>You may need to drop the negative times to visualise plausible
+values.</p>
+</div>
 </div>
 </div>
 </div>
@@ -1339,7 +1343,16 @@ date of admission.</li>
  9 PS010P2   2021-02-26                   2021-03-02                        4
 10 PS011P2   2021-03-03                   2021-03-05                        2</code></pre>
 </div>
+<div class="codewrapper sourceCode" id="cb44">
+<h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat_clean</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu">filter</span><span class="op">(</span><span class="va">days_to_admission</span> <span class="op">&gt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">days_to_admission</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_histogram</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre>
 </div>
+<figure><img src="../fig/clean-data-rendered-unnamed-chunk-21-1.png" alt="" style="display: block; margin: auto;" class="figure mx-auto d-block"></figure></div>
 </div>
 </div>
 </div>
@@ -1360,7 +1373,7 @@ example:</p>
 <p>Calculate the age in years of each subject until the <span class="math inline">\(3^{rd}\)</span> of January 2025
 (<code>"2025-01-03"</code>) from their date of birth, and the remainder
 time in months.</p>
-<div class="codewrapper sourceCode" id="cb44">
+<div class="codewrapper sourceCode" id="cb45">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1392,7 +1405,7 @@ time in months.</p>
 • where "x" represents here the vector of values from these columns
   (`data$target_column`).</code></pre>
 </div>
-<div class="codewrapper sourceCode" id="cb46">
+<div class="codewrapper sourceCode" id="cb47">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1447,7 +1460,7 @@ cleaning.</p>
 <p>Moreover, <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> provides a built-in dictionary
 specifically tailored for epidemiological data. The example dictionary
 below includes mappings for the “gender” column.</p>
-<div class="codewrapper sourceCode" id="cb48">
+<div class="codewrapper sourceCode" id="cb49">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1476,7 +1489,7 @@ column according to predefined categories. Below is an example code
 chunk demonstrating how to perform this using the
 <code>clean_using_dictionary()</code> function from the
 <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> package.</p>
-<div class="codewrapper sourceCode" id="cb50">
+<div class="codewrapper sourceCode" id="cb51">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1521,7 +1534,7 @@ in the dictionary, the function
 can start a custom dictionary with a data frame inside or outside R and
 use the function <code>cleanepi::add_to_dictionary()</code> to include
 new elements in the dictionary. For example:</p>
-<div class="codewrapper sourceCode" id="cb52">
+<div class="codewrapper sourceCode" id="cb53">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1565,7 +1578,7 @@ values for numbers explicitly into numeric values (e.g.,
 data set, in the age column some entries are written in words. In
 <a href="https://epiverse-trace.github.io/cleanepi/" class="external-link">cleanepi</a> the function <code>convert_to_numeric()</code>
 does such conversion as illustrated in the below code chunk.</p>
-<div class="codewrapper sourceCode" id="cb54">
+<div class="codewrapper sourceCode" id="cb55">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1613,7 +1626,7 @@ values.</p>
 <hr class="half-width"><p>You can combine multiple data cleaning tasks via the base R pipe
 (<code>|&gt;</code>) or the <a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a> pipe
 (<code>%&gt;%</code>) operator, as shown in the code snippet below.</p>
-<div class="codewrapper sourceCode" id="cb56">
+<div class="codewrapper sourceCode" id="cb57">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1661,7 +1674,7 @@ operations at once.</p>
 data cleaning operations to the input dataset. Here’s an example code
 chunk illustrating how to use <code>clean_data()</code> on a raw
 simulated Ebola dataset:</p>
-<div class="codewrapper sourceCode" id="cb57">
+<div class="codewrapper sourceCode" id="cb58">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1748,7 +1761,7 @@ particular operation. This interactive approach enables users to
 efficiently review and analyze the effects of individual cleansing steps
 within the broader data cleansing process.</p>
 <p>You can view the report using:</p>
-<div class="codewrapper sourceCode" id="cb62">
+<div class="codewrapper sourceCode" id="cb63">
 <h3 class="code-label">R<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="downlit sourceCode r">
@@ -1835,9 +1848,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
   "identifier": "https://epiverse-trace.github.io/tutorials-early/instructor/clean-data.html",
-  "dateCreated": "2026-07-03",
-  "dateModified": "2026-07-03",
-  "datePublished": "2026-07-03"
+  "dateCreated": "2026-07-05",
+  "dateModified": "2026-07-05",
+  "datePublished": "2026-07-05"
 }
 
   </script><script>
