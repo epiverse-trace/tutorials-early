@@ -226,13 +226,13 @@ In a relational database, you typically have multiple tables. Each table represe
 You can read the data from the `author` table using `dplyr::tbl()`. This table lists
 authors of GenBank sequence submissions, with each `name` stored as `"LastName,F.I."`.
 
-```{r}
+```{r, warning=FALSE}
 # import data from the 'author' table using an SQL query
 dat <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
   dplyr::filter(stringr::str_sub(string = name, start = 1, end = 1) == "A") %>%
-  dplyr::arrange(desc(id)) %>%
-  dplyr::slice_sample(n = 20)
+  dplyr::slice_sample(n = 20) %>% 
+  dplyr::arrange(desc(id))
 
 dat
 ```
@@ -251,7 +251,7 @@ Alternatively, you can use the `readepi::read_rdbms()` function to import data f
 
 Use `dplyr::collect()` to force computation of a database query and extract the output to your local computer.
 
-```{r}
+```{r, warning=FALSE}
 # Pull all data down to a local tibble
 dat %>%
   dplyr::collect()
@@ -293,7 +293,7 @@ Join columns from two different tables:
 
 ::::::::::::::: solution
 
-```{r}
+```{r, warning=FALSE}
 # SELECT FEW COLUMNS FROM ONE TABLE AND LEFT JOIN WITH ANOTHER TABLE
 author <- rdbms_login %>%
   dplyr::tbl(from = "author") %>%
