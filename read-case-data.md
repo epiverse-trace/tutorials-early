@@ -267,26 +267,26 @@ dat
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 321653 An L, Li X, Tang C, Xu N and Sun W.                             2.34e9
- 2 271688 Aro J, Tokola H, Ronkainen VP, Koivisto E, Tenhunen O, Ilves M… 3.36e9
- 3 264702 Arazi T, Kaplan B and Fromm H.                                  3.37e9
- 4 260691 Aslam,Z., Im,W.T., Kim,M.K. and Lee,S.T.                        6.87e8
- 5 218748 Ashwell,C.M., Czerwinski,S.M. and McMurtry,J.P.                 2.90e9
- 6 200362 Abdelaziz,L., Karine,B., Aissa,B., Hussam,B., Hassen,M. and Mu… 9.94e8
- 7 197628 Awasthi,P., Ram,R., Zaidi,A.A. and Hallan,V.                    5.98e8
- 8 188494 Arnedo-Valero,M., Plana,M., Mas,A., Guila,M., Gil,C., Castro,P… 9.96e8
- 9 128253 Atlasi,Y., Mowla,S.J., Ziaee,S.A., Gokhale,P.J. and Andrews,P.… 3.91e9
-10 125824 Abe,H., Lavanya,M., Kajiwara,E., Kitaguchi,D., Manel,N., Arita… 9.91e8
-11 112681 Aikawa,J., Grobe,K., Tsujimoto,M. and Esko,J.D.                 5.98e8
-12 109859 Agarwal,P., Dabi,M. and Agarwal,P.K.                            3.91e9
-13  74832 Ainsworth,C., Tarvis,M. and Clark,J.                            3.37e9
-14  71921 Aceituno-Valenzuela,U., Covarrubias,M., Aguayo,M., Valenzuela-… 3.00e9
-15  57118 Aikawa,E., Goettsch,C. and Aikawa,M.                            2.75e9
-16  50825 Aharonov,R., Rosenfeld,N. and Rosenwald,S.                      3.99e9
-17  35167 Amichot,M., Brun,A., Cuany,A., LeMouel,T. and Berge,J.          9.55e8
-18  21580 Angerer,L.M., Oleksyn,D.W., Levine,A.M., Li,X., Klein,W.H. and… 3.91e9
-19  19290 Asgari,S., Theopold,U., Wellby,C. and Schmidt,O.                2.40e9
-20   3930 Aoki,H., Ahsan,M.N. and Watabe,S.                               1.67e9
+ 1 326885 Ampomah-Dwamena C, Driedonks N, Lewis D, Shumskaya M, Chen X, … 3.82e9
+ 2 323705 Antonucci L, Di Magno L, D'Amico D, Manni S, Serrao SM, Di Pas… 2.76e9
+ 3 322652 Ayhan,N. and Charrel,R.N.                                       3.92e9
+ 4 317756 Alfajaro MM, Cho EH, Park JG, Kim JY, Soliman M, Baek YB, Kang… 1.70e9
+ 5 298522 Aksu M, Trakhanov S and Gorlich D.                              3.47e9
+ 6 287377 Azam L and McIntosh JM.                                         3.95e9
+ 7 261100 Abildgaard,L., Nielsen,M.B., Kjeldsen,K.U. and Ingvorsen,K.     3.95e9
+ 8 232397 Aderolu,A.Z., Sahu,N.P. and Aparna,C.                           3.82e9
+ 9 204448 Ahamed,S.F., Vivek,R., Britto,C., Dias,M. and Shet,A.           4.06e9
+10 170197 Arafa,A.-S.M., Sleim,A.A., Hassan,M.K. and Aly,M.M.             6.86e8
+11 168019 Ataman-Onal,Y., Telles,J.-N., Gonzalez,R., Biron,F. and Verrie… 2.40e9
+12 166503 Aoki,Y., Noda,M. and Ishii,K.                                   3.37e9
+13 139376 Acker,J., De Graaff,M., Vigneron,M. and Kedinger,C.             9.86e8
+14 119440 Ahokas,K., Lohi,J., Lohi,H., Elomaa,O., Karjalainen-Lindsberg,… 2.72e9
+15  60759 Arima,T., Tsujikawa,M. and Kawabe,H.                            5.99e8
+16  56633 ALMARSSON,O., AFEYAN,N.B., BOLEN,J.B. and SABNIS,S.             1.67e9
+17  52177 Aartsma-rus,A., Ommen,G.B.V., Kimpe,J.J.D., Deutekom,J.C.T.V. … 9.15e8
+18  42547 Al-Khedhairy,A.A., Arfin,M. and Bin Dukhyil,A.A.                4.27e7
+19  10967 Abd-El-Samie,E.M. and El Fiky,Z.A.                              3.91e9
+20   1970 Ahmed,F., Torrado,M., Zinovieva,R.D., Senatorov,V.V., Wistow,G… 4.00e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -327,26 +327,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 338044 Azab B, Barham R, Ali D, Dardas Z, Rashdan L, Bijawi M, Maswad… 2.17e8
- 2 323638 Airik R, Schueler M, Airik M, Cho J, Ulanowicz KA, Porath JD, … 2.89e9
- 3 319422 Adorno M, di Robilant BN, Sikandar SS, Acosta VH, Antony J, He… 2.45e8
- 4 289965 Ahn,J.H., Kim,T.W., Kim,T.S., Joung,Y. and Kim,S.B.             2.30e9
- 5 265853 Allison AB, Kohler DJ, Ortega A, Hoover EA, Grove DM, Holmes E… 9.92e8
- 6 198640 Allan,J.S., Short,M., Taylor,M.E., Su,S., Hirsch,V.M., Johnson… 5.98e8
- 7 185853 Ajjikuttira,P.A., Loh,C.S., Ong,C.A. and Wong,S.M.              5.99e8
- 8 173406 Arai,S., Gu,S.H., Baek,L.J., Tabara,K., Oh,H.-S., Takada,N., T… 2.40e9
- 9 169115 Anton,A., Martinez,M.J., Isanta,R., Munoz,C.J., Marcos,M.A. an… 9.96e8
-10 160208 Ahmad,I. and Acharay,H.R.                                       3.90e9
-11 139304 Almendro,N., Bellon,T., Rius,C., Lastres,P., Langa,C., Corbi,A… 9.78e8
-12 121591 Albertella,M.R., Jones,H., Thomson,W., Olavesen,M.G. and Campb… 2.76e9
-13 107017 Alimirzaee,M. and Mirzaie-Asl,A.                                3.27e9
-14  99971 Amorim,M.I., Ferreira,E., Abreu,I. and de Dios Alche,J.         9.26e8
-15  99038 Akhtardanesh,H., Niazi,A., Abolimoghadam,A.A., Ramezani,A., Za… 3.95e9
-16  90079 Agrawal,G.K., Rakwal,R. and Iwahashi,H.                         9.89e8
-17  65941 Ariizumi,T., Hatakeyama,K., Hinata,K., Inatsugi,R., Nishida,I.… 9.99e8
-18  44824 Ataya,F.S., Fouad,D. and Bazzi,M.D.                             2.39e9
-19  43276 Adamowicz,T., Flisikowski,K., Hiendleder,S., Wolf,E., Zwierzch… 4.00e9
-20  36802 Ando,A., Imaeda,N., Kitagawa,H. and Inoko,H.                    2.03e9
+ 1 365207 Agrotis A, von Chamier L, Oliver H, Kiso K, Singh T and Kettel… 9.88e8
+ 2 344686 Aguilera-Montilla N, Bailon E, Uceda-Castro R, Ugarte-Berzal E… 2.27e9
+ 3 315304 Aftimos P, Rolfo C, Rottey S, Offner F, Bron D, Maerevoet M, S… 4.18e9
+ 4 315117 Addison,J.A. and Pogson,G.H.                                    9.95e8
+ 5 283698 Ayyadurai S, Gibson AJ, D'Costa S, Overman EL, Sommerville LJ,… 1.32e9
+ 6 278485 Araki T, Kusakabe M and Nishida E.                              1.32e9
+ 7 272766 Andrees,S., Harmsen,D., Kroppenstedt,R.M., Mauch,H. and Roth,A. 5.07e8
+ 8 270821 Amunts A, Brown A, Toots J, Scheres SHW and Ramakrishnan V.     8.43e8
+ 9 268195 Austin,M.N., Rabe,L.K., Srinivasan,S., Fredricks,D.N., Wiesenf… 3.94e9
+10 268050 Albuquerque,L., Kowalewicz-Kulbat,M., Drzewiecka,D., Staczek,P… 3.22e9
+11 240721 Al-Sa'ady,M.T., Alkhafaji,Z.A. and Shibly,K.                    5.99e8
+12 230446 Abramyan,J., Leung,K.J. and Richman,J.M.                        3.98e9
+13 222464 Azofeifa,G., Arce,V., Alape,A. and Flores,M.                    5.98e8
+14 220421 Agate,R.J., Perlman,W.R. and Arnold,A.P.                        9.80e8
+15 170471 Aghokeng,A.F., Vergne,L., Mpoudi-Ngole,E., Mbangue,M., Deoudje… 2.40e9
+16 149997 Alexandrow,M.G. and Hamlin,J.L.                                 9.83e8
+17 108872 Al-Tammar,K.A., Abu Bakar,F. and Abdul Murad,A.                 2.29e9
+18  32902 Adeyinka,O.S., Bushra,T. and Nasir,I.A.                         2.39e9
+19  14270 Abada,E. and El-Sherbiny,M.                                     2.46e9
+20   2947 Alvarez-Dominguez,J.R., Zhang,X. and Hu,W.                      3.17e7
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -434,20 +434,22 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 148 × 4
-      id name                                                       author acc  
-   <int> <chr>                                                       <dbl> <chr>
- 1 38576 Adler,H., Frech,B., Thony,M., Pfister,H., Peterhans,E. an…  38576 AF34…
- 2 38576 Adler,H., Frech,B., Thony,M., Pfister,H., Peterhans,E. an…  38576 U146…
- 3   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 4   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 5   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 6   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 7   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 8   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
- 9   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
-10   436 Almeida-Dalmet,S., Litchfield,C.D., Gillevet,P. and Baxte…    436 KT79…
-# ℹ 138 more rows
+# A tibble: 13 × 4
+       id name                                                      author acc  
+    <int> <chr>                                                      <dbl> <chr>
+ 1 337298 Aleksic T, Gray N, Wu X, Rieunier G, Osher E, Mills J, V… 337298 NM_0…
+ 2 337298 Aleksic T, Gray N, Wu X, Rieunier G, Osher E, Mills J, V… 337298 NM_0…
+ 3 337298 Aleksic T, Gray N, Wu X, Rieunier G, Osher E, Mills J, V… 337298 NM_0…
+ 4 357135 Ansari,A., Sabara,P., Puvar,A., Raval,J., Patel,Z., Gand… 357135 MT57…
+ 5 214301 Alabdullah,A., Minafra,A., Elbeaino,T., Saponari,M., Sav… 214301 FJ44…
+ 6 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 AM41…
+ 7 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 AM41…
+ 8 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 AM41…
+ 9 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 AM41…
+10 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 AM41…
+11 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 FN82…
+12 148496 Avivi,A., Gerlach,F., Joel,A., Reuss,S., Burmester,T., N… 148496 FN82…
+13 267512 Akbar,A., Chen,C., Zhu,L., Xin,K., Cheng,J., Yang,Q., Zh… 267512 NR_1…
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -524,7 +526,7 @@ dhis2_login
 GET https://play.im.dhis2.org/stable-2-42-5-1/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (12558 bytes)
+Body: In memory (12600 bytes)
 ```
 
 If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-5-1` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
@@ -557,27 +559,29 @@ tibble::as_tibble(programs)
 ```
 
 ``` output
-# A tibble: 18 × 3
+# A tibble: 20 × 3
    displayName                                         id          type     
    <chr>                                               <chr>       <chr>    
  1 ANC Registry (AI QA)                                nwRVCEXbrzR tracker  
  2 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 3 Child Programme                                     IpHINAT79UW tracker  
- 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 5 Daily Spray Operator Form                           nppSwI94Yva aggregate
- 6 Information Campaign                                q04UBOqq3rp aggregate
- 7 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 8 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 9 Malaria case registration                           VBqh0ynB2wv aggregate
-10 Malaria focus investigation                         M3xtLkYBlKI tracker  
-11 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-12 Maternal and Child Health (MCH) Program             NyQHyNNiiNl tracker  
-13 Mental Health Wellness Tracker                      Btcz4346koO tracker  
-14 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-15 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-16 TB program                                          ur1Edk5Oe2n tracker  
-17 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-18 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+ 3 CDC Bottle                                          BfW7UmisRmz aggregate
+ 4 Child Programme                                     IpHINAT79UW tracker  
+ 5 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 6 Daily Spray Operator Form                           nppSwI94Yva aggregate
+ 7 Diabetes Care & Complications Tracker               mN7SYIvl0DW tracker  
+ 8 Information Campaign                                q04UBOqq3rp aggregate
+ 9 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+10 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+11 Malaria case registration                           VBqh0ynB2wv aggregate
+12 Malaria focus investigation                         M3xtLkYBlKI tracker  
+13 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+14 Maternal and Child Health (MCH) Program             aks8IcfaKad tracker  
+15 Mental Health Wellness Tracker                      Btcz4346koO tracker  
+16 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+17 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+18 TB program                                          ur1Edk5Oe2n tracker  
+19 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+20 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -756,14 +760,14 @@ tibble::as_tibble(covid_cases)
 ```
 
 ``` output
-# A tibble: 2 × 16
+# A tibble: 2 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
 1 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
 2 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
-# ℹ 9 more variables: date_of_birth <chr>, country <chr>, city <chr>,
+# ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, date_first_contact <date>, Ct_values <chr>
+#   date_last_contact <date>, Ct_values <chr>
 ```
 
 A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
