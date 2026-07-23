@@ -44,6 +44,9 @@ authors:
     family-names: Bah
     email: Bubacarr.Bah1@lshtm.ac.uk
     orcid: 'https://orcid.org/0000-0003-3318-6668'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21512018
 repository-code: 'https://github.com/epiverse-trace/tutorials-early'
 url: 'https://epiverse-trace.github.io/tutorials-early/'
 abstract: >-
@@ -76,5 +79,5 @@ keywords:
   - rstats
   - english-language
 license: CC-BY-4.0
-version: v2025-03-11
-date-released: '2025-03-11'
+version: v2026-07-23
+date-released: '2026-07-23'
