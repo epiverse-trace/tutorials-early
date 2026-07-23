@@ -68,8 +68,9 @@ To cite these tutorials in publications use:
 
 
 ```
-Degoot A, Valle-Campos A, Mané K, Gruson H, Funk S, Eggo R, Kucharski A, Bah B (2026). "Epiverse-TRACE Tutorials Early: Read and clean case data, and make linelist for outbreak
-analytics with R." <https://epiverse-trace.github.io/tutorials-early/>.
+Degoot A, Valle-Campos A, Mané K, Gruson H, Funk S, Eggo R, Kucharski A, Bah B (2026). "Epiverse-TRACE Tutorials Early: Read and
+clean case data, and make linelist for outbreak analytics with R." doi:10.5281/zenodo.21512018
+<https://doi.org/10.5281/zenodo.21512018>. <https://epiverse-trace.github.io/tutorials-early/>.
 ```
 
 A BibTeX entry for LaTeX users is:
@@ -80,6 +81,7 @@ A BibTeX entry for LaTeX users is:
   title = {Epiverse-TRACE Tutorials Early: Read and clean case data, and make linelist for outbreak analytics with R},
   author = {Abdoelnaser Degoot and Andree Valle-Campos and Karim Mané and Hugo Gruson and Sebastian Funk and Rosalind Eggo and Adam Kucharski and Bubacarr Bah},
   year = {2026},
+  doi = {10.5281/zenodo.21512018},
   url = {https://epiverse-trace.github.io/tutorials-early/},
   abstract = {The Epiverse-TRACE initiative aims to provide a software ecosystem for outbreak analytics with integrated, generalisable and scalable community-driven software. We support the development of R packages, make the existing ones interoperable for the user experience, and stimulate a community of practice. In the outbreak analytics curriculum, we built three tutorials around an outbreak analysis pipeline split into three stages: Early, Middle, and Late tasks. Early tasks include reading, cleaning and validating case data, and converting line list data to incidence for visualizing epidemic curves. Middle tasks host real-time analysis that includes accessing epidemiological delays, estimating transmission metrics, forecasting, and severity from incidence data, superspreading from line list and contact data, and simulating transmission chains. Late tasks include accessing and analyzing social contact matrices, scenario modelling to simulate disease spread and investigate interventions, and modelling disease burden.},
   keywords = {outbreak-analytics,exploratory-data-analysis,data-cleaning,data-validation,data-visualization,carpentries,rstats,english-language},
