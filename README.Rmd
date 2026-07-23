@@ -4,6 +4,7 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- knitr::knit("README.Rmd", output = "README.md") -->
+<!-- add DOI to README.md manually -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
