@@ -1054,11 +1054,19 @@ To identify both groups:
 
 - On a piece of paper, write the names of each function under the corresponding column:
 
-| **Diagnose** cleaning status | **Perform** cleaning action | 
+| Functions to **diagnose** cleaning status | Functions to **perform** cleaning action | 
 | ---------------- | ---------------- |
 | ...              | ...              | 
 
 ::::::::::::::
+
+:::::::::::::::::::: discussion
+
+Other than using {cleanepi} can you list any other ways that these diagnostic and cleaning tasks could be completed? For example, think of other R functions or R packages that could be used. Please list the pros and cons you can think of between the different approaches.
+
+Were there any diagnostic or cleaning functions that you did not know about before but that you think could be applicable in your work? If you are able, please share examples of where these functions could be used in your work.
+
+::::::::::::::::::::
 
 :::::::::::::: instructor
 
