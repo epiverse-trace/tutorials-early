@@ -262,31 +262,31 @@ dat
 ```
 
 ``` output
-# Source:     SQL [?? x 3]
+# A query:    ?? x 3
 # Database:   mysql 5.5.5-10.11.8-MariaDB [@genome-mysql.soe.ucsc.edu:/hgFixed]
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 280516 Alves MM, Burzynski G, Delalande JM, Osinga J, van der Goot A,… 9.86e8
- 2 271687 Alfonso-Pecchio A, Garcia M, Leonardi R and Jackowski S.        3.94e9
- 3 269783 Araujo MA, Marques TE, Octacilio-Silva S, Arroxelas-Silva CL, … 2.89e9
- 4 254096 Ambegaonkar,A., Vershon,A. and Mead,J.                          2.18e9
- 5 222253 Avaron,F., Hoffman,L., Guay,D. and Akimenko,M.A.                2.76e9
- 6 208729 Amedee,A.M., Rychert,J.A. and Lacour,N.                         5.99e8
- 7 169840 Andriamandimby,S.F., Randrianarivo-Solofoniaina,A.E., Jeanmair… 9.95e8
- 8 169585 Adkar-Purushothama,C.R., Quaglino,F., Casati,P. and Bianco,P.A. 9.78e8
- 9 160063 Angelotti,T. and Hofmann,F.                                     2.39e9
-10 133462 An,G., Huang,T.H., Tesfaigzi,J., Garcia-Heras,J., Ledbetter,D.… 2.50e9
-11 128322 Ahmed,Z.M., Riazuddin,S., Aye,S., Ali,R.A., Venselaar,H., Anwa… 2.87e9
-12 126974 Altenberger,T., Bilban,M., Auer,M., Knosp,E., Wolfsberger,S., … 3.10e9
-13  89341 Al-Babili,S., Hugueney,P., Schledz,M., Welsch,R., Frohnmeyer,H… 3.91e9
-14  83564 Asif,M.H., Dhawan,P. and Nath,P.                                3.19e9
-15  65345 Ashida,Y., Watanabe,J., Matsushima,A. and Hirata,T.             5.98e8
-16  65145 Asawatreratanakul,K., Zhang,Y.W., Wititsuwannakul,R. and Koyam… 1.67e9
-17  50659 Atabekov,J., Korpela,T., Dorokhov,Y., Ivanov,P., Skulachev,M.,… 2.39e9
-18  39509 Antonini,S.                                                     1.07e8
-19  39402 Argov,N. and Sklan,D.                                           3.64e9
-20  12546 Aich,A. and Shaha,C.                                            1.50e8
+ 1 360722 Aerbajinai W, Ghosh MC, Liu J, Kumkhaek C, Zhu J, Chin K, Roua… 9.96e8
+ 2 329162 Antony J, Zanini E, Kelly Z, Tan TZ, Karali E, Alomary M, Jung… 2.21e9
+ 3 318804 Abdullah NH and Ismail S.                                       6.18e7
+ 4 314722 Abeyta A, Castella M, Jacquemont C and Taniguchi T.             3.98e9
+ 5 303662 Anderson ST, Barclay JL, Fanning KJ, Kusters DH, Waters MJ and… 3.93e9
+ 6 258335 Alain,K., Rolland,S., Crassous,P., Lesongeur,F., Zbinden,M., l… 3.99e9
+ 7 255427 Aklujkar,M., Young,N.D., Holmes,D., Chavan,M., Risso,C., Kiss,… 9.91e8
+ 8 253899 Ammanamanchi,N., Katz,J. and Mead,J.                            2.79e9
+ 9 243756 Ajith,H., Vyas,D.H. and Patell,V.M.                             9.92e8
+10 211833 Aquino,J.D., Tang,W.F., Ishii,R., Ono,T., Eshita,Y., Aono,H. a… 3.82e9
+11 207322 Alexeev,D., Chukin,M.M., Generozov,E.V., Govorun,V.M., Gribano… 1.69e9
+12 173806 Ahlquist,P., Dasgupta,R. and Kaesberg,P.                        9.86e8
+13 173772 Al-Hammad,Y.                                                    4.05e8
+14 166392 Abe,M., Ito,N., Sakai,K., Kaku,Y., Oba,M., Nishimura,M., Kuran… 9.91e8
+15 150665 Abmayr,S., Gregorevic,P., Allen,J.M. and Chamberlain,J.S.       1.38e9
+16  70586 Abdel Razik,E.S.                                                1.94e9
+17  51050 Akada,R. and Nakamura,M.                                        9.89e8
+18  49795 Alessi,D.R., Saito,Y., Campbell,D.G., Cohen,P., Sithanandam,G.… 1.67e9
+19  47644 Agris,P.F., KiKuchi,Y., Gross,H.J., Takano,M. and Sharp,G.C.    2.40e9
+20  45633 Abu El-Magd,M.E.R., Abas,H.E., EL-Kattawy,A.M.A. and Mokhbatly… 1.69e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -302,10 +302,14 @@ dat %>%
 <SQL>
 SELECT `id`, `name`, `crc`
 FROM (
-  SELECT `author`.*, ROW_NUMBER() OVER (ORDER BY RAND()) AS `col01`
+  SELECT
+    *,
+    CASE
+WHEN (NOT(((RAND()) IS NULL))) THEN ROW_NUMBER() OVER (PARTITION BY (CASE WHEN (((RAND()) IS NULL)) THEN 1 ELSE 0 END) ORDER BY RAND())
+END AS `col01`
   FROM `author`
   WHERE (SUBSTR(`name`, 1, 1) = 'A')
-) `q01`
+) AS `q01`
 WHERE (`col01` <= 20)
 ORDER BY `id` DESC
 ```
@@ -327,26 +331,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 364672 Ahn,J.H., Lim,J.M., Kim,S.J., Song,J., Kwon,S.W. and Weon,H.Y.  2.75e9
- 2 301229 Aijaz S, Sanchez-Heras E, Balda MS and Matter K.                1.94e9
- 3 272284 Angelopoulou K, Prassas I and Yousef GM.                        1.32e9
- 4 271440 Anderson KE, Kielkowska A, Durrant TN, Juvin V, Clark J, Steph… 9.83e8
- 5 260571 An,D.S., Kim,S.G., Ten,L.N. and Cho,C.H.                        1.49e9
- 6 250769 Asi,S., Marushak,T. and Mead,J.                                 2.39e8
- 7 242927 Avrova,A.O., Venter,E., Birch,P.R.J. and Whisson,S.C.           4.00e9
- 8 192414 Alexandre,M.A.V., Duarte,L.M.L., Rodrigues,L.K., Ramos,A.F. an… 9.83e8
- 9 185984 Aguilar,J.M., Hernandez-Gallardo,M.D., Cenis,J.L., Lacasa,A. a… 9.79e8
-10 180275 Afifi,M.A., Zaki,M.M., ABoZeid,H.H. and El-Kady,M.F.            3.91e9
-11 177605 Alexandre,M.A.V., Duarte,L.M.L., Ramos,A.F. and Harakava,R.     9.83e8
-12 171661 Ar Gouilh,M., Puechmaille,S.J., Gonzalez,J.-P.J., Teeling,E., … 2.69e9
-13 153780 Azim,S., Banday,A.R. and Tabish,M.                              1.67e9
-14 128930 Aksenova,V., Khotin,M., Turoverova,L., Barlev,N., Magnusson,K.… 2.40e9
-15 118320 Ahmad,F., Gonzalez,O., Ramagli,L., Xu,J., Siciliano,M.J., Bach… 2.40e9
-16 110990 Ali,B., Sohail,Y., Mumtaz,A.S. and Berndt,R.                    2.75e9
-17  97114 Aslam,M., Anandhan,S., Singh,R.K. and Ahmed,Z.                  6.86e8
-18  52134 Aurias,A., Chibon,F. and Mariani,O.                             2.39e9
-19  45713 Azhar,M. and Somashekhar,R.                                     3.74e9
-20  31554 Atkinson,N.S., Robertson,G.A. and Ganetzky,B.                   9.82e8
+ 1 342458 An HJ, Koh HM and Song DH.                                      4.11e9
+ 2 327919 Assumpcao,T.C., Eaton,D.P., Pham,V.M., Francischetti,I.M., Aok… 3.98e9
+ 3 315865 Anandham,R., Indira Gandhi,P., Kwon,S.W., Sa,T.M., Kim,Y.K. an… 6.86e8
+ 4 243058 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C., Gust… 2.73e9
+ 5 238726 Atkinson,B.G., Helbing,C.C. and Chen,Y.                         3.93e9
+ 6 238544 Anderson,M., Amemiya,C., Luer,C., Litman,R., Rast,J., Niimura,… 5.99e8
+ 7 234381 Al-Zailaie,K.A., Kang,S.W., Youngren,O.M., Thayananuphat,A., B… 3.91e9
+ 8 216220 Ahsan,M.N., Aoki,H. and Watabe,S.                               3.82e9
+ 9 197512 Arai,S., Aoki,K., Son,N.T., Tu,V.T., Kikuchi,F., Kinoshita,G.,… 4.18e8
+10 181914 Anjanappa,R.B., Gowda,M.M.N., Kanju,E., Nawabu,H., Gruissem,W.… 3.47e9
+11 171691 Air,G.M. and Gulati,S.                                          5.99e8
+12 157954 Alexander,W.S. and Dunn,A.R.                                    2.75e9
+13 151698 Akira,T., Komatsu,M., Nango,R., Tomooka,A., Konaka,K., Yamauch… 4.00e9
+14 136764 Adoyo,P.A., Lea,I.A., Richardson,R.T., Widgren,E.E. and O'Rand… 9.73e8
+15 120179 Abdelhaleem,M.M.                                                2.02e9
+16 102496 Abidi,F., Aissaoui,N., Gaudin,J.C., Chobert,J.M., Haertle,T. a… 2.93e9
+17  72480 Anuratha,C.S., Mew,T. and Muthukrishnan,S.                      4.00e9
+18  64748 Ashida,H., Tamaki,H., Fujimoto,T., Yamamoto,K. and Kumagai,H.   2.40e9
+19  35070 Affolter,M., Montagne,J., Walldorf,U., Groppe,J., Kloter,U., L… 3.93e9
+20  15401 Anantharaman,S. and Craft,J.A.                                  2.39e9
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -413,12 +417,16 @@ SELECT `LHS`.*, `author`, `acc`
 FROM (
   SELECT `id`, `name`
   FROM (
-    SELECT `author`.*, ROW_NUMBER() OVER (ORDER BY RAND()) AS `col01`
+    SELECT
+      *,
+      CASE
+WHEN (NOT(((RAND()) IS NULL))) THEN ROW_NUMBER() OVER (PARTITION BY (CASE WHEN (((RAND()) IS NULL)) THEN 1 ELSE 0 END) ORDER BY RAND())
+END AS `col01`
     FROM `author`
     WHERE (SUBSTR(`name`, 1, 1) = 'A')
-  ) `q01`
+  ) AS `q01`
   WHERE (`col01` <= 5)
-) `LHS`
+) AS `LHS`
 LEFT JOIN `gbCdnaInfo`
   ON (`LHS`.`id` = `gbCdnaInfo`.`author`)
 ```
@@ -434,24 +442,20 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 15 × 4
+# A tibble: 11 × 4
        id name                                                      author acc  
     <int> <chr>                                                      <dbl> <chr>
- 1 361044 Amatya N, Wales TE, Kwon A, Yeung W, Joseph RE, Fulton D… 361044 NM_0…
- 2 361044 Amatya N, Wales TE, Kwon A, Yeung W, Joseph RE, Fulton D… 361044 NM_0…
- 3 361044 Amatya N, Wales TE, Kwon A, Yeung W, Joseph RE, Fulton D… 361044 NM_0…
- 4 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
- 5 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
- 6 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
- 7 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
- 8 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
- 9 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
-10 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
-11 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
-12 200680 Ahmad,A., Azmai,M.N.A. and Abdullah,A.                    200680 MG58…
-13 115745 Abdelgadir,S.E., Roselli,C.E., Choate,J.V. and Resko,J.A. 115745 AF09…
-14    408 Astashkin,E.I., Knyazeva,A.I., Kartsev,N.N. and Fursova,…    408 KJ46…
-15 334026 Ash,S., Marrone,P. and Mead,J.                            334026 JZ98…
+ 1 167020 Anindita,P.D., Sasaki,M., Setiyono,A., Handharyani,E., O… 167020 AB91…
+ 2 167020 Anindita,P.D., Sasaki,M., Setiyono,A., Handharyani,E., O… 167020 AB91…
+ 3 167020 Anindita,P.D., Sasaki,M., Setiyono,A., Handharyani,E., O… 167020 AB91…
+ 4  83972 Alche,J.D., Castro,A.J. and Rodriguez-Garcia,M.I.          83972 AF19…
+ 5 362706 Aragon E, Wang Q, Zou Y, Morgani SM, Ruiz L, Kaczmarska … 362706 NM_0…
+ 6 362706 Aragon E, Wang Q, Zou Y, Morgani SM, Ruiz L, Kaczmarska … 362706 NM_0…
+ 7 362706 Aragon E, Wang Q, Zou Y, Morgani SM, Ruiz L, Kaczmarska … 362706 NM_0…
+ 8  48298 Aharony,D., Little,J., Thomas,C., Powell,S., Downey-Jone…  48298 S824…
+ 9  48298 Aharony,D., Little,J., Thomas,C., Powell,S., Downey-Jone…  48298 S762…
+10  48298 Aharony,D., Little,J., Thomas,C., Powell,S., Downey-Jone…  48298 NM_0…
+11 339309 Alfy,H., Ghreeb,R.Y. and Hafez,E.E.                       339309 MK95…
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -515,7 +519,7 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-5-1",
+  from = "https://play.im.dhis2.org/stable-2-42-6",
   user_name = "admin",
   password = "district"
 )
@@ -525,13 +529,13 @@ dhis2_login
 
 ``` output
 <httr2_response>
-GET https://play.im.dhis2.org/stable-2-42-5-1/api/me
+GET https://play.im.dhis2.org/stable-2-42-6/api/me
 Status: 200 OK
 Content-Type: application/json
-Body: In memory (12749 bytes)
+Body: In memory (12468 bytes)
 ```
 
-If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-5-1` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
+If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-6` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
 
 ::::::: caution
 
@@ -541,7 +545,7 @@ Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
 ``` r
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-5-1",
+  from = "https://play.im.dhis2.org/stable-2-42-6",
   user_name = rstudioapi::askForPassword("Database username"),
   password = rstudioapi::askForPassword("Database password")
 )
@@ -561,20 +565,24 @@ tibble::as_tibble(programs)
 ```
 
 ``` output
-# A tibble: 28 × 3
-   displayName                             id          type     
-   <chr>                                   <chr>       <chr>    
- 1 "ANC Registry (AI QA)"                  nwRVCEXbrzR tracker  
- 2 "ANC risk factor "                      BrA9KDpAfWW aggregate
- 3 "Antenatal care visit"                  lxAQ7Zs9VYR aggregate
- 4 "Cause of death (registration)"         ogrOUKoSaWA tracker  
- 5 "CDC Bottle"                            BfW7UmisRmz aggregate
- 6 "Child Programme"                       IpHINAT79UW tracker  
- 7 "Contraceptives Voucher Program"        kla3mAPgvCH aggregate
- 8 "Daily Spray Operator Form"             nppSwI94Yva aggregate
- 9 "Diabetes Care & Complications Tracker" mN7SYIvl0DW tracker  
-10 "Information Campaign"                  q04UBOqq3rp aggregate
-# ℹ 18 more rows
+# A tibble: 15 × 3
+   displayName                                         id          type     
+   <chr>                                               <chr>       <chr>    
+ 1 Acute Viral Hepatitis Case Report — Unified         OhbVrpoiVgR aggregate
+ 2 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 3 Child Programme                                     IpHINAT79UW tracker  
+ 4 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 5 Information Campaign                                q04UBOqq3rp aggregate
+ 6 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 7 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 8 Malaria case registration                           VBqh0ynB2wv aggregate
+ 9 Malaria focus investigation                         M3xtLkYBlKI tracker  
+10 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+11 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+12 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+13 TB program                                          ur1Edk5Oe2n tracker  
+14 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+15 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
@@ -587,7 +595,7 @@ tibble::as_tibble(org_units)
 ```
 
 ``` output
-# A tibble: 1,161 × 8
+# A tibble: 1,166 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
  1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
@@ -600,7 +608,7 @@ tibble::as_tibble(org_units)
  8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
 10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
-# ℹ 1,151 more rows
+# ℹ 1,156 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
@@ -672,7 +680,7 @@ tibble::as_tibble(target_org_units)
 ```
 
 ``` output
-# A tibble: 1,161 × 3
+# A tibble: 1,166 × 3
    org_unit_ids levels        org_unit_names              
    <chr>        <chr>         <chr>                       
  1 vRC0stJ5y9Q  Facility_name Bucksal Clinic              
@@ -685,7 +693,7 @@ tibble::as_tibble(target_org_units)
  8 LaxJ6CD2DHq  Facility_name EM&BEE Maternity Home Clinic
  9 WerHl8SDtRU  Facility_name Mandema CHP                 
 10 CTnuuI55SOj  Facility_name Manewa MCHP                 
-# ℹ 1,151 more rows
+# ℹ 1,156 more rows
 ```
 
 <!-- :::::::::::::::: callout
@@ -748,7 +756,7 @@ tibble::as_tibble(covid_cases)
 # A tibble: 2 × 15
   case_id             person_id date_onset case_origin case_status outcome sex  
   <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
-1 UZWZTD-BFNG4C-VXMD… QYLUZS-S… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+1 TYG7I3-2GONYO-JDJP… QJXOUU-6… NA         IN_COUNTRY  SUSPECT     NO_OUT… <NA> 
 2 ULMPMT-PBQOQ2-ETGY… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
 # ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
 #   latitude <chr>, longitude <chr>, contact_id <chr>,
@@ -788,9 +796,13 @@ tibble::as_tibble(disease_names)
 :::::::::::::::::::::: challenge
 ### Reading from Demo SORMAS sever
 
+<!-- 
 The SORMAS organization also provides demo servers for development and testing. One of
 these is called **clinical surveillance**, available at the link
-("https://demo.sormas.org/sormas-rest"), and accessible with username "CaseSup" and password "SJgFKffPDmr7". Log into this server, list all available diseases, and import cases related to the monkeypox (mpox) disease.
+("https://demo.sormas.org/sormas-rest"), and accessible with username "CaseSup" and password "SJgFKffPDmr7". 
+-->
+
+Log into this server, list all available diseases, and import cases related to the monkeypox (mpox) disease.
 
 ::::::::::::::: solution
 
@@ -800,8 +812,8 @@ these is called **clinical surveillance**, available at the link
 sormas_demo <- readepi::login(
   type = "sormas",
   from = "https://demo.sormas.org/sormas-rest",
-  user_name = "CaseSup",
-  password = "SJgFKffPDmr7"
+  user_name = "SurvSup",
+  password = "Lk5R7JXeZSEc"
 )
 
 # List the names of all disease
@@ -835,20 +847,23 @@ mpox_cases <- readepi::read_sormas(
 )
 ```
 
-``` error
-Error in `sormas_get_cases_data()`:
-✖ No cases found for the supplied disease.
-ℹ Please run `sormas_get_diseases()` to check if you provided the correct
-  disease name.
+``` warning
+Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
+coercion
 ```
 
 ``` r
 tibble::as_tibble(mpox_cases)
 ```
 
-``` error
-Error:
-! object 'mpox_cases' not found
+``` output
+# A tibble: 1 × 15
+  case_id             person_id date_onset case_origin case_status outcome sex  
+  <chr>               <chr>     <date>     <chr>       <chr>       <chr>   <chr>
+1 TU75PT-MMBE3I-OEJN… XQFYXH-R… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA> 
+# ℹ 8 more variables: date_of_birth <chr>, country <chr>, city <chr>,
+#   latitude <chr>, longitude <chr>, contact_id <chr>,
+#   date_last_contact <date>, Ct_values <chr>
 ```
 
 :::::::::::::::

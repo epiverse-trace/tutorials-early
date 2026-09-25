@@ -172,7 +172,7 @@ scan_result |>
                        background = "red", color = "white")
 ```
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; "><table class=" lightable-paper lightable-striped" style='font-size: 14px; font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+<div style="border: 1px solid #ddd; padding: 5px;overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; "><table class=" lightable-paper lightable-striped" style='font-size: 14px; font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Field_names </th>
@@ -455,7 +455,7 @@ constant_data |>
                          fixed_thead = TRUE)
 ```
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; "><table class=" lightable-paper lightable-striped" style='font-size: 14px; font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; "><table class=" lightable-paper lightable-striped" style='font-size: 14px; font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
  <thead>
   <tr>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> iteration </th>
