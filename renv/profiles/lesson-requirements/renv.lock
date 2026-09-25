@@ -298,12 +298,12 @@
     },
     "RSQLite": {
       "Package": "RSQLite",
-      "Version": "3.53.1",
+      "Version": "3.53.3",
       "Source": "Repository",
       "Title": "SQLite Interface for R",
-      "Date": "2026-05-22",
+      "Date": "2026-06-28",
       "Authors@R": "c( person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-1416-3412\")), person(\"Hadley\", \"Wickham\", role = \"aut\"), person(c(\"David\", \"A.\"), \"James\", role = \"aut\"), person(\"Seth\", \"Falcon\", role = \"aut\"), person(\"D. Richard\", \"Hipp\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Dan\", \"Kennedy\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Joe\", \"Mistachkin\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(, \"SQLite Authors\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"Liam\", \"Healy\", role = \"ctb\", comment = \"for the included SQLite sources\"), person(\"R Consortium\", role = \"fnd\"), person(, \"RStudio\", role = \"cph\") )",
-      "Description": "Embeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.",
+      "Description": "Embeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations. Optionally, when libcurl is available at build time, an experimental HTTP/HTTPS virtual file system (VFS) can be enabled to allow read-only access to remote immutable SQLite database files via URIs.",
       "License": "LGPL (>= 2.1)",
       "URL": "https://rsqlite.r-dbi.org, https://github.com/r-dbi/RSQLite",
       "BugReports": "https://github.com/r-dbi/RSQLite/issues",
@@ -327,6 +327,7 @@
         "gert",
         "gh",
         "hms",
+        "httpuv",
         "knitr",
         "magrittr",
         "rmarkdown",
@@ -344,7 +345,7 @@
       "Config/autostyle/strict": "false",
       "Config/testthat/edition": "3",
       "Encoding": "UTF-8",
-      "Collate": "'SQLiteConnection.R' 'SQLKeywords_SQLiteConnection.R' 'SQLiteDriver.R' 'SQLite.R' 'SQLiteResult.R' 'coerce.R' 'compatRowNames.R' 'copy.R' 'cpp11.R' 'datasetsDb.R' 'dbAppendTable_SQLiteConnection.R' 'dbBeginTransaction.R' 'dbBegin_SQLiteConnection.R' 'dbBind_SQLiteResult.R' 'dbClearResult_SQLiteResult.R' 'dbColumnInfo_SQLiteResult.R' 'dbCommit_SQLiteConnection.R' 'dbConnect_SQLiteConnection.R' 'dbConnect_SQLiteDriver.R' 'dbDataType_SQLiteConnection.R' 'dbDataType_SQLiteDriver.R' 'dbDisconnect_SQLiteConnection.R' 'dbExistsTable_SQLiteConnection_Id.R' 'dbExistsTable_SQLiteConnection_character.R' 'dbFetch_SQLiteResult.R' 'dbGetException_SQLiteConnection.R' 'dbGetInfo_SQLiteConnection.R' 'dbGetInfo_SQLiteDriver.R' 'dbGetPreparedQuery.R' 'dbGetPreparedQuery_SQLiteConnection_character_data.frame.R' 'dbGetRowCount_SQLiteResult.R' 'dbGetRowsAffected_SQLiteResult.R' 'dbGetStatement_SQLiteResult.R' 'dbHasCompleted_SQLiteResult.R' 'dbIsValid_SQLiteConnection.R' 'dbIsValid_SQLiteDriver.R' 'dbIsValid_SQLiteResult.R' 'dbListObjects_SQLiteConnection.R' 'dbListResults_SQLiteConnection.R' 'dbListTables_SQLiteConnection.R' 'dbQuoteIdentifier_SQLiteConnection_SQL.R' 'dbQuoteIdentifier_SQLiteConnection_character.R' 'dbReadTable_SQLiteConnection_character.R' 'dbRemoveTable_SQLiteConnection_character.R' 'dbRollback_SQLiteConnection.R' 'dbSendPreparedQuery.R' 'dbSendPreparedQuery_SQLiteConnection_character_data.frame.R' 'dbSendQuery_SQLiteConnection_character.R' 'dbUnloadDriver_SQLiteDriver.R' 'dbUnquoteIdentifier_SQLiteConnection_SQL.R' 'dbWriteTable_SQLiteConnection_character_character.R' 'dbWriteTable_SQLiteConnection_character_data.frame.R' 'db_bind.R' 'deprecated.R' 'export.R' 'fetch_SQLiteResult.R' 'import-standalone-check_suggested.R' 'import-standalone-purrr.R' 'initExtension.R' 'initRegExp.R' 'isSQLKeyword_SQLiteConnection_character.R' 'make.db.names_SQLiteConnection_character.R' 'pkgconfig.R' 'show_SQLiteConnection.R' 'sqlData_SQLiteConnection.R' 'table.R' 'transactions.R' 'utils.R' 'version.R' 'zzz.R'",
+      "Collate": "'SQLiteConnection.R' 'SQLKeywords_SQLiteConnection.R' 'SQLiteDriver.R' 'SQLite.R' 'SQLiteResult.R' 'coerce.R' 'compatRowNames.R' 'copy.R' 'cpp11.R' 'datasetsDb.R' 'dbAppendTable_SQLiteConnection.R' 'dbBeginTransaction.R' 'dbBegin_SQLiteConnection.R' 'dbBind_SQLiteResult.R' 'dbClearResult_SQLiteResult.R' 'dbColumnInfo_SQLiteResult.R' 'dbCommit_SQLiteConnection.R' 'dbConnect_SQLiteConnection.R' 'dbConnect_SQLiteDriver.R' 'dbDataType_SQLiteConnection.R' 'dbDataType_SQLiteDriver.R' 'dbDisconnect_SQLiteConnection.R' 'dbExistsTable_SQLiteConnection_Id.R' 'dbExistsTable_SQLiteConnection_character.R' 'dbFetch_SQLiteResult.R' 'dbGetException_SQLiteConnection.R' 'dbGetInfo_SQLiteConnection.R' 'dbGetInfo_SQLiteDriver.R' 'dbGetPreparedQuery.R' 'dbGetPreparedQuery_SQLiteConnection_character_data.frame.R' 'dbGetRowCount_SQLiteResult.R' 'dbGetRowsAffected_SQLiteResult.R' 'dbGetStatement_SQLiteResult.R' 'dbHasCompleted_SQLiteResult.R' 'dbIsValid_SQLiteConnection.R' 'dbIsValid_SQLiteDriver.R' 'dbIsValid_SQLiteResult.R' 'dbListObjects_SQLiteConnection.R' 'dbListResults_SQLiteConnection.R' 'dbListTables_SQLiteConnection.R' 'dbQuoteIdentifier_SQLiteConnection_SQL.R' 'dbQuoteIdentifier_SQLiteConnection_character.R' 'dbReadTable_SQLiteConnection_character.R' 'dbRemoveTable_SQLiteConnection_character.R' 'dbRollback_SQLiteConnection.R' 'dbSendPreparedQuery.R' 'dbSendPreparedQuery_SQLiteConnection_character_data.frame.R' 'dbSendQuery_SQLiteConnection_character.R' 'dbUnloadDriver_SQLiteDriver.R' 'dbUnquoteIdentifier_SQLiteConnection_SQL.R' 'dbWriteTable_SQLiteConnection_character_character.R' 'dbWriteTable_SQLiteConnection_character_data.frame.R' 'db_bind.R' 'deprecated.R' 'export.R' 'fetch_SQLiteResult.R' 'httpvfs.R' 'httpvfs_config.R' 'import-standalone-check_suggested.R' 'import-standalone-purrr.R' 'initExtension.R' 'initRegExp.R' 'isSQLKeyword_SQLiteConnection_character.R' 'make.db.names_SQLiteConnection_character.R' 'pkgconfig.R' 'show_SQLiteConnection.R' 'sqlData_SQLiteConnection.R' 'table.R' 'transactions.R' 'utils.R' 'version.R' 'zzz.R'",
       "Config/roxygen2/version": "8.0.0.9000",
       "NeedsCompilation": "yes",
       "Author": "Kirill Müller [aut, cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>), Hadley Wickham [aut], David A. James [aut], Seth Falcon [aut], D. Richard Hipp [ctb] (for the included SQLite sources), Dan Kennedy [ctb] (for the included SQLite sources), Joe Mistachkin [ctb] (for the included SQLite sources), SQLite Authors [ctb] (for the included SQLite sources), Liam Healy [ctb] (for the included SQLite sources), R Consortium [fnd], RStudio [cph]",
@@ -353,10 +354,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.1.1-1.1",
+      "Version": "1.1.2",
       "Source": "Repository",
       "Title": "Seamless R and C++ Integration",
-      "Date": "2026-04-19",
+      "Date": "2026-07-01",
       "Authors@R": "c(person(\"Dirk\", \"Eddelbuettel\", role = c(\"aut\", \"cre\"), email = \"edd@debian.org\", comment = c(ORCID = \"0000-0001-6419-907X\")), person(\"Romain\", \"Francois\", role = \"aut\", comment = c(ORCID = \"0000-0002-2444-4226\")), person(\"JJ\", \"Allaire\", role = \"aut\", comment = c(ORCID = \"0000-0003-0174-9868\")), person(\"Kevin\", \"Ushey\", role = \"aut\", comment = c(ORCID = \"0000-0003-2880-7407\")), person(\"Qiang\", \"Kou\", role = \"aut\", comment = c(ORCID = \"0000-0001-6786-5453\")), person(\"Nathan\", \"Russell\", role = \"aut\"), person(\"Iñaki\", \"Ucar\", role = \"aut\", comment = c(ORCID = \"0000-0001-6403-5550\")), person(\"Doug\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"John\", \"Chambers\", role = \"aut\"))",
       "Description": "The 'Rcpp' package provides R functions as well as C++ classes which offer a seamless integration of R and C++. Many R data types and objects can be mapped back and forth to C++ equivalents which facilitates both writing of new code as well as easier integration of third-party libraries. Documentation about 'Rcpp' is provided by several vignettes included in this package, via the 'Rcpp Gallery' site at <https://gallery.rcpp.org>, the paper by Eddelbuettel and Francois (2011, <doi:10.18637/jss.v040.i08>), the book by Eddelbuettel (2013, <doi:10.1007/978-1-4614-6868-4>) and the paper by Eddelbuettel and Balamuta (2018, <doi:10.1080/00031305.2017.1375990>); see 'citation(\"Rcpp\")' for details.",
       "Depends": [
@@ -375,7 +376,6 @@
       "URL": "https://www.rcpp.org, https://dirk.eddelbuettel.com/code/rcpp.html, https://github.com/RcppCore/Rcpp",
       "License": "GPL (>= 2)",
       "BugReports": "https://github.com/RcppCore/Rcpp/issues",
-      "MailingList": "rcpp-devel@lists.r-forge.r-project.org",
       "RoxygenNote": "6.1.1",
       "Encoding": "UTF-8",
       "VignetteBuilder": "Rcpp",
@@ -1064,11 +1064,11 @@
     },
     "cffr": {
       "Package": "cffr",
-      "Version": "1.4.0",
+      "Version": "1.4.1",
       "Source": "Repository",
-      "Title": "Generate Citation File Format ('cff') Metadata for R Packages",
+      "Title": "Generate Citation File Format ('CFF') Metadata for R Packages",
       "Authors@R": "c( person(\"Diego\", \"Hernangómez\", , \"diego.hernangomezherrero@gmail.com\", role = c(\"aut\", \"cre\", \"cph\"), comment = c(ORCID = \"0000-0001-8457-4658\")), person(\"João\", \"Martins\", role = \"rev\", comment = c(ORCID = \"0000-0001-7961-4280\")), person(\"Scott\", \"Chamberlain\", role = \"rev\", comment = c(ORCID = \"0000-0003-1444-9135\")) )",
-      "Description": "The Citation File Format version 1.2.0 <doi:10.5281/zenodo.5171937> is a human and machine readable file format which provides citation metadata for software. This package provides core utilities to generate and validate this metadata.",
+      "Description": "Citation File Format ('CFF') version 1.2.0 <doi:10.5281/zenodo.5171937> is a human- and machine-readable file format for software citation metadata. Core utilities generate, read, write and validate Citation File Format metadata for R packages.",
       "License": "GPL (>= 3)",
       "URL": "https://docs.ropensci.org/cffr/, https://github.com/ropensci/cffr",
       "BugReports": "https://github.com/ropensci/cffr/issues",
@@ -1079,7 +1079,7 @@
         "cli (>= 2.0.0)",
         "desc (>= 1.3.0)",
         "jsonlite (>= 1.7.2)",
-        "jsonvalidate (>= 1.5.0)",
+        "jsonvalidate (>= 1.1.0)",
         "tools",
         "utils",
         "yaml (>= 2.2.1)"
@@ -1153,7 +1153,7 @@
     },
     "chron": {
       "Package": "chron",
-      "Version": "2.3-62",
+      "Version": "2.3-63",
       "Source": "Repository",
       "Title": "Chronological Objects which Can Handle Dates and Times",
       "Description": "Provides chronological objects which can handle dates and times.",
@@ -1174,7 +1174,7 @@
       ],
       "License": "GPL-2",
       "NeedsCompilation": "yes",
-      "Author": "David James [aut] (S original), Kurt Hornik [aut, trl, cre] (<https://orcid.org/0000-0003-4198-9911>, R port), Gabor Grothendieck [ctb], R Core Team [ctb]",
+      "Author": "David James [aut] (S original), Kurt Hornik [aut, trl, cre] (ORCID: <https://orcid.org/0000-0003-4198-9911>, R port), Gabor Grothendieck [ctb], R Core Team [ctb]",
       "Maintainer": "Kurt Hornik <Kurt.Hornik@R-project.org>",
       "Repository": "CRAN"
     },
@@ -1572,17 +1572,17 @@
     },
     "dbplyr": {
       "Package": "dbplyr",
-      "Version": "2.5.2",
+      "Version": "2.6.0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "A 'dplyr' Back End for Databases",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Maximilian\", \"Girlich\", role = \"aut\"), person(\"Edgar\", \"Ruiz\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
-      "Description": "A 'dplyr' back end for databases that allows you to work with remote database tables as if they are in-memory data frames.  Basic features works with any database that has a 'DBI' back end; more advanced features require 'SQL' translation to be provided by the package author.",
+      "Description": "A 'dplyr' back end for databases that allows you to work with remote database tables as if they are in-memory data frames.  Basic features work with any database that has a 'DBI' back end; more advanced features require 'SQL' translation to be provided by the package author.",
       "License": "MIT + file LICENSE",
       "URL": "https://dbplyr.tidyverse.org/, https://github.com/tidyverse/dbplyr",
       "BugReports": "https://github.com/tidyverse/dbplyr/issues",
       "Depends": [
-        "R (>= 3.6)"
+        "R (>= 4.1)"
       ],
       "Imports": [
         "blob (>= 1.2.0)",
@@ -1605,12 +1605,16 @@
         "withr (>= 2.5.0)"
       ],
       "Suggests": [
+        "adbcdrivermanager",
+        "adbcsqlite",
+        "adbi",
         "bit64",
         "covr",
         "knitr",
         "Lahman",
         "nycflights13",
         "odbc (>= 1.4.2)",
+        "RJDBC",
         "RMariaDB (>= 1.2.2)",
         "rmarkdown",
         "RPostgres (>= 1.4.5)",
@@ -1624,8 +1628,8 @@
       "Config/testthat/parallel": "TRUE",
       "Encoding": "UTF-8",
       "Language": "en-gb",
-      "RoxygenNote": "7.3.3",
-      "Collate": "'db-sql.R' 'utils-check.R' 'import-standalone-types-check.R' 'import-standalone-obj-type.R' 'utils.R' 'sql.R' 'escape.R' 'translate-sql-cut.R' 'translate-sql-quantile.R' 'translate-sql-string.R' 'translate-sql-paste.R' 'translate-sql-helpers.R' 'translate-sql-window.R' 'translate-sql-conditional.R' 'backend-.R' 'backend-access.R' 'backend-hana.R' 'backend-hive.R' 'backend-impala.R' 'verb-copy-to.R' 'backend-mssql.R' 'backend-mysql.R' 'backend-odbc.R' 'backend-oracle.R' 'backend-postgres.R' 'backend-postgres-old.R' 'backend-redshift.R' 'backend-snowflake.R' 'backend-spark-sql.R' 'backend-sqlite.R' 'backend-teradata.R' 'build-sql.R' 'data-cache.R' 'data-lahman.R' 'data-nycflights13.R' 'db-escape.R' 'db-io.R' 'db.R' 'dbplyr.R' 'explain.R' 'ident.R' 'import-standalone-s3-register.R' 'join-by-compat.R' 'join-cols-compat.R' 'lazy-join-query.R' 'lazy-ops.R' 'lazy-query.R' 'lazy-select-query.R' 'lazy-set-op-query.R' 'memdb.R' 'optimise-utils.R' 'pillar.R' 'progress.R' 'sql-build.R' 'query-join.R' 'query-select.R' 'query-semi-join.R' 'query-set-op.R' 'query.R' 'reexport.R' 'remote.R' 'rows.R' 'schema.R' 'simulate.R' 'sql-clause.R' 'sql-expr.R' 'src-sql.R' 'src_dbi.R' 'table-name.R' 'tbl-lazy.R' 'tbl-sql.R' 'test-frame.R' 'testthat.R' 'tidyeval-across.R' 'tidyeval.R' 'translate-sql.R' 'utils-format.R' 'verb-arrange.R' 'verb-compute.R' 'verb-count.R' 'verb-distinct.R' 'verb-do-query.R' 'verb-do.R' 'verb-expand.R' 'verb-fill.R' 'verb-filter.R' 'verb-group_by.R' 'verb-head.R' 'verb-joins.R' 'verb-mutate.R' 'verb-pivot-longer.R' 'verb-pivot-wider.R' 'verb-pull.R' 'verb-select.R' 'verb-set-ops.R' 'verb-slice.R' 'verb-summarise.R' 'verb-uncount.R' 'verb-window.R' 'zzz.R'",
+      "Collate": "'verb-copy-inline.R' 'verb-copy-to.R' 'db-sql.R' 'db.R' 'utils-check.R' 'import-standalone-types-check.R' 'import-standalone-obj-type.R' 'utils.R' 'sql.R' 'escape.R' 'translate-sql-cut.R' 'translate-sql-string.R' 'translate-sql-aggregate.R' 'translate-sql-scalar.R' 'translate-sql-helpers.R' 'translate-sql-window.R' 'translate-sql-conditional.R' 'backend-.R' 'backend-access.R' 'backend-adbc.R' 'backend-db2.R' 'backend-hana.R' 'backend-hive.R' 'backend-impala.R' 'backend-jdbc.R' 'backend-mssql.R' 'backend-mysql.R' 'backend-odbc.R' 'backend-oracle.R' 'backend-postgres.R' 'backend-postgres-old.R' 'backend-redshift.R' 'backend-snowflake.R' 'backend-spark-sql.R' 'backend-sqlite.R' 'backend-teradata.R' 'backward-compatibility.R' 'bind-queries.R' 'data-cache.R' 'data-lahman.R' 'data-nycflights13.R' 'db-io.R' 'dbplyr.R' 'ident.R' 'import-standalone-s3-register.R' 'join-by-compat.R' 'join-cols-compat.R' 'lazy-ops.R' 'memdb.R' 'optimise-utils.R' 'progress.R' 'query-base.R' 'query-join.R' 'query-rf-join.R' 'query-select.R' 'query-semi-join.R' 'query-set-op.R' 'query-union.R' 'query.R' 'remote.R' 'rows.R' 'schema.R' 'sql-build.R' 'sql-clause.R' 'sql-dialect.R' 'sql-glue.R' 'sql-quote.R' 'sql-superseded.R' 'src-sql.R' 'src_dbi.R' 'table-name.R' 'tbl-lazy.R' 'tbl-sql.R' 'tidyeval-across.R' 'tidyeval.R' 'translate-sql.R' 'utils-format.R' 'verb-arrange.R' 'verb-collapse.R' 'verb-collect.R' 'verb-compute.R' 'verb-count.R' 'verb-distinct.R' 'verb-do-query.R' 'verb-do.R' 'verb-expand.R' 'verb-explain.R' 'verb-fill.R' 'verb-filter.R' 'verb-group_by.R' 'verb-head.R' 'verb-joins.R' 'verb-mutate.R' 'verb-pivot-longer.R' 'verb-pivot-wider.R' 'verb-pull.R' 'verb-select.R' 'verb-set-ops.R' 'verb-slice.R' 'verb-summarise.R' 'verb-uncount.R' 'verb-window.R' 'with-dialect.R' 'zzz.R'",
+      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut, cre], Maximilian Girlich [aut], Edgar Ruiz [aut], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
@@ -1723,7 +1727,7 @@
     },
     "distributional": {
       "Package": "distributional",
-      "Version": "0.7.1",
+      "Version": "0.8.1",
       "Source": "Repository",
       "Title": "Vectorised Probability Distributions",
       "Authors@R": "c(person(given = \"Mitchell\", family = \"O'Hara-Wild\", role = c(\"aut\", \"cre\"), email = \"mail@mitchelloharawild.com\", comment = c(ORCID = \"0000-0001-6729-7695\")), person(given = \"Matthew\", family = \"Kay\", role = c(\"aut\"), comment = c(ORCID = \"0000-0001-9446-0419\")), person(given = \"Alex\", family = \"Hayes\", role = c(\"aut\"), comment = c(ORCID = \"0000-0002-4985-5160\")), person(given = \"Rob\", family = \"Hyndman\", role = c(\"aut\"), comment = c(ORCID = \"0000-0002-2140-5352\")), person(given = \"Earo\", family = \"Wang\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0001-6448-5260\")), person(given = \"Vencislav\", family = \"Popov\", role = c(\"ctb\"), comment = c(ORCID = \"0000-0002-8073-4199\")))",
@@ -2875,7 +2879,7 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "1.2.2",
+      "Version": "1.3.0",
       "Source": "Repository",
       "Title": "Perform HTTP Requests and Process the Responses",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"Maximilian\", \"Girlich\", role = \"ctb\") )",
@@ -2894,8 +2898,7 @@
         "magrittr",
         "openssl",
         "R6",
-        "rappdirs",
-        "rlang (>= 1.1.0)",
+        "rlang (>= 1.3.0)",
         "vctrs (>= 0.6.3)",
         "withr"
       ],
@@ -2904,6 +2907,7 @@
         "bench",
         "clipr",
         "covr",
+        "digest",
         "docopt",
         "httpuv",
         "jose",
@@ -2915,6 +2919,7 @@
         "otelsdk (>= 0.2.0)",
         "paws.common (>= 0.8.0)",
         "promises",
+        "rappdirs",
         "rmarkdown",
         "testthat (>= 3.1.8)",
         "tibble",
@@ -2923,11 +2928,11 @@
       ],
       "VignetteBuilder": "knitr",
       "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/roxygen2/version": "8.0.0",
       "Config/testthat/edition": "3",
       "Config/testthat/parallel": "true",
       "Config/testthat/start-first": "resp-stream, req-perform",
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.3",
       "NeedsCompilation": "no",
       "Author": "Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd], Maximilian Girlich [ctb]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
@@ -3184,14 +3189,14 @@
     },
     "kableExtra": {
       "Package": "kableExtra",
-      "Version": "1.4.0",
+      "Version": "1.4.1",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Construct Complex Table with 'kable' and Pipe Syntax",
       "Authors@R": "c( person('Hao', 'Zhu', email = 'haozhu233@gmail.com', role = c('aut', 'cre'), comment = c(ORCID = '0000-0002-3386-6076')), person('Thomas', 'Travison', role = 'ctb'), person('Timothy', 'Tsai', role = 'ctb'), person('Will', 'Beasley', email = 'wibeasley@hotmail.com', role = 'ctb'), person('Yihui', 'Xie', email = 'xie@yihui.name', role = 'ctb'), person('GuangChuang', 'Yu', email = 'guangchuangyu@gmail.com', role = 'ctb'), person('Stéphane', 'Laurent', role = 'ctb'), person('Rob', 'Shepherd', role = 'ctb'), person('Yoni', 'Sidi', role = 'ctb'),  person('Brian', 'Salzer', role = 'ctb'), person('George', 'Gui', role = 'ctb'), person('Yeliang', 'Fan', role = 'ctb'), person('Duncan', 'Murdoch', role = 'ctb'), person('Vincent', 'Arel-Bundock', role = 'ctb'), person('Bill', 'Evans',  role = 'ctb') )",
       "Description": "Build complex HTML or 'LaTeX' tables using 'kable()' from 'knitr'  and the piping syntax from 'magrittr'. Function 'kable()' is a light weight  table generator coming from 'knitr'. This package simplifies the way to  manipulate the HTML or 'LaTeX' codes generated by 'kable()' and allows  users to construct complex tables and customize styles using a readable  syntax.",
       "License": "MIT + file LICENSE",
-      "URL": "http://haozhu233.github.io/kableExtra/, https://github.com/haozhu233/kableExtra",
+      "URL": "https://haozhu233.github.io/kableExtra/, https://github.com/haozhu233/kableExtra",
       "BugReports": "https://github.com/haozhu233/kableExtra/issues",
       "Depends": [
         "R (>= 3.1.0)"
@@ -3224,10 +3229,10 @@
       "Config/testthat/edition": "3",
       "VignetteBuilder": "knitr",
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.2.3",
+      "RoxygenNote": "7.3.2",
       "Language": "en-US",
       "NeedsCompilation": "no",
-      "Author": "Hao Zhu [aut, cre] (<https://orcid.org/0000-0002-3386-6076>), Thomas Travison [ctb], Timothy Tsai [ctb], Will Beasley [ctb], Yihui Xie [ctb], GuangChuang Yu [ctb], Stéphane Laurent [ctb], Rob Shepherd [ctb], Yoni Sidi [ctb], Brian Salzer [ctb], George Gui [ctb], Yeliang Fan [ctb], Duncan Murdoch [ctb], Vincent Arel-Bundock [ctb], Bill Evans [ctb]",
+      "Author": "Hao Zhu [aut, cre] (ORCID: <https://orcid.org/0000-0002-3386-6076>), Thomas Travison [ctb], Timothy Tsai [ctb], Will Beasley [ctb], Yihui Xie [ctb], GuangChuang Yu [ctb], Stéphane Laurent [ctb], Rob Shepherd [ctb], Yoni Sidi [ctb], Brian Salzer [ctb], George Gui [ctb], Yeliang Fan [ctb], Duncan Murdoch [ctb], Vincent Arel-Bundock [ctb], Bill Evans [ctb]",
       "Maintainer": "Hao Zhu <haozhu233@gmail.com>",
       "Repository": "CRAN"
     },
@@ -3477,19 +3482,18 @@
     },
     "lintr": {
       "Package": "lintr",
-      "Version": "3.3.0-1",
+      "Version": "3.4.0",
       "Source": "Repository",
       "Title": "A 'Linter' for R Code",
-      "Authors@R": "c( person(\"Jim\", \"Hester\", , role = \"aut\"), person(\"Florent\", \"Angly\", role = \"aut\", comment = c(GitHub = \"fangly\")), person(\"Russ\", \"Hyde\", role = \"aut\"), person(\"Michael\", \"Chirico\", email = \"michaelchirico4@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-0787-087X\")), person(\"Kun\", \"Ren\", role = \"aut\"), person(\"Alexander\", \"Rosenstock\", role = \"aut\", comment = c(GitHub = \"AshesITR\")), person(\"Indrajeet\", \"Patil\", email = \"patilindrajeet.science@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0003-1995-6531\")), person(\"Hugo\", \"Gruson\", role = \"aut\", comment = c(ORCID = \"0000-0002-4094-1476\")) )",
+      "Authors@R": "c( person(\"Jim\", \"Hester\", , role = \"aut\"), person(\"Florent\", \"Angly\", role = \"aut\", comment = c(GitHub = \"fangly\")), person(\"Russ\", \"Hyde\", role = \"aut\"), person(\"Michael\", \"Chirico\", email = \"michaelchirico4@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0003-0787-087X\")), person(\"Kun\", \"Ren\", role = \"aut\"), person(\"Alexander\", \"Rosenstock\", role = \"aut\", comment = c(GitHub = \"AshesITR\")), person(\"Indrajeet\", \"Patil\", email = \"patilindrajeet.science@gmail.com\", role = \"aut\", comment = c(ORCID = \"0000-0003-1995-6531\")), person(\"Hugo\", \"Gruson\", role = \"aut\", comment = c(ORCID = \"0000-0002-4094-1476\")), person(\"Emmanuel\", \"Ferdman\", role = \"aut\") )",
       "Description": "Checks adherence to a given style, syntax errors and possible semantic issues.  Supports on the fly checking of R code edited with 'RStudio IDE', 'Emacs', 'Vim', 'Sublime Text', 'Atom' and 'Visual Studio Code'.",
       "License": "MIT + file LICENSE",
       "URL": "https://lintr.r-lib.org, https://github.com/r-lib/lintr",
       "BugReports": "https://github.com/r-lib/lintr/issues",
       "Depends": [
-        "R (>= 4.0)"
+        "R (>= 4.1.0)"
       ],
       "Imports": [
-        "backports (>= 1.5.0)",
         "cli (>= 3.4.0)",
         "codetools",
         "digest",
@@ -3499,7 +3503,7 @@
         "stats",
         "utils",
         "xfun",
-        "xml2 (>= 1.0.0)",
+        "xml2 (>= 1.3.4)",
         "xmlparsedata (>= 1.0.5)"
       ],
       "Suggests": [
@@ -3510,7 +3514,7 @@
         "rlang",
         "rmarkdown",
         "rstudioapi (>= 0.2)",
-        "testthat (>= 3.2.1)",
+        "testthat (>= 3.3.0)",
         "tibble",
         "tufte",
         "withr (>= 2.5.0)"
@@ -3523,20 +3527,20 @@
       "Config/Needs/development": "pkgload, testthat, patrick",
       "Config/testthat/edition": "3",
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.3",
-      "Collate": "'make_linter_from_xpath.R' 'xp_utils.R' 'utils.R' 'AAA.R' 'T_and_F_symbol_linter.R' 'absolute_path_linter.R' 'actions.R' 'addins.R' 'all_equal_linter.R' 'any_duplicated_linter.R' 'any_is_na_linter.R' 'assignment_linter.R' 'backport_linter.R' 'boolean_arithmetic_linter.R' 'brace_linter.R' 'cache.R' 'class_equals_linter.R' 'coalesce_linter.R' 'commas_linter.R' 'commented_code_linter.R' 'comparison_negation_linter.R' 'condition_call_linter.R' 'condition_message_linter.R' 'conjunct_test_linter.R' 'consecutive_assertion_linter.R' 'consecutive_mutate_linter.R' 'cyclocomp_linter.R' 'declared_functions.R' 'deprecated.R' 'download_file_linter.R' 'duplicate_argument_linter.R' 'empty_assignment_linter.R' 'equals_na_linter.R' 'exclude.R' 'expect_comparison_linter.R' 'expect_identical_linter.R' 'expect_length_linter.R' 'expect_lint.R' 'expect_named_linter.R' 'expect_not_linter.R' 'expect_null_linter.R' 'expect_s3_class_linter.R' 'expect_s4_class_linter.R' 'expect_true_false_linter.R' 'expect_type_linter.R' 'extract.R' 'fixed_regex_linter.R' 'for_loop_index_linter.R' 'function_argument_linter.R' 'function_left_parentheses_linter.R' 'function_return_linter.R' 'get_source_expressions.R' 'ids_with_token.R' 'if_not_else_linter.R' 'if_switch_linter.R' 'ifelse_censor_linter.R' 'implicit_assignment_linter.R' 'implicit_integer_linter.R' 'indentation_linter.R' 'infix_spaces_linter.R' 'inner_combine_linter.R' 'is_lint_level.R' 'is_numeric_linter.R' 'keyword_quote_linter.R' 'length_levels_linter.R' 'length_test_linter.R' 'lengths_linter.R' 'library_call_linter.R' 'line_length_linter.R' 'lint.R' 'linter_tag_docs.R' 'linter_tags.R' 'lintr-deprecated.R' 'lintr-package.R' 'list2df_linter.R' 'list_comparison_linter.R' 'literal_coercion_linter.R' 'make_linter_from_regex.R' 'matrix_apply_linter.R' 'methods.R' 'missing_argument_linter.R' 'missing_package_linter.R' 'namespace.R' 'namespace_linter.R' 'nested_ifelse_linter.R' 'nested_pipe_linter.R' 'nonportable_path_linter.R' 'shared_constants.R' 'nrow_subset_linter.R' 'numeric_leading_zero_linter.R' 'nzchar_linter.R' 'object_length_linter.R' 'object_name_linter.R' 'object_overwrite_linter.R' 'object_usage_linter.R' 'one_call_pipe_linter.R' 'outer_negation_linter.R' 'package_hooks_linter.R' 'paren_body_linter.R' 'paste_linter.R' 'path_utils.R' 'pipe_call_linter.R' 'pipe_consistency_linter.R' 'pipe_continuation_linter.R' 'pipe_return_linter.R' 'print_linter.R' 'quotes_linter.R' 'redundant_equals_linter.R' 'redundant_ifelse_linter.R' 'regex_subset_linter.R' 'rep_len_linter.R' 'repeat_linter.R' 'return_linter.R' 'routine_registration_linter.R' 'sample_int_linter.R' 'scalar_in_linter.R' 'semicolon_linter.R' 'seq_linter.R' 'settings.R' 'settings_utils.R' 'sort_linter.R' 'source_utils.R' 'spaces_inside_linter.R' 'spaces_left_parentheses_linter.R' 'sprintf_linter.R' 'stopifnot_all_linter.R' 'string_boundary_linter.R' 'strings_as_factors_linter.R' 'system_file_linter.R' 'terminal_close_linter.R' 'todo_comment_linter.R' 'trailing_blank_lines_linter.R' 'trailing_whitespace_linter.R' 'tree_utils.R' 'undesirable_function_linter.R' 'undesirable_operator_linter.R' 'unnecessary_concatenation_linter.R' 'unnecessary_lambda_linter.R' 'unnecessary_nesting_linter.R' 'unnecessary_placeholder_linter.R' 'unreachable_code_linter.R' 'unused_import_linter.R' 'use_lintr.R' 'vector_logic_linter.R' 'which_grepl_linter.R' 'whitespace_linter.R' 'with.R' 'with_id.R' 'xml_nodes_to_lints.R' 'xml_utils.R' 'yoda_test_linter.R' 'zzz.R'",
+      "Collate": "'make_linter_from_xpath.R' 'xp_utils.R' 'utils.R' 'AAA.R' 'T_and_F_symbol_linter.R' 'absolute_path_linter.R' 'actions.R' 'addins.R' 'all_equal_linter.R' 'any_duplicated_linter.R' 'any_is_na_linter.R' 'assignment_linter.R' 'backport_linter.R' 'boolean_arithmetic_linter.R' 'brace_linter.R' 'cache.R' 'class_equals_linter.R' 'coalesce_linter.R' 'commas_linter.R' 'commented_code_linter.R' 'comparison_negation_linter.R' 'condition_call_linter.R' 'condition_message_linter.R' 'conjunct_test_linter.R' 'consecutive_assertion_linter.R' 'consecutive_mutate_linter.R' 'cyclocomp_linter.R' 'declared_functions.R' 'deprecated.R' 'download_file_linter.R' 'duplicate_argument_linter.R' 'empty_assignment_linter.R' 'equals_na_linter.R' 'exclude.R' 'expect_comparison_linter.R' 'expect_identical_linter.R' 'expect_length_linter.R' 'expect_lint.R' 'expect_named_linter.R' 'expect_not_linter.R' 'expect_null_linter.R' 'expect_s3_class_linter.R' 'expect_s4_class_linter.R' 'expect_true_false_linter.R' 'expect_type_linter.R' 'extract.R' 'fixed_regex_linter.R' 'for_loop_index_linter.R' 'function_argument_linter.R' 'function_left_parentheses_linter.R' 'function_return_linter.R' 'get_source_expressions.R' 'ids_with_token.R' 'if_not_else_linter.R' 'if_switch_linter.R' 'ifelse_censor_linter.R' 'implicit_assignment_linter.R' 'implicit_integer_linter.R' 'indentation_linter.R' 'infix_spaces_linter.R' 'inner_combine_linter.R' 'is_lint_level.R' 'is_numeric_linter.R' 'keyword_quote_linter.R' 'length_levels_linter.R' 'length_test_linter.R' 'lengths_linter.R' 'library_call_linter.R' 'line_length_linter.R' 'lint.R' 'linter_tag_docs.R' 'linter_tags.R' 'lintr-package.R' 'list2df_linter.R' 'list_comparison_linter.R' 'literal_coercion_linter.R' 'make_linter_from_regex.R' 'matrix_apply_linter.R' 'methods.R' 'missing_argument_linter.R' 'missing_package_linter.R' 'namespace.R' 'namespace_linter.R' 'nested_ifelse_linter.R' 'nested_pipe_linter.R' 'nonportable_path_linter.R' 'shared_constants.R' 'nrow_subset_linter.R' 'numeric_leading_zero_linter.R' 'nzchar_linter.R' 'object_length_linter.R' 'object_name_linter.R' 'object_overwrite_linter.R' 'object_usage_linter.R' 'one_call_pipe_linter.R' 'outer_negation_linter.R' 'package_hooks_linter.R' 'paren_body_linter.R' 'paste_linter.R' 'path_utils.R' 'pipe_call_linter.R' 'pipe_consistency_linter.R' 'pipe_continuation_linter.R' 'pipe_return_linter.R' 'print_linter.R' 'quotes_linter.R' 'redundant_equals_linter.R' 'redundant_ifelse_linter.R' 'regex_subset_linter.R' 'rep_len_linter.R' 'repeat_linter.R' 'return_linter.R' 'routine_registration_linter.R' 'sample_int_linter.R' 'scalar_in_linter.R' 'semicolon_linter.R' 'seq_linter.R' 'settings.R' 'settings_utils.R' 'sort_linter.R' 'source_utils.R' 'spaces_inside_linter.R' 'spaces_left_parentheses_linter.R' 'sprintf_linter.R' 'stopifnot_all_linter.R' 'string_boundary_linter.R' 'strings_as_factors_linter.R' 'system_file_linter.R' 'terminal_close_linter.R' 'todo_comment_linter.R' 'trailing_blank_lines_linter.R' 'trailing_whitespace_linter.R' 'tree_utils.R' 'undesirable_function_linter.R' 'undesirable_operator_linter.R' 'unnecessary_concatenation_linter.R' 'unnecessary_lambda_linter.R' 'unnecessary_nesting_linter.R' 'unnecessary_placeholder_linter.R' 'unreachable_code_linter.R' 'unused_import_linter.R' 'use_lintr.R' 'vector_logic_linter.R' 'which_grepl_linter.R' 'whitespace_linter.R' 'with.R' 'with_id.R' 'xml_nodes_to_lints.R' 'xml_utils.R' 'yoda_test_linter.R' 'zzz.R'",
       "Language": "en-US",
+      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "no",
-      "Author": "Jim Hester [aut], Florent Angly [aut] (GitHub: fangly), Russ Hyde [aut], Michael Chirico [aut, cre] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Kun Ren [aut], Alexander Rosenstock [aut] (GitHub: AshesITR), Indrajeet Patil [aut] (ORCID: <https://orcid.org/0000-0003-1995-6531>), Hugo Gruson [aut] (ORCID: <https://orcid.org/0000-0002-4094-1476>)",
+      "Author": "Jim Hester [aut], Florent Angly [aut] (GitHub: fangly), Russ Hyde [aut], Michael Chirico [aut, cre] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Kun Ren [aut], Alexander Rosenstock [aut] (GitHub: AshesITR), Indrajeet Patil [aut] (ORCID: <https://orcid.org/0000-0003-1995-6531>), Hugo Gruson [aut] (ORCID: <https://orcid.org/0000-0002-4094-1476>), Emmanuel Ferdman [aut]",
       "Maintainer": "Michael Chirico <michaelchirico4@gmail.com>",
       "Repository": "CRAN"
     },
     "lme4": {
       "Package": "lme4",
-      "Version": "2.0-1",
+      "Version": "2.0-6",
       "Source": "Repository",
       "Title": "Linear Mixed-Effects Models using 'Eigen' and S4",
-      "Authors@R": "c(person(\"Douglas\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"Martin\", \"Maechler\", role = \"aut\", comment = c(ORCID = \"0000-0002-8685-9910\")), person(\"Ben\", \"Bolker\", role = c(\"cre\", \"aut\"), email = \"bbolker+lme4@gmail.com\", comment = c(ORCID = \"0000-0002-2127-0443\")), person(\"Steven\", \"Walker\", role = \"aut\", comment = c(ORCID = \"0000-0002-4394-9078\")), person(\"Rune Haubo Bojesen\", \"Christensen\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4494-3399\")), person(\"Henrik\", \"Singmann\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4842-3657\")), person(\"Bin\", \"Dai\", role = \"ctb\"), person(\"Fabian\", \"Scheipl\", role = \"ctb\", comment = c(ORCID = \"0000-0001-8172-3603\")), person(\"Gabor\", \"Grothendieck\", role = \"ctb\"), person(\"Peter\", \"Green\", role = \"ctb\", comment = c(ORCID = \"0000-0002-0238-9852\")), person(\"John\", \"Fox\", role = \"ctb\"), person(\"Alexander\", \"Bauer\", role = \"ctb\"), person(\"Pavel N.\", \"Krivitsky\", role = c(\"ctb\", \"cph\"), comment = c(ORCID = \"0000-0002-9101-3362\", \"shared copyright on simulate.formula\")), person(\"Emi\", \"Tanaka\", role = \"ctb\", comment = c(ORCID = \"0000-0002-1455-259X\")), person(\"Mikael\", \"Jagan\", role = \"aut\", comment = c(ORCID = \"0000-0002-3542-2938\")), person(\"Ross D.\", \"Boylan\", role = \"ctb\", comment = c(ORCID = \"0009-0003-4123-8090\")), person(\"Anna\", \"Ly\", role = \"aut\", comment = c(ORCID = \"0000-0002-0210-0342\")))",
+      "Authors@R": "c(person(\"Douglas\", \"Bates\", role = \"aut\", comment = c(ORCID = \"0000-0001-8316-9503\")), person(\"Martin\", \"Maechler\", role = \"aut\", comment = c(ORCID = \"0000-0002-8685-9910\")), person(\"Ben\", \"Bolker\", role = c(\"cre\", \"aut\"), email = \"bbolker+lme4@gmail.com\", comment = c(ORCID = \"0000-0002-2127-0443\")), person(\"Steven\", \"Walker\", role = \"aut\", comment = c(ORCID = \"0000-0002-4394-9078\")), person(\"Anna\", \"Ly\", role = \"aut\", comment = c(ORCID = \"0000-0002-0210-0342\")), person(\"Mikael\", \"Jagan\", role = \"aut\", comment = c(ORCID = \"0000-0002-3542-2938\")), person(\"Rune Haubo Bojesen\", \"Christensen\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4494-3399\")), person(\"Henrik\", \"Singmann\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4842-3657\")), person(\"Bin\", \"Dai\", role = \"ctb\"), person(\"Fabian\", \"Scheipl\", role = \"ctb\", comment = c(ORCID = \"0000-0001-8172-3603\")), person(\"Gabor\", \"Grothendieck\", role = \"ctb\"), person(\"Peter\", \"Green\", role = \"ctb\", comment = c(ORCID = \"0000-0002-0238-9852\")), person(\"John\", \"Fox\", role = \"ctb\"), person(\"Alexander\", \"Bauer\", role = \"ctb\"), person(\"Pavel N.\", \"Krivitsky\", role = c(\"ctb\", \"cph\"), comment = c(ORCID = \"0000-0002-9101-3362\", \"shared copyright on simulate.formula\")), person(\"Emi\", \"Tanaka\", role = \"ctb\", comment = c(ORCID = \"0000-0002-1455-259X\")), person(\"Ross D.\", \"Boylan\", role = \"ctb\", comment = c(ORCID = \"0009-0003-4123-8090\")), person(\"Henrik\", \"Bengtsson\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9280-4430\")))",
       "Description": "Fit linear and generalized linear mixed-effects models.  The models and their components are represented using S4 classes and methods.  The core computational algorithms are implemented using the 'Eigen' C++ library for numerical linear algebra and 'RcppEigen' \"glue\".",
       "Depends": [
         "R (>= 3.6)",
@@ -3546,7 +3550,7 @@
       ],
       "LinkingTo": [
         "Matrix (>= 1.5-0)",
-        "Rcpp (>= 0.10.5)",
+        "Rcpp (>= 1.1.1-1.1)",
         "RcppEigen (>= 0.3.3.9.4)"
       ],
       "Imports": [
@@ -3561,18 +3565,20 @@
         "nloptr (>= 1.0.4)",
         "parallel",
         "reformulas (>= 0.4.3.1)",
-        "rlang",
         "splines",
         "utils"
       ],
       "Suggests": [
+        "DHARMa",
         "HSAUR3",
         "MEMSS",
         "car",
         "dfoptim",
+        "future.apply",
         "gamm4",
         "ggplot2",
         "glmmTMB",
+        "gridExtra",
         "knitr",
         "merDeriv",
         "mgcv",
@@ -3580,16 +3586,14 @@
         "numDeriv",
         "optimx (>= 2013.8.6)",
         "pbkrtest",
+        "performance",
         "rmarkdown",
         "rr2",
+        "see",
         "semEff",
         "statmod",
         "testthat (>= 0.8.1)",
         "tibble"
-      ],
-      "Enhances": [
-        "DHARMa",
-        "performance"
       ],
       "RdMacros": "Rdpack",
       "VignetteBuilder": "knitr",
@@ -3598,9 +3602,8 @@
       "URL": "https://github.com/lme4/lme4/",
       "BugReports": "https://github.com/lme4/lme4/issues",
       "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.3",
       "NeedsCompilation": "yes",
-      "Author": "Douglas Bates [aut] (ORCID: <https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Ben Bolker [cre, aut] (ORCID: <https://orcid.org/0000-0002-2127-0443>), Steven Walker [aut] (ORCID: <https://orcid.org/0000-0002-4394-9078>), Rune Haubo Bojesen Christensen [ctb] (ORCID: <https://orcid.org/0000-0002-4494-3399>), Henrik Singmann [ctb] (ORCID: <https://orcid.org/0000-0002-4842-3657>), Bin Dai [ctb], Fabian Scheipl [ctb] (ORCID: <https://orcid.org/0000-0001-8172-3603>), Gabor Grothendieck [ctb], Peter Green [ctb] (ORCID: <https://orcid.org/0000-0002-0238-9852>), John Fox [ctb], Alexander Bauer [ctb], Pavel N. Krivitsky [ctb, cph] (ORCID: <https://orcid.org/0000-0002-9101-3362>, shared copyright on simulate.formula), Emi Tanaka [ctb] (ORCID: <https://orcid.org/0000-0002-1455-259X>), Mikael Jagan [aut] (ORCID: <https://orcid.org/0000-0002-3542-2938>), Ross D. Boylan [ctb] (ORCID: <https://orcid.org/0009-0003-4123-8090>), Anna Ly [aut] (ORCID: <https://orcid.org/0000-0002-0210-0342>)",
+      "Author": "Douglas Bates [aut] (ORCID: <https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Ben Bolker [cre, aut] (ORCID: <https://orcid.org/0000-0002-2127-0443>), Steven Walker [aut] (ORCID: <https://orcid.org/0000-0002-4394-9078>), Anna Ly [aut] (ORCID: <https://orcid.org/0000-0002-0210-0342>), Mikael Jagan [aut] (ORCID: <https://orcid.org/0000-0002-3542-2938>), Rune Haubo Bojesen Christensen [ctb] (ORCID: <https://orcid.org/0000-0002-4494-3399>), Henrik Singmann [ctb] (ORCID: <https://orcid.org/0000-0002-4842-3657>), Bin Dai [ctb], Fabian Scheipl [ctb] (ORCID: <https://orcid.org/0000-0001-8172-3603>), Gabor Grothendieck [ctb], Peter Green [ctb] (ORCID: <https://orcid.org/0000-0002-0238-9852>), John Fox [ctb], Alexander Bauer [ctb], Pavel N. Krivitsky [ctb, cph] (ORCID: <https://orcid.org/0000-0002-9101-3362>, shared copyright on simulate.formula), Emi Tanaka [ctb] (ORCID: <https://orcid.org/0000-0002-1455-259X>), Ross D. Boylan [ctb] (ORCID: <https://orcid.org/0009-0003-4123-8090>), Henrik Bengtsson [ctb] (ORCID: <https://orcid.org/0000-0002-9280-4430>)",
       "Maintainer": "Ben Bolker <bbolker+lme4@gmail.com>",
       "Repository": "CRAN"
     },
@@ -4088,7 +4091,7 @@
     },
     "pak": {
       "Package": "pak",
-      "Version": "0.10.0",
+      "Version": "0.11.0",
       "Source": "Repository",
       "Title": "Another Approach to Package Installation",
       "Authors@R": "c( person(\"Gábor\", \"Csárdi\", , \"csardi.gabor@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")), person(\"Winston\", \"Chang\", role = \"ctb\", comment = \"R6, callr, processx\"), person(\"Ascent Digital Services\", role = c(\"cph\", \"fnd\"), comment = \"callr, processx\"), person(\"Hadley\", \"Wickham\", role = c(\"ctb\", \"cph\"), comment = \"cli, curl, pkgbuild, yaml\"), person(\"Jeroen\", \"Ooms\", role = \"ctb\", comment = \"curl, jsonlite\"), person(\"Maëlle\", \"Salmon\", role = \"ctb\", comment = \"desc, pkgsearch\"), person(\"Duncan\", \"Temple Lang\", role = \"ctb\", comment = \"jsonlite\"), person(\"Lloyd\", \"Hilaiel\", role = \"cph\", comment = \"jsonlite\"), person(\"Alec\", \"Wong\", role = \"ctb\", comment = \"keyring\"), person(\"Michel Berkelaar and lpSolve authors\", role = \"ctb\", comment = \"lpSolve\"), person(\"R Consortium\", role = \"fnd\", comment = \"pkgsearch\"), person(\"Jay\", \"Loden\", role = \"ctb\", comment = \"ps\"), person(\"Dave\", \"Daeschler\", role = \"ctb\", comment = \"ps\"), person(\"Giampaolo\", \"Rodola\", role = \"ctb\", comment = \"ps\"), person(\"Shawn\", \"Garbett\", role = \"ctb\", comment = \"yaml\"), person(\"Jeremy\", \"Stephens\", role = \"ctb\", comment = \"yaml\"), person(\"Kirill\", \"Simonov\", role = \"ctb\", comment = \"yaml\"), person(\"Yihui\", \"Xie\", role = \"ctb\", comment = \"yaml\"), person(\"Zhuoer\", \"Dong\", role = \"ctb\", comment = \"yaml\"), person(\"Jeffrey\", \"Horner\", role = \"ctb\", comment = \"yaml\"), person(\"Will\", \"Beasley\", role = \"ctb\", comment = \"yaml\"), person(\"Brendan\", \"O'Connor\", role = \"ctb\", comment = \"yaml\"), person(\"Gregory\", \"Warnes\", role = \"ctb\", comment = \"yaml\"), person(\"Michael\", \"Quinn\", role = \"ctb\", comment = \"yaml\"), person(\"Zhian\", \"Kamvar\", role = \"ctb\", comment = \"yaml\"), person(\"Charlie\", \"Gao\", role = \"ctb\", comment = \"yaml\"), person(\"Kuba\", \"Podgórski\", role = \"ctb\", comment = \"zip\"), person(\"Rich\", \"Geldreich\", role = \"ctb\", comment = \"zip\") )",
@@ -4142,7 +4145,7 @@
       "NeedsCompilation": "yes",
       "Author": "Gábor Csárdi [aut, cre], Jim Hester [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>), Winston Chang [ctb] (R6, callr, processx), Ascent Digital Services [cph, fnd] (callr, processx), Hadley Wickham [ctb, cph] (cli, curl, pkgbuild, yaml), Jeroen Ooms [ctb] (curl, jsonlite), Maëlle Salmon [ctb] (desc, pkgsearch), Duncan Temple Lang [ctb] (jsonlite), Lloyd Hilaiel [cph] (jsonlite), Alec Wong [ctb] (keyring), Michel Berkelaar and lpSolve authors [ctb] (lpSolve), R Consortium [fnd] (pkgsearch), Jay Loden [ctb] (ps), Dave Daeschler [ctb] (ps), Giampaolo Rodola [ctb] (ps), Shawn Garbett [ctb] (yaml), Jeremy Stephens [ctb] (yaml), Kirill Simonov [ctb] (yaml), Yihui Xie [ctb] (yaml), Zhuoer Dong [ctb] (yaml), Jeffrey Horner [ctb] (yaml), Will Beasley [ctb] (yaml), Brendan O'Connor [ctb] (yaml), Gregory Warnes [ctb] (yaml), Michael Quinn [ctb] (yaml), Zhian Kamvar [ctb] (yaml), Charlie Gao [ctb] (yaml), Kuba Podgórski [ctb] (zip), Rich Geldreich [ctb] (zip)",
       "Maintainer": "Gábor Csárdi <csardi.gabor@gmail.com>",
-      "Repository": "https://packagemanager.posit.co/cran/latest"
+      "Repository": "CRAN"
     },
     "pillar": {
       "Package": "pillar",
@@ -4972,6 +4975,52 @@
       "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
       "Repository": "CRAN"
     },
+    "repr": {
+      "Package": "repr",
+      "Version": "1.1.7",
+      "Source": "Repository",
+      "Title": "Serializable Representations",
+      "Authors@R": "c( person('Philipp', 'Angerer', email = 'phil.angerer@gmail.com', role = c('aut', 'cre'), comment = c(ORCID = \"0000-0002-0369-2888\")), person('Thomas', 'Kluyver', email = 'thomas@kluyver.me.uk', role = 'aut'), person('Jan', 'Schulz', email = 'jasc@gmx.net', role = 'aut'), person('abielr', role = 'ctb'), person('Denilson', 'Figueiredo de Sa', role = 'ctb'), person('Jim', 'Hester', role = 'ctb'), person('karldw', role = 'ctb'), person('Dave', 'Foster', role = 'ctb'), person('Carson', 'Sievert', role = 'ctb') )",
+      "Maintainer": "Philipp Angerer <phil.angerer@gmail.com>",
+      "Description": "String and binary representations of objects for several formats / mime types.",
+      "URL": "https://github.com/IRkernel/repr/",
+      "BugReports": "https://github.com/IRkernel/repr/issues/",
+      "Depends": [
+        "R (>= 3.0.1)"
+      ],
+      "Imports": [
+        "utils",
+        "grDevices",
+        "htmltools",
+        "jsonlite",
+        "pillar (>= 1.4.0)",
+        "base64enc"
+      ],
+      "Suggests": [
+        "methods",
+        "highr",
+        "Cairo",
+        "stringr",
+        "testthat (>= 3.0.0)",
+        "leaflet"
+      ],
+      "Enhances": [
+        "data.table",
+        "tibble",
+        "htmlwidgets",
+        "vegalite",
+        "plotly",
+        "geojsonio"
+      ],
+      "Config/testthat/edition": "3",
+      "License": "GPL (>= 3)",
+      "Encoding": "UTF-8",
+      "Collate": "'generics.r' 'options.r' 'package.r' 'repr_datatable.r' 'repr_datetime.r' 'utils.r' 'repr_list.r' 'repr_vector.r' 'repr_factor.r' 'repr_function.r' 'repr_help_files_with_topic.r' 'repr_htmlwidget.r' 'repr_matrix_df.r' 'repr_packageIQR.r' 'repr_plotly.r' 'repr_recordedplot.r' 'repr_spatial.r' 'repr_ts.r' 'repr_vega.r' 'zzz_onload.r'",
+      "RoxygenNote": "7.3.1",
+      "NeedsCompilation": "no",
+      "Author": "Philipp Angerer [aut, cre] (<https://orcid.org/0000-0002-0369-2888>), Thomas Kluyver [aut], Jan Schulz [aut], abielr [ctb], Denilson Figueiredo de Sa [ctb], Jim Hester [ctb], karldw [ctb], Dave Foster [ctb], Carson Sievert [ctb]",
+      "Repository": "CRAN"
+    },
     "reprex": {
       "Package": "reprex",
       "Version": "2.1.1",
@@ -5123,14 +5172,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.2.0",
+      "Version": "1.3.0",
       "Source": "Repository",
       "Title": "Functions for Base Types and Core R and 'Tidyverse' Features",
+      "Authors@R": "c( person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = c(\"aut\", \"cre\")), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\"), person(\"mikefc\", , , \"mikefc@coolbutuseless.com\", role = \"cph\", comment = \"Hash implementation based on Mike's xxhashlite\"), person(\"Yann\", \"Collet\", role = \"cph\", comment = \"Author of the embedded xxHash library\"), person(\"Posit, PBC\", role = c(\"cph\", \"fnd\")) )",
       "Description": "A toolbox for working with base types, core R features like the condition system, and core 'Tidyverse' features like tidy evaluation.",
-      "Authors@R": "c( person(\"Lionel\", \"Henry\", ,\"lionel@posit.co\", c(\"aut\", \"cre\")), person(\"Hadley\", \"Wickham\", ,\"hadley@posit.co\", \"aut\"), person(given = \"mikefc\", email = \"mikefc@coolbutuseless.com\", role = \"cph\", comment = \"Hash implementation based on Mike's xxhashlite\"), person(given = \"Yann\", family = \"Collet\", role = \"cph\", comment = \"Author of the embedded xxHash library\"), person(given = \"Posit, PBC\", role = c(\"cph\", \"fnd\")) )",
       "License": "MIT + file LICENSE",
-      "ByteCompile": "true",
-      "Biarch": "true",
+      "URL": "https://rlang.r-lib.org, https://github.com/r-lib/rlang",
+      "BugReports": "https://github.com/r-lib/rlang/issues",
       "Depends": [
         "R (>= 4.0.0)"
       ],
@@ -5160,13 +5209,14 @@
       "Enhances": [
         "winch"
       ],
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.3.3",
-      "URL": "https://rlang.r-lib.org, https://github.com/r-lib/rlang",
-      "BugReports": "https://github.com/r-lib/rlang/issues",
+      "Biarch": "true",
+      "ByteCompile": "true",
       "Config/build/compilation-database": "true",
-      "Config/testthat/edition": "3",
       "Config/Needs/website": "dplyr, tidyverse/tidytemplate",
+      "Config/roxygen2/version": "8.0.0",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "true",
+      "Encoding": "UTF-8",
       "NeedsCompilation": "yes",
       "Author": "Lionel Henry [aut, cre], Hadley Wickham [aut], mikefc [cph] (Hash implementation based on Mike's xxhashlite), Yann Collet [cph] (Author of the embedded xxHash library), Posit, PBC [cph, fnd]",
       "Maintainer": "Lionel Henry <lionel@posit.co>",
@@ -5424,18 +5474,17 @@
     },
     "selectr": {
       "Package": "selectr",
-      "Version": "0.5-1",
+      "Version": "0.6-0",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Translate CSS Selectors to XPath Expressions",
       "Authors@R": "c(person(\"Simon\", \"Potter\", role = c(\"aut\", \"trl\", \"cre\"), email = \"simon@sjp.co.nz\"), person(\"Simon\", \"Sapin\", role = \"aut\"), person(\"Ian\", \"Bicking\", role = \"aut\"))",
       "License": "BSD_3_clause + file LICENCE",
+      "Encoding": "UTF-8",
       "Depends": [
-        "R (>= 3.0)"
+        "R (>= 3.3)"
       ],
       "Imports": [
-        "methods",
-        "stringr",
         "R6"
       ],
       "Suggests": [
@@ -5495,6 +5544,55 @@
       "Maintainer": "Joshua W. Lambert <joshua.lambert@lshtm.ac.uk>",
       "Repository": "CRAN"
     },
+    "skimr": {
+      "Package": "skimr",
+      "Version": "2.2.2",
+      "Source": "Repository",
+      "Title": "Compact and Flexible Summaries of Data",
+      "Authors@R": "c(person(given = \"Elin\", family = \"Waring\", role = c(\"cre\", \"aut\"), email = \"elin.waring@gmail.com\"), person(given = \"Michael\", family = \"Quinn\", role = \"aut\", email = \"msquinn@google.com\"), person(given = \"Amelia\", family = \"McNamara\", role = \"aut\", email = \"amcnamara@smith.edu\"), person(given = \"Eduardo\", family = \"Arino de la Rubia\", role = \"aut\", email = \"earino@gmail.com\"), person(given = \"Hao\", family = \"Zhu\", role = \"aut\", email = \"haozhu233@gmail.com\"), person(given = \"Julia\", family = \"Lowndes\", role = \"ctb\", email = \"lowndes@nceas.ucsb.edu\"), person(given = \"Shannon\", family = \"Ellis\", role = \"aut\", email = \"sellis18@jhmi.edu\"), person(given = \"Hope\", family = \"McLeod\", role = \"ctb\", email = \"hmgit2@gmail.com\"), person(given = \"Hadley\", family = \"Wickham\", role = \"ctb\", email = \"hadley@rstudio.com\"), person(given = \"Kirill\", family = \"Müller\", role = \"ctb\", email = \"krlmlr+r@mailbox.org\"), person(family = \"RStudio, Inc.\", role = \"cph\", comment = \"Spark functions\"), person(given = \"Connor\", family = \"Kirkpatrick\", role = \"ctb\", email = \"hello@connorkirkpatrick.com\"), person(given = \"Scott\", family = \"Brenstuhl\", role = \"ctb\", email = \"brenstsr@miamioh.edu\"), person(given = \"Patrick\", family = \"Schratz\", role = \"ctb\", email = \"patrick.schratz@gmail.com\"), person(given = \"lbusett\", role = \"ctb\", email = \"lbusett@gmail.com\"), person(given = \"Mikko\", family = \"Korpela\", role = \"ctb\", email = \"mvkorpel@iki.fi\"), person(given = \"Jennifer\", family = \"Thompson\", role = \"ctb\", email = \"thompson.jennifer@gmail.com\"), person(given = \"Harris\", family = \"McGehee\", role = \"ctb\", email = \"mcgehee.harris@gmail.com\"), person(given = \"Mark\", family = \"Roepke\", role = \"ctb\", email = \"mroepke5@gmail.com\"), person(given = \"Patrick\", family = \"Kennedy\", role = \"ctb\", email = \"pkqstr@protonmail.com\"), person(given = \"Daniel\", family = \"Possenriede\", role = \"ctb\", email = \"possenriede@gmail.com\"), person(given = \"David\", family = \"Zimmermann\", role = \"ctb\", email = \"david_j_zimmermann@hotmail.com\"), person(given = \"Kyle\",  family = \"Butts\", role =\"ctb\", email = \"buttskyle96@gmail.com\"), person(given = \"Bastian\",  family = \"Torges\", role =\"ctb\", email = \"bastian.torges@gmail.com\"), person(given = \"Rick\", family = \"Saporta\", role = \"ctb\", email = \"Rick@TheFarmersDog.com\"), person(given = \"Henry\", family = \"Morgan Stewart\", role = \"ctb\", email = \"henry.morganstewart@gmail.com\"), person(given = \"Olivier\", family = \"Roy\", role = \"ctb\") )",
+      "Description": "A simple to use summary function that can be used with pipes and displays nicely in the console. The default summary statistics may be modified by the user as can the default formatting.  Support for data frames and vectors is included, and users can implement their own skim methods for specific object types as described in a vignette. Default summaries include support for inline spark graphs. Instructions for managing these on specific operating systems are given in the \"Using skimr\" vignette and the README.",
+      "License": "GPL-3",
+      "URL": "https://docs.ropensci.org/skimr/, https://github.com/ropensci/skimr/",
+      "BugReports": "https://github.com/ropensci/skimr/issues",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "cli",
+        "dplyr (>= 1.0.0)",
+        "knitr (>= 1.2)",
+        "pillar (>= 1.6.4)",
+        "purrr",
+        "repr",
+        "rlang",
+        "stats",
+        "stringr (>= 1.1)",
+        "tibble (>= 2.0.0)",
+        "tidyr (>= 1.0)",
+        "tidyselect (>= 1.0.0)",
+        "utils",
+        "vctrs (>= 0.5.0)"
+      ],
+      "Suggests": [
+        "data.table",
+        "dtplyr",
+        "extrafont",
+        "haven",
+        "lubridate",
+        "rmarkdown",
+        "testthat (>= 3.0.0)",
+        "withr"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "Collate": "'deprecated.R' 'dplyr.R' 'stats.R' 'skim_with.R' 'get_skimmers.R' 'package.R' 'reshape.R' 'sfl.R' 'skim.R' 'skim_obj.R' 'skim_print.R' 'skimr-package.R' 'summary.R' 'utils.R' 'vctrs.R'",
+      "Config/testthat/edition": "3",
+      "NeedsCompilation": "no",
+      "Author": "Elin Waring [cre, aut], Michael Quinn [aut], Amelia McNamara [aut], Eduardo Arino de la Rubia [aut], Hao Zhu [aut], Julia Lowndes [ctb], Shannon Ellis [aut], Hope McLeod [ctb], Hadley Wickham [ctb], Kirill Müller [ctb], RStudio, Inc. [cph] (Spark functions), Connor Kirkpatrick [ctb], Scott Brenstuhl [ctb], Patrick Schratz [ctb], lbusett [ctb], Mikko Korpela [ctb], Jennifer Thompson [ctb], Harris McGehee [ctb], Mark Roepke [ctb], Patrick Kennedy [ctb], Daniel Possenriede [ctb], David Zimmermann [ctb], Kyle Butts [ctb], Bastian Torges [ctb], Rick Saporta [ctb], Henry Morgan Stewart [ctb], Olivier Roy [ctb]",
+      "Maintainer": "Elin Waring <elin.waring@gmail.com>",
+      "Repository": "CRAN"
+    },
     "snakecase": {
       "Package": "snakecase",
       "Version": "0.11.1",
@@ -5532,9 +5630,9 @@
     },
     "stringi": {
       "Package": "stringi",
-      "Version": "1.8.7",
+      "Version": "1.8.9",
       "Source": "Repository",
-      "Date": "2025-03-27",
+      "Date": "2026-07-30",
       "Title": "Fast and Portable Character String Processing Facilities",
       "Description": "A collection of character string/text/natural language processing tools for pattern searching (e.g., with 'Java'-like regular expressions or the 'Unicode' collation algorithm), random string generation, case mapping, string transliteration, concatenation, sorting, padding, wrapping, Unicode normalisation, date-time formatting and parsing, and many more. They are fast, consistent, convenient, and - thanks to 'ICU' (International Components for Unicode) - portable across all locales and platforms. Documentation about 'stringi' is provided via its website at <https://stringi.gagolewski.com/> and the paper by Gagolewski (2022, <doi:10.18637/jss.v103.i02>).",
       "URL": "https://stringi.gagolewski.com/, https://github.com/gagolews/stringi, https://icu.unicode.org/",
@@ -5552,17 +5650,13 @@
       "Biarch": "TRUE",
       "License": "file LICENSE",
       "Authors@R": "c(person(given = \"Marek\", family = \"Gagolewski\", role = c(\"aut\", \"cre\", \"cph\"), email = \"marek@gagolewski.com\", comment = c(ORCID = \"0000-0003-0637-6028\")), person(given = \"Bartek\", family = \"Tartanus\", role = \"ctb\"), person(\"Unicode, Inc. and others\", role=\"ctb\", comment = \"ICU4C source code, Unicode Character Database\") )",
-      "RoxygenNote": "7.3.2",
       "Encoding": "UTF-8",
-      "Config/pak/sysreqs": "libicu-dev",
-      "Repository": "https://carpentries.r-universe.dev",
+      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "yes",
       "Author": "Marek Gagolewski [aut, cre, cph] (ORCID: <https://orcid.org/0000-0003-0637-6028>), Bartek Tartanus [ctb], Unicode, Inc. and others [ctb] (ICU4C source code, Unicode Character Database)",
       "Maintainer": "Marek Gagolewski <marek@gagolewski.com>",
-      "RemoteType": "repository",
-      "RemoteUrl": "https://github.com/gagolews/stringi",
-      "RemoteRef": "v1.8.7",
-      "RemoteSha": "ed7f27ad103d38dae90ca4471b189fffe01c53fa"
+      "License_is_FOSS": "yes",
+      "Repository": "CRAN"
     },
     "stringr": {
       "Package": "stringr",
@@ -5733,7 +5827,7 @@
       "RoxygenNote": "7.3.1",
       "Encoding": "UTF-8",
       "NeedsCompilation": "yes",
-      "Repository": "https://packagemanager.posit.co/cran/latest"
+      "Repository": "CRAN"
     },
     "systemfonts": {
       "Package": "systemfonts",
@@ -6080,7 +6174,7 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.59",
+      "Version": "0.60",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Helper Functions to Install and Maintain TeX Live, and Compile LaTeX Documents",
@@ -6173,7 +6267,8 @@
       "LazyData": "true",
       "URL": "https://github.com/epiverse-trace/tracetheme",
       "BugReports": "https://github.com/epiverse-trace/tracetheme/issues",
-      "Author": "Hugo Gruson [aut, cre] (ORCID: <https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
+      "NeedsCompilation": "no",
+      "Author": "Hugo Gruson [aut, cre] (<https://orcid.org/0000-0002-4094-1476>), The Epiverse-TRACE team [aut, cph]",
       "Maintainer": "Hugo Gruson <hugo@data.org>",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
@@ -6446,7 +6541,7 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "3.0.2",
+      "Version": "3.0.3",
       "Source": "Repository",
       "Title": "Run Code 'With' Temporarily Modified Global State",
       "Authors@R": "c( person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Lionel\", \"Henry\", , \"lionel@posit.co\", role = c(\"aut\", \"cre\")), person(\"Kirill\", \"Müller\", , \"krlmlr+r@mailbox.org\", role = \"aut\"), person(\"Kevin\", \"Ushey\", , \"kevinushey@gmail.com\", role = \"aut\"), person(\"Hadley\", \"Wickham\", , \"hadley@posit.co\", role = \"aut\"), person(\"Winston\", \"Chang\", role = \"aut\"), person(\"Jennifer\", \"Bryan\", role = \"ctb\"), person(\"Richard\", \"Cotton\", role = \"ctb\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
@@ -6480,7 +6575,7 @@
       "NeedsCompilation": "no",
       "Author": "Jim Hester [aut], Lionel Henry [aut, cre], Kirill Müller [aut], Kevin Ushey [aut], Hadley Wickham [aut], Winston Chang [aut], Jennifer Bryan [ctb], Richard Cotton [ctb], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Lionel Henry <lionel@posit.co>",
-      "Repository": "RSPM"
+      "Repository": "CRAN"
     },
     "writexl": {
       "Package": "writexl",
@@ -6511,7 +6606,7 @@
     },
     "xfun": {
       "Package": "xfun",
-      "Version": "0.58",
+      "Version": "0.60",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Supporting Functions for Packages Maintained by 'Yihui Xie'",
@@ -6559,7 +6654,7 @@
     },
     "xml2": {
       "Package": "xml2",
-      "Version": "1.5.2",
+      "Version": "1.6.0",
       "Source": "Repository",
       "Title": "Parse XML",
       "Authors@R": "c( person(\"Hadley\", \"Wickham\", role = \"aut\"), person(\"Jim\", \"Hester\", role = \"aut\"), person(\"Jeroen\", \"Ooms\", email = \"jeroenooms@gmail.com\", role = c(\"aut\", \"cre\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(\"R Foundation\", role = \"ctb\", comment = \"Copy of R-project homepage cached as example\") )",
@@ -6590,7 +6685,7 @@
       "Encoding": "UTF-8",
       "RoxygenNote": "7.3.3",
       "SystemRequirements": "libxml2: libxml2-dev (deb), libxml2-devel (rpm)",
-      "Collate": "'S4.R' 'as_list.R' 'xml_parse.R' 'as_xml_document.R' 'classes.R' 'format.R' 'import-standalone-obj-type.R' 'import-standalone-purrr.R' 'import-standalone-types-check.R' 'init.R' 'nodeset_apply.R' 'paths.R' 'utils.R' 'xml2-package.R' 'xml_attr.R' 'xml_children.R' 'xml_document.R' 'xml_find.R' 'xml_missing.R' 'xml_modify.R' 'xml_name.R' 'xml_namespaces.R' 'xml_node.R' 'xml_nodeset.R' 'xml_path.R' 'xml_schema.R' 'xml_serialize.R' 'xml_structure.R' 'xml_text.R' 'xml_type.R' 'xml_url.R' 'xml_write.R' 'zzz.R'",
+      "Collate": "'S4.R' 'as_list.R' 'xml_parse.R' 'as_xml_document.R' 'classes.R' 'format.R' 'import-standalone-obj-type.R' 'import-standalone-purrr.R' 'import-standalone-types-check.R' 'init.R' 'nodeset_apply.R' 'paths.R' 'utils.R' 'xml2-package.R' 'xml_attr.R' 'xml_children.R' 'xml_document.R' 'xml_find.R' 'xml_missing.R' 'xml_modify.R' 'xml_name.R' 'xml_namespaces.R' 'xml_node.R' 'xml_nodeset.R' 'xml_path.R' 'xml_schema.R' 'xml_serialize.R' 'xml_structure.R' 'xml_text.R' 'xml_type.R' 'xml_url.R' 'xml_write.R'",
       "Config/testthat/edition": "3",
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut], Jim Hester [aut], Jeroen Ooms [aut, cre], Posit Software, PBC [cph, fnd], R Foundation [ctb] (Copy of R-project homepage cached as example)",
