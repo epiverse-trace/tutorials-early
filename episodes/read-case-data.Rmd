@@ -515,9 +515,13 @@ tibble::as_tibble(disease_names)
 :::::::::::::::::::::: challenge
 ### Reading from Demo SORMAS sever
 
+<!-- 
 The SORMAS organization also provides demo servers for development and testing. One of
 these is called **clinical surveillance**, available at the link
-("https://demo.sormas.org/sormas-rest"), and accessible with username "CaseSup" and password "SJgFKffPDmr7". Log into this server, list all available diseases, and import cases related to the monkeypox (mpox) disease.
+("https://demo.sormas.org/sormas-rest"), and accessible with username "CaseSup" and password "SJgFKffPDmr7". 
+-->
+
+Log into this server, list all available diseases, and import cases related to the monkeypox (mpox) disease.
 
 ::::::::::::::: solution
 
@@ -526,8 +530,8 @@ these is called **clinical surveillance**, available at the link
 sormas_demo <- readepi::login(
   type = "sormas",
   from = "https://demo.sormas.org/sormas-rest",
-  user_name = "CaseSup",
-  password = "SJgFKffPDmr7"
+  user_name = "SurvSup",
+  password = "Lk5R7JXeZSEc"
 )
 
 # List the names of all disease
