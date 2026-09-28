@@ -355,7 +355,7 @@ missing_dat %>%
 
 :::::::::
 
-::::::::::::::::: checkpoint
+::::::::::::::::: checklist
 
 At this point, we removed a number of columns and rows. Compare the dimensions of `raw_ebola_data` and `sim_ebola_data`.
 
