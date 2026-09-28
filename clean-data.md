@@ -457,7 +457,7 @@ missing_dat %>%
 
 :::::::::
 
-::::::::::::::::: checkpoint
+::::::::::::::::: checklist
 
 At this point, we removed a number of columns and rows. Compare the dimensions of `raw_ebola_data` and `sim_ebola_data`.
 
@@ -1054,11 +1054,25 @@ To identify both groups:
 
 - On a piece of paper, write the names of each function under the corresponding column:
 
-| **Diagnose** cleaning status | **Perform** cleaning action | 
+| Functions to **diagnose** cleaning status | Functions to **perform** cleaning action | 
 | ---------------- | ---------------- |
 | ...              | ...              | 
 
 ::::::::::::::
+
+:::::::::::::::::::: discussion
+
+**Connect to your work**
+
+- Which diagnostic or cleaning functions from this episode were new to you?
+- Where could you apply them in your own work? Share an example.
+
+**Compare approaches**
+
+- Besides {cleanepi}, which other R functions or packages could you use for these tasks?
+- What are the pros and cons of each approach?
+
+::::::::::::::::::::
 
 :::::::::::::: instructor
 
