@@ -267,26 +267,26 @@ dat
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 361653 Aizawa S, Gu T, Kaminoda A, Fujioka R, Ojima F, Sakata I, Saka… 9.95e8
- 2 343922 Amelia,C. and Marcos,dl.P.                                      3.95e9
- 3 340293 Agaram NP, Zhang L, Cotzia P and Antonescu CR.                  2.79e9
- 4 333711 Akshatha,R., Sharmila,F., Dhodapkar,R., Sistla,S., Wyawahare,M… 2.40e9
- 5 333474 Al Balwi,M., Khan,A., UdayaRaja G,K., Al Drees,M. and AlAbdulk… 2.29e9
- 6 322907 Arikit S, Xia R, Kakrana A, Huang K, Zhai J, Yan Z, Valdes-Lop… 3.47e9
- 7 322075 Agoston,J., Almasi,A., Salanki,K. and Palkovics,L.              3.96e9
- 8 314948 Alqurashi N, Hashimi SM, Alowaidi F, Ivanovski S and Wei MQ.    8.60e8
- 9 304887 Aguillon R, Batut J, Subramanian A, Madelaine R, Dufourcq P, S… 1.67e9
-10 292302 Antonyan AA, Sharoyan SG, Mardanyan SS and Galoyan AA.          9.82e8
-11 250439 Athwal,N., Peretz,S. and Mead,J.                                3.39e9
-12 210215 Albarino,C. and Nichol,S.T.                                     9.91e8
-13 192942 Arafa,A.A., Hagag,N., ElHusseiny,M.M., Abdelhalim,A., Hassan,M… 5.99e8
-14 190803 Alaoui,S.A., Melloul,M., Loutfi,C., Ibrahimi,A., Touil,N. and … 9.82e8
-15 172071 Abbas,M.A., Spackman,E., Ahmed,Z., Naeem,K., Siddique,N., Sway… 3.82e9
-16 148403 Ashur-Fabian,O., Avivi,A., Trakhtenbrot,L., Adamsky,K., Cohen,… 2.40e9
-17  48400 Aiello,L.P., Robinson,G.S., Lin,Y.W., Nishio,Y. and King,G.L.   5.99e8
-18  38480 Augustin,R., Navarrete-Santos,A. and Fischer,B.                 2.39e9
-19  15062 Abuhagr,A.M., Blindert,J.L. and Mykles,D.L.                     9.94e8
-20    875 Alfaro-Saladana,E.F., Covarrubias-Rubio,Y., Hernandez-Sanchez,… 4.77e8
+ 1 357812 ANDERSON,D.G., WESSELHOEFT,R.A. and KOWALSKI,P.S.               2.78e9
+ 2 316945 Antony C, Huchet M, Changeux JP and Cartaud J.                  2.45e8
+ 3 316090 Arakaki AKS, Pan WA, Lin H and Trejo J.                         3.77e9
+ 4 313214 Atanes P, Ruz-Maldonado I, Hawkes R, Liu B, Zhao M, Huang GC, … 9.93e8
+ 5 255289 Audic,S., Lescot,M., Claverie,J.M., Cloeckaert,A. and Zygmunt,… 4.03e9
+ 6 254388 Arand,M., Friedberg,T., Wieser,R.J. and Oesch.F.                4.18e8
+ 7 240722 Al-Sa'ady,A.T., Alkhafaji,Z.A. and Shibly,K.                    5.99e8
+ 8 237145 Amemiya,C.T. and Litman,G.W.                                    9.90e8
+ 9 227535 Aztatzi-Aguilar,O.G., Perez-Nunez,M.T., Albores-Medina,A. and … 3.04e9
+10 218177 Andeol,Y., Lefresne,J., Simard,C., Seguin,C., Mouton,C. and Si… 9.96e8
+11 212573 Agwu,A., Lindsey,J.C., Ferguson,K., Zhang,H., Spector,S., Rudy… 2.40e9
+12 170109 Avettand-Fenoel,V., Hocqueloux,L., Muller-Trutwin,M., Prazuck,… 9.98e8
+13 151418 Adachi,T., Kojima,K., Fukuoka,S., Ogawa,H. and Matsumoto,I.     3.95e9
+14 143616 Azim,A.C., Kim,A.C., Lutchman,M., Andrabi,S., Peters,L.L. and … 3.92e9
+15 131685 Aso,T., Haque,D., Fukudome,K., Brower,C.S., Conaway,J.W. and C… 3.92e9
+16 115822 Allcock,R.J., Christiansen,F.T. and Price,P.                    3.10e9
+17  95062 Azoulay-Shemer,T., Harpaz-Saad,S., Cohen-Peer,R., Mett,A., Spi… 1.92e9
+18  91118 Ahn,K., Grishina,G., Bardina,L., Beyer,K. and Sampson,H.A.      3.98e9
+19  63845 Adhin,M.R., Hirashima,A. and van Duin,J.                        1.03e9
+20     46 Agematu,H., Matsumoto,N., Fujii,Y., Kabumoto,H., Doi,S., Machi… 2.39e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -331,26 +331,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 356306 Alcaide,C., Rabadan,M.P., Juarez,M. and Gomez,P.                3.37e9
- 2 352666 Alowiri NH, Hanafy SM, Haleem RA and Abdellatif A.              2.72e9
- 3 336442 Alamri A, Biswas L, Watson DG and Shu X.                        2.04e9
- 4 307115 Alessandrini F, Pezze L, Menendez D, Resnick MA and Ciribilli … 3.92e9
- 5 286656 Ahmed EA, Philippens ME, Kal HB, de Rooij DG and de Boer P.     3.47e9
- 6 285907 Araujo FM, Meola J, Rosa-E-Silva JC, Paz CCP, Ferriani RA and … 3.97e9
- 7 281125 Arany I, Carter A, Hall S, Fulop T and Dixit M.                 2.43e9
- 8 257020 Ardley,J.K., Parker,M.A., De Meyer,S.E., Trengove,R.D., O'Hara… 2.91e9
- 9 242291 Anderson,O.D., Chao,S., Han,P.S., Hsia,C.C., Johnson,R.R., Kan… 5.80e8
-10 236868 Abe,G., Lee,S.H., Li,I.J. and Ota,K.G.                          4.18e8
-11 225939 Andre,S., Kerfourn,F. and Fellah,J.S.                           9.82e8
-12 204736 Akanbi,O.A., Wang,B., Harms,D., Adesina,O., Osdundare,F.A., Op… 2.39e9
-13 195458 Abed,M., Soubies,S., Courtillon,C., Briand,F.X., Allee,C., Ame… 2.86e9
-14 156856 Alessandrini,A. and Desiderio,S.V.                              2.59e9
-15  83880 Adams,K.L., Song,K., Roessler,P.G., Nugent,J.M., Doyle,J.L., D… 9.91e8
-16  82315 Ahluwalia,K.K. and Baysdorfer,C.                                2.75e9
-17  68196 Almeida,A., Dong,L., Khakimov,B., Bassard,J.A., Moses,T., Lota… 1.99e9
-18  65069 Akama,K., Akihiro,T., Kitagawa,M. and Takaiwa,F.                2.40e9
-19  30699 Adams,B., Musiyenko,A. and Barik,S.                             1.49e8
-20  10834 An,S., Chen,L., Wei,J.F., Yang,X., Ma,D., Xu,X., Xu,X., He,S.,… 1.50e9
+ 1 366032 Aprato J, Sock E, Weider M, Elsesser O, Frob F and Wegner M.   1.67 e9
+ 2 362282 Acharya S, Dutta S, Chopra S and Bose K.                       1.93 e9
+ 3 361717 An X, Liu X, Ma G and Li C.                                    2.73 e9
+ 4 361608 An HJ, Ryu M, Jeong HJ, Kang M, Jeon HM, Lee JO, Kim YS and L… 3.03 e7
+ 5 336519 Abe K, Cox A, Takamatsu N, Velez G, Laxer RM, Tse SML, Mahaja… 3.50 e9
+ 6 333458 Arunkumar,G., Shilpa,C., Kavitha,K., Sudheesh,N., Sabeena,S.,… 4.18 e8
+ 7 323985 Askari M, Kordi-Tamandani DM, Almadani N, McElreavey K and To… 1.000e9
+ 8 286024 Arvaniti M, Jensen MM, Soni N, Wang H, Klein AB, Thiriet N, P… 9.97 e8
+ 9 281561 Amiri-Yekta A, Coutton C, Kherraf ZE, Karaouzene T, Le Tanno … 3.90 e9
+10 236788 Akashi,H.D., Saito,S., Cadiz Diaz,A., Makino,T., Tominaga,M. … 5.99 e8
+11 233349 Aguilar,A., Edwards,S.V., Smith,T.B. and Wayne,R.K.            2.40 e9
+12 204458 Anis,E., Wilkes,R.P., Needle,D.B., Stevens,B.A. and Dubovi,E.… 9.83 e8
+13 196059 Alam,S.T., Vaidya,S.R., Kamble,M. and Rabha,D.                 3.37 e9
+14 190799 Alves-Freitas,D.M., Pinheiro-Lima,B., Faria,J.C., Lacorte,C.,… 2.75 e9
+15 157418 Arce Vargas,F., Furness,A.J., Litchfield,K., Joshi,K., Rosent… 3.99 e9
+16 135157 Albertsen,H.M., Smith,S.A., Mazoyer,S., Fujimoto,E., Stevens,… 2.80 e9
+17  98593 Ali,M., Ji,W., Baloch,G.M. and Baloch,G.A.                     9.76 e8
+18  85121 Abe,I., Naito,K., Takagi,Y. and Noguchi,H.                     2.40 e9
+19  47967 Abdul,F., Filleton,F., Gerossier,L., Paturel,A., Hall,J., Str… 2.39 e9
+20  43072 Amills,M., Sulas,C., Sanchez,A., Bertoni,G., Zanoni,R. and Ob… 3.24 e9
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -442,20 +442,27 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 11,014 × 4
+# A tibble: 18 × 4
        id name                                                      author acc  
     <int> <chr>                                                      <dbl> <chr>
- 1 333840 Amer,M.A. and Younis,S.                                   333840 MK45…
- 2 333840 Amer,M.A. and Younis,S.                                   333840 MK45…
- 3 276374 Aksoy I, Utami KH, Winata CL, Hillmer AM, Rouam SL, Bria…     NA <NA> 
- 4 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
- 5 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
- 6 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
- 7 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
- 8 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
- 9 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
-10 243045 Anderson,O.D., Chao,S., Chin,A., Close,T.J., Crossman,C.… 243045 BQ29…
-# ℹ 11,004 more rows
+ 1 310700 Andrews MT, Squire TL, Bowen CM and Rollins MB.           310700 NM_0…
+ 2 190053 Aghamolai,A., Nasrollanejad,S. and Mostafavi Neishaburi,… 190053 KR90…
+ 3 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 4 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 5 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 6 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 7 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 8 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+ 9 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+10 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+11 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+12 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+13 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+14 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
+15 262715 Augustin R, Franke A, Khalturin K, Kiko R, Siebert S, He… 262715 NM_0…
+16 262715 Augustin R, Franke A, Khalturin K, Kiko R, Siebert S, He… 262715 NM_0…
+17 316274 Aouini A, Matsukura C, Ezura H and Asamizu E.             316274 NM_0…
+18 316274 Aouini A, Matsukura C, Ezura H and Asamizu E.             316274 NM_0…
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -597,16 +604,16 @@ tibble::as_tibble(org_units)
 # A tibble: 1,166 × 8
    National_name National_id District_name District_id Chiefdom_name Chiefdom_id
    <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 1 Sierra Leone  ImspTQPwCqd Kenema        kJq2mPyFEHo Nongowa       KIUCimTXf8Q
  2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 4 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 5 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 6 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 7 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 8 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+ 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
  9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Kono          Vth0fbpFcsO Gbense        TQkG0sX9nca
+10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
 # ℹ 1,156 more rows
 # ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
@@ -630,15 +637,15 @@ tibble::as_tibble(data_name)
    event      tracked_entity org_unit Gender `First name` `Last name` enrollment
    <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
  1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
- 2 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
- 3 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 2 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 3 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
  4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
- 5 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 6 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 7 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 8 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 9 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
-10 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+ 5 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 6 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 7 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 8 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 9 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+10 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
 # ℹ 20 more rows
 # ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
 #   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
