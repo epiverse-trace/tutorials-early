@@ -267,26 +267,26 @@ dat
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 357812 ANDERSON,D.G., WESSELHOEFT,R.A. and KOWALSKI,P.S.               2.78e9
- 2 316945 Antony C, Huchet M, Changeux JP and Cartaud J.                  2.45e8
- 3 316090 Arakaki AKS, Pan WA, Lin H and Trejo J.                         3.77e9
- 4 313214 Atanes P, Ruz-Maldonado I, Hawkes R, Liu B, Zhao M, Huang GC, … 9.93e8
- 5 255289 Audic,S., Lescot,M., Claverie,J.M., Cloeckaert,A. and Zygmunt,… 4.03e9
- 6 254388 Arand,M., Friedberg,T., Wieser,R.J. and Oesch.F.                4.18e8
- 7 240722 Al-Sa'ady,A.T., Alkhafaji,Z.A. and Shibly,K.                    5.99e8
- 8 237145 Amemiya,C.T. and Litman,G.W.                                    9.90e8
- 9 227535 Aztatzi-Aguilar,O.G., Perez-Nunez,M.T., Albores-Medina,A. and … 3.04e9
-10 218177 Andeol,Y., Lefresne,J., Simard,C., Seguin,C., Mouton,C. and Si… 9.96e8
-11 212573 Agwu,A., Lindsey,J.C., Ferguson,K., Zhang,H., Spector,S., Rudy… 2.40e9
-12 170109 Avettand-Fenoel,V., Hocqueloux,L., Muller-Trutwin,M., Prazuck,… 9.98e8
-13 151418 Adachi,T., Kojima,K., Fukuoka,S., Ogawa,H. and Matsumoto,I.     3.95e9
-14 143616 Azim,A.C., Kim,A.C., Lutchman,M., Andrabi,S., Peters,L.L. and … 3.92e9
-15 131685 Aso,T., Haque,D., Fukudome,K., Brower,C.S., Conaway,J.W. and C… 3.92e9
-16 115822 Allcock,R.J., Christiansen,F.T. and Price,P.                    3.10e9
-17  95062 Azoulay-Shemer,T., Harpaz-Saad,S., Cohen-Peer,R., Mett,A., Spi… 1.92e9
-18  91118 Ahn,K., Grishina,G., Bardina,L., Beyer,K. and Sampson,H.A.      3.98e9
-19  63845 Adhin,M.R., Hirashima,A. and van Duin,J.                        1.03e9
-20     46 Agematu,H., Matsumoto,N., Fujii,Y., Kabumoto,H., Doi,S., Machi… 2.39e9
+ 1 336399 Ali H, AbdelMageed M, Olsson L, Israelsson A, Lindmark G, Hamm… 8.68e8
+ 2 330710 Alakoski T, Ulvila J, Yrjola R, Vainio L, Magga J, Szabo Z, Li… 2.47e8
+ 3 328385 Ajogbasile,F.V., Oguzie,J.U., Oluniyi,P.E., Eromon,P.E., Uwani… 2.39e9
+ 4 309405 Abeln M, Borst KM, Cajic S, Thiesler H, Kats E, Albers I, Kuhn… 9.99e8
+ 5 282733 Atef ME and Anand-Srivastava MB.                                2.98e9
+ 6 281458 Archambaud C, Nahori MA, Soubigou G, Becavin C, Laval L, Lecha… 1.32e9
+ 7 279821 Adler E, Hoon MA, Mueller KL, Chandrashekar J, Ryba NJ and Zuk… 6.00e8
+ 8 270046 Aizenberg-Gershtein,Y., Laviad,S., Samuni-Blank,M. and Halpern… 2.39e9
+ 9 216764 Abe,S., Miyamoto,K. and Sasaki,E.                               2.75e9
+10 216220 Ahsan,M.N., Aoki,H. and Watabe,S.                               3.82e9
+11 192242 Arauz,D., De Urriola,L., Jones,J., Castillo,M., Martinez,A., M… 2.75e9
+12 142821 Andersson,U., Antonicka,H., Houstek,J. and Cannon,B.            1.67e9
+13 133296 Anderson,R.A. and Sando,G.N.                                    2.40e9
+14 114792 Aarts,W.M., Willemze,R., Bende,R.J., Meijer,C.J., Pals,S.T. an… 1.63e9
+15  99026 Aza-Gonzalez,C., Herrera-Isidron,L., Nunes-Palenius,H.G., Mart… 3.25e9
+16  64950 Asada,A., Kusakawa,T., Orii,H., Watanabe,K. and Tsubaki,M.      2.40e9
+17  61824 Akerblom,I.E.                                                   1.68e9
+18  46733 Ahmed,A., Arshad,M., Malik,A., Parveen,S. and Alsenaidy,A.M.    2.50e9
+19  25785 Adam,M.A.M., Phillips,M.S., Jones,J.T. and Blok,V.C.            3.82e9
+20  23395 Arca,B., Lombardo,F., Lanfrancotti,A., Spanos,L., Veneri,M., L… 2.39e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -331,26 +331,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 366032 Aprato J, Sock E, Weider M, Elsesser O, Frob F and Wegner M.   1.67 e9
- 2 362282 Acharya S, Dutta S, Chopra S and Bose K.                       1.93 e9
- 3 361717 An X, Liu X, Ma G and Li C.                                    2.73 e9
- 4 361608 An HJ, Ryu M, Jeong HJ, Kang M, Jeon HM, Lee JO, Kim YS and L… 3.03 e7
- 5 336519 Abe K, Cox A, Takamatsu N, Velez G, Laxer RM, Tse SML, Mahaja… 3.50 e9
- 6 333458 Arunkumar,G., Shilpa,C., Kavitha,K., Sudheesh,N., Sabeena,S.,… 4.18 e8
- 7 323985 Askari M, Kordi-Tamandani DM, Almadani N, McElreavey K and To… 1.000e9
- 8 286024 Arvaniti M, Jensen MM, Soni N, Wang H, Klein AB, Thiriet N, P… 9.97 e8
- 9 281561 Amiri-Yekta A, Coutton C, Kherraf ZE, Karaouzene T, Le Tanno … 3.90 e9
-10 236788 Akashi,H.D., Saito,S., Cadiz Diaz,A., Makino,T., Tominaga,M. … 5.99 e8
-11 233349 Aguilar,A., Edwards,S.V., Smith,T.B. and Wayne,R.K.            2.40 e9
-12 204458 Anis,E., Wilkes,R.P., Needle,D.B., Stevens,B.A. and Dubovi,E.… 9.83 e8
-13 196059 Alam,S.T., Vaidya,S.R., Kamble,M. and Rabha,D.                 3.37 e9
-14 190799 Alves-Freitas,D.M., Pinheiro-Lima,B., Faria,J.C., Lacorte,C.,… 2.75 e9
-15 157418 Arce Vargas,F., Furness,A.J., Litchfield,K., Joshi,K., Rosent… 3.99 e9
-16 135157 Albertsen,H.M., Smith,S.A., Mazoyer,S., Fujimoto,E., Stevens,… 2.80 e9
-17  98593 Ali,M., Ji,W., Baloch,G.M. and Baloch,G.A.                     9.76 e8
-18  85121 Abe,I., Naito,K., Takagi,Y. and Noguchi,H.                     2.40 e9
-19  47967 Abdul,F., Filleton,F., Gerossier,L., Paturel,A., Hall,J., Str… 2.39 e9
-20  43072 Amills,M., Sulas,C., Sanchez,A., Bertoni,G., Zanoni,R. and Ob… 3.24 e9
+ 1 359121 Amirfallah A, Arason A, Einarsson H, Gudmundsdottir ET, Freyst… 1.37e9
+ 2 357812 ANDERSON,D.G., WESSELHOEFT,R.A. and KOWALSKI,P.S.               2.78e9
+ 3 348634 Alleboina S, Ayalew D, Peravali R, Chen L, Wong T and Dokun AO. 1.14e9
+ 4 336506 Antunes LCM, Cartell A, de Farias CB, Bakos RM, Roesler R and … 1.24e9
+ 5 335333 Alici,E.                                                        1.65e6
+ 6 274535 Ashida H, Hong Y, Murakami Y, Shishioh N, Sugimoto N, Kim YU, … 3.95e9
+ 7 245111 Aquea,F. and Arce-Johnson,P.                                    1.49e9
+ 8 229181 Adams,M.E., Minamide,L.S., Duester,G. and Bamburg,J.R.          3.91e9
+ 9 218329 Asch,W.S., Leake,D., Canger,A.K., Passini,M.A., Argenton,F. an… 3.98e9
+10 213167 Amarilla,A.A., de Almeida,F.T., Jorge,D.M., Alfonso,H.L., de C… 9.80e8
+11 165415 Abe,K.                                                          9.96e4
+12 148173 Abarca-Heidemann,K.                                             2.07e9
+13 114715 Adams,J.C. and Zhang,L.                                         2.83e9
+14  76824 Alonso,J.M., Chamarro,J. and Granell,A.                         2.39e9
+15  75226 Aalen,R.B., Opsahl-Ferstad,H.G., Linnestad,C. and Olsen,O.A.    2.40e9
+16  72078 Ashrafi,M., Azimi Moqadam,M.R., Moradi,P., Shekari,F. and Mohs… 4.24e8
+17  63896 Adams,J.M., Cory,S. and Spahr,P.F.                              2.40e9
+18  55727 Appella,D.H., Micklitsch,C., Yemane,B. and Zhao,C.              1.18e9
+19  42590 Ager,E.I., Cowing,J., Rodger,J. and Hunt,D.M.                   1.67e9
+20  38510 Ambagala,A.P., Feng,Z., Barletta,R.G. and Srikumaran,S.         3.09e9
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -442,27 +442,20 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 18 × 4
+# A tibble: 146 × 4
        id name                                                      author acc  
     <int> <chr>                                                      <dbl> <chr>
- 1 310700 Andrews MT, Squire TL, Bowen CM and Rollins MB.           310700 NM_0…
- 2 190053 Aghamolai,A., Nasrollanejad,S. and Mostafavi Neishaburi,… 190053 KR90…
- 3 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 4 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 5 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 6 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 7 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 8 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
- 9 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-10 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-11 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-12 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-13 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-14 168300 Abid,K., Quadri,R., Veuthey,A.L., Hadengue,A. and Negro,… 168300 AF21…
-15 262715 Augustin R, Franke A, Khalturin K, Kiko R, Siebert S, He… 262715 NM_0…
-16 262715 Augustin R, Franke A, Khalturin K, Kiko R, Siebert S, He… 262715 NM_0…
-17 316274 Aouini A, Matsukura C, Ezura H and Asamizu E.             316274 NM_0…
-18 316274 Aouini A, Matsukura C, Ezura H and Asamizu E.             316274 NM_0…
+ 1 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 2 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 3 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 4 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 5 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 6 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 7 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 8 210433 Arankalle,V.A., Shrivastava,S., Cherian,S., Gunjikar,R.S… 210433 EF02…
+ 9  41988 Aschenbach,J.R., Steglich,K., Honscha,K.U. and Gabel,G.    41988 FJ20…
+10  41988 Aschenbach,J.R., Steglich,K., Honscha,K.U. and Gabel,G.    41988 FJ20…
+# ℹ 136 more rows
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -530,16 +523,30 @@ dhis2_login <- readepi::login(
   user_name = "admin",
   password = "district"
 )
+```
 
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
+! HTTP 404 Not Found.
+```
+
+``` r
 dhis2_login
 ```
 
 ``` output
-<httr2_response>
-GET https://play.im.dhis2.org/stable-2-42-6/api/me
-Status: 200 OK
-Content-Type: application/json
-Body: In memory (12468 bytes)
+function(base_url,
+                        user_name,
+                        password) {
+  target_url <- file.path(base_url, "api", "me")
+  resp <- httr2::request(target_url) |>
+    httr2::req_auth_basic(user_name, password) |>
+    httr2::req_perform()
+  cli::cli_alert_success("Logged in successfully!")
+  return(invisible(resp))
+}
+<bytecode: 0x55876b61c830>
+<environment: namespace:readepi>
 ```
 
 If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-6` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
@@ -566,56 +573,42 @@ Your can read further from this blogpost on [How to Avoid Publishing Credentials
 ``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 # print tables
 tibble::as_tibble(programs)
 ```
 
-``` output
-# A tibble: 14 × 3
-   displayName                                         id          type     
-   <chr>                                               <chr>       <chr>    
- 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
- 2 Child Programme                                     IpHINAT79UW tracker  
- 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
- 4 Information Campaign                                q04UBOqq3rp aggregate
- 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
- 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
- 7 Malaria case registration                           VBqh0ynB2wv aggregate
- 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
- 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
-10 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
-11 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
-12 TB program                                          ur1Edk5Oe2n tracker  
-13 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
-14 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
+``` error
+Error:
+! object 'programs' not found
 ```
 
 
 ``` r
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 # print tables
 tibble::as_tibble(org_units)
 ```
 
-``` output
-# A tibble: 1,166 × 8
-   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
-   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
- 1 Sierra Leone  ImspTQPwCqd Kenema        kJq2mPyFEHo Nongowa       KIUCimTXf8Q
- 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
- 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
- 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
- 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
- 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
- 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
- 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
-# ℹ 1,156 more rows
-# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
+``` error
+Error:
+! object 'org_units' not found
 ```
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
@@ -628,31 +621,20 @@ data_name <- readepi::read_dhis2(
   org_unit = "Bucksal Clinic",
   program = "Child Programme"
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 tibble::as_tibble(data_name)
 ```
 
-``` output
-# A tibble: 30 × 26
-   event      tracked_entity org_unit Gender `First name` `Last name` enrollment
-   <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
- 1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
- 2 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
- 3 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
- 4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
- 5 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 6 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
- 7 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 8 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
- 9 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
-10 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
-# ℹ 20 more rows
-# ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
-#   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
-#   `MCH ARV at birth` <chr>, `MCH Apgar Score` <chr>, `MCH Weight (g)` <chr>,
-#   `MCH Infant Weight  (g)` <chr>, `MCH Vit A` <chr>,
-#   `MCH Infant HIV Test Result` <chr>, `MCH HIV Test Type` <chr>,
-#   `MCH IPT dose` <chr>, `MCH DPT dose` <chr>, `MCH Child ARVs` <chr>, …
+``` error
+Error:
+! object 'data_name' not found
 ```
 
 
@@ -663,12 +645,20 @@ data_id <- readepi::read_dhis2(
   org_unit = "vRC0stJ5y9Q",
   program = "IpHINAT79UW"
 )
+```
 
+``` error
+Error in `readepi::read_dhis2()`:
+! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
+```
+
+``` r
 identical(data_id, data_name)
 ```
 
-``` output
-[1] TRUE
+``` error
+Error:
+! object 'data_id' not found
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
@@ -681,25 +671,20 @@ target_org_units <- readepi::get_program_org_units(
   program = "IpHINAT79UW",
   org_units = org_units
 )
+```
 
+``` error
+Error in `login[["url"]]`:
+! object of type 'closure' is not subsettable
+```
+
+``` r
 tibble::as_tibble(target_org_units)
 ```
 
-``` output
-# A tibble: 1,166 × 3
-   org_unit_ids levels        org_unit_names              
-   <chr>        <chr>         <chr>                       
- 1 vRC0stJ5y9Q  Facility_name Bucksal Clinic              
- 2 simyC07XwnS  Facility_name Maforay MCHP                
- 3 E9oBVjyEaCe  Facility_name Gbanja Town MCHP            
- 4 ZpE2POxvl9P  Facility_name Faabu CHP                   
- 5 yTMrs5kClCv  Facility_name Condama MCHP                
- 6 FO1Tq8vUa62  Facility_name EPI Headquarter             
- 7 jGYT5U5qJP6  Facility_name Gbaiima CHC                 
- 8 LaxJ6CD2DHq  Facility_name EM&BEE Maternity Home Clinic
- 9 WerHl8SDtRU  Facility_name Mandema CHP                 
-10 CTnuuI55SOj  Facility_name Manewa MCHP                 
-# ℹ 1,156 more rows
+``` error
+Error:
+! object 'target_org_units' not found
 ```
 
 <!-- :::::::::::::::: callout
