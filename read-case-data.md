@@ -267,26 +267,26 @@ dat
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 348745 Akhter MS, Singh S, Yadegari H, Ivaskevicius V, Oldenburg J an… 2.75e9
- 2 345925 Alisson-Silva F, Mantuano NR, Lopes AL, Vasconcelos-Dos-Santos… 3.77e9
- 3 344415 Abou Abdallah,R., Cimmino,T., Baron,S., Cadoret,F., Michelle,C… 5.98e8
- 4 326983 Assarnia S, Ardalan Khales S and Forghanifard MM.               3.24e9
- 5 283467 Aomatsu E, Takahashi N, Sawada S, Okubo N, Hasegawa T, Taira M… 2.23e9
- 6 279615 Amin ND, Bai G, Klug JR, Bonanomi D, Pankratz MT, Gifford WD, … 2.21e9
- 7 260229 Anil Kumar,P., Aparna,P., Srinivas,T.N., Sasikala,Ch. and Rama… 3.97e9
- 8 254798 Azuma,Y., Hosoyama,A., Matsutani,M., Furuya,N., Horikawa,H., H… 1.67e9
- 9 214850 Andreotti,M., Galluzzo,C.M., Guidotti,G., Germano,P., Altan,A.… 9.84e8
-10 207207 Aamir,U.B., Naeem,K., Ahmed,Z., Obert,C.A., Franks,J., Krauss,… 4.00e9
-11 192482 Al Kindi,H., Al Jardani,A., Al Mahruqi,S., Al Busaidi,A., Al A… 3.89e9
-12 190158 Abreu,E.F., Daltro,C.B., Nogueira,E.O., Andrade,E.C. and Araga… 9.79e8
-13 176278 Ali,M., Fatima,Z., Idrees,M., Akram,M., Ali,L., Hussain,A., Ma… 3.06e9
-14 171555 Ahmed,H.A., Omran,R. and Yanni,M.I.                             2.40e9
-15 102448 Augustine,R. and Bisht,N.C.                                     2.39e9
-16  75694 Albrecht,M., Klein,A., Hugueney,P., Sandmann,G. and Kuntz,M.    1.76e9
-17  75432 Appert,C., Logemann,E., Hahlbrock,K., Schmid,J. and Amrhein,N.  2.39e9
-18  36148 Andreolli,A.P., Cabral,F.J., Sa,R.G. and Rodrigues,V.           3.99e9
-19  31654 Adam,R.D., Yang,Y.M. and Nash,T.E.                              5.99e8
-20   9248 Ayala,R.F., Vershon,A.K. and Nemeroff,M.E.                      2.96e9
+ 1 330871 Amal H, Gong G, Gjoneska E, Lewis SM, Wishnok JS, Tsai LH and … 3.58e9
+ 2 322312 Asman,A.K.M., Curtis,B.A. and Archibald,J.M.                    2.54e9
+ 3 305353 Abe H, Jitsuki S, Nakajima W, Murata Y, Jitsuki-Takahashi A, K… 3.98e9
+ 4 296021 Almeida FF, Tenno M, Brzostek J, Li JL, Allies G, Hoeffel G, S… 1.32e9
+ 5 265798 Ando A, Shigenari A, Kulski JK, Renard C, Chardon P, Shiina T … 3.51e9
+ 6 261910 Albuquerque,L., Rainey,F.A., Chung,A.P., Sunna,A., Nobre,M.F.,… 3.22e9
+ 7 251016 Aldea,D., Jones,J. and Mead,J.                                  3.86e9
+ 8 199440 Adams,I.P. and Braidwood,L.A.                                   2.60e9
+ 9 184303 Abd El Hamid,M.I., El Zeedy,S.A., El Sanousi,A.A. and Reda,I.M. 5.99e8
+10 179410 Amaral,H.A., Soares,R.M., Cortez,A., Durigon,E.L., Funada,M.R.… 2.39e9
+11 173094 Abo Hatab,E.M., Hussein,H.A., El-Sabagh,I.M. and Saber,M.S.     2.40e9
+12 172335 Auguste,A.J., Adams,A.P., Arrigo,N.C., Martinez,R., Travassos … 9.99e8
+13 158962 Akhtar,I., Gold,J.P., Pan,L.Y., Ferrara,J.L., Yang,X.D., Kim,J… 1.50e8
+14 141323 Aiba,Y.                                                         4.07e5
+15 121053 Achen,M.G., Jeltsch,M., Kukk,E., Makinen,T., Vitali,A., Wilks,… 3.99e9
+16  48262 Adams,T.E.                                                      2.58e7
+17  47806 Adams,T.E., Baker,L., Fiddes,R.J. and Brandon,M.R.              3.92e9
+18  32880 Abalde,S., Tenorio,M.J., Afonso,C.M. and Zardoya,R.             2.40e9
+19  15737 Asadulina,A., Panzera,A., Veraszto,C., Liebig,C. and Jekely,G.  2.75e9
+20  12187 Alliegro,M.A., Henry,J.J. and Alliegro,M.C.                     2.77e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -331,26 +331,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 259181 Amoozegar,M.A., Bagheri,M., Didari,M., Shahzedeh Fazeli,S.A., … 2.40e9
- 2 242828 Adelson,D.L. and Gill,C.A.                                      3.82e9
- 3 228028 Araya,I.C., Nardocci,G.A., Vera,M.I., Molina,A.I. and Alvarez,… 3.92e9
- 4 204563 Arunkumar,G., Sanjay,R.E., Anitha,J., Santhosha,D., Aswathyraj… 2.40e9
- 5 201540 Awasthi,S., Isler,J.A. and Alwine,J.C.                          9.79e8
- 6 197656 Abou Kubaa,R., D'Onghia,A.M. and Djelouah,K.                    9.81e8
- 7 193921 Abu El Naga,E.M. and Kassem,S.G.                                9.86e8
- 8 173310 Abdul-Hamid,N.F., Firat-Sarac,M., Radford,A.D., Knowles,N.J. a… 1.67e9
- 9 159904 Azuara,V., Levraud,J.P., Lembezat,M.P. and Pereira,P.           2.40e9
-10 155692 Aksamit,R.R.                                                    4.24e8
-11 119729 Ahmad,W., Ratterre,M.S., Panteleyev,A.A., Aita,V.M., Sundberg,… 1.71e9
-12  96589 Avanzo,P., Sabotic,J., Anzlovar,S., Popovic,T., Leonardi,A., P… 2.57e9
-13  73650 Apt,K.E., Metzner,S. and Grossman,A.R.                          2.90e9
-14  70143 Axel'rod,V.D., Kryukov,V.M., Isaenko,S.N. and Bayev,A.A.        2.39e9
-15  65144 Asawatreratanakul,K., Zhang,Y.W., Wititsuwannakul,D., Wititsuw… 5.99e8
-16  63075 Adema,G.J., Meyaard,L., Gorman,D.M., McClanahan,T.K., Zurawski… 3.48e9
-17  58126 Arhancet,J.P.H. and Mclaughlin,P.D.                             3.92e9
-18  56026 Aoki,M.                                                         4.16e5
-19  36395 Ando,A., Kawata,H., Murakami,T., Shigenari,A., Shiina,T., Sada… 2.83e9
-20  28446 Augusto-Pinto,L., Teixeira,S.M., Pena,S.D. and Machado,C.R.     3.95e9
+ 1 361723 Andergassen D, Smith ZD, Lewandowski JP, Gerhardinger C, Meiss… 3.30e9
+ 2 335333 Alici,E.                                                        1.65e6
+ 3 333001 Ali,M.R., Alam,A.S.M.R.U., Amin,M.A., Siddique,M.A., Sultana,M… 3.95e9
+ 4 330823 Aydin HA, Toptas T, Bozkurt S, Aydin A, Erdogan G, Pestereli E… 1.40e9
+ 5 329222 Amin,A.K., Tanaka,M., Al-Saari,N., Feng,G., Mino,S., Ogura,Y.,… 3.82e9
+ 6 282424 Abrol N, de Tombe PP and Robia SL.                              6.23e7
+ 7 259256 Albuquerque,L., Tiago,I., Nobre,M.F., Verissimo,A. and da Cost… 3.22e9
+ 8 246757 Adomas,A., Sun,H. and Asiegbu,F.O.                              3.92e9
+ 9 246327 Adhikari,B.N., Wall,D.H. and Adams,B.J.                         2.39e9
+10 234551 Arocas,V., Castro,H.C., Zingali,R.B., Guillin,M.C., Jandrot-Pe… 2.75e9
+11 233315 Avdic,S. and Broady,K.W.                                        9.81e8
+12 182243 Adkar-Purushothama,C.R., Kanchepalli,P.R., Yanjarappa,S.M., Zh… 6.41e8
+13 161114 Amor-Gueret,M. and Levi-Strauss,M.                              3.91e9
+14  96026 Assarehzadegan,M.A., Sankian,M., Jabbari,F., Tehrani,M. and Va… 9.98e8
+15  89908 Asturias,J.A., Ibarrola,I., Fernandez,J., Arilla,M.C., Gonzale… 9.89e8
+16  85051 Appel,M., Burger,A.L. and Bellstedt,D.U.                        2.43e9
+17  73579 Adnan,S., Susan,L. and Weiss,D.                                 3.10e9
+18  53129 Aartsma-rus,A., Platenburg,G.J., Kimpe,J.J.D., Deutekom,J.C.T.… 3.97e9
+19  47967 Abdul,F., Filleton,F., Gerossier,L., Paturel,A., Hall,J., Stru… 2.39e9
+20  23845 Adell,T. and Muller,W.E.                                        9.93e8
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -442,20 +442,20 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 82 × 4
+# A tibble: 25 × 4
        id name                                                      author acc  
     <int> <chr>                                                      <dbl> <chr>
- 1 158083 Arsura,M., Deshpande,A., Hann,S.R. and Sonenshein,G.E.    158083 S805…
- 2  98059 Abraham-Juarez,M.J., Martinez-Hernandez,A., Leyva-Gonzal…  98059 GU98…
- 3  98059 Abraham-Juarez,M.J., Martinez-Hernandez,A., Leyva-Gonzal…  98059 GU98…
- 4  38237 Allaire,P., Levesque,L., Leclerc,G. and Guy,L.-G.          38237 AF23…
- 5 233904 Allen,B.G., Allen-Brady,K. and Weeks,D.L.                 233904 AY65…
- 6  53227 Amor,F., Jeanson-leh,L., Israeli,D. and Voit,T.            53227 HW91…
- 7  53227 Amor,F., Jeanson-leh,L., Israeli,D. and Voit,T.            53227 HW91…
- 8  53227 Amor,F., Jeanson-leh,L., Israeli,D. and Voit,T.            53227 HW91…
- 9  53227 Amor,F., Jeanson-leh,L., Israeli,D. and Voit,T.            53227 HW91…
-10  53227 Amor,F., Jeanson-leh,L., Israeli,D. and Voit,T.            53227 HW91…
-# ℹ 72 more rows
+ 1 293148 Alvarez E, Zhou W, Witta SE and Freed CR.                 293148 NM_0…
+ 2 146496 An,G., Dong,N., Shao,B., Zhu,M. and Ruan,C.               146496 AF35…
+ 3 146496 An,G., Dong,N., Shao,B., Zhu,M. and Ruan,C.               146496 AF35…
+ 4 143958 Airenne,T., Lin,Y., Olsson,M., Ekblom,P., Vainio,S. and … 143958 AF10…
+ 5 211525 Azizi,A., Couto,N., Banister,K. and Diaz-Mitoma,F.        211525 EF61…
+ 6 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
+ 7 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
+ 8 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
+ 9 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NR_1…
+10 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
+# ℹ 15 more rows
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -545,7 +545,7 @@ function(base_url,
   cli::cli_alert_success("Logged in successfully!")
   return(invisible(resp))
 }
-<bytecode: 0x63c6a71d36b0>
+<bytecode: 0x5623a17df818>
 <environment: namespace:readepi>
 ```
 
@@ -740,18 +740,20 @@ covid_cases <- readepi::read_sormas(
   login = sormas_login,
   disease = "coronavirus",
 )
+```
+
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
+! HTTP 503 Service Unavailable.
+```
+
+``` r
 tibble::as_tibble(covid_cases)
 ```
 
-``` output
-# A tibble: 2 × 16
-  case_id      person_id date_onset case_origin case_status outcome date_outcome
-  <chr>        <chr>     <date>     <chr>       <chr>       <chr>   <chr>       
-1 W3RLN3-LNPN… R6HELZ-O… NA         IN_COUNTRY  NOT_CLASSI… RECOVE… 1.791846e+12
-2 ULMPMT-PBQO… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA>        
-# ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
-#   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, Ct_values <chr>
+``` error
+Error:
+! object 'covid_cases' not found
 ```
 
 A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
@@ -762,25 +764,20 @@ A key parameter is the disease name. To ensure correct syntax, you can retrieve 
 disease_names <- readepi::sormas_get_diseases(
   login = sormas_login
 )
+```
 
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
+! HTTP 503 Service Unavailable.
+```
+
+``` r
 tibble::as_tibble(disease_names)
 ```
 
-``` output
-# A tibble: 69 × 2
-   disease            active
-   <chr>              <chr> 
- 1 AFP                TRUE  
- 2 CHOLERA            TRUE  
- 3 CONGENITAL_RUBELLA TRUE  
- 4 DENGUE             TRUE  
- 5 EVD                TRUE  
- 6 GUINEA_WORM        TRUE  
- 7 LASSA              TRUE  
- 8 MONKEYPOX          TRUE  
- 9 NEW_INFLUENZA      TRUE  
-10 PLAGUE             TRUE  
-# ℹ 59 more rows
+``` error
+Error:
+! object 'disease_names' not found
 ```
 
 
@@ -809,24 +806,20 @@ sormas_demo <- readepi::login(
 
 # List the names of all disease
 demo_diseases <- readepi::sormas_get_diseases(login = sormas_demo)
+```
+
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
+! HTTP 503 Service Unavailable.
+```
+
+``` r
 tibble::as_tibble(demo_diseases)
 ```
 
-``` output
-# A tibble: 69 × 2
-   disease            active
-   <chr>              <chr> 
- 1 AFP                TRUE  
- 2 CHOLERA            TRUE  
- 3 CONGENITAL_RUBELLA TRUE  
- 4 DENGUE             TRUE  
- 5 EVD                TRUE  
- 6 GUINEA_WORM        TRUE  
- 7 LASSA              TRUE  
- 8 MONKEYPOX          TRUE  
- 9 NEW_INFLUENZA      TRUE  
-10 PLAGUE             TRUE  
-# ℹ 59 more rows
+``` error
+Error:
+! object 'demo_diseases' not found
 ```
 
 
@@ -838,23 +831,18 @@ mpox_cases <- readepi::read_sormas(
 )
 ```
 
-``` warning
-Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
-coercion
+``` error
+Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
+! HTTP 503 Service Unavailable.
 ```
 
 ``` r
 tibble::as_tibble(mpox_cases)
 ```
 
-``` output
-# A tibble: 1 × 16
-  case_id      person_id date_onset case_origin case_status outcome date_outcome
-  <chr>        <chr>     <date>     <chr>       <chr>       <chr>   <chr>       
-1 TU75PT-MMBE… XQFYXH-R… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA>        
-# ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
-#   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
-#   date_last_contact <date>, Ct_values <chr>
+``` error
+Error:
+! object 'mpox_cases' not found
 ```
 
 :::::::::::::::
