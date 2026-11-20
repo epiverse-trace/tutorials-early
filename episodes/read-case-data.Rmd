@@ -365,7 +365,7 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-6",
+  from = "https://play.im.dhis2.org/stable-2-42-7-1",
   user_name = "admin",
   password = "district"
 )
@@ -382,7 +382,7 @@ Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
 ```{r, eval = FALSE}
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-6",
+  from = "https://play.im.dhis2.org/stable-2-42-7-1",
   user_name = rstudioapi::askForPassword("Database username"),
   password = rstudioapi::askForPassword("Database password")
 )
