@@ -159,7 +159,7 @@ rio::import(here::here("data", "Marburg.zip"))
 ## Reading from databases
 
 The `{readepi}` library contains functions that allow you to import data directly from RDBMS.
-The `readepi::read_rdbms()` function supports importing data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build on the [{DBI}](https://dbi.r-dbi.org/) package, which provides a general interface for interacting RDBMS.
+The `readepi::read_rdbms()` function supports importing data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build on the `{DBI}` package, which provides a general interface for interacting with  RDBMS.
 
 ::::::::::::: discussion
 
