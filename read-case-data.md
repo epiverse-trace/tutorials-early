@@ -161,7 +161,7 @@ rio::import(here::here("data", "Marburg.zip"))
 ## Reading from databases
 
 The `{readepi}` library contains functions that allow you to import data directly from RDBMS.
-The `readepi::read_rdbms()` function supports importing data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build on the [{DBI}](https://dbi.r-dbi.org/) package, which provides a general interface for interacting RDBMS.
+The `readepi::read_rdbms()` function supports importing data from servers such as Microsoft SQL, MySQL, PostgreSQL, and SQLite. It build on the `{DBI}` package, which provides a general interface for interacting with  RDBMS.
 
 ::::::::::::: discussion
 
@@ -267,26 +267,26 @@ dat
 # Ordered by: desc(id)
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 330871 Amal H, Gong G, Gjoneska E, Lewis SM, Wishnok JS, Tsai LH and … 3.58e9
- 2 322312 Asman,A.K.M., Curtis,B.A. and Archibald,J.M.                    2.54e9
- 3 305353 Abe H, Jitsuki S, Nakajima W, Murata Y, Jitsuki-Takahashi A, K… 3.98e9
- 4 296021 Almeida FF, Tenno M, Brzostek J, Li JL, Allies G, Hoeffel G, S… 1.32e9
- 5 265798 Ando A, Shigenari A, Kulski JK, Renard C, Chardon P, Shiina T … 3.51e9
- 6 261910 Albuquerque,L., Rainey,F.A., Chung,A.P., Sunna,A., Nobre,M.F.,… 3.22e9
- 7 251016 Aldea,D., Jones,J. and Mead,J.                                  3.86e9
- 8 199440 Adams,I.P. and Braidwood,L.A.                                   2.60e9
- 9 184303 Abd El Hamid,M.I., El Zeedy,S.A., El Sanousi,A.A. and Reda,I.M. 5.99e8
-10 179410 Amaral,H.A., Soares,R.M., Cortez,A., Durigon,E.L., Funada,M.R.… 2.39e9
-11 173094 Abo Hatab,E.M., Hussein,H.A., El-Sabagh,I.M. and Saber,M.S.     2.40e9
-12 172335 Auguste,A.J., Adams,A.P., Arrigo,N.C., Martinez,R., Travassos … 9.99e8
-13 158962 Akhtar,I., Gold,J.P., Pan,L.Y., Ferrara,J.L., Yang,X.D., Kim,J… 1.50e8
-14 141323 Aiba,Y.                                                         4.07e5
-15 121053 Achen,M.G., Jeltsch,M., Kukk,E., Makinen,T., Vitali,A., Wilks,… 3.99e9
-16  48262 Adams,T.E.                                                      2.58e7
-17  47806 Adams,T.E., Baker,L., Fiddes,R.J. and Brandon,M.R.              3.92e9
-18  32880 Abalde,S., Tenorio,M.J., Afonso,C.M. and Zardoya,R.             2.40e9
-19  15737 Asadulina,A., Panzera,A., Veraszto,C., Liebig,C. and Jekely,G.  2.75e9
-20  12187 Alliegro,M.A., Henry,J.J. and Alliegro,M.C.                     2.77e9
+ 1 365428 Ascher DB, Spiga O, Sekelska M, Pires DEV, Bernini A, Tiezzi M… 1.32e9
+ 2 361047 Antinucci P, Folgueira M and Bianco IH.                         1.32e9
+ 3 357571 Aung,M. and Aung Zaw,L.                                         9.80e8
+ 4 341036 Auberson M, Stadelmann S, Stoudmann C, Seuwen K, Koesters R, T… 1.50e8
+ 5 320042 Anwar T, Sen B, Aggarwal S, Nath R, Pathak N, Katoch A, Aiyaz … 3.43e9
+ 6 296138 Andrejc D and Legisa M.                                         1.14e9
+ 7 296049 Abbott GW.                                                      2.57e7
+ 8 210144 Arun Kumar,N., Lakshmi Narasu,M., Zehr,U.B. and Ravi,K.S.       1.67e9
+ 9 206914 Ayllon,M.A., Lopez,C., Navas-Castillo,J., Mawassi,M., Dawson,W… 1.67e9
+10 193521 Anheyer-Behmenburg,H.E., Szabo,K., Schotte,U., Binder,A., Klei… 1.76e9
+11 191651 Abernathy,E., Pukuta,E., Waku-Kouomou,D., Kebela ILLunga,B., O… 3.02e9
+12 188395 Avellon,A., Casas,I., Trallero,G., Perez,C., Tenorio,A. and Pa… 9.91e8
+13 174920 Atkinson,B., Chamberlain,J., Logue,C.H., Cook,N., Bruce,C., Do… 2.75e9
+14 156428 Ahmad,S., Ahuja,R., Venner,T.J. and Gupta,R.S.                  2.39e9
+15 123828 Annilo,T., Shulemin,S., Chen,Z.Q., Arnould,I., Prades,C., Lemo… 3.82e9
+16 116063 Aho,S., Buisson,M., Pajunen,T., Ryoo,Y.W., Giot,J.F., Gruffat,… 1.50e8
+17  61933 Azzey,M., Hobom,G., Menke,A. and Flick,R.                       1.50e8
+18  49262 Arai,H., Hori,S., Aramori,I., Ohkubo,H. and Nakanishi,S.        3.96e9
+19  33248 Alberini,C.M., Ghirardi,M., Metz,R. and Kandel,E.R.             9.86e8
+20   3320 Ali,M.Y., Khan,M.L., Siddiqui,S.S., Khan,S.T. and Mohammed,A.S. 2.98e9
 ```
 
 When you apply `{dplyr}` verbs to this database table, they are automatically translated into SQL queries:
@@ -331,26 +331,26 @@ dat %>%
 # A tibble: 20 × 3
        id name                                                               crc
     <int> <chr>                                                            <dbl>
- 1 361723 Andergassen D, Smith ZD, Lewandowski JP, Gerhardinger C, Meiss… 3.30e9
- 2 335333 Alici,E.                                                        1.65e6
- 3 333001 Ali,M.R., Alam,A.S.M.R.U., Amin,M.A., Siddique,M.A., Sultana,M… 3.95e9
- 4 330823 Aydin HA, Toptas T, Bozkurt S, Aydin A, Erdogan G, Pestereli E… 1.40e9
- 5 329222 Amin,A.K., Tanaka,M., Al-Saari,N., Feng,G., Mino,S., Ogura,Y.,… 3.82e9
- 6 282424 Abrol N, de Tombe PP and Robia SL.                              6.23e7
- 7 259256 Albuquerque,L., Tiago,I., Nobre,M.F., Verissimo,A. and da Cost… 3.22e9
- 8 246757 Adomas,A., Sun,H. and Asiegbu,F.O.                              3.92e9
- 9 246327 Adhikari,B.N., Wall,D.H. and Adams,B.J.                         2.39e9
-10 234551 Arocas,V., Castro,H.C., Zingali,R.B., Guillin,M.C., Jandrot-Pe… 2.75e9
-11 233315 Avdic,S. and Broady,K.W.                                        9.81e8
-12 182243 Adkar-Purushothama,C.R., Kanchepalli,P.R., Yanjarappa,S.M., Zh… 6.41e8
-13 161114 Amor-Gueret,M. and Levi-Strauss,M.                              3.91e9
-14  96026 Assarehzadegan,M.A., Sankian,M., Jabbari,F., Tehrani,M. and Va… 9.98e8
-15  89908 Asturias,J.A., Ibarrola,I., Fernandez,J., Arilla,M.C., Gonzale… 9.89e8
-16  85051 Appel,M., Burger,A.L. and Bellstedt,D.U.                        2.43e9
-17  73579 Adnan,S., Susan,L. and Weiss,D.                                 3.10e9
-18  53129 Aartsma-rus,A., Platenburg,G.J., Kimpe,J.J.D., Deutekom,J.C.T.… 3.97e9
-19  47967 Abdul,F., Filleton,F., Gerossier,L., Paturel,A., Hall,J., Stru… 2.39e9
-20  23845 Adell,T. and Muller,W.E.                                        9.93e8
+ 1 358290 Akter,S., Mohammad Mahmud,A.S., Uzzaman,M.S., Osman,E., Habib… 5.99 e8
+ 2 355246 Amor DJ, Stephenson SEM, Mustapha M, Mensah MA, Ockeloen CW, … 3.96 e9
+ 3 325670 Agafonov DE, Kastner B, Dybkov O, Hofele RV, Liu WT, Urlaub H… 1.50 e8
+ 4 289564 Achouri Y, Noel G, Vertommen D, Rider MH, Veiga-Da-Cunha M an… 1.36 e9
+ 5 283424 Abrink M, Aveskogh M and Hellman L.                            1.32 e9
+ 6 279382 Abbott DE, Pritchard C, Clegg NJ, Ferguson C, Dumpit R, Sikes… 1.32 e9
+ 7 277898 Andermatt I, Wilson NH, Bergmann T, Mauti O, Gesemann M, Sock… 4.00 e9
+ 8 267780 Acloque H, Risson V, Birot AM, Kunita R, Pain B and Samarut J. 2.40 e9
+ 9 230517 Azizan,S., Wan,K.-L. and Mohd-Adnan,A.                         2.97 e9
+10 198418 Arikawa,J., Lapenotiere,H.F., Iacono-Connors,L., Wang,M.L. an… 1.20 e9
+11 180396 Allison,A.B., Mead,D.G., Palacios,G.F., Tesh,R.B. and Holmes,… 9.86 e8
+12 164578 Abreu,H.M.C., Nobile,P.M. and Mazzafera,P.                     3.96 e9
+13 163963 Albarino,C.G., Wiggleton Guerrero,L., Lo,M.K., Nichol,S.T. an… 1.000e9
+14 136274 Acharya,S., Wilson,T., Gradia,S., Kane,M.F., Guerrette,S., Ma… 1.67 e9
+15 125735 Akahane,T., Hosoda,F., Arai,Y., Fujisawa,N., Kitabayashi,I., … 2.32 e9
+16 114329 Assmann,V., Marshall,J.F., Fieber,C., Hofmann,M. and Hart,I.R. 5.98 e8
+17 112965 Adachi,H. and Tsujimoto,M.                                     4.00 e9
+18  84031 Austin-Brown,S., Knesek,J. and Chapman,K.D.                    3.91 e9
+19  80679 Arana,M.V., de Miguel,L.C. and Sanchez,R.A.                    3.98 e9
+20  53036 Arjun,R. and J,L.M.                                            8.31 e8
 ```
 
 Ideally, after specifying a set of queries, we can reduce the size of the input dataset to use in the environment of our R session.
@@ -442,20 +442,20 @@ dplyr::left_join(
 ```
 
 ``` output
-# A tibble: 25 × 4
+# A tibble: 68 × 4
        id name                                                      author acc  
     <int> <chr>                                                      <dbl> <chr>
- 1 293148 Alvarez E, Zhou W, Witta SE and Freed CR.                 293148 NM_0…
- 2 146496 An,G., Dong,N., Shao,B., Zhu,M. and Ruan,C.               146496 AF35…
- 3 146496 An,G., Dong,N., Shao,B., Zhu,M. and Ruan,C.               146496 AF35…
- 4 143958 Airenne,T., Lin,Y., Olsson,M., Ekblom,P., Vainio,S. and … 143958 AF10…
- 5 211525 Azizi,A., Couto,N., Banister,K. and Diaz-Mitoma,F.        211525 EF61…
- 6 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
- 7 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
- 8 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
- 9 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NR_1…
-10 361395 Armenteros-Monterroso E, Zhao L, Gasparoli L, Brooks T, … 361395 NM_0…
-# ℹ 15 more rows
+ 1 251844 Abara,A., Sana,M. and Mead,J.                             251844 JZ88…
+ 2 251844 Abara,A., Sana,M. and Mead,J.                             251844 JZ88…
+ 3 217121 Akanuma,T., Koshida,S., Kawamura,A., Kishimoto,Y. and Ta… 217121 AB28…
+ 4 217121 Akanuma,T., Koshida,S., Kawamura,A., Kishimoto,Y. and Ta… 217121 AB28…
+ 5 255945 Ao,L., Zeng,X.C., Nie,Y., Mu,Y., Zhou,L. and Luo,X.       255945 NR_1…
+ 6 154406 Ahn,J. and Lee,K.                                         154406 KT89…
+ 7 214556 Abbas,M.A., Spackman,E., Swayne,D.E., Ahmed,Z., Sarmento… 214556 FJ57…
+ 8 214556 Abbas,M.A., Spackman,E., Swayne,D.E., Ahmed,Z., Sarmento… 214556 FJ57…
+ 9 214556 Abbas,M.A., Spackman,E., Swayne,D.E., Ahmed,Z., Sarmento… 214556 FJ57…
+10 214556 Abbas,M.A., Spackman,E., Swayne,D.E., Ahmed,Z., Sarmento… 214556 FJ57…
+# ℹ 58 more rows
 ```
 
 You can also review the `{dbplyr}` R package. But for a step-by-step tutorial about SQL, we recommend you this [tutorial about data management with SQL for Ecologist](https://datacarpentry.org/sql-ecology-lesson/).
@@ -493,7 +493,7 @@ dat
 ```
 
 ``` error
-Error in `poolCheckout()` at pool/R/pool-methods.R:136:3:
+Error in `poolCheckout()`:
 ! The pool has been closed.
 ```
 
@@ -519,34 +519,20 @@ You can retrieve the IDs and names of available programs and organization units 
 # establish the connection to the system
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-6",
+  from = "https://play.im.dhis2.org/stable-2-42-7-1",
   user_name = "admin",
   password = "district"
 )
-```
 
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_dhis2-helpers.R:57:3:
-! HTTP 404 Not Found.
-```
-
-``` r
 dhis2_login
 ```
 
 ``` output
-function(base_url,
-                        user_name,
-                        password) {
-  target_url <- file.path(base_url, "api", "me")
-  resp <- httr2::request(target_url) |>
-    httr2::req_auth_basic(user_name, password) |>
-    httr2::req_perform()
-  cli::cli_alert_success("Logged in successfully!")
-  return(invisible(resp))
-}
-<bytecode: 0x5623a17df818>
-<environment: namespace:readepi>
+<httr2_response>
+GET https://play.im.dhis2.org/stable-2-42-7-1/api/me
+Status: 200 OK
+Content-Type: application/json
+Body: In memory (12468 bytes)
 ```
 
 If the step above fails, check for others available in the list of [DHIS2 Demo Instances](https://im.dhis2.org/public/instances), all accessible with username `"admin"` and password `"district"`. Just replace `stable-2-42-6` in the URL string. The only conditions is that it must be of version equal or lower than `2.42`.
@@ -559,7 +545,7 @@ Avoid publishing your USER NAME and PASSWORD. You could use `{rstudioapi}`:
 ``` r
 dhis2_login <- readepi::login(
   type = "dhis2",
-  from = "https://play.im.dhis2.org/stable-2-42-6",
+  from = "https://play.im.dhis2.org/stable-2-42-7-1",
   user_name = rstudioapi::askForPassword("Database username"),
   password = rstudioapi::askForPassword("Database password")
 )
@@ -573,42 +559,57 @@ Your can read further from this blogpost on [How to Avoid Publishing Credentials
 ``` r
 # get the names and IDs of the programs
 programs <- readepi::get_programs(login = dhis2_login)
-```
 
-``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
-```
-
-``` r
 # print tables
 tibble::as_tibble(programs)
 ```
 
-``` error
-Error:
-! object 'programs' not found
+``` output
+# A tibble: 15 × 3
+   displayName                                         id          type     
+   <chr>                                               <chr>       <chr>    
+ 1 Antenatal care visit                                lxAQ7Zs9VYR aggregate
+ 2 Child Programme                                     IpHINAT79UW tracker  
+ 3 Contraceptives Voucher Program                      kla3mAPgvCH aggregate
+ 4 Information Campaign                                q04UBOqq3rp aggregate
+ 5 Inpatient morbidity and mortality                   eBAyeGv0exc aggregate
+ 6 Malaria case diagnosis, treatment and investigation qDkgAbB5Jlk tracker  
+ 7 Malaria case registration                           VBqh0ynB2wv aggregate
+ 8 Malaria focus investigation                         M3xtLkYBlKI tracker  
+ 9 Malaria testing and surveillance                    bMcwwoVnbSR aggregate
+10 Medical Equipment Registry                          a406h0DYr2V tracker  
+11 MNCH / PNC (Adult Woman)                            uy2gU8kT1jF tracker  
+12 Provider Follow-up and Support Tool                 fDd25txQckK tracker  
+13 TB program                                          ur1Edk5Oe2n tracker  
+14 WHO RMNCH Tracker                                   WSGAb5XwJ3Y tracker  
+15 XX MAL RDT - Case Registration                      MoUd5BTQ3lY aggregate
 ```
 
 
 ``` r
 # get the names and IDs of the organisation units
 org_units <- readepi::get_organisation_units(login = dhis2_login)
-```
 
-``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
-```
-
-``` r
 # print tables
 tibble::as_tibble(org_units)
 ```
 
-``` error
-Error:
-! object 'org_units' not found
+``` output
+# A tibble: 1,166 × 8
+   National_name National_id District_name District_id Chiefdom_name Chiefdom_id
+   <chr>         <chr>       <chr>         <chr>       <chr>         <chr>      
+ 1 Sierra Leone  ImspTQPwCqd Kenema        kJq2mPyFEHo Nongowa       KIUCimTXf8Q
+ 2 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 3 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Rural Wester… qtr8GGlm4gg
+ 4 Sierra Leone  ImspTQPwCqd Bo            O6uvpzGd5pu Kakua         U6Kr7Gtpidn
+ 5 Sierra Leone  ImspTQPwCqd Kambia        PMa2VCrupOd Magbema       QywkxFudXrC
+ 6 Sierra Leone  ImspTQPwCqd Tonkolili     eIQbndfxQMb Yoni          NNE0YMCDZkO
+ 7 Sierra Leone  ImspTQPwCqd Port Loko     TEQlaapDQoK Kaffu Bullom  vn9KJsLyP5f
+ 8 Sierra Leone  ImspTQPwCqd Koinadugu     qhqAxPSTUXp Nieni         J4GiUImJZoE
+ 9 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+10 Sierra Leone  ImspTQPwCqd Western Area  at6UHUQatSo Freetown      C9uduqDZr9d
+# ℹ 1,156 more rows
+# ℹ 2 more variables: Facility_name <chr>, Facility_id <chr>
 ```
 
 After retrieving organization units and program names from the DHIS2 database, we can import data using either names or coded IDs, as demonstrated in the code chunks below:
@@ -621,20 +622,31 @@ data_name <- readepi::read_dhis2(
   org_unit = "Bucksal Clinic",
   program = "Child Programme"
 )
-```
 
-``` error
-Error in `readepi::read_dhis2()`:
-! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
-```
-
-``` r
 tibble::as_tibble(data_name)
 ```
 
-``` error
-Error:
-! object 'data_name' not found
+``` output
+# A tibble: 30 × 26
+   event      tracked_entity org_unit Gender `First name` `Last name` enrollment
+   <chr>      <chr>          <chr>    <chr>  <chr>        <chr>       <chr>     
+ 1 RrWEjrd84… yzhEctxhPiL    Bucksal… Female Karen        Alvarez     WKgHJZ3Ue…
+ 2 Sz2U8t3YA… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 3 JgPqmTcG0… G3hZ9gN7UYD    Bucksal… Female Ruby         Warren      Rth5aVYua…
+ 4 VEvcoYpWF… RyPuD70zgE9    Bucksal… Male   Earl         Mason       COU4sScB6…
+ 5 wGMKQ3SBb… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 6 BNZA0qyfC… KfXae2GB6Fb    Bucksal… Male   Mark         Jacobs      x4vAlqBJl…
+ 7 HFQQUGE9O… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 8 FoCWOlstb… aXaALEYwQNV    Bucksal… Female Lillian      Mccoy       VkZrYFMCK…
+ 9 Dee74ydRn… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+10 pVmIV0EyY… rdo8mO4Jifk    Bucksal… Female Denise       Henderson   iwYMBJgiQ…
+# ℹ 20 more rows
+# ℹ 19 more variables: program <chr>, program_stage <chr>, event_date <chr>,
+#   `MCH Infant Feeding` <chr>, `MCH OPV dose` <chr>, `MCH BCG dose` <chr>,
+#   `MCH ARV at birth` <chr>, `MCH Apgar Score` <chr>, `MCH Weight (g)` <chr>,
+#   `MCH Infant Weight  (g)` <chr>, `MCH Vit A` <chr>,
+#   `MCH Infant HIV Test Result` <chr>, `MCH HIV Test Type` <chr>,
+#   `MCH IPT dose` <chr>, `MCH DPT dose` <chr>, `MCH Child ARVs` <chr>, …
 ```
 
 
@@ -645,20 +657,12 @@ data_id <- readepi::read_dhis2(
   org_unit = "vRC0stJ5y9Q",
   program = "IpHINAT79UW"
 )
-```
 
-``` error
-Error in `readepi::read_dhis2()`:
-! Assertion on 'login' failed: Must inherit from class 'httr2_response', but has class 'function'.
-```
-
-``` r
 identical(data_id, data_name)
 ```
 
-``` error
-Error:
-! object 'data_id' not found
+``` output
+[1] TRUE
 ```
 
 Note that not all organization units are registered for a specific program. To find which organization units are running a particular program, use the `get_program_org_units()` function as shown below:
@@ -671,20 +675,25 @@ target_org_units <- readepi::get_program_org_units(
   program = "IpHINAT79UW",
   org_units = org_units
 )
-```
 
-``` error
-Error in `login[["url"]]`:
-! object of type 'closure' is not subsettable
-```
-
-``` r
 tibble::as_tibble(target_org_units)
 ```
 
-``` error
-Error:
-! object 'target_org_units' not found
+``` output
+# A tibble: 1,166 × 3
+   org_unit_ids levels        org_unit_names              
+   <chr>        <chr>         <chr>                       
+ 1 vRC0stJ5y9Q  Facility_name Bucksal Clinic              
+ 2 simyC07XwnS  Facility_name Maforay MCHP                
+ 3 E9oBVjyEaCe  Facility_name Gbanja Town MCHP            
+ 4 ZpE2POxvl9P  Facility_name Faabu CHP                   
+ 5 yTMrs5kClCv  Facility_name Condama MCHP                
+ 6 FO1Tq8vUa62  Facility_name EPI Headquarter             
+ 7 jGYT5U5qJP6  Facility_name Gbaiima CHC                 
+ 8 LaxJ6CD2DHq  Facility_name EM&BEE Maternity Home Clinic
+ 9 WerHl8SDtRU  Facility_name Mandema CHP                 
+10 CTnuuI55SOj  Facility_name Manewa MCHP                 
+# ℹ 1,156 more rows
 ```
 
 <!-- :::::::::::::::: callout
@@ -740,20 +749,18 @@ covid_cases <- readepi::read_sormas(
   login = sormas_login,
   disease = "coronavirus",
 )
-```
-
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
-! HTTP 503 Service Unavailable.
-```
-
-``` r
 tibble::as_tibble(covid_cases)
 ```
 
-``` error
-Error:
-! object 'covid_cases' not found
+``` output
+# A tibble: 2 × 16
+  case_id      person_id date_onset case_origin case_status outcome date_outcome
+  <chr>        <chr>     <date>     <chr>       <chr>       <chr>   <chr>       
+1 W3RLN3-LNPN… R6HELZ-O… NA         IN_COUNTRY  NOT_CLASSI… RECOVE… 1.791846e+12
+2 ULMPMT-PBQO… WVP6NB-J… 2026-05-31 IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA>        
+# ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
+#   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
+#   date_last_contact <date>, Ct_values <chr>
 ```
 
 A key parameter is the disease name. To ensure correct syntax, you can retrieve the list of available disease names using the `sormas_get_diseases()` function.
@@ -764,20 +771,25 @@ A key parameter is the disease name. To ensure correct syntax, you can retrieve 
 disease_names <- readepi::sormas_get_diseases(
   login = sormas_login
 )
-```
 
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
-! HTTP 503 Service Unavailable.
-```
-
-``` r
 tibble::as_tibble(disease_names)
 ```
 
-``` error
-Error:
-! object 'disease_names' not found
+``` output
+# A tibble: 69 × 2
+   disease            active
+   <chr>              <chr> 
+ 1 AFP                TRUE  
+ 2 CHOLERA            TRUE  
+ 3 CONGENITAL_RUBELLA TRUE  
+ 4 DENGUE             TRUE  
+ 5 EVD                TRUE  
+ 6 GUINEA_WORM        TRUE  
+ 7 LASSA              TRUE  
+ 8 MONKEYPOX          TRUE  
+ 9 NEW_INFLUENZA      TRUE  
+10 PLAGUE             TRUE  
+# ℹ 59 more rows
 ```
 
 
@@ -806,20 +818,24 @@ sormas_demo <- readepi::login(
 
 # List the names of all disease
 demo_diseases <- readepi::sormas_get_diseases(login = sormas_demo)
-```
-
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
-! HTTP 503 Service Unavailable.
-```
-
-``` r
 tibble::as_tibble(demo_diseases)
 ```
 
-``` error
-Error:
-! object 'demo_diseases' not found
+``` output
+# A tibble: 69 × 2
+   disease            active
+   <chr>              <chr> 
+ 1 AFP                TRUE  
+ 2 CHOLERA            TRUE  
+ 3 CONGENITAL_RUBELLA TRUE  
+ 4 DENGUE             TRUE  
+ 5 EVD                TRUE  
+ 6 GUINEA_WORM        TRUE  
+ 7 LASSA              TRUE  
+ 8 MONKEYPOX          TRUE  
+ 9 NEW_INFLUENZA      TRUE  
+10 PLAGUE             TRUE  
+# ℹ 59 more rows
 ```
 
 
@@ -831,18 +847,23 @@ mpox_cases <- readepi::read_sormas(
 )
 ```
 
-``` error
-Error in `httr2::req_perform()` at readepi/R/read_sormas-helpers.R:28:3:
-! HTTP 503 Service Unavailable.
+``` warning
+Warning in as.POSIXct(as.numeric(x), origin = "1970-01-01"): NAs introduced by
+coercion
 ```
 
 ``` r
 tibble::as_tibble(mpox_cases)
 ```
 
-``` error
-Error:
-! object 'mpox_cases' not found
+``` output
+# A tibble: 1 × 16
+  case_id      person_id date_onset case_origin case_status outcome date_outcome
+  <chr>        <chr>     <date>     <chr>       <chr>       <chr>   <chr>       
+1 TU75PT-MMBE… XQFYXH-R… NA         IN_COUNTRY  NOT_CLASSI… NO_OUT… <NA>        
+# ℹ 9 more variables: sex <chr>, date_of_birth <chr>, country <chr>,
+#   city <chr>, latitude <chr>, longitude <chr>, contact_id <chr>,
+#   date_last_contact <date>, Ct_values <chr>
 ```
 
 :::::::::::::::
